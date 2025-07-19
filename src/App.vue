@@ -26,8 +26,6 @@
   --gap-md: 1.5rem; /* 24px */
   --gap-lg: 2rem; /* 32px */
   --gap-xl: 3rem; /* 48px */
-
-  background: var(--color-background);
 }
 
 #app {
@@ -36,5 +34,11 @@
   -moz-osx-font-smoothing: grayscale;
 
   color: var(--color-text-primary);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-background);
 }
 </style>
