@@ -20,6 +20,13 @@
   --font-size-sub-title: 1.4375rem; /* 23px */
   --font-size-paragraph: 1.125rem; /* 18px */
 
+  /* Gaps */
+  --gap-xs: 0.5rem; /* 8px */
+  --gap-sm: 1rem; /* 16px */
+  --gap-md: 1.5rem; /* 24px */
+  --gap-lg: 2rem; /* 32px */
+  --gap-xl: 3rem; /* 48px */
+
   background: var(--color-background);
 }
 
