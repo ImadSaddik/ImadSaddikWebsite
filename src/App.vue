@@ -34,6 +34,9 @@
   -moz-osx-font-smoothing: grayscale;
 
   color: var(--color-text-primary);
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: var(--gap-lg);
 }
 
 body {
