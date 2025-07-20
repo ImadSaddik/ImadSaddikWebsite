@@ -16,6 +16,16 @@
     <div class="separator-section-1">
       <img src="@/assets/scorpius_and_stars.svg" alt="Scorpius and Stars" />
     </div>
+
+    <section class="about-me-section">
+      <h2 class="title">About me</h2>
+      <p class="paragraph">
+        I'm a developer and content creator based in Morocco, with a passion for building beautiful things for the web.
+        From crafting code with Vue.js to capturing distant galaxies, my work is driven by a love for exploration and
+        sharing what I learn along the way.
+      </p>
+      <button class="primary-button">Read my full story</button>
+    </section>
   </div>
 </template>
 
@@ -28,6 +38,9 @@ export default {
 
 <style scoped>
 .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   padding: var(--gap-xl);
 }
@@ -84,6 +97,14 @@ export default {
   margin-bottom: var(--gap-xl);
 }
 
+.paragraph {
+  font-size: var(--font-size-sub-title);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--gap-xl);
+  margin-top: 0;
+  text-align: center;
+}
+
 .hero-image {
   flex: 1;
   display: flex;
@@ -97,14 +118,20 @@ export default {
 }
 
 .separator-section-1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: var(--gap-xxl);
+  width: 100%;
+  margin-top: 15rem;
 }
 
 .separator-section-1 img {
   width: 100%;
   height: auto;
+}
+
+.about-me-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15rem;
+  width: 100%;
 }
 </style>
