@@ -47,9 +47,37 @@ export default {
 
   color: var(--color-text-primary);
   /* background-color: lightcoral; */
-  max-width: 1600px;
+  width: 70%;
   margin: 0 auto;
-  padding: var(--gap-lg);
+  padding: var(--gap-xl);
+}
+
+@media (max-width: 1400px) {
+  #app {
+    width: 80%;
+    padding: var(--gap-lg);
+  }
+}
+
+@media (max-width: 1200px) {
+  #app {
+    width: 85%;
+    padding: var(--gap-md);
+  }
+}
+
+@media (max-width: 992px) {
+  #app {
+    width: 90%;
+    padding: var(--gap-sm);
+  }
+}
+
+@media (max-width: 768px) {
+  #app {
+    width: 95%;
+    padding: var(--gap-sm);
+  }
 }
 
 body {

@@ -1,13 +1,24 @@
 <template>
   <section class="container">
-    <RouterLink class="nav-bar-home" to="/">Imad Saddik</RouterLink>
+    <div class="expanded-nav-bar">
+      <RouterLink class="nav-bar-home" to="/">Imad Saddik</RouterLink>
 
-    <div>
-      <RouterLink class="nav-bar-item" to="/blogs">Blogs</RouterLink>
-      <RouterLink class="nav-bar-item" to="/courses">Courses</RouterLink>
-      <RouterLink class="nav-bar-item" to="/astrophotography">Astrophotography</RouterLink>
-      <RouterLink class="nav-bar-item" to="/about-me">About me</RouterLink>
-      <RouterLink class="nav-bar-item" to="/hire-me">Hire me</RouterLink>
+      <div>
+        <RouterLink v-for="item in navigationBarItems" :key="item.path" class="expanded-nav-bar-item" :to="item.path">
+          {{ item.name }}
+        </RouterLink>
+      </div>
+
+      <div role="button" aria-label="Toggle navigation" class="nav-menu" @click="isMenuOpen = !isMenuOpen">
+        <i v-if="!isMenuOpen" class="fa-solid fa-bars fa-xl custom-icons"></i>
+        <i v-else class="fa-solid fa-xmark fa-xl custom-icons"></i>
+      </div>
+    </div>
+
+    <div v-if="isMenuOpen" class="collapsed-nav-bar">
+      <RouterLink v-for="item in navigationBarItems" :key="item.path" class="collapsed-nav-bar-item" :to="item.path">
+        {{ item.name }}
+      </RouterLink>
     </div>
   </section>
 </template>
@@ -17,18 +28,36 @@ export default {
   name: "NavBar",
   components: {},
   data() {
-    return {};
+    return {
+      isMenuOpen: true,
+      navigationBarItems: [
+        { name: "Blogs", path: "/blogs" },
+        { name: "Courses", path: "/courses" },
+        { name: "Astrophotography", path: "/astrophotography" },
+        { name: "About me", path: "/about-me" },
+        { name: "Hire me", path: "/hire-me" },
+      ],
+    };
   },
 };
 </script>
 
 <style scoped>
 .container {
+  width: 100%;
+}
+
+.expanded-nav-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--color-background);
-  color: var(--color-text-primary);
+}
+
+.collapsed-nav-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
 }
 
 .nav-bar-home {
@@ -42,14 +71,22 @@ export default {
   color: var(--color-text-primary);
 }
 
-.nav-bar-item {
+.expanded-nav-bar-item {
   margin: var(--gap-md);
   text-decoration: none;
   color: var(--color-text-secondary);
   font-size: var(--font-size-paragraph);
 }
 
-.nav-bar-item:hover {
+.expanded-nav-bar-item:hover {
+  color: var(--color-text-primary);
+}
+
+.collapsed-nav-bar-item {
+  display: none;
+}
+
+.collapsed-nav-bar-item:hover {
   color: var(--color-text-primary);
 }
 
@@ -59,5 +96,47 @@ export default {
   text-decoration-thickness: 0.125rem;
   text-underline-offset: 0.625rem;
   text-decoration-color: var(--color-text-primary);
+}
+
+.nav-menu {
+  display: none;
+}
+
+.nav-menu:hover {
+  border: 0.125rem solid var(--color-text-primary);
+}
+
+.custom-icons {
+  color: var(--color-text-primary);
+}
+
+@media (max-width: 1100px) {
+  .expanded-nav-bar-item {
+    display: none;
+  }
+
+  .collapsed-nav-bar-item {
+    display: block;
+    padding: var(--gap-sm) 0;
+    text-decoration: none;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-paragraph);
+    width: 100%;
+  }
+
+  .collapsed-nav-bar-item:hover {
+    background-color: var(--color-text-disabled);
+  }
+
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: var(--gap-sm);
+    border: 0.125rem solid var(--color-text-disabled);
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 }
 </style>
