@@ -1,16 +1,22 @@
 <template>
-  <section class="hero-section">
-    <div class="actions">
-      <h1 class="title">Explore articles and courses I create about coding and the cosmos.</h1>
+  <div class="container">
+    <section class="hero-section">
+      <div class="actions">
+        <h1 class="title">Explore articles and courses I create about coding and the cosmos.</h1>
 
-      <button class="primary-button">Explore articles</button>
-      <button class="secondary-button">View courses</button>
-    </div>
+        <button class="primary-button">Explore articles</button>
+        <button class="secondary-button">View courses</button>
+      </div>
 
-    <div class="image">
-      <img src="@/assets/hero_section/blue_galaxy.svg" alt="Blue Galaxy" />
+      <div class="hero-image">
+        <img src="@/assets/hero_section/blue_galaxy.svg" alt="Blue Galaxy" />
+      </div>
+    </section>
+
+    <div class="separator-section-1">
+      <img src="@/assets/scorpius_and_stars.svg" alt="Scorpius and Stars" />
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -21,13 +27,17 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  width: 100%;
+  padding: var(--gap-xl);
+}
+
 .hero-section {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-top: var(--gap-xxl);
-  padding: var(--gap-xl);
-  /* background-color: rgb(36, 13, 25); */
+  /* background-color: rgb(72, 56, 64); */
 }
 
 .actions {
@@ -74,15 +84,27 @@ export default {
   margin-bottom: var(--gap-xl);
 }
 
-.image {
+.hero-image {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.image img {
+.hero-image img {
   width: 75%;
+  height: auto;
+}
+
+.separator-section-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--gap-xxl);
+}
+
+.separator-section-1 img {
+  width: 100%;
   height: auto;
 }
 </style>
