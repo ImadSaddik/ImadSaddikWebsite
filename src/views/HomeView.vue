@@ -86,6 +86,30 @@
     <div class="separator-section-4">
       <img src="@/assets/star_trails.svg" alt="Star Trail" />
     </div>
+
+    <section class="cosmos-images-section">
+      <h2 class="title">Capturing the cosmos</h2>
+
+      <div class="cosmos-images-list">
+        <div class="cosmos-image-card">
+          <img src="@/assets/card_placeholders/placeholder_1.svg" alt="" />
+          <h3 class="cosmos-image-title">Image title 1</h3>
+          <p class="cosmos-image-upload-date">16 August 2001</p>
+        </div>
+        <div class="cosmos-image-card">
+          <img src="@/assets/card_placeholders/placeholder_2.svg" alt="" />
+          <h3 class="cosmos-image-title">Image title 2</h3>
+          <p class="cosmos-image-upload-date">16 August 2001</p>
+        </div>
+        <div class="cosmos-image-card">
+          <img src="@/assets/card_placeholders/placeholder_1.svg" alt="" />
+          <h3 class="cosmos-image-title">Image title 3</h3>
+          <p class="cosmos-image-upload-date">16 August 2001</p>
+        </div>
+      </div>
+
+      <button class="primary-button">View all images</button>
+    </section>
   </div>
 </template>
 
@@ -292,6 +316,39 @@ export default {
 }
 
 .article-upload-date {
+  font-size: var(--font-size-paragraph);
+  color: var(--color-text-secondary);
+  margin-top: var(--gap-xs);
+}
+
+.cosmos-images-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15rem;
+  width: 100%;
+}
+
+.cosmos-images-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-md);
+  width: 100%;
+  margin-bottom: var(--gap-xl);
+}
+
+.cosmos-image-card img {
+  width: 100%;
+  height: auto;
+}
+
+.cosmos-image-title {
+  font-size: var(--font-size-sub-title);
+  margin-top: var(--gap-md);
+  margin-bottom: 0;
+}
+
+.cosmos-image-upload-date {
   font-size: var(--font-size-paragraph);
   color: var(--color-text-secondary);
   margin-top: var(--gap-xs);
