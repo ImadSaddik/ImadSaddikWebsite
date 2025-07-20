@@ -1,6 +1,18 @@
 <template>
+  <NavBar />
   <router-view />
 </template>
+
+<script>
+import NavBar from "@/components/NavBar.vue";
+
+export default {
+  name: "App",
+  components: {
+    NavBar,
+  },
+};
+</script>
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
@@ -34,6 +46,7 @@
   -moz-osx-font-smoothing: grayscale;
 
   color: var(--color-text-primary);
+  /* background-color: lightcoral; */
   max-width: 1600px;
   margin: 0 auto;
   padding: var(--gap-lg);
