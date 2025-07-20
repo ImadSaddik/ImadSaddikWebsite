@@ -54,6 +54,10 @@
 
       <button class="primary-button">View more courses</button>
     </section>
+
+    <div class="separator-section-3">
+      <img src="@/assets/solar_system.svg" alt="Solar System" />
+    </div>
   </div>
 </template>
 
@@ -158,6 +162,11 @@ export default {
   margin-top: 15rem;
 }
 
+.separator-section-3 {
+  width: 100%;
+  margin-top: 15rem;
+}
+
 .separator-section-1 img {
   width: 100%;
   height: auto;
@@ -165,6 +174,11 @@ export default {
 
 .separator-section-2 img {
   width: 20%;
+  height: auto;
+}
+
+.separator-section-3 img {
+  width: 100%;
   height: auto;
 }
 
