@@ -58,6 +58,30 @@
     <div class="separator-section-3">
       <img src="@/assets/solar_system.svg" alt="Solar System" />
     </div>
+
+    <section class="articles-section">
+      <h2 class="title">Latest articles</h2>
+
+      <div class="articles-list">
+        <div class="article-card">
+          <img src="@/assets/card_placeholders/placeholder_1.svg" alt="" />
+          <h3 class="article-title">Article title 1</h3>
+          <p class="article-upload-date">16 August 2001</p>
+        </div>
+        <div class="article-card">
+          <img src="@/assets/card_placeholders/placeholder_2.svg" alt="" />
+          <h3 class="article-title">Article title 2</h3>
+          <p class="article-upload-date">16 August 2001</p>
+        </div>
+        <div class="article-card">
+          <img src="@/assets/card_placeholders/placeholder_1.svg" alt="" />
+          <h3 class="article-title">Article title 3</h3>
+          <p class="article-upload-date">16 August 2001</p>
+        </div>
+      </div>
+
+      <button class="primary-button">View all articles</button>
+    </section>
   </div>
 </template>
 
@@ -218,6 +242,39 @@ export default {
 }
 
 .course-upload-date {
+  font-size: var(--font-size-paragraph);
+  color: var(--color-text-secondary);
+  margin-top: var(--gap-xs);
+}
+
+.articles-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15rem;
+  width: 100%;
+}
+
+.articles-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-md);
+  width: 100%;
+  margin-bottom: var(--gap-xl);
+}
+
+.article-card img {
+  width: 100%;
+  height: auto;
+}
+
+.article-title {
+  font-size: var(--font-size-sub-title);
+  margin-top: var(--gap-md);
+  margin-bottom: 0;
+}
+
+.article-upload-date {
   font-size: var(--font-size-paragraph);
   color: var(--color-text-secondary);
   margin-top: var(--gap-xs);
