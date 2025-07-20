@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section class="hero-section">
     <div class="actions">
       <h1 class="title">Explore articles and courses I create about coding and the cosmos.</h1>
 
@@ -21,7 +21,7 @@ export default {
 </script>
 
 <style scoped>
-.container {
+.hero-section {
   display: flex;
   flex-direction: row;
   align-items: center;
