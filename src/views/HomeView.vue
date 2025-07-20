@@ -82,6 +82,10 @@
 
       <button class="primary-button">View all articles</button>
     </section>
+
+    <div class="separator-section-4">
+      <img src="@/assets/star_trails.svg" alt="Star Trail" />
+    </div>
   </div>
 </template>
 
@@ -191,6 +195,14 @@ export default {
   margin-top: 15rem;
 }
 
+.separator-section-4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 15rem;
+}
+
 .separator-section-1 img {
   width: 100%;
   height: auto;
@@ -203,6 +215,11 @@ export default {
 
 .separator-section-3 img {
   width: 100%;
+  height: auto;
+}
+
+.separator-section-4 img {
+  width: 50%;
   height: auto;
 }
 
