@@ -30,6 +30,30 @@
     <div class="separator-section-2">
       <img src="@/assets/quasar.svg" alt="Quasar" />
     </div>
+
+    <section class="courses-section">
+      <h2 class="title">Featured courses</h2>
+
+      <div class="courses-list">
+        <div class="course-card">
+          <img src="@/assets/card_placeholders/placeholder_1.svg" alt="" />
+          <h3 class="course-title">Course title 1</h3>
+          <p class="course-upload-date">16 August 2001</p>
+        </div>
+        <div class="course-card">
+          <img src="@/assets/card_placeholders/placeholder_2.svg" alt="" />
+          <h3 class="course-title">Course title 2</h3>
+          <p class="course-upload-date">16 August 2001</p>
+        </div>
+        <div class="course-card">
+          <img src="@/assets/card_placeholders/placeholder_1.svg" alt="" />
+          <h3 class="course-title">Course title 3</h3>
+          <p class="course-upload-date">16 August 2001</p>
+        </div>
+      </div>
+
+      <button class="primary-button">View more courses</button>
+    </section>
   </div>
 </template>
 
@@ -150,5 +174,38 @@ export default {
   align-items: center;
   margin-top: 15rem;
   width: 100%;
+}
+
+.courses-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15rem;
+  width: 100%;
+}
+
+.courses-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-md);
+  width: 100%;
+  margin-bottom: var(--gap-xl);
+}
+
+.course-card img {
+  width: 100%;
+  height: auto;
+}
+
+.course-title {
+  font-size: var(--font-size-sub-title);
+  margin-top: var(--gap-md);
+  margin-bottom: 0;
+}
+
+.course-upload-date {
+  font-size: var(--font-size-paragraph);
+  color: var(--color-text-secondary);
+  margin-top: var(--gap-xs);
 }
 </style>
