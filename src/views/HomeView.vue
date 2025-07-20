@@ -26,6 +26,10 @@
       </p>
       <button class="primary-button">Read my full story</button>
     </section>
+
+    <div class="separator-section-2">
+      <img src="@/assets/quasar.svg" alt="Quasar" />
+    </div>
   </div>
 </template>
 
@@ -122,8 +126,21 @@ export default {
   margin-top: 15rem;
 }
 
+.separator-section-2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 15rem;
+}
+
 .separator-section-1 img {
   width: 100%;
+  height: auto;
+}
+
+.separator-section-2 img {
+  width: 20%;
   height: auto;
 }
 
