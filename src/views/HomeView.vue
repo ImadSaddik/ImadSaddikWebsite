@@ -110,6 +110,32 @@
 
       <button class="primary-button">View all images</button>
     </section>
+
+    <section class="footer-section">
+      <div class="footer-content">
+        <h3 class="footer-title">Imad Saddik</h3>
+        <p class="footer-description">Programming, exploring the sky, and sharing everything I learn.</p>
+
+        <div class="footer-logos">
+          <img src="@/assets/logos/github.svg" alt="GitHub" />
+          <img src="@/assets/logos/youtube.svg" alt="YouTube" />
+          <img src="@/assets/logos/hugging_face.svg" alt="Hugging Face" />
+          <img src="@/assets/logos/medium.svg" alt="Medium" />
+          <img src="@/assets/logos/linkedin.svg" alt="LinkedIn" />
+        </div>
+
+        <p class="footer-rights">All rights reserved © 2025 Imad Saddik</p>
+      </div>
+
+      <div class="footer-images">
+        <img class="footer-telescope" src="@/assets/telescope.svg" alt="Telescope" />
+        <img
+          class="footer-objects"
+          src="@/assets/objects_telescope_looking_at.svg"
+          alt="Objects Telescope Looking At"
+        />
+      </div>
+    </section>
   </div>
 </template>
 
@@ -126,7 +152,6 @@ export default {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: var(--gap-xl);
 }
 
 .hero-section {
@@ -352,5 +377,72 @@ export default {
   font-size: var(--font-size-paragraph);
   color: var(--color-text-secondary);
   margin-top: var(--gap-xs);
+}
+
+.footer-section {
+  width: 100%;
+  margin-top: 15rem;
+  border-top: 1px solid var(--color-text-secondary);
+  position: relative;
+}
+
+.footer-title {
+  font-size: var(--font-size-section-title);
+  margin-top: 6rem;
+  margin-bottom: var(--gap-sm);
+}
+
+.footer-description {
+  font-size: var(--font-size-paragraph);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--gap-md);
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.footer-logos {
+  display: flex;
+  gap: var(--gap-sm);
+  margin-bottom: var(--gap-md);
+}
+
+.footer-logos img {
+  width: 46px;
+  height: 46px;
+}
+
+.footer-rights {
+  font-size: var(--font-size-paragraph);
+  color: var(--color-text-secondary);
+  margin-top: var(--gap-xl);
+  margin-bottom: 5rem;
+}
+
+.footer-images {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.footer-telescope {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.footer-objects {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  width: 320px;
+  height: auto;
 }
 </style>

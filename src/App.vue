@@ -58,7 +58,6 @@ export default {
   /* background-color: lightcoral; */
   width: 70%;
   margin: 0 auto;
-  padding: var(--gap-xl);
 }
 
 @media (max-width: 1400px) {

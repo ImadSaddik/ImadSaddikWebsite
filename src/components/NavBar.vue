@@ -45,6 +45,7 @@ export default {
 <style scoped>
 .container {
   width: 100%;
+  margin-top: var(--gap-xl);
 }
 
 .expanded-nav-bar {
