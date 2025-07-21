@@ -29,7 +29,7 @@ export default {
   components: {},
   data() {
     return {
-      isMenuOpen: false,
+      isMenuOpen: true,
       navigationBarItems: [
         { name: "Blogs", path: "/blogs" },
         { name: "Courses", path: "/courses" },
@@ -58,8 +58,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 1rem;
-  padding: var(--gap-xl);
+  padding: 0 var(--gap-xl);
 }
 
 .nav-bar-home {
