@@ -56,7 +56,6 @@ export default {
 
   color: var(--color-text-primary);
   width: 100%;
-  background-color: lightcoral;
 }
 
 body {
