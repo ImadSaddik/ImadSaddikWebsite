@@ -55,37 +55,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
 
   color: var(--color-text-primary);
-  /* background-color: lightcoral; */
-  width: 70%;
-  margin: 0 auto;
-}
-
-@media (max-width: 1400px) {
-  #app {
-    width: 80%;
-    padding: var(--gap-lg);
-  }
-}
-
-@media (max-width: 1200px) {
-  #app {
-    width: 85%;
-    padding: var(--gap-md);
-  }
-}
-
-@media (max-width: 992px) {
-  #app {
-    width: 90%;
-    padding: var(--gap-sm);
-  }
-}
-
-@media (max-width: 768px) {
-  #app {
-    width: 95%;
-    padding: var(--gap-sm);
-  }
+  width: 100%;
+  background-color: lightcoral;
 }
 
 body {
