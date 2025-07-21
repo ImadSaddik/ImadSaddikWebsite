@@ -1,115 +1,117 @@
 <template>
   <div class="container">
-    <section class="hero-section">
-      <div class="actions">
-        <h1 class="title">Explore articles and courses I create about coding and the cosmos.</h1>
+    <div class="main-content">
+      <section class="hero-section">
+        <div class="actions">
+          <h1 class="title">Explore articles and courses I create about coding and the cosmos.</h1>
 
-        <button class="primary-button">Explore articles</button>
-        <button class="secondary-button">View courses</button>
+          <button class="primary-button">Explore articles</button>
+          <button class="secondary-button">View courses</button>
+        </div>
+
+        <div class="hero-image">
+          <img src="@/assets/hero_section/blue_galaxy.svg" alt="Blue Galaxy" />
+        </div>
+      </section>
+
+      <div class="separator-section-1">
+        <img src="@/assets/scorpius_and_stars.svg" alt="Scorpius and Stars" />
       </div>
 
-      <div class="hero-image">
-        <img src="@/assets/hero_section/blue_galaxy.svg" alt="Blue Galaxy" />
-      </div>
-    </section>
+      <section class="about-me-section">
+        <h2 class="title">About me</h2>
+        <p class="paragraph">
+          I'm a developer and content creator based in Morocco, with a passion for building beautiful things for the
+          web. From crafting code with Vue.js to capturing distant galaxies, my work is driven by a love for exploration
+          and sharing what I learn along the way.
+        </p>
+        <button class="primary-button">Read my full story</button>
+      </section>
 
-    <div class="separator-section-1">
-      <img src="@/assets/scorpius_and_stars.svg" alt="Scorpius and Stars" />
+      <div class="separator-section-2">
+        <img src="@/assets/quasar.svg" alt="Quasar" />
+      </div>
+
+      <section class="courses-section">
+        <h2 class="title">Featured courses</h2>
+
+        <div class="courses-list">
+          <div class="course-card">
+            <img src="@/assets/card_placeholders/placeholder_1.svg" alt="" />
+            <h3 class="course-title">Course title 1</h3>
+            <p class="course-upload-date">16 August 2001</p>
+          </div>
+          <div class="course-card">
+            <img src="@/assets/card_placeholders/placeholder_2.svg" alt="" />
+            <h3 class="course-title">Course title 2</h3>
+            <p class="course-upload-date">16 August 2001</p>
+          </div>
+          <div class="course-card">
+            <img src="@/assets/card_placeholders/placeholder_1.svg" alt="" />
+            <h3 class="course-title">Course title 3</h3>
+            <p class="course-upload-date">16 August 2001</p>
+          </div>
+        </div>
+
+        <button class="primary-button">View more courses</button>
+      </section>
+
+      <div class="separator-section-3">
+        <img src="@/assets/solar_system.svg" alt="Solar System" />
+      </div>
+
+      <section class="articles-section">
+        <h2 class="title">Latest articles</h2>
+
+        <div class="articles-list">
+          <div class="article-card">
+            <img src="@/assets/card_placeholders/placeholder_1.svg" alt="" />
+            <h3 class="article-title">Article title 1</h3>
+            <p class="article-upload-date">16 August 2001</p>
+          </div>
+          <div class="article-card">
+            <img src="@/assets/card_placeholders/placeholder_2.svg" alt="" />
+            <h3 class="article-title">Article title 2</h3>
+            <p class="article-upload-date">16 August 2001</p>
+          </div>
+          <div class="article-card">
+            <img src="@/assets/card_placeholders/placeholder_1.svg" alt="" />
+            <h3 class="article-title">Article title 3</h3>
+            <p class="article-upload-date">16 August 2001</p>
+          </div>
+        </div>
+
+        <button class="primary-button">View all articles</button>
+      </section>
+
+      <div class="separator-section-4">
+        <img src="@/assets/star_trails.svg" alt="Star Trail" />
+      </div>
+
+      <section class="cosmos-images-section">
+        <h2 class="title">Capturing the cosmos</h2>
+
+        <div class="cosmos-images-list">
+          <div class="cosmos-image-card">
+            <img src="@/assets/card_placeholders/placeholder_1.svg" alt="" />
+            <h3 class="cosmos-image-title">Image title 1</h3>
+            <p class="cosmos-image-upload-date">16 August 2001</p>
+          </div>
+          <div class="cosmos-image-card">
+            <img src="@/assets/card_placeholders/placeholder_2.svg" alt="" />
+            <h3 class="cosmos-image-title">Image title 2</h3>
+            <p class="cosmos-image-upload-date">16 August 2001</p>
+          </div>
+          <div class="cosmos-image-card">
+            <img src="@/assets/card_placeholders/placeholder_1.svg" alt="" />
+            <h3 class="cosmos-image-title">Image title 3</h3>
+            <p class="cosmos-image-upload-date">16 August 2001</p>
+          </div>
+        </div>
+
+        <button class="primary-button">View all images</button>
+      </section>
     </div>
-
-    <section class="about-me-section">
-      <h2 class="title">About me</h2>
-      <p class="paragraph">
-        I'm a developer and content creator based in Morocco, with a passion for building beautiful things for the web.
-        From crafting code with Vue.js to capturing distant galaxies, my work is driven by a love for exploration and
-        sharing what I learn along the way.
-      </p>
-      <button class="primary-button">Read my full story</button>
-    </section>
-
-    <div class="separator-section-2">
-      <img src="@/assets/quasar.svg" alt="Quasar" />
-    </div>
-
-    <section class="courses-section">
-      <h2 class="title">Featured courses</h2>
-
-      <div class="courses-list">
-        <div class="course-card">
-          <img src="@/assets/card_placeholders/placeholder_1.svg" alt="" />
-          <h3 class="course-title">Course title 1</h3>
-          <p class="course-upload-date">16 August 2001</p>
-        </div>
-        <div class="course-card">
-          <img src="@/assets/card_placeholders/placeholder_2.svg" alt="" />
-          <h3 class="course-title">Course title 2</h3>
-          <p class="course-upload-date">16 August 2001</p>
-        </div>
-        <div class="course-card">
-          <img src="@/assets/card_placeholders/placeholder_1.svg" alt="" />
-          <h3 class="course-title">Course title 3</h3>
-          <p class="course-upload-date">16 August 2001</p>
-        </div>
-      </div>
-
-      <button class="primary-button">View more courses</button>
-    </section>
-
-    <div class="separator-section-3">
-      <img src="@/assets/solar_system.svg" alt="Solar System" />
-    </div>
-
-    <section class="articles-section">
-      <h2 class="title">Latest articles</h2>
-
-      <div class="articles-list">
-        <div class="article-card">
-          <img src="@/assets/card_placeholders/placeholder_1.svg" alt="" />
-          <h3 class="article-title">Article title 1</h3>
-          <p class="article-upload-date">16 August 2001</p>
-        </div>
-        <div class="article-card">
-          <img src="@/assets/card_placeholders/placeholder_2.svg" alt="" />
-          <h3 class="article-title">Article title 2</h3>
-          <p class="article-upload-date">16 August 2001</p>
-        </div>
-        <div class="article-card">
-          <img src="@/assets/card_placeholders/placeholder_1.svg" alt="" />
-          <h3 class="article-title">Article title 3</h3>
-          <p class="article-upload-date">16 August 2001</p>
-        </div>
-      </div>
-
-      <button class="primary-button">View all articles</button>
-    </section>
-
-    <div class="separator-section-4">
-      <img src="@/assets/star_trails.svg" alt="Star Trail" />
-    </div>
-
-    <section class="cosmos-images-section">
-      <h2 class="title">Capturing the cosmos</h2>
-
-      <div class="cosmos-images-list">
-        <div class="cosmos-image-card">
-          <img src="@/assets/card_placeholders/placeholder_1.svg" alt="" />
-          <h3 class="cosmos-image-title">Image title 1</h3>
-          <p class="cosmos-image-upload-date">16 August 2001</p>
-        </div>
-        <div class="cosmos-image-card">
-          <img src="@/assets/card_placeholders/placeholder_2.svg" alt="" />
-          <h3 class="cosmos-image-title">Image title 2</h3>
-          <p class="cosmos-image-upload-date">16 August 2001</p>
-        </div>
-        <div class="cosmos-image-card">
-          <img src="@/assets/card_placeholders/placeholder_1.svg" alt="" />
-          <h3 class="cosmos-image-title">Image title 3</h3>
-          <p class="cosmos-image-upload-date">16 August 2001</p>
-        </div>
-      </div>
-
-      <button class="primary-button">View all images</button>
-    </section>
 
     <section class="footer-section">
       <div class="footer-content">
@@ -148,10 +150,12 @@ export default {
 
 <style scoped>
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 100%;
+}
+
+.main-content {
+  padding: var(--gap-xl);
+  margin: 0 auto;
 }
 
 .hero-section {
@@ -402,6 +406,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: start;
+  padding: var(--gap-xl);
 }
 
 .footer-logos {
@@ -434,15 +439,14 @@ export default {
 .footer-telescope {
   position: absolute;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 60%;
 }
 
 .footer-objects {
   position: absolute;
   top: 50px;
   right: 50px;
-  width: 320px;
+  width: 360px;
   height: auto;
 }
 </style>
