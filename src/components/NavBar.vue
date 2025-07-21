@@ -45,13 +45,13 @@ export default {
 <style scoped>
 .container {
   width: 100%;
-  margin-top: var(--gap-xl);
 }
 
 .expanded-nav-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: var(--gap-xl);
 }
 
 .collapsed-nav-bar {
@@ -59,6 +59,7 @@ export default {
   flex-direction: column;
   align-items: center;
   margin-top: 1rem;
+  padding: var(--gap-xl);
 }
 
 .nav-bar-home {
