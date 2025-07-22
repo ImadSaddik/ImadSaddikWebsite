@@ -127,11 +127,11 @@
         <p class="footer-description">Programming, exploring the sky, and sharing everything I learn.</p>
 
         <div class="footer-logos">
-          <img src="@/assets/logos/github.svg" alt="GitHub" />
-          <img src="@/assets/logos/hugging_face.svg" alt="Hugging Face" />
-          <img src="@/assets/logos/youtube.svg" alt="YouTube" />
-          <img src="@/assets/logos/medium.svg" alt="Medium" />
-          <img src="@/assets/logos/linkedin.svg" alt="LinkedIn" />
+          <img :src="githubLogo" alt="GitHub logo" />
+          <img :src="huggingFaceLogo" alt="Hugging Face logo" />
+          <img :src="youtubeLogo" alt="YouTube logo" />
+          <img :src="mediumLogo" alt="Medium logo" />
+          <img :src="linkedinLogo" alt="LinkedIn logo" />
         </div>
 
         <p class="footer-rights">All rights reserved © 2025 Imad Saddik</p>
@@ -159,6 +159,13 @@ import quasarIllustration from "@/assets/illustrations/quasar.svg";
 import solarSystemIllustration from "@/assets/illustrations/solar_system.svg";
 import starTrailsIllustration from "@/assets/illustrations/star_trails.svg";
 
+// Logos
+import githubLogo from "@/assets/logos/github.svg";
+import huggingFaceLogo from "@/assets/logos/hugging_face.svg";
+import youtubeLogo from "@/assets/logos/youtube.svg";
+import mediumLogo from "@/assets/logos/medium.svg";
+import linkedinLogo from "@/assets/logos/linkedin.svg";
+
 export default {
   name: "HomeView",
   components: {
@@ -170,6 +177,12 @@ export default {
       quasarIllustration,
       solarSystemIllustration,
       starTrailsIllustration,
+
+      githubLogo,
+      huggingFaceLogo,
+      youtubeLogo,
+      mediumLogo,
+      linkedinLogo,
     };
   },
 };
