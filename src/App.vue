@@ -68,17 +68,20 @@ body {
   margin-bottom: var(--gap-xl);
 }
 
-.primary-button {
-  color: var(--color-text-primary);
-  background-color: var(--color-button-primary);
-  border: none;
+.custom-button {
   cursor: pointer;
   font-size: var(--font-size-medium);
   font-weight: 600;
   padding: var(--gap-sm) var(--gap-md);
-  margin-right: var(--gap-md);
   width: 300px;
   transition: background-color 0.3s ease;
+  margin-right: var(--gap-md);
+}
+
+.primary-button {
+  color: var(--color-text-primary);
+  background-color: var(--color-button-primary);
+  border: none;
 }
 
 .primary-button:hover {
@@ -89,12 +92,6 @@ body {
   color: var(--color-button-secondary);
   background-color: transparent;
   border: 1px solid var(--color-button-secondary);
-  cursor: pointer;
-  font-size: var(--font-size-medium);
-  font-weight: 600;
-  padding: var(--gap-sm) var(--gap-md);
-  width: 300px;
-  transition: background-color 0.3s ease;
 }
 
 .secondary-button:hover {

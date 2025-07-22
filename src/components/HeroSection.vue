@@ -4,8 +4,8 @@
       <h1 class="title">Explore articles and courses I create about programming and the universe.</h1>
 
       <div class="buttons-container">
-        <button class="primary-button">Explore articles</button>
-        <button class="secondary-button">View courses</button>
+        <button class="custom-button primary-button">Explore articles</button>
+        <button class="custom-button secondary-button">View courses</button>
       </div>
     </div>
 

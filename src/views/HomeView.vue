@@ -15,7 +15,7 @@
           web. From crafting code with Vue.js to capturing distant galaxies, my work is driven by a love for exploration
           and sharing what I learn along the way.
         </p>
-        <button class="primary-button">Read my full story</button>
+        <button class="custom-button primary-button">Read my full story</button>
       </section>
 
       <SeparatorImage
@@ -45,7 +45,7 @@
           </div>
         </div>
 
-        <button class="primary-button">View more courses</button>
+        <button class="custom-button primary-button">View more courses</button>
       </section>
 
       <SeparatorImage
@@ -75,7 +75,7 @@
           </div>
         </div>
 
-        <button class="primary-button">View all articles</button>
+        <button class="custom-button primary-button">View all articles</button>
       </section>
 
       <SeparatorImage
@@ -105,7 +105,7 @@
           </div>
         </div>
 
-        <button class="primary-button">View all images</button>
+        <button class="custom-button primary-button">View all images</button>
       </section>
     </div>
 
