@@ -39,6 +39,10 @@ img {
   height: auto;
 }
 
+.container {
+  margin: 0;
+}
+
 .card-title {
   font-size: var(--font-size-medium);
   margin-top: var(--gap-md);
