@@ -1,19 +1,7 @@
 <template>
   <div class="container">
     <div class="main-content">
-      <section class="hero-section">
-        <div class="actions">
-          <h1 class="title">Explore articles and courses I create about coding and the cosmos.</h1>
-
-          <button class="primary-button">Explore articles</button>
-          <button class="secondary-button">View courses</button>
-        </div>
-
-        <div class="hero-image">
-          <img src="@/assets/hero_section/blue_galaxy.svg" alt="Blue Galaxy" />
-        </div>
-      </section>
-
+      <HeroSection />
       <SeparatorImage
         :image-src="scorpiusIllustration"
         alt-text="Scorpius constellation with connecting lines and colorful stars and galaxies."
@@ -152,6 +140,7 @@
 <script>
 // Components
 import SeparatorImage from "@/components/SeparatorImage.vue";
+import HeroSection from "@/components/HeroSection.vue";
 
 // Illustrations
 import scorpiusIllustration from "@/assets/illustrations/scorpius.svg";
@@ -170,6 +159,7 @@ export default {
   name: "HomeView",
   components: {
     SeparatorImage,
+    HeroSection,
   },
   data() {
     return {
@@ -198,76 +188,12 @@ export default {
   margin: 0 auto;
 }
 
-.hero-section {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-top: var(--gap-xxl);
-  /* background-color: rgb(72, 56, 64); */
-}
-
-.actions {
-  flex: 1;
-  color: var(--color-text-primary);
-}
-
-.primary-button {
-  color: var(--color-text-primary);
-  background-color: var(--color-button-primary);
-  border: none;
-  cursor: pointer;
-  font-size: var(--font-size-medium);
-  font-weight: 600;
-  padding: var(--gap-sm) var(--gap-md);
-  margin-right: var(--gap-md);
-  width: 250px;
-  transition: background-color 0.3s ease;
-}
-
-.primary-button:hover {
-  background-color: var(--color-button-primary-hover);
-}
-
-.secondary-button {
-  color: var(--color-button-secondary);
-  background-color: transparent;
-  border: 1px solid var(--color-button-secondary);
-  cursor: pointer;
-  font-size: var(--font-size-medium);
-  font-weight: 600;
-  padding: var(--gap-sm) var(--gap-md);
-  width: 250px;
-  transition: background-color 0.3s ease;
-}
-
-.secondary-button:hover {
-  color: var(--color-text-primary);
-  background-color: var(--color-button-secondary-hover);
-}
-
-.title {
-  font-size: var(--font-size-big);
-  margin-bottom: var(--gap-xl);
-}
-
 .paragraph {
   font-size: var(--font-size-medium);
   color: var(--color-text-secondary);
   margin-bottom: var(--gap-xl);
   margin-top: 0;
   text-align: center;
-}
-
-.hero-image {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.hero-image img {
-  width: 75%;
-  height: auto;
 }
 
 .about-me-section {

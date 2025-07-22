@@ -61,4 +61,44 @@ body {
   padding: 0;
   background: var(--color-background);
 }
+
+.title {
+  font-size: var(--font-size-big);
+  margin-top: 0;
+  margin-bottom: var(--gap-xl);
+}
+
+.primary-button {
+  color: var(--color-text-primary);
+  background-color: var(--color-button-primary);
+  border: none;
+  cursor: pointer;
+  font-size: var(--font-size-medium);
+  font-weight: 600;
+  padding: var(--gap-sm) var(--gap-md);
+  margin-right: var(--gap-md);
+  width: 300px;
+  transition: background-color 0.3s ease;
+}
+
+.primary-button:hover {
+  background-color: var(--color-button-primary-hover);
+}
+
+.secondary-button {
+  color: var(--color-button-secondary);
+  background-color: transparent;
+  border: 1px solid var(--color-button-secondary);
+  cursor: pointer;
+  font-size: var(--font-size-medium);
+  font-weight: 600;
+  padding: var(--gap-sm) var(--gap-md);
+  width: 300px;
+  transition: background-color 0.3s ease;
+}
+
+.secondary-button:hover {
+  color: var(--color-text-primary);
+  background-color: var(--color-button-secondary-hover);
+}
 </style>
