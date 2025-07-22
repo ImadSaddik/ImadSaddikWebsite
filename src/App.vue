@@ -68,6 +68,14 @@ body {
   margin-bottom: var(--gap-xl);
 }
 
+.paragraph {
+  font-size: var(--font-size-medium);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--gap-xl);
+  margin-top: 0;
+  text-align: center;
+}
+
 .custom-button {
   cursor: pointer;
   font-size: var(--font-size-medium);

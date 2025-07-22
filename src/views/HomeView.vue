@@ -8,16 +8,7 @@
         image-width="100%"
       />
 
-      <section class="about-me-section">
-        <h2 class="title">About me</h2>
-        <p class="paragraph">
-          I'm a developer and content creator based in Morocco, with a passion for building beautiful things for the
-          web. From crafting code with Vue.js to capturing distant galaxies, my work is driven by a love for exploration
-          and sharing what I learn along the way.
-        </p>
-        <button class="custom-button primary-button">Read my full story</button>
-      </section>
-
+      <AboutMeSection />
       <SeparatorImage
         :image-src="quasarIllustration"
         alt-text="Blue quasar at the center of a spiral galaxy with energetic jets."
@@ -141,6 +132,7 @@
 // Components
 import SeparatorImage from "@/components/SeparatorImage.vue";
 import HeroSection from "@/components/HeroSection.vue";
+import AboutMeSection from "@/components/AboutMeSection.vue";
 
 // Illustrations
 import scorpiusIllustration from "@/assets/illustrations/scorpius.svg";
@@ -160,6 +152,7 @@ export default {
   components: {
     SeparatorImage,
     HeroSection,
+    AboutMeSection,
   },
   data() {
     return {
@@ -184,24 +177,10 @@ export default {
 }
 
 .main-content {
-  padding: var(--gap-xl);
-  margin: 0 auto;
-}
-
-.paragraph {
-  font-size: var(--font-size-medium);
-  color: var(--color-text-secondary);
-  margin-bottom: var(--gap-xl);
-  margin-top: 0;
-  text-align: center;
-}
-
-.about-me-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 15rem;
-  width: 100%;
+  padding: var(--gap-xl);
 }
 
 .courses-section {
