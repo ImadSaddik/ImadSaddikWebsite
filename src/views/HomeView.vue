@@ -423,7 +423,6 @@ export default {
   font-size: var(--font-size-small);
   color: var(--color-text-secondary);
   margin-top: var(--gap-xl);
-  margin-bottom: 5rem;
 }
 
 .footer-images {
