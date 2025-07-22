@@ -120,8 +120,8 @@
 
         <div class="footer-logos">
           <img src="@/assets/logos/github.svg" alt="GitHub" />
-          <img src="@/assets/logos/youtube.svg" alt="YouTube" />
           <img src="@/assets/logos/hugging_face.svg" alt="Hugging Face" />
+          <img src="@/assets/logos/youtube.svg" alt="YouTube" />
           <img src="@/assets/logos/medium.svg" alt="Medium" />
           <img src="@/assets/logos/linkedin.svg" alt="LinkedIn" />
         </div>
@@ -416,8 +416,7 @@ export default {
 }
 
 .footer-logos img {
-  width: 46px;
-  height: 46px;
+  height: 32px;
 }
 
 .footer-rights {
