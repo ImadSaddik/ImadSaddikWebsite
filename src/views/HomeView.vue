@@ -391,7 +391,7 @@ export default {
 }
 
 .footer-title {
-  font-size: var(--font-size-section-title);
+  font-size: var(--font-size-page-huge-title);
   margin-top: 6rem;
   margin-bottom: var(--gap-sm);
 }
