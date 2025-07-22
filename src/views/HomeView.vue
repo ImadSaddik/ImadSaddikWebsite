@@ -19,21 +19,24 @@
         <h2 class="title">Featured courses</h2>
 
         <div class="courses-list">
-          <div class="course-card">
-            <img src="@/assets/card_placeholders/placeholder_1.svg" alt="" />
-            <h3 class="course-title">Course title 1</h3>
-            <p class="course-upload-date">16 August 2001</p>
-          </div>
-          <div class="course-card">
-            <img src="@/assets/card_placeholders/placeholder_2.svg" alt="" />
-            <h3 class="course-title">Course title 2</h3>
-            <p class="course-upload-date">16 August 2001</p>
-          </div>
-          <div class="course-card">
-            <img src="@/assets/card_placeholders/placeholder_1.svg" alt="" />
-            <h3 class="course-title">Course title 3</h3>
-            <p class="course-upload-date">16 August 2001</p>
-          </div>
+          <Card
+            :image-src="coursePlaceholder1"
+            alt-text="Course placeholder 1"
+            title="Course title 1"
+            sub-title="16 August 2001"
+          />
+          <Card
+            :image-src="coursePlaceholder2"
+            alt-text="Course placeholder 2"
+            title="Course title 2"
+            sub-title="16 August 2001"
+          />
+          <Card
+            :image-src="coursePlaceholder1"
+            alt-text="Course placeholder 3"
+            title="Course title 3"
+            sub-title="16 August 2001"
+          />
         </div>
 
         <button class="custom-button primary-button">View more courses</button>
@@ -49,21 +52,24 @@
         <h2 class="title">Latest articles</h2>
 
         <div class="articles-list">
-          <div class="article-card">
-            <img src="@/assets/card_placeholders/placeholder_1.svg" alt="" />
-            <h3 class="article-title">Article title 1</h3>
-            <p class="article-upload-date">16 August 2001</p>
-          </div>
-          <div class="article-card">
-            <img src="@/assets/card_placeholders/placeholder_2.svg" alt="" />
-            <h3 class="article-title">Article title 2</h3>
-            <p class="article-upload-date">16 August 2001</p>
-          </div>
-          <div class="article-card">
-            <img src="@/assets/card_placeholders/placeholder_1.svg" alt="" />
-            <h3 class="article-title">Article title 3</h3>
-            <p class="article-upload-date">16 August 2001</p>
-          </div>
+          <Card
+            :image-src="coursePlaceholder1"
+            alt-text="Course placeholder 1"
+            title="Article title 1"
+            sub-title="16 August 2001"
+          />
+          <Card
+            :image-src="coursePlaceholder2"
+            alt-text="Course placeholder 2"
+            title="Article title 2"
+            sub-title="16 August 2001"
+          />
+          <Card
+            :image-src="coursePlaceholder1"
+            alt-text="Course placeholder 3"
+            title="Article title 3"
+            sub-title="16 August 2001"
+          />
         </div>
 
         <button class="custom-button primary-button">View all articles</button>
@@ -79,21 +85,24 @@
         <h2 class="title">Capturing the cosmos</h2>
 
         <div class="cosmos-images-list">
-          <div class="cosmos-image-card">
-            <img src="@/assets/card_placeholders/placeholder_1.svg" alt="" />
-            <h3 class="cosmos-image-title">Image title 1</h3>
-            <p class="cosmos-image-upload-date">16 August 2001</p>
-          </div>
-          <div class="cosmos-image-card">
-            <img src="@/assets/card_placeholders/placeholder_2.svg" alt="" />
-            <h3 class="cosmos-image-title">Image title 2</h3>
-            <p class="cosmos-image-upload-date">16 August 2001</p>
-          </div>
-          <div class="cosmos-image-card">
-            <img src="@/assets/card_placeholders/placeholder_1.svg" alt="" />
-            <h3 class="cosmos-image-title">Image title 3</h3>
-            <p class="cosmos-image-upload-date">16 August 2001</p>
-          </div>
+          <Card
+            :image-src="coursePlaceholder1"
+            alt-text="Course placeholder 1"
+            title="Image title 1"
+            sub-title="16 August 2001"
+          />
+          <Card
+            :image-src="coursePlaceholder2"
+            alt-text="Course placeholder 2"
+            title="Image title 2"
+            sub-title="16 August 2001"
+          />
+          <Card
+            :image-src="coursePlaceholder1"
+            alt-text="Course placeholder 3"
+            title="Image title 3"
+            sub-title="16 August 2001"
+          />
         </div>
 
         <button class="custom-button primary-button">View all images</button>
@@ -133,6 +142,7 @@
 import SeparatorImage from "@/components/SeparatorImage.vue";
 import HeroSection from "@/components/HeroSection.vue";
 import AboutMeSection from "@/components/AboutMeSection.vue";
+import Card from "@/components/Card.vue";
 
 // Illustrations
 import scorpiusIllustration from "@/assets/illustrations/scorpius.svg";
@@ -147,12 +157,25 @@ import youtubeLogo from "@/assets/logos/youtube.svg";
 import mediumLogo from "@/assets/logos/medium.svg";
 import linkedinLogo from "@/assets/logos/linkedin.svg";
 
+// Courses images
+import coursePlaceholder1 from "@/assets/courses/placeholder_1.svg";
+import coursePlaceholder2 from "@/assets/courses/placeholder_2.svg";
+
+// Articles images
+import articlePlaceholder1 from "@/assets/articles/placeholder_1.svg";
+import articlePlaceholder2 from "@/assets/articles/placeholder_2.svg";
+
+// Astronomy images
+import cosmosImagePlaceholder1 from "@/assets/astronomy/placeholder_1.svg";
+import cosmosImagePlaceholder2 from "@/assets/astronomy/placeholder_2.svg";
+
 export default {
   name: "HomeView",
   components: {
     SeparatorImage,
     HeroSection,
     AboutMeSection,
+    Card,
   },
   data() {
     return {
@@ -166,6 +189,15 @@ export default {
       youtubeLogo,
       mediumLogo,
       linkedinLogo,
+
+      coursePlaceholder1,
+      coursePlaceholder2,
+
+      articlePlaceholder1,
+      articlePlaceholder2,
+
+      cosmosImagePlaceholder1,
+      cosmosImagePlaceholder2,
     };
   },
 };
@@ -197,23 +229,6 @@ export default {
   gap: var(--gap-md);
   width: 100%;
   margin-bottom: var(--gap-xl);
-}
-
-.course-card img {
-  width: 100%;
-  height: auto;
-}
-
-.course-title {
-  font-size: var(--font-size-medium);
-  margin-top: var(--gap-md);
-  margin-bottom: 0;
-}
-
-.course-upload-date {
-  font-size: var(--font-size-small);
-  color: var(--color-text-secondary);
-  margin-top: var(--gap-xs);
 }
 
 .articles-section {
