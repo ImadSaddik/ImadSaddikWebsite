@@ -168,7 +168,7 @@ export default {
 
 .actions {
   flex: 1;
-  color: white;
+  color: var(--color-text-primary);
 }
 
 .primary-button {
