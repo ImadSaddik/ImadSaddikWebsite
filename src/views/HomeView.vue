@@ -15,125 +15,48 @@
         image-width="20%"
       />
 
-      <section class="courses-section">
-        <h2 class="title">Featured courses</h2>
-
-        <div class="courses-list">
-          <Card
-            :image-src="coursePlaceholder1"
-            alt-text="Course placeholder 1"
-            title="Course title 1"
-            sub-title="16 August 2001"
-          />
-          <Card
-            :image-src="coursePlaceholder2"
-            alt-text="Course placeholder 2"
-            title="Course title 2"
-            sub-title="16 August 2001"
-          />
-          <Card
-            :image-src="coursePlaceholder1"
-            alt-text="Course placeholder 3"
-            title="Course title 3"
-            sub-title="16 August 2001"
-          />
-        </div>
-
-        <button class="custom-button primary-button">View more courses</button>
-      </section>
-
+      <CardGroup title="Courses" :cards-data="coursesCardData" button-text="View all courses" />
       <SeparatorImage
         :image-src="solarSystemIllustration"
         alt-text="Stylized illustration of a solar system showing 4 planets and a sun."
         image-width="100%"
       />
 
-      <section class="articles-section">
-        <h2 class="title">Latest articles</h2>
-
-        <div class="articles-list">
-          <Card
-            :image-src="coursePlaceholder1"
-            alt-text="Course placeholder 1"
-            title="Article title 1"
-            sub-title="16 August 2001"
-          />
-          <Card
-            :image-src="coursePlaceholder2"
-            alt-text="Course placeholder 2"
-            title="Article title 2"
-            sub-title="16 August 2001"
-          />
-          <Card
-            :image-src="coursePlaceholder1"
-            alt-text="Course placeholder 3"
-            title="Article title 3"
-            sub-title="16 August 2001"
-          />
-        </div>
-
-        <button class="custom-button primary-button">View all articles</button>
-      </section>
-
+      <CardGroup title="Articles" :cards-data="articlesCardData" button-text="View all articles" />
       <SeparatorImage
         :image-src="starTrailsIllustration"
         alt-text="White star trails forming concentric arcs."
         image-width="50%"
       />
 
-      <section class="cosmos-images-section">
-        <h2 class="title">Capturing the cosmos</h2>
+      <CardGroup title="Cosmos Images" :cards-data="cosmosImagesCardData" button-text="View all cosmos images" />
 
-        <div class="cosmos-images-list">
-          <Card
-            :image-src="coursePlaceholder1"
-            alt-text="Course placeholder 1"
-            title="Image title 1"
-            sub-title="16 August 2001"
-          />
-          <Card
-            :image-src="coursePlaceholder2"
-            alt-text="Course placeholder 2"
-            title="Image title 2"
-            sub-title="16 August 2001"
-          />
-          <Card
-            :image-src="coursePlaceholder1"
-            alt-text="Course placeholder 3"
-            title="Image title 3"
-            sub-title="16 August 2001"
-          />
+      <section class="footer-section">
+        <div class="footer-content">
+          <h3 class="footer-title">Imad Saddik</h3>
+          <p class="footer-description">Programming, exploring the sky, and sharing everything I learn.</p>
+
+          <div class="footer-logos">
+            <img :src="githubLogo" alt="GitHub logo" />
+            <img :src="huggingFaceLogo" alt="Hugging Face logo" />
+            <img :src="youtubeLogo" alt="YouTube logo" />
+            <img :src="mediumLogo" alt="Medium logo" />
+            <img :src="linkedinLogo" alt="LinkedIn logo" />
+          </div>
+
+          <p class="footer-rights">All rights reserved © 2025 Imad Saddik</p>
         </div>
 
-        <button class="custom-button primary-button">View all images</button>
+        <div class="footer-images">
+          <img class="footer-telescope" src="@/assets/telescope.svg" alt="Telescope" />
+          <img
+            class="footer-objects"
+            src="@/assets/objects_telescope_looking_at.svg"
+            alt="Objects Telescope Looking At"
+          />
+        </div>
       </section>
     </div>
-
-    <section class="footer-section">
-      <div class="footer-content">
-        <h3 class="footer-title">Imad Saddik</h3>
-        <p class="footer-description">Programming, exploring the sky, and sharing everything I learn.</p>
-
-        <div class="footer-logos">
-          <img :src="githubLogo" alt="GitHub logo" />
-          <img :src="huggingFaceLogo" alt="Hugging Face logo" />
-          <img :src="youtubeLogo" alt="YouTube logo" />
-          <img :src="mediumLogo" alt="Medium logo" />
-          <img :src="linkedinLogo" alt="LinkedIn logo" />
-        </div>
-
-        <p class="footer-rights">All rights reserved © 2025 Imad Saddik</p>
-      </div>
-
-      <div class="footer-images">
-        <img class="footer-telescope" src="@/assets/telescope.svg" alt="Telescope" />
-        <img
-          class="footer-objects"
-          src="@/assets/objects_telescope_looking_at.svg"
-          alt="Objects Telescope Looking At"
-        />
-      </div>
-    </section>
   </div>
 </template>
 
@@ -142,7 +65,7 @@
 import SeparatorImage from "@/components/SeparatorImage.vue";
 import HeroSection from "@/components/HeroSection.vue";
 import AboutMeSection from "@/components/AboutMeSection.vue";
-import Card from "@/components/Card.vue";
+import CardGroup from "@/components/CardGroup.vue";
 
 // Illustrations
 import scorpiusIllustration from "@/assets/illustrations/scorpius.svg";
@@ -157,17 +80,9 @@ import youtubeLogo from "@/assets/logos/youtube.svg";
 import mediumLogo from "@/assets/logos/medium.svg";
 import linkedinLogo from "@/assets/logos/linkedin.svg";
 
-// Courses images
+// placeholder images
 import coursePlaceholder1 from "@/assets/courses/placeholder_1.svg";
 import coursePlaceholder2 from "@/assets/courses/placeholder_2.svg";
-
-// Articles images
-import articlePlaceholder1 from "@/assets/articles/placeholder_1.svg";
-import articlePlaceholder2 from "@/assets/articles/placeholder_2.svg";
-
-// Astronomy images
-import cosmosImagePlaceholder1 from "@/assets/astronomy/placeholder_1.svg";
-import cosmosImagePlaceholder2 from "@/assets/astronomy/placeholder_2.svg";
 
 export default {
   name: "HomeView",
@@ -175,7 +90,7 @@ export default {
     SeparatorImage,
     HeroSection,
     AboutMeSection,
-    Card,
+    CardGroup,
   },
   data() {
     return {
@@ -190,14 +105,66 @@ export default {
       mediumLogo,
       linkedinLogo,
 
-      coursePlaceholder1,
-      coursePlaceholder2,
-
-      articlePlaceholder1,
-      articlePlaceholder2,
-
-      cosmosImagePlaceholder1,
-      cosmosImagePlaceholder2,
+      coursesCardData: [
+        {
+          imageSrc: coursePlaceholder1,
+          altText: "Course placeholder 1",
+          title: "Image title 1",
+          subTitle: "16 August 2001",
+        },
+        {
+          imageSrc: coursePlaceholder2,
+          altText: "Course placeholder 2",
+          title: "Image title 2",
+          subTitle: "16 August 2001",
+        },
+        {
+          imageSrc: coursePlaceholder1,
+          altText: "Course placeholder 3",
+          title: "Image title 3",
+          subTitle: "16 August 2001",
+        },
+      ],
+      articlesCardData: [
+        {
+          imageSrc: coursePlaceholder1,
+          altText: "Article placeholder 1",
+          title: "Article title 1",
+          subTitle: "16 August 2001",
+        },
+        {
+          imageSrc: coursePlaceholder2,
+          altText: "Article placeholder 2",
+          title: "Article title 2",
+          subTitle: "16 August 2001",
+        },
+        {
+          imageSrc: coursePlaceholder1,
+          altText: "Article placeholder 3",
+          title: "Article title 3",
+          subTitle: "16 August 2001",
+        },
+      ],
+      cosmosImagesCardData: [
+        {
+          imageSrc: coursePlaceholder1,
+          altText: "Cosmos image placeholder 1",
+          title: "Cosmos Image Title 1",
+          subTitle: "16 August 2001",
+        },
+        {
+          imageSrc: coursePlaceholder2,
+          altText: "Cosmos image placeholder 2",
+          title: "Cosmos Image Title 2",
+          subTitle: "16 August 2001",
+        },
+        {
+          imageSrc: coursePlaceholder1,
+          altText: "Cosmos image placeholder 3",
+          title: "Cosmos Image Title 3",
+          subTitle: "16 August 2001",
+        },
+      ],
     };
   },
 };
@@ -213,88 +180,6 @@ export default {
   flex-direction: column;
   align-items: center;
   padding: var(--gap-xl);
-}
-
-.courses-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 15rem;
-  width: 100%;
-}
-
-.courses-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--gap-md);
-  width: 100%;
-  margin-bottom: var(--gap-xl);
-}
-
-.articles-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 15rem;
-  width: 100%;
-}
-
-.articles-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--gap-md);
-  width: 100%;
-  margin-bottom: var(--gap-xl);
-}
-
-.article-card img {
-  width: 100%;
-  height: auto;
-}
-
-.article-title {
-  font-size: var(--font-size-medium);
-  margin-top: var(--gap-md);
-  margin-bottom: 0;
-}
-
-.article-upload-date {
-  font-size: var(--font-size-small);
-  color: var(--color-text-secondary);
-  margin-top: var(--gap-xs);
-}
-
-.cosmos-images-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 15rem;
-  width: 100%;
-}
-
-.cosmos-images-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--gap-md);
-  width: 100%;
-  margin-bottom: var(--gap-xl);
-}
-
-.cosmos-image-card img {
-  width: 100%;
-  height: auto;
-}
-
-.cosmos-image-title {
-  font-size: var(--font-size-medium);
-  margin-top: var(--gap-md);
-  margin-bottom: 0;
-}
-
-.cosmos-image-upload-date {
-  font-size: var(--font-size-small);
-  color: var(--color-text-secondary);
-  margin-top: var(--gap-xs);
 }
 
 .footer-section {
