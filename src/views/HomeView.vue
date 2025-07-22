@@ -14,9 +14,11 @@
         </div>
       </section>
 
-      <div class="separator-section-1">
-        <img src="@/assets/scorpius_and_stars.svg" alt="Scorpius and Stars" />
-      </div>
+      <SeparatorImage
+        :image-src="scorpiusIllustration"
+        alt-text="Scorpius constellation with connecting lines and colorful stars and galaxies."
+        image-width="100%"
+      />
 
       <section class="about-me-section">
         <h2 class="title">About me</h2>
@@ -28,9 +30,11 @@
         <button class="primary-button">Read my full story</button>
       </section>
 
-      <div class="separator-section-2">
-        <img src="@/assets/quasar.svg" alt="Quasar" />
-      </div>
+      <SeparatorImage
+        :image-src="quasarIllustration"
+        alt-text="Blue quasar at the center of a spiral galaxy with energetic jets."
+        image-width="20%"
+      />
 
       <section class="courses-section">
         <h2 class="title">Featured courses</h2>
@@ -56,9 +60,11 @@
         <button class="primary-button">View more courses</button>
       </section>
 
-      <div class="separator-section-3">
-        <img src="@/assets/solar_system.svg" alt="Solar System" />
-      </div>
+      <SeparatorImage
+        :image-src="solarSystemIllustration"
+        alt-text="Stylized illustration of a solar system showing 4 planets and a sun."
+        image-width="100%"
+      />
 
       <section class="articles-section">
         <h2 class="title">Latest articles</h2>
@@ -84,9 +90,11 @@
         <button class="primary-button">View all articles</button>
       </section>
 
-      <div class="separator-section-4">
-        <img src="@/assets/star_trails.svg" alt="Star Trail" />
-      </div>
+      <SeparatorImage
+        :image-src="starTrailsIllustration"
+        alt-text="White star trails forming concentric arcs."
+        image-width="50%"
+      />
 
       <section class="cosmos-images-section">
         <h2 class="title">Capturing the cosmos</h2>
@@ -142,9 +150,28 @@
 </template>
 
 <script>
+// Components
+import SeparatorImage from "@/components/SeparatorImage.vue";
+
+// Illustrations
+import scorpiusIllustration from "@/assets/illustrations/scorpius.svg";
+import quasarIllustration from "@/assets/illustrations/quasar.svg";
+import solarSystemIllustration from "@/assets/illustrations/solar_system.svg";
+import starTrailsIllustration from "@/assets/illustrations/star_trails.svg";
+
 export default {
   name: "HomeView",
-  components: {},
+  components: {
+    SeparatorImage,
+  },
+  data() {
+    return {
+      scorpiusIllustration,
+      quasarIllustration,
+      solarSystemIllustration,
+      starTrailsIllustration,
+    };
+  },
 };
 </script>
 
@@ -227,52 +254,6 @@ export default {
 
 .hero-image img {
   width: 75%;
-  height: auto;
-}
-
-.separator-section-1 {
-  width: 100%;
-  margin-top: 15rem;
-}
-
-.separator-section-2 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin-top: 15rem;
-}
-
-.separator-section-3 {
-  width: 100%;
-  margin-top: 15rem;
-}
-
-.separator-section-4 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin-top: 15rem;
-}
-
-.separator-section-1 img {
-  width: 100%;
-  height: auto;
-}
-
-.separator-section-2 img {
-  width: 20%;
-  height: auto;
-}
-
-.separator-section-3 img {
-  width: 100%;
-  height: auto;
-}
-
-.separator-section-4 img {
-  width: 50%;
   height: auto;
 }
 
