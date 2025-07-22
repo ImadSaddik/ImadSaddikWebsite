@@ -29,11 +29,9 @@ export default {
   --color-text-disabled: #4b5563;
 
   /* Font sizes */
-  --font-size-page-huge-title: 3.125rem; /* 50px */
-  --font-size-page-title: 2.1875rem; /* 35px */
-  --font-size-section-title: 1.75rem; /* 28px */
-  --font-size-sub-title: 1.4375rem; /* 23px */
-  --font-size-paragraph: 1.125rem; /* 18px */
+  --font-size-big: 3rem; /* 48px */
+  --font-size-medium: 1.5rem; /* 24px */
+  --font-size-small: 1.125rem; /* 18px */
 
   /* Gaps */
   --gap-xs: 0.5rem; /* 8px */

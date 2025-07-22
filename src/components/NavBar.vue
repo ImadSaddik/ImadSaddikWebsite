@@ -62,7 +62,7 @@ export default {
 }
 
 .nav-bar-home {
-  font-size: var(--font-size-page-title);
+  font-size: var(--font-size-big);
   font-weight: bold;
   text-decoration: none;
   color: var(--color-text-primary);
@@ -76,7 +76,7 @@ export default {
   margin: var(--gap-md);
   text-decoration: none;
   color: var(--color-text-secondary);
-  font-size: var(--font-size-paragraph);
+  font-size: var(--font-size-small);
 }
 
 .expanded-nav-bar-item:hover {
@@ -121,7 +121,7 @@ export default {
     padding: var(--gap-sm) 0;
     text-decoration: none;
     color: var(--color-text-secondary);
-    font-size: var(--font-size-paragraph);
+    font-size: var(--font-size-small);
     width: 100%;
   }
 

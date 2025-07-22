@@ -176,7 +176,7 @@ export default {
   background-color: var(--color-button-primary);
   border: none;
   cursor: pointer;
-  font-size: var(--font-size-sub-title);
+  font-size: var(--font-size-medium);
   font-weight: 600;
   padding: var(--gap-sm) var(--gap-md);
   margin-right: var(--gap-md);
@@ -193,7 +193,7 @@ export default {
   background-color: transparent;
   border: 1px solid var(--color-button-secondary);
   cursor: pointer;
-  font-size: var(--font-size-sub-title);
+  font-size: var(--font-size-medium);
   font-weight: 600;
   padding: var(--gap-sm) var(--gap-md);
   width: 250px;
@@ -206,12 +206,12 @@ export default {
 }
 
 .title {
-  font-size: var(--font-size-page-huge-title);
+  font-size: var(--font-size-big);
   margin-bottom: var(--gap-xl);
 }
 
 .paragraph {
-  font-size: var(--font-size-sub-title);
+  font-size: var(--font-size-medium);
   color: var(--color-text-secondary);
   margin-bottom: var(--gap-xl);
   margin-top: 0;
@@ -306,13 +306,13 @@ export default {
 }
 
 .course-title {
-  font-size: var(--font-size-sub-title);
+  font-size: var(--font-size-medium);
   margin-top: var(--gap-md);
   margin-bottom: 0;
 }
 
 .course-upload-date {
-  font-size: var(--font-size-paragraph);
+  font-size: var(--font-size-small);
   color: var(--color-text-secondary);
   margin-top: var(--gap-xs);
 }
@@ -339,13 +339,13 @@ export default {
 }
 
 .article-title {
-  font-size: var(--font-size-sub-title);
+  font-size: var(--font-size-medium);
   margin-top: var(--gap-md);
   margin-bottom: 0;
 }
 
 .article-upload-date {
-  font-size: var(--font-size-paragraph);
+  font-size: var(--font-size-small);
   color: var(--color-text-secondary);
   margin-top: var(--gap-xs);
 }
@@ -372,13 +372,13 @@ export default {
 }
 
 .cosmos-image-title {
-  font-size: var(--font-size-sub-title);
+  font-size: var(--font-size-medium);
   margin-top: var(--gap-md);
   margin-bottom: 0;
 }
 
 .cosmos-image-upload-date {
-  font-size: var(--font-size-paragraph);
+  font-size: var(--font-size-small);
   color: var(--color-text-secondary);
   margin-top: var(--gap-xs);
 }
@@ -391,13 +391,13 @@ export default {
 }
 
 .footer-title {
-  font-size: var(--font-size-page-huge-title);
+  font-size: var(--font-size-big);
   margin-top: 6rem;
   margin-bottom: var(--gap-sm);
 }
 
 .footer-description {
-  font-size: var(--font-size-paragraph);
+  font-size: var(--font-size-medium);
   color: var(--color-text-secondary);
   margin-bottom: var(--gap-md);
 }
@@ -421,7 +421,7 @@ export default {
 }
 
 .footer-rights {
-  font-size: var(--font-size-paragraph);
+  font-size: var(--font-size-small);
   color: var(--color-text-secondary);
   margin-top: var(--gap-xl);
   margin-bottom: 5rem;
