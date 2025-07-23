@@ -5,11 +5,21 @@
       <p class="footer-description">Programming, exploring the sky, and sharing everything I learn.</p>
 
       <div class="footer-logos">
-        <img :src="githubLogo" alt="GitHub logo" />
-        <img :src="huggingFaceLogo" alt="Hugging Face logo" />
-        <img :src="youtubeLogo" alt="YouTube logo" />
-        <img :src="mediumLogo" alt="Medium logo" />
-        <img :src="linkedinLogo" alt="LinkedIn logo" />
+        <a href="https://github.com/ImadSaddik" target="_blank" rel="noopener noreferrer">
+          <img :src="githubLogo" alt="GitHub logo" />
+        </a>
+        <a href="https://huggingface.co/ImadSaddik" target="_blank" rel="noopener noreferrer">
+          <img :src="huggingFaceLogo" alt="Hugging Face logo" />
+        </a>
+        <a href="https://www.youtube.com/@3CodeCampers" target="_blank" rel="noopener noreferrer">
+          <img :src="youtubeLogo" alt="YouTube logo" />
+        </a>
+        <a href="https://medium.com/@imadsaddik" target="_blank" rel="noopener noreferrer">
+          <img :src="mediumLogo" alt="Medium logo" />
+        </a>
+        <a href="https://www.linkedin.com/in/imadsaddik/" target="_blank" rel="noopener noreferrer">
+          <img :src="linkedinLogo" alt="LinkedIn logo" />
+        </a>
       </div>
 
       <p class="footer-rights">All rights reserved © 2025 Imad Saddik</p>
@@ -93,7 +103,13 @@ export default {
 }
 
 .footer-logos img {
-  height: 32px;
+  height: 40px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.footer-logos img:hover {
+  filter: brightness(0.9);
 }
 
 .footer-rights {
