@@ -5,64 +5,83 @@
 <script>
 export default {
   name: "StarBackground",
-  mounted() {
-    const canvas = this.$el;
-    const ctx = canvas.getContext("2d");
-    let w = window.innerWidth;
-    let h = window.innerHeight;
-    canvas.width = w;
-    canvas.height = h;
-    canvas.style.position = "fixed";
-    canvas.style.top = 0;
-    canvas.style.left = 0;
-    canvas.style.zIndex = -1;
-    canvas.style.width = "100vw";
-    canvas.style.height = "100vh";
-    canvas.style.pointerEvents = "none";
-
-    const numStars = 120;
-    const stars = [];
-    for (let i = 0; i < numStars; i++) {
-      stars.push({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        r: Math.random() * 1.2 + 0.3,
-        alpha: Math.random() * 0.5 + 0.5,
-        dx: (Math.random() - 0.5) * 0.15,
-        dy: (Math.random() - 0.5) * 0.15,
-      });
-    }
-
-    function drawStars() {
-      ctx.clearRect(0, 0, w, h);
-      for (const star of stars) {
-        ctx.save();
-        ctx.globalAlpha = star.alpha;
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.r, 0, 2 * Math.PI);
-        ctx.fillStyle = "#fff";
-        ctx.shadowColor = "#fff";
-        ctx.shadowBlur = 8;
-        ctx.fill();
-        ctx.restore();
+  data() {
+    return {
+      stars: [],
+      numStars: 120,
+      width: window.innerWidth,
+      height: window.innerHeight,
+      context: null,
+      animationFrameId: null,
+    };
+  },
+  methods: {
+    initStars() {
+      this.stars = [];
+      for (let i = 0; i < this.numStars; i++) {
+        this.stars.push({
+          x: Math.random() * this.width,
+          y: Math.random() * this.height,
+          r: Math.random() * 1.2 + 0.3,
+          alpha: Math.random() * 0.5 + 0.5,
+          dx: (Math.random() - 0.5) * 0.15,
+          dy: (Math.random() - 0.5) * 0.15,
+        });
+      }
+    },
+    drawStars() {
+      this.context.clearRect(0, 0, this.width, this.height);
+      for (const star of this.stars) {
+        this.context.save();
+        this.context.globalAlpha = star.alpha;
+        this.context.beginPath();
+        this.context.arc(star.x, star.y, star.r, 0, 2 * Math.PI);
+        this.context.fillStyle = "#fff";
+        this.context.shadowColor = "#fff";
+        this.context.shadowBlur = 8;
+        this.context.fill();
+        this.context.restore();
 
         star.x += star.dx;
         star.y += star.dy;
-        if (star.x < 0) star.x = w;
-        if (star.x > w) star.x = 0;
-        if (star.y < 0) star.y = h;
-        if (star.y > h) star.y = 0;
+        if (star.x < 0) star.x = this.width;
+        if (star.x > this.width) star.x = 0;
+        if (star.y < 0) star.y = this.height;
+        if (star.y > this.height) star.y = 0;
       }
-      requestAnimationFrame(drawStars);
-    }
-    drawStars();
-
-    window.addEventListener("resize", () => {
-      w = window.innerWidth;
-      h = window.innerHeight;
-      canvas.width = w;
-      canvas.height = h;
-    });
+      this.animationFrameId = requestAnimationFrame(this.drawStars);
+    },
+    handleResize() {
+      this.width = window.innerWidth;
+      this.height = window.innerHeight;
+      const canvas = this.$el;
+      canvas.width = this.width;
+      canvas.height = this.height;
+      this.initStars();
+    },
+    setupCanvas() {
+      const canvas = this.$el;
+      this.context = canvas.getContext("2d");
+      canvas.width = this.width;
+      canvas.height = this.height;
+      canvas.style.position = "fixed";
+      canvas.style.top = 0;
+      canvas.style.left = 0;
+      canvas.style.zIndex = -1;
+      canvas.style.width = "100vw";
+      canvas.style.height = "100vh";
+      canvas.style.pointerEvents = "none";
+    },
+  },
+  mounted() {
+    this.setupCanvas();
+    this.initStars();
+    this.drawStars();
+    window.addEventListener("resize", this.handleResize);
+  },
+  beforeUnmount() {
+    window.removeEventListener("resize", this.handleResize);
+    cancelAnimationFrame(this.animationFrameId);
   },
 };
 </script>
