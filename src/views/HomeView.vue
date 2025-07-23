@@ -29,7 +29,7 @@
         image-width="25%"
       />
 
-      <CardGroup title="Cosmos Images" :cards-data="cosmosImagesCardData" button-text="View all cosmos images" />
+      <CardGroup title="Universe" :cards-data="universeImagesCardData" button-text="View all images" />
     </div>
 
     <FooterSection />
@@ -110,7 +110,7 @@ export default {
           subTitle: "16 August 2001",
         },
       ],
-      cosmosImagesCardData: [
+      universeImagesCardData: [
         {
           imageSrc: coursePlaceholder1,
           altText: "Cosmos image placeholder 1",
