@@ -17,6 +17,6 @@
   align-items: center;
   justify-content: center;
   margin-top: var(--gap-between-sections);
-  width: 50%;
+  width: 75%;
 }
 </style>

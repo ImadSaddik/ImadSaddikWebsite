@@ -54,7 +54,7 @@ export default {
   flex-direction: column;
   align-items: center;
   margin-top: var(--gap-between-sections);
-  width: 100%;
+  width: 75%;
 }
 
 .cards-group {

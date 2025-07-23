@@ -1,7 +1,7 @@
 <template>
   <section class="hero-container">
     <div class="actions-column">
-      <h1 class="title">Explore articles and courses I create about programming and the universe.</h1>
+      <h1 class="title">Explore articles, images and courses I create about programming and the universe.</h1>
 
       <div class="buttons-container">
         <button class="custom-button primary-button">Explore articles</button>
@@ -33,7 +33,7 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 100%;
+  width: 75%;
   gap: var(--gap-xxl);
   margin-top: var(--gap-xxl);
 }
