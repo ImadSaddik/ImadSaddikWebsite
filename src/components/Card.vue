@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="card-container">
     <img :src="imageSrc" :alt="altText" />
     <h3 class="card-title">{{ title }}</h3>
     <p class="card-subtitle">{{ subTitle }}</p>
@@ -37,10 +37,6 @@ export default {
 img {
   width: 100%;
   height: auto;
-}
-
-.container {
-  margin: 0;
 }
 
 .card-title {
