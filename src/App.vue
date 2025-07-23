@@ -1,15 +1,18 @@
 <template>
   <NavBar />
-  <router-view />
+  <RouterView />
+  <StarBackground />
 </template>
 
 <script>
 import NavBar from "@/components/NavBar.vue";
+import StarBackground from "@/components/StarBackground.vue";
 
 export default {
   name: "App",
   components: {
     NavBar,
+    StarBackground,
   },
 };
 </script>
