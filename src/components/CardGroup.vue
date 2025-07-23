@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section class="cards-group-container">
     <h2 class="title">{{ title }}</h2>
 
     <div class="cards-group">
@@ -49,7 +49,7 @@ export default {
 </script>
 
 <style scoped>
-.container {
+.cards-group-container {
   display: flex;
   flex-direction: column;
   align-items: center;
