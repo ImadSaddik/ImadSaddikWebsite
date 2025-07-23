@@ -26,7 +26,7 @@
       <SeparatorImage
         :image-src="starTrailsIllustration"
         alt-text="White star trails forming concentric arcs."
-        image-width="50%"
+        image-width="25%"
       />
 
       <CardGroup title="Cosmos Images" :cards-data="cosmosImagesCardData" button-text="View all cosmos images" />
