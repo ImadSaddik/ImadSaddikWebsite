@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="separator-image-container">
     <img :src="imageSrc" :alt="altText" :width="imageWidth" :height="imageHeight" />
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style scoped>
-.container {
+.separator-image-container {
   display: flex;
   justify-content: center;
   align-items: center;

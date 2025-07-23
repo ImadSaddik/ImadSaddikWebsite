@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section class="navbar-container">
     <div class="expanded-nav-bar">
       <RouterLink class="nav-bar-home" to="/">Imad Saddik</RouterLink>
 
@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style scoped>
-.container {
+.navbar-container {
   width: 100%;
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section class="footer-container">
     <div class="footer-content">
       <h3 class="footer-title">Imad Saddik</h3>
       <p class="footer-description">Programming, exploring the sky, and sharing everything I learn.</p>
@@ -60,7 +60,7 @@ export default {
 </script>
 
 <style scoped>
-.container {
+.footer-container {
   width: 100%;
   margin-top: var(--gap-between-sections);
   border-top: 1px solid var(--color-text-secondary);

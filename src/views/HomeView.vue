@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="home-view-container">
     <div class="main-content">
       <HeroSection />
       <SeparatorImage
@@ -136,7 +136,7 @@ export default {
 </script>
 
 <style scoped>
-.container {
+.home-view-container {
   width: 100%;
 }
 

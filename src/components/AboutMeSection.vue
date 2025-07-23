@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section class="about-me-container">
     <h2 class="title">About me</h2>
     <p class="paragraph">
       I'm Imad Saddik from Morocco. I enjoy programming, astronomy, and teaching. I created a YouTube channel called
@@ -11,7 +11,7 @@
 </template>
 
 <style scoped>
-.container {
+.about-me-container {
   display: flex;
   flex-direction: column;
   align-items: center;

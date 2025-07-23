@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section class="hero-container">
     <div class="actions-column">
       <h1 class="title">Explore articles and courses I create about programming and the universe.</h1>
 
@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style scoped>
-.container {
+.hero-container {
   display: flex;
   flex-direction: row;
   align-items: center;
