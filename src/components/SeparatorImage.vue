@@ -36,5 +36,6 @@ export default {
   justify-content: center;
   align-items: center;
   margin-top: var(--gap-between-sections);
+  width: 100%;
 }
 </style>
