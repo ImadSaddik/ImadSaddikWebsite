@@ -16,7 +16,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 15rem;
+  margin-top: var(--gap-between-sections);
   width: 50%;
 }
 </style>

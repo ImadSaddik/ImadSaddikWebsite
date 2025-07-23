@@ -53,7 +53,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 15rem;
+  margin-top: var(--gap-between-sections);
   width: 100%;
 }
 

@@ -62,7 +62,7 @@ export default {
 <style scoped>
 .container {
   width: 100%;
-  margin-top: 15rem;
+  margin-top: var(--gap-between-sections);
   border-top: 1px solid var(--color-text-secondary);
   position: relative;
 }
