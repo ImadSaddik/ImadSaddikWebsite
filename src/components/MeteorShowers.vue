@@ -18,8 +18,7 @@ export default {
   },
   methods: {
     spawnMeteor() {
-      // I restricted the spawn zone to the middle 70% of the screen
-      const spawnZoneWidth = this.width * 0.7;
+      const spawnZoneWidth = this.width * 0.2;
       const spawnZoneOffset = (this.width - spawnZoneWidth) / 2;
 
       // A random starting point along the top edge of the screen
@@ -29,7 +28,6 @@ export default {
       // Calculate the angle from the radiant to the start point.
       // This makes all meteors travel in a similar direction.
       const angle = Math.atan2(startY - this.radiant.y, startX - this.radiant.x);
-      console.log("Angle in degrees:", angle * (180 / Math.PI));
 
       // Add more variety to each meteor's appearance
       const speed = Math.random() * 7 + 6;
