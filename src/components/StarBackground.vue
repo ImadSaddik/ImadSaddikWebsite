@@ -36,6 +36,7 @@ export default {
           dx: (Math.random() - 0.5) * 0.15,
           dy: (Math.random() - 0.5) * 0.15,
           color: starColors[Math.floor(Math.random() * starColors.length)],
+          hasSpikes: Math.random() < 0.1, // 10% chance to have spikes
         });
       }
     },
@@ -44,11 +45,35 @@ export default {
       for (const star of this.stars) {
         this.context.save();
         this.context.globalAlpha = star.alpha;
+        if (star.hasSpikes) {
+          // Draw diffraction spikes (JWST style)
+          const numSpikes = 6;
+          const spikeLength = star.r * 3 + Math.random() * 2;
+          const spikeWidth = Math.max(0.5, star.r * 0.5);
+          for (let i = 0; i < numSpikes; i++) {
+            const angle = (i * Math.PI) / (numSpikes / 2);
+            this.context.save();
+            this.context.translate(star.x, star.y);
+            this.context.rotate(angle);
+            this.context.beginPath();
+            this.context.moveTo(0, 0);
+            this.context.lineTo(0, -spikeLength);
+            this.context.strokeStyle = star.color;
+            this.context.shadowColor = star.color;
+            this.context.shadowBlur = 8;
+            this.context.lineWidth = spikeWidth;
+            this.context.globalAlpha = star.alpha * 0.7;
+            this.context.stroke();
+            this.context.restore();
+          }
+        }
+        // Draw the star circle
         this.context.beginPath();
         this.context.arc(star.x, star.y, star.r, 0, 2 * Math.PI);
         this.context.fillStyle = star.color;
         this.context.shadowColor = star.color;
         this.context.shadowBlur = 8;
+        this.context.globalAlpha = star.alpha;
         this.context.fill();
         this.context.restore();
 
