@@ -2,16 +2,19 @@
   <NavBar />
   <RouterView />
   <StarBackground />
+  <MeteorShowers />
 </template>
 
 <script>
 import NavBar from "@/components/NavBar.vue";
 import StarBackground from "@/components/StarBackground.vue";
+import MeteorShowers from "./components/MeteorShowers.vue";
 
 export default {
   name: "App",
   components: {
     NavBar,
+    MeteorShowers,
     StarBackground,
   },
 };
