@@ -17,6 +17,15 @@ export default {
   },
   methods: {
     initStars() {
+      const starColors = [
+        "#ffffff", // White
+        "#ffe9c4", // Pale yellow
+        "#b5d0ff", // Blue-white
+        "#f7f7a8", // Yellowish
+        "#c4e1ff", // Light blue
+        "#ffd700", // Gold
+        "#ffb347", // Orange
+      ];
       this.stars = [];
       for (let i = 0; i < this.numStars; i++) {
         this.stars.push({
@@ -26,6 +35,7 @@ export default {
           alpha: Math.random() * 0.5 + 0.5,
           dx: (Math.random() - 0.5) * 0.15,
           dy: (Math.random() - 0.5) * 0.15,
+          color: starColors[Math.floor(Math.random() * starColors.length)],
         });
       }
     },
@@ -36,8 +46,8 @@ export default {
         this.context.globalAlpha = star.alpha;
         this.context.beginPath();
         this.context.arc(star.x, star.y, star.r, 0, 2 * Math.PI);
-        this.context.fillStyle = "#fff";
-        this.context.shadowColor = "#fff";
+        this.context.fillStyle = star.color;
+        this.context.shadowColor = star.color;
         this.context.shadowBlur = 8;
         this.context.fill();
         this.context.restore();
