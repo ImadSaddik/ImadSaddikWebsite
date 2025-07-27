@@ -17,7 +17,9 @@
 
     <div v-if="isMenuOpen" class="collapsed-nav-bar">
       <RouterLink v-for="item in navigationBarItems" :key="item.path" class="collapsed-nav-bar-item" :to="item.path">
-        {{ item.name }}
+        <p>
+          {{ item.name }}
+        </p>
       </RouterLink>
     </div>
   </section>
@@ -29,7 +31,7 @@ export default {
   components: {},
   data() {
     return {
-      isMenuOpen: false,
+      isMenuOpen: true,
       navigationBarItems: [
         { name: "Blogs", path: "/blogs" },
         { name: "Courses", path: "/courses" },
@@ -54,11 +56,35 @@ export default {
   padding: var(--gap-xl);
 }
 
+@media screen and (max-width: 1100px) {
+  .expanded-nav-bar {
+    padding: var(--gap-md) var(--gap-lg);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .expanded-nav-bar {
+    padding: var(--gap-sm) var(--gap-md);
+  }
+}
+
 .collapsed-nav-bar {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 0 var(--gap-xl);
+}
+
+@media screen and (max-width: 1100px) {
+  .collapsed-nav-bar {
+    padding: 0 var(--gap-lg);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .collapsed-nav-bar {
+    padding: 0 var(--gap-md);
+  }
 }
 
 .nav-bar-home {
@@ -70,6 +96,12 @@ export default {
 
 .nav-bar-home:hover {
   color: var(--color-text-primary);
+}
+
+@media screen and (max-width: 1100px) {
+  .nav-bar-home {
+    font-size: var(--font-size-medium);
+  }
 }
 
 .expanded-nav-bar-item {
@@ -118,11 +150,15 @@ export default {
 
   .collapsed-nav-bar-item {
     display: block;
-    padding: var(--gap-sm) 0.5rem;
-    text-decoration: none;
-    color: var(--color-text-secondary);
-    font-size: var(--font-size-small);
     width: 100%;
+    text-decoration: none;
+    font-size: var(--font-size-small);
+    color: var(--color-text-secondary);
+  }
+
+  .collapsed-nav-bar-item p {
+    margin: 0;
+    padding: var(--gap-sm) var(--gap-md);
   }
 
   .collapsed-nav-bar-item:hover {
@@ -138,6 +174,13 @@ export default {
     border: 0.125rem solid var(--color-text-disabled);
     width: 1.5rem;
     height: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-menu {
+    width: 1rem;
+    height: 1rem;
   }
 }
 </style>
