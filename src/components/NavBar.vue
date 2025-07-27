@@ -118,7 +118,7 @@ export default {
 
   .collapsed-nav-bar-item {
     display: block;
-    padding: var(--gap-sm) 0;
+    padding: var(--gap-sm) 0.5rem;
     text-decoration: none;
     color: var(--color-text-secondary);
     font-size: var(--font-size-small);
