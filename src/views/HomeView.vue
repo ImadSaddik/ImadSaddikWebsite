@@ -146,4 +146,16 @@ export default {
   align-items: center;
   padding: var(--gap-xl);
 }
+
+@media screen and (max-width: 1100px) {
+  .main-content {
+    padding: var(--gap-lg);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main-content {
+    padding: var(--gap-md);
+  }
+}
 </style>
