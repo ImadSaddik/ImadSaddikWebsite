@@ -31,7 +31,7 @@ export default {
   components: {},
   data() {
     return {
-      isMenuOpen: true,
+      isMenuOpen: false,
       navigationBarItems: [
         { name: "Blogs", path: "/blogs" },
         { name: "Courses", path: "/courses" },
