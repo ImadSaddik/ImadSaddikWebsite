@@ -1,7 +1,9 @@
 <template>
   <section class="hero-container">
     <div class="actions-column">
-      <h1 class="title">Explore articles, images and courses I create about programming and the universe.</h1>
+      <h1 id="hero-title" class="title">
+        Explore articles, images and courses I create about programming and the universe.
+      </h1>
 
       <div class="buttons-container">
         <button class="custom-button primary-button">Explore articles</button>
@@ -48,7 +50,7 @@ export default {
 .buttons-container {
   display: flex;
   flex-direction: row;
-  gap: var(--gap-xs);
+  gap: var(--gap-md);
 }
 
 .image-column {
@@ -61,5 +63,90 @@ export default {
 .image-column img {
   width: 75%;
   height: auto;
+}
+
+@media screen and (max-width: 1700px) {
+  .hero-container {
+    margin-top: 0;
+    width: 80%;
+    gap: var(--gap-xxl);
+  }
+
+  .buttons-container {
+    flex-direction: row;
+    gap: var(--gap-sm);
+  }
+
+  .image-column img {
+    width: 75%;
+  }
+
+  #hero-title {
+    width: 100%;
+    margin-bottom: var(--gap-xl);
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .hero-container {
+    width: 85%;
+    gap: var(--gap-xl);
+  }
+
+  .image-column img {
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .hero-container {
+    width: 90%;
+  }
+
+  .buttons-container {
+    flex-direction: column;
+  }
+
+  .image-column img {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .hero-container {
+    width: 100%;
+  }
+
+  .buttons-container {
+    gap: var(--gap-xs);
+  }
+
+  .image-column img {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hero-container {
+    flex-direction: column-reverse;
+  }
+
+  .image-column img {
+    width: 90%;
+  }
+
+  #hero-title {
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .image-column img {
+    width: 80%;
+  }
+
+  #hero-title {
+    width: 100%;
+  }
 }
 </style>

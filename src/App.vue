@@ -36,6 +36,7 @@ export default {
 
   /* Font sizes */
   --font-size-big: 3rem; /* 48px */
+  --font-size-big-medium: 2rem; /* 32px */
   --font-size-medium: 1.5rem; /* 24px */
   --font-size-small: 1.125rem; /* 18px */
 
@@ -89,10 +90,9 @@ body {
   cursor: pointer;
   font-size: var(--font-size-medium);
   font-weight: 600;
-  padding: var(--gap-sm) var(--gap-md);
+  padding: var(--gap-sm) var(--gap-xs);
   width: 300px;
   transition: background-color 0.3s ease;
-  margin-right: var(--gap-md);
 }
 
 .primary-button {
@@ -114,5 +114,36 @@ body {
 .secondary-button:hover {
   color: var(--color-text-primary);
   background-color: var(--color-button-secondary-hover);
+}
+
+@media screen and (max-width: 1900px) {
+  .title {
+    font-size: var(--font-size-big-medium);
+  }
+
+  .custom-button {
+    width: 40%;
+    font-size: var(--font-size-small);
+    margin: 0;
+    padding: var(--gap-sm) var(--gap-xs);
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .custom-button {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+}
+
+@media screen and (max-width: 672px) {
+  .custom-button {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 576px) {
 }
 </style>
