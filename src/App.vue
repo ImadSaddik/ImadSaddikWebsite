@@ -86,19 +86,12 @@ body {
   text-align: center;
 }
 
-.custom-button {
-  cursor: pointer;
-  font-size: var(--font-size-medium);
-  font-weight: 600;
-  padding: var(--gap-sm) var(--gap-xs);
-  width: 300px;
-  transition: background-color 0.3s ease;
-}
-
 .primary-button {
+  cursor: pointer;
   color: var(--color-text-primary);
   background-color: var(--color-button-primary);
   border: none;
+  transition: background-color 0.3s ease;
 }
 
 .primary-button:hover {
@@ -106,9 +99,11 @@ body {
 }
 
 .secondary-button {
+  cursor: pointer;
   color: var(--color-button-secondary);
   background-color: transparent;
   border: 1px solid var(--color-button-secondary);
+  transition: background-color 0.3s ease;
 }
 
 .secondary-button:hover {
@@ -120,28 +115,15 @@ body {
   .title {
     font-size: var(--font-size-big-medium);
   }
-
-  .custom-button {
-    width: 40%;
-    font-size: var(--font-size-small);
-    margin: 0;
-    padding: var(--gap-sm) var(--gap-xs);
-  }
 }
 
 @media screen and (max-width: 1300px) {
-  .custom-button {
-    width: 50%;
-  }
 }
 
 @media screen and (max-width: 768px) {
 }
 
 @media screen and (max-width: 672px) {
-  .custom-button {
-    width: 60%;
-  }
 }
 
 @media screen and (max-width: 576px) {
