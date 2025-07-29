@@ -35,7 +35,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: var(--gap-between-sections);
+  margin-top: var(--gap-between-sections-big);
   width: 100%;
 }
 </style>

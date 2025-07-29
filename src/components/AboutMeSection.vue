@@ -16,7 +16,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: var(--gap-between-sections);
+  margin-top: var(--gap-between-sections-big);
   width: 60%;
 }
 

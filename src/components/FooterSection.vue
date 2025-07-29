@@ -72,7 +72,7 @@ export default {
 <style scoped>
 .footer-container {
   width: 100%;
-  margin-top: var(--gap-between-sections);
+  margin-top: var(--gap-between-sections-big);
   border-top: 1px solid var(--color-text-secondary);
   position: relative;
 }
