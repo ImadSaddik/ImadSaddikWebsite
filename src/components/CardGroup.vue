@@ -71,6 +71,13 @@ export default {
   margin-bottom: var(--gap-xl);
 }
 
+.cards-group-button {
+  padding: var(--gap-sm) var(--gap-xs);
+  font-size: var(--font-size-small);
+  font-weight: 600;
+  width: 200px;
+}
+
 @media screen and (max-width: 2000px) {
   .cards-group-container {
     width: 80%;
