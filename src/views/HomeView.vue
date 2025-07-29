@@ -2,18 +2,19 @@
   <div class="home-view-container">
     <div class="main-content">
       <HeroSection />
-      <SeparatorImage
+      <!-- <SeparatorImage
         :image-src="scorpiusIllustration"
         alt-text="Scorpius constellation with connecting lines and colorful stars and galaxies."
         image-width="100%"
-      />
+      /> -->
 
       <AboutMeSection />
-      <SeparatorImage
-        :image-src="quasarIllustration"
-        alt-text="Blue quasar at the center of a spiral galaxy with energetic jets."
-        image-width="20%"
+      <img
+        class="quasar-image"
+        :src="quasarIllustration"
+        alt="Blue quasar at the center of a spiral galaxy with energetic jets."
       />
+      <!-- 
 
       <CardGroup title="Courses" :cards-data="coursesCardData" button-text="View all courses" />
       <SeparatorImage
@@ -29,20 +30,20 @@
         image-width="25%"
       />
 
-      <CardGroup title="Universe" :cards-data="universeImagesCardData" button-text="View all images" />
+      <CardGroup title="Universe" :cards-data="universeImagesCardData" button-text="View all images" /> -->
     </div>
 
-    <FooterSection />
+    <!-- <FooterSection /> -->
   </div>
 </template>
 
 <script>
 // Components
-import SeparatorImage from "@/components/SeparatorImage.vue";
+// import SeparatorImage from "@/components/SeparatorImage.vue";
 import HeroSection from "@/components/HeroSection.vue";
 import AboutMeSection from "@/components/AboutMeSection.vue";
-import CardGroup from "@/components/CardGroup.vue";
-import FooterSection from "@/components/FooterSection.vue";
+// import CardGroup from "@/components/CardGroup.vue";
+// import FooterSection from "@/components/FooterSection.vue";
 
 // Illustrations
 import scorpiusIllustration from "@/assets/illustrations/scorpius.svg";
@@ -57,11 +58,11 @@ import coursePlaceholder2 from "@/assets/courses/placeholder_2.svg";
 export default {
   name: "HomeView",
   components: {
-    SeparatorImage,
+    // SeparatorImage,
     HeroSection,
     AboutMeSection,
-    CardGroup,
-    FooterSection,
+    // CardGroup,
+    // FooterSection,
   },
   data() {
     return {
@@ -147,15 +148,51 @@ export default {
   padding: var(--gap-xl);
 }
 
-@media screen and (max-width: 1100px) {
+.quasar-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--gap-between-sections-big);
+  width: 20%;
+}
+
+@media screen and (max-width: 2000px) {
   .main-content {
     padding: var(--gap-lg);
+  }
+
+  .quasar-image {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .quasar-image {
+    width: 40%;
+    margin-top: var(--gap-between-sections-medium);
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .quasar-image {
+    width: 50%;
   }
 }
 
 @media screen and (max-width: 768px) {
   .main-content {
     padding: var(--gap-md);
+  }
+
+  .quasar-image {
+    width: 60%;
+    margin-top: var(--gap-between-sections-small);
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .quasar-image {
+    width: 70%;
   }
 }
 </style>
