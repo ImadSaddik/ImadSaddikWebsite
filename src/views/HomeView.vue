@@ -2,11 +2,11 @@
   <div class="home-view-container">
     <div class="main-content">
       <HeroSection />
-      <!-- <SeparatorImage
-        :image-src="scorpiusIllustration"
-        alt-text="Scorpius constellation with connecting lines and colorful stars and galaxies."
-        image-width="100%"
-      /> -->
+      <img
+        class="scorpius-image"
+        :src="scorpiusIllustration"
+        alt="Scorpius constellation with connecting lines and colorful stars and galaxies."
+      />
 
       <AboutMeSection />
       <img
@@ -157,6 +157,14 @@ export default {
   width: 100%;
 }
 
+.scorpius-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--gap-between-sections-big);
+  width: 100%;
+}
+
 .star-trails-image {
   display: flex;
   justify-content: center;
@@ -189,6 +197,10 @@ export default {
     margin-top: var(--gap-between-sections-medium);
   }
 
+  .scorpius-image {
+    margin-top: var(--gap-between-sections-medium);
+  }
+
   .star-trails-image {
     width: 50%;
     margin-top: var(--gap-between-sections-medium);
@@ -216,6 +228,10 @@ export default {
   }
 
   .solar-system-image {
+    margin-top: var(--gap-between-sections-small);
+  }
+
+  .scorpius-image {
     margin-top: var(--gap-between-sections-small);
   }
 
