@@ -49,7 +49,9 @@ export default {
   --gap-xxl: 4rem; /* 64px */
 
   /* Gaps between sections */
-  --gap-between-sections: 15rem;
+  --gap-between-sections-small: 5rem;
+  --gap-between-sections-medium: 10rem;
+  --gap-between-sections-big: 15rem;
 }
 
 ::selection {
