@@ -21,19 +21,11 @@
         :src="solarSystemIllustration"
         alt="Stylized illustration of a solar system showing 4 planets and a sun."
       />
-      <!-- 
-
-      
-      
 
       <CardGroup title="Articles" :cards-data="articlesCardData" button-text="View all articles" />
-      <SeparatorImage
-        :image-src="starTrailsIllustration"
-        alt-text="White star trails forming concentric arcs."
-        image-width="25%"
-      />
+      <img class="star-trails-image" :src="starTrailsIllustration" alt="White star trails forming concentric arcs." />
 
-      <CardGroup title="Universe" :cards-data="universeImagesCardData" button-text="View all images" /> -->
+      <CardGroup title="Universe" :cards-data="universeImagesCardData" button-text="View all images" />
     </div>
 
     <!-- <FooterSection /> -->
@@ -42,7 +34,6 @@
 
 <script>
 // Components
-// import SeparatorImage from "@/components/SeparatorImage.vue";
 import HeroSection from "@/components/HeroSection.vue";
 import AboutMeSection from "@/components/AboutMeSection.vue";
 import CardGroup from "@/components/CardGroup.vue";
@@ -61,7 +52,6 @@ import coursePlaceholder2 from "@/assets/courses/placeholder_2.svg";
 export default {
   name: "HomeView",
   components: {
-    // SeparatorImage,
     HeroSection,
     AboutMeSection,
     CardGroup,
@@ -167,6 +157,14 @@ export default {
   width: 100%;
 }
 
+.star-trails-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--gap-between-sections-big);
+  width: 25%;
+}
+
 @media screen and (max-width: 2000px) {
   .main-content {
     padding: var(--gap-lg);
@@ -174,6 +172,10 @@ export default {
 
   .quasar-image {
     width: 30%;
+  }
+
+  .star-trails-image {
+    width: 40%;
   }
 }
 
@@ -186,11 +188,20 @@ export default {
   .solar-system-image {
     margin-top: var(--gap-between-sections-medium);
   }
+
+  .star-trails-image {
+    width: 50%;
+    margin-top: var(--gap-between-sections-medium);
+  }
 }
 
 @media screen and (max-width: 1100px) {
   .quasar-image {
     width: 50%;
+  }
+
+  .star-trails-image {
+    width: 60%;
   }
 }
 
@@ -207,11 +218,20 @@ export default {
   .solar-system-image {
     margin-top: var(--gap-between-sections-small);
   }
+
+  .star-trails-image {
+    width: 80%;
+    margin-top: var(--gap-between-sections-small);
+  }
 }
 
 @media screen and (max-width: 576px) {
   .quasar-image {
     width: 70%;
+  }
+
+  .star-trails-image {
+    width: 100%;
   }
 }
 </style>
