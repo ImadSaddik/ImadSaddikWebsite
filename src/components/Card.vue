@@ -50,4 +50,16 @@ img {
   color: var(--color-text-secondary);
   margin-top: var(--gap-xs);
 }
+
+@media screen and (max-width: 2000px) {
+  .card-title {
+    margin-top: var(--gap-sm);
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .card-title {
+    margin-top: var(--gap-xs);
+  }
+}
 </style>
