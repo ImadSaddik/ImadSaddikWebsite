@@ -14,14 +14,17 @@
         :src="quasarIllustration"
         alt="Blue quasar at the center of a spiral galaxy with energetic jets."
       />
-      <!-- 
 
       <CardGroup title="Courses" :cards-data="coursesCardData" button-text="View all courses" />
-      <SeparatorImage
-        :image-src="solarSystemIllustration"
-        alt-text="Stylized illustration of a solar system showing 4 planets and a sun."
-        image-width="100%"
+      <img
+        class="solar-system-image"
+        :src="solarSystemIllustration"
+        alt="Stylized illustration of a solar system showing 4 planets and a sun."
       />
+      <!-- 
+
+      
+      
 
       <CardGroup title="Articles" :cards-data="articlesCardData" button-text="View all articles" />
       <SeparatorImage
@@ -42,7 +45,7 @@
 // import SeparatorImage from "@/components/SeparatorImage.vue";
 import HeroSection from "@/components/HeroSection.vue";
 import AboutMeSection from "@/components/AboutMeSection.vue";
-// import CardGroup from "@/components/CardGroup.vue";
+import CardGroup from "@/components/CardGroup.vue";
 // import FooterSection from "@/components/FooterSection.vue";
 
 // Illustrations
@@ -61,7 +64,7 @@ export default {
     // SeparatorImage,
     HeroSection,
     AboutMeSection,
-    // CardGroup,
+    CardGroup,
     // FooterSection,
   },
   data() {
@@ -156,6 +159,14 @@ export default {
   width: 20%;
 }
 
+.solar-system-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--gap-between-sections-big);
+  width: 100%;
+}
+
 @media screen and (max-width: 2000px) {
   .main-content {
     padding: var(--gap-lg);
@@ -169,6 +180,10 @@ export default {
 @media screen and (max-width: 1500px) {
   .quasar-image {
     width: 40%;
+    margin-top: var(--gap-between-sections-medium);
+  }
+
+  .solar-system-image {
     margin-top: var(--gap-between-sections-medium);
   }
 }
@@ -186,6 +201,10 @@ export default {
 
   .quasar-image {
     width: 60%;
+    margin-top: var(--gap-between-sections-small);
+  }
+
+  .solar-system-image {
     margin-top: var(--gap-between-sections-small);
   }
 }
