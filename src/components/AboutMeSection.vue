@@ -44,6 +44,7 @@
 @media screen and (max-width: 1500px) {
   .about-me-container {
     width: 80%;
+    margin-top: var(--gap-between-sections-medium);
   }
 
   .about-me-paragraph {
@@ -60,6 +61,7 @@
 @media screen and (max-width: 768px) {
   .about-me-container {
     width: 100%;
+    margin-top: var(--gap-between-sections-small);
   }
 
   .about-me-title {
