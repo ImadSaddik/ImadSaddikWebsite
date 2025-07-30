@@ -90,7 +90,7 @@ body {
 
 .primary-button {
   cursor: pointer;
-  color: var(--color-text-primary);
+  color: black;
   background-color: var(--color-button-primary);
   border: none;
   transition: background-color 0.3s ease;
