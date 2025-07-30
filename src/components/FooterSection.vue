@@ -32,7 +32,7 @@
           <img :src="inkscapeLogo" alt="Inkscape logo" class="footer-credit-logo" /> </a
         >.
         <span class="separator">|</span>
-        All rights reserved © 2025 Imad Saddik
+        All rights reserved © {{ currentYear }} Imad Saddik
       </p>
     </div>
 
@@ -69,6 +69,8 @@ export default {
   name: "FooterSection",
   data() {
     return {
+      currentYear: new Date().getFullYear(),
+
       githubLogo,
       huggingFaceLogo,
       youtubeLogo,
