@@ -7,6 +7,11 @@
         :src="scorpiusIllustration"
         alt="Scorpius constellation with connecting lines and colorful stars and galaxies."
       />
+      <img
+        class="orion-image"
+        :src="orionIllustration"
+        alt="Orion constellation with connecting lines and colorful stars and galaxies."
+      />
 
       <AboutMeSection />
       <img
@@ -41,6 +46,7 @@ import FooterSection from "@/components/FooterSection.vue";
 
 // Illustrations
 import scorpiusIllustration from "@/assets/illustrations/scorpius.svg";
+import orionIllustration from "@/assets/illustrations/orion.svg";
 import quasarIllustration from "@/assets/illustrations/quasar.svg";
 import solarSystemIllustration from "@/assets/illustrations/solar_system.svg";
 import starTrailsIllustration from "@/assets/illustrations/star_trails.svg";
@@ -63,6 +69,7 @@ export default {
       quasarIllustration,
       solarSystemIllustration,
       starTrailsIllustration,
+      orionIllustration,
 
       coursesCardData: [
         {
@@ -165,6 +172,14 @@ export default {
   width: 100%;
 }
 
+.orion-image {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--gap-between-sections-big);
+  width: 100%;
+}
+
 .star-trails-image {
   display: flex;
   justify-content: center;
@@ -215,6 +230,16 @@ export default {
   .star-trails-image {
     width: 60%;
   }
+
+  .scorpius-image {
+    display: none;
+  }
+
+  .orion-image {
+    display: flex;
+    width: 70%;
+    margin-top: var(--gap-between-sections-small);
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -229,6 +254,11 @@ export default {
 
   .solar-system-image {
     margin-top: var(--gap-between-sections-small);
+  }
+
+  .orion-image {
+    display: flex;
+    width: 100%;
   }
 
   .scorpius-image {
