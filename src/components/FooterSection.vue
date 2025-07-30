@@ -22,7 +22,18 @@
         </a>
       </div>
 
-      <p class="footer-rights">All rights reserved © 2025 Imad Saddik</p>
+      <p class="footer-credits">
+        Built with
+        <a href="https://vuejs.org/" target="_blank" rel="noopener noreferrer">
+          <img :src="vueLogo" alt="Vue.js logo" class="footer-credit-logo" />
+        </a>
+        &amp; illustrations made in
+        <a href="https://inkscape.org/" target="_blank" rel="noopener noreferrer">
+          <img :src="inkscapeLogo" alt="Inkscape logo" class="footer-credit-logo" /> </a
+        >.
+        <span class="separator">|</span>
+        All rights reserved © 2025 Imad Saddik
+      </p>
     </div>
 
     <div class="footer-images">
@@ -47,6 +58,8 @@ import huggingFaceLogo from "@/assets/logos/hugging_face.svg";
 import youtubeLogo from "@/assets/logos/youtube.svg";
 import mediumLogo from "@/assets/logos/medium.svg";
 import linkedinLogo from "@/assets/logos/linkedin.svg";
+import inkscapeLogo from "@/assets/logos/inkscape.svg";
+import vueLogo from "@/assets/logos/vue.svg";
 
 // Images
 import telescopeImage from "@/assets/telescope.svg";
@@ -61,6 +74,8 @@ export default {
       youtubeLogo,
       mediumLogo,
       linkedinLogo,
+      inkscapeLogo,
+      vueLogo,
 
       telescopeImage,
       objectsImage,
@@ -79,7 +94,7 @@ export default {
 
 .footer-title {
   font-size: var(--font-size-big);
-  margin-top: 6rem;
+  margin-top: 5rem;
   margin-bottom: var(--gap-sm);
 }
 
@@ -99,7 +114,6 @@ export default {
 .footer-logos {
   display: flex;
   gap: var(--gap-sm);
-  margin-bottom: var(--gap-md);
 }
 
 .footer-logos img {
@@ -112,11 +126,21 @@ export default {
   filter: brightness(0.9);
 }
 
-.footer-rights {
+.footer-credit-logo {
+  height: 32px;
+  vertical-align: middle;
+}
+
+.footer-credit-logo:hover {
+  filter: brightness(0.9);
+}
+
+.footer-credits {
   font-size: var(--font-size-small);
   color: var(--color-text-secondary);
-  margin-top: var(--gap-xxl);
-  margin-bottom: var(--gap-xxl);
+  margin-top: var(--gap-lg);
+  margin-bottom: 5rem;
+  width: 100%;
 }
 
 .footer-images {
@@ -171,6 +195,10 @@ export default {
     bottom: 0;
     left: 40%;
   }
+
+  .footer-credits {
+    width: 30%;
+  }
 }
 
 @media screen and (max-width: 1100px) {
@@ -184,10 +212,9 @@ export default {
     margin-bottom: var(--gap-sm);
   }
 
-  .footer-rights {
-    font-size: var(--font-size-small);
-    margin-top: var(--gap-xl);
+  .footer-credits {
     margin-bottom: 0;
+    width: 100%;
   }
 }
 
@@ -205,6 +232,10 @@ export default {
   }
 
   .footer-logos img {
+    height: 24px;
+  }
+
+  .footer-credit-logo {
     height: 24px;
   }
 }
