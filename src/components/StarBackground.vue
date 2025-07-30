@@ -29,14 +29,14 @@ export default {
       this.stars = [];
       for (let i = 0; i < this.numStars; i++) {
         this.stars.push({
-          x: Math.random() * this.width,
-          y: Math.random() * this.height,
-          r: Math.random() * 1.2 + 0.3,
-          alpha: Math.random() * 0.5 + 0.5,
-          dx: (Math.random() - 0.5) * 0.15,
-          dy: (Math.random() - 0.5) * 0.15,
+          positionX: Math.random() * this.width,
+          positionY: Math.random() * this.height,
+          radius: Math.random() * 1.2 + 0.3,
+          alpha: Math.random() * 0.5 + 0.3,
+          stepSizeX: (Math.random() - 0.5) * 0.15,
+          stepSizeY: (Math.random() - 0.5) * 0.15,
           color: starColors[Math.floor(Math.random() * starColors.length)],
-          hasSpikes: Math.random() < 0.1, // 10% chance to have spikes
+          hasSpikes: Math.random() < 0.1,
         });
       }
     },
@@ -48,12 +48,12 @@ export default {
         if (star.hasSpikes) {
           // Draw diffraction spikes (JWST style)
           const numSpikes = 6;
-          const spikeLength = star.r * 3 + Math.random() * 2;
-          const spikeWidth = Math.max(0.5, star.r * 0.5);
+          const spikeLength = star.radius * 3 + Math.random() * 2;
+          const spikeWidth = Math.max(0.5, star.radius * 0.5);
           for (let i = 0; i < numSpikes; i++) {
             const angle = (i * Math.PI) / (numSpikes / 2);
             this.context.save();
-            this.context.translate(star.x, star.y);
+            this.context.translate(star.positionX, star.positionY);
             this.context.rotate(angle);
             this.context.beginPath();
             this.context.moveTo(0, 0);
@@ -69,7 +69,7 @@ export default {
         }
         // Draw the star circle
         this.context.beginPath();
-        this.context.arc(star.x, star.y, star.r, 0, 2 * Math.PI);
+        this.context.arc(star.positionX, star.positionY, star.radius, 0, 2 * Math.PI);
         this.context.fillStyle = star.color;
         this.context.shadowColor = star.color;
         this.context.shadowBlur = 8;
@@ -77,12 +77,12 @@ export default {
         this.context.fill();
         this.context.restore();
 
-        star.x += star.dx;
-        star.y += star.dy;
-        if (star.x < 0) star.x = this.width;
-        if (star.x > this.width) star.x = 0;
-        if (star.y < 0) star.y = this.height;
-        if (star.y > this.height) star.y = 0;
+        star.positionX += star.stepSizeX;
+        star.positionY += star.stepSizeY;
+        if (star.positionX < 0) star.positionX = this.width;
+        if (star.positionX > this.width) star.positionX = 0;
+        if (star.positionY < 0) star.positionY = this.height;
+        if (star.positionY > this.height) star.positionY = 0;
       }
       this.animationFrameId = requestAnimationFrame(this.drawStars);
     },
