@@ -28,7 +28,7 @@
       <CardGroup title="Universe" :cards-data="universeImagesCardData" button-text="View all images" />
     </div>
 
-    <!-- <FooterSection /> -->
+    <FooterSection />
   </div>
 </template>
 
@@ -37,7 +37,7 @@
 import HeroSection from "@/components/HeroSection.vue";
 import AboutMeSection from "@/components/AboutMeSection.vue";
 import CardGroup from "@/components/CardGroup.vue";
-// import FooterSection from "@/components/FooterSection.vue";
+import FooterSection from "@/components/FooterSection.vue";
 
 // Illustrations
 import scorpiusIllustration from "@/assets/illustrations/scorpius.svg";
@@ -55,7 +55,7 @@ export default {
     HeroSection,
     AboutMeSection,
     CardGroup,
-    // FooterSection,
+    FooterSection,
   },
   data() {
     return {

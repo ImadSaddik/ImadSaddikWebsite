@@ -84,7 +84,7 @@ export default {
 }
 
 .footer-description {
-  font-size: var(--font-size-medium);
+  font-size: var(--font-size-small);
   color: var(--color-text-secondary);
   margin-bottom: var(--gap-md);
 }
@@ -115,8 +115,8 @@ export default {
 .footer-rights {
   font-size: var(--font-size-small);
   color: var(--color-text-secondary);
-  margin-top: var(--gap-xl);
-  margin-bottom: var(--gap-xl);
+  margin-top: var(--gap-xxl);
+  margin-bottom: var(--gap-xxl);
 }
 
 .footer-images {
@@ -131,7 +131,7 @@ export default {
 .telescope-image {
   position: absolute;
   bottom: 0;
-  left: 60%;
+  left: 50%;
 }
 
 .deep-sky-objects-image {
@@ -140,5 +140,72 @@ export default {
   right: 50px;
   width: 360px;
   height: auto;
+}
+
+@media screen and (max-width: 2000px) {
+  .footer-content {
+    padding: var(--gap-lg);
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .footer-container {
+    margin-top: var(--gap-between-sections-medium);
+  }
+
+  .footer-title {
+    margin-top: var(--gap-xl);
+    margin-bottom: var(--gap-md);
+  }
+
+  .footer-logos {
+    gap: var(--gap-sm);
+  }
+
+  .footer-logos img {
+    height: 32px;
+  }
+
+  .telescope-image {
+    position: absolute;
+    bottom: 0;
+    left: 40%;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .footer-images {
+    display: none;
+  }
+
+  .footer-title {
+    font-size: var(--font-size-big-medium);
+    margin-top: var(--gap-lg);
+    margin-bottom: var(--gap-sm);
+  }
+
+  .footer-rights {
+    font-size: var(--font-size-small);
+    margin-top: var(--gap-xl);
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer-container {
+    margin-top: var(--gap-between-sections-small);
+  }
+
+  .footer-content {
+    padding: var(--gap-md);
+  }
+
+  .footer-logos {
+    gap: var(--gap-xs);
+  }
+
+  .footer-logos img {
+    height: 24px;
+  }
 }
 </style>
