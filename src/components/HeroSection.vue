@@ -6,8 +6,8 @@
       </h1>
 
       <div class="buttons-container">
-        <button class="custom-button primary-button">Explore articles</button>
-        <button class="custom-button secondary-button">View courses</button>
+        <button class="hero-button primary-button">Explore articles</button>
+        <button class="hero-button secondary-button">View courses</button>
       </div>
     </div>
 
@@ -51,6 +51,13 @@ export default {
   display: flex;
   flex-direction: row;
   gap: var(--gap-md);
+}
+
+.hero-button {
+  padding: var(--gap-sm) var(--gap-xs);
+  font-size: var(--font-size-small);
+  font-weight: 600;
+  width: 200px;
 }
 
 .image-column {
