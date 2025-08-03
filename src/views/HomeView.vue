@@ -2,13 +2,13 @@
   <div class="home-view-container">
     <div class="main-content">
       <HeroSection />
-      <!-- <img
+
+      <AboutMeSection />
+      <img
         class="orion-image"
         :src="orionIllustration"
         alt="Orion constellation with connecting lines and colorful stars and galaxies."
-      /> -->
-
-      <AboutMeSection />
+      />
       <img
         class="scorpius-image"
         :src="scorpiusIllustration"
