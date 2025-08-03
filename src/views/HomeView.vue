@@ -18,7 +18,7 @@
       <CardGroup title="Courses" :cards-data="coursesCardData" button-text="View all courses" />
       <img
         class="horizontal-solar-system-image"
-        :src="solarSystemIllustration"
+        :src="horizontalSolarSystemIllustration"
         alt="Stylized illustration of a solar system showing 4 planets and a sun."
       />
       <img
