@@ -1,9 +1,7 @@
 <template>
   <section class="hero-container">
     <div class="actions-column">
-      <h1 id="hero-title" class="title">
-        Explore articles, images and courses I create about programming and the universe.
-      </h1>
+      <h1 class="hero-title">Explore articles, images and courses I create about programming and the universe.</h1>
 
       <div class="buttons-container">
         <button class="hero-button primary-button">Explore articles</button>
@@ -12,19 +10,30 @@
     </div>
 
     <div class="image-column">
-      <img :src="bigDipper" alt="Blue spiral galaxy with a dark core." />
+      <img
+        class="vertical-big-dipper"
+        :src="verticalBigDipper"
+        alt="Ursa major constellation with connecting lines and colorful stars and galaxies."
+      />
+      <img
+        class="horizontal-big-dipper"
+        :src="horizontalBigDipper"
+        alt="Ursa major constellation with connecting lines and colorful stars and galaxies."
+      />
     </div>
   </section>
 </template>
 
 <script>
-import bigDipper from "@/assets/illustrations/big_dipper_vertical.svg";
+import verticalBigDipper from "@/assets/illustrations/big_dipper_vertical.svg";
+import horizontalBigDipper from "@/assets/illustrations/big_dipper_horizontal.svg";
 
 export default {
   name: "HeroSection",
   data() {
     return {
-      bigDipper,
+      verticalBigDipper,
+      horizontalBigDipper,
     };
   },
 };
@@ -35,9 +44,15 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 75%;
+  width: 100%;
   gap: var(--gap-xxl);
   margin-top: var(--gap-xxl);
+}
+
+.hero-title {
+  font-size: var(--font-size-big);
+  margin-top: 0;
+  margin-bottom: var(--gap-xl);
 }
 
 .actions-column {
@@ -65,95 +80,57 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
-.image-column img {
+.vertical-big-dipper {
+  display: block;
   width: 75%;
   height: auto;
 }
 
-@media screen and (max-width: 1700px) {
-  .hero-container {
-    margin-top: 0;
-    width: 80%;
-    gap: var(--gap-xxl);
-  }
-
-  .buttons-container {
-    flex-direction: row;
-    gap: var(--gap-sm);
-  }
-
-  .image-column img {
-    width: 75%;
-  }
-
-  #hero-title {
-    width: 100%;
-    margin-bottom: var(--gap-xl);
-  }
-}
-
-@media screen and (max-width: 1500px) {
-  .hero-container {
-    width: 85%;
-    gap: var(--gap-xl);
-  }
-
-  .image-column img {
-    width: 85%;
-  }
-}
-
-@media screen and (max-width: 1300px) {
-  .hero-container {
-    width: 90%;
-  }
-
-  .buttons-container {
-    flex-direction: column;
-  }
-
-  .image-column img {
-    width: 90%;
-  }
+.horizontal-big-dipper {
+  display: none;
 }
 
 @media screen and (max-width: 1100px) {
-  .hero-container {
-    width: 100%;
+  .vertical-big-dipper {
+    width: 70%;
   }
 
-  .buttons-container {
-    gap: var(--gap-xs);
-  }
-
-  .image-column img {
-    width: 100%;
+  .hero-title {
+    font-size: var(--font-size-big-medium);
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
   .hero-container {
     flex-direction: column-reverse;
   }
 
-  .image-column img {
-    width: 90%;
+  .vertical-big-dipper {
+    width: 70%;
+    display: none;
   }
 
-  #hero-title {
-    width: 85%;
+  .horizontal-big-dipper {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .hero-title {
+    font-size: var(--font-size-big-medium);
   }
 }
 
-@media screen and (max-width: 576px) {
-  .image-column img {
-    width: 80%;
-  }
+@media screen and (max-width: 768px) {
+}
 
-  #hero-title {
-    width: 100%;
+@media screen and (max-width: 576px) {
+  .buttons-container {
+    flex-direction: column;
+    gap: var(--gap-sm);
   }
 }
 </style>
