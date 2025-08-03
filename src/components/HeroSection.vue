@@ -12,19 +12,19 @@
     </div>
 
     <div class="image-column">
-      <img :src="blueGalaxy" alt="Blue spiral galaxy with a dark core." />
+      <img :src="bigDipper" alt="Blue spiral galaxy with a dark core." />
     </div>
   </section>
 </template>
 
 <script>
-import blueGalaxy from "@/assets/hero_section/blue_galaxy.svg";
+import bigDipper from "@/assets/illustrations/big_dipper_vertical.svg";
 
 export default {
   name: "HeroSection",
   data() {
     return {
-      blueGalaxy,
+      bigDipper,
     };
   },
 };
