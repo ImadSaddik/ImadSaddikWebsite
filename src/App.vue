@@ -65,7 +65,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
 
   color: var(--color-text-primary);
-  width: 100%;
+  max-width: 2000px;
+  margin: 0 auto;
 }
 
 body {
