@@ -7,7 +7,7 @@
 	xmlns:xlink="http://www.w3.org/1999/xlink"
 	xmlns="http://www.w3.org/2000/svg"
 	xmlns:svg="http://www.w3.org/2000/svg">
-	<sodipodi:namedview id="namedview1" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" inkscape:document-units="px" inkscape:zoom="1.2951324" inkscape:cx="316.56995" inkscape:cy="932.33711" inkscape:window-width="2560" inkscape:window-height="1371" inkscape:window-x="0" inkscape:window-y="32" inkscape:window-maximized="1" inkscape:current-layer="layer1" showguides="true" />
+	<sodipodi:namedview id="namedview1" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" inkscape:document-units="px" inkscape:zoom="0.6475662" inkscape:cx="412.31306" inkscape:cy="899.52193" inkscape:window-width="2560" inkscape:window-height="1371" inkscape:window-x="0" inkscape:window-y="32" inkscape:window-maximized="1" inkscape:current-layer="layer1" showguides="true" />
 	<defs id="defs1">
 		<inkscape:path-effect effect="bspline" id="path-effect336" is_visible="true" lpeversion="1.3" weight="33.333333" steps="2" helper_size="0" apply_no_weight="true" apply_with_weight="true" only_selected="false" uniform="false" />
 		<inkscape:path-effect effect="bspline" id="path-effect311" is_visible="true" lpeversion="1.3" weight="33.333333" steps="2" helper_size="0" apply_no_weight="true" apply_with_weight="true" only_selected="false" uniform="false" />
@@ -91,13 +91,53 @@
 	</defs>
 	<g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" transform="translate(38.120845,105.95211)">
 		<circle style="opacity:1;fill:#f29508;fill-opacity:1;stroke:none;stroke-width:0.347555;stroke-linejoin:round" id="path152" cx="67.73333" cy="67.73333" r="11.005835" />
-		<ellipse style="fill:none;fill-opacity:1;stroke:#f9f9f9;stroke-width:0.529388;stroke-linejoin:round;stroke-dasharray:none" id="ellipse160" cx="24.750536" cy="91.746033" rx="46.518192" ry="16.794153" transform="matrix(0.88591393,-0.46384965,0.49964686,0.86622919,0,0)" />
-		<ellipse style="fill:none;fill-opacity:1;stroke:#f9f9f9;stroke-width:0.529388;stroke-linejoin:round;stroke-dasharray:none" id="ellipse161" cx="24.750536" cy="91.746033" rx="56.538063" ry="20.41156" transform="matrix(0.88591393,-0.46384965,0.49964686,0.86622919,0,0)" />
-		<ellipse style="fill:none;fill-opacity:1;stroke:#f9f9f9;stroke-width:0.632261;stroke-linejoin:round;stroke-dasharray:none" id="ellipse163" cx="6.5775919" cy="95.503082" rx="99.038139" ry="35.755081" transform="matrix(0.78110077,-0.62440499,0.65578723,0.75494577,0,0)" />
-		<ellipse style="fill:none;fill-opacity:1;stroke:#f9f9f9;stroke-width:0.791512;stroke-linejoin:round;stroke-dasharray:none" id="planetOrbit1" cx="-48.14257" cy="85.042068" rx="155.24739" ry="56.047932" transform="matrix(0.29844452,-0.95442698,0.96582022,0.25921285,0,0)" inkscape:label="planetOrbit1" />
-		<circle style="fill:#00d455;fill-opacity:1;stroke:none;stroke-width:0.637714;stroke-linejoin:round;stroke-dasharray:none" id="circle166" cx="84.407127" cy="86.571175" r="3.6006212" transform="rotate(-15)" />
-		<circle style="fill:#2ad4ff;fill-opacity:1;stroke:none;stroke-width:0.503394;stroke-linejoin:round;stroke-dasharray:none" id="circle167" cx="-4.8932872" cy="99.524147" r="2.8422313" transform="rotate(-15)" />
- style="fill:#00ffcc;fill-opacity:1;stroke:none;stroke-width:0.708416;stroke-linejoin:round;stroke-dasharray:none" id="circle171" cx="90.315071" cy="33.592693" r="3.9998169" transform="rotate(-15)" /><path id="path2" style="fill:url(#linearGradient2);stroke-width:0.179294;stroke-linejoin:round" d="M -6.1014106,-8.3269845 -21.949649,-19.591775 -9.0661262,-5.0289098 a 2.2173647,2.2173647 0 0 0 3.131395,-0.1666781 2.2173647,2.2173647 0 0 0 -0.1666794,-3.1313966 z" />
+		<path id="planetOrbit1" style="fill:none;stroke:#f9f9f9;stroke-width:0.791512;stroke-linejoin:round" inkscape:label="planetOrbit1" transform="matrix(0.29844452,-0.95442698,0.96582022,0.25921285,0,0)" d="M 107.10482,85.042068 A 155.24739,56.047932 0 0 1 -48.14257,141.09 155.24739,56.047932 0 0 1 -203.38996,85.042068 155.24739,56.047932 0 0 1 -48.14257,28.994137 155.24739,56.047932 0 0 1 107.10482,85.042068 Z" />
+		<g transform="matrix(0.29844452,-0.95442698,0.96582022,0.25921285,0,0)" id="planetGroup1">
+
+			<circle style="fill:#2ca05a;fill-opacity:1;stroke:none;" id="planet1" r="5.1915727" cx="0" cy="0">
+
+				<animateMotion dur="120s" repeatCount="indefinite" begin="-30s">
+					<mpath href="#planetOrbit1" />
+				</animateMotion>
+
+			</circle>
+		</g>
+
+		<path id="planetOrbit2" style="fill:none;stroke:#f9f9f9;stroke-width:0.632261;stroke-linejoin:round" inkscape:label="planetOrbit2" transform="matrix(0.78110077,-0.62440499,0.65578723,0.75494577,0,0)" d="M 105.61573,95.503082 A 99.038139,35.755081 0 0 1 6.5775919,131.25816 99.038139,35.755081 0 0 1 -92.460547,95.503082 99.038139,35.755081 0 0 1 6.5775919,59.748001 99.038139,35.755081 0 0 1 105.61573,95.503082 Z" />
+		<g transform="matrix(0.78110077,-0.62440499,0.65578723,0.75494577,0,0)" id="planetGroup2">
+
+			<circle style="fill:#00ffcc;fill-opacity:1;stroke:none;stroke-width:0.708416;stroke-linejoin:round;stroke-dasharray:none" id="planet2" cx="0" cy="0" r="3.9998169">
+
+				<animateMotion dur="60s" repeatCount="indefinite" begin="-40s">
+					<mpath href="#planetOrbit2" />
+				</animateMotion>
+
+			</circle>
+		</g>
+
+		<path id="planetOrbit3" style="fill:none;stroke:#f9f9f9;stroke-width:0.529388;stroke-linejoin:round" inkscape:label="planetOrbit3" transform="matrix(0.88591393,-0.46384965,0.49964686,0.86622919,0,0)" d="M 81.288599,91.746033 A 56.538063,20.41156 0 0 1 24.750536,112.15759 56.538063,20.41156 0 0 1 -31.787527,91.746033 56.538063,20.41156 0 0 1 24.750536,71.334473 56.538063,20.41156 0 0 1 81.288599,91.746033 Z" />
+		<g transform="matrix(0.88591393,-0.46384965,0.49964686,0.86622919,0,0)" id="planetGroup3">
+
+			<circle style="fill:#00d455;fill-opacity:1;stroke:none;stroke-width:0.637714;stroke-linejoin:round;stroke-dasharray:none" id="planet3" cx="0" cy="0" r="3.6006212">
+
+				<animateMotion dur="30s" repeatCount="indefinite" begin="-5s">
+					<mpath href="#planetOrbit3" />
+				</animateMotion>
+
+			</circle>
+		</g>
+
+		<path id="planetOrbit4" style="fill:none;stroke:#f9f9f9;stroke-width:0.529388;stroke-linejoin:round" inkscape:label="planetOrbit4" transform="matrix(0.88591393,-0.46384965,0.49964686,0.86622919,0,0)" d="M 71.268728,91.746033 A 46.518192,16.794153 0 0 1 24.750536,108.54019 46.518192,16.794153 0 0 1 -21.767656,91.746033 46.518192,16.794153 0 0 1 24.750536,74.95188 46.518192,16.794153 0 0 1 71.268728,91.746033 Z" />
+		<g transform="matrix(0.88591393,-0.46384965,0.49964686,0.86622919,0,0)" id="planetGroup4">
+
+			<circle style="fill:#2ad4ff;fill-opacity:1;stroke:none;stroke-width:0.503394;stroke-linejoin:round;stroke-dasharray:none" id="planet4" cx="0" cy="0" r="2.8422313">
+
+				<animateMotion dur="15s" repeatCount="indefinite" begin="-10s">
+					<mpath href="#planetOrbit4" />
+				</animateMotion>
+
+			</circle>
+		</g> style=&quot;fill:#00ffcc;fill-opacity:1;stroke:none;stroke-width:0.708416;stroke-linejoin:round;stroke-dasharray:none&quot; id=&quot;circle171&quot; cx=&quot;90.315071&quot; cy=&quot;33.592693&quot; r=&quot;3.9998169&quot; transform=&quot;rotate(-15)&quot; /&gt;<path id="path2" style="fill:url(#linearGradient2);stroke-width:0.179294;stroke-linejoin:round" d="M -6.1014106,-8.3269845 -21.949649,-19.591775 -9.0661262,-5.0289098 a 2.2173647,2.2173647 0 0 0 3.131395,-0.1666781 2.2173647,2.2173647 0 0 0 -0.1666794,-3.1313966 z" />
 	<path id="path171" style="fill:url(#linearGradient171);stroke-width:0.179294;stroke-linejoin:round" d="m 141.51524,-88.879498 9.30528,-17.072612 -12.93175,14.520055 a 2.2173647,2.2173647 0 0 0 0.53696,3.089518 2.2173647,2.2173647 0 0 0 3.08951,-0.536961 z" />
 	<path id="path176" style="fill:url(#linearGradient176);stroke-width:0.179294;stroke-linejoin:round" d="m -14.720479,199.28664 -11.877277,33.75585 15.961359,-32.02751 c 0.477275,-1.12779 -0.05008,-2.42896 -1.177883,-2.90622 -1.127788,-0.47726 -2.428936,0.0501 -2.906199,1.17788 z" sodipodi:nodetypes="cccsc" />
 	<g id="g186">
