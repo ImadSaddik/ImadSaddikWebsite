@@ -2,22 +2,17 @@
   <div class="home-view-container">
     <div class="main-content">
       <HeroSection />
+      <!-- <img
+        class="orion-image"
+        :src="orionIllustration"
+        alt="Orion constellation with connecting lines and colorful stars and galaxies."
+      /> -->
+
+      <AboutMeSection />
       <img
         class="scorpius-image"
         :src="scorpiusIllustration"
         alt="Scorpius constellation with connecting lines and colorful stars and galaxies."
-      />
-      <img
-        class="orion-image"
-        :src="orionIllustration"
-        alt="Orion constellation with connecting lines and colorful stars and galaxies."
-      />
-
-      <AboutMeSection />
-      <img
-        class="quasar-image"
-        :src="quasarIllustration"
-        alt="Blue quasar at the center of a spiral galaxy with energetic jets."
       />
 
       <CardGroup title="Courses" :cards-data="coursesCardData" button-text="View all courses" />
@@ -28,7 +23,11 @@
       />
 
       <CardGroup title="Articles" :cards-data="articlesCardData" button-text="View all articles" />
-      <img class="star-trails-image" :src="starTrailsIllustration" alt="White star trails forming concentric arcs." />
+      <img
+        class="quasar-image"
+        :src="quasarIllustration"
+        alt="Blue quasar at the center of a spiral galaxy with energetic jets."
+      />
 
       <CardGroup title="Universe" :cards-data="universeImagesCardData" button-text="View all images" />
     </div>
@@ -49,7 +48,6 @@ import scorpiusIllustration from "@/assets/illustrations/scorpius.svg";
 import orionIllustration from "@/assets/illustrations/orion.svg";
 import quasarIllustration from "@/assets/illustrations/quasar.svg";
 import solarSystemIllustration from "@/assets/illustrations/solar_system.svg";
-import starTrailsIllustration from "@/assets/illustrations/star_trails.svg";
 
 // placeholder images
 import coursePlaceholder1 from "@/assets/courses/placeholder_1.svg";
@@ -68,7 +66,6 @@ export default {
       scorpiusIllustration,
       quasarIllustration,
       solarSystemIllustration,
-      starTrailsIllustration,
       orionIllustration,
 
       coursesCardData: [
