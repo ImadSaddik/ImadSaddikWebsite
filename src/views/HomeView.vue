@@ -17,8 +17,13 @@
 
       <CardGroup title="Courses" :cards-data="coursesCardData" button-text="View all courses" />
       <img
-        class="solar-system-image"
+        class="horizontal-solar-system-image"
         :src="solarSystemIllustration"
+        alt="Stylized illustration of a solar system showing 4 planets and a sun."
+      />
+      <img
+        class="vertical-solar-system-image"
+        :src="verticalSolarSystemIllustration"
         alt="Stylized illustration of a solar system showing 4 planets and a sun."
       />
 
@@ -47,7 +52,8 @@ import FooterSection from "@/components/FooterSection.vue";
 import scorpiusIllustration from "@/assets/illustrations/scorpius.svg";
 import orionIllustration from "@/assets/illustrations/orion.svg";
 import quasarIllustration from "@/assets/illustrations/quasar.svg";
-import solarSystemIllustration from "@/assets/illustrations/solar_system.svg";
+import horizontalSolarSystemIllustration from "@/assets/illustrations/solar_system_horizontal.svg";
+import verticalSolarSystemIllustration from "@/assets/illustrations/solar_system_vertical.svg";
 
 // placeholder images
 import coursePlaceholder1 from "@/assets/courses/placeholder_1.svg";
@@ -65,8 +71,9 @@ export default {
     return {
       scorpiusIllustration,
       quasarIllustration,
-      solarSystemIllustration,
       orionIllustration,
+      horizontalSolarSystemIllustration,
+      verticalSolarSystemIllustration,
 
       coursesCardData: [
         {
@@ -153,8 +160,16 @@ export default {
   width: 20%;
 }
 
-.solar-system-image {
+.horizontal-solar-system-image {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--gap-between-sections-big);
+  width: 100%;
+}
+
+.vertical-solar-system-image {
+  display: none;
   justify-content: center;
   align-items: center;
   margin-top: var(--gap-between-sections-big);
@@ -193,7 +208,7 @@ export default {
     margin-top: var(--gap-between-sections-medium);
   }
 
-  .solar-system-image {
+  .horizontal-solar-system-image {
     margin-top: var(--gap-between-sections-medium);
   }
 
@@ -216,6 +231,16 @@ export default {
     width: 70%;
     margin-top: var(--gap-between-sections-small);
   }
+
+  .horizontal-solar-system-image {
+    display: none;
+  }
+
+  .vertical-solar-system-image {
+    display: flex;
+    width: 100%;
+    margin-top: var(--gap-between-sections-small);
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -225,10 +250,6 @@ export default {
 
   .quasar-image {
     width: 60%;
-    margin-top: var(--gap-between-sections-small);
-  }
-
-  .solar-system-image {
     margin-top: var(--gap-between-sections-small);
   }
 
