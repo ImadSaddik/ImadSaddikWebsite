@@ -151,7 +151,7 @@ export default {
   }
 
   .nav-bar-home {
-    font-size: var(--font-size-medium);
+    font-size: var(--font-size-big-medium);
   }
 
   .expanded-nav-bar {
