@@ -177,14 +177,6 @@ export default {
   width: 100%;
 }
 
-.star-trails-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: var(--gap-between-sections-big);
-  width: 25%;
-}
-
 @media screen and (max-width: 2000px) {
   .main-content {
     padding: var(--gap-lg);
@@ -192,10 +184,6 @@ export default {
 
   .quasar-image {
     width: 30%;
-  }
-
-  .star-trails-image {
-    width: 40%;
   }
 }
 
@@ -212,20 +200,11 @@ export default {
   .scorpius-image {
     margin-top: var(--gap-between-sections-medium);
   }
-
-  .star-trails-image {
-    width: 50%;
-    margin-top: var(--gap-between-sections-medium);
-  }
 }
 
 @media screen and (max-width: 1100px) {
   .quasar-image {
     width: 50%;
-  }
-
-  .star-trails-image {
-    width: 60%;
   }
 
   .scorpius-image {
@@ -261,20 +240,11 @@ export default {
   .scorpius-image {
     margin-top: var(--gap-between-sections-small);
   }
-
-  .star-trails-image {
-    width: 80%;
-    margin-top: var(--gap-between-sections-small);
-  }
 }
 
 @media screen and (max-width: 576px) {
   .quasar-image {
     width: 70%;
-  }
-
-  .star-trails-image {
-    width: 100%;
   }
 }
 </style>
