@@ -90,8 +90,19 @@ export default {
 .footer-container {
   width: 100%;
   margin-top: var(--gap-between-sections-big);
-  border-top: 1px solid var(--color-text-secondary);
   position: relative;
+}
+
+.footer-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 1px;
+  background-color: var(--color-text-secondary);
+  z-index: 1;
 }
 
 .footer-title {
