@@ -54,7 +54,6 @@ export default {
   cursor: pointer;
   z-index: 3;
   background-color: var(--color-button-primary);
-  border-radius: 50%;
   transition: background-color 0.3s ease;
 }
 
