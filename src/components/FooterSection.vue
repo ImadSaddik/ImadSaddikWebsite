@@ -311,7 +311,7 @@ export default {
   }
 
   .footer-effects-container {
-    width: 35%;
+    width: 45%;
   }
 }
 
