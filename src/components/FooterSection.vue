@@ -34,6 +34,15 @@
         <span class="separator">|</span>
         All rights reserved © {{ currentYear }} Imad Saddik
       </p>
+
+      <div class="footer-effects-container">
+        <p>Your browser can't handle the star and meteor shower effects?</p>
+        <label class="effects-toggle">
+          <input type="checkbox" v-model="effectsEnabled" @change="handleEffectsToggle" />
+          <span class="effects-slider"></span>
+          <span class="effects-toggle-label">{{ toggleLabel }}</span>
+        </label>
+      </div>
     </div>
 
     <div class="footer-images">
@@ -65,12 +74,25 @@ import vueLogo from "@/assets/logos/vue.svg";
 import telescopeImage from "@/assets/telescope.svg";
 import objectsImage from "@/assets/objects_telescope_looking_at.svg";
 
+// Constants
+import { EFFECTS_TOGGLE_LOCAL_STORAGE_KEY, EFFECTS_TOGGLE_EVENT_NAME } from "@/constants";
+
 export default {
   name: "FooterSection",
+  emits: [EFFECTS_TOGGLE_EVENT_NAME],
+  computed: {
+    currentYear() {
+      return new Date().getFullYear();
+    },
+    toggleLabel() {
+      return this.effectsEnabled ? "On" : "Off";
+    },
+  },
+  mounted() {
+    this.loadEffectsPreference();
+  },
   data() {
     return {
-      currentYear: new Date().getFullYear(),
-
       githubLogo,
       huggingFaceLogo,
       youtubeLogo,
@@ -81,7 +103,21 @@ export default {
 
       telescopeImage,
       objectsImage,
+
+      effectsEnabled: true,
     };
+  },
+  methods: {
+    handleEffectsToggle() {
+      this.$emit(EFFECTS_TOGGLE_EVENT_NAME, this.effectsEnabled);
+      localStorage.setItem(EFFECTS_TOGGLE_LOCAL_STORAGE_KEY, this.effectsEnabled);
+    },
+    loadEffectsPreference() {
+      const storedEffectsEnabled = localStorage.getItem(EFFECTS_TOGGLE_LOCAL_STORAGE_KEY);
+      if (storedEffectsEnabled !== null) {
+        this.effectsEnabled = JSON.parse(storedEffectsEnabled);
+      }
+    },
   },
 };
 </script>
@@ -152,7 +188,7 @@ export default {
   font-size: var(--font-size-small);
   color: var(--color-text-secondary);
   margin-top: var(--gap-lg);
-  margin-bottom: 5rem;
+  margin-bottom: 0rem;
   width: 100%;
 }
 
@@ -177,6 +213,67 @@ export default {
   right: 50px;
   width: 360px;
   height: auto;
+}
+
+.footer-effects-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: var(--gap-lg);
+  margin-bottom: 5rem;
+}
+
+.footer-effects-container p {
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.effects-toggle {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 1rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.effects-toggle input[type="checkbox"] {
+  display: none;
+}
+
+.effects-slider {
+  width: 44px;
+  height: 24px;
+  background: var(--color-text-secondary);
+  position: relative;
+  transition: background 0.3s;
+  margin-right: 0.5rem;
+}
+
+.effects-slider::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  width: 16px;
+  height: 16px;
+  background: var(--color-background);
+  transition: transform 0.3s;
+}
+
+.effects-toggle input:checked + .effects-slider {
+  background: var(--color-button-primary);
+}
+
+.effects-toggle input:checked + .effects-slider::before {
+  transform: translateX(20px);
+  background: var(--color-text-primary);
+}
+
+.effects-toggle-label {
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+  margin-left: 0.25rem;
 }
 
 @media screen and (max-width: 2000px) {
@@ -210,7 +307,11 @@ export default {
   }
 
   .footer-credits {
-    width: 30%;
+    width: 35%;
+  }
+
+  .footer-effects-container {
+    width: 35%;
   }
 }
 
@@ -226,8 +327,12 @@ export default {
   }
 
   .footer-credits {
-    margin-bottom: 0;
     width: 100%;
+  }
+
+  .footer-effects-container {
+    width: 100%;
+    margin-bottom: 3rem;
   }
 }
 
@@ -250,6 +355,16 @@ export default {
 
   .footer-credit-logo {
     height: 24px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .effects-toggle {
+    margin-left: 1rem;
+  }
+
+  .effects-toggle-label {
+    display: none;
   }
 }
 </style>

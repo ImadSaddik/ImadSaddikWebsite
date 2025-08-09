@@ -1,8 +1,8 @@
 <template>
   <NavBar />
-  <RouterView />
-  <StarBackground />
-  <MeteorShowers />
+  <RouterView @effects-toggle="handleEffectsToggle" />
+  <StarBackground v-if="effectsEnabled" />
+  <MeteorShowers v-if="effectsEnabled" />
   <ScrollBackToTop />
 </template>
 
@@ -12,6 +12,9 @@ import StarBackground from "@/components/StarBackground.vue";
 import MeteorShowers from "./components/MeteorShowers.vue";
 import ScrollBackToTop from "./components/ScrollBackToTop.vue";
 
+// Constants
+import { EFFECTS_TOGGLE_LOCAL_STORAGE_KEY } from "@/constants";
+
 export default {
   name: "App",
   components: {
@@ -19,6 +22,25 @@ export default {
     MeteorShowers,
     StarBackground,
     ScrollBackToTop,
+  },
+  data() {
+    return {
+      effectsEnabled: true,
+    };
+  },
+  mounted() {
+    this.loadEffectsPreference();
+  },
+  methods: {
+    handleEffectsToggle(enabled) {
+      this.effectsEnabled = enabled;
+    },
+    loadEffectsPreference() {
+      const storedEffectsEnabled = localStorage.getItem(EFFECTS_TOGGLE_LOCAL_STORAGE_KEY);
+      if (storedEffectsEnabled !== null) {
+        this.effectsEnabled = JSON.parse(storedEffectsEnabled);
+      }
+    },
   },
 };
 </script>
@@ -70,6 +92,7 @@ export default {
   color: var(--color-text-primary);
   max-width: 2000px;
   margin: 0 auto;
+  /* background-color: #0710474f; */
 }
 
 body {
