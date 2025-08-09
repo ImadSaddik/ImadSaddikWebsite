@@ -55,15 +55,16 @@ export default {
   z-index: 3;
   background-color: var(--color-button-primary);
   border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.scroll-back-to-top-button:hover {
+  background-color: var(--color-button-primary-hover);
 }
 
 .scroll-back-to-top-button-icon {
   width: 2rem;
   height: 2rem;
-}
-
-.scroll-back-to-top-button:hover {
-  opacity: 0.8;
 }
 
 @media screen and (max-width: 1100px) {
