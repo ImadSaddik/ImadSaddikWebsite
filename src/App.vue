@@ -123,16 +123,4 @@ body {
     font-size: var(--font-size-big-medium);
   }
 }
-
-@media screen and (max-width: 1300px) {
-}
-
-@media screen and (max-width: 768px) {
-}
-
-@media screen and (max-width: 672px) {
-}
-
-@media screen and (max-width: 576px) {
-}
 </style>
