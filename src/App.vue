@@ -75,6 +75,7 @@ export default {
 body {
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
   background: var(--color-background);
 }
 
