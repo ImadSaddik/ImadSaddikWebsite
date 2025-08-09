@@ -22,6 +22,15 @@
         </a>
       </div>
 
+      <div class="footer-effects-container">
+        <p>Your browser can't handle the star and meteor shower effects?</p>
+        <label class="effects-toggle">
+          <input type="checkbox" v-model="effectsEnabled" @change="handleEffectsToggle" />
+          <span class="effects-slider"></span>
+          <span class="effects-toggle-label">{{ toggleLabel }}</span>
+        </label>
+      </div>
+
       <p class="footer-credits">
         Built with
         <a href="https://vuejs.org/" target="_blank" rel="noopener noreferrer">
@@ -34,15 +43,6 @@
         <span class="separator">|</span>
         All rights reserved © {{ currentYear }} Imad Saddik
       </p>
-
-      <div class="footer-effects-container">
-        <p>Your browser can't handle the star and meteor shower effects?</p>
-        <label class="effects-toggle">
-          <input type="checkbox" v-model="effectsEnabled" @change="handleEffectsToggle" />
-          <span class="effects-slider"></span>
-          <span class="effects-toggle-label">{{ toggleLabel }}</span>
-        </label>
-      </div>
     </div>
 
     <div class="footer-images">
@@ -188,7 +188,7 @@ export default {
   font-size: var(--font-size-small);
   color: var(--color-text-secondary);
   margin-top: var(--gap-lg);
-  margin-bottom: 0rem;
+  margin-bottom: 5rem;
   width: 100%;
 }
 
@@ -220,7 +220,7 @@ export default {
   align-items: center;
   width: 100%;
   margin-top: var(--gap-lg);
-  margin-bottom: 5rem;
+  margin-bottom: 0rem;
 }
 
 .footer-effects-container p {
@@ -327,12 +327,12 @@ export default {
   }
 
   .footer-credits {
+    margin-bottom: 3rem;
     width: 100%;
   }
 
   .footer-effects-container {
     width: 100%;
-    margin-bottom: 3rem;
   }
 }
 
