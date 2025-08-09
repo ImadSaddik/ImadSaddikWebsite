@@ -3,12 +3,14 @@
   <RouterView />
   <StarBackground />
   <MeteorShowers />
+  <ScrollBackToTop />
 </template>
 
 <script>
 import NavBar from "@/components/NavBar.vue";
 import StarBackground from "@/components/StarBackground.vue";
 import MeteorShowers from "./components/MeteorShowers.vue";
+import ScrollBackToTop from "./components/ScrollBackToTop.vue";
 
 export default {
   name: "App",
@@ -16,6 +18,7 @@ export default {
     NavBar,
     MeteorShowers,
     StarBackground,
+    ScrollBackToTop,
   },
 };
 </script>
