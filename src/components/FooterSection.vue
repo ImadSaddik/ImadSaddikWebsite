@@ -25,7 +25,7 @@
       <div class="footer-effects-container">
         <p>Your browser can't handle the star and meteor shower effects?</p>
         <label class="effects-toggle">
-          <input type="checkbox" v-model="effectsEnabled" @change="handleEffectsToggle" />
+          <input type="checkbox" :checked="effectsEnabled" @change="handleEffectsToggle($event.target.checked)" />
           <span class="effects-slider"></span>
           <span class="effects-toggle-label">{{ toggleLabel }}</span>
         </label>
@@ -80,6 +80,12 @@ import { EFFECTS_TOGGLE_LOCAL_STORAGE_KEY } from "@/constants";
 export default {
   name: "FooterSection",
   emits: ["effects-toggle"],
+  props: {
+    effectsEnabled: {
+      type: Boolean,
+      default: true,
+    },
+  },
   computed: {
     currentYear() {
       return new Date().getFullYear();
@@ -87,9 +93,6 @@ export default {
     toggleLabel() {
       return this.effectsEnabled ? "On" : "Off";
     },
-  },
-  mounted() {
-    this.loadEffectsPreference();
   },
   data() {
     return {
@@ -103,20 +106,13 @@ export default {
 
       telescopeImage,
       objectsImage,
-
-      effectsEnabled: true,
     };
   },
   methods: {
-    handleEffectsToggle() {
-      this.$emit("effects-toggle", this.effectsEnabled);
-      localStorage.setItem(EFFECTS_TOGGLE_LOCAL_STORAGE_KEY, this.effectsEnabled);
-    },
-    loadEffectsPreference() {
-      const storedEffectsEnabled = localStorage.getItem(EFFECTS_TOGGLE_LOCAL_STORAGE_KEY);
-      if (storedEffectsEnabled !== null) {
-        this.effectsEnabled = JSON.parse(storedEffectsEnabled);
-      }
+    handleEffectsToggle(value) {
+      console.log("Effects enabled:", value);
+      this.$emit("effects-toggle", value);
+      localStorage.setItem(EFFECTS_TOGGLE_LOCAL_STORAGE_KEY, value);
     },
   },
 };

@@ -4,7 +4,7 @@
   <StarBackground v-if="effectsEnabled" />
   <MeteorShowers v-if="effectsEnabled" />
   <ScrollBackToTop />
-  <FooterSection @effects-toggle="handleEffectsToggle" />
+  <FooterSection :effects-enabled="effectsEnabled" @effects-toggle="handleEffectsToggle" />
 </template>
 
 <script>
