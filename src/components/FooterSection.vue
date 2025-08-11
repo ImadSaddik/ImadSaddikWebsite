@@ -75,11 +75,11 @@ import telescopeImage from "@/assets/telescope.svg";
 import objectsImage from "@/assets/objects_telescope_looking_at.svg";
 
 // Constants
-import { EFFECTS_TOGGLE_LOCAL_STORAGE_KEY, EFFECTS_TOGGLE_EVENT_NAME } from "@/constants";
+import { EFFECTS_TOGGLE_LOCAL_STORAGE_KEY } from "@/constants";
 
 export default {
   name: "FooterSection",
-  emits: [EFFECTS_TOGGLE_EVENT_NAME],
+  emits: ["effects-toggle"],
   computed: {
     currentYear() {
       return new Date().getFullYear();
@@ -109,7 +109,7 @@ export default {
   },
   methods: {
     handleEffectsToggle() {
-      this.$emit(EFFECTS_TOGGLE_EVENT_NAME, this.effectsEnabled);
+      this.$emit("effects-toggle", this.effectsEnabled);
       localStorage.setItem(EFFECTS_TOGGLE_LOCAL_STORAGE_KEY, this.effectsEnabled);
     },
     loadEffectsPreference() {

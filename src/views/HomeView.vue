@@ -36,8 +36,6 @@
 
       <CardGroup title="Universe" :cards-data="universeImagesCardData" button-text="View all images" />
     </div>
-
-    <FooterSection @effects-toggle="handleEffectsToggle" />
   </div>
 </template>
 
@@ -46,7 +44,6 @@
 import HeroSection from "@/components/HeroSection.vue";
 import AboutMeSection from "@/components/AboutMeSection.vue";
 import CardGroup from "@/components/CardGroup.vue";
-import FooterSection from "@/components/FooterSection.vue";
 
 // Illustrations
 import scorpiusIllustration from "@/assets/illustrations/scorpius.svg";
@@ -59,17 +56,12 @@ import verticalSolarSystemIllustration from "@/assets/illustrations/solar_system
 import coursePlaceholder1 from "@/assets/courses/placeholder_1.svg";
 import coursePlaceholder2 from "@/assets/courses/placeholder_2.svg";
 
-// Constants
-import { EFFECTS_TOGGLE_EVENT_NAME } from "@/constants";
-
 export default {
   name: "HomeView",
-  emits: [EFFECTS_TOGGLE_EVENT_NAME],
   components: {
     HeroSection,
     AboutMeSection,
     CardGroup,
-    FooterSection,
   },
   data() {
     return {
@@ -141,11 +133,7 @@ export default {
       ],
     };
   },
-  methods: {
-    handleEffectsToggle(enabled) {
-      this.$emit(EFFECTS_TOGGLE_EVENT_NAME, enabled);
-    },
-  },
+  methods: {},
 };
 </script>
 

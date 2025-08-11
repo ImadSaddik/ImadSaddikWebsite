@@ -1,9 +1,10 @@
 <template>
   <NavBar />
-  <RouterView @effects-toggle="handleEffectsToggle" />
+  <RouterView />
   <StarBackground v-if="effectsEnabled" />
   <MeteorShowers v-if="effectsEnabled" />
   <ScrollBackToTop />
+  <FooterSection @effects-toggle="handleEffectsToggle" />
 </template>
 
 <script>
@@ -11,6 +12,7 @@ import NavBar from "@/components/NavBar.vue";
 import StarBackground from "@/components/StarBackground.vue";
 import MeteorShowers from "./components/MeteorShowers.vue";
 import ScrollBackToTop from "./components/ScrollBackToTop.vue";
+import FooterSection from "@/components/FooterSection.vue";
 
 // Constants
 import { EFFECTS_TOGGLE_LOCAL_STORAGE_KEY } from "@/constants";
@@ -22,6 +24,7 @@ export default {
     MeteorShowers,
     StarBackground,
     ScrollBackToTop,
+    FooterSection,
   },
   data() {
     return {
