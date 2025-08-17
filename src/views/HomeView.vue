@@ -190,10 +190,6 @@ export default {
 }
 
 @media screen and (max-width: 2000px) {
-  .main-content {
-    padding: var(--gap-lg);
-  }
-
   .quasar-image {
     width: 30%;
   }
@@ -215,6 +211,10 @@ export default {
 }
 
 @media screen and (max-width: 1100px) {
+  .main-content {
+    padding: var(--gap-lg);
+  }
+
   .quasar-image {
     width: 50%;
   }
