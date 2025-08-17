@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     openImageModal(event) {
-      this.$emit("openImageModal", event);
+      this.$emit("open-image-modal", event);
     },
   },
 };

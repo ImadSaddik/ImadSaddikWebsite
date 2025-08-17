@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     closeImageModal() {
-      this.$emit("closeImageModal");
+      this.$emit("close-image-modal");
     },
     handleEscape(event) {
       if (event.key === "Escape") {
