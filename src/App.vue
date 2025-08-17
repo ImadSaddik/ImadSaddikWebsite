@@ -52,21 +52,40 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 :root {
-  /* Colors */
+  /* General colors */
   --color-background: #03071e;
-  --color-button-primary: #f97316;
-  --color-button-primary-hover: #cb5f12;
-  --color-button-secondary: #22d3ee;
-  --color-button-secondary-hover: #167595;
+  --color-primary: #f97316;
+  --color-primary-hover: #cb5f12;
+  --color-secondary: #22d3ee;
+  --color-secondary-hover: #167595;
+
+  /* Text colors */
   --color-text-primary: #e5e7eb;
   --color-text-secondary: #9ca3af;
   --color-text-disabled: #4b5563;
+
+  /* Tag colors */
+  --color-tag-background: #22d3ee1a;
+  --color-tag-background-hover: #22d3ee26;
+  --color-tag-border: #22d3ee33;
+  --color-tag-border-hover: #22d3ee4d;
+
+  /* Code colors */
+  --color-code-night-owl-background: #011627;
+  --color-code-highlighted-background: #00ddff22;
+  --color-code-line-inset-background: #82aaff;
+  --color-code-border: #444654;
+
+  /* Modal */
+  --color-background-overlay: #000000cc;
 
   /* Font sizes */
   --font-size-big: 3rem; /* 48px */
   --font-size-big-medium: 2rem; /* 32px */
   --font-size-medium: 1.5rem; /* 24px */
+  --font-size-big-small: 1.25rem; /* 20px */
   --font-size-small: 1.125rem; /* 18px */
+  --font-size-extra-small: 0.875rem; /* 14px */
 
   /* Gaps */
   --gap-xs: 0.5rem; /* 8px */
@@ -83,7 +102,7 @@ export default {
 }
 
 ::selection {
-  background: var(--color-button-primary);
+  background: var(--color-primary);
   color: var(--color-background);
 }
 
@@ -105,6 +124,11 @@ body {
   background: var(--color-background);
 }
 
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
 .title {
   font-size: var(--font-size-big);
   margin-top: 0;
@@ -122,26 +146,26 @@ body {
 .primary-button {
   cursor: pointer;
   color: black;
-  background-color: var(--color-button-primary);
+  background-color: var(--color-primary);
   border: none;
   transition: background-color 0.3s ease;
 }
 
 .primary-button:hover {
-  background-color: var(--color-button-primary-hover);
+  background-color: var(--color-primary-hover);
 }
 
 .secondary-button {
   cursor: pointer;
-  color: var(--color-button-secondary);
+  color: var(--color-secondary);
   background-color: transparent;
-  border: 1px solid var(--color-button-secondary);
+  border: 1px solid var(--color-secondary);
   transition: background-color 0.3s ease;
 }
 
 .secondary-button:hover {
   color: var(--color-text-primary);
-  background-color: var(--color-button-secondary-hover);
+  background-color: var(--color-secondary-hover);
 }
 
 @media screen and (max-width: 1900px) {
