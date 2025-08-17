@@ -27,7 +27,7 @@
         alt="Stylized illustration of a solar system showing 4 planets and a sun."
       />
 
-      <CardGroup title="Articles" :cards-data="articlesCardData" button-text="View all articles" />
+      <CardGroup title="Blogs" :cards-data="blogsCardData" button-text="View all blogs" />
       <img
         class="quasar-image"
         :src="quasarIllustration"
@@ -91,23 +91,23 @@ export default {
           subTitle: "16 August 2001",
         },
       ],
-      articlesCardData: [
+      blogsCardData: [
         {
           imageSrc: coursePlaceholder1,
-          altText: "Article placeholder 1",
-          title: "Article title 1",
+          altText: "Blog placeholder 1",
+          title: "Blog title 1",
           subTitle: "16 August 2001",
         },
         {
           imageSrc: coursePlaceholder2,
-          altText: "Article placeholder 2",
-          title: "Article title 2",
+          altText: "Blog placeholder 2",
+          title: "Blog title 2",
           subTitle: "16 August 2001",
         },
         {
           imageSrc: coursePlaceholder1,
-          altText: "Article placeholder 3",
-          title: "Article title 3",
+          altText: "Blog placeholder 3",
+          title: "Blog title 3",
           subTitle: "16 August 2001",
         },
       ],
