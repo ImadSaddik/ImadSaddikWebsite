@@ -41,7 +41,7 @@
         <InlineCode text="dense_vector" />. Elasticsearch doesn't do this by itself like it does for other fields, so we
         have to do it manually.
       </p>
-      <CodeBlock :code="pythonCodeSnippet1" language="python" />
+      <CodeBlock :code="pythonCodeSnippet1" language="python" @show-toast="handleShowToast" />
 
       <h3 class="article-body-subheader">Indexing documents</h3>
       <p>
@@ -50,7 +50,7 @@
           >this GitHub repository</a
         >. Start by reading the file.
       </p>
-      <CodeBlock :code="pythonCodeSnippet2" language="python" />
+      <CodeBlock :code="pythonCodeSnippet2" language="python" @show-toast="handleShowToast" />
       <p>Then, let's use an embedding model from Hugging Face. An embedding model converts text into a dense vector.</p>
       <p>
         I will use
@@ -67,19 +67,19 @@
       <p>
         First, make sure to install the <InlineCode text="sentence_transformers" /> library in your python environment.
       </p>
-      <CodeBlock :code="bashCodeSnippet1" language="bash" />
+      <CodeBlock :code="bashCodeSnippet1" language="bash" @show-toast="handleShowToast" />
 
       <p>
         Then, download the model from Hugging Face and pass it to the device. The code will automatically detect if you
         have a GPU or not.
       </p>
-      <CodeBlock :code="pythonCodeSnippet3" language="python" />
+      <CodeBlock :code="pythonCodeSnippet3" language="python" @show-toast="handleShowToast" />
 
       <p>
         Let's use the model to embed the <InlineCode text="explanation" /> field for all documents. We will also use the
         <InlineCode text="bulk API" /> to index the documents in the <InlineCode text="apod index" />.
       </p>
-      <CodeBlock :code="pythonCodeSnippet4" language="python" />
+      <CodeBlock :code="pythonCodeSnippet4" language="python" @show-toast="handleShowToast" />
 
       <p>
         If the indexing is successful, you should see <InlineCode text='response["errors"]' /> as
@@ -91,14 +91,14 @@
         Before using <InlineCode text="pre-filtering" />, let's use kNN search only. The following search query, will
         use kNN search to find 10 documents that are very similar to the query.
       </p>
-      <CodeBlock :code="pythonCodeSnippet5" language="python" />
+      <CodeBlock :code="pythonCodeSnippet5" language="python" @show-toast="handleShowToast" />
 
       <p>Here we got 10 documents that are very similar to the query. Let's print the first 3 documents.</p>
-      <CodeBlock :code="pythonCodeSnippet6" language="python" />
+      <CodeBlock :code="pythonCodeSnippet6" language="python" @show-toast="handleShowToast" />
       <CodeOutput :code-output="codeOutput1" />
 
       <p>Let's look at the years of the documents returned by the regular kNN search.</p>
-      <CodeBlock :code="pythonCodeSnippet7" language="python" />
+      <CodeBlock :code="pythonCodeSnippet7" language="python" @show-toast="handleShowToast" />
 
       <p>We can see that the years are different.</p>
       <CodeOutput :code-output="codeOutput2" />
@@ -112,10 +112,10 @@
         <InlineCode text="filter" /> clause is a regular query that filters the documents before the kNN search is
         performed.
       </p>
-      <CodeBlock :code="pythonCodeSnippet8" language="python" />
+      <CodeBlock :code="pythonCodeSnippet8" language="python" @show-toast="handleShowToast" />
 
       <p>We still get 10 documents, let's look at the year field in each document.</p>
-      <CodeBlock :code="pythonCodeSnippet7" language="python" />
+      <CodeBlock :code="pythonCodeSnippet7" language="python" @show-toast="handleShowToast" />
 
       <p>As you can see, the documents returned are only from the year 2024.</p>
       <CodeOutput :code-output="codeOutput3" />
@@ -123,7 +123,7 @@
       <p>
         Let's look at the first 3 documents returned by the kNN search to confirm that they are similar to the query.
       </p>
-      <CodeBlock :code="pythonCodeSnippet6" language="python" />
+      <CodeBlock :code="pythonCodeSnippet6" language="python" @show-toast="handleShowToast" />
       <CodeOutput :code-output="codeOutput4" />
 
       <h2 class="article-body-header">Conclusion</h2>

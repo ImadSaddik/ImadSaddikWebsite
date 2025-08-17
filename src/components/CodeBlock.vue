@@ -9,7 +9,7 @@
       :title="copied ? 'Copied!' : 'Copy code'"
       @click="copyCode"
     >
-      <i :class="copied ? 'fa-solid fa-check fa-2xl' : 'fa-regular fa-clipboard fa-2xl'"></i>
+      <i :class="iconClass"></i>
     </button>
     <div v-html="highlightedHtml"></div>
   </div>
@@ -21,6 +21,7 @@ import { transformerNotationHighlight } from "@shikijs/transformers";
 
 export default {
   name: "CodeBlock",
+  emits: ["show-toast"],
   props: {
     code: {
       type: String,
@@ -31,11 +32,20 @@ export default {
       required: true,
     },
   },
+  computed: {
+    iconClass() {
+      if (this.errorOccured) return "fa-solid fa-xmark fa-2xl";
+      if (this.copied) return "fa-solid fa-check fa-2xl";
+      return "fa-regular fa-clipboard fa-2xl";
+    },
+  },
   data() {
     return {
       highlightedHtml: null,
       copied: false,
+      errorOccured: false,
       hovering: false,
+      resetIconIntervalInMilliseconds: 1500,
     };
   },
   async created() {
@@ -48,15 +58,24 @@ export default {
   },
   methods: {
     async copyCode() {
+      if (this.errorOccured || this.copied) return;
+
       const text = this.code ?? "";
       try {
         await navigator.clipboard.writeText(text);
         this.copied = true;
-        setTimeout(() => (this.copied = false), 1500);
-      } catch (error) {
-        // TODO: Show error notification
-        alert("Copy failed: " + error);
-        console.error("Copy failed:", error);
+        setTimeout(() => {
+          this.copied = false;
+        }, this.resetIconIntervalInMilliseconds);
+      } catch {
+        this.errorOccured = true;
+        this.$emit("show-toast", {
+          message: "Failed to copy code",
+          type: "error",
+        });
+        setTimeout(() => {
+          this.errorOccured = false;
+        }, this.resetIconIntervalInMilliseconds);
       }
     },
   },
