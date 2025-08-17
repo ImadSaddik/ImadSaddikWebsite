@@ -145,6 +145,11 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
 .title {
   font-size: var(--font-size-big);
   margin-top: 0;
