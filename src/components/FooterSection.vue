@@ -258,7 +258,7 @@ export default {
 }
 
 .effects-toggle input:checked + .effects-slider {
-  background: var(--color-button-primary);
+  background: var(--color-primary);
 }
 
 .effects-toggle input:checked + .effects-slider::before {
@@ -270,12 +270,6 @@ export default {
   font-size: var(--font-size-small);
   color: var(--color-text-secondary);
   margin-left: 0.25rem;
-}
-
-@media screen and (max-width: 2000px) {
-  .footer-content {
-    padding: var(--gap-lg);
-  }
 }
 
 @media screen and (max-width: 1500px) {
@@ -312,6 +306,10 @@ export default {
 }
 
 @media screen and (max-width: 1100px) {
+  .footer-content {
+    padding: var(--gap-lg);
+  }
+
   .footer-images {
     display: none;
   }
