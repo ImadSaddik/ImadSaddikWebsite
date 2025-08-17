@@ -13,7 +13,9 @@
 
     <!-- body -->
     <div class="article-body">
-      <h2 class="article-body-header">Introduction</h2>
+      <h2 class="article-body-header" id="introduction">
+        <a href="#introduction">Introduction</a>
+      </h2>
       <p>
         In the
         <a href="https://medium.com/@imadsaddik/26-collapse-search-results-c2c4f4290485" target="_blank"
@@ -29,13 +31,17 @@
         <a href="https://github.com/ImadSaddik/ElasticSearch_Python_Course" target="_blank">GitHub repository</a>.
       </p>
 
-      <h2 class="article-body-header">Pre-filtering</h2>
+      <h2 class="article-body-header" id="pre-filtering">
+        <a href="#pre-filtering">Pre-filtering</a>
+      </h2>
       <p>
         <InlineCode text="Pre-filtering" /> means we apply filters to an index before doing anything else. For example,
         we can filter out documents that don't meet certain requirements before using kNN search.
       </p>
 
-      <h3 class="article-body-subheader">Preparing the index</h3>
+      <h3 class="article-body-subheader" id="preparing-the-index">
+        <a href="#preparing-the-index">Preparing the index</a>
+      </h3>
       <p>
         Since we're using kNN search, we need to set the data type for the embedding field to
         <InlineCode text="dense_vector" />. Elasticsearch doesn't do this by itself like it does for other fields, so we
@@ -43,7 +49,9 @@
       </p>
       <CodeBlock :code="pythonCodeSnippet1" language="python" @show-toast="handleShowToast" />
 
-      <h3 class="article-body-subheader">Indexing documents</h3>
+      <h3 class="article-body-subheader" id="indexing-documents">
+        <a href="#indexing-documents">Indexing documents</a>
+      </h3>
       <p>
         Let's use the <InlineCode text="Apod" /> dataset, you can find it in
         <a href="https://github.com/ImadSaddik/ElasticSearch_Python_Course/blob/main/data/apod.json" target="_blank"
@@ -86,7 +94,9 @@
         <InlineCode text="False" />.
       </p>
 
-      <h3 class="article-body-subheader">Pre-filtering & kNN search</h3>
+      <h3 class="article-body-subheader" id="pre-filtering-knn-search">
+        <a href="#pre-filtering-knn-search">Pre-filtering & kNN search</a>
+      </h3>
       <p>
         Before using <InlineCode text="pre-filtering" />, let's use kNN search only. The following search query, will
         use kNN search to find 10 documents that are very similar to the query.
@@ -126,7 +136,9 @@
       <CodeBlock :code="pythonCodeSnippet6" language="python" @show-toast="handleShowToast" />
       <CodeOutput :code-output="codeOutput4" />
 
-      <h2 class="article-body-header">Conclusion</h2>
+      <h2 class="article-body-header" id="conclusion">
+        <a href="#conclusion">Conclusion</a>
+      </h2>
       <p>
         We've reached the end of this journey! I hope you had fun and learned a lot. I also hope I did a good job
         teaching you how to use Elasticsearch. It's a great tool that I really enjoy. Best of luck on your learning
