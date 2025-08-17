@@ -36,6 +36,7 @@ import BaseTag from "@/components/BaseTag.vue";
 
 export default {
   name: "ArticleHeader",
+  emits: ["show-toast"],
   props: {
     title: {
       type: String,
@@ -85,8 +86,15 @@ export default {
     async copyLink() {
       try {
         await navigator.clipboard.writeText(window.location.href);
-      } catch (error) {
-        console.error("Failed to copy link:", error);
+        this.$emit("show-toast", {
+          message: "Link copied to clipboard!",
+          type: "success",
+        });
+      } catch {
+        this.$emit("show-toast", {
+          message: "Failed to copy link",
+          type: "error",
+        });
       }
     },
   },

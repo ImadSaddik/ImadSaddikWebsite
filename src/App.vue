@@ -1,10 +1,11 @@
 <template>
   <NavBar />
-  <RouterView />
+  <RouterView @show-toast="handleShowToast" />
   <StarBackground v-if="effectsEnabled" />
   <MeteorShowers v-if="effectsEnabled" />
   <ScrollBackToTop />
   <FooterSection :effects-enabled="effectsEnabled" @effects-toggle="handleEffectsToggle" />
+  <ToastNotificationManager ref="toastManager" />
 </template>
 
 <script>
@@ -13,6 +14,7 @@ import StarBackground from "@/components/StarBackground.vue";
 import MeteorShowers from "./components/MeteorShowers.vue";
 import ScrollBackToTop from "./components/ScrollBackToTop.vue";
 import FooterSection from "@/components/FooterSection.vue";
+import ToastNotificationManager from "@/components/ToastNotificationManager.vue";
 
 // Constants
 import { EFFECTS_TOGGLE_LOCAL_STORAGE_KEY } from "@/constants";
@@ -25,6 +27,7 @@ export default {
     StarBackground,
     ScrollBackToTop,
     FooterSection,
+    ToastNotificationManager,
   },
   data() {
     return {
@@ -43,6 +46,9 @@ export default {
       if (storedEffectsEnabled !== null) {
         this.effectsEnabled = JSON.parse(storedEffectsEnabled);
       }
+    },
+    handleShowToast(data) {
+      this.$refs.toastManager.showToast(data);
     },
   },
 };
@@ -75,6 +81,16 @@ export default {
   --color-code-highlighted-background: #00ddff22;
   --color-code-line-inset-background: #82aaff;
   --color-code-border: #444654;
+
+  /* Toast colors */
+  --color-toast-error-background: #af1a1a;
+  --color-toast-error-foreground: #ffffff;
+  --color-toast-success-background: #10662f;
+  --color-toast-success-foreground: #ffffff;
+  --color-toast-warning-background: #e87800;
+  --color-toast-warning-foreground: #000000;
+  --color-toast-info-background: #5996f7;
+  --color-toast-info-foreground: #000000;
 
   /* Modal */
   --color-background-overlay: #000000cc;

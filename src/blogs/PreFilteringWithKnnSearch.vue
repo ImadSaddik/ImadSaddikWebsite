@@ -8,6 +8,7 @@
       :cover-image="coverImage"
       creation-date="August 12, 2025"
       reading-time="5"
+      @show-toast="handleShowToast"
     />
 
     <!-- body -->
@@ -164,6 +165,7 @@ import ImageWithCaption from "@/components/ImageWithCaption.vue";
 
 export default {
   name: "PreFilteringWithKnnSearch",
+  emits: ["show-toast"],
   components: {
     CodeBlock,
     CodeOutput,
@@ -345,6 +347,9 @@ Explanation: What's happening to the big black hole in the center of our galaxy?
       this.isImageModalVisible = false;
       this.enlargedImageSrc = "";
       window.removeEventListener("keydown", this.handleEscape);
+    },
+    handleShowToast(data) {
+      this.$emit("show-toast", data);
     },
   },
 };
