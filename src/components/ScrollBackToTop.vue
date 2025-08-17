@@ -53,12 +53,12 @@ export default {
   right: var(--gap-lg);
   cursor: pointer;
   z-index: 3;
-  background-color: var(--color-button-primary);
+  background-color: var(--color-primary);
   transition: background-color 0.3s ease;
 }
 
 .scroll-back-to-top-button:hover {
-  background-color: var(--color-button-primary-hover);
+  background-color: var(--color-primary-hover);
 }
 
 .scroll-back-to-top-button-icon {
