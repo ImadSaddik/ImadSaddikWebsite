@@ -77,4 +77,12 @@ export default {
   flex: 1;
   line-height: 1.4;
 }
+
+@media screen and (max-width: 576px) {
+  .toast-message {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+  }
+}
 </style>

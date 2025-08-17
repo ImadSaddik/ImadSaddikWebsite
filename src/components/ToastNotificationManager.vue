@@ -116,4 +116,16 @@ export default {
     right: var(--gap-sm);
   }
 }
+
+@media screen and (max-width: 576px) {
+  .toast-container {
+    left: 0;
+    right: 0;
+  }
+  .toast-item {
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+}
 </style>
