@@ -3,7 +3,7 @@
     <h2 class="cards-group-title">{{ title }}</h2>
 
     <div class="cards-group">
-      <Card
+      <BaseCard
         v-for="(card, idx) in cardsData"
         :key="idx"
         :image-src="card.imageSrc"
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import Card from "@/components/Card.vue";
+import BaseCard from "@/components/BaseCard.vue";
 
 export default {
   name: "CardGroup",
@@ -40,7 +40,7 @@ export default {
     },
   },
   components: {
-    Card,
+    BaseCard,
   },
   data() {
     return {};

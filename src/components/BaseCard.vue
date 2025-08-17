@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: "CourseCard",
+  name: "BaseCard",
   props: {
     imageSrc: {
       type: String,
@@ -49,6 +49,7 @@ img {
   font-size: var(--font-size-small);
   color: var(--color-text-secondary);
   margin-top: var(--gap-xs);
+  margin-bottom: 0;
 }
 
 @media screen and (max-width: 2000px) {
