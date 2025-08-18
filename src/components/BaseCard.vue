@@ -1,5 +1,5 @@
 <template>
-  <div class="card-container">
+  <div class="card-container" @click="handleCardClick">
     <img :src="imageSrc" :alt="altText" />
     <h3 class="card-title">{{ title }}</h3>
     <p class="card-subtitle">{{ subTitle }}</p>
@@ -26,9 +26,18 @@ export default {
       type: String,
       required: true,
     },
+    id: {
+      type: String,
+      required: true,
+    },
   },
   data() {
     return {};
+  },
+  methods: {
+    handleCardClick() {
+      this.$router.push({ name: "blog-post", params: { slug: this.id } });
+    },
   },
 };
 </script>
@@ -37,6 +46,10 @@ export default {
 img {
   width: 100%;
   height: auto;
+}
+
+.card-container {
+  cursor: pointer;
 }
 
 .card-title {

@@ -10,6 +10,7 @@
         :alt-text="card.altText"
         :title="card.title"
         :sub-title="card.subTitle"
+        :id="card.id"
       />
     </div>
 
