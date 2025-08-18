@@ -52,7 +52,8 @@ import quasarIllustration from "@/assets/illustrations/quasar.svg";
 import horizontalSolarSystemIllustration from "@/assets/illustrations/solar_system_horizontal.svg";
 import verticalSolarSystemIllustration from "@/assets/illustrations/solar_system_vertical.svg";
 
-// placeholder images
+// Images
+import blogcoverImage1 from "@/assets/blogs/preFilteringWithKnnSearch.png";
 import coursePlaceholder1 from "@/assets/courses/placeholder_1.svg";
 import coursePlaceholder2 from "@/assets/courses/placeholder_2.svg";
 
@@ -93,10 +94,11 @@ export default {
       ],
       blogsCardData: [
         {
-          imageSrc: coursePlaceholder1,
-          altText: "Blog placeholder 1",
-          title: "Blog title 1",
-          subTitle: "16 August 2001",
+          imageSrc: blogcoverImage1,
+          altText: "Cover image for the blog titled Pre-filtering with kNN search in Elasticsearch",
+          title: "Pre-filtering with kNN search in Elasticsearch",
+          subTitle: "12 August 2025",
+          id: "PreFilteringWithKnnSearch",
         },
         {
           imageSrc: coursePlaceholder2,
