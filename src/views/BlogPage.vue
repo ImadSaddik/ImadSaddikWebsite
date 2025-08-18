@@ -1,0 +1,21 @@
+<template>
+  <component v-if="blogToDisplay" :is="blogToDisplay" />
+</template>
+
+<script>
+import { defineAsyncComponent } from "vue";
+
+export default {
+  name: "BlogViewer",
+  props: {
+    slug: { type: String, required: true },
+  },
+  computed: {
+    blogToDisplay() {
+      return defineAsyncComponent(() => import(`@/blogs/${this.slug}.vue`));
+    },
+  },
+};
+</script>
+
+<style scoped></style>

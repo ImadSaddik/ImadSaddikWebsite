@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import PreFilteringWithKnnSearch from "@/blogs/PreFilteringWithKnnSearch.vue";
+import BlogPage from "@/views/BlogPage.vue";
 
 const routes = [
   {
@@ -9,9 +9,10 @@ const routes = [
     component: HomeView,
   },
   {
-    path: "/blogs",
-    name: "blogs",
-    component: PreFilteringWithKnnSearch,
+    path: "/blogs/:slug",
+    name: "blog-post",
+    component: BlogPage,
+    props: true,
   },
 ];
 
