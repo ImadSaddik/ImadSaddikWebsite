@@ -9,6 +9,8 @@
         :alt-text="card.altText"
         :title="card.title"
         :sub-title="card.subTitle"
+        :article-type="card.articleType"
+        :article-id="card.articleId"
       />
     </div>
   </section>
@@ -44,7 +46,7 @@ export default {
 
 .article-footer-cards-group {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   width: 100%;
   gap: var(--gap-md);
 }
@@ -52,12 +54,6 @@ export default {
 @media screen and (max-width: 1500px) {
   .article-footer {
     width: 100%;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .article-footer-cards-group {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
 
