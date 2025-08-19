@@ -3,8 +3,6 @@
 </template>
 
 <script>
-import { defineAsyncComponent } from "vue";
-
 export default {
   name: "BlogPage",
   props: {
@@ -12,7 +10,7 @@ export default {
   },
   computed: {
     blogToDisplay() {
-      return defineAsyncComponent(() => import(`@/blogs/${this.slug}.vue`));
+      return this.$route.meta.blogComponent;
     },
   },
 };

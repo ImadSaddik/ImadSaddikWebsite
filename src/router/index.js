@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import BlogPage from "@/views/BlogPage.vue";
+import BlogsHub from "@/views/BlogsHub.vue";
 
 const routes = [
   {
@@ -9,10 +10,25 @@ const routes = [
     component: HomeView,
   },
   {
+    path: "/blogs",
+    name: "blogs",
+    component: BlogsHub,
+  },
+  {
     path: "/blogs/:slug",
     name: "blog-post",
     component: BlogPage,
     props: true,
+    async beforeEnter(to) {
+      try {
+        const component = await import(`@/blogs/${to.params.slug}.vue`);
+        to.meta.blogComponent = component.default;
+        return true;
+      } catch (error) {
+        // Redirect to the blogs endpoint if the slug is invalid
+        return { name: "blogs" };
+      }
+    },
   },
 ];
 
