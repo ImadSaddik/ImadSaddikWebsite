@@ -53,7 +53,7 @@ import horizontalSolarSystemIllustration from "@/assets/illustrations/solar_syst
 import verticalSolarSystemIllustration from "@/assets/illustrations/solar_system_vertical.svg";
 
 // Images
-import blogcoverImage1 from "@/assets/blogs/preFilteringWithKnnSearch.png";
+import blogcoverImage1 from "@/assets/blogs/preFilteringWithKnnSearch.svg";
 import coursePlaceholder1 from "@/assets/courses/placeholder_1.svg";
 import coursePlaceholder2 from "@/assets/courses/placeholder_2.svg";
 

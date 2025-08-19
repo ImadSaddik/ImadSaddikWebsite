@@ -160,7 +160,7 @@
 
 <script>
 // Images
-import coverImage from "@/assets/blogs/preFilteringWithKnnSearch.png";
+import coverImage from "@/assets/blogs/preFilteringWithKnnSearch.svg";
 import coursePlaceholder1 from "@/assets/courses/placeholder_1.svg";
 import coursePlaceholder2 from "@/assets/courses/placeholder_2.svg";
 import allMiniLMModelHuggingFaceHub from "@/assets/blogs/all_minilm_l6_v2_model_hf.png";
