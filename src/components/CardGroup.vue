@@ -56,7 +56,7 @@ export default {
   flex-direction: column;
   align-items: center;
   margin-top: var(--gap-between-sections-big);
-  width: 75%;
+  width: 100%;
 }
 
 .cards-group-title {
@@ -80,22 +80,14 @@ export default {
   width: 200px;
 }
 
-@media screen and (max-width: 2000px) {
-  .cards-group-container {
-    width: 80%;
-  }
-}
-
 @media screen and (max-width: 1500px) {
   .cards-group-container {
-    width: 90%;
     margin-top: var(--gap-between-sections-medium);
   }
 }
 
 @media screen and (max-width: 1100px) {
   .cards-group-container {
-    width: 100%;
     margin-top: var(--gap-between-sections-small);
   }
 }
