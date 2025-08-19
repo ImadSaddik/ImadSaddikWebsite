@@ -10,7 +10,8 @@
         :alt-text="card.altText"
         :title="card.title"
         :sub-title="card.subTitle"
-        :id="card.id"
+        :article-type="card.articleType"
+        :article-id="card.articleId"
       />
     </div>
 
@@ -66,7 +67,7 @@ export default {
 
 .cards-group {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   width: 100%;
   gap: var(--gap-md);
   margin-bottom: var(--gap-xl);
@@ -102,10 +103,6 @@ export default {
 @media screen and (max-width: 768px) {
   .cards-group-title {
     font-size: var(--font-size-big-medium);
-  }
-
-  .cards-group {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
 

@@ -28,7 +28,11 @@ export default {
       type: String,
       required: true,
     },
-    id: {
+    articleType: {
+      type: String,
+      required: true,
+    },
+    articleId: {
       type: String,
       required: true,
     },
@@ -38,7 +42,7 @@ export default {
   },
   methods: {
     handleCardClick() {
-      this.$router.push({ name: "blog-post", params: { slug: this.id } });
+      this.$router.push({ name: this.articleType, params: { slug: this.articleId } });
     },
   },
 };
