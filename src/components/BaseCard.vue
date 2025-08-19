@@ -1,6 +1,8 @@
 <template>
   <div class="card-container" @click="handleCardClick">
-    <img :src="imageSrc" :alt="altText" />
+    <div class="image-wrapper">
+      <img :src="imageSrc" :alt="altText" />
+    </div>
     <h3 class="card-title">{{ title }}</h3>
     <p class="card-subtitle">{{ subTitle }}</p>
   </div>
@@ -43,9 +45,29 @@ export default {
 </script>
 
 <style scoped>
+.image-wrapper {
+  position: relative;
+}
+
+.image-wrapper::after {
+  content: "";
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  bottom: -6px;
+  left: -6px;
+  border: 4px solid transparent;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.card-container:hover .image-wrapper::after {
+  border-color: var(--color-secondary);
+}
+
 img {
   width: 100%;
   height: auto;
+  display: block;
 }
 
 .card-container {
