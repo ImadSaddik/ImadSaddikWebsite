@@ -21,8 +21,7 @@ const routes = [
     props: true,
     async beforeEnter(to) {
       try {
-        const component = await import(`@/blogs/${to.params.slug}.vue`);
-        to.meta.blogComponent = component.default;
+        await import(`@/blogs/${to.params.slug}.vue`);
         return true;
       } catch (error) {
         // Redirect to the blogs endpoint if the slug is invalid
@@ -38,9 +37,15 @@ const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition;
-    } else {
-      return { top: 0 };
     }
+    if (to.hash) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve({ el: to.hash, behavior: "smooth" });
+        }, 300);
+      });
+    }
+    return { top: 0 };
   },
 });
 
