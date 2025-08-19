@@ -6,7 +6,7 @@
 import { defineAsyncComponent } from "vue";
 
 export default {
-  name: "BlogViewer",
+  name: "BlogPage",
   props: {
     slug: { type: String, required: true },
   },
