@@ -22,11 +22,6 @@ export default {
     closeImageModal() {
       this.$emit("close-image-modal");
     },
-    handleEscape(event) {
-      if (event.key === "Escape") {
-        this.closeImageModal();
-      }
-    },
   },
 };
 </script>

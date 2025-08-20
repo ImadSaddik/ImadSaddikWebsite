@@ -216,6 +216,11 @@ export default {
       this.enlargedImageSrc = "";
       window.removeEventListener("keydown", this.handleEscape);
     },
+    handleEscape(event) {
+      if (event.key === "Escape") {
+        this.handleCloseImageModal();
+      }
+    },
     handleShowToast(data) {
       this.$emit("show-toast", data);
     },
