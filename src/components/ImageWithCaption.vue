@@ -10,7 +10,7 @@
 <script>
 export default {
   name: "ImageWithCaption",
-  emits: ["openImageModal"],
+  emits: ["open-image-modal"],
   props: {
     imageSrc: {
       type: String,
