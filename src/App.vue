@@ -92,6 +92,18 @@ export default {
   --color-toast-info-background: #5996f7;
   --color-toast-info-foreground: #000000;
 
+  /* Admonition colors */
+  --color-admonition-note-background: #9ca3af1a;
+  --color-admonition-note-border: #9ca3af;
+  --color-admonition-tip-background: #22c55e1a;
+  --color-admonition-tip-border: #22c55e;
+  --color-admonition-info-background: #5996f71a;
+  --color-admonition-info-border: #5996f7;
+  --color-admonition-warning-background: #e878001a;
+  --color-admonition-warning-border: #e87800;
+  --color-admonition-danger-background: #ef44441a;
+  --color-admonition-danger-border: #ef4444;
+
   /* Modal */
   --color-background-overlay: #000000cc;
 
