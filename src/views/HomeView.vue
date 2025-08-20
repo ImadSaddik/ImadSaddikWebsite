@@ -53,7 +53,9 @@ import horizontalSolarSystemIllustration from "@/assets/illustrations/solar_syst
 import verticalSolarSystemIllustration from "@/assets/illustrations/solar_system_vertical.svg";
 
 // Images
-import blogcoverImage1 from "@/assets/blogs/preFilteringWithKnnSearch.svg";
+import blogcoverImage1 from "@/blogs/PreFilteringWithKnnSearch/coverImage.svg";
+import blogcoverImage2 from "@/blogs/CollapseSearchResults/coverImage.svg";
+import blogcoverImage3 from "@/blogs/PreFilteringWithKnnSearch/coverImage.svg";
 import coursePlaceholder1 from "@/assets/courses/placeholder_1.svg";
 import coursePlaceholder2 from "@/assets/courses/placeholder_2.svg";
 
@@ -102,15 +104,15 @@ export default {
           articleId: "PreFilteringWithKnnSearch",
         },
         {
-          imageSrc: blogcoverImage1,
-          altText: "Cover image for the blog titled Pre-filtering with kNN search in Elasticsearch",
-          title: "Pre-filtering with kNN search in Elasticsearch",
-          subTitle: "12 August 2025",
+          imageSrc: blogcoverImage2,
+          altText: "Cover image for the blog titled Collapse search results in Elasticsearch",
+          title: "Collapse search results in Elasticsearch",
+          subTitle: "20 August 2025",
           articleType: "blog-post",
-          articleId: "PreFilteringWithKnnSearch",
+          articleId: "CollapseSearchResults",
         },
         {
-          imageSrc: blogcoverImage1,
+          imageSrc: blogcoverImage3,
           altText: "Cover image for the blog titled Pre-filtering with kNN search in Elasticsearch",
           title: "Pre-filtering with kNN search in Elasticsearch",
           subTitle: "12 August 2025",

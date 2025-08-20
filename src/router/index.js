@@ -21,7 +21,8 @@ const routes = [
     props: true,
     async beforeEnter(to) {
       try {
-        await import(`@/blogs/${to.params.slug}.vue`);
+        const slug = to.params.slug;
+        await import(`@/blogs/${slug}`);
         return true;
       } catch (error) {
         // Redirect to the blogs endpoint if the slug is invalid

@@ -12,7 +12,7 @@ export default {
   },
   computed: {
     blogToDisplay() {
-      return defineAsyncComponent(() => import(`@/blogs/${this.slug}.vue`));
+      return defineAsyncComponent(() => import(`@/blogs/${this.slug}`));
     },
   },
 };
