@@ -20,7 +20,7 @@
         In this article, I will show you how to use pre-filtering with kNN search. For a more detailed walkthrough,
         check out the video tutorial:
       </p>
-      <YouTubePlayer :video-url="'https://www.youtube.com/embed/ESC-ome_Q1o'" />
+      <YouTubePlayer video-url="https://www.youtube.com/embed/ESC-ome_Q1o" />
 
       <p>
         You can also find all related notebooks and slides in my
