@@ -1,11 +1,12 @@
 <template>
   <ArticleLayout
+    ref="articleContent"
     title="Pre-filtering with kNN search in Elasticsearch"
     sub-title="How to apply filters to an index to remove documents that don’t meet certain requirements before using kNN search."
     :article-tags="blogTags"
     :cover-image="coverImage"
     creation-date="August 12, 2025"
-    reading-time="5"
+    :reading-time="readingTime"
     :related-blogs-card-data="relatedBlogsCardData"
   >
     <section>
@@ -194,8 +195,9 @@
 </template>
 
 <script>
-// Constants
+// Constants &
 import * as codeSnippets from "./codeSnippets.js";
+import { calculateReadingTime } from "../utils.js";
 
 // Images
 import coverImage from "./coverImage.svg";
@@ -233,6 +235,7 @@ export default {
       coverImage,
       enlargedImageSrc: "",
       isImageModalVisible: false,
+      readingTime: 0,
       relatedBlogsCardData: [
         {
           imageSrc: coursePlaceholder1,
@@ -254,6 +257,9 @@ export default {
         },
       ],
     };
+  },
+  mounted() {
+    this.readingTime = calculateReadingTime(this.$refs);
   },
   methods: {
     handleOpenImageModal(event) {

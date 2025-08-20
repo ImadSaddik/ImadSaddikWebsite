@@ -1,11 +1,12 @@
 <template>
   <ArticleLayout
+    ref="articleContent"
     title="Collapse search results in Elasticsearch"
     sub-title="How to show only the best documents for each group with collapsing."
     :article-tags="blogTags"
     :cover-image="coverImage"
     creation-date="August 20, 2025"
-    reading-time="5"
+    :reading-time="readingTime"
     :related-blogs-card-data="relatedBlogsCardData"
   >
     <section>
@@ -271,8 +272,9 @@
 </template>
 
 <script>
-// Constants
+// Constants & Utils
 import * as codeSnippets from "./codeSnippets.js";
+import { calculateReadingTime } from "../utils.js";
 
 // Images
 import coverImage from "./coverImage.svg";
@@ -304,6 +306,7 @@ export default {
 
       blogTags: ["Python", "Elasticsearch", "Collapse"],
       coverImage,
+      readingTime: 0,
       relatedBlogsCardData: [
         {
           imageSrc: coursePlaceholder1,
@@ -325,6 +328,9 @@ export default {
         },
       ],
     };
+  },
+  mounted() {
+    this.readingTime = calculateReadingTime(this.$refs);
   },
   methods: {
     handleShowToast(data) {
