@@ -17,13 +17,9 @@
         <a href="#introduction">Introduction</a>
       </h2>
       <p>
-        In the
-        <a href="https://medium.com/@imadsaddik/26-collapse-search-results-c2c4f4290485" target="_blank"
-          >previous article</a
-        >, we have talked about how to collapse search results in Elasticsearch. In this one, I will show you how to use
-        pre-filtering with kNN search.
+        In this article, I will show you how to use pre-filtering with kNN search. For a more detailed walkthrough,
+        check out the video tutorial:
       </p>
-      <p>For a more detailed walkthrough, check out the video tutorial:</p>
       <YouTubePlayer :video-url="'https://www.youtube.com/embed/ESC-ome_Q1o'" />
 
       <p>
