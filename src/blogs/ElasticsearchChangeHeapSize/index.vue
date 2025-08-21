@@ -134,8 +134,8 @@ import { calculateReadingTime } from "../utils.js";
 
 // Images
 import coverImage from "./coverImage.svg";
-import coursePlaceholder1 from "@/assets/courses/placeholder_1.svg";
-import coursePlaceholder2 from "@/assets/courses/placeholder_2.svg";
+import blogcoverImage1 from "@/blogs/ElasticsearchPreFilteringWithKnnSearch/coverImage.svg";
+import blogcoverImage2 from "@/blogs/ElasticsearchCollapseSearchResults/coverImage.svg";
 
 // Components
 import CodeBlock from "@/components/CodeBlock.vue";
@@ -163,22 +163,20 @@ export default {
       readingTime: 0,
       relatedBlogsCardData: [
         {
-          imageSrc: coursePlaceholder1,
-          altText: "Course placeholder 1",
-          title: "Image title 1",
-          subTitle: "16 August 2001",
+          imageSrc: blogcoverImage1,
+          altText: "Cover image for the blog titled Pre-filtering with kNN search in Elasticsearch",
+          title: "Pre-filtering with kNN search in Elasticsearch",
+          subTitle: "12 August 2025",
+          articleType: "blog-post",
+          articleId: "ElasticsearchPreFilteringWithKnnSearch",
         },
         {
-          imageSrc: coursePlaceholder2,
-          altText: "Course placeholder 2",
-          title: "Image title 2",
-          subTitle: "16 August 2001",
-        },
-        {
-          imageSrc: coursePlaceholder1,
-          altText: "Course placeholder 3",
-          title: "Image title 3",
-          subTitle: "16 August 2001",
+          imageSrc: blogcoverImage2,
+          altText: "Cover image for the blog titled Collapse search results in Elasticsearch",
+          title: "Collapse search results in Elasticsearch",
+          subTitle: "20 August 2025",
+          articleType: "blog-post",
+          articleId: "ElasticsearchCollapseSearchResults",
         },
       ],
     };

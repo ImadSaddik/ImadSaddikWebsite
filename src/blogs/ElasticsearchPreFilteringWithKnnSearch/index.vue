@@ -201,8 +201,8 @@ import { calculateReadingTime } from "../utils.js";
 
 // Images
 import coverImage from "./coverImage.svg";
-import coursePlaceholder1 from "@/assets/courses/placeholder_1.svg";
-import coursePlaceholder2 from "@/assets/courses/placeholder_2.svg";
+import blogcoverImage1 from "@/blogs/ElasticsearchCollapseSearchResults/coverImage.svg";
+import blogcoverImage2 from "@/blogs/ElasticsearchChangeHeapSize/coverImage.svg";
 import allMiniLMModelHuggingFaceHub from "./all_minilm_l6_v2_model_hf.png";
 
 // Components
@@ -238,22 +238,20 @@ export default {
       readingTime: 0,
       relatedBlogsCardData: [
         {
-          imageSrc: coursePlaceholder1,
-          altText: "Course placeholder 1",
-          title: "Image title 1",
-          subTitle: "16 August 2001",
+          imageSrc: blogcoverImage1,
+          altText: "Cover image for the blog titled Collapse search results in Elasticsearch",
+          title: "Collapse search results in Elasticsearch",
+          subTitle: "20 August 2025",
+          articleType: "blog-post",
+          articleId: "ElasticsearchCollapseSearchResults",
         },
         {
-          imageSrc: coursePlaceholder2,
-          altText: "Course placeholder 2",
-          title: "Image title 2",
-          subTitle: "16 August 2001",
-        },
-        {
-          imageSrc: coursePlaceholder1,
-          altText: "Course placeholder 3",
-          title: "Image title 3",
-          subTitle: "16 August 2001",
+          imageSrc: blogcoverImage2,
+          altText: "Cover image for the blog titled Change the heap size for Elasticsearch",
+          title: "Change the heap size for Elasticsearch",
+          subTitle: "12 August 2025",
+          articleType: "blog-post",
+          articleId: "ElasticsearchChangeHeapSize",
         },
       ],
     };
