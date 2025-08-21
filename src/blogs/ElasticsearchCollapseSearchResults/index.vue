@@ -290,7 +290,7 @@ import AdmonitionBlock from "@/components/AdmonitionBlock.vue";
 import ArticleLayout from "@/components/ArticleLayout.vue";
 
 export default {
-  name: "CollapseSearchResults",
+  name: "ElasticsearchCollapseSearchResults",
   emits: ["show-toast"],
   components: {
     CodeBlock,

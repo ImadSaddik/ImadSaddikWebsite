@@ -215,7 +215,7 @@ import ImageWithCaption from "@/components/ImageWithCaption.vue";
 import ArticleLayout from "@/components/ArticleLayout.vue";
 
 export default {
-  name: "PreFilteringWithKnnSearch",
+  name: "ElasticsearchPreFilteringWithKnnSearch",
   emits: ["show-toast"],
   components: {
     CodeBlock,
