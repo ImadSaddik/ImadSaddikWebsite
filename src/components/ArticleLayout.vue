@@ -72,17 +72,17 @@ export default {
   margin-top: var(--gap-xxl);
 }
 
-.article-body-header {
+.article-body :deep(.article-body-header) {
   font-size: var(--font-size-big-medium);
   margin: var(--gap-md) 0;
 }
 
-.article-body-subheader {
+.article-body :deep(.article-body-subheader) {
   font-size: var(--font-size-medium);
   margin: var(--gap-md) 0;
 }
 
-.article-body p {
+.article-body :deep(p) {
   font-size: var(--font-size-small);
   color: var(--color-text-secondary);
   margin: var(--gap-md) 0;
@@ -96,11 +96,11 @@ export default {
 }
 
 @media screen and (max-width: 1100px) {
-  .article-body-header {
+  .article-body :deep(.article-body-header) {
     font-size: var(--font-size-medium);
   }
 
-  .article-body-subheader {
+  .article-body :deep(.article-body-subheader) {
     font-size: var(--font-size-big-small);
   }
 
