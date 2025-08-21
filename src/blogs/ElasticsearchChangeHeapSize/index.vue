@@ -3,11 +3,12 @@
     ref="articleContent"
     title="Change the heap size for Elasticsearch"
     sub-title="How to change the heap size for Elasticsearch to improve performance and reduce memory usage."
+    creation-date="August 21, 2025"
     :article-tags="blogTags"
     :cover-image="coverImage"
-    creation-date="August 21, 2025"
     :reading-time="readingTime"
     :related-blogs-card-data="relatedBlogsCardData"
+    @show-toast="handleShowToast"
   >
     <section>
       <h2 class="article-body-header" id="introduction">

@@ -3,11 +3,12 @@
     ref="articleContent"
     title="Pre-filtering with kNN search in Elasticsearch"
     sub-title="How to apply filters to an index to remove documents that don’t meet certain requirements before using kNN search."
+    creation-date="August 12, 2025"
     :article-tags="blogTags"
     :cover-image="coverImage"
-    creation-date="August 12, 2025"
     :reading-time="readingTime"
     :related-blogs-card-data="relatedBlogsCardData"
+    @show-toast="handleShowToast"
   >
     <section>
       <h2 class="article-body-header" id="introduction">

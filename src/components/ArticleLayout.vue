@@ -7,6 +7,7 @@
       :cover-image="coverImage"
       :creation-date="creationDate"
       :reading-time="readingTime"
+      @show-toast="handleShowToast"
     />
 
     <div class="article-body">
@@ -23,6 +24,7 @@ import ArticleFooter from "@/components/ArticleFooter.vue";
 
 export default {
   name: "ArticleLayout",
+  emits: ["show-toast"],
   props: {
     title: {
       type: String,
@@ -58,6 +60,11 @@ export default {
   components: {
     ArticleHeader,
     ArticleFooter,
+  },
+  methods: {
+    handleShowToast(data) {
+      this.$emit("show-toast", data);
+    },
   },
 };
 </script>

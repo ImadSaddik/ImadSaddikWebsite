@@ -3,11 +3,12 @@
     ref="articleContent"
     title="Collapse search results in Elasticsearch"
     sub-title="How to show only the best documents for each group with collapsing."
+    creation-date="August 20, 2025"
     :article-tags="blogTags"
     :cover-image="coverImage"
-    creation-date="August 20, 2025"
     :reading-time="readingTime"
     :related-blogs-card-data="relatedBlogsCardData"
+    @show-toast="handleShowToast"
   >
     <section>
       <h2 class="article-body-header" id="introduction">
