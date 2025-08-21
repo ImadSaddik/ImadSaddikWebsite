@@ -19,7 +19,6 @@ export default {
     slug: {
       immediate: true,
       handler(newSlug) {
-        console.log("Slug changed:", newSlug);
         this.blogToDisplay = defineAsyncComponent(() => import(`@/blogs/${newSlug}`));
       },
     },

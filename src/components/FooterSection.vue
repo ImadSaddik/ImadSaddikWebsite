@@ -110,7 +110,6 @@ export default {
   },
   methods: {
     handleEffectsToggle(value) {
-      console.log("Effects enabled:", value);
       this.$emit("effects-toggle", value);
       localStorage.setItem(EFFECTS_TOGGLE_LOCAL_STORAGE_KEY, value);
     },
