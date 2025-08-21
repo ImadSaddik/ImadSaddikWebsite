@@ -49,8 +49,8 @@ import CardGroup from "@/components/CardGroup.vue";
 import scorpiusIllustration from "@/assets/illustrations/scorpius.svg";
 import orionIllustration from "@/assets/illustrations/orion.svg";
 import quasarIllustration from "@/assets/illustrations/quasar.svg";
-import horizontalSolarSystemIllustration from "@/assets/illustrations/solar_system_horizontal.svg";
-import verticalSolarSystemIllustration from "@/assets/illustrations/solar_system_vertical.svg";
+import horizontalSolarSystemIllustration from "@/assets/illustrations/solarSystemHorizontal.svg";
+import verticalSolarSystemIllustration from "@/assets/illustrations/solarSystemVertical.svg";
 
 // Images
 import blogcoverImage1 from "@/blogs/ElasticsearchPreFilteringWithKnnSearch/coverImage.svg";

@@ -63,7 +63,7 @@
 <script>
 // Logos
 import githubLogo from "@/assets/logos/github.svg";
-import huggingFaceLogo from "@/assets/logos/hugging_face.svg";
+import huggingFaceLogo from "@/assets/logos/huggingFace.svg";
 import youtubeLogo from "@/assets/logos/youtube.svg";
 import mediumLogo from "@/assets/logos/medium.svg";
 import linkedinLogo from "@/assets/logos/linkedin.svg";
@@ -72,7 +72,7 @@ import vueLogo from "@/assets/logos/vue.svg";
 
 // Images
 import telescopeImage from "@/assets/telescope.svg";
-import objectsImage from "@/assets/objects_telescope_looking_at.svg";
+import objectsImage from "@/assets/objectsTelescopeLookingAt.svg";
 
 // Constants
 import { EFFECTS_TOGGLE_LOCAL_STORAGE_KEY } from "@/constants";

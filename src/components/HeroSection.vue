@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import verticalBigDipper from "@/assets/illustrations/big_dipper_vertical.svg";
-import horizontalBigDipper from "@/assets/illustrations/big_dipper_horizontal.svg";
+import verticalBigDipper from "@/assets/illustrations/bigDipperVertical.svg";
+import horizontalBigDipper from "@/assets/illustrations/bigDipperHorizontal.svg";
 
 export default {
   name: "HeroSection",

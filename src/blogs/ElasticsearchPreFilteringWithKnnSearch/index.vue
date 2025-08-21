@@ -203,7 +203,7 @@ import { calculateReadingTime } from "../utils.js";
 import coverImage from "./coverImage.svg";
 import blogcoverImage1 from "@/blogs/ElasticsearchCollapseSearchResults/coverImage.svg";
 import blogcoverImage2 from "@/blogs/ElasticsearchChangeHeapSize/coverImage.svg";
-import allMiniLMModelHuggingFaceHub from "./all_minilm_l6_v2_model_hf.png";
+import allMiniLMModelHuggingFaceHub from "./allMiniLmL6V2ModelHF.png";
 
 // Components
 import CodeBlock from "@/components/CodeBlock.vue";

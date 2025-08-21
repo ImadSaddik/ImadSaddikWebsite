@@ -29,7 +29,7 @@
 // Logos
 import linkedinLogo from "@/assets/logos/linkedin.svg";
 import twitterLogo from "@/assets/logos/twitter.svg";
-import copyLinkIcon from "@/assets/copy_link.svg";
+import copyLinkIcon from "@/assets/copyLink.svg";
 
 // Components
 import BaseTag from "@/components/BaseTag.vue";
