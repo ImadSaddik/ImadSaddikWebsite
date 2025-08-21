@@ -55,7 +55,7 @@ import verticalSolarSystemIllustration from "@/assets/illustrations/solar_system
 // Images
 import blogcoverImage1 from "@/blogs/ElasticsearchPreFilteringWithKnnSearch/coverImage.svg";
 import blogcoverImage2 from "@/blogs/ElasticsearchCollapseSearchResults/coverImage.svg";
-import blogcoverImage3 from "@/blogs/ElasticsearchPreFilteringWithKnnSearch/coverImage.svg";
+import blogcoverImage3 from "@/blogs/ElasticsearchChangeHeapSize/coverImage.svg";
 import coursePlaceholder1 from "@/assets/courses/placeholder_1.svg";
 import coursePlaceholder2 from "@/assets/courses/placeholder_2.svg";
 
@@ -113,11 +113,11 @@ export default {
         },
         {
           imageSrc: blogcoverImage3,
-          altText: "Cover image for the blog titled Pre-filtering with kNN search in Elasticsearch",
-          title: "Pre-filtering with kNN search in Elasticsearch",
+          altText: "Cover image for the blog titled Change the heap size for Elasticsearch",
+          title: "Change the heap size for Elasticsearch",
           subTitle: "12 August 2025",
           articleType: "blog-post",
-          articleId: "ElasticsearchPreFilteringWithKnnSearch",
+          articleId: "ElasticsearchChangeHeapSize",
         },
       ],
       universeImagesCardData: [
