@@ -41,7 +41,7 @@
           <img :src="inkscapeLogo" alt="Inkscape logo" class="footer-credit-logo" /> </a
         >.
         <span class="separator">|</span>
-        All rights reserved © {{ currentYear }} Imad Saddik
+        All rights reserved &copy; {{ currentYear }} Imad Saddik
       </p>
     </div>
 
