@@ -52,8 +52,8 @@
         alt="White telescope on a tripod pointing toward the night sky."
       />
       <img
-        class="deep-sky-objects-image"
-        :src="objectsImage"
+        class="star-cluster-image"
+        :src="starCluster"
         alt="Planet with a moon, colorful stars, and spiral galaxies in the night sky."
       />
     </div>
@@ -72,7 +72,7 @@ import vueLogo from "@/assets/logos/vue.svg";
 
 // Images
 import telescopeImage from "@/assets/telescope.svg";
-import objectsImage from "@/assets/objectsTelescopeLookingAt.svg";
+import starCluster from "@/assets/starCluster.svg";
 
 // Constants
 import { EFFECTS_TOGGLE_LOCAL_STORAGE_KEY } from "@/constants";
@@ -105,7 +105,7 @@ export default {
       vueLogo,
 
       telescopeImage,
-      objectsImage,
+      starCluster,
     };
   },
   methods: {
@@ -203,11 +203,11 @@ export default {
   left: 50%;
 }
 
-.deep-sky-objects-image {
+.star-cluster-image {
   position: absolute;
   top: 50px;
   right: 50px;
-  width: 360px;
+  width: 250px;
   height: auto;
 }
 
