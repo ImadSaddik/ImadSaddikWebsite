@@ -35,7 +35,7 @@ export default {
 
 <style scoped>
 .article-footer {
-  width: 50%;
+  width: 100%;
 }
 
 .article-footer-header {
@@ -46,7 +46,7 @@ export default {
 
 .article-footer-cards-group {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   width: 100%;
   gap: var(--gap-md);
 }
@@ -57,7 +57,13 @@ export default {
   }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 1300px) {
+  .article-footer-cards-group {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
   .article-footer-cards-group {
     grid-template-columns: repeat(1, 1fr);
   }
