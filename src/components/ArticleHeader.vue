@@ -8,7 +8,7 @@
 
     <img class="article-header-cover-image" :src="coverImage" alt="" />
     <div class="article-header-meta-row">
-      <p class="article-header-meta-info">{{ creationDate }} · {{ readingTime }} min read</p>
+      <p class="article-header-meta-info">{{ creationDate }} - {{ readingTime }} min read</p>
       <div class="article-header-share-buttons">
         <p class="article-header-share-title">Share:</p>
         <button class="article-header-share-button" @click="shareOnTwitter" title="Share on Twitter">
