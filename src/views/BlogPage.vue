@@ -1,5 +1,5 @@
 <template>
-  <component v-if="blogToDisplay" :is="blogToDisplay" />
+  <component v-if="blogToDisplay" :is="blogToDisplay" :key="slug" />
 </template>
 
 <script>
@@ -10,9 +10,18 @@ export default {
   props: {
     slug: { type: String, required: true },
   },
-  computed: {
-    blogToDisplay() {
-      return defineAsyncComponent(() => import(`@/blogs/${this.slug}`));
+  data() {
+    return {
+      blogToDisplay: null,
+    };
+  },
+  watch: {
+    slug: {
+      immediate: true,
+      handler(newSlug) {
+        console.log("Slug changed:", newSlug);
+        this.blogToDisplay = defineAsyncComponent(() => import(`@/blogs/${newSlug}`));
+      },
     },
   },
 };
