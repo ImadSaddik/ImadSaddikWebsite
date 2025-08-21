@@ -67,7 +67,7 @@ export default {
 
 .cards-group {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   width: 100%;
   gap: var(--gap-md);
   margin-bottom: var(--gap-xl);
@@ -86,6 +86,12 @@ export default {
   }
 }
 
+@media screen and (max-width: 1300px) {
+  .cards-group {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media screen and (max-width: 1100px) {
   .cards-group-container {
     margin-top: var(--gap-between-sections-small);
@@ -96,9 +102,7 @@ export default {
   .cards-group-title {
     font-size: var(--font-size-big-medium);
   }
-}
 
-@media screen and (max-width: 576px) {
   .cards-group {
     grid-template-columns: repeat(1, 1fr);
   }
