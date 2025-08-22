@@ -64,6 +64,10 @@ export default {
       try {
         await navigator.clipboard.writeText(text);
         this.copied = true;
+        this.$emit("show-toast", {
+          message: "Code copied to clipboard",
+          type: "success",
+        });
         setTimeout(() => {
           this.copied = false;
         }, this.resetIconIntervalInMilliseconds);
