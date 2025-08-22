@@ -12,6 +12,7 @@
 
     <div class="article-body">
       <slot></slot>
+      <EditArticleOnGitHub :slug="slug" />
     </div>
 
     <ArticleFooter :card-data="relatedBlogsCardData" />
@@ -21,6 +22,7 @@
 <script>
 import ArticleHeader from "@/components/ArticleHeader.vue";
 import ArticleFooter from "@/components/ArticleFooter.vue";
+import EditArticleOnGitHub from "./EditArticleOnGitHub.vue";
 
 export default {
   name: "ArticleLayout",
@@ -56,10 +58,15 @@ export default {
       required: true,
       default: () => [],
     },
+    slug: {
+      type: String,
+      required: true,
+    },
   },
   components: {
     ArticleHeader,
     ArticleFooter,
+    EditArticleOnGitHub,
   },
   methods: {
     handleShowToast(data) {

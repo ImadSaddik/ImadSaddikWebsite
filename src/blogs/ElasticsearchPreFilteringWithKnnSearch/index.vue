@@ -8,6 +8,7 @@
     :cover-image="coverImage"
     :reading-time="readingTime"
     :related-blogs-card-data="relatedBlogsCardData"
+    :slug="slug"
     @show-toast="handleShowToast"
   >
     <section>
@@ -226,6 +227,11 @@ export default {
     YouTubePlayer,
     ImageWithCaption,
     ArticleLayout,
+  },
+  computed: {
+    slug() {
+      return this.$route.params.slug;
+    },
   },
   data() {
     return {
