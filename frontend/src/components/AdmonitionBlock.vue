@@ -35,6 +35,7 @@ export default {
 .admonition {
   padding: var(--gap-md);
   border-left: 5px solid;
+  margin-top: var(--gap-md);
 }
 
 .admonition-note {
@@ -62,7 +63,7 @@ export default {
   border-color: var(--color-admonition-danger-border);
 }
 
-.admonition-title {
+.admonition .admonition-title {
   font-weight: 600;
   margin: 0;
   margin-bottom: var(--gap-xs);
