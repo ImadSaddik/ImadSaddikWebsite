@@ -9,6 +9,7 @@
     :reading-time="readingTime"
     :related-blogs-card-data="relatedBlogsCardData"
     :slug="slug"
+    :markdown-content="markdownContent"
     @show-toast="handleShowToast"
   >
     <section>
@@ -255,13 +256,11 @@
       <p>
         In this article, we explored how <InlineCode text="collapsing" /> search results works in
         <InlineCode text="Elasticsearch" />. This feature helps you refine your search output by showing only the most
-        relevant document from each <InlineCode text="group" />, like getting just one top result per
-        <InlineCode text="year" />.
+        relevant document from each <InlineCode text="group" />, like getting just one top result per year.
       </p>
       <p>
-        We learned how <InlineCode text="collapsing" /> reduces the number of returned <InlineCode text="hits" /> for a
-        cleaner view, and how <InlineCode text="inner_hits" /> can expand those results to show more details within each
-        group.
+        We learned how <InlineCode text="collapsing" /> reduces the number of returned hits for a cleaner view, and how
+        <InlineCode text="inner_hits" /> can expand those results to show more details within each group.
       </p>
       <p>
         For large datasets, we also saw that <InlineCode text="search_after" /> is the way to paginate through collapsed
@@ -274,9 +273,10 @@
 </template>
 
 <script>
-// Constants & Utils
+// Text & Utils
 import * as codeSnippets from "./codeSnippets.js";
 import { calculateReadingTime } from "../utils.js";
+import markdownContent from "./content.md";
 
 // Images
 import coverImage from "./coverImage.svg";
@@ -311,9 +311,10 @@ export default {
     return {
       ...codeSnippets,
 
-      blogTags: ["Python", "Elasticsearch", "Collapse"],
+      blogTags: ["Elasticsearch"],
       coverImage,
       readingTime: 0,
+      markdownContent,
       relatedBlogsCardData: [
         {
           imageSrc: blogcoverImage1,

@@ -9,6 +9,7 @@
     :reading-time="readingTime"
     :related-blogs-card-data="relatedBlogsCardData"
     :slug="slug"
+    :markdown-content="markdownContent"
     @show-toast="handleShowToast"
   >
     <section>
@@ -197,9 +198,10 @@
 </template>
 
 <script>
-// Constants &
+// Text & Utils
 import * as codeSnippets from "./codeSnippets.js";
 import { calculateReadingTime } from "../utils.js";
+import markdownContent from "./content.md";
 
 // Images
 import coverImage from "./coverImage.svg";
@@ -238,11 +240,12 @@ export default {
       ...codeSnippets,
 
       allMiniLMModelHuggingFaceHub,
-      blogTags: ["Python", "Elasticsearch", "kNN"],
+      blogTags: ["Elasticsearch", "kNN", "Semantic search"],
       coverImage,
       enlargedImageSrc: "",
       isImageModalVisible: false,
       readingTime: 0,
+      markdownContent,
       relatedBlogsCardData: [
         {
           imageSrc: blogcoverImage1,

@@ -9,6 +9,7 @@
     :reading-time="readingTime"
     :related-blogs-card-data="relatedBlogsCardData"
     :slug="slug"
+    :markdown-content="markdownContent"
     @show-toast="handleShowToast"
   >
     <section>
@@ -130,9 +131,10 @@
 </template>
 
 <script>
-// Constants &
+// Text & Utils
 import * as codeSnippets from "./codeSnippets.js";
 import { calculateReadingTime } from "../utils.js";
+import markdownContent from "./content.md";
 
 // Images
 import coverImage from "./coverImage.svg";
@@ -145,6 +147,7 @@ import CodeOutput from "@/components/CodeOutput.vue";
 import InlineCode from "@/components/InlineCode.vue";
 import YouTubePlayer from "@/components/YouTubePlayer.vue";
 import ArticleLayout from "@/components/ArticleLayout.vue";
+import AdmonitionBlock from "@/components/AdmonitionBlock.vue";
 
 export default {
   name: "ElasticsearchChangeHeapSize",
@@ -155,6 +158,7 @@ export default {
     InlineCode,
     YouTubePlayer,
     ArticleLayout,
+    AdmonitionBlock,
   },
   computed: {
     slug() {
@@ -165,9 +169,10 @@ export default {
     return {
       ...codeSnippets,
 
-      blogTags: ["Elasticsearch", "Heap size", "Performance", "Docker"],
+      blogTags: ["Elasticsearch"],
       coverImage,
       readingTime: 0,
+      markdownContent,
       relatedBlogsCardData: [
         {
           imageSrc: blogcoverImage1,

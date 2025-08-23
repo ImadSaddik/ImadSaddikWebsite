@@ -22,6 +22,11 @@
         </button>
       </div>
     </div>
+
+    <p class="article-header-copy-info">
+      Copy this article as markdown to use it with your favorite LLM. It's free.
+      <InlineButton fontAwesomeIcon="fa-solid fa-copy" label="Copy" @button-clicked="handleCopyContentInMarkdown" />
+    </p>
   </section>
 </template>
 
@@ -33,6 +38,7 @@ import copyLinkIcon from "@/assets/copyLink.svg";
 
 // Components
 import BaseTag from "@/components/BaseTag.vue";
+import InlineButton from "./InlineButton.vue";
 
 export default {
   name: "ArticleHeader",
@@ -62,9 +68,14 @@ export default {
       type: String,
       required: true,
     },
+    markdownContent: {
+      type: String,
+      required: true,
+    },
   },
   components: {
     BaseTag,
+    InlineButton,
   },
   data() {
     return {
@@ -97,6 +108,20 @@ export default {
         });
       }
     },
+    async handleCopyContentInMarkdown() {
+      try {
+        await navigator.clipboard.writeText(this.markdownContent);
+        this.$emit("show-toast", {
+          message: "Article content copied to clipboard!",
+          type: "success",
+        });
+      } catch {
+        this.$emit("show-toast", {
+          message: "Failed to copy article content",
+          type: "error",
+        });
+      }
+    },
   },
 };
 </script>
@@ -112,11 +137,13 @@ export default {
   margin-bottom: var(--gap-md);
 }
 
-.article-header-subtitle {
+.article-header-subtitle,
+.article-header-copy-info {
   font-size: var(--font-size-small);
   color: var(--color-text-secondary);
   margin-top: 0;
   margin-bottom: var(--gap-md);
+  line-height: 1.6;
 }
 
 .article-header-tags {
@@ -139,7 +166,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   margin-top: 0;
-  margin-bottom: var(--gap-xl);
+  margin-bottom: var(--gap-sm);
 }
 
 .article-header-meta-info {

@@ -7,6 +7,7 @@
       :cover-image="coverImage"
       :creation-date="creationDate"
       :reading-time="readingTime"
+      :markdown-content="markdownContent"
       @show-toast="handleShowToast"
     />
 
@@ -59,6 +60,10 @@ export default {
       default: () => [],
     },
     slug: {
+      type: String,
+      required: true,
+    },
+    markdownContent: {
       type: String,
       required: true,
     },
