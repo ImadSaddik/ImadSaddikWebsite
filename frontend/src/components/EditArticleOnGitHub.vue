@@ -19,7 +19,7 @@ export default {
   computed: {
     githubEditUrl() {
       const baseRepoUrl = "https://github.com/ImadSaddik/ImadSaddikWebsite/edit/master";
-      const filePath = `src/blogs/${this.slug}/index.vue`;
+      const filePath = `frontend/src/blogs/${this.slug}/index.vue`;
       return `${baseRepoUrl}/${filePath}`;
     },
   },
