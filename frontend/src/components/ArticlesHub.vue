@@ -67,6 +67,7 @@ import SearchBar from "@/components/SearchBar.vue";
 
 export default {
   name: "ArticlesHub",
+  emits: ["search-request"],
   props: {
     articleType: {
       type: String,
@@ -131,7 +132,18 @@ export default {
     toggleTagsExpanded() {
       this.tagsExpanded = !this.tagsExpanded;
     },
-    handleSearchRequest() {},
+    handleSearchRequest(searchQuery) {
+      const data = {
+        query: searchQuery,
+        articleType: this.articleType,
+        sortBy: this.sortOption,
+        filters: {
+          years: this.selectedYears,
+          tags: this.selectedTags,
+        },
+      };
+      this.$emit("search-request", data);
+    },
   },
 };
 </script>

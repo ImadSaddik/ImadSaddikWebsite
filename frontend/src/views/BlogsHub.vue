@@ -4,6 +4,7 @@
     search-placeholder="What blogs are you curious about today?"
     sort-placeholder="Show me blogs sorted by..."
     :card-data="cardData"
+    @search-request="handleSearchRequest"
   />
 </template>
 
@@ -52,7 +53,11 @@ export default {
       ],
     };
   },
-  methods: {},
+  methods: {
+    handleSearchRequest(data) {
+      console.log("Search requested for:", data);
+    },
+  },
 };
 </script>
 
