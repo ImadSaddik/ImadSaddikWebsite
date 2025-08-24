@@ -1,7 +1,7 @@
 <template>
   <section class="blog-hub-container">
     <div>
-      <h1 class="blog-hub-title">Blog hub</h1>
+      <h1 class="blog-hub-title">Blogs hub</h1>
       <SearchBar placeHolder="Search blogs..." @search-request="handleSearchRequest" />
     </div>
 
@@ -226,5 +226,42 @@ export default {
   font-weight: 600;
   width: 200px;
   margin-top: var(--gap-xl);
+}
+
+@media screen and (max-width: 1100px) {
+  .blog-hub-container {
+    padding: var(--gap-lg);
+    margin-top: var(--gap-md);
+  }
+
+  .blog-hub-title {
+    font-size: var(--font-size-big-medium);
+    margin-bottom: var(--gap-md);
+  }
+
+  .blog-hub-search-result {
+    flex: 2;
+  }
+
+  .cards-group {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .blog-hub-container {
+    padding: var(--gap-md);
+    margin-top: var(--gap-sm);
+  }
+
+  .blog-hub-columns {
+    flex-direction: column;
+    gap: var(--gap-lg);
+    margin-top: var(--gap-lg);
+  }
+
+  .blog-hub-filters-column h2 {
+    font-size: var(--font-size-big-small);
+  }
 }
 </style>
