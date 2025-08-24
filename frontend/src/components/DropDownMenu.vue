@@ -1,7 +1,9 @@
 <template>
   <section class="dropdown" ref="dropdownReference">
     <button class="dropdown-toggle" @click="toggleDropdown" :aria-expanded="isOpen" aria-haspopup="listbox">
-      <span>{{ selectedOption.label }}</span>
+      <span class="dropdown-label" :class="{ 'is-placeholder': selectedOption.value === null }">{{
+        selectedOption.label
+      }}</span>
       <i
         v-if="clearable && modelValue !== null"
         class="fa-solid fa-times fa-lg dropdown-clear"
@@ -188,5 +190,14 @@ export default {
 .dropdown-menu li.is-selected {
   background-color: var(--color-primary);
   color: var(--color-background);
+}
+
+.dropdown-label {
+  font-size: var(--font-size-small);
+  color: var(--color-text-primary);
+}
+
+.dropdown-label.is-placeholder {
+  color: var(--color-text-secondary);
 }
 </style>
