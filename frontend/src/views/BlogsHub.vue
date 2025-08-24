@@ -5,7 +5,7 @@
     sort-placeholder="Show me blogs sorted by..."
     :article-type="articleType"
     :card-data="cardData"
-    @search-request="handleSearchRequest"
+    @perform-search="handleSearchRequest"
   />
 </template>
 
@@ -63,7 +63,9 @@ export default {
       ];
     },
     handleSearchRequest(data) {
-      console.log("Search requested for:", data);
+      const stringifiedData = JSON.stringify(data, null, 2);
+      // Pretty print the data
+      console.log("Search requested for:", stringifiedData);
     },
   },
 };

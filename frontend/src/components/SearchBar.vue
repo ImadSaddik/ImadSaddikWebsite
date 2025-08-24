@@ -4,12 +4,13 @@
     <input
       class="search-input"
       type="text"
-      v-model="searchQuery"
+      :value="modelValue"
       :placeholder="placeHolder"
-      @keydown.enter="handleSearchRequest"
+      @input="updateSearchQuery($event.target.value)"
+      @keydown.enter="sendRequestToPerformSearch"
     />
     <i
-      v-if="searchQuery"
+      v-if="modelValue"
       class="fa-solid fa-times fa-lg search-clear"
       @click="clearSearch"
       aria-label="Clear search"
@@ -21,24 +22,29 @@
 <script>
 export default {
   name: "SearchBar",
-  emits: ["search-request"],
+  emits: ["update:modelValue", "perform-search"],
   props: {
     placeHolder: {
       type: String,
       required: true,
     },
+    modelValue: {
+      type: String,
+      default: "",
+    },
   },
   data() {
-    return {
-      searchQuery: "",
-    };
+    return {};
   },
   methods: {
     clearSearch() {
-      this.searchQuery = "";
+      this.$emit("update:modelValue", "");
     },
-    handleSearchRequest() {
-      this.$emit("search-request", this.searchQuery);
+    updateSearchQuery(searchQuery) {
+      this.$emit("update:modelValue", searchQuery);
+    },
+    sendRequestToPerformSearch() {
+      this.$emit("perform-search");
     },
   },
 };

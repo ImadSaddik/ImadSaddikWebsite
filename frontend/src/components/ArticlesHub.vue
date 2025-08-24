@@ -2,7 +2,7 @@
   <section class="articles-hub-container">
     <div>
       <h1 class="articles-hub-title">{{ articleTitle }} hub</h1>
-      <SearchBar :placeHolder="searchPlaceholder" @search-request="handleSearchRequest" />
+      <SearchBar v-model="searchQuery" :placeHolder="searchPlaceholder" @perform-search="sendRequestToPerformSearch" />
     </div>
 
     <div class="articles-hub-columns">
@@ -67,7 +67,7 @@ import SearchBar from "@/components/SearchBar.vue";
 
 export default {
   name: "ArticlesHub",
-  emits: ["search-request"],
+  emits: ["perform-search"],
   props: {
     articleTitle: {
       type: String,
@@ -105,6 +105,8 @@ export default {
       yearExpanded: true,
       tagsExpanded: true,
 
+      searchQuery: "",
+
       sortOption: null,
       sortOptions: [
         { value: "date", label: "Date" },
@@ -126,6 +128,23 @@ export default {
       ],
     };
   },
+  watch: {
+    sortOption(oldValue, newValue) {
+      if (oldValue !== newValue) {
+        this.sendRequestToPerformSearch();
+      }
+    },
+    selectedYears(oldValue, newValue) {
+      if (oldValue !== newValue) {
+        this.sendRequestToPerformSearch();
+      }
+    },
+    selectedTags(oldValue, newValue) {
+      if (oldValue !== newValue) {
+        this.sendRequestToPerformSearch();
+      }
+    },
+  },
   methods: {
     toggleSortingExpanded() {
       this.sortingExpanded = !this.sortingExpanded;
@@ -136,9 +155,9 @@ export default {
     toggleTagsExpanded() {
       this.tagsExpanded = !this.tagsExpanded;
     },
-    handleSearchRequest(searchQuery) {
+    sendRequestToPerformSearch() {
       const data = {
-        query: searchQuery,
+        query: this.searchQuery,
         articleType: this.articleType,
         sortBy: this.sortOption,
         filters: {
@@ -146,7 +165,7 @@ export default {
           tags: this.selectedTags,
         },
       };
-      this.$emit("search-request", data);
+      this.$emit("perform-search", data);
     },
   },
 };
