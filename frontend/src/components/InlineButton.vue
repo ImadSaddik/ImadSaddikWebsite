@@ -37,7 +37,6 @@ button {
   font-weight: 600;
   font-size: var(--font-size-extra-small);
   padding: var(--gap-xs);
-  border-radius: 0px;
   border: 1px solid var(--color-tag-border);
   background-color: var(--color-tag-background);
   color: var(--color-secondary);
