@@ -1,7 +1,7 @@
 <template>
   <section class="articles-hub-container">
     <div>
-      <h1 class="articles-hub-title">{{ articleType }} hub</h1>
+      <h1 class="articles-hub-title">{{ articleTitle }} hub</h1>
       <SearchBar :placeHolder="searchPlaceholder" @search-request="handleSearchRequest" />
     </div>
 
@@ -69,6 +69,10 @@ export default {
   name: "ArticlesHub",
   emits: ["search-request"],
   props: {
+    articleTitle: {
+      type: String,
+      required: true,
+    },
     articleType: {
       type: String,
       required: true,
