@@ -10,7 +10,7 @@
     />
     <i
       v-if="searchQuery"
-      class="fas fa-times fa-xl search-clear"
+      class="fas fa-times fa-lg search-clear"
       @click="clearSearch"
       aria-label="Clear search"
       role="button"
