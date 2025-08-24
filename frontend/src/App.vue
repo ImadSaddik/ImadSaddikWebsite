@@ -64,6 +64,7 @@ export default {
   --color-primary-hover: #cb5f12;
   --color-secondary: #22d3ee;
   --color-secondary-hover: #167595;
+  --color-disabled: #4b5563;
 
   /* Text colors */
   --color-text-primary: #e5e7eb;
