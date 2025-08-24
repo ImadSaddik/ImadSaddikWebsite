@@ -2,18 +2,23 @@
   <section class="blog-hub-container">
     <div>
       <h1 class="blog-hub-title">Blogs hub</h1>
-      <SearchBar placeHolder="Search blogs..." @search-request="handleSearchRequest" />
+      <SearchBar placeHolder="What article are you curious about today?" @search-request="handleSearchRequest" />
     </div>
 
     <div class="blog-hub-columns">
       <div class="blog-hub-filters-column">
         <div class="blog-hub-filters-sorting">
           <h2 @click="toggleSortingExpanded" class="collapsible-header">
-            Sort blogs
+            Sort
             <i class="fa-solid" :class="sortingExpanded ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
           </h2>
           <div v-if="sortingExpanded" class="collapsible-content">
-            <DropDownMenu clearable v-model="sortOption" placeholder="Sort by" :options="sortOptions" />
+            <DropDownMenu
+              clearable
+              v-model="sortOption"
+              placeholder="Show me articles sorted by..."
+              :options="sortOptions"
+            />
           </div>
         </div>
 
