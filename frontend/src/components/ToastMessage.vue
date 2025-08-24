@@ -24,10 +24,10 @@ export default {
     },
     toastIcon() {
       const iconMap = {
-        success: "fas fa-check-circle",
-        error: "fas fa-exclamation-circle",
-        warning: "fas fa-exclamation-triangle",
-        info: "fas fa-info-circle",
+        success: "fa-solid fa-check-circle",
+        error: "fa-solid fa-exclamation-circle",
+        warning: "fa-solid fa-exclamation-triangle",
+        info: "fa-solid fa-info-circle",
       };
       return iconMap[this.type];
     },

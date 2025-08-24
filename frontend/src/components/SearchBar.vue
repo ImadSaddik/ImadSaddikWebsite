@@ -1,6 +1,6 @@
 <template>
   <div class="search-bar">
-    <i class="fas fa-search search-icon"></i>
+    <i class="fa-solid fa-search search-icon"></i>
     <input
       class="search-input"
       type="text"
@@ -10,7 +10,7 @@
     />
     <i
       v-if="searchQuery"
-      class="fas fa-times fa-lg search-clear"
+      class="fa-solid fa-times fa-lg search-clear"
       @click="clearSearch"
       aria-label="Clear search"
       role="button"

@@ -1,7 +1,7 @@
 <template>
   <section>
     <a :href="githubEditUrl" target="_blank" rel="noopener noreferrer" class="edit-on-github-link">
-      <i class="fas fa-edit" aria-hidden="true"></i>
+      <i class="fa-solid fa-edit" aria-hidden="true"></i>
       Edit this page on GitHub
     </a>
   </section>

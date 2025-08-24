@@ -4,12 +4,12 @@
       <span>{{ selectedOption.label }}</span>
       <i
         v-if="clearable && modelValue !== null"
-        class="fas fa-times fa-lg dropdown-clear"
+        class="fa-solid fa-times fa-lg dropdown-clear"
         role="button"
         aria-label="Clear selection"
         @click.stop="clearSelection"
       ></i>
-      <i v-else class="fas dropdown-arrow" :class="isOpen ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+      <i v-else class="fa-solid dropdown-arrow" :class="isOpen ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
     </button>
 
     <ul v-if="isOpen" class="dropdown-menu" role="listbox" aria-label="Options">
