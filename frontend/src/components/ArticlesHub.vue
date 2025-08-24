@@ -110,7 +110,7 @@ export default {
       sortOption: null,
       sortOptions: [
         { value: "date", label: "Date" },
-        { value: "relevance", label: "Relevance" },
+        { value: "popularity", label: "Popularity" },
       ],
 
       selectedYears: [],
