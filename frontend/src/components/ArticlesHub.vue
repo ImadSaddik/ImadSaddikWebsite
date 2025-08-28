@@ -39,7 +39,7 @@
       </div>
 
       <div class="articles-hub-search-result">
-        <div class="cards-group">
+        <div v-if="!isSearchResponseEmpty" class="cards-group">
           <BaseCard
             v-for="(card, idx) in cardData"
             :key="idx"
@@ -52,7 +52,12 @@
           />
         </div>
 
-        <button class="load-more-button primary-button">Load more</button>
+        <!-- Replace this with an illustration in the future -->
+        <div v-else class="articles-hub-no-search-results">
+          <p v-if="isSearchResponseEmpty">No results found</p>
+        </div>
+
+        <button v-if="showLoadMoreButton" class="load-more-button primary-button">Load more</button>
       </div>
     </div>
   </section>
@@ -92,12 +97,21 @@ export default {
       required: true,
       default: () => [],
     },
+    isSearchResponseEmpty: {
+      type: Boolean,
+      required: true,
+    },
   },
   components: {
     DropDownMenu,
     CheckboxGroup,
     BaseCard,
     SearchBar,
+  },
+  computed: {
+    showLoadMoreButton() {
+      return !this.isSearchResponseEmpty && this.cardData.length > 0;
+    },
   },
   data() {
     return {
@@ -235,6 +249,13 @@ export default {
 
 .articles-hub-search-result {
   flex: 4;
+}
+
+.articles-hub-no-search-results {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .cards-group {

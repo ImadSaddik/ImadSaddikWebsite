@@ -5,6 +5,7 @@
     sort-placeholder="Show me blogs sorted by..."
     :article-type="articleType"
     :card-data="cardData"
+    :is-search-response-empty="isSearchResponseEmpty"
     @perform-search="performSearchRequest"
   />
 </template>
@@ -26,6 +27,7 @@ export default {
       articleType: "blog-post",
       cardData: [],
       searchResponse: null,
+      isSearchResponseEmpty: false,
     };
   },
   async mounted() {
@@ -55,6 +57,8 @@ export default {
           type: "error",
         });
       }
+
+      this.isSearchResponseEmpty = !this.searchResponse || this.searchResponse.hits.length === 0;
     },
     setCardsData() {
       const hits = this.searchResponse?.hits || [];
