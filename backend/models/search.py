@@ -8,10 +8,15 @@ class SearchFilters(BaseModel):
     tags: List[str] = []
 
 
+class SearchSortBy(BaseModel):
+    field: str = "date"
+    order: str = "desc"
+
+
 class SearchRequest(BaseModel):
     query: str = ""
     articleType: str
-    sortBy: Optional[str] = "date"
+    sortBy: Optional[SearchSortBy] = SearchSortBy()
     filters: SearchFilters = SearchFilters()
 
 

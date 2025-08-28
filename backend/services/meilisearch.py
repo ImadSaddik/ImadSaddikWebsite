@@ -28,9 +28,14 @@ class MeilisearchService:
         return " AND ".join(conditions) if conditions else ""
 
     def get_sorting_criteria(self, data: SearchRequest) -> List[str]:
-        sort_by = data.sortBy or "date"
-        field_mapping = {"date": "creation_date:desc", "popularity": "view_count:desc"}
-        return [field_mapping.get(sort_by, "creation_date:desc")]
+        sort_by = data.sortBy.field if data.sortBy else "date"
+        sort_order = data.sortBy.order if data.sortBy else "desc"
+        field_mapping = {
+            "date": f"creation_date:{sort_order}",
+            "popularity": f"view_count:{sort_order}",
+        }
+        default_sorting = f"creation_date:{sort_order}"
+        return [field_mapping.get(sort_by, default_sorting)]
 
     async def search(
         self, request: SearchRequest, query_vector: Optional[List[float]]

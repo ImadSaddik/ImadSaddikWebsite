@@ -14,6 +14,21 @@
           </h2>
           <div v-if="sortingExpanded" class="collapsible-content">
             <DropDownMenu clearable v-model="sortOption" :placeholder="sortPlaceholder" :options="sortOptions" />
+            <div v-if="sortOption" class="order-container">
+              <p>Order:</p>
+              <div class="order-options">
+                <i
+                  class="fa-solid fa-arrow-up"
+                  :class="{ selected: sortOrder === 'asc' }"
+                  @click="setSortOrder('asc')"
+                ></i>
+                <i
+                  class="fa-solid fa-arrow-down"
+                  :class="{ selected: sortOrder === 'desc' }"
+                  @click="setSortOrder('desc')"
+                ></i>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -114,7 +129,8 @@ export default {
 
       searchQuery: "",
 
-      sortOption: null,
+      sortOrder: "desc",
+      sortOption: "",
       sortOptions: [
         { value: "date", label: "Date" },
         { value: "popularity", label: "Popularity" },
@@ -170,6 +186,10 @@ export default {
     toggleTagsExpanded() {
       this.tagsExpanded = !this.tagsExpanded;
     },
+    setSortOrder(order) {
+      this.sortOrder = order;
+      this.performSearchRequest();
+    },
     async getCardsData() {
       const data = {
         articleType: this.articleType,
@@ -180,7 +200,10 @@ export default {
       const data = {
         query: this.searchQuery,
         articleType: this.articleType,
-        sortBy: this.sortOption,
+        sortBy: {
+          field: this.sortOption,
+          order: this.sortOrder,
+        },
         filters: {
           years: this.selectedYears,
           tags: this.selectedTags,
@@ -229,6 +252,10 @@ export default {
 </script>
 
 <style scoped>
+p {
+  font-size: var(--font-size-small);
+}
+
 .articles-hub-container {
   padding: var(--gap-xl);
   margin-top: var(--gap-xxl);
@@ -301,6 +328,11 @@ export default {
   height: 100%;
 }
 
+.articles-hub-no-search-results {
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+}
+
 .cards-group {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -314,6 +346,38 @@ export default {
   font-weight: 600;
   width: 200px;
   margin-top: var(--gap-xl);
+}
+
+.order-container {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-sm);
+}
+
+.order-options {
+  display: flex;
+  gap: var(--gap-xs);
+}
+
+.order-options i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: var(--gap-xs);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.order-options i:hover {
+  background-color: var(--color-primary-hover);
+  color: var(--color-background);
+}
+
+.order-options i.selected {
+  background-color: var(--color-primary);
+  color: var(--color-background);
 }
 
 @media screen and (max-width: 1100px) {
