@@ -15,7 +15,7 @@
       />
     </div>
 
-    <button class="cards-group-button primary-button">{{ buttonText }}</button>
+    <button class="cards-group-button primary-button" @click="navigateToPath">{{ buttonText }}</button>
   </section>
 </template>
 
@@ -40,12 +40,21 @@ export default {
       required: true,
       default: null,
     },
+    path: {
+      type: String,
+      required: true,
+    },
   },
   components: {
     BaseCard,
   },
   data() {
     return {};
+  },
+  methods: {
+    navigateToPath() {
+      this.$router.push({ path: this.path });
+    },
   },
 };
 </script>

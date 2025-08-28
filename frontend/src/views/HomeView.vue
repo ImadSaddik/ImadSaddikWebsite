@@ -15,7 +15,7 @@
         alt="Scorpius constellation with connecting lines and colorful stars and galaxies."
       />
 
-      <CardGroup title="Blogs" :cards-data="blogsCardData" button-text="View all blogs" />
+      <CardGroup title="Blogs" :cards-data="blogsCardData" button-text="View all blogs" path="blogs" />
       <img
         class="horizontal-solar-system-image"
         :src="horizontalSolarSystemIllustration"
@@ -27,14 +27,14 @@
         alt="Stylized illustration of a solar system showing 4 planets and a sun."
       />
 
-      <CardGroup title="Courses" :cards-data="coursesCardData" button-text="View all courses" />
+      <CardGroup title="Courses" :cards-data="coursesCardData" button-text="View all courses" path="courses" />
       <img
         class="quasar-image"
         :src="quasarIllustration"
         alt="Blue quasar at the center of a spiral galaxy with energetic jets."
       />
 
-      <CardGroup title="Universe" :cards-data="universeImagesCardData" button-text="View all images" />
+      <CardGroup title="Universe" :cards-data="universeImagesCardData" button-text="View all images" path="astronomy" />
     </div>
   </div>
 </template>
