@@ -19,6 +19,7 @@ import ArticlesHub from "@/components/ArticlesHub.vue";
 
 export default {
   name: "BlogHub",
+  emits: ["show-toast"],
   components: {
     ArticlesHub,
   },
