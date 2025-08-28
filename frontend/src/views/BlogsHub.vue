@@ -49,8 +49,11 @@ export default {
         });
         this.searchResponse = response.data;
         this.setCardsData();
-      } catch (error) {
-        console.error("Search request failed:", error);
+      } catch {
+        this.$emit("show-toast", {
+          message: "Failed to perform search",
+          type: "error",
+        });
       }
     },
     setCardsData() {
