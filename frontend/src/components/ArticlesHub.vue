@@ -2,7 +2,7 @@
   <section class="articles-hub-container">
     <div>
       <h1 class="articles-hub-title">{{ articleTitle }} hub</h1>
-      <SearchBar v-model="searchQuery" :placeHolder="searchPlaceholder" @perform-search="sendRequestToPerformSearch" />
+      <SearchBar v-model="searchQuery" :placeHolder="searchPlaceholder" @perform-search="performSearchRequest" />
     </div>
 
     <div class="articles-hub-columns">
@@ -52,7 +52,7 @@
           />
         </div>
 
-        <!-- Replace this with an illustration in the future -->
+        <!-- TODO: Replace this with an illustration in the future -->
         <div v-else class="articles-hub-no-search-results">
           <p v-if="isSearchResponseEmpty">No results found</p>
         </div>
@@ -64,6 +64,9 @@
 </template>
 
 <script>
+// Third-party libraries
+import axios from "axios";
+
 // Components
 import DropDownMenu from "@/components/DropDownMenu.vue";
 import CheckboxGroup from "@/components/CheckboxGroup.vue";
@@ -72,7 +75,12 @@ import SearchBar from "@/components/SearchBar.vue";
 
 export default {
   name: "ArticlesHub",
-  emits: ["perform-search"],
+  components: {
+    DropDownMenu,
+    CheckboxGroup,
+    BaseCard,
+    SearchBar,
+  },
   props: {
     articleTitle: {
       type: String,
@@ -92,21 +100,6 @@ export default {
       required: true,
       default: "Show me articles sorted by...",
     },
-    cardData: {
-      type: Array,
-      required: true,
-      default: () => [],
-    },
-    isSearchResponseEmpty: {
-      type: Boolean,
-      required: true,
-    },
-  },
-  components: {
-    DropDownMenu,
-    CheckboxGroup,
-    BaseCard,
-    SearchBar,
   },
   computed: {
     showLoadMoreButton() {
@@ -140,24 +133,32 @@ export default {
         { value: "javascript", label: "JavaScript" },
         { value: "css", label: "CSS" },
       ],
+
+      cardData: [],
+      searchResponse: null,
+      isSearchResponseEmpty: false,
     };
   },
   watch: {
     sortOption(oldValue, newValue) {
       if (oldValue !== newValue) {
-        this.sendRequestToPerformSearch();
+        this.performSearchRequest();
       }
     },
     selectedYears(oldValue, newValue) {
       if (oldValue !== newValue) {
-        this.sendRequestToPerformSearch();
+        this.performSearchRequest();
       }
     },
     selectedTags(oldValue, newValue) {
       if (oldValue !== newValue) {
-        this.sendRequestToPerformSearch();
+        this.performSearchRequest();
       }
     },
+  },
+  async mounted() {
+    await this.getCardsData();
+    this.setCardsData();
   },
   methods: {
     toggleSortingExpanded() {
@@ -169,7 +170,13 @@ export default {
     toggleTagsExpanded() {
       this.tagsExpanded = !this.tagsExpanded;
     },
-    sendRequestToPerformSearch() {
+    async getCardsData() {
+      const data = {
+        articleType: this.articleType,
+      };
+      await this.performSearchRequest(data);
+    },
+    async performSearchRequest() {
       const data = {
         query: this.searchQuery,
         articleType: this.articleType,
@@ -179,7 +186,43 @@ export default {
           tags: this.selectedTags,
         },
       };
-      this.$emit("perform-search", data);
+
+      try {
+        const response = await axios.post("/api/search", JSON.stringify(data), {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          timeout: 10_000,
+        });
+        this.searchResponse = response.data;
+        this.setCardsData();
+      } catch {
+        this.$emit("show-toast", {
+          message: "Failed to perform search",
+          type: "error",
+        });
+      }
+
+      this.isSearchResponseEmpty = !this.searchResponse || this.searchResponse.hits.length === 0;
+    },
+    setCardsData() {
+      const hits = this.searchResponse?.hits || [];
+      this.cardData = hits.map((hit) => ({
+        imageSrc: require(`@/blogs/${hit.name}/coverImage.svg`),
+        altText: `Cover image for the blog titled ${hit.title}`,
+        title: hit.title,
+        subTitle: this.convertUnixTimestampToReadableFormat(hit.creation_date),
+        articleType: this.articleType,
+        articleId: hit.name,
+      }));
+    },
+    convertUnixTimestampToReadableFormat(unixTimestamp) {
+      const date = new Date(unixTimestamp * 1000);
+      return date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
     },
   },
 };
