@@ -5,7 +5,7 @@
     sort-placeholder="Show me blogs sorted by..."
     :article-type="articleType"
     :card-data="cardData"
-    @perform-search="handleSearchRequest"
+    @perform-search="performSearchRequest"
   />
 </template>
 
@@ -28,18 +28,18 @@ export default {
       searchResponse: null,
     };
   },
-  mounted() {
-    this.getCardsData();
+  async mounted() {
+    await this.getCardsData();
+    this.setCardsData();
   },
   methods: {
     async getCardsData() {
       const data = {
         articleType: this.articleType,
       };
-      await this.handleSearchRequest(data);
-      this.setCardsData();
+      await this.performSearchRequest(data);
     },
-    async handleSearchRequest(data) {
+    async performSearchRequest(data) {
       try {
         const response = await axios.post("/api/search", JSON.stringify(data), {
           headers: {
