@@ -10,13 +10,11 @@
 </template>
 
 <script>
+// Third-party libraries
+import axios from "axios";
+
 // Components
 import ArticlesHub from "@/components/ArticlesHub.vue";
-
-// Images
-import blogcoverImage1 from "@/blogs/ElasticsearchPreFilteringWithKnnSearch/coverImage.svg";
-import blogcoverImage2 from "@/blogs/ElasticsearchCollapseSearchResults/coverImage.svg";
-import blogcoverImage3 from "@/blogs/ElasticsearchChangeHeapSize/coverImage.svg";
 
 export default {
   name: "BlogHub",
@@ -27,45 +25,52 @@ export default {
     return {
       articleType: "blog-post",
       cardData: [],
+      searchResponse: null,
     };
   },
   mounted() {
     this.getCardsData();
   },
   methods: {
-    getCardsData() {
-      // TODO: Replace this with an actual API call
-      this.cardData = [
-        {
-          imageSrc: blogcoverImage1,
-          altText: "Cover image for the blog titled Pre-filtering with kNN search in Elasticsearch",
-          title: "Pre-filtering with kNN search in Elasticsearch",
-          subTitle: "12 August 2025",
-          articleType: this.articleType,
-          articleId: "ElasticsearchPreFilteringWithKnnSearch",
-        },
-        {
-          imageSrc: blogcoverImage2,
-          altText: "Cover image for the blog titled Collapse search results in Elasticsearch",
-          title: "Collapse search results in Elasticsearch",
-          subTitle: "20 August 2025",
-          articleType: this.articleType,
-          articleId: "ElasticsearchCollapseSearchResults",
-        },
-        {
-          imageSrc: blogcoverImage3,
-          altText: "Cover image for the blog titled Change the heap size for Elasticsearch",
-          title: "Change the heap size for Elasticsearch",
-          subTitle: "12 August 2025",
-          articleType: this.articleType,
-          articleId: "ElasticsearchChangeHeapSize",
-        },
-      ];
+    async getCardsData() {
+      const data = {
+        articleType: this.articleType,
+      };
+      await this.handleSearchRequest(data);
+      this.setCardsData();
     },
-    handleSearchRequest(data) {
-      const stringifiedData = JSON.stringify(data, null, 2);
-      // Pretty print the data
-      console.log("Search requested for:", stringifiedData);
+    async handleSearchRequest(data) {
+      try {
+        const response = await axios.post("/api/search", JSON.stringify(data), {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          timeout: 10_000,
+        });
+        this.searchResponse = response.data;
+        this.setCardsData();
+      } catch (error) {
+        console.error("Search request failed:", error);
+      }
+    },
+    setCardsData() {
+      const hits = this.searchResponse?.hits || [];
+      this.cardData = hits.map((hit) => ({
+        imageSrc: require(`@/blogs/${hit.name}/coverImage.svg`),
+        altText: `Cover image for the blog titled ${hit.title}`,
+        title: hit.title,
+        subTitle: this.convertUnixTimestampToReadableFormat(hit.creation_date),
+        articleType: this.articleType,
+        articleId: hit.name,
+      }));
+    },
+    convertUnixTimestampToReadableFormat(unixTimestamp) {
+      const date = new Date(unixTimestamp * 1000);
+      return date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
     },
   },
 };
