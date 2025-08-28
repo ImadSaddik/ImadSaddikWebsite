@@ -5,7 +5,7 @@
         selectedOption.label
       }}</span>
       <i
-        v-if="clearable && modelValue !== null"
+        v-if="clearable && modelValue"
         class="fa-solid fa-times fa-lg dropdown-clear"
         role="button"
         aria-label="Clear selection"
