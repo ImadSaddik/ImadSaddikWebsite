@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import BlogPage from "@/views/BlogPage.vue";
 import BlogsHub from "@/views/BlogsHub.vue";
+import CoursesHub from "@/views/CoursesHub.vue";
+import AstronomyHub from "@/views/AstronomyHub.vue";
 
 const routes = [
   {
@@ -29,6 +31,16 @@ const routes = [
         return { name: "blogs" };
       }
     },
+  },
+  {
+    path: "/courses",
+    name: "courses",
+    component: CoursesHub,
+  },
+  {
+    path: "/astronomy",
+    name: "astronomy",
+    component: AstronomyHub,
   },
 ];
 

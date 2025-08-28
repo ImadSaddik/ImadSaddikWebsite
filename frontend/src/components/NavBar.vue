@@ -35,7 +35,7 @@ export default {
       navigationBarItems: [
         { name: "Blogs", path: "/blogs" },
         { name: "Courses", path: "/courses" },
-        { name: "Astrophotography", path: "/astrophotography" },
+        { name: "Astronomy", path: "/astronomy" },
         { name: "About me", path: "/about-me" },
         { name: "Hire me", path: "/hire-me" },
       ],
