@@ -4,8 +4,8 @@
       <h1 class="hero-title">Explore articles, images and courses I create about programming and the universe.</h1>
 
       <div class="buttons-container">
-        <button class="hero-button primary-button">Explore articles</button>
-        <button class="hero-button secondary-button">View courses</button>
+        <button class="hero-button primary-button" @click="navigateToPath('blogs')">Explore articles</button>
+        <button class="hero-button secondary-button" @click="navigateToPath('courses')">View courses</button>
       </div>
     </div>
 
@@ -35,6 +35,11 @@ export default {
       verticalBigDipper,
       horizontalBigDipper,
     };
+  },
+  methods: {
+    navigateToPath(path) {
+      this.$router.push({ path });
+    },
   },
 };
 </script>
