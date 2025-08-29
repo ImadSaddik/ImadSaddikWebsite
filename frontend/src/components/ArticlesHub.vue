@@ -90,6 +90,7 @@ import SearchBar from "@/components/SearchBar.vue";
 
 export default {
   name: "ArticlesHub",
+  emits: ["show-toast"],
   components: {
     DropDownMenu,
     CheckboxGroup,

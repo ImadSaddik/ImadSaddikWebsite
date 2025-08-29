@@ -4,6 +4,7 @@
     search-placeholder="What astronomy articles are you curious about today?"
     sort-placeholder="Show me astronomy articles sorted by..."
     :article-type="articleType"
+    @show-toast="$emit('show-toast', $event)"
   />
 </template>
 

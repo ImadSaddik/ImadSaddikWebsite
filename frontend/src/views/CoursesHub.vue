@@ -4,6 +4,7 @@
     search-placeholder="What courses are you curious about today?"
     sort-placeholder="Show me courses sorted by..."
     :article-type="articleType"
+    @show-toast="$emit('show-toast', $event)"
   />
 </template>
 

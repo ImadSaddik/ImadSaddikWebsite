@@ -4,6 +4,7 @@
     search-placeholder="What blogs are you curious about today?"
     sort-placeholder="Show me blogs sorted by..."
     :article-type="articleType"
+    @show-toast="$emit('show-toast', $event)"
   />
 </template>
 
