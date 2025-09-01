@@ -51,11 +51,7 @@
         :src="telescopeImage"
         alt="White telescope on a tripod pointing toward the night sky."
       />
-      <img
-        class="star-cluster-image"
-        :src="starCluster"
-        alt="Planet with a moon, colorful stars, and spiral galaxies in the night sky."
-      />
+      <img class="moon-image" :src="crescentMoon" alt="An image of a crescent moon." />
     </div>
   </section>
 </template>
@@ -72,7 +68,7 @@ import vueLogo from "@/assets/logos/vue.svg";
 
 // Images
 import telescopeImage from "@/assets/telescope.svg";
-import starCluster from "@/assets/starCluster.svg";
+import crescentMoon from "@/assets/crescentMoon.svg";
 
 // Constants
 import { EFFECTS_TOGGLE_LOCAL_STORAGE_KEY } from "@/constants";
@@ -105,7 +101,7 @@ export default {
       vueLogo,
 
       telescopeImage,
-      starCluster,
+      crescentMoon,
     };
   },
   methods: {
@@ -202,11 +198,11 @@ export default {
   left: 50%;
 }
 
-.star-cluster-image {
+.moon-image {
   position: absolute;
-  top: 50px;
-  right: 50px;
-  width: 250px;
+  top: 100px;
+  right: 100px;
+  width: 50px;
   height: auto;
 }
 
