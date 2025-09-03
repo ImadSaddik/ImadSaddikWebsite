@@ -2,6 +2,8 @@ from typing import Dict, List, Optional
 
 from pydantic import BaseModel
 
+from models.document import Hit
+
 
 class SearchFilters(BaseModel):
     years: List[str] = []
@@ -20,17 +22,7 @@ class SearchRequest(BaseModel):
     filters: SearchFilters = SearchFilters()
 
 
-class SearchHit(BaseModel):
-    id: str
-    chunk_number: int
-    name: str
-    title: str
-    content: str
-    type: str
-    year: str
-    tags: List[str]
-    creation_date: int
-    view_count: int
+class SearchHit(Hit):
     ranking_score: Optional[float] = None
 
 

@@ -2,6 +2,7 @@ from typing import List, Optional
 
 import meilisearch
 from core.config import settings
+from models.article import RecommendationHit, RecommendationResponse
 from models.search import FacetDistribution, SearchHit, SearchRequest, SearchResponse
 
 
@@ -118,3 +119,32 @@ class MeilisearchService:
 
         except Exception as e:
             return {"success": False, "message": str(e), "view_count": 0}
+
+    async def get_article_recommendations(
+        self, document_name_to_ignore: str, document_type: str
+    ) -> RecommendationResponse:
+        response = self.index.get_documents(
+            {
+                "filter": f"type = '{document_type}' AND name != '{document_name_to_ignore}' AND chunk_number = 0",
+                "limit": 3,
+            }
+        )
+        hits = [
+            RecommendationHit(
+                id=hit.id,
+                chunk_number=hit.chunk_number,
+                name=hit.name,
+                title=hit.title,
+                content=hit.content,
+                type=hit.type,
+                year=hit.year,
+                tags=hit.tags,
+                creation_date=hit.creation_date,
+                view_count=hit.view_count,
+            )
+            for hit in response.results
+        ]
+        return RecommendationResponse(
+            hits=hits,
+            total_hits=len(hits),
+        )
