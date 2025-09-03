@@ -1,6 +1,6 @@
 <template>
   <NavBar />
-  <RouterView @show-toast="handleShowToast" />
+  <RouterView @show-toast="handleShowToastEvent" />
   <StarBackground v-if="effectsEnabled" />
   <MeteorShowers v-if="effectsEnabled" />
   <ScrollBackToTop />
@@ -47,7 +47,7 @@ export default {
         this.effectsEnabled = JSON.parse(storedEffectsEnabled);
       }
     },
-    handleShowToast(data) {
+    handleShowToastEvent(data) {
       this.$refs.toastManager.showToast(data);
     },
   },

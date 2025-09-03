@@ -10,7 +10,7 @@
     :related-blogs-card-data="relatedBlogsCardData"
     :slug="slug"
     :markdown-content="markdownContent"
-    @show-toast="handleShowToast"
+    @show-toast="handleShowToastEvent"
   >
     <section>
       <h2 class="article-body-header" id="introduction">
@@ -50,17 +50,17 @@
               >this GitHub repository</a
             >. Start by reading the file.
           </p>
-          <CodeBlock :code="pythonCodeSnippet1" language="python" @show-toast="handleShowToast" />
+          <CodeBlock :code="pythonCodeSnippet1" language="python" @show-toast="handleShowToastEvent" />
         </div>
 
         <div>
           <p>Then, create an index.</p>
-          <CodeBlock :code="pythonCodeSnippet2" language="python" @show-toast="handleShowToast" />
+          <CodeBlock :code="pythonCodeSnippet2" language="python" @show-toast="handleShowToastEvent" />
         </div>
 
         <div>
           <p>Use the <InlineCode text="bulk API" /> to index the documents in the <InlineCode text="apod index" />.</p>
-          <CodeBlock :code="pythonCodeSnippet3" language="python" @show-toast="handleShowToast" />
+          <CodeBlock :code="pythonCodeSnippet3" language="python" @show-toast="handleShowToastEvent" />
         </div>
 
         <p>
@@ -76,7 +76,7 @@
 
         <div>
           <p>Now, let's search for documents where <InlineCode text="Andromeda galaxy" /> appears in the title.</p>
-          <CodeBlock :code="pythonCodeSnippet4" language="python" @show-toast="handleShowToast" />
+          <CodeBlock :code="pythonCodeSnippet4" language="python" @show-toast="handleShowToastEvent" />
         </div>
 
         <div>
@@ -92,7 +92,7 @@
             Let's look at the count of documents that matched the query per year in the
             <InlineCode text="apod index" />.
           </p>
-          <CodeBlock :code="pythonCodeSnippet5" language="python" @show-toast="handleShowToast" />
+          <CodeBlock :code="pythonCodeSnippet5" language="python" @show-toast="handleShowToastEvent" />
         </div>
 
         <div>
@@ -108,7 +108,7 @@
             Collapsing search results by year will return only one document per year that matches the query. That
             returned document will be the one with the highest <InlineCode text="_score" /> for that year.
           </p>
-          <CodeBlock :code="pythonCodeSnippet6" language="python" @show-toast="handleShowToast" />
+          <CodeBlock :code="pythonCodeSnippet6" language="python" @show-toast="handleShowToastEvent" />
         </div>
 
         <div>
@@ -118,7 +118,7 @@
 
         <div>
           <p>Let's print the number of documents per year.</p>
-          <CodeBlock :code="pythonCodeSnippet7" language="python" @show-toast="handleShowToast" />
+          <CodeBlock :code="pythonCodeSnippet7" language="python" @show-toast="handleShowToastEvent" />
         </div>
 
         <div>
@@ -128,7 +128,7 @@
 
         <div>
           <p>Let's verify if the document in year 2024 is the one with the highest <InlineCode text="_score" />.</p>
-          <CodeBlock :code="pythonCodeSnippet8" language="python" @show-toast="handleShowToast" />
+          <CodeBlock :code="pythonCodeSnippet8" language="python" @show-toast="handleShowToastEvent" />
         </div>
 
         <div>
@@ -141,7 +141,7 @@
 
         <div>
           <p>Let's look at the scores in the response without collapsing</p>
-          <CodeBlock :code="pythonCodeSnippet9" language="python" @show-toast="handleShowToast" />
+          <CodeBlock :code="pythonCodeSnippet9" language="python" @show-toast="handleShowToastEvent" />
         </div>
 
         <div>
@@ -168,7 +168,7 @@
             <InlineCode text="most_recent" /> will be used to extract those documents from the response object.
             <InlineCode text="size" /> controls the number of documents that we
           </p>
-          <CodeBlock :code="pythonCodeSnippet10" language="python" @show-toast="handleShowToast" />
+          <CodeBlock :code="pythonCodeSnippet10" language="python" @show-toast="handleShowToastEvent" />
         </div>
 
         <div>
@@ -182,7 +182,7 @@
 
         <div>
           <p>Let's see how many documents we have in a single year.</p>
-          <CodeBlock :code="pythonCodeSnippet11" language="python" @show-toast="handleShowToast" />
+          <CodeBlock :code="pythonCodeSnippet11" language="python" @show-toast="handleShowToastEvent" />
         </div>
 
         <div>
@@ -195,7 +195,7 @@
             The documents are sorted by <InlineCode text="_score" /> within each collapsed group. They also match the
             scores in the response without collapsing.
           </p>
-          <CodeBlock :code="pythonCodeSnippet12" language="python" @show-toast="handleShowToast" />
+          <CodeBlock :code="pythonCodeSnippet12" language="python" @show-toast="handleShowToastEvent" />
           <CodeOutput :code-output="codeOutput9" />
         </div>
       </section>
@@ -223,13 +223,13 @@
           <p>
             Let's create a new index where we are going to create 40 000 documents. Each user, will have 2 documents.
           </p>
-          <CodeBlock :code="pythonCodeSnippet13" language="python" @show-toast="handleShowToast" />
+          <CodeBlock :code="pythonCodeSnippet13" language="python" @show-toast="handleShowToastEvent" />
           <CodeOutput :code-output="codeOutput10" />
         </div>
 
         <div>
           <p>Let's confirm that we have 40 000 documents in the index.</p>
-          <CodeBlock :code="pythonCodeSnippet14" language="python" @show-toast="handleShowToast" />
+          <CodeBlock :code="pythonCodeSnippet14" language="python" @show-toast="handleShowToastEvent" />
           <CodeOutput :code-output="codeOutput11" />
         </div>
 
@@ -238,7 +238,7 @@
             Now we are ready to use <InlineCode text="search_after" /> to paginate through the collapsed results. Since
             we have 2 documents per user, we can expect to have 20 000 collapsed results.
           </p>
-          <CodeBlock :code="pythonCodeSnippet15" language="python" @show-toast="handleShowToast" />
+          <CodeBlock :code="pythonCodeSnippet15" language="python" @show-toast="handleShowToastEvent" />
           <CodeOutput :code-output="codeOutput12" />
         </div>
 
@@ -339,7 +339,7 @@ export default {
     this.readingTime = calculateReadingTime(this.$refs);
   },
   methods: {
-    handleShowToast(data) {
+    handleShowToastEvent(data) {
       this.$emit("show-toast", data);
     },
   },

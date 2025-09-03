@@ -8,7 +8,7 @@
       :creation-date="creationDate"
       :reading-time="readingTime"
       :markdown-content="markdownContent"
-      @show-toast="handleShowToast"
+      @show-toast="handleShowToastEvent"
     />
 
     <div class="article-body">
@@ -74,7 +74,7 @@ export default {
     EditArticleOnGitHub,
   },
   methods: {
-    handleShowToast(data) {
+    handleShowToastEvent(data) {
       this.$emit("show-toast", data);
     },
   },

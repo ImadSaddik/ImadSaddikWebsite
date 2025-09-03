@@ -10,7 +10,7 @@
     :related-blogs-card-data="relatedBlogsCardData"
     :slug="slug"
     :markdown-content="markdownContent"
-    @show-toast="handleShowToast"
+    @show-toast="handleShowToastEvent"
   >
     <section>
       <h2 class="article-body-header" id="introduction">
@@ -66,7 +66,7 @@
 
         <div>
           <p>Open your terminal and run:</p>
-          <CodeBlock :code="bashCodeSnippet1" language="bash" @show-toast="handleShowToast" />
+          <CodeBlock :code="bashCodeSnippet1" language="bash" @show-toast="handleShowToastEvent" />
           <AdmonitionBlock title="Note" type="note">
             <p>
               If you assigned a different name to the container, replace <InlineCode text="elasticsearch" /> with that
@@ -83,7 +83,7 @@
 
         <div>
           <p>Execute the following command to enter the <InlineCode text="elasticsearch" /> container:</p>
-          <CodeBlock :code="bashCodeSnippet2" language="bash" @show-toast="handleShowToast" />
+          <CodeBlock :code="bashCodeSnippet2" language="bash" @show-toast="handleShowToastEvent" />
         </div>
       </section>
 
@@ -97,12 +97,12 @@
             Navigate to the <InlineCode text="jvm.options.d" /> folder and configure the
             <InlineCode text="heap size" />. Run these commands to create the file and set the memory limits:
           </p>
-          <CodeBlock :code="bashCodeSnippet3" language="bash" @show-toast="handleShowToast" />
+          <CodeBlock :code="bashCodeSnippet3" language="bash" @show-toast="handleShowToastEvent" />
         </div>
 
         <div>
           <p>Verify the file contents with:</p>
-          <CodeBlock :code="bashCodeSnippet4" language="bash" @show-toast="handleShowToast" />
+          <CodeBlock :code="bashCodeSnippet4" language="bash" @show-toast="handleShowToastEvent" />
         </div>
 
         <div>
@@ -197,7 +197,7 @@ export default {
     this.readingTime = calculateReadingTime(this.$refs);
   },
   methods: {
-    handleShowToast(data) {
+    handleShowToastEvent(data) {
       this.$emit("show-toast", data);
     },
   },
