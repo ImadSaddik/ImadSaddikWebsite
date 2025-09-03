@@ -64,6 +64,7 @@
             :sub-title="card.subTitle"
             :article-type="card.articleType"
             :article-id="card.articleId"
+            :view-count="card.viewCount"
           />
         </div>
 
@@ -238,6 +239,7 @@ export default {
         subTitle: this.convertUnixTimestampToReadableFormat(hit.creation_date),
         articleType: this.articleType,
         articleId: hit.name,
+        viewCount: hit.view_count,
       }));
     },
     convertUnixTimestampToReadableFormat(unixTimestamp) {

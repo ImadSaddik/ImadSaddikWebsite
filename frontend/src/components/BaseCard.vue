@@ -4,7 +4,7 @@
       <img :src="imageSrc" :alt="altText" />
     </div>
     <h3 class="card-title">{{ title }}</h3>
-    <p class="card-subtitle">{{ subTitle }}</p>
+    <p class="card-subtitle">{{ subTitle }} - {{ viewCount }} views</p>
   </div>
 </template>
 
@@ -35,6 +35,10 @@ export default {
     articleId: {
       type: String,
       required: true,
+    },
+    viewCount: {
+      type: Number,
+      required: false,
     },
   },
   data() {
