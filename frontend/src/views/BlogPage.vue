@@ -1,5 +1,5 @@
 <template>
-  <component v-if="blogToDisplay" :is="blogToDisplay" :key="slug" />
+  <component v-if="blogToDisplay" :is="blogToDisplay" :key="slug" @show-toast="handleShowToastEvent" />
 </template>
 
 <script>
@@ -28,6 +28,9 @@ export default {
     },
   },
   methods: {
+    handleShowToastEvent(data) {
+      this.$emit("show-toast", data);
+    },
     async incrementBlogViewCount() {
       try {
         const response = await axios.patch(`/api/articles/${this.slug}/increment-view-count`, {
