@@ -87,3 +87,34 @@ class MeilisearchService:
             facet_distribution=facet_distribution,
             processing_time_ms=results.get("processingTimeMs", 0),
         )
+
+    async def increment_view_count(self, document_name: str) -> dict:
+        try:
+            response = self.index.get_documents(
+                {"filter": f"name = '{document_name}'", "limit": 100}
+            )
+            chunks = response.results
+
+            if not chunks:
+                return {
+                    "success": False,
+                    "message": "Document not found",
+                    "view_count": 0,
+                }
+
+            new_view_count = chunks[0].view_count + 1
+            documents_to_update = [
+                {"id": chunk.id, "view_count": new_view_count} for chunk in chunks
+            ]
+
+            task = self.index.update_documents(documents_to_update)
+            self.client.wait_for_task(task.task_uid)
+
+            return {
+                "success": True,
+                "message": f"Incremented view count to {new_view_count}",
+                "view_count": new_view_count,
+            }
+
+        except Exception as e:
+            return {"success": False, "message": str(e), "view_count": 0}
