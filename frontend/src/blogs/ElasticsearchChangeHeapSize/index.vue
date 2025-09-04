@@ -4,10 +4,10 @@
     title="Change the heap size for Elasticsearch"
     sub-title="How to change the heap size for Elasticsearch to improve performance and reduce memory usage."
     creation-date="August 21, 2025"
+    article-type="blog-post"
     :article-tags="blogTags"
     :cover-image="coverImage"
     :reading-time="readingTime"
-    :related-blogs-card-data="relatedBlogsCardData"
     :slug="slug"
     :markdown-content="markdownContent"
     @show-toast="handleShowToastEvent"
@@ -133,13 +133,11 @@
 <script>
 // Text & Utils
 import * as codeSnippets from "./codeSnippets.js";
-import { calculateReadingTime } from "../utils.js";
 import markdownContent from "./content.md";
+import { calculateReadingTime } from "@/utils.js";
 
 // Images
 import coverImage from "./coverImage.svg";
-import blogcoverImage1 from "@/blogs/ElasticsearchPreFilteringWithKnnSearch/coverImage.svg";
-import blogcoverImage2 from "@/blogs/ElasticsearchCollapseSearchResults/coverImage.svg";
 
 // Components
 import CodeBlock from "@/components/CodeBlock.vue";
@@ -173,24 +171,6 @@ export default {
       coverImage,
       readingTime: 0,
       markdownContent,
-      relatedBlogsCardData: [
-        {
-          imageSrc: blogcoverImage1,
-          altText: "Cover image for the blog titled Pre-filtering with kNN search in Elasticsearch",
-          title: "Pre-filtering with kNN search in Elasticsearch",
-          subTitle: "12 August 2025",
-          articleType: "blog-post",
-          articleId: "ElasticsearchPreFilteringWithKnnSearch",
-        },
-        {
-          imageSrc: blogcoverImage2,
-          altText: "Cover image for the blog titled Collapse search results in Elasticsearch",
-          title: "Collapse search results in Elasticsearch",
-          subTitle: "20 August 2025",
-          articleType: "blog-post",
-          articleId: "ElasticsearchCollapseSearchResults",
-        },
-      ],
     };
   },
   mounted() {

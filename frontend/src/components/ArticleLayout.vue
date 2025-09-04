@@ -16,11 +16,18 @@
       <EditArticleOnGitHub :slug="slug" />
     </div>
 
-    <ArticleFooter :card-data="relatedBlogsCardData" />
+    <ArticleFooter :card-data="cardData" />
   </section>
 </template>
 
 <script>
+// Third-party libraries
+import axios from "axios";
+
+// Utils
+import { getCardsDataFromDocumentHits } from "@/utils.js";
+
+// Components
 import ArticleHeader from "@/components/ArticleHeader.vue";
 import ArticleFooter from "@/components/ArticleFooter.vue";
 import EditArticleOnGitHub from "./EditArticleOnGitHub.vue";
@@ -54,16 +61,15 @@ export default {
       type: String,
       required: true,
     },
-    relatedBlogsCardData: {
-      type: Array,
-      required: true,
-      default: () => [],
-    },
     slug: {
       type: String,
       required: true,
     },
     markdownContent: {
+      type: String,
+      required: true,
+    },
+    articleType: {
       type: String,
       required: true,
     },
@@ -73,9 +79,34 @@ export default {
     ArticleFooter,
     EditArticleOnGitHub,
   },
+  data() {
+    return {
+      cardData: [],
+    };
+  },
+  async mounted() {
+    await this.getArticleRecommendations();
+  },
   methods: {
     handleShowToastEvent(data) {
       this.$emit("show-toast", data);
+    },
+    async getArticleRecommendations() {
+      try {
+        const response = await axios.post("/api/articles/recommendations", {
+          documentNameToIgnore: this.slug,
+          articleType: this.articleType,
+        });
+
+        const recommendations = response.data;
+        const hits = recommendations?.hits || [];
+        this.cardData = getCardsDataFromDocumentHits({
+          hits,
+          articleType: this.articleType,
+        });
+      } catch (error) {
+        this.$emit("show-toast", { message: error.response.data.detail, type: "error" });
+      }
     },
   },
 };

@@ -83,6 +83,9 @@
 // Third-party libraries
 import axios from "axios";
 
+// Utils
+import { getCardsDataFromDocumentHits } from "@/utils.js";
+
 // Components
 import DropDownMenu from "@/components/DropDownMenu.vue";
 import CheckboxGroup from "@/components/CheckboxGroup.vue";
@@ -153,7 +156,6 @@ export default {
       ],
 
       cardData: [],
-      searchResponse: null,
       isSearchResponseEmpty: false,
     };
   },
@@ -176,7 +178,6 @@ export default {
   },
   async mounted() {
     await this.getCardsData();
-    this.setCardsData();
   },
   methods: {
     toggleSortingExpanded() {
@@ -212,6 +213,7 @@ export default {
         },
       };
 
+      let searchResponse = null;
       try {
         const response = await axios.post("/api/search", JSON.stringify(data), {
           headers: {
@@ -219,8 +221,12 @@ export default {
           },
           timeout: 10_000,
         });
-        this.searchResponse = response.data;
-        this.setCardsData();
+        searchResponse = response.data;
+        const hits = searchResponse?.hits || [];
+        this.cardData = getCardsDataFromDocumentHits({
+          hits,
+          articleType: this.articleType,
+        });
       } catch {
         this.$emit("show-toast", {
           message: "Failed to perform search",
@@ -228,27 +234,7 @@ export default {
         });
       }
 
-      this.isSearchResponseEmpty = !this.searchResponse || this.searchResponse.hits.length === 0;
-    },
-    setCardsData() {
-      const hits = this.searchResponse?.hits || [];
-      this.cardData = hits.map((hit) => ({
-        imageSrc: require(`@/blogs/${hit.name}/coverImage.svg`),
-        altText: `Cover image for the blog titled ${hit.title}`,
-        title: hit.title,
-        subTitle: this.convertUnixTimestampToReadableFormat(hit.creation_date),
-        articleType: this.articleType,
-        articleId: hit.name,
-        viewCount: hit.view_count,
-      }));
-    },
-    convertUnixTimestampToReadableFormat(unixTimestamp) {
-      const date = new Date(unixTimestamp * 1000);
-      return date.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      });
+      this.isSearchResponseEmpty = !searchResponse || searchResponse.hits.length === 0;
     },
   },
 };

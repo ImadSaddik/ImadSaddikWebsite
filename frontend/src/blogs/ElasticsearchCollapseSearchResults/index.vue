@@ -4,10 +4,10 @@
     title="Collapse search results in Elasticsearch"
     sub-title="How to show only the best documents for each group with collapsing."
     creation-date="August 20, 2025"
+    article-type="blog-post"
     :article-tags="blogTags"
     :cover-image="coverImage"
     :reading-time="readingTime"
-    :related-blogs-card-data="relatedBlogsCardData"
     :slug="slug"
     :markdown-content="markdownContent"
     @show-toast="handleShowToastEvent"
@@ -275,13 +275,11 @@
 <script>
 // Text & Utils
 import * as codeSnippets from "./codeSnippets.js";
-import { calculateReadingTime } from "../utils.js";
+import { calculateReadingTime } from "@/utils.js";
 import markdownContent from "./content.md";
 
 // Images
 import coverImage from "./coverImage.svg";
-import blogcoverImage1 from "@/blogs/ElasticsearchPreFilteringWithKnnSearch/coverImage.svg";
-import blogcoverImage2 from "@/blogs/ElasticsearchChangeHeapSize/coverImage.svg";
 
 // Components
 import CodeBlock from "@/components/CodeBlock.vue";
@@ -315,24 +313,6 @@ export default {
       coverImage,
       readingTime: 0,
       markdownContent,
-      relatedBlogsCardData: [
-        {
-          imageSrc: blogcoverImage1,
-          altText: "Cover image for the blog titled Pre-filtering with kNN search in Elasticsearch",
-          title: "Pre-filtering with kNN search in Elasticsearch",
-          subTitle: "12 August 2025",
-          articleType: "blog-post",
-          articleId: "ElasticsearchPreFilteringWithKnnSearch",
-        },
-        {
-          imageSrc: blogcoverImage2,
-          altText: "Cover image for the blog titled Change the heap size for Elasticsearch",
-          title: "Change the heap size for Elasticsearch",
-          subTitle: "12 August 2025",
-          articleType: "blog-post",
-          articleId: "ElasticsearchChangeHeapSize",
-        },
-      ],
     };
   },
   mounted() {
