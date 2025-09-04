@@ -124,6 +124,10 @@ export default {
   async mounted() {
     // TODO: Set the document title
     this.blogsCardData = await this.getLatestArticlesPerType("blog-post");
+
+    // TODO: Uncomment these when the articles are written
+    // this.coursesCardData = await this.getLatestArticlesPerType("course-post");
+    // this.universeImagesCardData = await this.getLatestArticlesPerType("astronomy-post");
   },
   methods: {
     async getLatestArticlesPerType(articleType) {
@@ -138,8 +142,8 @@ export default {
           hits,
           articleType,
         });
-      } catch (error) {
-        this.$emit("show-toast", { message: error.response.data.detail, type: "error" });
+      } catch {
+        this.$emit("show-toast", { message: `Failed to fetch the latest ${articleType} articles`, type: "error" });
       }
     },
   },
