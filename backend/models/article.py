@@ -5,34 +5,34 @@ from pydantic import BaseModel
 from models.document import Hit
 
 
-class UpdateViewCountResponse(BaseModel):
+class IncrementViewCountResponse(BaseModel):
     success: bool
     message: str
     view_count: int
 
 
-class RecommendationRequest(BaseModel):
+class RecommendationArticleRequest(BaseModel):
     documentNameToIgnore: str
     articleType: str
 
 
-class RecommendationHit(Hit):
+class RecommendationArticleHit(Hit):
     pass
 
 
-class RecommendationResponse(BaseModel):
-    hits: List[RecommendationHit]
+class RecommendationArticleResponse(BaseModel):
+    hits: List[RecommendationArticleHit]
     total_hits: int
 
 
-class LatestDocumentRequest(BaseModel):
+class LatestArticleRequest(BaseModel):
     articleType: str
 
 
-class LatestDocumentHit(Hit):
+class LatestArticleHit(Hit):
     pass
 
 
-class LatestDocumentResponse(BaseModel):
-    hits: List[LatestDocumentHit]
+class LatestArticleResponse(BaseModel):
+    hits: List[LatestArticleHit]
     total_hits: int

@@ -1,10 +1,10 @@
 from fastapi import APIRouter, HTTPException
 from models.article import (
-    LatestDocumentRequest,
-    LatestDocumentResponse,
-    RecommendationRequest,
-    RecommendationResponse,
-    UpdateViewCountResponse,
+    IncrementViewCountResponse,
+    LatestArticleRequest,
+    LatestArticleResponse,
+    RecommendationArticleRequest,
+    RecommendationArticleResponse,
 )
 from services.meilisearch import MeilisearchService
 
@@ -13,7 +13,7 @@ meilisearch_service = MeilisearchService()
 
 
 @router.patch(
-    "/articles/{name}/increment-view-count", response_model=UpdateViewCountResponse
+    "/articles/{name}/increment-view-count", response_model=IncrementViewCountResponse
 )
 async def increment_article_view_count(name: str):
     try:
@@ -25,7 +25,7 @@ async def increment_article_view_count(name: str):
                 detail=result["message"],
             )
 
-        return UpdateViewCountResponse(
+        return IncrementViewCountResponse(
             success=result["success"],
             message=result["message"],
             view_count=result["view_count"],
@@ -35,8 +35,8 @@ async def increment_article_view_count(name: str):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.post("/articles/recommendations", response_model=RecommendationResponse)
-async def get_article_recommendations(request: RecommendationRequest):
+@router.post("/articles/recommendations", response_model=RecommendationArticleResponse)
+async def get_article_recommendations(request: RecommendationArticleRequest):
     try:
         recommendations = await meilisearch_service.get_article_recommendations(
             document_name_to_ignore=request.documentNameToIgnore,
@@ -48,8 +48,8 @@ async def get_article_recommendations(request: RecommendationRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.post("/articles/latest", response_model=LatestDocumentResponse)
-async def get_latest_articles(request: LatestDocumentRequest):
+@router.post("/articles/latest", response_model=LatestArticleResponse)
+async def get_latest_articles(request: LatestArticleRequest):
     try:
         latest_articles = await meilisearch_service.get_latest_articles(
             document_type=request.articleType,
