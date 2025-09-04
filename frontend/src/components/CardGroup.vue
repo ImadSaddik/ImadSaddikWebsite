@@ -12,6 +12,7 @@
         :sub-title="card.subTitle"
         :article-type="card.articleType"
         :article-id="card.articleId"
+        :view-count="card.viewCount"
       />
     </div>
 

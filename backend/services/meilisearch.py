@@ -2,7 +2,12 @@ from typing import List, Optional
 
 import meilisearch
 from core.config import settings
-from models.article import RecommendationHit, RecommendationResponse
+from models.article import (
+    LatestDocumentHit,
+    LatestDocumentResponse,
+    RecommendationHit,
+    RecommendationResponse,
+)
 from models.search import FacetDistribution, SearchHit, SearchRequest, SearchResponse
 
 
@@ -145,6 +150,34 @@ class MeilisearchService:
             for hit in response.results
         ]
         return RecommendationResponse(
+            hits=hits,
+            total_hits=len(hits),
+        )
+
+    async def get_latest_articles(self, document_type: str) -> LatestDocumentResponse:
+        response = self.index.get_documents(
+            {
+                "filter": f"type = '{document_type}' AND chunk_number = 0",
+                "sort": ["creation_date:desc"],
+                "limit": 3,
+            }
+        )
+        hits = [
+            LatestDocumentHit(
+                id=hit.id,
+                chunk_number=hit.chunk_number,
+                name=hit.name,
+                title=hit.title,
+                content=hit.content,
+                type=hit.type,
+                year=hit.year,
+                tags=hit.tags,
+                creation_date=hit.creation_date,
+                view_count=hit.view_count,
+            )
+            for hit in response.results
+        ]
+        return LatestDocumentResponse(
             hits=hits,
             total_hits=len(hits),
         )

@@ -1,5 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from models.article import (
+    LatestDocumentRequest,
+    LatestDocumentResponse,
     RecommendationRequest,
     RecommendationResponse,
     UpdateViewCountResponse,
@@ -41,6 +43,18 @@ async def get_article_recommendations(request: RecommendationRequest):
             document_type=request.articleType,
         )
         return recommendations
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/articles/latest", response_model=LatestDocumentResponse)
+async def get_latest_articles(request: LatestDocumentRequest):
+    try:
+        latest_articles = await meilisearch_service.get_latest_articles(
+            document_type=request.articleType,
+        )
+        return latest_articles
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

@@ -40,6 +40,12 @@
 </template>
 
 <script>
+// Third-party libraries
+import axios from "axios";
+
+// Utils
+import { getCardsDataFromDocumentHits } from "@/utils.js";
+
 // Components
 import HeroSection from "@/components/HeroSection.vue";
 import AboutMeSection from "@/components/AboutMeSection.vue";
@@ -53,9 +59,6 @@ import horizontalSolarSystemIllustration from "@/assets/illustrations/solarSyste
 import verticalSolarSystemIllustration from "@/assets/illustrations/solarSystemVertical.svg";
 
 // Images
-import blogcoverImage1 from "@/blogs/ElasticsearchPreFilteringWithKnnSearch/coverImage.svg";
-import blogcoverImage2 from "@/blogs/ElasticsearchCollapseSearchResults/coverImage.svg";
-import blogcoverImage3 from "@/blogs/ElasticsearchChangeHeapSize/coverImage.svg";
 import coursePlaceholder1 from "@/assets/courses/placeholder_1.svg";
 import coursePlaceholder2 from "@/assets/courses/placeholder_2.svg";
 
@@ -74,6 +77,7 @@ export default {
       horizontalSolarSystemIllustration,
       verticalSolarSystemIllustration,
 
+      // TODO: Replace these with data from the API in the future
       coursesCardData: [
         {
           imageSrc: coursePlaceholder1,
@@ -94,32 +98,7 @@ export default {
           subTitle: "16 August 2001",
         },
       ],
-      blogsCardData: [
-        {
-          imageSrc: blogcoverImage1,
-          altText: "Cover image for the blog titled Pre-filtering with kNN search in Elasticsearch",
-          title: "Pre-filtering with kNN search in Elasticsearch",
-          subTitle: "12 August 2025",
-          articleType: "blog-post",
-          articleId: "ElasticsearchPreFilteringWithKnnSearch",
-        },
-        {
-          imageSrc: blogcoverImage2,
-          altText: "Cover image for the blog titled Collapse search results in Elasticsearch",
-          title: "Collapse search results in Elasticsearch",
-          subTitle: "20 August 2025",
-          articleType: "blog-post",
-          articleId: "ElasticsearchCollapseSearchResults",
-        },
-        {
-          imageSrc: blogcoverImage3,
-          altText: "Cover image for the blog titled Change the heap size for Elasticsearch",
-          title: "Change the heap size for Elasticsearch",
-          subTitle: "12 August 2025",
-          articleType: "blog-post",
-          articleId: "ElasticsearchChangeHeapSize",
-        },
-      ],
+      blogsCardData: [],
       universeImagesCardData: [
         {
           imageSrc: coursePlaceholder1,
@@ -142,7 +121,28 @@ export default {
       ],
     };
   },
-  methods: {},
+  async mounted() {
+    // TODO: Set the document title
+    this.blogsCardData = await this.getLatestArticlesPerType("blog-post");
+  },
+  methods: {
+    async getLatestArticlesPerType(articleType) {
+      try {
+        const response = await axios.post("/api/articles/latest", {
+          articleType,
+        });
+
+        const data = response.data;
+        const hits = data?.hits || [];
+        return getCardsDataFromDocumentHits({
+          hits,
+          articleType,
+        });
+      } catch (error) {
+        this.$emit("show-toast", { message: error.response.data.detail, type: "error" });
+      }
+    },
+  },
 };
 </script>
 

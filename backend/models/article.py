@@ -23,3 +23,16 @@ class RecommendationHit(Hit):
 class RecommendationResponse(BaseModel):
     hits: List[RecommendationHit]
     total_hits: int
+
+
+class LatestDocumentRequest(BaseModel):
+    articleType: str
+
+
+class LatestDocumentHit(Hit):
+    pass
+
+
+class LatestDocumentResponse(BaseModel):
+    hits: List[LatestDocumentHit]
+    total_hits: int
