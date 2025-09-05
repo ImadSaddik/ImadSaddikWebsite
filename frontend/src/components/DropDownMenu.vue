@@ -195,6 +195,7 @@ export default {
 .dropdown-label {
   font-size: var(--font-size-small);
   color: var(--color-text-primary);
+  margin-right: var(--gap-xs);
 }
 
 .dropdown-label.is-placeholder {
