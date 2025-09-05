@@ -82,7 +82,7 @@ export default {
       }
     },
     clearSelection() {
-      this.$emit("update:modelValue", null);
+      this.$emit("update:modelValue", "");
     },
     handleClickOutside(event) {
       const reference = this.$refs.dropdownReference;
