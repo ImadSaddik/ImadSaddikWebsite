@@ -22,8 +22,8 @@
     </div>
 
     <div v-if="isMenuOpen" class="collapsed-nav-bar">
-      <RouterLink v-for="item in navigationBarItems" :key="item.path" class="collapsed-nav-bar-item" :to="item.path">
-        <p>
+      <RouterLink v-for="item in navigationBarItems" :key="item.key" class="collapsed-nav-bar-item" :to="item.path">
+        <p :class="{ selected: item.key === visitedPage }">
           {{ item.name }}
         </p>
       </RouterLink>
