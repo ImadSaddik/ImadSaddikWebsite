@@ -33,7 +33,6 @@
 
 <script>
 import {
-  // HOME_PAGE_VISITED_KEY,
   BLOGS_PAGE_VISITED_KEY,
   COURSES_PAGE_VISITED_KEY,
   ASTRONOMY_PAGE_VISITED_KEY,
@@ -102,7 +101,7 @@ export default {
 }
 
 .expanded-nav-bar-item:hover {
-  color: var(--color-text-primary);
+  color: var(--color-primary);
 }
 
 .collapsed-nav-bar-item {
@@ -114,11 +113,11 @@ export default {
 }
 
 .selected {
-  color: var(--color-text-primary);
+  color: var(--color-primary);
   text-decoration: underline;
   text-decoration-thickness: 0.125rem;
   text-underline-offset: 0.625rem;
-  text-decoration-color: var(--color-text-primary);
+  text-decoration-color: var(--color-primary);
 }
 
 .nav-menu {
