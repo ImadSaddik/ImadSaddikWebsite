@@ -4,7 +4,13 @@
       <RouterLink class="nav-bar-home" to="/">Imad Saddik</RouterLink>
 
       <div>
-        <RouterLink v-for="item in navigationBarItems" :key="item.path" class="expanded-nav-bar-item" :to="item.path">
+        <RouterLink
+          v-for="item in navigationBarItems"
+          :key="item.key"
+          class="expanded-nav-bar-item"
+          :class="{ selected: item.key === visitedPage }"
+          :to="item.path"
+        >
           {{ item.name }}
         </RouterLink>
       </div>
@@ -26,18 +32,32 @@
 </template>
 
 <script>
+import {
+  // HOME_PAGE_VISITED_KEY,
+  BLOGS_PAGE_VISITED_KEY,
+  COURSES_PAGE_VISITED_KEY,
+  ASTRONOMY_PAGE_VISITED_KEY,
+  ABOUT_ME_PAGE_VISITED_KEY,
+  HIRE_ME_PAGE_VISITED_KEY,
+} from "@/constants";
+
 export default {
   name: "NavBar",
-  components: {},
+  props: {
+    visitedPage: {
+      type: String,
+      required: false,
+    },
+  },
   data() {
     return {
       isMenuOpen: false,
       navigationBarItems: [
-        { name: "Blogs", path: "/blogs" },
-        { name: "Courses", path: "/courses" },
-        { name: "Astronomy", path: "/astronomy" },
-        { name: "About me", path: "/about-me" },
-        { name: "Hire me", path: "/hire-me" },
+        { name: "Blogs", path: "/blogs", key: BLOGS_PAGE_VISITED_KEY },
+        { name: "Courses", path: "/courses", key: COURSES_PAGE_VISITED_KEY },
+        { name: "Astronomy", path: "/astronomy", key: ASTRONOMY_PAGE_VISITED_KEY },
+        { name: "About me", path: "/about-me", key: ABOUT_ME_PAGE_VISITED_KEY },
+        { name: "Hire me", path: "/hire-me", key: HIRE_ME_PAGE_VISITED_KEY },
       ],
     };
   },

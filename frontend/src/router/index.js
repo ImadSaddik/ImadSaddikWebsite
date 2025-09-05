@@ -4,6 +4,10 @@ import BlogPage from "@/views/BlogPage.vue";
 import BlogsHub from "@/views/BlogsHub.vue";
 import CoursesHub from "@/views/CoursesHub.vue";
 import AstronomyHub from "@/views/AstronomyHub.vue";
+import AboutMe from "@/views/AboutMe.vue";
+import HireMe from "@/views/HireMe.vue";
+import CoursePage from "@/views/CoursePage.vue";
+import AstronomyPage from "@/views/AstronomyPage.vue";
 
 const routes = [
   {
@@ -38,9 +42,51 @@ const routes = [
     component: CoursesHub,
   },
   {
+    path: "/courses/:slug",
+    name: "course-post",
+    component: CoursePage,
+    props: true,
+    async beforeEnter(to) {
+      try {
+        const slug = to.params.slug;
+        await import(`@/courses/${slug}`);
+        return true;
+      } catch (error) {
+        // Redirect to the courses endpoint if the slug is invalid
+        return { name: "courses" };
+      }
+    },
+  },
+  {
     path: "/astronomy",
     name: "astronomy",
     component: AstronomyHub,
+  },
+  {
+    path: "/astronomy/:slug",
+    name: "astronomy-post",
+    component: AstronomyPage,
+    props: true,
+    async beforeEnter(to) {
+      try {
+        const slug = to.params.slug;
+        await import(`@/astronomy/${slug}`);
+        return true;
+      } catch (error) {
+        // Redirect to the astronomy endpoint if the slug is invalid
+        return { name: "astronomy" };
+      }
+    },
+  },
+  {
+    path: "/about-me",
+    name: "about-me",
+    component: AboutMe,
+  },
+  {
+    path: "/hire-me",
+    name: "hire-me",
+    component: HireMe,
   },
 ];
 

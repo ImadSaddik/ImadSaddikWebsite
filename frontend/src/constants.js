@@ -1,1 +1,9 @@
 export const EFFECTS_TOGGLE_LOCAL_STORAGE_KEY = "effectsEnabled";
+
+export const HOME_PAGE_VISITED_KEY = "HOME";
+export const BLOGS_PAGE_VISITED_KEY = "BLOGS";
+export const COURSES_PAGE_VISITED_KEY = "COURSES";
+export const ASTRONOMY_PAGE_VISITED_KEY = "ASTRONOMY";
+export const ABOUT_ME_PAGE_VISITED_KEY = "ABOUT_ME";
+export const HIRE_ME_PAGE_VISITED_KEY = "HIRE_ME";
+export const OTHER_PAGES_VISITED_KEY = "OTHER";

@@ -1,6 +1,6 @@
 <template>
-  <NavBar />
-  <RouterView @show-toast="handleShowToastEvent" />
+  <NavBar :visited-page="visitedPage" />
+  <RouterView @show-toast="handleShowToastEvent" @page-visited="handlePageVisitedEvent" />
   <StarBackground v-if="effectsEnabled" />
   <MeteorShowers v-if="effectsEnabled" />
   <ScrollBackToTop />
@@ -32,6 +32,7 @@ export default {
   data() {
     return {
       effectsEnabled: true,
+      visitedPage: "",
     };
   },
   mounted() {
@@ -49,6 +50,10 @@ export default {
     },
     handleShowToastEvent(data) {
       this.$refs.toastManager.showToast(data);
+    },
+    handlePageVisitedEvent(pageKey) {
+      console.log(`Page visited: ${pageKey}`);
+      this.visitedPage = pageKey;
     },
   },
 };

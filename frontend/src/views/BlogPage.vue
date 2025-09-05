@@ -7,9 +7,12 @@
 import axios from "axios";
 import { defineAsyncComponent } from "vue";
 
+// Constants
+import { OTHER_PAGES_VISITED_KEY } from "@/constants.js";
+
 export default {
   name: "BlogPage",
-  emits: ["show-toast"],
+  emits: ["show-toast", "page-visited"],
   props: {
     slug: { type: String, required: true },
   },
@@ -26,6 +29,9 @@ export default {
         this.incrementBlogViewCount();
       },
     },
+  },
+  mounted() {
+    this.$emit("page-visited", OTHER_PAGES_VISITED_KEY);
   },
   methods: {
     handleShowToastEvent(data) {

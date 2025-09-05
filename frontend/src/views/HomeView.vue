@@ -46,6 +46,9 @@ import axios from "axios";
 // Utils
 import { getCardsDataFromDocumentHits } from "@/utils.js";
 
+// Constants
+import { HOME_PAGE_VISITED_KEY } from "@/constants.js";
+
 // Components
 import HeroSection from "@/components/HeroSection.vue";
 import AboutMeSection from "@/components/AboutMeSection.vue";
@@ -64,6 +67,7 @@ import coursePlaceholder2 from "@/assets/courses/placeholder_2.svg";
 
 export default {
   name: "HomeView",
+  emits: ["page-visited"],
   components: {
     HeroSection,
     AboutMeSection,
@@ -123,6 +127,7 @@ export default {
   },
   async mounted() {
     // TODO: Set the document title
+    this.$emit("page-visited", HOME_PAGE_VISITED_KEY);
     this.blogsCardData = await this.getLatestArticlesPerType("blog-post");
 
     // TODO: Uncomment these when the articles are written

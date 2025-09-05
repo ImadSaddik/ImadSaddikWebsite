@@ -12,9 +12,12 @@
 // Components
 import ArticlesHub from "@/components/ArticlesHub.vue";
 
+// Constants
+import { BLOGS_PAGE_VISITED_KEY } from "@/constants.js";
+
 export default {
   name: "BlogHub",
-  emits: ["show-toast"],
+  emits: ["show-toast", "page-visited"],
   components: {
     ArticlesHub,
   },
@@ -22,6 +25,9 @@ export default {
     return {
       articleType: "blog-post",
     };
+  },
+  mounted() {
+    this.$emit("page-visited", BLOGS_PAGE_VISITED_KEY);
   },
 };
 </script>
