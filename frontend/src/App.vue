@@ -52,7 +52,6 @@ export default {
       this.$refs.toastManager.showToast(data);
     },
     handlePageVisitedEvent(pageKey) {
-      console.log(`Page visited: ${pageKey}`);
       this.visitedPage = pageKey;
     },
   },
