@@ -53,7 +53,10 @@ export default {
         });
         const { success, message } = response.data;
         if (!success) {
-          throw new Error(`Failed to increment blog view count: ${message}`);
+          this.$emit("show-toast", {
+            message: `Failed to increment blog view count: ${message}`,
+            type: "error",
+          });
         }
       } catch {
         this.$emit("show-toast", {
