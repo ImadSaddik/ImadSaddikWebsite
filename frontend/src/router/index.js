@@ -4,7 +4,7 @@ import BlogPage from "@/views/BlogPage.vue";
 import BlogsHub from "@/views/BlogsHub.vue";
 import CoursesHub from "@/views/CoursesHub.vue";
 import AstronomyHub from "@/views/AstronomyHub.vue";
-import AboutMe from "@/views/AboutMe.vue";
+import AboutMeFullStory from "@/views/AboutMeFullStory.vue";
 import HireMe from "@/views/HireMe.vue";
 import CoursePage from "@/views/CoursePage.vue";
 import AstronomyPage from "@/views/AstronomyPage.vue";
@@ -81,7 +81,7 @@ const routes = [
   {
     path: "/about-me",
     name: "about-me",
-    component: AboutMe,
+    component: AboutMeFullStory,
   },
   {
     path: "/hire-me",

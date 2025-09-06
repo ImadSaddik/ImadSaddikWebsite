@@ -5,7 +5,7 @@
 import { ABOUT_ME_PAGE_VISITED_KEY } from "@/constants.js";
 
 export default {
-  name: "AboutMe",
+  name: "AboutMeFullStory",
   emits: ["page-visited"],
 
   mounted() {
