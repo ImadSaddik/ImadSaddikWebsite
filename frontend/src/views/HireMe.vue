@@ -9,6 +9,7 @@ export default {
   emits: ["page-visited"],
 
   mounted() {
+    document.title = "Hire Imad Saddik";
     this.$emit("page-visited", HIRE_ME_PAGE_VISITED_KEY);
   },
 };

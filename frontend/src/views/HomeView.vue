@@ -126,7 +126,7 @@ export default {
     };
   },
   async mounted() {
-    // TODO: Set the document title
+    document.title = "Imad Saddik";
     this.$emit("page-visited", HOME_PAGE_VISITED_KEY);
     this.blogsCardData = await this.getLatestArticlesPerType("blog-post");
 

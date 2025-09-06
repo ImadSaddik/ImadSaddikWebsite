@@ -174,6 +174,7 @@ export default {
     };
   },
   mounted() {
+    document.title = "Change the heap size for Elasticsearch";
     this.readingTime = calculateReadingTime(this.$refs);
     const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
     setTimeout(() => {

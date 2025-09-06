@@ -27,6 +27,7 @@ export default {
     };
   },
   mounted() {
+    document.title = "Astronomy with Imad Saddik";
     this.$emit("page-visited", ASTRONOMY_PAGE_VISITED_KEY);
   },
 };

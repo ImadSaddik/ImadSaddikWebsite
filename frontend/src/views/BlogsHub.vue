@@ -27,6 +27,7 @@ export default {
     };
   },
   mounted() {
+    document.title = "Blogs by Imad Saddik";
     this.$emit("page-visited", BLOGS_PAGE_VISITED_KEY);
   },
 };

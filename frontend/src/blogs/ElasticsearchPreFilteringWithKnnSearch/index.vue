@@ -247,6 +247,7 @@ export default {
     };
   },
   mounted() {
+    document.title = "Pre-filtering with kNN search in Elasticsearch";
     this.readingTime = calculateReadingTime(this.$refs);
     const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
     setTimeout(() => {

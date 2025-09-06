@@ -27,6 +27,7 @@ export default {
     };
   },
   mounted() {
+    document.title = "Courses by Imad Saddik";
     this.$emit("page-visited", COURSES_PAGE_VISITED_KEY);
   },
 };
