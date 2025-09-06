@@ -11,6 +11,12 @@ class IncrementViewCountResponse(BaseModel):
     view_count: int
 
 
+class IncrementReadCountResponse(BaseModel):
+    success: bool
+    message: str
+    read_count: int
+
+
 class RecommendationArticleRequest(BaseModel):
     documentNameToIgnore: str
     articleType: str

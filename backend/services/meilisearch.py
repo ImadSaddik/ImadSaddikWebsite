@@ -39,6 +39,7 @@ class MeilisearchService:
         field_mapping = {
             "date": f"creation_date:{sort_order}",
             "popularity": f"view_count:{sort_order}",
+            "engagement": f"read_count:{sort_order}",
         }
         default_sorting = f"creation_date:{sort_order}"
         return [field_mapping.get(sort_by, default_sorting)]
@@ -77,6 +78,7 @@ class MeilisearchService:
                 tags=hit.get("tags", []),
                 creation_date=hit.get("creation_date", ""),
                 view_count=hit.get("view_count", 0),
+                read_count=hit.get("read_count", 0),
                 ranking_score=hit.get("_rankingScore"),
             )
             for hit in results["hits"]
@@ -125,6 +127,37 @@ class MeilisearchService:
         except Exception as e:
             return {"success": False, "message": str(e), "view_count": 0}
 
+    async def increment_read_count(self, document_name: str) -> dict:
+        try:
+            response = self.index.get_documents(
+                {"filter": f"name = '{document_name}'", "limit": 100}
+            )
+            chunks = response.results
+
+            if not chunks:
+                return {
+                    "success": False,
+                    "message": "Document not found",
+                    "read_count": 0,
+                }
+
+            new_read_count = chunks[0].read_count + 1
+            documents_to_update = [
+                {"id": chunk.id, "read_count": new_read_count} for chunk in chunks
+            ]
+
+            task = self.index.update_documents(documents_to_update)
+            self.client.wait_for_task(task.task_uid)
+
+            return {
+                "success": True,
+                "message": f"Incremented read count to {new_read_count}",
+                "read_count": new_read_count,
+            }
+
+        except Exception as e:
+            return {"success": False, "message": str(e), "read_count": 0}
+
     async def get_article_recommendations(
         self, document_name_to_ignore: str, document_type: str
     ) -> RecommendationArticleResponse:
@@ -146,6 +179,7 @@ class MeilisearchService:
                 tags=hit.tags,
                 creation_date=hit.creation_date,
                 view_count=hit.view_count,
+                read_count=hit.read_count,
             )
             for hit in response.results
         ]
@@ -174,6 +208,7 @@ class MeilisearchService:
                 tags=hit.tags,
                 creation_date=hit.creation_date,
                 view_count=hit.view_count,
+                read_count=hit.read_count,
             )
             for hit in response.results
         ]

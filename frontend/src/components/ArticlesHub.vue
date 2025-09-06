@@ -65,6 +65,7 @@
             :article-type="card.articleType"
             :article-id="card.articleId"
             :view-count="card.viewCount"
+            :read-count="card.readCount"
           />
         </div>
 
@@ -139,6 +140,7 @@ export default {
       sortOptions: [
         { value: "date", label: "Date" },
         { value: "popularity", label: "Popularity" },
+        { value: "engagement", label: "Engagement" },
       ],
 
       selectedYears: [],

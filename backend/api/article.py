@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from models.article import (
+    IncrementReadCountResponse,
     IncrementViewCountResponse,
     LatestArticleRequest,
     LatestArticleResponse,
@@ -29,6 +30,29 @@ async def increment_article_view_count(name: str):
             success=result["success"],
             message=result["message"],
             view_count=result["view_count"],
+        )
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.patch(
+    "/articles/{name}/increment-read-count", response_model=IncrementReadCountResponse
+)
+async def increment_article_read_count(name: str):
+    try:
+        result = await meilisearch_service.increment_read_count(name)
+
+        if not result["success"]:
+            raise HTTPException(
+                status_code=404 if "not found" in result["message"] else 500,
+                detail=result["message"],
+            )
+
+        return IncrementReadCountResponse(
+            success=result["success"],
+            message=result["message"],
+            read_count=result["read_count"],
         )
 
     except Exception as e:

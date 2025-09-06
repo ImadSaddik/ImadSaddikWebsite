@@ -13,6 +13,7 @@
         :article-type="card.articleType"
         :article-id="card.articleId"
         :view-count="card.viewCount"
+        :read-count="card.readCount"
       />
     </div>
 

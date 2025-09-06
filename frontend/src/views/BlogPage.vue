@@ -1,5 +1,11 @@
 <template>
-  <component v-if="blogToDisplay" :is="blogToDisplay" :key="slug" @show-toast="handleShowToastEvent" />
+  <component
+    v-if="blogToDisplay"
+    :is="blogToDisplay"
+    :key="slug"
+    @show-toast="handleShowToastEvent"
+    @article-read="handleArticleReadEvent"
+  />
 </template>
 
 <script>
@@ -37,6 +43,9 @@ export default {
     handleShowToastEvent(data) {
       this.$emit("show-toast", data);
     },
+    handleArticleReadEvent() {
+      this.incrementBlogReadCount();
+    },
     async incrementBlogViewCount() {
       try {
         const response = await axios.patch(`/api/articles/${this.slug}/increment-view-count`, {
@@ -49,6 +58,22 @@ export default {
       } catch {
         this.$emit("show-toast", {
           message: "Failed to increment blog view count",
+          type: "error",
+        });
+      }
+    },
+    async incrementBlogReadCount() {
+      try {
+        const response = await axios.patch(`/api/articles/${this.slug}/increment-read-count`, {
+          timeout: 10_000,
+        });
+        const { success, message } = response.data;
+        if (!success) {
+          throw new Error(`Failed to increment blog read count: ${message}`);
+        }
+      } catch {
+        this.$emit("show-toast", {
+          message: "Failed to increment blog read count",
           type: "error",
         });
       }

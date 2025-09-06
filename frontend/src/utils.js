@@ -30,6 +30,7 @@ function getCardsDataFromDocumentHits({ hits, articleType }) {
     articleType: articleType,
     articleId: hit.name,
     viewCount: hit.view_count,
+    readCount: hit.read_count,
   }));
 }
 

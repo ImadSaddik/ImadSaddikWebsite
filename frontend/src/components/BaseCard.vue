@@ -6,6 +6,7 @@
     <h3 class="card-title">{{ title }}</h3>
     <p class="card-subtitle">
       {{ subTitle }} <span v-if="viewCount"> - {{ viewCount }} views</span>
+      <span v-if="readCount"> &amp; {{ readCount }} reads</span>
     </p>
   </div>
 </template>
@@ -39,6 +40,10 @@ export default {
       required: true,
     },
     viewCount: {
+      type: Number,
+      required: false,
+    },
+    readCount: {
       type: Number,
       required: false,
     },

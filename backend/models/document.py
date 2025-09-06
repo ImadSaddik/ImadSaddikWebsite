@@ -14,3 +14,4 @@ class Hit(BaseModel):
     tags: List[str]
     creation_date: int
     view_count: int
+    read_count: int
