@@ -156,9 +156,9 @@ export default {
 
       selectedTags: [],
       tagOptions: [
-        { value: "vue", label: "Vue.js" },
-        { value: "javascript", label: "JavaScript" },
-        { value: "css", label: "CSS" },
+        { value: "Elasticsearch", label: "Elasticsearch" },
+        { value: "KNN", label: "KNN" },
+        { value: "Semantic search", label: "Semantic search" },
       ],
 
       cardData: [],
