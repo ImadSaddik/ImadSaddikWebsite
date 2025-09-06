@@ -8,7 +8,7 @@
         :image-src="card.imageSrc"
         :alt-text="card.altText"
         :title="card.title"
-        :sub-title="card.subTitle"
+        :creation-date="card.creationDate"
         :article-type="card.articleType"
         :article-id="card.articleId"
         :view-count="card.viewCount"

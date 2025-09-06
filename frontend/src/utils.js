@@ -26,7 +26,7 @@ function getCardsDataFromDocumentHits({ hits, articleType }) {
     imageSrc: require(`@/${directoryMapping[articleType]}/${hit.name}/coverImage.svg`),
     altText: `Cover image for the ${articleType} titled ${hit.title}`,
     title: hit.title,
-    subTitle: convertUnixTimestampToReadableFormat(hit.creation_date),
+    creationDate: convertUnixTimestampToReadableFormat(hit.creation_date),
     articleType: articleType,
     articleId: hit.name,
     viewCount: hit.view_count,

@@ -4,10 +4,7 @@
       <img :src="imageSrc" :alt="altText" />
     </div>
     <h3 class="card-title">{{ title }}</h3>
-    <p class="card-subtitle">
-      {{ subTitle }} <span v-if="viewCount"> - {{ viewCount }} views</span>
-      <span v-if="readCount"> &amp; {{ readCount }} reads</span>
-    </p>
+    <p class="card-subtitle">{{ subTitle }}</p>
   </div>
 </template>
 
@@ -27,7 +24,7 @@ export default {
       type: String,
       required: true,
     },
-    subTitle: {
+    creationDate: {
       type: String,
       required: true,
     },
@@ -46,6 +43,21 @@ export default {
     readCount: {
       type: Number,
       required: false,
+    },
+  },
+  computed: {
+    subTitle() {
+      let stringBuilder = "";
+      if (this.creationDate) {
+        stringBuilder += this.creationDate;
+      }
+      if (this.viewCount) {
+        stringBuilder += ` - ${this.viewCount} views`;
+      }
+      if (this.readCount) {
+        stringBuilder += ` & ${this.readCount} reads`;
+      }
+      return stringBuilder;
     },
   },
   data() {
