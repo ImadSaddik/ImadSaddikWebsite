@@ -124,7 +124,9 @@ export default {
   },
   computed: {
     showLoadMoreButton() {
-      return !this.isSearchResponseEmpty && this.cardData.length > 0;
+      return (
+        !this.isSearchResponseEmpty && this.cardData.length > 0 && this.cardData.length < this.totalDocumentsInIndex
+      );
     },
   },
   data() {
@@ -159,6 +161,11 @@ export default {
 
       cardData: [],
       isSearchResponseEmpty: false,
+
+      // TODO: Implement pagination in the future
+      currentPage: 1,
+      cardsPerPage: 10,
+      totalDocumentsInIndex: 0,
     };
   },
   watch: {
@@ -180,6 +187,7 @@ export default {
   },
   async mounted() {
     await this.getCardsData();
+    await this.getTotalDocumentsCount();
   },
   methods: {
     toggleSortingExpanded() {
@@ -237,6 +245,27 @@ export default {
       }
 
       this.isSearchResponseEmpty = !searchResponse || searchResponse.hits.length === 0;
+    },
+    async getTotalDocumentsCount() {
+      try {
+        const response = await axios.get(`/api/articles/${this.articleType}/count-documents`, {
+          timeout: 10_000,
+        });
+        const countResponse = response.data;
+        if (countResponse.success) {
+          this.totalDocumentsInIndex = countResponse.documents_count;
+        } else {
+          this.$emit("show-toast", {
+            message: `Failed to get total documents count: ${countResponse.message}`,
+            type: "error",
+          });
+        }
+      } catch {
+        this.$emit("show-toast", {
+          message: "Failed to get total documents count",
+          type: "error",
+        });
+      }
     },
   },
 };
