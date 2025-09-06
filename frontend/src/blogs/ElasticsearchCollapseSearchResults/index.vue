@@ -291,7 +291,7 @@ import ArticleLayout from "@/components/ArticleLayout.vue";
 
 export default {
   name: "ElasticsearchCollapseSearchResults",
-  emits: ["show-toast"],
+  emits: ["show-toast", "article-read"],
   components: {
     CodeBlock,
     CodeOutput,
@@ -317,6 +317,10 @@ export default {
   },
   mounted() {
     this.readingTime = calculateReadingTime(this.$refs);
+    const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
+    setTimeout(() => {
+      this.$emit("article-read");
+    }, readTimeThresholdInMilliseconds);
   },
   methods: {
     handleShowToastEvent(data) {
