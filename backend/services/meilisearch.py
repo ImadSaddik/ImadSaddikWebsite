@@ -216,3 +216,29 @@ class MeilisearchService:
             hits=hits,
             total_hits=len(hits),
         )
+
+    async def get_documents_count(self, document_type: str) -> dict:
+        try:
+            response = self.index.get_documents(
+                {
+                    "filter": f"type = '{document_type}' AND chunk_number = 0",
+                    "limit": 1000,
+                }
+            )
+            chunks = response.results
+
+            if not chunks:
+                return {
+                    "success": False,
+                    "message": "No documents found",
+                    "documents_count": 0,
+                }
+
+            return {
+                "success": True,
+                "message": f"Found {len(chunks)} documents",
+                "documents_count": len(chunks),
+            }
+
+        except Exception as e:
+            return {"success": False, "message": str(e), "documents_count": 0}

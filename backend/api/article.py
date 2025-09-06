@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from models.article import (
+    CountDocumentsResponse,
     IncrementReadCountResponse,
     IncrementViewCountResponse,
     LatestArticleRequest,
@@ -79,6 +80,29 @@ async def get_latest_articles(request: LatestArticleRequest):
             document_type=request.articleType,
         )
         return latest_articles
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get(
+    "/articles/{article_type}/count-documents", response_model=CountDocumentsResponse
+)
+async def get_documents_count(article_type: str):
+    try:
+        result = await meilisearch_service.get_documents_count(article_type)
+
+        if not result["success"]:
+            raise HTTPException(
+                status_code=404 if "not found" in result["message"] else 500,
+                detail=result["message"],
+            )
+
+        return CountDocumentsResponse(
+            success=result["success"],
+            message=result["message"],
+            documents_count=result["documents_count"],
+        )
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
