@@ -55,6 +55,7 @@ class MeilisearchService:
             "showRankingScore": True,
             "sort": sorting_criteria,
             "facets": ["tags", "year"],
+            "limit": request.size,
         }
 
         if query_vector:

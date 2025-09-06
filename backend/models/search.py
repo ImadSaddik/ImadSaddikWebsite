@@ -20,6 +20,7 @@ class SearchRequest(BaseModel):
     articleType: str
     sortBy: Optional[SearchSortBy] = SearchSortBy()
     filters: SearchFilters = SearchFilters()
+    size: int = 10
 
 
 class SearchHit(Hit):

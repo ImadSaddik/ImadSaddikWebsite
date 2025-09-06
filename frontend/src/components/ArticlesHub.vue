@@ -74,7 +74,9 @@
           <p v-if="isSearchResponseEmpty">No results found</p>
         </div>
 
-        <button v-if="showLoadMoreButton" class="load-more-button primary-button">Load more</button>
+        <button v-if="showLoadMoreButton" class="load-more-button primary-button" @click="loadMoreArticles">
+          Load more
+        </button>
       </div>
     </div>
   </section>
@@ -162,9 +164,7 @@ export default {
       cardData: [],
       isSearchResponseEmpty: false,
 
-      // TODO: Implement pagination in the future
-      currentPage: 1,
-      cardsPerPage: 10,
+      batchSize: 10,
       totalDocumentsInIndex: 0,
     };
   },
@@ -209,6 +209,10 @@ export default {
       };
       await this.performSearchRequest(data);
     },
+    async loadMoreArticles() {
+      this.batchSize += 1;
+      await this.performSearchRequest();
+    },
     async performSearchRequest() {
       const data = {
         query: this.searchQuery,
@@ -221,6 +225,7 @@ export default {
           years: this.selectedYears,
           tags: this.selectedTags,
         },
+        size: this.batchSize,
       };
 
       let searchResponse = null;
