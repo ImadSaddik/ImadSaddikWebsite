@@ -2,7 +2,7 @@
   <section>
     <figure>
       <img :src="imageSrc" :alt="imageAlt" @click="openImageModal" />
-      <figcaption>{{ imageCaption }}</figcaption>
+      <figcaption v-html="imageCaption"></figcaption>
     </figure>
   </section>
 </template>
