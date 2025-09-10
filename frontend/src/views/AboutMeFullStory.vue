@@ -6,15 +6,124 @@
       <div>
         <p>
           I was born in <b>Meknes, Morocco, in 2001</b>. My early childhood was simple. Back then, computers and phones
-          were not common, so I spent most of my time outside, playing football and other games with my friends in the
-          streets. I was a playful kid, but I learned early on to manage my time. My mom would not let me play until my
-          homework was done, which taught me to balance my duties with my fun. This simple rule helped me a lot later in
-          life.
+          were not common, so I spent most of my time outside, playing football and other traditional Moroccan street
+          games with my friends in the streets.
+        </p>
+        <p>
+          I was a playful kid, but I learned early on to manage my time. My mom would not let me play until my homework
+          was done, so I always finished my homework quickly to go play with my friends. This taught me to balance my
+          responsibilities with my fun. This balance has stayed with me throughout my life.
         </p>
         <ImageWithCaption
           :image-src="meLookingAtSunset"
           image-alt="Me looking at the sunset"
-          image-caption="A photo of me looking at the sunset. Edited with <a href='https://blog.google/intl/en-mena/product-updates/explore-get-answers/nano-banana-image-editing-in-gemini-just-got-a-major-upgrade/' target='_blank'>Nano Banana</a> to remove other people from the scene."
+          image-caption="A photo of me looking at the sunset. Edited with <a href='https://blog.google/intl/en-mena/product-updates/explore-get-answers/nano-banana-image-editing-in-gemini-just-got-a-major-upgrade/' target='_blank'>Nano banana</a> to remove other people from the scene."
+          @open-image-modal="handleOpenImageModal"
+        />
+      </div>
+    </section>
+
+    <section>
+      <h2>My academic journey</h2>
+
+      <div>
+        <h3>Lycee Moulay Ismail</h3>
+        <p>
+          My academic journey started in <b>2016</b> when I joined <b>Lycee Moulay Ismail</b> (which means high school
+          in French). At this school, science classes were taught in French, not Arabic like before. It was hard at
+          first, but I got used to it quickly. I spent 3 years there, studying <b>Electrical Engineering</b>.
+        </p>
+        <ImageWithCaption
+          :image-src="moulayIsmailUpClose"
+          image-alt="Lycee Moulay Ismail Up Close"
+          image-caption="A photo of Lycee Moulay Ismail, the high school I attended in Meknes, Morocco."
+          @open-image-modal="handleOpenImageModal"
+        />
+        <p>
+          I really enjoyed learning about how electricity is made, how it travels to our homes and factories, and how it
+          powers everything we use. We also learned how computers work, including digital logic, microcontrollers, and
+          how to write programs in <b>assembly language</b>. We did not spend too much time on programming because the
+          focus was more on hardware and electrical systems.
+        </p>
+        <p>
+          In <b>2019</b>, I graduated from high school and wanted to study <b>Computer Science</b>, but since my
+          background was in Electrical Engineering, no school accepted me for that major. So, I chose to go to
+          <b>ESTM</b>
+          (Ecole Superieure de Technologie de Meknes), where I continued learning Electrical Engineering.
+        </p>
+      </div>
+
+      <div>
+        <h3>ESTM - Ecole Superieure de Technologie de Meknes</h3>
+        <p>
+          EST schools in Morocco focus on hands-on training to prepare students for specific jobs. The programs are
+          shorter (2 years) and more practical than regular universities. At
+          <a href="https://www.est.umi.ac.ma/" target="_blank">ESTM</a>, I learned about things like
+          <a href="https://en.wikipedia.org/wiki/Digital-to-analog_converter" target="_blank">DAC</a>/<a
+            href="https://en.wikipedia.org/wiki/Analog-to-digital_converter"
+            target="_blank"
+            >ADC</a
+          >, signal processing, induction motors,
+          <a href="https://en.wikipedia.org/wiki/Control_engineering" target="_blank">control engineering</a>, and much
+          more.
+        </p>
+        <ImageWithCaption
+          :image-src="estmUpClose"
+          image-alt="ESTM Up Close"
+          image-caption="A photo of ESTM , the school I attended for my higher education."
+          @open-image-modal="handleOpenImageModal"
+        />
+        <p>
+          During my time at ESTM, I also learned the <b>C</b> programming language. We didn't build anything big with
+          it, we just used it to solve programming challenges and practice problem-solving skills. Two years have passed
+          and I graduated in <b>2021</b> with a DUT (Diplome Universitaire de Technologie) in Electrical Engineering.
+        </p>
+        <p>
+          After that, I joined <a href="http://www.ensam-umi.ac.ma/" target="_blank">ENSAM</a> (Ecole Nationale
+          Superieure d'Arts et Metiers) in Meknes to pursue a 3-year engineering degree in Industrial Engineering, AI &
+          Data Science.
+        </p>
+      </div>
+
+      <div>
+        <h3>ENSAM - Ecole Nationale Superieure d'Arts et Metiers</h3>
+        <p>
+          After studying Electrical Engineering for 5 years, I wanted to learn something new and exciting. That's why I
+          chose to specialize in Industrial Engineering, AI & Data Science. It was a tough decision because I had to
+          deal with subjects like thermodynamics, materials science, and welding - stuff I didn't find interesting. But
+          I pushed through because I wanted to achieve my goal of becoming an engineer.
+        </p>
+        <ImageWithCaption
+          :image-src="ensamUpClose"
+          image-alt="ENSAM Up Close"
+          image-caption="A photo of ENSAM, the engineering school I attended."
+          @open-image-modal="handleOpenImageModal"
+        />
+        <p>
+          I learned two more programming languages at ENSAM: <b>Python</b> and <b>Java</b>. We started with Java in the
+          first year. I fell in love with it because I could use it to build Android apps, this was the first time I
+          used a programming language to build something useful. In the last two years, we learned Python for data
+          science and machine learning. I loved Python because it's easy to use and has lots of libraries that make
+          complex things simple.
+        </p>
+        <p>
+          In my final year before graduation, I did my internship in Strasbourg, France. This was the first time I left
+          my city after living there for 22 years. I worked at a research lab called
+          <a href="https://lineact.cesi.fr/en/" target="_blank">CESI Lineact</a>. The project was interesting because it
+          combined machine learning with electrical engineering.
+        </p>
+        <p>
+          I built a model that predicts how much energy a solar panel will produce. The model used historical data from
+          buildings in Strasbourg. It had to handle many variables like the solar panel type, size, placement, and
+          weather conditions. This work received the first best paper award at the
+          <a href="https://www.icrera.org/archieve2024/" target="_blank">ICRERA 2024 conference</a>.
+          <a href="https://ieeexplore.ieee.org/document/10815288" target="_blank">Read the paper</a> if you are
+          interested.
+        </p>
+        <ImageWithCaption
+          :image-src="bestPaperAward"
+          image-alt="Best Paper Award"
+          image-caption="The first best paper award that I received at the ICRERA 2024 conference."
           @open-image-modal="handleOpenImageModal"
         />
       </div>
@@ -237,6 +346,10 @@ import milkyWayWideFieldShot from "@/assets/milky_way_wide_field_shot.jpeg";
 import approximatingSquareWaveFunction from "@/assets/approximating_square_wave_function_with_fourier_transform.gif";
 import randomAyahGeneratorScreenshots from "@/assets/random_ayah_generator_screenshots.svg";
 import meLookingAtSunset from "@/assets/me_looking_at_sunset_ai.jpeg";
+import moulayIsmailUpClose from "@/assets/moulay_ismail_up_close.jpeg";
+import estmUpClose from "@/assets/estm_up_close.jpeg";
+import ensamUpClose from "@/assets/ensam_up_close.jpeg";
+import bestPaperAward from "@/assets/best_paper_award.jpeg";
 
 export default {
   name: "AboutMeFullStory",
@@ -260,6 +373,10 @@ export default {
       approximatingSquareWaveFunction,
       randomAyahGeneratorScreenshots,
       meLookingAtSunset,
+      moulayIsmailUpClose,
+      estmUpClose,
+      ensamUpClose,
+      bestPaperAward,
 
       enlargedImageSrc: "",
       isImageModalVisible: false,
