@@ -274,39 +274,54 @@
 
     <section>
       <h2>Linux changed my life</h2>
-      <p>
-        During the last year at the <a href="https://www.est.umi.ac.ma/" target="_blank">High School of Technology</a>,
-        I had a very slow PC that was running Windows 10. It was bad and hard to work with because it was slow and
-        overheated a lot. It was in that year that I discovered <b>Linux</b>. A YouTube video introduced me to Ubuntu,
-        and I immediately noticed how fast and light it was.
-      </p>
-
       <div>
         <p>
-          <b>Linux</b> changed my life for good. I was amazed by this ecosystem where everything is free and open, and
-          that feeling alone made me want to share my own work with the world. I even found two free and open-source
-          alternatives to <a href="https://www.mathworks.com/products/matlab.html" target="_blank">Matlab</a> called
-          <a href="https://www.scilab.org/" target="_blank">Scilab</a> and
-          <a href="https://octave.org/" target="_blank">Octave</a>, which I used to work on my school assignments.
+          During my time at ESTM, I purchased my first laptop, which ran Windows 10. The laptop was bulky, slow, and
+          overheated a lot during the summer. Although I wasn't satisfied with it, I had no other option since I needed
+          it for my studies. At that time, I had never heard of Linux.
         </p>
-        <ImageWithCaption
-          :image-src="approximatingSquareWaveFunction"
-          image-alt="Approximating Square Wave Function with Fourier Transform"
-          image-caption="A project I completed in Octave. I used Fourier Transform to approximate a square wave function."
-          @open-image-modal="handleOpenImageModal"
-        />
+        <p>
+          Toward the end of my second year at ESTM, a random video popped up in my YouTube recommendations. While I
+          can't recall the exact video, its message was something like, "If you're using Windows, you should switch to
+          Linux." I watched the video and decided to give Linux a shot. I installed
+          <a href="https://system76.com/pop/" target="_blank">Pop!_OS</a> on my laptop because the video mentioned it
+          was user-friendly and had a Windows-like feel.
+        </p>
+        <p>
+          Once I installed Pop!_OS, I was blown away by how fast and responsive my laptop became. From that point on, I
+          never looked back. These days, I primarily use
+          <a href="https://ubuntu.com/download" target="_blank">Ubuntu</a> as my operating system. I don't quite
+          remember how I transitioned to it, but I did.
+        </p>
       </div>
-    </section>
-
-    <section>
-      <h2>Sharing knowledge with others</h2>
 
       <div>
         <p>
-          My love for the open-source world, which started with Linux, made me believe that learning should be free. I
-          was very happy that I got to attend high school for free in Morocco. This feeling inspired me to start my own
-          journey of sharing knowledge. I created the <b>3CodeCamp</b> YouTube channel, where I began to share tutorials
-          on programming and <b>Linux</b>.
+          Switching to Linux completely flipped my life. Back when I was on Windows, if you couldn’t buy software, you’d
+          just
+          <a href="https://en.wikipedia.org/wiki/Software_cracking" target="_blank">crack it</a>, especially in a
+          country like Morocco. Even schools and universities were full of pirated programs, haha.
+        </p>
+        <p>
+          But with Linux, everything is free and open-source. Need a tool? Just install it, no drama. I fell in love
+          with this ecosystem where people share their work with the world, and it pushed me to start sharing my own
+          stuff too.
+        </p>
+        <p>
+          Back in school, I used to share my notes with classmates. I’ve always been a pretty organized person, so my
+          notes were clean and easy to follow. People always hit me up right before exams (classic last-minute students,
+          lol), and I was more than happy to share.
+        </p>
+        <p>
+          Before graduating from ESTM, I launched a
+          <a href="https://www.youtube.com/@e.eacademy1382/videos" target="_blank">YouTube channel</a> to teach
+          Electrical Engineering topics. I was scared I’d forget everything since I was switching majors at ENSAM. Later
+          on, I stopped posting because I wasn’t studying Electrical Engineering anymore and didn’t feel as confident
+          teaching it.
+        </p>
+        <p>
+          At ENSAM, I did the same thing but switched focus to programming and Linux. And that’s still what I
+          <a href="https://www.youtube.com/@3CodeCampers" target="_blank">create content</a> about today.
         </p>
         <ImageWithCaption
           :image-src="myYouTubeChannel"
@@ -314,13 +329,24 @@
           image-caption="A screenshot of my YouTube channel, 3CodeCamp."
           @open-image-modal="handleOpenImageModal"
         />
-      </div>
-
-      <div>
         <p>
-          I also found a lot of inspiration from <b>freeCodeCamp</b>, a channel I used to learn a ton of new concepts
-          myself. I decided to collaborate with them and have created courses on topics like <b>Elasticsearch</b>, how
-          to train <b>LLMs from scratch</b>, and the evolution of the <b>Transformer architecture</b>.
+          I also found a ton of inspiration from <b>freeCodeCamp</b>, a channel where I learned so many new concepts
+          myself. Later, I got the chance to collaborate with them and created courses on topics like
+          <a
+            href="https://www.youtube.com/watch?v=a4HBKEda_F8&list=PLMSb3cZXtIfoj0guEc9UV_oSEQmA4_hvs&index=2"
+            target="_blank"
+            >Elasticsearch</a
+          >,
+          <a
+            href="https://www.youtube.com/watch?v=9Ge0sMm65jo&list=PLMSb3cZXtIfoj0guEc9UV_oSEQmA4_hvs&index=3&t=105s"
+            target="_blank"
+            >how to train LLMs from scratch</a
+          >, and
+          <a
+            href="https://www.youtube.com/watch?v=8WBS0dT0h2I&list=PLMSb3cZXtIfoj0guEc9UV_oSEQmA4_hvs&index=4&t=1185s"
+            target="_blank"
+            >the evolution of the Transformer architecture</a
+          >.
         </p>
         <ImageWithCaption
           :image-src="freeCodeCampContributions"
@@ -328,55 +354,83 @@
           image-caption="Few courses I created for freeCodeCamp."
           @open-image-modal="handleOpenImageModal"
         />
+        <p>Thank you, <b>Linux</b>!</p>
       </div>
-
-      <p>
-        During my studies, I also discovered <b>Python</b>, and it's a language that I use for everything now. I've used
-        it to build many projects, and I love giving back to the community by contributing to open-source projects on
-        <b>GitHub</b>.
-      </p>
     </section>
 
     <section>
-      <h2>My passion for the cosmos</h2>
+      <h2>I love the universe!</h2>
 
       <div>
         <p>
-          My life is not just about programming and engineering. The last thing I love doing is astronomy. I remember
-          one day, while waiting at a grocery store, I looked up and saw a bright dot in the sky. I was confused because
-          the sun's light was still there. When I got home, I searched for what it was and discovered it was not a star,
-          but Venus, the evening star. From that moment, I was hooked.
+          My life isn’t only about programming and engineering, I also love <b>astronomy</b>. It’s not a very common
+          hobby here in Morocco, and honestly, I stumbled into it by pure chance.
+        </p>
+        <p>
+          I remember one day, while waiting at a grocery store, I looked up and saw a bright dot in the sky. I was
+          confused because the sun's light was still there. When I got home, I searched for what it was and discovered
+          it was not a star, but <a href="https://en.wikipedia.org/wiki/Venus" target="_blank">Venus</a>, the evening
+          star.
         </p>
         <ImageWithCaption
           :image-src="venusDuringSunset"
           image-alt="Venus During Sunset"
-          image-caption="Venus shining during sunset <i>(dot added manually)</i>."
+          image-caption="Venus shining during sunset at Meknes, Morocco <i>(dot added manually)</i>."
           @open-image-modal="handleOpenImageModal"
         />
       </div>
 
       <div>
         <p>
-          Because of the pandemic, I spent a lot of time at home and used that time to learn about constellations, star
-          names, and even astrophysics on my own. It was a new world for me.
+          That little moment kicked off my curiosity. I started researching more and more, and every day I learned
+          something new that made me fall deeper in love with the universe. This all happened during the start of the
+          pandemic, which for me was a blessing in disguise. I spent countless nights staring at the stars, just
+          thinking about how massive the universe is.
         </p>
-      </div>
-
-      <div>
         <p>
-          I was so passionate that during my internship in France, I bought my first telescope. It was a breathtaking
-          experience to finally see Jupiter, Saturn and their moons up close.
+          I learned to recognize
+          <a href="https://en.wikipedia.org/wiki/Constellation" target="_blank">constellations</a>, planets, and bright
+          stars. While memorizing star names, I discovered that many of them have
+          <a href="https://en.wikipedia.org/wiki/List_of_Arabic_star_names" target="_blank">Arabic origins</a>. That
+          made me proud, because as an Arab, I realized how much my ancestors
+          <a href="https://en.wikipedia.org/wiki/Astronomy_in_the_medieval_Islamic_world" target="_blank">
+            contributed to astronomy</a
+          >.
+        </p>
+        <p>
+          Eventually, I bought a pair of binoculars so I could see things more closely. Through them, I spotted some of
+          <a href="https://en.wikipedia.org/wiki/Moons_of_Jupiter" target="_blank">Jupiter’s moons</a>,
+          <a href="https://en.wikipedia.org/wiki/Open_cluster" target="_blank">open clusters</a>, and even the
+          <a href="https://en.wikipedia.org/wiki/Andromeda_Galaxy" target="_blank">Andromeda galaxy</a>. Later, during
+          my end-of-studies internship in France, I finally got the chance to buy my first telescope.
+        </p>
+        <p>
+          Owning a telescope was always a dream of mine, and I finally made it happen. I got a
+          <a
+            href="https://www.astroshop.eu/telescopes/skywatcher-dobson-telescope-n-130-650-heritage-flextube-dob/p,14966"
+            target="_blank"
+            >130/650 Dobsonian telescope</a
+          >
+          (130 mm aperture, 650 mm focal length). It’s simple to use and shows amazing views of the night sky. With it,
+          I’ve seen Jupiter’s bands, Saturn’s rings, and the craters of the Moon. Honestly, it was a magical experience
+          I’ll never forget.
         </p>
         <ImageWithCaption
           :image-src="telescopeAndJupiterSaturnMoon"
           image-alt="Telescope and Jupiter, Saturn, and Moon"
-          image-caption="My telescope and a photo I took of Jupiter, Saturn, and the Moon."
+          image-caption="My telescope alongside a photo I took of Jupiter, Saturn, and the Moon. The camera doesn’t capture their true beauty, they look much more stunning to the naked eye."
           @open-image-modal="handleOpenImageModal"
         />
       </div>
 
       <div>
-        <p>Now, with a camera, I also do astrophotography, capturing the Milky Way and other celestial objects.</p>
+        <p>
+          I also got into <a href="https://en.wikipedia.org/wiki/Astrophotography" target="_blank">astrophotography</a>.
+          At first, I was using just my phone, but later I bought a second-hand
+          <a href="https://en.wikipedia.org/wiki/Canon_EOS_1300D" target="_blank">Canon 1300D</a> to take things
+          further. Here’s one of my favorite shots of the Milky Way I captured with it in a
+          <a href="https://en.wikipedia.org/wiki/Bortle_scale" target="_blank">bortle</a> class 3 area.
+        </p>
         <ImageWithCaption
           :image-src="milkyWayWideFieldShot"
           image-alt="Milky Way Wide Field Shot"
@@ -397,6 +451,19 @@
         <a href="https://github.com/ImadSaddik" target="_blank">contribute to the open-source community</a>. This mix of
         work and hobbies keeps my days interesting and helps me learn something new every day.
       </p>
+      <p>
+        If you’d like to connect, you can find me on
+        <a href="https://github.com/ImadSaddik" target="_blank">GitHub</a>,
+        <a href="https://www.linkedin.com/in/imadsaddik/" target="_blank">LinkedIn</a>, or send me an
+        <a href="mailto:simad3647@gmail.com">email</a>. I like meeting new people, don't hesitate to reach out!
+      </p>
+
+      <ImageWithCaption
+        :image-src="sombreroGalaxy"
+        image-alt="Sombrero Galaxy"
+        image-caption="My favorite galaxy, the <a href='https://en.wikipedia.org/wiki/Sombrero_Galaxy' target='_blank'>Sombrero galaxy</a>."
+        @open-image-modal="handleOpenImageModal"
+      />
     </section>
   </div>
 
@@ -422,13 +489,13 @@ import freeCodeCampContributions from "@/assets/free_code_camp_contributions.svg
 import venusDuringSunset from "@/assets/venus_shining_during_sunset.svg";
 import telescopeAndJupiterSaturnMoon from "@/assets/telescope_and_jupiter_saturn_moon.jpeg";
 import milkyWayWideFieldShot from "@/assets/milky_way_wide_field_shot.jpeg";
-import approximatingSquareWaveFunction from "@/assets/approximating_square_wave_function_with_fourier_transform.gif";
 import randomAyahGeneratorScreenshots from "@/assets/random_ayah_generator_screenshots.svg";
 import meLookingAtSunset from "@/assets/me_looking_at_sunset_ai.jpeg";
 import moulayIsmailUpClose from "@/assets/moulay_ismail_up_close.jpeg";
 import estmUpClose from "@/assets/estm_up_close.jpeg";
 import ensamUpClose from "@/assets/ensam_up_close.jpeg";
 import bestPaperAward from "@/assets/best_paper_award.jpeg";
+import sombreroGalaxy from "@/assets/sombrero_galaxy.jpeg";
 
 export default {
   name: "AboutMeFullStory",
@@ -449,13 +516,13 @@ export default {
       venusDuringSunset,
       telescopeAndJupiterSaturnMoon,
       milkyWayWideFieldShot,
-      approximatingSquareWaveFunction,
       randomAyahGeneratorScreenshots,
       meLookingAtSunset,
       moulayIsmailUpClose,
       estmUpClose,
       ensamUpClose,
       bestPaperAward,
+      sombreroGalaxy,
 
       enlargedImageSrc: "",
       isImageModalVisible: false,
