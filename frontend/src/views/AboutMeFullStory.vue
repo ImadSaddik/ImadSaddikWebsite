@@ -133,29 +133,50 @@
       <h2>How I became a programmer</h2>
 
       <div>
+        <h3>Assembly language</h3>
         <p>
-          After my simple childhood, I began studying Electrical Engineering. It was there that I had my first contact
-          with programming. We learned to program microcontrollers using <b>assembly language</b>. It was tough, but I
-          was hooked. I loved the idea of writing a set of instructions that could control a machine. It felt like I was
-          learning how to think in a completely new way.
+          I got my first taste of programming at Lycee Moulay Ismail, where we used
+          <a href="https://www.microchip.com/en-us/product/PIC16F877" target="_blank">PIC16F877</a> microcontrollers.
+          Later, at ESTM, we worked with
+          <a href="https://en.wikipedia.org/wiki/Motorola_68HC11" target="_blank">Motorola 68HC11</a> microcontrollers
+          and programmed them in <b>assembly language</b>. Starting with assembly was tough, but it taught me how simple
+          instructions can work together to build complex systems.
         </p>
         <p>
-          Here is a sample program written in <b>Motorola 68HC11 Assembly Language</b>. Back in the lab, we used to work
-          on code like this all the time. Looking at it now, I honestly can’t make sense of it anymore! I had to ask an
-          LLM to figure out that this program counts the number of positive, negative, and zero values in a block of
-          memory.
+          Here is a program written in <b>Motorola 68HC11 assembly language</b> that I found on my hard drive. Back in
+          the lab, we used to work on code like this all the time. Looking at it now, I honestly can’t make sense of it
+          anymore! I had to ask an LLM to figure out that this program counts the number of positive, negative, and zero
+          values in a block of memory.
         </p>
         <CodeBlock :code="assemblyCodeSnippet" language="asm" @show-toast="handleShowToastEvent" />
       </div>
 
-      <p>
-        Later, I moved on to programming in <b>C</b>, where I focused on solving problems. But it was not until I
-        discovered <b>Java</b> that I truly fell in love with programming. With Java, I was finally able to build useful
-        things, like my first Android apps. Here are some of the apps I built.
-      </p>
+      <div>
+        <h3>The C programming language</h3>
+        <p>
+          When I studied at ESTM, I spent two years programming in <b>C</b>. I focused on solving difficult problems,
+          and I found it easier to write code in <b>C</b> than in assembly. Even though I learned a lot, I didn't build
+          any projects with <b>C</b>. We only used it for practice. Because of this, programming in <b>C</b> felt less
+          rewarding to me compared to my earlier experience of seeing a microcontroller do what I told it to do.
+        </p>
+      </div>
 
       <div>
-        <h3>Random ayah generator</h3>
+        <h3>Java</h3>
+        <p>
+          Everything changed when I started at ENSAM. In my first year, we learned <b>Java</b> and studied
+          <a href="https://en.wikipedia.org/wiki/Object-oriented_programming" target="_blank">OOP</a> (Object Oriented
+          Programming) concepts while solving problems. I looked up YouTube tutorials to see what I could create with
+          Java and discovered I could build Android apps, thanks to this
+          <a
+            href="https://www.youtube.com/watch?v=fis26HvvDII&list=PL22-qG2MGGhAqt-zr2_8nPX0rM-Ej1D2X&index=2"
+            target="_blank"
+            >course on freeCodeCamp</a
+          >. I really enjoyed working with Java because I could finally make useful things. Here are some apps I built
+          for myself.
+        </p>
+
+        <h4>Random ayah generator</h4>
         <p>
           I use this app every day before I go to pray. For each prayer, you need to read a pair of verses (ayahs) from
           the Quran, and this app helps me quickly find two random ayahs. Discovering new ayahs keeps things fresh and
@@ -172,7 +193,7 @@
       </div>
 
       <div>
-        <h3>DoCamp - RAG on mobile</h3>
+        <h4>DoCamp - RAG on mobile</h4>
         <p>
           I created this app to participate in the
           <a href="https://ai.google.dev/competition" target="_blank">Gemini API developer competition</a>. The name
@@ -189,6 +210,64 @@
           that can be run locally on the phone, which is amazing. I will probably update the app to use these models in
           the future. In any case, you can find the app in this
           <a href="https://github.com/ImadSaddik/DoCamp" target="_blank">GitHub repository</a>.
+        </p>
+      </div>
+
+      <div>
+        <h3>Python</h3>
+        <p>
+          I started learning Python during my last two years at ENSAM while studying data science and machine learning.
+          Python is perfect for these subjects, and it was easy for me to pick up since I already knew other programming
+          languages.
+        </p>
+        <p>
+          Python is simple to read and write, and it has lots of helpful libraries. You can build almost anything with
+          it. I really enjoyed our school projects because, for the first time, we learned by working on real projects.
+        </p>
+      </div>
+
+      <div>
+        <h3>Web development</h3>
+        <p>
+          I first got into web development during my time at ENSAM while working on machine learning projects. Back
+          then, I needed a way to showcase my models. Initially, I used
+          <a href="https://streamlit.io/" target="_blank">Streamlit</a>, but a friend encouraged me to learn web
+          development instead. He explained that it would give me more control over the interface and allow for greater
+          customization.
+        </p>
+        <p>
+          I took his advice and began learning web development from the ground up, without relying on any framework at
+          first. I started by mastering the fundamentals of HTML, CSS, and JavaScript. With that knowledge, I built a
+          website for each machine learning project I worked on during my studies.
+        </p>
+        <p>
+          As for web frameworks, at first I didn’t really understand why they were needed. The same friend suggested I
+          try
+          <a href="https://react.dev/" target="_blank">React</a>, so I gave it a shot. I followed a few YouTube courses
+          and experimented with it in my projects. However, I found React confusing at the time and decided to go back
+          to using plain JavaScript.
+        </p>
+        <p>
+          A few months later, during my internship, I was given a project to build a web app, this time using
+          <a href="https://vuejs.org/" target="_blank">Vue.js</a>. To learn it, I followed this
+          <a
+            href="https://www.youtube.com/watch?v=Yg5zkd9nm6w&list=PL22-qG2MGGhAqt-zr2_8nPX0rM-Ej1D2X&index=11&t=1767s"
+            target="_blank"
+            >freeCodeCamp course</a
+          >
+          that also showed how to connect Vue with Python on the backend. Oh boy, I loved it! Vue.js made building web
+          apps so much easier and a lot more fun.
+        </p>
+        <p>
+          Now, with a few years of experience, I finally understand why I did not enjoy React. It was the JSX. I like
+          keeping HTML, CSS, and JavaScript separate, and that is exactly what Vue gives you: template, script, and
+          style in one file. It honestly felt like it was made for me. And by the way, I prefer the
+          <a href="https://guide.vueframework.com/api/options-api.html" target="_blank">Options API</a>.
+        </p>
+        <p>
+          Another thing I really like about Vue is how simple state management is. You can get a lot done with just a
+          few lines of code. In React, on the other hand, you often end up writing tons of boilerplate just to manage
+          state, and that quickly becomes a pain as the app grows bigger.
         </p>
       </div>
     </section>
@@ -451,6 +530,11 @@ h2 {
 h3 {
   margin: var(--gap-sm) 0;
   font-size: var(--font-size-medium);
+}
+
+h4 {
+  margin: var(--gap-sm) 0;
+  font-size: var(--font-size-small);
 }
 
 img {
