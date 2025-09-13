@@ -5,9 +5,10 @@
 
       <div>
         <p>
-          I was born in <b>Meknes, Morocco, in 2001</b>. My early childhood was simple. Back then, computers and phones
-          were not common, so I spent most of my time outside, playing football and other traditional Moroccan street
-          games with my friends in the streets.
+          I was born in
+          <b><a href="https://en.wikipedia.org/wiki/Meknes" target="_blank">Meknes</a>, Morocco, in 2001</b>. My early
+          childhood was simple. Back then, computers and phones were not common, so I spent most of my time outside,
+          playing football and other traditional Moroccan street games with my friends in the streets.
         </p>
         <p>
           I was a playful kid, but I learned early on to manage my time. My mom would not let me play until my homework
@@ -29,9 +30,10 @@
       <div>
         <h3>Lycee Moulay Ismail</h3>
         <p>
-          My academic journey started in <b>2016</b> when I joined <b>Lycee Moulay Ismail</b> (which means high school
-          in French). At this school, science classes were taught in French, not Arabic like before. It was hard at
-          first, but I got used to it quickly. I spent 3 years there, studying <b>Electrical Engineering</b>.
+          My academic journey started in <b>2016</b> when I joined <b>Lycee (high school in French) Moulay Ismail</b>.
+          At this school, science classes were taught in French, not Arabic like before. It was hard at first, but I got
+          used to it quickly. I spent 3 years there, studying
+          <a href="https://en.wikipedia.org/wiki/Electrical_engineering" target="_blank">Electrical Engineering</a>.
         </p>
         <ImageWithCaption
           :image-src="moulayIsmailUpClose"
@@ -40,13 +42,17 @@
           @open-image-modal="handleOpenImageModal"
         />
         <p>
-          I really enjoyed learning about how electricity is made, how it travels to our homes and factories, and how it
-          powers everything we use. We also learned how computers work, including digital logic, microcontrollers, and
-          how to write programs in <b>assembly language</b>. We did not spend too much time on programming because the
-          focus was more on hardware and electrical systems.
+          I really enjoyed learning about
+          <a href="https://en.wikipedia.org/wiki/Electricity_generation" target="_blank">how electricity is made</a>,
+          <a href="https://en.wikipedia.org/wiki/Electric_power_transmission" target="_blank">how it travels</a> to our
+          homes and factories, and how it powers everything we use. We also learned how computers work, including
+          digital logic, microcontrollers, and how to write programs in
+          <a href="https://en.wikipedia.org/wiki/Assembly_language" target="_blank">assembly language</a>. We did not
+          spend too much time on programming because the focus was more on hardware and electrical systems.
         </p>
         <p>
-          In <b>2019</b>, I graduated from high school and wanted to study <b>Computer Science</b>, but since my
+          In <b>2019</b>, I graduated from high school and wanted to study
+          <a href="https://en.wikipedia.org/wiki/Computer_science" target="_blank">Computer Science</a>, but since my
           background was in Electrical Engineering, no school accepted me for that major. So, I chose to go to
           <b>ESTM</b>
           (Ecole Superieure de Technologie de Meknes), where I continued learning Electrical Engineering.
@@ -63,7 +69,8 @@
             href="https://en.wikipedia.org/wiki/Analog-to-digital_converter"
             target="_blank"
             >ADC</a
-          >, signal processing, induction motors,
+          >, <a href="https://en.wikipedia.org/wiki/Signal_processing" target="_blank">signal processing</a>,
+          <a href="https://en.wikipedia.org/wiki/Induction_motor" target="_blank">induction motors</a>,
           <a href="https://en.wikipedia.org/wiki/Control_engineering" target="_blank">control engineering</a>, and much
           more.
         </p>
@@ -74,14 +81,18 @@
           @open-image-modal="handleOpenImageModal"
         />
         <p>
-          During my time at ESTM, I also learned the <b>C</b> programming language. We didn't build anything big with
-          it, we just used it to solve programming challenges and practice problem-solving skills. Two years have passed
-          and I graduated in <b>2021</b> with a DUT (Diplome Universitaire de Technologie) in Electrical Engineering.
+          During my time at ESTM, I also learned the
+          <a href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank">C programming language</a>.
+          We didn't build anything big with it, we just used it to solve programming challenges and practice
+          problem-solving skills. Two years have passed and I graduated in <b>2021</b> with a DUT (Diplome Universitaire
+          de Technologie) in Electrical Engineering.
         </p>
         <p>
           After that, I joined <a href="http://www.ensam-umi.ac.ma/" target="_blank">ENSAM</a> (Ecole Nationale
-          Superieure d'Arts et Metiers) in Meknes to pursue a 3-year engineering degree in Industrial Engineering, AI &
-          Data Science.
+          Superieure d'Arts et Metiers) in Meknes to pursue a 3-year engineering degree in
+          <a href="https://en.wikipedia.org/wiki/Industrial_engineering" target="_blank">Industrial Engineering</a>,
+          <a href="https://en.wikipedia.org/wiki/Artificial_intelligence" target="_blank">AI</a>
+          & <a href="https://en.wikipedia.org/wiki/Data_science" target="_blank">Data Science</a>.
         </p>
       </div>
 
@@ -90,8 +101,12 @@
         <p>
           After studying Electrical Engineering for 5 years, I wanted to learn something new and exciting. That's why I
           chose to specialize in Industrial Engineering, AI & Data Science. It was a tough decision because I had to
-          deal with subjects like thermodynamics, materials science, and welding - stuff I didn't find interesting. But
-          I pushed through because I wanted to achieve my goal of becoming an engineer.
+          deal with subjects like
+          <a href="https://en.wikipedia.org/wiki/Thermodynamics" target="_blank">thermodynamics</a>,
+          <a href="https://en.wikipedia.org/wiki/Materials_science" target="_blank">materials science</a>, and
+          <a href="https://en.wikipedia.org/wiki/Welding" target="_blank">welding</a> - stuff I didn't find interesting.
+          But I pushed through because I wanted to achieve my goal of becoming an
+          <a href="https://en.wikipedia.org/wiki/Engineer" target="_blank">engineer</a>.
         </p>
         <ImageWithCaption
           :image-src="ensamUpClose"
@@ -100,22 +115,26 @@
           @open-image-modal="handleOpenImageModal"
         />
         <p>
-          I learned two more programming languages at ENSAM: <b>Python</b> and <b>Java</b>. We started with Java in the
-          first year. I fell in love with it because I could use it to build Android apps, this was the first time I
-          used a programming language to build something useful. In the last two years, we learned Python for data
-          science and machine learning. I loved Python because it's easy to use and has lots of libraries that make
-          complex things simple.
+          I learned two more programming languages at ENSAM:
+          <a href="https://en.wikipedia.org/wiki/Python_(programming_language)" target="_blank">Python</a> and
+          <a href="https://en.wikipedia.org/wiki/Java_(programming_language)" target="_blank">Java</a>. We started with
+          Java in the first year. I fell in love with it because I could use it to build Android apps, this was the
+          first time I used a programming language to build something useful. In the last two years, we learned Python
+          for data science and machine learning. I loved Python because it's easy to use and has lots of libraries that
+          make complex things simple.
         </p>
         <p>
-          In my final year before graduation, I did my internship in Strasbourg, France. This was the first time I left
-          my city after living there for 22 years. I worked at a research lab called
+          In my final year before graduation, I did my internship in
+          <a href="https://en.wikipedia.org/wiki/Strasbourg" target="_blank">Strasbourg</a>, France. This was the first
+          time I left my city after living there for 22 years. I worked at a research lab called
           <a href="https://lineact.cesi.fr/en/" target="_blank">CESI Lineact</a>. The project was interesting because it
-          combined machine learning with electrical engineering.
+          combined <a href="https://en.wikipedia.org/wiki/Machine_learning" target="_blank">machine learning</a> with
+          electrical engineering.
         </p>
         <p>
           I built a model that predicts how much energy a solar panel will produce. The model used historical data from
           buildings in Strasbourg. It had to handle many variables like the solar panel type, size, placement, and
-          weather conditions. This work received the first best paper award at the
+          weather conditions. This work received the <b>first best paper award</b> at the
           <a href="https://www.icrera.org/archieve2024/" target="_blank">ICRERA 2024 conference</a>.
           <a href="https://ieeexplore.ieee.org/document/10815288" target="_blank">Read the paper</a> if you are
           interested.
@@ -127,6 +146,10 @@
           @open-image-modal="handleOpenImageModal"
         />
       </div>
+      <p>
+        And that marked the end of my academic journey. From high school to earning an engineering degree, it was a
+        challenging yet rewarding experience that shaped who I am today.
+      </p>
     </section>
 
     <section>
@@ -165,9 +188,11 @@
         <h3>Java</h3>
         <p>
           Everything changed when I started at ENSAM. In my first year, we learned <b>Java</b> and studied
-          <a href="https://en.wikipedia.org/wiki/Object-oriented_programming" target="_blank">OOP</a> (Object Oriented
-          Programming) concepts while solving problems. I looked up YouTube tutorials to see what I could create with
-          Java and discovered I could build Android apps, thanks to this
+          <a href="https://en.wikipedia.org/wiki/Object-oriented_programming" target="_blank"
+            >OOP (Object Oriented Programming)</a
+          >
+          concepts while solving problems. I looked up YouTube tutorials to see what I could create with Java and
+          discovered I could build Android apps, thanks to this
           <a
             href="https://www.youtube.com/watch?v=fis26HvvDII&list=PL22-qG2MGGhAqt-zr2_8nPX0rM-Ej1D2X&index=2"
             target="_blank"
@@ -178,9 +203,11 @@
 
         <h4>Random ayah generator</h4>
         <p>
-          I use this app every day before I go to pray. For each prayer, you need to read a pair of verses (ayahs) from
-          the Quran, and this app helps me quickly find two random ayahs. Discovering new ayahs keeps things fresh and
-          encourages me to explore different parts of the Quran more.
+          I use this app every day before I go to
+          <a href="https://en.wikipedia.org/wiki/Salah" target="_blank">pray</a>. For each prayer, you need to read a
+          pair of verses (ayahs) from the <a href="https://en.wikipedia.org/wiki/Quran" target="_blank">Quran</a>, and
+          this app helps me quickly find two random ayahs. Discovering new ayahs keeps things fresh and encourages me to
+          explore different parts of the Quran more.
           <a href="https://github.com/ImadSaddik/RandomAyahGenerator" target="_blank">Download it from GitHub</a> if you
           are interested.
         </p>
@@ -198,13 +225,21 @@
           I created this app to participate in the
           <a href="https://ai.google.dev/competition" target="_blank">Gemini API developer competition</a>. The name
           <b>DoCamp</b> is a combination of the words <b>Doc</b> and <b>Camp</b>. I used it to chat with my personal
-          documents on my phone. I was motivated to build this app because I did not see anyone bring RAG
-          (Retrieval-Augmented Generation) to mobile, and I wanted to be the first to do it. The app is no longer
-          maintained because the Gemini API changed multiple times and I did not have the time to keep up with it.
+          documents on my phone.
         </p>
         <p>
-          The app uses Gemini as the LLM and an embedding from Google, both of them are accessed through the API. Now,
-          we have open source models like
+          I was motivated to build this app because I did not see anyone bring
+          <a href="https://www.ibm.com/think/topics/retrieval-augmented-generation" target="_blank"
+            >RAG (Retrieval-Augmented Generation)</a
+          >
+          to mobile, and I wanted to be the first to do it. The app is no longer maintained because the
+          <a href="https://ai.google.dev/gemini-api/docs" target="_blank">Gemini API</a>
+          changed multiple times and I did not have the time to keep up with it.
+        </p>
+        <p>
+          The app uses <a href="https://gemini.google.com/app" target="_blank">Gemini</a> as the LLM and an
+          <a href="https://aws.amazon.com/what-is/embeddings-in-machine-learning/">embedding model</a>
+          from Google, both of them are accessed through the API. Now, we have open source models like
           <a href="https://ai.google.dev/gemma/docs/gemma-3n" target="_blank">Gemma3</a> and
           <a href="https://developers.googleblog.com/en/introducing-embeddinggemma/" target="_blank">EmbeddingGemma</a>
           that can be run locally on the phone, which is amazing. I will probably update the app to use these models in
@@ -221,24 +256,29 @@
           languages.
         </p>
         <p>
-          Python is simple to read and write, and it has lots of helpful libraries. You can build almost anything with
-          it. I really enjoyed our school projects because, for the first time, we learned by working on real projects.
+          Python is simple to read and write, and it has lots of
+          <a href="https://pypi.org/" target="_blank">helpful libraries</a>. You can build almost anything with it. I
+          really enjoyed our school projects because, for the first time, we learned by working on real projects.
         </p>
       </div>
 
       <div>
         <h3>Web development</h3>
         <p>
-          I first got into web development during my time at ENSAM while working on machine learning projects. Back
-          then, I needed a way to showcase my models. Initially, I used
-          <a href="https://streamlit.io/" target="_blank">Streamlit</a>, but a friend encouraged me to learn web
+          I first got into
+          <a href="https://en.wikipedia.org/wiki/Web_development" target="_blank">web development</a> during my time at
+          ENSAM while working on machine learning projects. Back then, I needed a way to showcase my models. Initially,
+          I used <a href="https://streamlit.io/" target="_blank">Streamlit</a>, but a friend encouraged me to learn web
           development instead. He explained that it would give me more control over the interface and allow for greater
           customization.
         </p>
         <p>
           I took his advice and began learning web development from the ground up, without relying on any framework at
-          first. I started by mastering the fundamentals of HTML, CSS, and JavaScript. With that knowledge, I built a
-          website for each machine learning project I worked on during my studies.
+          first. I started by mastering the fundamentals of
+          <a href="https://en.wikipedia.org/wiki/HTML" target="_blank">HTML</a>,
+          <a href="https://en.wikipedia.org/wiki/CSS" target="_blank">CSS</a>, and
+          <a href="https://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>. With that knowledge, I
+          built a website for each machine learning project I worked on during my studies.
         </p>
         <p>
           As for web frameworks, at first I didn’t really understand why they were needed. The same friend suggested I
@@ -259,15 +299,18 @@
           apps so much easier and a lot more fun.
         </p>
         <p>
-          Now, with a few years of experience, I finally understand why I did not enjoy React. It was the JSX. I like
-          keeping HTML, CSS, and JavaScript separate, and that is exactly what Vue gives you: template, script, and
-          style in one file. It honestly felt like it was made for me. And by the way, I prefer the
+          Now, with a few years of experience, I finally understand why I did not enjoy React. It was the
+          <a href="https://legacy.reactjs.org/docs/introducing-jsx.html" target="_blank">JSX</a>. I like keeping HTML,
+          CSS, and JavaScript separate, and that is exactly what Vue gives you: template, script, and style in one file.
+          It honestly felt like it was made for me. And by the way, I prefer the
           <a href="https://guide.vueframework.com/api/options-api.html" target="_blank">Options API</a>.
         </p>
         <p>
-          Another thing I really like about Vue is how simple state management is. You can get a lot done with just a
-          few lines of code. In React, on the other hand, you often end up writing tons of boilerplate just to manage
-          state, and that quickly becomes a pain as the app grows bigger.
+          Another thing I really like about Vue is how simple
+          <a href="https://en.wikipedia.org/wiki/State_management" target="_blank">state management</a> is. You can get
+          a lot done with just a few lines of code. In React, on the other hand, you often end up writing tons of
+          <a href="https://en.wikipedia.org/wiki/Boilerplate_code" target="_blank">boilerplate</a> just to manage state,
+          and that quickly becomes a pain as the app grows bigger.
         </p>
       </div>
     </section>
@@ -276,14 +319,20 @@
       <h2>Linux changed my life</h2>
       <div>
         <p>
-          During my time at ESTM, I purchased my first laptop, which ran Windows 10. The laptop was bulky, slow, and
-          overheated a lot during the summer. Although I wasn't satisfied with it, I had no other option since I needed
-          it for my studies. At that time, I had never heard of Linux.
+          During my time at ESTM, I purchased my first laptop, which ran
+          <a href="https://en.wikipedia.org/wiki/Windows_10" target="_blank">Windows 10</a>. The laptop was bulky, slow,
+          and overheated a lot during the summer. Although I wasn't satisfied with it, I had no other option since I
+          needed it for my studies. At that time, I had never heard of
+          <a href="https://en.wikipedia.org/wiki/Linux" target="_blank">Linux</a>.
         </p>
         <p>
           Toward the end of my second year at ESTM, a random video popped up in my YouTube recommendations. While I
-          can't recall the exact video, its message was something like, "If you're using Windows, you should switch to
-          Linux." I watched the video and decided to give Linux a shot. I installed
+          can't recall the exact video, its message was something like,
+          <InlineCode
+            text="If you're using Windows, you should switch to
+          Linux."
+          />
+          I watched the video and decided to give Linux a shot. I installed
           <a href="https://system76.com/pop/" target="_blank">Pop!_OS</a> on my laptop because the video mentioned it
           was user-friendly and had a Windows-like feel.
         </p>
@@ -303,9 +352,9 @@
           country like Morocco. Even schools and universities were full of pirated programs, haha.
         </p>
         <p>
-          But with Linux, everything is free and open-source. Need a tool? Just install it, no drama. I fell in love
-          with this ecosystem where people share their work with the world, and it pushed me to start sharing my own
-          stuff too.
+          But with Linux, everything is free and
+          <a href="https://opensource.org/" target="_blank">open source</a>. I fell in love with this ecosystem where
+          people share their work with the world, and it pushed me to start sharing my own stuff too.
         </p>
         <p>
           Back in school, I used to share my notes with classmates. I’ve always been a pretty organized person, so my
@@ -330,8 +379,9 @@
           @open-image-modal="handleOpenImageModal"
         />
         <p>
-          I also found a ton of inspiration from <b>freeCodeCamp</b>, a channel where I learned so many new concepts
-          myself. Later, I got the chance to collaborate with them and created courses on topics like
+          I also found a ton of inspiration from
+          <a href="https://www.freecodecamp.org/" target="_blank">freeCodeCamp</a>, a channel where I learned so many
+          new concepts myself. Later, I got the chance to collaborate with them and created courses on topics like
           <a
             href="https://www.youtube.com/watch?v=a4HBKEda_F8&list=PLMSb3cZXtIfoj0guEc9UV_oSEQmA4_hvs&index=2"
             target="_blank"
@@ -363,8 +413,9 @@
 
       <div>
         <p>
-          My life isn’t only about programming and engineering, I also love <b>astronomy</b>. It’s not a very common
-          hobby here in Morocco, and honestly, I stumbled into it by pure chance.
+          My life isn’t only about programming and engineering, I also love
+          <a href="https://en.wikipedia.org/wiki/Astronomy" target="_blank">astronomy</a>. It’s not a very common hobby
+          here in Morocco, and honestly, I stumbled into it by pure chance.
         </p>
         <p>
           I remember one day, while waiting at a grocery store, I looked up and saw a bright dot in the sky. I was
@@ -383,16 +434,21 @@
       <div>
         <p>
           That little moment kicked off my curiosity. I started researching more and more, and every day I learned
-          something new that made me fall deeper in love with the universe. This all happened during the start of the
-          pandemic, which for me was a blessing in disguise. I spent countless nights staring at the stars, just
-          thinking about how massive the universe is.
+          something new that made me fall deeper in love with the
+          <a href="https://en.wikipedia.org/wiki/Universe" target="_blank">universe</a>. This all happened during the
+          start of the <a href="https://en.wikipedia.org/wiki/COVID-19" target="_blank">pandemic</a>, which for me was a
+          blessing in disguise. I spent countless nights staring at the stars, just thinking about how massive the
+          universe is.
         </p>
         <p>
           I learned to recognize
-          <a href="https://en.wikipedia.org/wiki/Constellation" target="_blank">constellations</a>, planets, and bright
-          stars. While memorizing star names, I discovered that many of them have
+          <a href="https://en.wikipedia.org/wiki/Constellation" target="_blank">constellations</a>,
+          <a href="https://en.wikipedia.org/wiki/Planet" target="_blank">planets</a>, and
+          <a href="https://en.wikipedia.org/wiki/List_of_brightest_stars" target="_blank">bright stars</a>. While
+          memorizing star names, I discovered that many of them have
           <a href="https://en.wikipedia.org/wiki/List_of_Arabic_star_names" target="_blank">Arabic origins</a>. That
-          made me proud, because as an Arab, I realized how much my ancestors
+          made me proud, because as an <a href="https://en.wikipedia.org/wiki/Arabs" target="_blank">Arab</a>, I
+          realized how much my ancestors
           <a href="https://en.wikipedia.org/wiki/Astronomy_in_the_medieval_Islamic_world" target="_blank">
             contributed to astronomy</a
           >.
@@ -402,7 +458,8 @@
           <a href="https://en.wikipedia.org/wiki/Moons_of_Jupiter" target="_blank">Jupiter’s moons</a>,
           <a href="https://en.wikipedia.org/wiki/Open_cluster" target="_blank">open clusters</a>, and even the
           <a href="https://en.wikipedia.org/wiki/Andromeda_Galaxy" target="_blank">Andromeda galaxy</a>. Later, during
-          my end-of-studies internship in France, I finally got the chance to buy my first telescope.
+          my end-of-studies internship in France, I finally got the chance to buy my first
+          <a href="https://en.wikipedia.org/wiki/Telescope" target="_blank">telescope</a>.
         </p>
         <p>
           Owning a telescope was always a dream of mine, and I finally made it happen. I got a
@@ -411,9 +468,10 @@
             target="_blank"
             >130/650 Dobsonian telescope</a
           >
-          (130 mm aperture, 650 mm focal length). It’s simple to use and shows amazing views of the night sky. With it,
-          I’ve seen Jupiter’s bands, Saturn’s rings, and the craters of the Moon. Honestly, it was a magical experience
-          I’ll never forget.
+          (130 mm <a href="https://en.wikipedia.org/wiki/Aperture" target="_blank">aperture</a>, 650 mm
+          <a href="https://en.wikipedia.org/wiki/Focal_length" target="_blank">focal length</a>). It’s simple to use and
+          shows amazing views of the night sky. With it, I’ve seen Jupiter’s bands, Saturn’s rings, and the craters of
+          the Moon. Honestly, it was a magical experience I’ll never forget.
         </p>
         <ImageWithCaption
           :image-src="telescopeAndJupiterSaturnMoon"
@@ -428,7 +486,8 @@
           I also got into <a href="https://en.wikipedia.org/wiki/Astrophotography" target="_blank">astrophotography</a>.
           At first, I was using just my phone, but later I bought a second-hand
           <a href="https://en.wikipedia.org/wiki/Canon_EOS_1300D" target="_blank">Canon 1300D</a> to take things
-          further. Here’s one of my favorite shots of the Milky Way I captured with it in a
+          further. Here’s one of my favorite shots of the
+          <a href="https://en.wikipedia.org/wiki/Milky_Way" target="_blank">Milky Way</a> I captured with it in a
           <a href="https://en.wikipedia.org/wiki/Bortle_scale" target="_blank">bortle</a> class 3 area.
         </p>
         <ImageWithCaption
@@ -444,11 +503,12 @@
       <h2>What I do now</h2>
       <p>
         My life today is a balance of all the things I love. I try to juggle between programming, gaming for an hour
-        each day, working out, listening to podcasts (I use
+        each day, working out, listening to
+        <a href="https://en.wikipedia.org/wiki/Podcast" target="_blank">podcasts</a> (I use
         <a href="https://antennapod.org/" target="_blank">AntennaPod</a>, it is free and
-        <a href="https://github.com/AntennaPod/AntennaPod" target="_blank">open-source</a>), and stargazing. I also
+        <a href="https://github.com/AntennaPod/AntennaPod" target="_blank">open source</a>), and stargazing. I also
         continue to share my knowledge and
-        <a href="https://github.com/ImadSaddik" target="_blank">contribute to the open-source community</a>. This mix of
+        <a href="https://github.com/ImadSaddik" target="_blank">contribute to the open source community</a>. This mix of
         work and hobbies keeps my days interesting and helps me learn something new every day.
       </p>
       <p>
@@ -482,6 +542,7 @@ import { ABOUT_ME_PAGE_VISITED_KEY } from "@/constants.js";
 import ImageWithCaption from "@/components/ImageWithCaption.vue";
 import ImageEnlarger from "@/components/ImageEnlarger.vue";
 import CodeBlock from "@/components/CodeBlock.vue";
+import InlineCode from "@/components/InlineCode.vue";
 
 // Images
 import myYouTubeChannel from "@/assets/my_youtube_channel.png";
@@ -504,6 +565,7 @@ export default {
     ImageWithCaption,
     ImageEnlarger,
     CodeBlock,
+    InlineCode,
   },
   mounted() {
     document.title = "About Imad Saddik";
