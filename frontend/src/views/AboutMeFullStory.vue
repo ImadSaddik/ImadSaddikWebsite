@@ -264,6 +264,12 @@
 
       <div>
         <h3>Web development</h3>
+        <ImageWithCaption
+          :image-src="reactBadVueGood"
+          image-alt="React Bad Vue Good"
+          image-caption="React the headache vs Vue the delight."
+          @open-image-modal="handleOpenImageModal"
+        />
         <p>
           I first got into
           <a href="https://en.wikipedia.org/wiki/Web_development" target="_blank">web development</a> during my time at
@@ -303,7 +309,7 @@
           <a href="https://legacy.reactjs.org/docs/introducing-jsx.html" target="_blank">JSX</a>. I like keeping HTML,
           CSS, and JavaScript separate, and that is exactly what Vue gives you: template, script, and style in one file.
           It honestly felt like it was made for me. And by the way, I prefer the
-          <a href="https://guide.vueframework.com/api/options-api.html" target="_blank">Options API</a>.
+          <a href="https://guide.vueframework.com/api/options-api.html" target="_blank">options API</a>.
         </p>
         <p>
           Another thing I really like about Vue is how simple
@@ -317,6 +323,13 @@
 
     <section>
       <h2>Linux changed my life</h2>
+      <ImageWithCaption
+        :image-src="windowsBadLinuxGood"
+        image-alt="Windows Bad Linux Good"
+        image-caption="Windows the demon vs Linux the angel."
+        @open-image-modal="handleOpenImageModal"
+      />
+
       <div>
         <p>
           During my time at ESTM, I purchased my first laptop, which ran
@@ -557,6 +570,8 @@ import estmUpClose from "@/assets/estm_up_close.jpeg";
 import ensamUpClose from "@/assets/ensam_up_close.jpeg";
 import bestPaperAward from "@/assets/best_paper_award.jpeg";
 import sombreroGalaxy from "@/assets/sombrero_galaxy.jpeg";
+import windowsBadLinuxGood from "@/assets/windows_bad_linux_good.svg";
+import reactBadVueGood from "@/assets/react_bad_vue_good.svg";
 
 export default {
   name: "AboutMeFullStory",
@@ -585,6 +600,8 @@ export default {
       ensamUpClose,
       bestPaperAward,
       sombreroGalaxy,
+      windowsBadLinuxGood,
+      reactBadVueGood,
 
       enlargedImageSrc: "",
       isImageModalVisible: false,
