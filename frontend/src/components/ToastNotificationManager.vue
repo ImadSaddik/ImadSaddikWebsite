@@ -1,6 +1,12 @@
 <template>
   <section class="toast-container">
-    <div v-for="toast in toasts" :key="toast.id" class="toast-item" :style="getToastStyle(toast.index)">
+    <div
+      v-for="toast in toasts"
+      :key="toast.id"
+      :ref="`toast-${toast.id}`"
+      class="toast-item"
+      :style="getToastStyle(toast.index)"
+    >
       <ToastMessage :message="toast.message" :type="toast.type" />
     </div>
   </section>
@@ -19,8 +25,9 @@ export default {
       toasts: [],
       pageWidth: window.innerWidth,
       toastIdCounter: 0,
-      autoRemoveIntervalInMilliseconds: 3000,
+      autoRemoveIntervalInMilliseconds: 5000,
       baseTopOffset: 32,
+      minToastSpacing: 8,
     };
   },
   mounted() {
@@ -42,6 +49,9 @@ export default {
         index: this.toasts.length,
       };
       this.toasts.push(toast);
+      this.$nextTick(() => {
+        this.updateToastPositions();
+      });
 
       setTimeout(() => {
         this.removeToast(toast.id);
@@ -59,12 +69,33 @@ export default {
         this.toasts.forEach((toast, idx) => {
           toast.index = idx;
         });
+        this.$nextTick(() => {
+          this.updateToastPositions();
+        });
       }
     },
     getToastStyle(index) {
+      const toast = this.toasts[index];
+      const hasCalculatedTop = toast && toast.calculatedTop !== undefined;
+      const topValue = hasCalculatedTop ? `${toast.calculatedTop}px` : `${this.baseTopOffset + index * 70}px`;
+
       return {
-        top: `${this.baseTopOffset + index * 70}px`,
+        top: topValue,
       };
+    },
+    updateToastPositions() {
+      let currentTop = this.baseTopOffset;
+
+      this.toasts.forEach((toast) => {
+        toast.calculatedTop = currentTop;
+
+        const toastElementArray = this.$refs[`toast-${toast.id}`];
+        const toastElement = Array.isArray(toastElementArray) ? toastElementArray[0] : null;
+        if (toastElement) {
+          const toastHeight = toastElement.offsetHeight;
+          currentTop += toastHeight + this.minToastSpacing;
+        }
+      });
     },
     handleResize() {
       this.pageWidth = window.innerWidth;
