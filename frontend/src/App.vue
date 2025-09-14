@@ -143,6 +143,11 @@ export default {
   color: var(--color-background);
 }
 
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) var(--color-background); /* Thumb color then track color */
+}
+
 #app {
   font-family: "Inter", Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
