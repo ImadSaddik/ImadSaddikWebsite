@@ -5,6 +5,7 @@
       :key="toast.id"
       :ref="`toast-${toast.id}`"
       class="toast-item"
+      :class="{ 'fade-out': toast.isLeaving }"
       :style="getToastStyle(toast.index)"
     >
       <ToastMessage :message="toast.message" :type="toast.type" />
@@ -25,7 +26,8 @@ export default {
       toasts: [],
       pageWidth: window.innerWidth,
       toastIdCounter: 0,
-      autoRemoveIntervalInMilliseconds: 5000,
+      autoRemoveIntervalInMilliseconds: 3000,
+      fadeOutAnimationDurationInMilliseconds: 300, // Must match the CSS animation duration
       baseTopOffset: 32,
       minToastSpacing: 8,
     };
@@ -47,6 +49,7 @@ export default {
         message: data.message,
         type: data.type,
         index: this.toasts.length,
+        isLeaving: false,
       };
       this.toasts.push(toast);
       this.$nextTick(() => {
@@ -63,15 +66,22 @@ export default {
       return data.message == null || data.type == null;
     },
     removeToast(toastId) {
-      const index = this.toasts.findIndex((toast) => toast.id === toastId);
-      if (index > -1) {
-        this.toasts.splice(index, 1);
-        this.toasts.forEach((toast, idx) => {
-          toast.index = idx;
-        });
-        this.$nextTick(() => {
-          this.updateToastPositions();
-        });
+      const toastToRemove = this.toasts.find((toast) => toast.id === toastId);
+      if (toastToRemove) {
+        toastToRemove.isLeaving = true;
+
+        setTimeout(() => {
+          const index = this.toasts.findIndex((toast) => toast.id === toastId);
+          if (index > -1) {
+            this.toasts.splice(index, 1);
+            this.toasts.forEach((toast, idx) => {
+              toast.index = idx;
+            });
+            this.$nextTick(() => {
+              this.updateToastPositions();
+            });
+          }
+        }, this.fadeOutAnimationDurationInMilliseconds);
       }
     },
     getToastStyle(index) {
@@ -125,6 +135,10 @@ export default {
   pointer-events: auto;
 }
 
+.toast-item.fade-out {
+  animation: slideOut 0.3s ease-in forwards;
+}
+
 @keyframes slideIn {
   from {
     transform: translateX(100%);
@@ -133,6 +147,17 @@ export default {
   to {
     transform: translateX(0);
     opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
   }
 }
 
