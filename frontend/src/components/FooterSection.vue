@@ -20,6 +20,9 @@
         <a href="https://www.linkedin.com/in/imadsaddik/" target="_blank" rel="noopener noreferrer">
           <img :src="linkedinLogo" alt="LinkedIn logo" />
         </a>
+        <a href="mailto:simad3647@gmail.com" target="_blank" rel="noopener noreferrer">
+          <img :src="emailLogo" alt="Email logo" />
+        </a>
       </div>
 
       <div class="footer-effects-container">
@@ -65,6 +68,7 @@ import mediumLogo from "@/assets/logos/medium.svg";
 import linkedinLogo from "@/assets/logos/linkedin.svg";
 import inkscapeLogo from "@/assets/logos/inkscape.svg";
 import vueLogo from "@/assets/logos/vue.svg";
+import emailLogo from "@/assets/logos/email.svg";
 
 // Images
 import telescopeImage from "@/assets/telescope.svg";
@@ -99,6 +103,7 @@ export default {
       linkedinLogo,
       inkscapeLogo,
       vueLogo,
+      emailLogo,
 
       telescopeImage,
       crescentMoon,
