@@ -112,6 +112,10 @@ export default {
   /* Modal */
   --color-background-overlay: #000000cc;
 
+  /* Shadow colors */
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-shadow-hover: rgba(0, 0, 0, 0.15);
+
   /* Font sizes */
   --font-size-big: 3rem; /* 48px */
   --font-size-big-medium: 2rem; /* 32px */
