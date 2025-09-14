@@ -2,31 +2,9 @@
   <section class="footer-container">
     <div class="footer-content">
       <h3 class="footer-title">Imad Saddik</h3>
-      <p class="footer-description">Programming, exploring the sky, and sharing everything I learn.</p>
-
-      <div class="footer-logos">
-        <a href="https://github.com/ImadSaddik" target="_blank" rel="noopener noreferrer">
-          <img :src="githubLogo" alt="GitHub logo" />
-        </a>
-        <a href="https://huggingface.co/ImadSaddik" target="_blank" rel="noopener noreferrer">
-          <img :src="huggingFaceLogo" alt="Hugging Face logo" />
-        </a>
-        <a href="https://www.youtube.com/@3CodeCampers" target="_blank" rel="noopener noreferrer">
-          <img :src="youtubeLogo" alt="YouTube logo" />
-        </a>
-        <a href="https://medium.com/@imadsaddik" target="_blank" rel="noopener noreferrer">
-          <img :src="mediumLogo" alt="Medium logo" />
-        </a>
-        <a href="https://www.linkedin.com/in/imadsaddik/" target="_blank" rel="noopener noreferrer">
-          <img :src="linkedinLogo" alt="LinkedIn logo" />
-        </a>
-        <a href="mailto:simad3647@gmail.com" target="_blank" rel="noopener noreferrer">
-          <img :src="emailLogo" alt="Email logo" />
-        </a>
-      </div>
 
       <div class="footer-effects-container">
-        <p>Your browser can't handle the star and meteor shower effects?</p>
+        <p>Having performance issues? You can disable the star and meteor shower effects.</p>
         <label class="effects-toggle">
           <input type="checkbox" :checked="effectsEnabled" @change="handleEffectsToggle($event.target.checked)" />
           <span class="effects-slider"></span>
@@ -34,18 +12,54 @@
         </label>
       </div>
 
-      <p class="footer-credits">
-        Built with
-        <a href="https://vuejs.org/" target="_blank" rel="noopener noreferrer">
-          <img :src="vueLogo" alt="Vue.js logo" class="footer-credit-logo" />
-        </a>
-        &amp; illustrations made in
-        <a href="https://inkscape.org/" target="_blank" rel="noopener noreferrer">
-          <img :src="inkscapeLogo" alt="Inkscape logo" class="footer-credit-logo" /> </a
-        >.
-        <span class="separator">|</span>
-        All rights reserved &copy; {{ currentYear }} Imad Saddik
-      </p>
+      <div class="footer-social-media-container">
+        <p>Stay connected with me:</p>
+        <div class="footer-social-media-logos">
+          <a href="https://github.com/ImadSaddik" target="_blank" rel="noopener noreferrer">
+            <img :src="githubLogo" alt="GitHub logo" />
+          </a>
+          <a href="https://huggingface.co/ImadSaddik" target="_blank" rel="noopener noreferrer">
+            <img :src="huggingFaceLogo" alt="Hugging Face logo" />
+          </a>
+          <a href="https://www.youtube.com/@3CodeCampers" target="_blank" rel="noopener noreferrer">
+            <img :src="youtubeLogo" alt="YouTube logo" />
+          </a>
+          <a href="https://medium.com/@imadsaddik" target="_blank" rel="noopener noreferrer">
+            <img :src="mediumLogo" alt="Medium logo" />
+          </a>
+          <a href="https://www.linkedin.com/in/imadsaddik/" target="_blank" rel="noopener noreferrer">
+            <img :src="linkedinLogo" alt="LinkedIn logo" />
+          </a>
+          <a href="mailto:simad3647@gmail.com" target="_blank" rel="noopener noreferrer">
+            <img :src="emailLogo" alt="Email logo" />
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-credits">
+        <p>This website was built using:</p>
+        <div class="footer-credits-logo-container">
+          <a href="https://vuejs.org/" target="_blank" rel="noopener noreferrer">
+            <img :src="vueLogo" alt="Vue.js logo" class="footer-credits-logo" />
+          </a>
+          <a href="https://www.python.org/" target="_blank" rel="noopener noreferrer">
+            <img :src="pythonLogo" alt="Python logo" class="footer-credits-logo" />
+          </a>
+          <a href="https://inkscape.org/" target="_blank" rel="noopener noreferrer">
+            <img :src="inkscapeLogo" alt="Inkscape logo" class="footer-credits-logo" />
+          </a>
+          <a href="https://www.svgrepo.com/" target="_blank" rel="noopener noreferrer">
+            <img :src="svgRepoLogo" alt="SVG Repo logo" class="footer-credits-logo" />
+          </a>
+          <a href="https://fontawesome.com/" target="_blank" rel="noopener noreferrer">
+            <img :src="fontAwesomeLogo" alt="Font Awesome logo" class="footer-credits-logo" />
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-rights">
+        <p>All rights reserved &copy; {{ currentYear }} Imad Saddik</p>
+      </div>
     </div>
 
     <div class="footer-images">
@@ -69,6 +83,9 @@ import linkedinLogo from "@/assets/logos/linkedin.svg";
 import inkscapeLogo from "@/assets/logos/inkscape.svg";
 import vueLogo from "@/assets/logos/vue.svg";
 import emailLogo from "@/assets/logos/email.svg";
+import pythonLogo from "@/assets/logos/python.svg";
+import svgRepoLogo from "@/assets/logos/svg_repo.svg";
+import fontAwesomeLogo from "@/assets/logos/fontAwesome.svg";
 
 // Images
 import telescopeImage from "@/assets/telescope.svg";
@@ -104,6 +121,9 @@ export default {
       inkscapeLogo,
       vueLogo,
       emailLogo,
+      pythonLogo,
+      svgRepoLogo,
+      fontAwesomeLogo,
 
       telescopeImage,
       crescentMoon,
@@ -119,6 +139,12 @@ export default {
 </script>
 
 <style scoped>
+p {
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+  margin: var(--gap-md) 0;
+}
+
 .footer-container {
   width: 100%;
   margin-top: var(--gap-between-sections-big);
@@ -143,12 +169,6 @@ export default {
   margin-bottom: var(--gap-sm);
 }
 
-.footer-description {
-  font-size: var(--font-size-small);
-  color: var(--color-text-secondary);
-  margin-bottom: var(--gap-md);
-}
-
 .footer-content {
   display: flex;
   flex-direction: column;
@@ -156,36 +176,48 @@ export default {
   padding: var(--gap-xl);
 }
 
-.footer-logos {
+.footer-social-media-logos {
   display: flex;
   gap: var(--gap-sm);
 }
 
-.footer-logos img {
-  height: 40px;
+.footer-social-media-logos img {
+  height: 32px;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
 
-.footer-logos img:hover {
+.footer-social-media-logos img:hover {
   filter: brightness(0.9);
 }
 
-.footer-credit-logo {
+.footer-credits-logo-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--gap-sm);
+}
+
+.footer-credits-logo {
   height: 32px;
   vertical-align: middle;
 }
 
-.footer-credit-logo:hover {
+.footer-credits-logo:hover {
   filter: brightness(0.9);
 }
 
+.footer-social-media-container {
+  margin-top: var(--gap-lg);
+}
+
 .footer-credits {
-  font-size: var(--font-size-small);
-  color: var(--color-text-secondary);
+  margin-top: var(--gap-lg);
+}
+
+.footer-rights {
   margin-top: var(--gap-lg);
   margin-bottom: 5rem;
-  width: 100%;
 }
 
 .footer-images {
@@ -205,9 +237,9 @@ export default {
 
 .moon-image {
   position: absolute;
-  top: 100px;
-  right: 100px;
-  width: 50px;
+  top: 150px;
+  right: 50px;
+  width: 100px;
   height: auto;
 }
 
@@ -215,13 +247,10 @@ export default {
   display: flex;
   align-items: center;
   width: 100%;
-  margin-top: var(--gap-lg);
-  margin-bottom: 0rem;
+  margin: 0;
 }
 
 .footer-effects-container p {
-  font-size: var(--font-size-small);
-  color: var(--color-text-secondary);
   margin: 0;
 }
 
@@ -282,26 +311,15 @@ export default {
     margin-bottom: var(--gap-md);
   }
 
-  .footer-logos {
-    gap: var(--gap-sm);
-  }
-
-  .footer-logos img {
-    height: 32px;
-  }
-
   .telescope-image {
     position: absolute;
     bottom: 0;
     left: 40%;
   }
 
-  .footer-credits {
-    width: 35%;
-  }
-
-  .footer-effects-container {
-    width: 45%;
+  .moon-image {
+    top: 250px;
+    right: 50px;
   }
 }
 
@@ -320,13 +338,18 @@ export default {
     margin-bottom: var(--gap-sm);
   }
 
-  .footer-credits {
-    margin-bottom: 3rem;
-    width: 100%;
+  .footer-social-media-container {
+    margin-top: var(--gap-sm);
   }
 
-  .footer-effects-container {
+  .footer-credits {
+    margin-top: var(--gap-sm);
+  }
+
+  .footer-rights {
     width: 100%;
+    margin-top: var(--gap-sm);
+    margin-bottom: 3rem;
   }
 }
 
@@ -339,26 +362,32 @@ export default {
     padding: var(--gap-md);
   }
 
-  .footer-logos {
-    gap: var(--gap-xs);
-  }
-
-  .footer-logos img {
+  .footer-social-media-logos img {
     height: 24px;
   }
 
-  .footer-credit-logo {
+  .footer-credits-logo {
     height: 24px;
+  }
+
+  .footer-social-media-container {
+    margin-top: var(--gap-xs);
+  }
+
+  .footer-credits {
+    margin-top: var(--gap-xs);
+  }
+
+  .footer-rights {
+    width: 100%;
+    margin-top: var(--gap-xs);
+    margin-bottom: 2rem;
   }
 }
 
 @media screen and (max-width: 576px) {
   .effects-toggle {
     margin-left: 1rem;
-  }
-
-  .effects-toggle-label {
-    display: none;
   }
 }
 </style>
