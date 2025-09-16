@@ -157,7 +157,6 @@ html {
   caret-color: var(--color-primary);
   max-width: 2000px;
   margin: 0 auto;
-  /* background-color: #0710474f; */
 }
 
 body {
