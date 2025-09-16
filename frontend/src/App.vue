@@ -165,6 +165,7 @@ body {
   padding: 0;
   overflow-x: hidden;
   background: var(--color-background);
+  cursor: url("@/assets/customCursor.svg"), auto;
 }
 
 a {
