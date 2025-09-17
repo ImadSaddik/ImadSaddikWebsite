@@ -3,10 +3,10 @@
     <section>
       <h1>Let's build something great</h1>
       <p>
-        I'm an engineer, and technical educator. I have experience in <b>web & mobile development</b> and
-        <b>AI & Data Science</b>. I offer a wide range of services to help you achieve your goals. I am looking for new
-        opportunities, either full-time or part-time, to work on exciting projects and collaborate with people on what I
-        find interesting.
+        I'm an engineer and technical educator with experience in <b>web & mobile development</b> and
+        <b>AI & Data Science</b>. I help individuals and organizations achieve their goals through high-quality
+        solutions and knowledge sharing. I'm seeking new opportunities — full-time or part-time — to work on exciting
+        projects and collaborate with others who share my interests.
       </p>
     </section>
   </div>
