@@ -23,41 +23,50 @@
       <div class="card-group">
         <div class="card">
           <i class="fa-solid fa-pen-nib service-icon"></i>
-          <h2>Technical writing</h2>
-          <p>I write high-quality documentation, tutorials, and guides to help users understand complex topics.</p>
-        </div>
-        <div class="card">
-          <i class="fa-solid fa-code service-icon"></i>
-          <h2>Software development</h2>
-          <p>I build software solutions that are efficient, scalable, and tailored to your needs.</p>
-        </div>
-        <div class="card">
-          <i class="fa-solid fa-headset service-icon"></i>
-          <h2>Support & maintenance</h2>
+          <h3>Technical writing</h3>
           <p>
-            I provide ongoing support and maintenance for your software solutions, ensuring they remain up-to-date and
-            continue to meet your needs.
+            I enjoy explaining complex topics in a clear and concise manner through writing. I can write articles,
+            tutorials, and documentation on a variety of technical subjects.
           </p>
         </div>
         <div class="card">
-          <i class="fa-solid fa-server service-icon"></i>
-          <h2>Project hosting</h2>
-          <p>I can host your projects on reliable platforms, ensuring they are accessible and performant.</p>
+          <i class="fa-solid fa-code service-icon"></i>
+          <h3>Software development</h3>
+          <p>
+            I can build full stack web applications with your preferred tech stack and native Android applications. I
+            write clean, maintainable code and follow best practices.
+          </p>
+        </div>
+        <div class="card">
+          <i class="fa-solid fa-database service-icon"></i>
+          <h3>Data Science</h3>
+          <p>
+            I analyze data, build predictive models, and create data-driven solutions using Python. I can help you
+            extract insights and make informed decisions from your data.
+          </p>
+        </div>
+        <div class="card">
+          <i class="fa-solid fa-headset service-icon"></i>
+          <h3>Support & maintenance</h3>
+          <p>
+            I provide ongoing support and maintenance for your software solutions. I can help you troubleshoot issues,
+            implement updates, and make sure that your applications run smoothly.
+          </p>
         </div>
         <div class="card">
           <i class="fa-solid fa-chalkboard-user service-icon"></i>
-          <h2>Tutorials</h2>
+          <h3>Tutorials</h3>
           <p>
-            I create step-by-step tutorials to help you learn new skills and technologies or to create tutorials
-            featuring your projects.
+            I create step-by-step tutorials to help teach people new skills. I create tutorials on everything related to
+            programming, AI, and Linux.
           </p>
         </div>
         <div class="card">
           <i class="fa-solid fa-magnifying-glass-chart service-icon"></i>
-          <h2>Code reviews</h2>
+          <h3>Code reviews</h3>
           <p>
-            I provide thorough code reviews to help you improve your code quality and ensure best practices are
-            followed.
+            I provide detailed code reviews to help improve the quality of your codebase. I can identify potential
+            issues, suggest improvements, and help you follow best practices.
           </p>
         </div>
       </div>
@@ -162,6 +171,11 @@ h2 {
   margin: var(--gap-md) 0;
 }
 
+h3 {
+  font-size: var(--font-size-medium);
+  margin: var(--gap-sm) 0;
+}
+
 .hire-me-container {
   width: 50%;
   padding: var(--gap-xl);
@@ -184,7 +198,7 @@ h2 {
 .service-icon {
   font-size: 2rem;
   color: var(--color-primary);
-  margin-bottom: var(--gap-sm);
+  margin-bottom: var(--gap-xxl);
   display: block;
 }
 
