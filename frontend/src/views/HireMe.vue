@@ -8,6 +8,12 @@
         solutions and knowledge sharing. I'm seeking new opportunities — full-time or part-time — to work on exciting
         projects and collaborate with others who share my interests.
       </p>
+      <ImageWithCaption
+        :image-src="heartShapedAntennaGalaxies"
+        image-alt="Heart-shaped antenna galaxies"
+        image-caption="A photo of heart-shaped antenna galaxies. <a href='https://esahubble.org/images/heic0812c/' target='_blank'>Credit: Robert Gendler</a>"
+        @open-image-modal="handleOpenImageModal"
+      />
     </section>
 
     <section>
@@ -67,25 +73,62 @@
       <button class="primary-button book-meeting-button" @click="openCalendlyLink">Book a meeting</button>
     </section>
   </div>
+
+  <ImageEnlarger
+    :is-visible="isImageModalVisible"
+    :enlarged-image-src="enlargedImageSrc"
+    @close-image-modal="handleCloseImageModal"
+  />
 </template>
 
 <script>
 // Constants
 import { HIRE_ME_PAGE_VISITED_KEY } from "@/constants.js";
 
+// Components
+import ImageWithCaption from "@/components/ImageWithCaption.vue";
+import ImageEnlarger from "@/components/ImageEnlarger.vue";
+
+// Images
+import heartShapedAntennaGalaxies from "@/assets/heart_shaped_antenna_galaxies.jpeg";
+
 export default {
   name: "HireMe",
   emits: ["page-visited"],
+  components: {
+    ImageWithCaption,
+    ImageEnlarger,
+  },
   mounted() {
     document.title = "Hire Imad Saddik";
     this.$emit("page-visited", HIRE_ME_PAGE_VISITED_KEY);
   },
   data() {
-    return {};
+    return {
+      heartShapedAntennaGalaxies,
+
+      enlargedImageSrc: "",
+      isImageModalVisible: false,
+    };
   },
   methods: {
     openCalendlyLink() {
       window.open("https://calendly.com/simad3647/30min", "_blank");
+    },
+    handleOpenImageModal(event) {
+      this.enlargedImageSrc = event.target.src;
+      this.isImageModalVisible = true;
+      window.addEventListener("keydown", this.handleEscape);
+    },
+    handleCloseImageModal() {
+      this.isImageModalVisible = false;
+      this.enlargedImageSrc = "";
+      window.removeEventListener("keydown", this.handleEscape);
+    },
+    handleEscape(event) {
+      if (event.key === "Escape") {
+        this.handleCloseImageModal();
+      }
     },
   },
 };
