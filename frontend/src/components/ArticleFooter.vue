@@ -37,7 +37,7 @@ export default {
 
 <style scoped>
 .article-footer {
-  width: 100%;
+  width: 75%;
 }
 
 .article-footer-header {
@@ -48,7 +48,7 @@ export default {
 
 .article-footer-cards-group {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   width: 100%;
   gap: var(--gap-md);
 }

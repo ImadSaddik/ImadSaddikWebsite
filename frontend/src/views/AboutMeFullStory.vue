@@ -690,7 +690,7 @@ img {
 }
 
 .about-me-full-story-container {
-  width: 50%;
+  width: 75%;
   padding: var(--gap-xl);
   margin-top: var(--gap-xxl);
   box-sizing: border-box;

@@ -114,7 +114,7 @@ export default {
 
 <style scoped>
 .article-body {
-  width: 50%;
+  width: 75%;
 }
 
 .article-container {

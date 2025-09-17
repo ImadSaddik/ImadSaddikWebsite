@@ -128,7 +128,7 @@ export default {
 
 <style scoped>
 .article-header {
-  width: 50%;
+  width: 75%;
 }
 
 .article-header-title {
