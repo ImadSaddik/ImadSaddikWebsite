@@ -120,10 +120,6 @@ h3 {
   padding: var(--gap-md);
 }
 
-.card:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-}
-
 .service-icon {
   font-size: 2rem;
   color: var(--color-primary);
