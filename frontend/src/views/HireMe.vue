@@ -64,7 +64,7 @@
         contact me via email at <a href="mailto:simad3647@gmail.com">simad3647@gmail.com</a>.
       </p>
       <p>Prefer a quick call? Book a meeting directly with me:</p>
-      <button class="primary-button book-meeting-button" @click="openCalLink">Book a meeting</button>
+      <button class="primary-button book-meeting-button" @click="openCalendlyLink">Book a meeting</button>
     </section>
   </div>
 </template>
@@ -84,8 +84,8 @@ export default {
     return {};
   },
   methods: {
-    openCalLink() {
-      // TODO: Set up a proper calendly link: https://calendly.com/
+    openCalendlyLink() {
+      window.open("https://calendly.com/simad3647/30min", "_blank");
     },
   },
 };
