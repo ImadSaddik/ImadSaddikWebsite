@@ -8,6 +8,7 @@ import AboutMeFullStory from "@/views/AboutMeFullStory.vue";
 import HireMe from "@/views/HireMe.vue";
 import CoursePage from "@/views/CoursePage.vue";
 import AstronomyPage from "@/views/AstronomyPage.vue";
+import NotFoundPage from "@/views/NotFoundPage.vue";
 
 const routes = [
   {
@@ -87,6 +88,11 @@ const routes = [
     path: "/hire-me",
     name: "hire-me",
     component: HireMe,
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    component: NotFoundPage,
   },
 ];
 
