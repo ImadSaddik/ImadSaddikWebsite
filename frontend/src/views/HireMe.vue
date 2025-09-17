@@ -9,6 +9,53 @@
         projects and collaborate with others who share my interests.
       </p>
     </section>
+
+    <section>
+      <h2>Services</h2>
+      <p>I offer a range of services to help you achieve your goals:</p>
+
+      <div class="card-group">
+        <div class="card">
+          <i class="fa-solid fa-pen-nib service-icon"></i>
+          <h2>Technical writing</h2>
+          <p>I write high-quality documentation, tutorials, and guides to help users understand complex topics.</p>
+        </div>
+        <div class="card">
+          <i class="fa-solid fa-code service-icon"></i>
+          <h2>Software development</h2>
+          <p>I build software solutions that are efficient, scalable, and tailored to your needs.</p>
+        </div>
+        <div class="card">
+          <i class="fa-solid fa-headset service-icon"></i>
+          <h2>Support & maintenance</h2>
+          <p>
+            I provide ongoing support and maintenance for your software solutions, ensuring they remain up-to-date and
+            continue to meet your needs.
+          </p>
+        </div>
+        <div class="card">
+          <i class="fa-solid fa-server service-icon"></i>
+          <h2>Project hosting</h2>
+          <p>I can host your projects on reliable platforms, ensuring they are accessible and performant.</p>
+        </div>
+        <div class="card">
+          <i class="fa-solid fa-chalkboard-user service-icon"></i>
+          <h2>Tutorials</h2>
+          <p>
+            I create step-by-step tutorials to help you learn new skills and technologies or to create tutorials
+            featuring your projects.
+          </p>
+        </div>
+        <div class="card">
+          <i class="fa-solid fa-magnifying-glass-chart service-icon"></i>
+          <h2>Code reviews</h2>
+          <p>
+            I provide thorough code reviews to help you improve your code quality and ensure best practices are
+            followed.
+          </p>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -59,6 +106,28 @@ h3 {
   padding: var(--gap-xl);
   margin-top: var(--gap-xxl);
   box-sizing: border-box;
+}
+
+.card-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--gap-md);
+}
+
+.card {
+  border: 1px solid var(--color-tag-border);
+  padding: var(--gap-md);
+}
+
+.card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.service-icon {
+  font-size: 2rem;
+  color: var(--color-primary);
+  margin-bottom: var(--gap-sm);
+  display: block;
 }
 
 @media screen and (max-width: 1500px) {
