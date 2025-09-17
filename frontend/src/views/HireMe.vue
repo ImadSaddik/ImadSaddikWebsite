@@ -56,6 +56,16 @@
         </div>
       </div>
     </section>
+
+    <section>
+      <h2>Get in touch</h2>
+      <p>
+        If you're interested in working together or have any questions, please don't hesitate to reach out. You can
+        contact me via email at <a href="mailto:simad3647@gmail.com">simad3647@gmail.com</a>.
+      </p>
+      <p>Prefer a quick call? Book a meeting directly with me:</p>
+      <button class="primary-button book-meeting-button" @click="openCalLink">Book a meeting</button>
+    </section>
   </div>
 </template>
 
@@ -66,13 +76,17 @@ import { HIRE_ME_PAGE_VISITED_KEY } from "@/constants.js";
 export default {
   name: "HireMe",
   emits: ["page-visited"],
-
   mounted() {
     document.title = "Hire Imad Saddik";
     this.$emit("page-visited", HIRE_ME_PAGE_VISITED_KEY);
   },
   data() {
     return {};
+  },
+  methods: {
+    openCalLink() {
+      // TODO: Set up a proper calendly link: https://calendly.com/
+    },
   },
 };
 </script>
@@ -125,6 +139,13 @@ h3 {
   color: var(--color-primary);
   margin-bottom: var(--gap-sm);
   display: block;
+}
+
+.book-meeting-button {
+  padding: var(--gap-sm) var(--gap-md);
+  font-size: var(--font-size-small);
+  font-weight: 600;
+  width: 200px;
 }
 
 @media screen and (max-width: 1500px) {
