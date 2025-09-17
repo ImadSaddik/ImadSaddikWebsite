@@ -110,11 +110,12 @@ h3 {
 
 .card-group {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   gap: var(--gap-md);
 }
 
 .card {
+  background-color: var(--color-code-night-owl-background);
   border: 1px solid var(--color-tag-border);
   padding: var(--gap-md);
 }
