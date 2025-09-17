@@ -10,8 +10,8 @@
       </p>
       <ImageWithCaption
         :image-src="heartShapedAntennaGalaxies"
-        image-alt="Heart-shaped antenna galaxies"
-        image-caption="A photo of heart-shaped antenna galaxies. <a href='https://esahubble.org/images/heic0812c/' target='_blank'>Credit: Robert Gendler</a>"
+        image-alt="Heart shaped antenna galaxies"
+        image-caption="A photo of the heart shaped antenna galaxies. <a href='https://esahubble.org/images/heic0812c/' target='_blank'>Credit: Robert Gendler</a>"
         @open-image-modal="handleOpenImageModal"
       />
     </section>
