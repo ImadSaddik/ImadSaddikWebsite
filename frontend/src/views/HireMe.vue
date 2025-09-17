@@ -94,7 +94,7 @@ import heartShapedAntennaGalaxies from "@/assets/heart_shaped_antenna_galaxies.j
 
 export default {
   name: "HireMe",
-  emits: ["page-visited"],
+  emits: ["page-visited", "show-toast"],
   components: {
     ImageWithCaption,
     ImageEnlarger,
@@ -113,7 +113,13 @@ export default {
   },
   methods: {
     openCalendlyLink() {
-      window.open("https://calendly.com/simad3647/30min", "_blank");
+      const calendlyWindow = window.open("https://calendly.com/simad3647/30min", "_blank");
+      if (!calendlyWindow) {
+        this.emitToastEvent({
+          type: "error",
+          message: "Popup was blocked! Please allow popups for this site to book a meeting.",
+        });
+      }
     },
     handleOpenImageModal(event) {
       this.enlargedImageSrc = event.target.src;
@@ -129,6 +135,9 @@ export default {
       if (event.key === "Escape") {
         this.handleCloseImageModal();
       }
+    },
+    emitToastEvent(data) {
+      this.$emit("show-toast", data);
     },
   },
 };
