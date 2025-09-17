@@ -110,11 +110,6 @@ h2 {
   margin: var(--gap-md) 0;
 }
 
-h3 {
-  font-size: var(--font-size-big-small);
-  margin: var(--gap-sm) 0;
-}
-
 .hire-me-container {
   width: 50%;
   padding: var(--gap-xl);
@@ -152,13 +147,20 @@ h3 {
   .hire-me-container {
     width: 100%;
   }
+}
 
+@media screen and (max-width: 1100px) {
   .hire-me-container h1 {
     font-size: var(--font-size-big-medium);
   }
 
   .hire-me-container h2 {
     font-size: var(--font-size-medium);
+  }
+
+  .hire-me-container {
+    padding: var(--gap-lg);
+    margin-top: var(--gap-md);
   }
 }
 
