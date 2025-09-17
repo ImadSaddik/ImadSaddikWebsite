@@ -177,7 +177,7 @@ h3 {
 }
 
 .hire-me-container {
-  width: 50%;
+  width: 75%;
   padding: var(--gap-xl);
   margin-top: var(--gap-xxl);
   box-sizing: border-box;
@@ -185,7 +185,7 @@ h3 {
 
 .card-group {
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--gap-md);
 }
 
@@ -227,6 +227,12 @@ h3 {
   .hire-me-container {
     padding: var(--gap-lg);
     margin-top: var(--gap-md);
+  }
+
+  .card-group {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: var(--gap-md);
   }
 }
 
