@@ -27,12 +27,44 @@ img {
 p {
   font-size: var(--font-size-small);
   color: var(--color-text-secondary);
-  margin: var(--gap-md) 0;
+  margin: var(--gap-xxl) 0;
   line-height: 1.6;
 }
 
 .not-found-page-container {
+  width: 100%;
   text-align: center;
-  margin-top: 50px;
+  margin-top: var(--gap-between-sections-medium);
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 1500px) {
+  img {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  img {
+    width: 90%;
+  }
+
+  p {
+    margin: var(--gap-xl) 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  img {
+    width: 100%;
+  }
+
+  p {
+    margin: var(--gap-lg) 0;
+  }
+
+  .not-found-page-container {
+    margin-top: var(--gap-between-sections-small);
+  }
 }
 </style>
