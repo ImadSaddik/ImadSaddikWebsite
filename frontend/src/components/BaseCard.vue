@@ -5,8 +5,19 @@
     </div>
     <h3 class="card-title">{{ title }}</h3>
     <div class="card-subtitle">
-      <p class="card-date">{{ creationDate }}</p>
-      <p class="card-stats">{{ statsLine }}</p>
+      <p class="card-stats">
+        <span class="card-date">{{ creationDate }}</span>
+        <span v-if="viewCount || readCount || clapsCount">&bull;</span>
+        <span v-if="viewCount" class="stat-item"
+          ><i class="fa-solid fa-eye"></i><span class="stat-num">{{ viewCount }}</span></span
+        >
+        <span v-if="readCount" class="stat-item"
+          ><i class="fa-solid fa-book-open"></i><span class="stat-num">{{ readCount }}</span></span
+        >
+        <span v-if="clapsCount" class="stat-item"
+          ><i class="fa-solid fa-hands-clapping"></i><span class="stat-num">{{ clapsCount }}</span></span
+        >
+      </p>
     </div>
   </div>
 </template>
@@ -50,23 +61,6 @@ export default {
     clapsCount: {
       type: Number,
       required: false,
-    },
-  },
-  computed: {
-    statsLine() {
-      let parts = [];
-
-      if (this.viewCount) {
-        parts.push(`${this.viewCount} views`);
-      }
-      if (this.readCount) {
-        parts.push(`${this.readCount} reads`);
-      }
-      if (this.clapsCount) {
-        parts.push(`${this.clapsCount} claps`);
-      }
-
-      return parts.join(" • ");
     },
   },
   data() {
@@ -127,11 +121,23 @@ img {
 
 .card-date {
   font-weight: bold;
-  margin: 0;
 }
 
 .card-stats {
-  margin: var(--gap-xs) 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--gap-sm);
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-xs);
+}
+
+.stat-item i {
+  color: var(--color-secondary);
 }
 
 @media screen and (max-width: 2000px) {
