@@ -20,6 +20,10 @@
       <button class="clap-button" @click="handleClap" :disabled="userClapCount >= maxPossibleClaps || isClapping">
         <i class="fa-solid fa-hands-clapping"></i>
         <span>{{ totalClapCount }}</span>
+
+        <div v-if="showClapAnimation" class="clap-animation-circle" :key="userClapCount" @animationend="onAnimationEnd">
+          +{{ userClapCount }}
+        </div>
       </button>
     </div>
 
@@ -90,9 +94,10 @@ export default {
     return {
       cardData: [],
       totalClapCount: 0,
-      maxPossibleClaps: 3,
+      maxPossibleClaps: 30,
       userClapCount: 0,
       isClapping: false,
+      showClapAnimation: false,
     };
   },
   async mounted() {
@@ -154,6 +159,7 @@ export default {
         if (success) {
           this.totalClapCount = claps_count;
           this.userClapCount += 1;
+          this.showClapAnimation = true;
         } else {
           this.$emit("show-toast", {
             message: `Failed to increment clap count: ${message}`,
@@ -168,6 +174,9 @@ export default {
       } finally {
         this.isClapping = false;
       }
+    },
+    onAnimationEnd() {
+      this.showClapAnimation = false;
     },
   },
 };
@@ -206,6 +215,7 @@ export default {
 }
 
 .clap-button {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -214,21 +224,53 @@ export default {
   cursor: pointer;
   font-size: var(--font-size-big-medium);
   color: var(--color-secondary);
-  transition: transform 0.1s;
+  transition: color 0.3s ease;
 }
 
-.clap-button:active {
-  transform: scale(1.2);
+.clap-button:hover {
+  color: var(--color-secondary-hover);
 }
 
 .clap-button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-  transform: none;
 }
 
-.clap-button:disabled:active {
-  transform: none;
+.clap-animation-circle {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: white;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  font-size: var(--font-size-extra-small);
+  font-weight: bold;
+  pointer-events: none;
+  animation: clapRiseAndFade 1.5s ease-out forwards;
+}
+
+@keyframes clapRiseAndFade {
+  0% {
+    transform: translateY(0) scale(0.5);
+    opacity: 1;
+  }
+  15% {
+    transform: translateY(-20px) scale(1);
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(-20px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20px) scale(0.5);
+    opacity: 0;
+  }
 }
 
 @media screen and (max-width: 1500px) {
