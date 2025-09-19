@@ -163,7 +163,6 @@ export default {
   top: calc(100% + 8px);
   left: 0;
   width: 100%;
-  max-height: 200px;
   box-sizing: border-box;
   background-color: var(--color-background);
   border: 1px solid var(--color-disabled);
