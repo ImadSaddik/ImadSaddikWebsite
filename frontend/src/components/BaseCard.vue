@@ -4,7 +4,10 @@
       <img :src="imageSrc" :alt="altText" />
     </div>
     <h3 class="card-title">{{ title }}</h3>
-    <p class="card-subtitle">{{ subTitle }}</p>
+    <div class="card-subtitle">
+      <p class="card-date">{{ creationDate }}</p>
+      <p class="card-stats">{{ statsLine }}</p>
+    </div>
   </div>
 </template>
 
@@ -44,20 +47,26 @@ export default {
       type: Number,
       required: false,
     },
+    clapsCount: {
+      type: Number,
+      required: false,
+    },
   },
   computed: {
-    subTitle() {
-      let stringBuilder = "";
-      if (this.creationDate) {
-        stringBuilder += this.creationDate;
-      }
+    statsLine() {
+      let parts = [];
+
       if (this.viewCount) {
-        stringBuilder += ` - ${this.viewCount} views`;
+        parts.push(`${this.viewCount} views`);
       }
       if (this.readCount) {
-        stringBuilder += ` & ${this.readCount} reads`;
+        parts.push(`${this.readCount} reads`);
       }
-      return stringBuilder;
+      if (this.clapsCount) {
+        parts.push(`${this.clapsCount} claps`);
+      }
+
+      return parts.join(" • ");
     },
   },
   data() {
@@ -72,6 +81,17 @@ export default {
 </script>
 
 <style scoped>
+p {
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+}
+
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .image-wrapper {
   position: relative;
 }
@@ -91,12 +111,6 @@ export default {
   border-color: var(--color-secondary);
 }
 
-img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
 .card-container {
   cursor: pointer;
 }
@@ -108,10 +122,16 @@ img {
 }
 
 .card-subtitle {
-  font-size: var(--font-size-small);
-  color: var(--color-text-secondary);
-  margin-top: var(--gap-xs);
-  margin-bottom: 0;
+  margin-top: var(--gap-sm);
+}
+
+.card-date {
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-stats {
+  margin: var(--gap-xs) 0;
 }
 
 @media screen and (max-width: 2000px) {

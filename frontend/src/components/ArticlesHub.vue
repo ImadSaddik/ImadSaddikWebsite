@@ -66,6 +66,7 @@
             :article-id="card.articleId"
             :view-count="card.viewCount"
             :read-count="card.readCount"
+            :claps-count="card.clapsCount"
           />
         </div>
 

@@ -87,6 +87,7 @@ class MeilisearchService:
                 creation_date=hit.get("creation_date", ""),
                 view_count=hit.get("view_count", 0),
                 read_count=hit.get("read_count", 0),
+                claps_count=hit.get("claps_count", 0),
                 ranking_score=hit.get("_rankingScore"),
             )
             for hit in results["hits"]
@@ -219,6 +220,7 @@ class MeilisearchService:
                 creation_date=hit.creation_date,
                 view_count=hit.view_count,
                 read_count=hit.read_count,
+                claps_count=hit.claps_count,
             )
             for hit in response.results
         ]
@@ -248,6 +250,7 @@ class MeilisearchService:
                 creation_date=hit.creation_date,
                 view_count=hit.view_count,
                 read_count=hit.read_count,
+                claps_count=hit.claps_count,
             )
             for hit in response.results
         ]
