@@ -159,6 +159,37 @@ class MeilisearchService:
         except Exception as e:
             return {"success": False, "message": str(e), "read_count": 0}
 
+    async def increment_claps_count(self, document_name: str) -> dict:
+        try:
+            response = self.index.get_documents(
+                {"filter": f"name = '{document_name}'", "limit": 100}
+            )
+            chunks = response.results
+
+            if not chunks:
+                return {
+                    "success": False,
+                    "message": "Document not found",
+                    "claps_count": 0,
+                }
+
+            new_claps_count = chunks[0].claps_count + 1
+            documents_to_update = [
+                {"id": chunk.id, "claps_count": new_claps_count} for chunk in chunks
+            ]
+
+            task = self.index.update_documents(documents_to_update)
+            self.client.wait_for_task(task.task_uid)
+
+            return {
+                "success": True,
+                "message": f"Incremented claps count to {new_claps_count}",
+                "claps_count": new_claps_count,
+            }
+
+        except Exception as e:
+            return {"success": False, "message": str(e), "claps_count": 0}
+
     async def get_article_recommendations(
         self, document_name_to_ignore: str, document_type: str
     ) -> RecommendationArticleResponse:
@@ -243,3 +274,30 @@ class MeilisearchService:
 
         except Exception as e:
             return {"success": False, "message": str(e), "documents_count": 0}
+
+    async def get_claps_count(self, document_name: str) -> dict:
+        try:
+            response = self.index.get_documents(
+                {"filter": f"name = '{document_name}'", "limit": 1}
+            )
+            chunks = response.results
+
+            if not chunks:
+                return {
+                    "success": False,
+                    "message": f"Document '{document_name}' not found",
+                    "claps_count": 0,
+                }
+
+            return {
+                "success": True,
+                "message": "Claps count retrieved successfully",
+                "claps_count": chunks[0].claps_count,
+            }
+
+        except Exception as e:
+            return {
+                "success": False,
+                "message": f"Failed to retrieve claps count: {str(e)}",
+                "claps_count": 0,
+            }

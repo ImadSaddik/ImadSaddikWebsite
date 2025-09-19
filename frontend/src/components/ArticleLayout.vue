@@ -16,6 +16,13 @@
       <EditArticleOnGitHub :slug="slug" />
     </div>
 
+    <div class="clap-container">
+      <button class="clap-btn" @click="handleClap" :disabled="userClapCount >= maxPossibleClaps || isClapping">
+        <i class="fa-solid fa-hands-clapping"></i>
+        <span>{{ totalClapCount }}</span>
+      </button>
+    </div>
+
     <ArticleFooter :card-data="cardData" />
   </section>
 </template>
@@ -82,14 +89,36 @@ export default {
   data() {
     return {
       cardData: [],
+      totalClapCount: 0,
+      maxPossibleClaps: 3,
+      userClapCount: 0,
+      isClapping: false,
     };
   },
   async mounted() {
     await this.getArticleRecommendations();
+    await this.getInitialClapCount();
   },
   methods: {
     handleShowToastEvent(data) {
       this.$emit("show-toast", data);
+    },
+    async getInitialClapCount() {
+      try {
+        const response = await axios.get(`/api/articles/${this.slug}/claps-count`);
+        const { success, claps_count } = response.data;
+
+        if (success) {
+          this.totalClapCount = claps_count;
+        } else {
+          throw new Error("Failed to fetch initial clap count");
+        }
+      } catch (error) {
+        this.$emit("show-toast", {
+          message: "Failed to fetch initial clap count",
+          type: "error",
+        });
+      }
     },
     async getArticleRecommendations() {
       try {
@@ -106,6 +135,38 @@ export default {
         });
       } catch (error) {
         this.$emit("show-toast", { message: error.response.data.detail, type: "error" });
+      }
+    },
+    async handleClap() {
+      if (this.isClapping || this.userClapCount >= this.maxPossibleClaps) {
+        return;
+      }
+
+      this.isClapping = true;
+
+      try {
+        const response = await axios.patch(`/api/articles/${this.slug}/increment-claps-count`, {
+          timeout: 10_000,
+        });
+
+        const { success, message, claps_count } = response.data;
+
+        if (success) {
+          this.totalClapCount = claps_count;
+          this.userClapCount += 1;
+        } else {
+          this.$emit("show-toast", {
+            message: `Failed to increment clap count: ${message}`,
+            type: "error",
+          });
+        }
+      } catch (error) {
+        this.$emit("show-toast", {
+          message: "Failed to increment clap count",
+          type: "error",
+        });
+      } finally {
+        this.isClapping = false;
       }
     },
   },
@@ -137,6 +198,37 @@ export default {
   color: var(--color-text-secondary);
   margin: var(--gap-md) 0;
   line-height: 1.6;
+}
+
+.clap-container {
+  display: flex;
+  margin: 2rem 0;
+}
+
+.clap-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: var(--font-size-big-medium);
+  color: var(--color-primary);
+  transition: transform 0.1s;
+}
+
+.clap-btn:active {
+  transform: scale(1.2);
+}
+
+.clap-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.clap-btn:disabled:active {
+  transform: none;
 }
 
 @media screen and (max-width: 1500px) {

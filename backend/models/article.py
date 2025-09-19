@@ -17,6 +17,12 @@ class IncrementReadCountResponse(BaseModel):
     read_count: int
 
 
+class IncrementClapsCountResponse(BaseModel):
+    success: bool
+    message: str
+    claps_count: int
+
+
 class CountDocumentsResponse(BaseModel):
     success: bool
     message: str

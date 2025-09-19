@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from models.article import (
     CountDocumentsResponse,
+    IncrementClapsCountResponse,
     IncrementReadCountResponse,
     IncrementViewCountResponse,
     LatestArticleRequest,
@@ -60,6 +61,29 @@ async def increment_article_read_count(name: str):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@router.patch(
+    "/articles/{name}/increment-claps-count", response_model=IncrementClapsCountResponse
+)
+async def increment_article_claps_count(name: str):
+    try:
+        result = await meilisearch_service.increment_claps_count(name)
+
+        if not result["success"]:
+            raise HTTPException(
+                status_code=404 if "not found" in result["message"] else 500,
+                detail=result["message"],
+            )
+
+        return IncrementClapsCountResponse(
+            success=result["success"],
+            message=result["message"],
+            claps_count=result["claps_count"],
+        )
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @router.post("/articles/recommendations", response_model=RecommendationArticleResponse)
 async def get_article_recommendations(request: RecommendationArticleRequest):
     try:
@@ -103,6 +127,26 @@ async def get_documents_count(article_type: str):
             message=result["message"],
             documents_count=result["documents_count"],
         )
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/articles/{name}/claps-count")
+async def get_article_claps_count(name: str):
+    try:
+        result = await meilisearch_service.get_claps_count(name)
+
+        if not result["success"]:
+            raise HTTPException(
+                status_code=404 if "not found" in result["message"] else 500,
+                detail=result["message"],
+            )
+
+        return {
+            "success": result["success"],
+            "claps_count": result["claps_count"],
+        }
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
