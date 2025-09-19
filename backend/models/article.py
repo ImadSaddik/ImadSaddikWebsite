@@ -34,8 +34,7 @@ class RecommendationArticleRequest(BaseModel):
     articleType: str
 
 
-class RecommendationArticleHit(Hit):
-    pass
+class RecommendationArticleHit(Hit): ...
 
 
 class RecommendationArticleResponse(BaseModel):
@@ -47,8 +46,7 @@ class LatestArticleRequest(BaseModel):
     articleType: str
 
 
-class LatestArticleHit(Hit):
-    pass
+class LatestArticleHit(Hit): ...
 
 
 class LatestArticleResponse(BaseModel):
