@@ -17,7 +17,7 @@
     </div>
 
     <div class="clap-container">
-      <button class="clap-btn" @click="handleClap" :disabled="userClapCount >= maxPossibleClaps || isClapping">
+      <button class="clap-button" @click="handleClap" :disabled="userClapCount >= maxPossibleClaps || isClapping">
         <i class="fa-solid fa-hands-clapping"></i>
         <span>{{ totalClapCount }}</span>
       </button>
@@ -205,7 +205,7 @@ export default {
   margin: 2rem 0;
 }
 
-.clap-btn {
+.clap-button {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -213,21 +213,21 @@ export default {
   background: none;
   cursor: pointer;
   font-size: var(--font-size-big-medium);
-  color: var(--color-primary);
+  color: var(--color-secondary);
   transition: transform 0.1s;
 }
 
-.clap-btn:active {
+.clap-button:active {
   transform: scale(1.2);
 }
 
-.clap-btn:disabled {
+.clap-button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
 }
 
-.clap-btn:disabled:active {
+.clap-button:disabled:active {
   transform: none;
 }
 
