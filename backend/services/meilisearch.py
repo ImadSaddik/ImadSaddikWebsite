@@ -8,7 +8,13 @@ from models.article import (
     RecommendationArticleHit,
     RecommendationArticleResponse,
 )
-from models.search import FacetDistribution, SearchHit, SearchRequest, SearchResponse
+from models.search import (
+    FacetDistribution,
+    SearchHit,
+    SearchRequest,
+    SearchResponse,
+    SortableFields,
+)
 
 
 class MeilisearchService:
@@ -34,12 +40,13 @@ class MeilisearchService:
         return " AND ".join(conditions) if conditions else ""
 
     def get_sorting_criteria(self, data: SearchRequest) -> List[str]:
-        sort_by = data.sortBy.field if data.sortBy else "date"
+        sort_by = data.sortBy.field if data.sortBy else SortableFields.DATE
         sort_order = data.sortBy.order if data.sortBy else "desc"
         field_mapping = {
-            "date": f"creation_date:{sort_order}",
-            "popularity": f"view_count:{sort_order}",
-            "engagement": f"read_count:{sort_order}",
+            SortableFields.DATE: f"creation_date:{sort_order}",
+            SortableFields.POPULARITY: f"view_count:{sort_order}",
+            SortableFields.ENGAGEMENT: f"read_count:{sort_order}",
+            SortableFields.CLAPS: f"claps_count:{sort_order}",
         }
         default_sorting = f"creation_date:{sort_order}"
         return [field_mapping.get(sort_by, default_sorting)]

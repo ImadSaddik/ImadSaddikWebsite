@@ -145,6 +145,7 @@ export default {
         { value: "date", label: "Date" },
         { value: "popularity", label: "Popularity" },
         { value: "engagement", label: "Engagement" },
+        { value: "claps", label: "Claps" },
       ],
 
       selectedYears: [],
