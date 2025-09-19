@@ -11,6 +11,7 @@ class SortableFields(str, Enum):
     POPULARITY = "popularity"
     ENGAGEMENT = "engagement"
     CLAPS = "claps"
+    NONE = ""
 
 
 class SearchFilters(BaseModel):
