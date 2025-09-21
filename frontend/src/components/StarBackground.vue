@@ -1,3 +1,4 @@
+<!-- TODO: Optimize this component so that it does not drop the FPS -->
 <template>
   <canvas id="star-bg"></canvas>
 </template>
