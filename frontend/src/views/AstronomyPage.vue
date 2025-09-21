@@ -18,7 +18,7 @@ import { OTHER_PAGES_VISITED_KEY } from "@/constants.js";
 
 export default {
   name: "AstronomyPage",
-  emits: ["page-visited"],
+  emits: ["show-toast", "page-visited"],
   props: {
     slug: { type: String, required: true },
   },
@@ -32,7 +32,7 @@ export default {
       immediate: true,
       async handler(newSlug) {
         this.astronomyArticleToDisplay = defineAsyncComponent(() => import(`@/astronomy/${newSlug}`));
-        // this.incrementAstronomyArticleViewCount();
+        this.incrementAstronomyArticleViewCount();
       },
     },
   },
@@ -44,7 +44,7 @@ export default {
       this.$emit("show-toast", data);
     },
     handleArticleReadEvent() {
-      // this.incrementAstronomyArticleReadCount();
+      this.incrementAstronomyArticleReadCount();
     },
     async incrementAstronomyArticleViewCount() {
       try {
