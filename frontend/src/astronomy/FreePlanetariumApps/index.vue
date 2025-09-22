@@ -444,6 +444,34 @@
           @open-image-modal="handleOpenImageModal"
         />
       </div>
+
+      <div>
+        <h4 class="article-body-sub-subheader" id="sky-tonight-stargazing-news">
+          <a href="#sky-tonight-stargazing-news">Stargazing news</a>
+        </h4>
+        <p>
+          The team behind Sky Tonight regularly publishes articles and quizzes about astronomy. You can find these by
+          clicking the hamburger menu icon, then selecting the <InlineCode text="Stargazing news" /> option.
+        </p>
+        <p>They also create beautiful infographics. I really enjoy reading these articles and taking the quizzes.</p>
+        <ImageWithCaption
+          :image-src="stargazingNewsSteps"
+          image-alt="Stargazing news in Sky Tonight"
+          image-caption="The <b>Stargazing news</b> section in Sky Tonight provides articles and quizzes about astronomy."
+          @open-image-modal="handleOpenImageModal"
+        />
+      </div>
+
+      <div>
+        <h3 class="article-body-subheader" id="other-applications">
+          <a href="#other-applications">Other applications</a>
+        </h3>
+        <p>
+          I have also used other planetarium apps like <InlineCode text="Star Walk 2" />, <InlineCode text="SkyView" />,
+          and several others. While I no longer use them, they are still solid options. You can try them out and see
+          which one you like best.
+        </p>
+      </div>
     </section>
   </ArticleLayout>
 
@@ -482,6 +510,7 @@ import skyTonightShareEvents from "./sky_tonight_share_events.jpeg";
 import visibleTonightIcon from "./visible_tonight_icon.svg";
 import stargazingIndexInformation from "./stargazing_index_information.svg";
 import changeForecastHorizonStargazingIndex from "./change_forecast_horizon_stargazing_index.svg";
+import stargazingNewsSteps from "./sky_tonight_stargazing_news_steps.svg";
 
 // Components
 import ArticleLayout from "@/components/ArticleLayout.vue";
@@ -533,6 +562,7 @@ export default {
       visibleTonightIcon,
       stargazingIndexInformation,
       changeForecastHorizonStargazingIndex,
+      stargazingNewsSteps,
     };
   },
   mounted() {
