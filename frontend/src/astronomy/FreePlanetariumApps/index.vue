@@ -473,6 +473,20 @@
         </p>
       </div>
     </section>
+
+    <section>
+      <h2 class="article-body-header" id="conclusion">
+        <a href="#conclusion">Conclusion</a>
+      </h2>
+      <p>
+        Exploring the night sky is incredibly easy with free planetarium applications. Over time, I’ve tried many of
+        these apps on both my computer and my phone, and each one has taught me something new about the universe.
+      </p>
+      <p>
+        If you have not already, I encourage you to try some of these tools. You might be surprised by how much you can
+        learn, and how much fun you will have just by looking up.
+      </p>
+    </section>
   </ArticleLayout>
 
   <ImageEnlarger
