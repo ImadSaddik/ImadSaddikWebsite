@@ -317,6 +317,134 @@
         </div>
       </div>
     </section>
+
+    <section>
+      <h2 class="article-body-header" id="mobile-applications">
+        <a href="#mobile-applications">Mobile applications</a>
+      </h2>
+      <p>
+        I have used many planetarium applications on my phone over the years. Currently, I only use
+        <InlineCode text="Sky Tonight" /> and <InlineCode text="SkySafari Legacy" />. Unfortunately, I can't discuss
+        SkySafari Legacy because it is no longer available for download. The other SkySafari versions are paid, and in
+        this article, I only cover free applications that I use.
+      </p>
+
+      <div>
+        <h3 class="article-body-subheader" id="sky-tonight">
+          <a href="#sky-tonight">Sky Tonight</a>
+        </h3>
+        <ImageWithCaption
+          :image-src="scorpiusSkyTonight"
+          image-alt="Scorpius in Sky Tonight"
+          image-caption="A view of the Scorpius constellation as seen from Sky Tonight."
+          @open-image-modal="handleOpenImageModal"
+        />
+        <p>
+          <InlineCode text="Sky Tonight" /> is a free planetarium application developed by
+          <a href="https://vitotechnology.com/" target="_blank">Vito Technology</a> and is available on both
+          <a
+            href="https://play.google.com/store/apps/details?id=com.vitotechnology.sky.tonight.map.star.walk&referrer=utm_source%3Dvitosite%26utm_medium%3Dsky-tonight%26utm_campaign%3Dproduct"
+            target="_blank"
+            >Android</a
+          >
+          and <a href="https://apps.apple.com/us/app/sky-tonight-stargazing-guide/id1570594940" target="_blank">iOS</a>.
+          Vito Technology has also developed other apps, such as
+          <a href="https://starwalk.space/en" target="_blank">Star Walk 2</a>, which I used previously. However, since
+          the launch of Sky Tonight, I have switched to it.
+        </p>
+        <p>
+          I love the graphics and user interface of Sky Tonight. The application has many features that I will discuss
+          below.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="article-body-sub-subheader" id="sky-tonight-calendar">
+          <a href="#sky-tonight-calendar">Calendar</a>
+        </h4>
+        <p>To use the calendar feature, tap the <InlineCode text="calendar" /> icon on the main screen.</p>
+        <ImageWithCaption
+          :image-src="calendarButtonSkyTonight"
+          image-alt="Calendar button in Sky Tonight"
+          image-caption="The <b>calendar</b> button in Sky Tonight opens the calendar view."
+          @open-image-modal="handleOpenImageModal"
+        />
+        <p>
+          The calendar displays a list of interesting celestial events happening today, and you can also select any
+          future date to see upcoming events for that day. Unlike Stellarium, you can't filter events by category or
+          magnitude, but you can view all events by selecting a date.
+        </p>
+        <ImageWithCaption
+          :image-src="skyTonightCalendar"
+          image-alt="Calendar in Sky Tonight"
+          image-caption="The calendar in Sky Tonight shows celestial events for the selected date."
+          @open-image-modal="handleOpenImageModal"
+        />
+        <p>
+          The calendar also shows moon phases. When you tap on a date, you'll see detailed information about the moon
+          phase for that day, including age, illumination, angular size, magnitude, rise and set times, and more.
+        </p>
+        <ImageWithCaption
+          :image-src="skyTonightMoonPhases"
+          image-alt="Moon phases in Sky Tonight"
+          image-caption="Detailed information about the moon phase in Sky Tonight."
+          @open-image-modal="handleOpenImageModal"
+        />
+        <p>
+          There is a tab for meteor showers you can observe, and another tab that provides information about the sky,
+          such as the length of the day, total darkness start and end times, and more.
+        </p>
+        <ImageWithCaption
+          :image-src="skyTonightMeteorShowersAndSkyDetails"
+          image-alt="Meteor showers and sky details in Sky Tonight"
+          image-caption="The <b>meteor showers</b> and <b>sky details</b> tabs in Sky Tonight."
+          @open-image-modal="handleOpenImageModal"
+        />
+        <p>You can also use the <InlineCode text="share" /> button to send calendar information to your friends.</p>
+        <ImageWithCaption
+          :image-src="skyTonightShareEvents"
+          image-alt="Share events in Sky Tonight"
+          image-caption="The <b>share</b> button in Sky Tonight allows you to share celestial event information."
+          @open-image-modal="handleOpenImageModal"
+        />
+      </div>
+
+      <div>
+        <h4 class="article-body-sub-subheader" id="sky-tonight-stargazing-index">
+          <a href="#sky-tonight-stargazing-index">Stargazing index</a>
+        </h4>
+        <p>To use this feature, click on the telescope icon at the bottom of the screen in the main view.</p>
+        <ImageWithCaption
+          :image-src="visibleTonightIcon"
+          image-alt="Visible Tonight icon in Sky Tonight"
+          image-caption="The <b>Visible Tonight</b> icon in Sky Tonight."
+          @open-image-modal="handleOpenImageModal"
+        />
+        <p>
+          The <InlineCode text="Stargazing index" /> feature gathers information about the start and end of the night,
+          the moon phase, light pollution, and the percentage of cloudiness. All of this data is combined to give you a
+          final score from 0 to 100%. A higher score means better conditions for stargazing.
+        </p>
+        <ImageWithCaption
+          :image-src="stargazingIndexInformation"
+          image-alt="Stargazing index information in Sky Tonight"
+          image-caption="The <b>Stargazing index</b> in Sky Tonight provides a score based on various factors affecting stargazing conditions."
+          @open-image-modal="handleOpenImageModal"
+        />
+        <p>
+          You can adjust the forecast horizon to see how the stargazing index changes over time. This is helpful for
+          planning your stargazing sessions. You can choose between <InlineCode text="1 day" />,
+          <InlineCode text="3 days" />, or <InlineCode text="7 days" />. When you select 3 days or 7 days, additional
+          tabs appear, one for each day.
+        </p>
+        <ImageWithCaption
+          :image-src="changeForecastHorizonStargazingIndex"
+          image-alt="Change forecast horizon in Sky Tonight"
+          image-caption="You can change the forecast horizon in the <b>Stargazing index</b> feature of Sky Tonight."
+          @open-image-modal="handleOpenImageModal"
+        />
+      </div>
+    </section>
   </ArticleLayout>
 
   <ImageEnlarger
@@ -345,6 +473,15 @@ import skyWithAndWithoutAtmosphere from "./sky_with_and_without_atmosphere.svg";
 import skyAndViewingWindow from "./sky_and_viewing_window.jpeg";
 import angularDistanceMeasurementPlugin from "./angular_distance_measurement_plugin.svg";
 import pluginsTabStellarium from "./plugins_tab_stellarium.jpeg";
+import scorpiusSkyTonight from "./scorpius_sky_tonight.jpeg";
+import calendarButtonSkyTonight from "./calendar_button_sky_tonight.svg";
+import skyTonightCalendar from "./sky_tonight_calendar.jpeg";
+import skyTonightMoonPhases from "./sky_tonight_moon_phases.jpeg";
+import skyTonightMeteorShowersAndSkyDetails from "./sky_tonight_meteor_showers_and_sky_details.svg";
+import skyTonightShareEvents from "./sky_tonight_share_events.jpeg";
+import visibleTonightIcon from "./visible_tonight_icon.svg";
+import stargazingIndexInformation from "./stargazing_index_information.svg";
+import changeForecastHorizonStargazingIndex from "./change_forecast_horizon_stargazing_index.svg";
 
 // Components
 import ArticleLayout from "@/components/ArticleLayout.vue";
@@ -387,6 +524,15 @@ export default {
       skyAndViewingWindow,
       angularDistanceMeasurementPlugin,
       pluginsTabStellarium,
+      scorpiusSkyTonight,
+      calendarButtonSkyTonight,
+      skyTonightCalendar,
+      skyTonightMoonPhases,
+      skyTonightMeteorShowersAndSkyDetails,
+      skyTonightShareEvents,
+      visibleTonightIcon,
+      stargazingIndexInformation,
+      changeForecastHorizonStargazingIndex,
     };
   },
   mounted() {
