@@ -18,8 +18,9 @@
       </h2>
       <p>
         <a href="https://en.wikipedia.org/wiki/Planetarium_software" target="_blank">Planetarium</a> applications helped
-        me learn a lot about the universe. I read stories about constellations, stars, and planets. I memorized the
-        names of the brightest stars. I learned how to read astronomical data like
+        me learn a lot about the universe. I read stories about
+        <a href="https://en.wikipedia.org/wiki/Constellation" target="_blank">constellations</a>, stars, and planets. I
+        memorized the names of the brightest stars. I learned how to read astronomical data like
         <a href="https://en.wikipedia.org/wiki/Right_ascension" target="_blank">right ascension</a>,
         <a href="https://en.wikipedia.org/wiki/Declination" target="_blank">declination</a>,
         <a href="https://en.wikipedia.org/wiki/Magnitude_(astronomy)" target="_blank">magnitude</a>,
@@ -348,7 +349,7 @@
             >Android</a
           >
           and <a href="https://apps.apple.com/us/app/sky-tonight-stargazing-guide/id1570594940" target="_blank">iOS</a>.
-          Vito Technology has also developed other apps, such as
+          Vito Technology has also developed other applications, such as
           <a href="https://starwalk.space/en" target="_blank">Star Walk 2</a>, which I used previously. However, since
           the launch of Sky Tonight, I have switched to it.
         </p>
@@ -467,9 +468,9 @@
           <a href="#other-applications">Other applications</a>
         </h3>
         <p>
-          I have also used other planetarium apps like <InlineCode text="Star Walk 2" />, <InlineCode text="SkyView" />,
-          and several others. While I no longer use them, they are still solid options. You can try them out and see
-          which one you like best.
+          I have also used other planetarium applications like <InlineCode text="Star Walk 2" />,
+          <InlineCode text="SkyView" />, and several others. While I no longer use them, they are still solid options.
+          You can try them out and see which one you like best.
         </p>
       </div>
     </section>
@@ -480,7 +481,8 @@
       </h2>
       <p>
         Exploring the night sky is incredibly easy with free planetarium applications. Over time, I’ve tried many of
-        these apps on both my computer and my phone, and each one has taught me something new about the universe.
+        these applications on both my computer and my phone, and each one has taught me something new about the
+        universe.
       </p>
       <p>
         If you have not already, I encourage you to try some of these tools. You might be surprised by how much you can
