@@ -139,7 +139,7 @@ export default {
           articleType: this.articleType,
         });
       } catch (error) {
-        this.$emit("show-toast", { message: error.response.data.detail, type: "error" });
+        this.$emit("show-toast", { message: "Failed to fetch article recommendations", type: "error" });
       }
     },
     async handleClap() {
@@ -199,6 +199,11 @@ export default {
 
 .article-body :deep(.article-body-subheader) {
   font-size: var(--font-size-medium);
+  margin: var(--gap-md) 0;
+}
+
+.article-body :deep(.article-body-sub-subheader) {
+  font-size: var(--font-size-big-small);
   margin: var(--gap-md) 0;
 }
 
