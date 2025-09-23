@@ -171,15 +171,17 @@
             the sky will be captured in your images.
           </p>
           <p>
-            You can select your sensor type, and the tool will display details such as the sensor's dimensions, binning,
-            X and Y scale, and rotation angle. You can also choose your telescope and lens configuration, including
+            You can select your sensor type, and the tool will display details such as the sensor's dimensions,
+            <a href="https://en.wikipedia.org/wiki/Pixel_binning" target="_blank">binning</a>, X and Y scale, and
+            rotation angle. You can also choose your telescope and lens configuration, including
             <a href="https://en.wikipedia.org/wiki/Telecompressor" target="_blank">focal reducers</a> or
             <a href="https://en.wikipedia.org/wiki/Extension_tube" target="_blank">extenders</a>, and see the resulting
             field of view and multiplicity.
           </p>
           <p>
-            This makes it easy to plan your astrophotography sessions and ensure your target fits perfectly within your
-            camera's frame.
+            This makes it easy to plan your
+            <a href="https://en.wikipedia.org/wiki/Astrophotography" target="_blank">astrophotography</a> sessions and
+            ensure your target fits perfectly within your camera's frame.
           </p>
           <ImageWithCaption
             :image-src="imageSensorFrameStellarium"
@@ -194,8 +196,10 @@
             <a href="#stellarium-sky-culture">Sky culture</a>
           </h4>
           <p>
-            Stellarium supports a variety of sky cultures, allowing you to view the night sky as interpreted by
-            different cultures around the world. You can choose from a wide range of cultural sky representations.
+            Stellarium supports a variety of
+            <a href="https://en.wikipedia.org/wiki/Cultural_astronomy" target="_blank">sky cultures</a>, allowing you to
+            view the night sky as interpreted by different cultures around the world. You can choose from a wide range
+            of cultural sky representations.
           </p>
           <p>
             To explore these options, click on the <InlineCode text="Sky and viewing options window" /> icon on the left
@@ -242,8 +246,8 @@
           />
           <p>
             To control whether the atmosphere is rendered, check the
-            <InlineCode text="Atmosphere visualization" /> checkbox. For more options, click the wrench icon next to it
-            to adjust temperature, pressure, and other parameters.
+            <InlineCode text="Atmosphere visualization" /> checkbox. For more options, click the
+            <i class="fa-solid fa-wrench"></i> icon next to it to adjust temperature, pressure, and other parameters.
           </p>
           <ImageWithCaption
             :image-src="skyWithAndWithoutAtmosphere"
@@ -277,8 +281,10 @@
           </h4>
           <p>
             Because Stellarium is open source, it offers a wide range of plugins that add extra features to the
-            application. You can find plugins that add quasars, pulsars, simulate periodic meteor showers, and much
-            more.
+            application. You can find plugins that add
+            <a href="https://en.wikipedia.org/wiki/Quasar" target="_blank">quasars</a>,
+            <a href="https://en.wikipedia.org/wiki/Pulsar" target="_blank">pulsars</a>, simulate periodic
+            <a href="https://en.wikipedia.org/wiki/Meteor_shower" target="_blank">meteor showers</a>, and much more.
           </p>
           <p>
             To explore plugins, click on the <InlineCode text="Configuration window" /> icon on the left toolbar or
@@ -293,8 +299,9 @@
             @open-image-modal="handleOpenImageModal"
           />
           <p>
-            For example, I enabled a plugin that measures angular distances between objects in the sky. After restarting
-            Stellarium, I could use this plugin by clicking on the
+            For example, I enabled a plugin that measures
+            <a href="https://en.wikipedia.org/wiki/Angular_distance" target="_blank">angular distances</a> between
+            objects in the sky. After restarting Stellarium, I could use this plugin by clicking on the
             <InlineCode text="angular distance measurement tool" /> on the bottom toolbar.
           </p>
           <ImageWithCaption
@@ -382,8 +389,9 @@
           @open-image-modal="handleOpenImageModal"
         />
         <p>
-          The calendar also shows moon phases. When you tap on a date, you'll see detailed information about the moon
-          phase for that day, including age, illumination, angular size, magnitude, rise and set times, and more.
+          The calendar also shows <a href="https://en.wikipedia.org/wiki/Lunar_phase" target="_blank">moon phases</a>.
+          When you tap on a date, you'll see detailed information about the moon phase for that day, including age,
+          illumination, angular size, magnitude, rise and set times, and more.
         </p>
         <ImageWithCaption
           :image-src="skyTonightMoonPhases"
