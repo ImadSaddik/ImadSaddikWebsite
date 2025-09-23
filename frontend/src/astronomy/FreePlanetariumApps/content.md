@@ -65,15 +65,15 @@ As with the previous features, double-clicking any row in the results table will
 
 For astrophotographers, the `Image sensor frame` feature is extremely useful. It allows you to simulate the field of view of your camera and telescope setup, so you can see exactly what portion of the sky will be captured in your images.
 
-You can select your sensor type, and the tool will display details such as the sensor's dimensions, binning, X and Y scale, and rotation angle. You can also choose your telescope and lens configuration, including [focal reducers](https://en.wikipedia.org/wiki/Telecompressor) or [extenders](https://en.wikipedia.org/wiki/Extension_tube), and see the resulting field of view and multiplicity.
+You can select your sensor type, and the tool will display details such as the sensor's dimensions, [binning](https://en.wikipedia.org/wiki/Pixel_binning), X and Y scale, and rotation angle. You can also choose your telescope and lens configuration, including [focal reducers](https://en.wikipedia.org/wiki/Telecompressor) or [extenders](https://en.wikipedia.org/wiki/Extension_tube), and see the resulting field of view and multiplicity.
 
-This makes it easy to plan your astrophotography sessions and ensure your target fits perfectly within your camera's frame.
+This makes it easy to plan your [astrophotography](https://en.wikipedia.org/wiki/Astrophotography) sessions and ensure your target fits perfectly within your camera's frame.
 
 *The **Image sensor frame** feature in Stellarium helps you visualize your camera and telescope setup.*
 
 #### Sky culture
 
-Stellarium supports a variety of sky cultures, allowing you to view the night sky as interpreted by different cultures around the world. You can choose from a wide range of cultural sky representations.
+Stellarium supports a variety of [sky cultures](https://en.wikipedia.org/wiki/Cultural_astronomy), allowing you to view the night sky as interpreted by different cultures around the world. You can choose from a wide range of cultural sky representations.
 
 To explore these options, click on the `Sky and viewing options window` icon on the left toolbar or press `F4`, then go to the `Sky culture` tab.
 
@@ -101,13 +101,13 @@ You can also adjust other settings, such as making stars twinkle, changing the [
 
 #### Plugins
 
-Because Stellarium is open source, it offers a wide range of plugins that add extra features to the application. You can find plugins that add quasars, pulsars, simulate periodic meteor showers, and much more.
+Because Stellarium is open source, it offers a wide range of plugins that add extra features to the application. You can find plugins that add [quasars](https://en.wikipedia.org/wiki/Quasar), [pulsars](https://en.wikipedia.org/wiki/Pulsar), simulate periodic [meteor showers](https://en.wikipedia.org/wiki/Meteor_shower), and much more.
 
 To explore plugins, click on the `Configuration window` icon on the left toolbar or press `F2`, then go to the `Plugins` tab. Select a plugin and check the `Load at startup` box to enable it. Some plugins have additional settings you can configure by clicking the `Configure` button.
 
 *The **Plugins** tab in Stellarium allows you to manage and configure various plugins.*
 
-For example, I enabled a plugin that measures angular distances between objects in the sky. After restarting Stellarium, I could use this plugin by clicking on the `angular distance measurement tool` on the bottom toolbar.
+For example, I enabled a plugin that measures [angular distances](https://en.wikipedia.org/wiki/Angular_distance) between objects in the sky. After restarting Stellarium, I could use this plugin by clicking on the `angular distance measurement tool` on the bottom toolbar.
 
 *The **angular distance measurement** plugin in Stellarium helps you measure distances between celestial objects.*
 
@@ -139,7 +139,7 @@ The calendar displays a list of interesting celestial events happening today, an
 
 *The calendar in Sky Tonight shows celestial events for the selected date.*
 
-The calendar also shows moon phases. When you tap on a date, you'll see detailed information about the moon phase for that day, including age, illumination, angular size, magnitude, rise and set times, and more.
+The calendar also shows [moon phases](https://en.wikipedia.org/wiki/Lunar_phase). When you tap on a date, you'll see detailed information about the moon phase for that day, including age, illumination, angular size, magnitude, rise and set times, and more.
 
 *Detailed information about the moon phase in Sky Tonight.*
 
