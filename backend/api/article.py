@@ -170,3 +170,23 @@ async def get_all_tags(article_type: str):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/articles/{article_type}/get-all-years")
+async def get_all_years(article_type: str):
+    try:
+        result = await meilisearch_service.get_all_years(article_type)
+
+        if not result["success"]:
+            raise HTTPException(
+                status_code=404 if "not found" in result["message"] else 500,
+                detail=result["message"],
+            )
+
+        return {
+            "success": result["success"],
+            "years": result["years"],
+        }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

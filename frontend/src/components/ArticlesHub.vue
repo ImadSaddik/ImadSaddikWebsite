@@ -150,11 +150,7 @@ export default {
       ],
 
       selectedYears: [],
-      yearOptions: [
-        { value: "2025", label: "2025" },
-        { value: "2024", label: "2024" },
-        { value: "2023", label: "2023" },
-      ],
+      yearOptions: [],
 
       selectedTags: [],
       tagOptions: [],
@@ -185,6 +181,7 @@ export default {
   },
   async mounted() {
     await this.getTags();
+    await this.getYears();
     await this.getCardsData();
     await this.getTotalDocumentsCount();
   },
@@ -291,6 +288,30 @@ export default {
       } catch {
         this.$emit("show-toast", {
           message: "Failed to get tags",
+          type: "error",
+        });
+      }
+    },
+    async getYears() {
+      try {
+        const response = await axios.get(`/api/articles/${this.articleType}/get-all-years`, {
+          timeout: 10_000,
+        });
+        const yearsResponse = response.data;
+        if (yearsResponse.success) {
+          this.yearOptions = yearsResponse.years.map((year) => ({
+            value: year,
+            label: year,
+          }));
+        } else {
+          this.$emit("show-toast", {
+            message: `Failed to get years: ${yearsResponse.message}`,
+            type: "error",
+          });
+        }
+      } catch {
+        this.$emit("show-toast", {
+          message: "Failed to get years",
           type: "error",
         });
       }

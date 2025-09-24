@@ -342,3 +342,34 @@ class MeilisearchService:
                 "message": f"Failed to retrieve tags: {str(e)}",
                 "tags": [],
             }
+
+    async def get_all_years(self, article_type: str) -> dict:
+        try:
+            response = self.index.get_documents(
+                {"filter": f"type = '{article_type}'", "limit": 1000}
+            )
+            chunks = response.results
+
+            if not chunks:
+                return {
+                    "success": False,
+                    "message": f"No documents found for type '{article_type}'",
+                    "years": [],
+                }
+
+            years_set = set()
+            for chunk in chunks:
+                years_set.add(str(chunk.year))
+
+            return {
+                "success": True,
+                "message": "Years retrieved successfully",
+                "years": sorted(list(years_set), reverse=True),
+            }
+
+        except Exception as e:
+            return {
+                "success": False,
+                "message": f"Failed to retrieve years: {str(e)}",
+                "years": [],
+            }
