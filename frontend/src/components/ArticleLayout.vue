@@ -232,7 +232,7 @@ export default {
   transition: color 0.3s ease;
 }
 
-.clap-button:hover {
+.clap-button:active {
   color: var(--color-secondary-hover);
 }
 
@@ -275,6 +275,12 @@ export default {
   100% {
     transform: translateY(-20px) scale(0.5);
     opacity: 0;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .clap-button:hover {
+    color: var(--color-secondary-hover);
   }
 }
 
