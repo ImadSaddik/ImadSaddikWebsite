@@ -61,10 +61,6 @@ import quasarIllustration from "@/assets/illustrations/quasar.svg";
 import horizontalSolarSystemIllustration from "@/assets/illustrations/solarSystemHorizontal.svg";
 import verticalSolarSystemIllustration from "@/assets/illustrations/solarSystemVertical.svg";
 
-// Images
-import coursePlaceholder1 from "@/assets/courses/placeholder_1.svg";
-import coursePlaceholder2 from "@/assets/courses/placeholder_2.svg";
-
 export default {
   name: "HomeView",
   emits: ["page-visited"],
@@ -81,58 +77,17 @@ export default {
       horizontalSolarSystemIllustration,
       verticalSolarSystemIllustration,
 
-      // TODO: Replace these with data from the API in the future
-      coursesCardData: [
-        {
-          imageSrc: coursePlaceholder1,
-          altText: "Course placeholder 1",
-          title: "Image title 1",
-          creationDate: "16 August 2001",
-        },
-        {
-          imageSrc: coursePlaceholder2,
-          altText: "Course placeholder 2",
-          title: "Image title 2",
-          creationDate: "16 August 2001",
-        },
-        {
-          imageSrc: coursePlaceholder1,
-          altText: "Course placeholder 3",
-          title: "Image title 3",
-          creationDate: "16 August 2001",
-        },
-      ],
+      coursesCardData: [],
       blogsCardData: [],
-      universeImagesCardData: [
-        {
-          imageSrc: coursePlaceholder1,
-          altText: "Cosmos image placeholder 1",
-          title: "Cosmos Image Title 1",
-          creationDate: "16 August 2001",
-        },
-        {
-          imageSrc: coursePlaceholder2,
-          altText: "Cosmos image placeholder 2",
-          title: "Cosmos Image Title 2",
-          creationDate: "16 August 2001",
-        },
-        {
-          imageSrc: coursePlaceholder1,
-          altText: "Cosmos image placeholder 3",
-          title: "Cosmos Image Title 3",
-          creationDate: "16 August 2001",
-        },
-      ],
+      universeImagesCardData: [],
     };
   },
   async mounted() {
     document.title = "Imad Saddik";
     this.$emit("page-visited", HOME_PAGE_VISITED_KEY);
     this.blogsCardData = await this.getLatestArticlesPerType("blog-post");
-
-    // TODO: Uncomment these when the articles are written
-    // this.coursesCardData = await this.getLatestArticlesPerType("course-post");
-    // this.universeImagesCardData = await this.getLatestArticlesPerType("astronomy-post");
+    this.coursesCardData = await this.getLatestArticlesPerType("course-post");
+    this.universeImagesCardData = await this.getLatestArticlesPerType("astronomy-post");
   },
   methods: {
     async getLatestArticlesPerType(articleType) {
