@@ -157,11 +157,7 @@ export default {
       ],
 
       selectedTags: [],
-      tagOptions: [
-        { value: "Elasticsearch", label: "Elasticsearch" },
-        { value: "KNN", label: "KNN" },
-        { value: "Semantic search", label: "Semantic search" },
-      ],
+      tagOptions: [],
 
       cardData: [],
       isSearchResponseEmpty: false,
@@ -188,6 +184,7 @@ export default {
     },
   },
   async mounted() {
+    await this.getTags();
     await this.getCardsData();
     await this.getTotalDocumentsCount();
   },
@@ -270,6 +267,30 @@ export default {
       } catch {
         this.$emit("show-toast", {
           message: "Failed to get total documents count",
+          type: "error",
+        });
+      }
+    },
+    async getTags() {
+      try {
+        const response = await axios.get(`/api/articles/${this.articleType}/get-all-tags`, {
+          timeout: 10_000,
+        });
+        const tagsResponse = response.data;
+        if (tagsResponse.success) {
+          this.tagOptions = tagsResponse.tags.map((tag) => ({
+            value: tag,
+            label: tag,
+          }));
+        } else {
+          this.$emit("show-toast", {
+            message: `Failed to get tags: ${tagsResponse.message}`,
+            type: "error",
+          });
+        }
+      } catch {
+        this.$emit("show-toast", {
+          message: "Failed to get tags",
           type: "error",
         });
       }

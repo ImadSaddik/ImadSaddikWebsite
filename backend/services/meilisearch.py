@@ -311,3 +311,34 @@ class MeilisearchService:
                 "message": f"Failed to retrieve claps count: {str(e)}",
                 "claps_count": 0,
             }
+
+    async def get_all_tags(self, article_type: str) -> dict:
+        try:
+            response = self.index.get_documents(
+                {"filter": f"type = '{article_type}'", "limit": 1000}
+            )
+            chunks = response.results
+
+            if not chunks:
+                return {
+                    "success": False,
+                    "message": f"No documents found for type '{article_type}'",
+                    "tags": [],
+                }
+
+            tags_set = set()
+            for chunk in chunks:
+                tags_set.update(chunk.tags)
+
+            return {
+                "success": True,
+                "message": "Tags retrieved successfully",
+                "tags": list(tags_set),
+            }
+
+        except Exception as e:
+            return {
+                "success": False,
+                "message": f"Failed to retrieve tags: {str(e)}",
+                "tags": [],
+            }

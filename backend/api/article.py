@@ -150,3 +150,23 @@ async def get_article_claps_count(name: str):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/articles/{article_type}/get-all-tags")
+async def get_all_tags(article_type: str):
+    try:
+        result = await meilisearch_service.get_all_tags(article_type)
+
+        if not result["success"]:
+            raise HTTPException(
+                status_code=404 if "not found" in result["message"] else 500,
+                detail=result["message"],
+            )
+
+        return {
+            "success": result["success"],
+            "tags": result["tags"],
+        }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
