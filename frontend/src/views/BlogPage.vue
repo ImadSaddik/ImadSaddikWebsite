@@ -54,13 +54,13 @@ export default {
         const { success, message } = response.data;
         if (!success) {
           this.$emit("show-toast", {
-            message: `Failed to increment blog view count: ${message}`,
+            message: `Failed to increment article view count: ${message}`,
             type: "error",
           });
         }
       } catch {
         this.$emit("show-toast", {
-          message: "Failed to increment blog view count",
+          message: "Failed to increment article view count",
           type: "error",
         });
       }
@@ -72,11 +72,11 @@ export default {
         });
         const { success, message } = response.data;
         if (!success) {
-          throw new Error(`Failed to increment blog read count: ${message}`);
+          throw new Error(`Failed to increment article read count: ${message}`);
         }
       } catch {
         this.$emit("show-toast", {
-          message: "Failed to increment blog read count",
+          message: "Failed to increment article read count",
           type: "error",
         });
       }
