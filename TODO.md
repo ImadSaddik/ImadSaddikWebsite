@@ -5,3 +5,4 @@
 - [ ] Padding right is missing on mobile when a toast appears with a large text on it. Fix it!
 - [ ] The load more button on the article hub appears when clicking on a tag even if there are no more articles to load. Fix it!
 - [ ] Update the links to the Udemy courses.
+- [ ] Add a button to clear all the checkboxes in the year and tag filters on the article hub.
