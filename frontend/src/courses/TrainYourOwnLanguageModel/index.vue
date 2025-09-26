@@ -104,7 +104,7 @@ export default {
   },
   data() {
     return {
-      tags: ["LLM", "Transformer", "Fine-tuning", "Attention", "PyTorch"],
+      tags: ["LLM", "Transformer", "Fine-tuning", "Attention", "PyTorch", "Python", "AI", "NLP", "Machine learning"],
       coverImage,
       enlargedImageSrc: "",
       isImageModalVisible: false,
