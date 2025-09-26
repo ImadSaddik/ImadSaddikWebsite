@@ -1,18 +1,18 @@
 <template>
   <div class="bullet-point">
-    <img :src="galaxyIcon" alt="A galaxy icon" />
+    <img :src="starsIcon" alt="A galaxy icon" />
     <span><slot></slot></span>
   </div>
 </template>
 
 <script>
-import galaxyIcon from "@/assets/galaxy_bullet_point.svg";
+import starsIcon from "@/assets/stars_bullet_point.svg";
 
 export default {
   name: "BulletPoint",
   data() {
     return {
-      galaxyIcon,
+      starsIcon,
     };
   },
 };
