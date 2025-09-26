@@ -165,7 +165,7 @@ async def get_all_tags(article_type: str):
 
         return {
             "success": result["success"],
-            "tags": result["tags"],
+            "tags": sorted(result["tags"]),
         }
 
     except Exception as e:
