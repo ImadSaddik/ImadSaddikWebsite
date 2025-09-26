@@ -80,7 +80,7 @@ import { calculateReadingTime } from "@/utils.js";
 import markdownContent from "./content.md";
 
 // Images
-import coverImage from "./coverImage.jpg";
+import coverImage from "./coverImage.svg";
 
 // Components
 import ImageEnlarger from "@/components/ImageEnlarger.vue";
