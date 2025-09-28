@@ -1,5 +1,5 @@
 <template>
-  <div class="card-container" @click="handleCardClick">
+  <RouterLink :to="articleRoute" class="card-container">
     <div class="image-wrapper">
       <img :src="imageSrc" :alt="altText" />
     </div>
@@ -19,7 +19,7 @@
         >
       </p>
     </div>
-  </div>
+  </RouterLink>
 </template>
 
 <script>
@@ -63,14 +63,15 @@ export default {
       required: false,
     },
   },
+  computed: {
+    articleRoute() {
+      return { name: this.articleType, params: { slug: this.articleId } };
+    },
+  },
   data() {
     return {};
   },
-  methods: {
-    handleCardClick() {
-      this.$router.push({ name: this.articleType, params: { slug: this.articleId } });
-    },
-  },
+  methods: {},
 };
 </script>
 
@@ -84,6 +85,11 @@ img {
   width: 100%;
   height: auto;
   display: block;
+}
+
+a.card-container {
+  text-decoration: none;
+  color: inherit;
 }
 
 .image-wrapper {
