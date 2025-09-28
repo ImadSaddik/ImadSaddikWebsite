@@ -9,13 +9,16 @@
       @input="updateSearchQuery($event.target.value)"
       @keydown.enter="sendRequestToPerformSearch"
     />
-    <i
-      v-if="modelValue"
-      class="fa-solid fa-times fa-lg search-clear"
-      @click="clearSearch"
-      aria-label="Clear search"
-      role="button"
-    ></i>
+    <div v-if="modelValue" class="search-actions">
+      <i class="fa-solid fa-times fa-lg search-clear" @click="clearSearch" aria-label="Clear search" role="button"></i>
+      <i
+        class="fa-solid fa-paper-plane search-send"
+        @click="sendRequestToPerformSearch"
+        aria-label="Perform search"
+        role="button"
+        title="Click to search or press Enter"
+      ></i>
+    </div>
   </div>
 </template>
 
@@ -53,36 +56,41 @@ export default {
 
 <style scoped>
 .search-bar {
-  position: relative;
   display: flex;
   align-items: center;
   width: 100%;
-}
-
-.search-icon {
-  position: absolute;
-  left: var(--gap-sm);
-  color: var(--color-text-secondary);
-  z-index: 1;
-}
-
-.search-input {
-  width: 100%;
-  background: var(--color-background);
   border: 4px solid var(--color-disabled);
-  padding: var(--gap-sm) var(--gap-xl);
-  font-size: var(--font-size-small);
-  color: var(--color-text-primary);
-  box-sizing: border-box;
   transition: border-color 0.3s ease;
 }
 
-.search-input:hover {
+.search-bar:hover {
   border-color: var(--color-primary);
 }
 
-.search-input:focus {
+.search-bar:focus-within {
   border-color: var(--color-primary);
+}
+
+.search-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin-left: var(--gap-xs);
+  color: var(--color-text-secondary);
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  background: var(--color-background);
+  padding: var(--gap-sm) var(--gap-xs);
+  font-size: var(--font-size-small);
+  color: var(--color-text-primary);
+}
+
+.search-input:focus {
   outline: none;
 }
 
@@ -90,16 +98,35 @@ export default {
   color: var(--color-text-secondary);
 }
 
-.search-clear {
-  position: absolute;
-  right: var(--gap-sm);
+.search-actions {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-right: var(--gap-xs);
+}
+
+.search-send {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
   color: var(--color-text-secondary);
-  z-index: 1;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.search-send:hover {
+  color: var(--color-primary);
+}
+
+.search-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: var(--color-text-secondary);
   cursor: pointer;
   transition: color 0.3s ease;
 }
