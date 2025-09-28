@@ -38,6 +38,13 @@
             <i class="fa-solid" :class="yearExpanded ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
           </h2>
           <div v-if="yearExpanded" class="collapsible-content">
+            <button
+              v-if="selectedYears.length > 0"
+              class="unselect-all-selected-checkboxes-button"
+              @click="clearAllYears"
+            >
+              Clear all years
+            </button>
             <CheckboxGroup v-model="selectedYears" :options="yearOptions" />
           </div>
         </div>
@@ -48,6 +55,13 @@
             <i class="fa-solid" :class="tagsExpanded ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
           </h2>
           <div v-if="tagsExpanded" class="collapsible-content">
+            <button
+              v-if="selectedTags.length > 0"
+              class="unselect-all-selected-checkboxes-button"
+              @click="clearAllTags"
+            >
+              Clear all tags
+            </button>
             <CheckboxGroup v-model="selectedTags" :options="tagOptions" />
           </div>
         </div>
@@ -198,6 +212,12 @@ export default {
     setSortOrder(order) {
       this.sortOrder = order;
       this.performSearchRequest();
+    },
+    clearAllTags() {
+      this.selectedTags = [];
+    },
+    clearAllYears() {
+      this.selectedYears = [];
     },
     async getCardsData() {
       const data = {
@@ -447,6 +467,24 @@ p {
 .order-options i.selected {
   background-color: var(--color-primary);
   color: var(--color-background);
+}
+
+.unselect-all-selected-checkboxes-button {
+  margin: 0 0 var(--gap-md) 0;
+  padding: var(--gap-xs) var(--gap-md);
+  font-size: var(--font-size-extra-small);
+  color: var(--color-text-primary);
+  background-color: transparent;
+  border: 4px solid var(--color-disabled);
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.unselect-all-selected-checkboxes-button:hover {
+  color: black;
+  border-color: var(--color-primary);
+  background-color: var(--color-primary);
 }
 
 @media screen and (max-width: 1100px) {
