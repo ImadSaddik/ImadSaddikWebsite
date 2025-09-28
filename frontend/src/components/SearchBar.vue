@@ -39,6 +39,7 @@ export default {
   methods: {
     clearSearch() {
       this.$emit("update:modelValue", "");
+      this.$emit("perform-search");
     },
     updateSearchQuery(searchQuery) {
       this.$emit("update:modelValue", searchQuery);
