@@ -1,6 +1,6 @@
 <template>
   <section>
-    <ul class="checkbox-group">
+    <ul v-if="options.length > 0" class="checkbox-group">
       <li v-for="option in options" class="checkbox-item" :key="option.value" @click="toggleSelection(option.value)">
         <input
           type="checkbox"
@@ -13,6 +13,9 @@
         >
       </li>
     </ul>
+    <div v-else>
+      <p>No options available</p>
+    </div>
   </section>
 </template>
 
@@ -53,6 +56,11 @@ export default {
 </script>
 
 <style scoped>
+p {
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+}
+
 .checkbox-group {
   display: flex;
   flex-direction: column;
