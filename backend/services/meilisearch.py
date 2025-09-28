@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List
 
 import meilisearch
 from core.config import settings
@@ -51,9 +51,7 @@ class MeilisearchService:
         default_sorting = f"creation_date:{sort_order}"
         return [field_mapping.get(sort_by, default_sorting)]
 
-    async def search(
-        self, request: SearchRequest, query_vector: Optional[List[float]]
-    ) -> SearchResponse:
+    async def search(self, request: SearchRequest) -> SearchResponse:
         filter_conditions = self.get_filter_conditions(request)
         sorting_criteria = self.get_sorting_criteria(request)
 
@@ -64,13 +62,6 @@ class MeilisearchService:
             "facets": ["tags", "year"],
             "limit": request.size,
         }
-
-        if query_vector:
-            search_parameters["vector"] = query_vector
-            search_parameters["hybrid"] = {
-                "embedder": "my_embedder",
-                "semanticRatio": 0.5,
-            }
 
         results = self.index.search(query=request.query, opt_params=search_parameters)
 
