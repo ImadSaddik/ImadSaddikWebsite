@@ -270,26 +270,24 @@ export default {
       this.isSearchResponseEmpty = !searchResponse || searchResponse.hits.length === 0;
     },
     updateTagsFromFacetDistribution(tagsFacet) {
-      // Convert to array of objects with count and sort by count descending
       const sortedTags = Object.entries(tagsFacet)
         .map(([tag, count]) => ({
           value: tag,
           label: tag,
           count: count,
         }))
-        .sort((a, b) => b.count - a.count);
+        .sort((firstTag, secondTag) => secondTag.count - firstTag.count);
 
       this.tagOptions = sortedTags;
     },
     updateYearsFromFacetDistribution(yearsFacet) {
-      // Convert to array of objects with count and sort by count descending
       const sortedYears = Object.entries(yearsFacet)
         .map(([year, count]) => ({
           value: year,
           label: year,
           count: count,
         }))
-        .sort((a, b) => b.count - a.count);
+        .sort((firstYear, secondYear) => secondYear.count - firstYear.count);
 
       this.yearOptions = sortedYears;
     },
