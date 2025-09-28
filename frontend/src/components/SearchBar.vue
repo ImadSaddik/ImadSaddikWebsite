@@ -10,7 +10,13 @@
       @keydown.enter="sendRequestToPerformSearch"
     />
     <div v-if="modelValue" class="search-actions">
-      <i class="fa-solid fa-times fa-lg search-clear" @click="clearSearch" aria-label="Clear search" role="button"></i>
+      <i
+        class="fa-solid fa-times fa-lg search-clear"
+        @click="clearSearch"
+        aria-label="Clear search"
+        role="button"
+        title="Click to clear search"
+      ></i>
       <i
         class="fa-solid fa-paper-plane search-send"
         @click="sendRequestToPerformSearch"
@@ -20,6 +26,7 @@
       ></i>
     </div>
   </div>
+  <p>To search, type your query and press Enter or click the search icon on the right.</p>
 </template>
 
 <script>
@@ -55,6 +62,12 @@ export default {
 </script>
 
 <style scoped>
+p {
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+  margin: var(--gap-sm) 0;
+}
+
 .search-bar {
   display: flex;
   align-items: center;
