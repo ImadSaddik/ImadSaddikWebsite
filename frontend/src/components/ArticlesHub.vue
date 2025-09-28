@@ -158,8 +158,8 @@ export default {
       sortOption: "",
       sortOptions: [
         { value: "date", label: "Date" },
-        { value: "popularity", label: "Popularity" },
-        { value: "engagement", label: "Engagement" },
+        { value: "popularity", label: "Popularity (Views)" },
+        { value: "engagement", label: "Engagement (Reads)" },
         { value: "claps", label: "Claps" },
       ],
 
