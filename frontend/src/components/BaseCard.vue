@@ -5,9 +5,9 @@
     </div>
     <h3 class="card-title">{{ title }}</h3>
     <div class="card-subtitle">
+      <p class="card-date">{{ creationDate }}</p>
+      <p v-if="canShowDotSeparator" class="card-dot-separator">&bull;</p>
       <p class="card-stats">
-        <span class="card-date">{{ creationDate }}</span>
-        <span v-if="viewCount || readCount || clapsCount">&bull;</span>
         <span v-if="viewCount" class="stat-item"
           ><i class="fa-solid fa-eye"></i><span class="stat-num">{{ viewCount }}</span></span
         >
@@ -67,6 +67,9 @@ export default {
     articleRoute() {
       return { name: this.articleType, params: { slug: this.articleId } };
     },
+    canShowDotSeparator() {
+      return this.viewCount || this.readCount || this.clapsCount;
+    },
   },
   data() {
     return {};
@@ -79,6 +82,7 @@ export default {
 p {
   font-size: var(--font-size-small);
   color: var(--color-text-secondary);
+  margin: 0;
 }
 
 img {
@@ -122,11 +126,10 @@ a.card-container {
 }
 
 .card-subtitle {
+  display: flex;
+  align-items: center;
   margin-top: var(--gap-sm);
-}
-
-.card-date {
-  font-weight: bold;
+  gap: var(--gap-sm);
 }
 
 .card-stats {
@@ -152,9 +155,16 @@ a.card-container {
   }
 }
 
-@media screen and (max-width: 1100px) {
-  .card-title {
-    margin-top: var(--gap-xs);
+@media screen and (max-width: 900px) {
+  .card-subtitle {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: var(--gap-sm);
+    gap: var(--gap-xs);
+  }
+
+  .card-dot-separator {
+    display: none;
   }
 }
 </style>
