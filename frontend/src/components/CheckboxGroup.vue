@@ -8,7 +8,9 @@
           :value="option.value"
           :checked="isSelected(option.value)"
         />
-        <label :for="`checkbox-${option.value}`" @click.prevent>{{ option.label }}</label>
+        <label :for="`checkbox-${option.value}`" @click.prevent
+          >{{ option.label }} <span class="checkbox-count">({{ option.count }})</span></label
+        >
       </li>
     </ul>
   </section>
@@ -116,5 +118,10 @@ export default {
   font-size: var(--font-size-small);
   cursor: pointer;
   user-select: none;
+}
+
+.checkbox-item label .checkbox-count {
+  color: var(--color-text-secondary);
+  font-weight: normal;
 }
 </style>

@@ -1,6 +1,5 @@
 from fastapi import APIRouter, HTTPException
 from models.article import (
-    CountDocumentsResponse,
     IncrementClapsCountResponse,
     IncrementReadCountResponse,
     IncrementViewCountResponse,
@@ -109,29 +108,6 @@ async def get_latest_articles(request: LatestArticleRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.get(
-    "/articles/{article_type}/count-documents", response_model=CountDocumentsResponse
-)
-async def get_documents_count(article_type: str):
-    try:
-        result = await meilisearch_service.get_documents_count(article_type)
-
-        if not result["success"]:
-            raise HTTPException(
-                status_code=404 if "not found" in result["message"] else 500,
-                detail=result["message"],
-            )
-
-        return CountDocumentsResponse(
-            success=result["success"],
-            message=result["message"],
-            documents_count=result["documents_count"],
-        )
-
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
 @router.get("/articles/{name}/claps-count")
 async def get_article_claps_count(name: str):
     try:
@@ -146,46 +122,6 @@ async def get_article_claps_count(name: str):
         return {
             "success": result["success"],
             "claps_count": result["claps_count"],
-        }
-
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-@router.get("/articles/{article_type}/get-all-tags")
-async def get_all_tags(article_type: str):
-    try:
-        result = await meilisearch_service.get_all_tags(article_type)
-
-        if not result["success"]:
-            raise HTTPException(
-                status_code=404 if "not found" in result["message"] else 500,
-                detail=result["message"],
-            )
-
-        return {
-            "success": result["success"],
-            "tags": sorted(result["tags"]),
-        }
-
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-@router.get("/articles/{article_type}/get-all-years")
-async def get_all_years(article_type: str):
-    try:
-        result = await meilisearch_service.get_all_years(article_type)
-
-        if not result["success"]:
-            raise HTTPException(
-                status_code=404 if "not found" in result["message"] else 500,
-                detail=result["message"],
-            )
-
-        return {
-            "success": result["success"],
-            "years": result["years"],
         }
 
     except Exception as e:

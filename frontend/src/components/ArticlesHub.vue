@@ -194,10 +194,7 @@ export default {
     },
   },
   async mounted() {
-    await this.getTags();
-    await this.getYears();
     await this.getCardsData();
-    await this.getTotalDocumentsCount();
   },
   methods: {
     toggleSortingExpanded() {
@@ -258,6 +255,11 @@ export default {
           hits,
           articleType: this.articleType,
         });
+        this.totalDocumentsInIndex = searchResponse?.total_hits || 0;
+        const facetDistribution = searchResponse?.facet_distribution || {};
+
+        this.updateTagsFromFacetDistribution(facetDistribution.tags || {});
+        this.updateYearsFromFacetDistribution(facetDistribution.year || {});
       } catch {
         this.$emit("show-toast", {
           message: "Failed to perform search",
@@ -267,74 +269,29 @@ export default {
 
       this.isSearchResponseEmpty = !searchResponse || searchResponse.hits.length === 0;
     },
-    async getTotalDocumentsCount() {
-      try {
-        const response = await axios.get(`/api/articles/${this.articleType}/count-documents`, {
-          timeout: 10_000,
-        });
-        const countResponse = response.data;
-        if (countResponse.success) {
-          this.totalDocumentsInIndex = countResponse.documents_count;
-        } else {
-          this.$emit("show-toast", {
-            message: `Failed to get total documents count: ${countResponse.message}`,
-            type: "error",
-          });
-        }
-      } catch {
-        this.$emit("show-toast", {
-          message: "Failed to get total documents count",
-          type: "error",
-        });
-      }
+    updateTagsFromFacetDistribution(tagsFacet) {
+      // Convert to array of objects with count and sort by count descending
+      const sortedTags = Object.entries(tagsFacet)
+        .map(([tag, count]) => ({
+          value: tag,
+          label: tag,
+          count: count,
+        }))
+        .sort((a, b) => b.count - a.count);
+
+      this.tagOptions = sortedTags;
     },
-    async getTags() {
-      try {
-        const response = await axios.get(`/api/articles/${this.articleType}/get-all-tags`, {
-          timeout: 10_000,
-        });
-        const tagsResponse = response.data;
-        if (tagsResponse.success) {
-          this.tagOptions = tagsResponse.tags.map((tag) => ({
-            value: tag,
-            label: tag,
-          }));
-        } else {
-          this.$emit("show-toast", {
-            message: `Failed to get tags: ${tagsResponse.message}`,
-            type: "error",
-          });
-        }
-      } catch {
-        this.$emit("show-toast", {
-          message: "Failed to get tags",
-          type: "error",
-        });
-      }
-    },
-    async getYears() {
-      try {
-        const response = await axios.get(`/api/articles/${this.articleType}/get-all-years`, {
-          timeout: 10_000,
-        });
-        const yearsResponse = response.data;
-        if (yearsResponse.success) {
-          this.yearOptions = yearsResponse.years.map((year) => ({
-            value: year,
-            label: year,
-          }));
-        } else {
-          this.$emit("show-toast", {
-            message: `Failed to get years: ${yearsResponse.message}`,
-            type: "error",
-          });
-        }
-      } catch {
-        this.$emit("show-toast", {
-          message: "Failed to get years",
-          type: "error",
-        });
-      }
+    updateYearsFromFacetDistribution(yearsFacet) {
+      // Convert to array of objects with count and sort by count descending
+      const sortedYears = Object.entries(yearsFacet)
+        .map(([year, count]) => ({
+          value: year,
+          label: year,
+          count: count,
+        }))
+        .sort((a, b) => b.count - a.count);
+
+      this.yearOptions = sortedYears;
     },
   },
 };

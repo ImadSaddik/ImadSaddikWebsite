@@ -250,32 +250,6 @@ class MeilisearchService:
             total_hits=len(hits),
         )
 
-    async def get_documents_count(self, document_type: str) -> dict:
-        try:
-            response = self.index.get_documents(
-                {
-                    "filter": f"type = '{document_type}' AND chunk_number = 0",
-                    "limit": 1000,
-                }
-            )
-            chunks = response.results
-
-            if not chunks:
-                return {
-                    "success": False,
-                    "message": "No documents found",
-                    "documents_count": 0,
-                }
-
-            return {
-                "success": True,
-                "message": f"Found {len(chunks)} documents",
-                "documents_count": len(chunks),
-            }
-
-        except Exception as e:
-            return {"success": False, "message": str(e), "documents_count": 0}
-
     async def get_claps_count(self, document_name: str) -> dict:
         try:
             response = self.index.get_documents(
@@ -301,66 +275,4 @@ class MeilisearchService:
                 "success": False,
                 "message": f"Failed to retrieve claps count: {str(e)}",
                 "claps_count": 0,
-            }
-
-    async def get_all_tags(self, article_type: str) -> dict:
-        try:
-            response = self.index.get_documents(
-                {"filter": f"type = '{article_type}'", "limit": 1000}
-            )
-            chunks = response.results
-
-            if not chunks:
-                return {
-                    "success": False,
-                    "message": f"No documents found for type '{article_type}'",
-                    "tags": [],
-                }
-
-            tags_set = set()
-            for chunk in chunks:
-                tags_set.update(chunk.tags)
-
-            return {
-                "success": True,
-                "message": "Tags retrieved successfully",
-                "tags": list(tags_set),
-            }
-
-        except Exception as e:
-            return {
-                "success": False,
-                "message": f"Failed to retrieve tags: {str(e)}",
-                "tags": [],
-            }
-
-    async def get_all_years(self, article_type: str) -> dict:
-        try:
-            response = self.index.get_documents(
-                {"filter": f"type = '{article_type}'", "limit": 1000}
-            )
-            chunks = response.results
-
-            if not chunks:
-                return {
-                    "success": False,
-                    "message": f"No documents found for type '{article_type}'",
-                    "years": [],
-                }
-
-            years_set = set()
-            for chunk in chunks:
-                years_set.add(str(chunk.year))
-
-            return {
-                "success": True,
-                "message": "Years retrieved successfully",
-                "years": sorted(list(years_set), reverse=True),
-            }
-
-        except Exception as e:
-            return {
-                "success": False,
-                "message": f"Failed to retrieve years: {str(e)}",
-                "years": [],
             }
