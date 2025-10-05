@@ -10,6 +10,9 @@ import notFoundIllustration from "@/assets/404_page.svg";
 
 export default {
   name: "NotFoundPage",
+  mounted() {
+    document.title = "Page not found";
+  },
   data() {
     return {
       notFoundIllustration,
