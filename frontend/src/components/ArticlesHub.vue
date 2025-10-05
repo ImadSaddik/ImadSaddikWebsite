@@ -194,6 +194,10 @@ export default {
     },
   },
   async mounted() {
+    const selectedTag = this.$route.query.selectedTag;
+    if (selectedTag) {
+      this.selectedTags = [selectedTag];
+    }
     await this.getCardsData();
   },
   methods: {

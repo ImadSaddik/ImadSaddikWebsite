@@ -8,6 +8,7 @@
       :creation-date="creationDate"
       :reading-time="readingTime"
       :markdown-content="markdownContent"
+      :article-type="articleType"
       @show-toast="handleShowToastEvent"
     />
 

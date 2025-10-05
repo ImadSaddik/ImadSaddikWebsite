@@ -3,7 +3,7 @@
     <h1 class="article-header-title">{{ title }}</h1>
     <p class="article-header-subtitle">{{ subTitle }}</p>
     <div class="article-header-tags">
-      <BaseTag v-for="tag in articleTags" :key="tag" :name="tag" />
+      <BaseTag v-for="tag in articleTags" :key="tag" :name="tag" :article-type="articleType" />
     </div>
 
     <img class="article-header-cover-image" :src="coverImage" alt="" />
@@ -54,6 +54,10 @@ export default {
     },
     articleTags: {
       type: Array,
+      required: true,
+    },
+    articleType: {
+      type: String,
       required: true,
     },
     coverImage: {
