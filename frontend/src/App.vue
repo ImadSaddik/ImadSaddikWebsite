@@ -1,10 +1,15 @@
 <template>
   <NavBar :visited-page="visitedPage" />
   <RouterView @show-toast="handleShowToastEvent" @page-visited="handlePageVisitedEvent" />
-  <StarBackground v-if="effectsEnabled" />
-  <MeteorShowers v-if="effectsEnabled" />
+  <StarBackground v-if="starEffectEnabled" />
+  <MeteorShowers v-if="cometEffectEnabled" />
   <ScrollBackToTop />
-  <FooterSection :effects-enabled="effectsEnabled" @effects-toggle="handleEffectsToggle" />
+  <FooterSection
+    :star-effect-enabled="starEffectEnabled"
+    :comet-effect-enabled="cometEffectEnabled"
+    @star-effect-toggle="handleStarEffectToggle"
+    @comet-effect-toggle="handleCometEffectToggle"
+  />
   <ToastNotificationManager ref="toastManager" />
 </template>
 
@@ -17,7 +22,7 @@ import FooterSection from "@/components/FooterSection.vue";
 import ToastNotificationManager from "@/components/ToastNotificationManager.vue";
 
 // Constants
-import { EFFECTS_TOGGLE_LOCAL_STORAGE_KEY } from "@/constants";
+import { STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, COMET_EFFECT_TOGGLE_LOCAL_STORAGE_KEY } from "@/constants";
 
 export default {
   name: "App",
@@ -31,21 +36,29 @@ export default {
   },
   data() {
     return {
-      effectsEnabled: true,
       visitedPage: "",
+      starEffectEnabled: true,
+      cometEffectEnabled: true,
     };
   },
   mounted() {
     this.loadEffectsPreference();
   },
   methods: {
-    handleEffectsToggle(enabled) {
-      this.effectsEnabled = enabled;
+    handleStarEffectToggle(enabled) {
+      this.starEffectEnabled = enabled;
+    },
+    handleCometEffectToggle(enabled) {
+      this.cometEffectEnabled = enabled;
     },
     loadEffectsPreference() {
-      const storedEffectsEnabled = localStorage.getItem(EFFECTS_TOGGLE_LOCAL_STORAGE_KEY);
-      if (storedEffectsEnabled !== null) {
-        this.effectsEnabled = JSON.parse(storedEffectsEnabled);
+      const storedStarEffectEnabled = localStorage.getItem(STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY);
+      const storedCometEffectEnabled = localStorage.getItem(COMET_EFFECT_TOGGLE_LOCAL_STORAGE_KEY);
+      if (storedStarEffectEnabled !== null) {
+        this.starEffectEnabled = JSON.parse(storedStarEffectEnabled);
+      }
+      if (storedCometEffectEnabled !== null) {
+        this.cometEffectEnabled = JSON.parse(storedCometEffectEnabled);
       }
     },
     handleShowToastEvent(data) {

@@ -1,4 +1,5 @@
-export const EFFECTS_TOGGLE_LOCAL_STORAGE_KEY = "effectsEnabled";
+export const STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY = "starEffectEnabled";
+export const COMET_EFFECT_TOGGLE_LOCAL_STORAGE_KEY = "cometEffectEnabled";
 
 export const HOME_PAGE_VISITED_KEY = "HOME";
 export const BLOGS_PAGE_VISITED_KEY = "BLOGS";

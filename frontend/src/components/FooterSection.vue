@@ -1,73 +1,123 @@
 <template>
   <section class="footer-container">
-    <div class="footer-content">
-      <h3 class="footer-title">Imad Saddik</h3>
+    <div class="footer-name-and-mission">
+      <h3 class="footer-name">Imad Saddik</h3>
+      <p class="footer-mission">Sharing knowledge about programming and astronomy.</p>
+    </div>
 
-      <div class="footer-effects-container">
-        <p>Having performance issues? You can disable the star and meteor shower effects.</p>
-        <label class="effects-toggle">
-          <input type="checkbox" :checked="effectsEnabled" @change="handleEffectsToggle($event.target.checked)" />
-          <span class="effects-slider"></span>
-          <span class="effects-toggle-label">{{ toggleLabel }}</span>
-        </label>
+    <div class="footer-columns-container">
+      <div class="footer-column">
+        <h4 class="footer-column-title">Quick access</h4>
+        <RouterLink to="/"><p class="clickable">Home</p></RouterLink>
+        <RouterLink to="/blogs"><p class="clickable">Blogs</p></RouterLink>
+        <RouterLink to="/courses"><p class="clickable">Courses</p></RouterLink>
+        <RouterLink to="/astronomy"><p class="clickable">Astronomy</p></RouterLink>
+        <RouterLink to="/about-me"><p class="clickable">About me</p></RouterLink>
+        <RouterLink to="/hire-me"><p class="clickable">Hire me</p></RouterLink>
       </div>
 
-      <div class="footer-social-media-container">
-        <p>Stay connected with me:</p>
-        <div class="footer-social-media-logos">
-          <a href="https://github.com/ImadSaddik" target="_blank" rel="noopener noreferrer">
-            <img :src="githubLogo" alt="GitHub logo" />
-          </a>
-          <a href="https://huggingface.co/ImadSaddik" target="_blank" rel="noopener noreferrer">
-            <img :src="huggingFaceLogo" alt="Hugging Face logo" />
-          </a>
-          <a href="https://www.youtube.com/@3CodeCampers" target="_blank" rel="noopener noreferrer">
-            <img :src="youtubeLogo" alt="YouTube logo" />
-          </a>
-          <a href="https://medium.com/@imadsaddik" target="_blank" rel="noopener noreferrer">
-            <img :src="mediumLogo" alt="Medium logo" />
-          </a>
-          <a href="https://www.linkedin.com/in/imadsaddik/" target="_blank" rel="noopener noreferrer">
-            <img :src="linkedinLogo" alt="LinkedIn logo" />
-          </a>
-          <a href="mailto:simad3647@gmail.com" target="_blank" rel="noopener noreferrer">
-            <img :src="emailLogo" alt="Email logo" />
-          </a>
+      <div class="footer-column">
+        <h4 class="footer-column-title">Follow me</h4>
+        <div class="footer-icon-text-container">
+          <img :src="githubLogo" alt="GitHub logo" />
+          <a class="clickable" href="https://github.com/ImadSaddik" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+
+        <div class="footer-icon-text-container">
+          <img :src="huggingFaceLogo" alt="Hugging Face logo" />
+          <a class="clickable" href="https://huggingface.co/ImadSaddik" target="_blank" rel="noopener noreferrer"
+            >Hugging Face</a
+          >
+        </div>
+
+        <div class="footer-icon-text-container">
+          <img :src="youtubeLogo" alt="YouTube logo" />
+          <a class="clickable" href="https://www.youtube.com/@3CodeCampers" target="_blank" rel="noopener noreferrer"
+            >YouTube</a
+          >
+        </div>
+
+        <div class="footer-icon-text-container">
+          <img :src="mediumLogo" alt="Medium logo" />
+          <a class="clickable" href="https://medium.com/@imadsaddik" target="_blank" rel="noopener noreferrer"
+            >Medium</a
+          >
+        </div>
+
+        <div class="footer-icon-text-container">
+          <img :src="linkedinLogo" alt="LinkedIn logo" />
+          <a class="clickable" href="https://www.linkedin.com/in/imadsaddik/" target="_blank" rel="noopener noreferrer"
+            >LinkedIn</a
+          >
         </div>
       </div>
 
-      <div class="footer-credits">
-        <p>This website was built using:</p>
-        <div class="footer-credits-logo-container">
-          <a href="https://vuejs.org/" target="_blank" rel="noopener noreferrer">
-            <img :src="vueLogo" alt="Vue.js logo" class="footer-credits-logo" />
-          </a>
-          <a href="https://www.python.org/" target="_blank" rel="noopener noreferrer">
-            <img :src="pythonLogo" alt="Python logo" class="footer-credits-logo" />
-          </a>
-          <a href="https://inkscape.org/" target="_blank" rel="noopener noreferrer">
-            <img :src="inkscapeLogo" alt="Inkscape logo" class="footer-credits-logo" />
-          </a>
-          <a href="https://www.svgrepo.com/" target="_blank" rel="noopener noreferrer">
-            <img :src="svgRepoLogo" alt="SVG Repo logo" class="footer-credits-logo" />
-          </a>
-          <a href="https://fontawesome.com/" target="_blank" rel="noopener noreferrer">
-            <img :src="fontAwesomeLogo" alt="Font Awesome logo" class="footer-credits-logo" />
-          </a>
+      <div class="footer-column">
+        <h4 class="footer-column-title">Website built with</h4>
+
+        <div class="footer-icon-text-container">
+          <img :src="vueLogo" alt="Vue.js logo" />
+          <a class="clickable" href="https://vuejs.org/" target="_blank" rel="noopener noreferrer">Vue.js</a>
+        </div>
+
+        <div class="footer-icon-text-container">
+          <img :src="pythonLogo" alt="Python logo" />
+          <a class="clickable" href="https://www.python.org/" target="_blank" rel="noopener noreferrer">Python</a>
+        </div>
+
+        <div class="footer-icon-text-container">
+          <img :src="inkscapeLogo" alt="Inkscape logo" />
+          <a class="clickable" href="https://inkscape.org/" target="_blank" rel="noopener noreferrer">Inkscape</a>
         </div>
       </div>
 
-      <div class="footer-rights">
-        <p>All rights reserved &copy; {{ currentYear }} Imad Saddik</p>
+      <div class="footer-column">
+        <h4 class="footer-column-title">Contact me</h4>
+        <a class="clickable" href="mailto:simad3647@gmail.com" target="_blank" rel="noopener noreferrer">Email</a>
+        <a class="clickable" href="https://calendly.com/simad3647/30min" target="_blank" rel="noopener noreferrer"
+          >Book a meeting</a
+        >
+      </div>
+
+      <div class="footer-column">
+        <h4 class="footer-column-title">Controls</h4>
+
+        <div class="footer-effects-container">
+          <div class="footer-effects-toggle-names">
+            <p>Star effect</p>
+            <p>Comet effect</p>
+          </div>
+          <div class="footer-effects-toggle-buttons">
+            <label for="star-effect" class="effects-toggle">
+              <input
+                id="star-effect"
+                type="checkbox"
+                :checked="starEffectEnabled"
+                @change="handleStarEffectToggle($event.target.checked)"
+              />
+              <span class="effects-slider"></span>
+            </label>
+
+            <label for="comet-effect" class="effects-toggle">
+              <input
+                id="comet-effect"
+                type="checkbox"
+                :checked="cometEffectEnabled"
+                @change="handleCometEffectToggle($event.target.checked)"
+              />
+              <span class="effects-slider"></span>
+            </label>
+          </div>
+        </div>
       </div>
     </div>
 
+    <div class="footer-rights">
+      <p>All rights reserved &copy; {{ currentYear }} Imad Saddik</p>
+    </div>
+
     <div class="footer-images">
-      <img
-        class="telescope-image"
-        :src="telescopeImage"
-        alt="White telescope on a tripod pointing toward the night sky."
-      />
+      <img class="landscape-image" :src="footerLandscape" alt="A beautiful landscape." />
       <img class="moon-image" :src="crescentMoon" alt="An image of a crescent moon." />
     </div>
   </section>
@@ -88,17 +138,21 @@ import svgRepoLogo from "@/assets/logos/svg_repo.svg";
 import fontAwesomeLogo from "@/assets/logos/fontAwesome.svg";
 
 // Images
-import telescopeImage from "@/assets/telescope.svg";
+import footerLandscape from "@/assets/footer_landscape.svg";
 import crescentMoon from "@/assets/crescentMoon.svg";
 
 // Constants
-import { EFFECTS_TOGGLE_LOCAL_STORAGE_KEY } from "@/constants";
+import { STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, COMET_EFFECT_TOGGLE_LOCAL_STORAGE_KEY } from "@/constants";
 
 export default {
   name: "FooterSection",
-  emits: ["effects-toggle"],
+  emits: ["star-effect-toggle", "comet-effect-toggle"],
   props: {
-    effectsEnabled: {
+    starEffectEnabled: {
+      type: Boolean,
+      default: true,
+    },
+    cometEffectEnabled: {
       type: Boolean,
       default: true,
     },
@@ -106,9 +160,6 @@ export default {
   computed: {
     currentYear() {
       return new Date().getFullYear();
-    },
-    toggleLabel() {
-      return this.effectsEnabled ? "On" : "Off";
     },
   },
   data() {
@@ -125,30 +176,48 @@ export default {
       svgRepoLogo,
       fontAwesomeLogo,
 
-      telescopeImage,
       crescentMoon,
+      footerLandscape,
     };
   },
   methods: {
-    handleEffectsToggle(value) {
-      this.$emit("effects-toggle", value);
-      localStorage.setItem(EFFECTS_TOGGLE_LOCAL_STORAGE_KEY, value);
+    handleStarEffectToggle(value) {
+      this.$emit("star-effect-toggle", value);
+      localStorage.setItem(STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, value);
+    },
+    handleCometEffectToggle(value) {
+      this.$emit("comet-effect-toggle", value);
+      localStorage.setItem(COMET_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, value);
     },
   },
 };
 </script>
 
 <style scoped>
+a,
 p {
   font-size: var(--font-size-small);
   color: var(--color-text-secondary);
-  margin: var(--gap-md) 0;
+  margin: 0;
+}
+
+a:hover,
+p:hover {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  cursor: default;
+}
+
+.clickable:hover {
+  color: var(--color-primary);
+  cursor: pointer;
 }
 
 .footer-container {
   width: 100%;
   margin-top: var(--gap-between-sections-big);
   position: relative;
+  padding: var(--gap-xl);
 }
 
 .footer-container::before {
@@ -163,61 +232,30 @@ p {
   z-index: 1;
 }
 
-.footer-title {
+.footer-name {
   font-size: var(--font-size-big);
   margin-top: 5rem;
-  margin-bottom: var(--gap-sm);
+  margin-bottom: 0;
 }
 
-.footer-content {
+.footer-mission {
+  margin: var(--gap-md) 0;
+  color: var(--color-text-secondary);
+}
+
+.footer-icon-text-container {
   display: flex;
-  flex-direction: column;
-  align-items: start;
-  padding: var(--gap-xl);
-}
-
-.footer-social-media-logos {
-  display: flex;
-  gap: var(--gap-sm);
-}
-
-.footer-social-media-logos img {
-  height: 32px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.footer-social-media-logos img:hover {
-  filter: brightness(0.9);
-}
-
-.footer-credits-logo-container {
-  display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
   align-items: center;
   gap: var(--gap-sm);
 }
 
-.footer-credits-logo {
-  height: 32px;
-  vertical-align: middle;
-}
-
-.footer-credits-logo:hover {
-  filter: brightness(0.9);
-}
-
-.footer-social-media-container {
-  margin-top: var(--gap-lg);
-}
-
-.footer-credits {
-  margin-top: var(--gap-lg);
+.footer-icon-text-container img {
+  width: 28px;
 }
 
 .footer-rights {
-  margin-top: var(--gap-lg);
-  margin-bottom: 5rem;
+  margin-top: var(--gap-between-sections-big);
 }
 
 .footer-images {
@@ -229,10 +267,11 @@ p {
   pointer-events: none;
 }
 
-.telescope-image {
+.landscape-image {
   position: absolute;
   bottom: 0;
-  left: 50%;
+  left: 0;
+  z-index: -1;
 }
 
 .moon-image {
@@ -250,8 +289,21 @@ p {
   margin: 0;
 }
 
-.footer-effects-container p {
-  margin: 0;
+.footer-effects-toggle-container {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-sm);
+}
+
+.footer-effects-toggle-names,
+.footer-effects-toggle-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+}
+
+.footer-effects-toggle-buttons {
+  margin-left: var(--gap-md);
 }
 
 .effects-toggle {
@@ -301,12 +353,33 @@ p {
   margin-left: 0.25rem;
 }
 
+.footer-columns-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--gap-xxl);
+  margin-top: var(--gap-xl);
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+  min-width: 150px;
+}
+
+.footer-column-title {
+  font-size: var(--font-size-small);
+  margin-bottom: 0;
+  color: var(--color-text-primary);
+}
+
 @media screen and (max-width: 1500px) {
   .footer-container {
     margin-top: var(--gap-between-sections-medium);
   }
 
-  .footer-title {
+  .footer-name {
     margin-top: var(--gap-xl);
     margin-bottom: var(--gap-md);
   }
@@ -324,7 +397,7 @@ p {
 }
 
 @media screen and (max-width: 1100px) {
-  .footer-content {
+  .footer-container {
     padding: var(--gap-lg);
   }
 
@@ -332,18 +405,10 @@ p {
     display: none;
   }
 
-  .footer-title {
+  .footer-name {
     font-size: var(--font-size-big-medium);
     margin-top: var(--gap-lg);
     margin-bottom: var(--gap-sm);
-  }
-
-  .footer-social-media-container {
-    margin-top: var(--gap-sm);
-  }
-
-  .footer-credits {
-    margin-top: var(--gap-sm);
   }
 
   .footer-rights {
@@ -358,24 +423,12 @@ p {
     margin-top: var(--gap-between-sections-small);
   }
 
-  .footer-content {
+  .footer-container {
     padding: var(--gap-md);
   }
 
-  .footer-social-media-logos img {
+  .footer-icon-text-container img {
     height: 24px;
-  }
-
-  .footer-credits-logo {
-    height: 24px;
-  }
-
-  .footer-social-media-container {
-    margin-top: var(--gap-xs);
-  }
-
-  .footer-credits {
-    margin-top: var(--gap-xs);
   }
 
   .footer-rights {
