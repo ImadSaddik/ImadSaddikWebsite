@@ -1,124 +1,132 @@
 <template>
   <section class="footer-container">
-    <div class="footer-name-and-mission">
-      <h3 class="footer-name">Imad Saddik</h3>
-      <p class="footer-mission">Sharing knowledge about programming and astronomy.</p>
-    </div>
-
-    <div class="footer-columns-container">
-      <div class="footer-column">
-        <h4 class="footer-column-title">Quick access</h4>
-        <RouterLink to="/"><p class="clickable">Home</p></RouterLink>
-        <RouterLink to="/blogs"><p class="clickable">Blogs</p></RouterLink>
-        <RouterLink to="/courses"><p class="clickable">Courses</p></RouterLink>
-        <RouterLink to="/astronomy"><p class="clickable">Astronomy</p></RouterLink>
-        <RouterLink to="/about-me"><p class="clickable">About me</p></RouterLink>
-        <RouterLink to="/hire-me"><p class="clickable">Hire me</p></RouterLink>
+    <div class="footer-content">
+      <div class="footer-name-and-mission">
+        <h3 class="footer-name">Imad Saddik</h3>
+        <p class="footer-mission">Sharing knowledge about programming and astronomy.</p>
       </div>
 
-      <div class="footer-column">
-        <h4 class="footer-column-title">Follow me</h4>
-        <div class="footer-icon-text-container">
-          <img :src="githubLogo" alt="GitHub logo" />
-          <a class="clickable" href="https://github.com/ImadSaddik" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <div class="footer-columns-container">
+        <div class="footer-column">
+          <h4 class="footer-column-title">Quick access</h4>
+          <RouterLink to="/"><p class="clickable">Home</p></RouterLink>
+          <RouterLink to="/blogs"><p class="clickable">Blogs</p></RouterLink>
+          <RouterLink to="/courses"><p class="clickable">Courses</p></RouterLink>
+          <RouterLink to="/astronomy"><p class="clickable">Astronomy</p></RouterLink>
+          <RouterLink to="/about-me"><p class="clickable">About me</p></RouterLink>
+          <RouterLink to="/hire-me"><p class="clickable">Hire me</p></RouterLink>
         </div>
 
-        <div class="footer-icon-text-container">
-          <img :src="huggingFaceLogo" alt="Hugging Face logo" />
-          <a class="clickable" href="https://huggingface.co/ImadSaddik" target="_blank" rel="noopener noreferrer"
-            >Hugging Face</a
-          >
-        </div>
-
-        <div class="footer-icon-text-container">
-          <img :src="youtubeLogo" alt="YouTube logo" />
-          <a class="clickable" href="https://www.youtube.com/@3CodeCampers" target="_blank" rel="noopener noreferrer"
-            >YouTube</a
-          >
-        </div>
-
-        <div class="footer-icon-text-container">
-          <img :src="mediumLogo" alt="Medium logo" />
-          <a class="clickable" href="https://medium.com/@imadsaddik" target="_blank" rel="noopener noreferrer"
-            >Medium</a
-          >
-        </div>
-
-        <div class="footer-icon-text-container">
-          <img :src="linkedinLogo" alt="LinkedIn logo" />
-          <a class="clickable" href="https://www.linkedin.com/in/imadsaddik/" target="_blank" rel="noopener noreferrer"
-            >LinkedIn</a
-          >
-        </div>
-      </div>
-
-      <div class="footer-column">
-        <h4 class="footer-column-title">Website built with</h4>
-
-        <div class="footer-icon-text-container">
-          <img :src="vueLogo" alt="Vue.js logo" />
-          <a class="clickable" href="https://vuejs.org/" target="_blank" rel="noopener noreferrer">Vue.js</a>
-        </div>
-
-        <div class="footer-icon-text-container">
-          <img :src="pythonLogo" alt="Python logo" />
-          <a class="clickable" href="https://www.python.org/" target="_blank" rel="noopener noreferrer">Python</a>
-        </div>
-
-        <div class="footer-icon-text-container">
-          <img :src="inkscapeLogo" alt="Inkscape logo" />
-          <a class="clickable" href="https://inkscape.org/" target="_blank" rel="noopener noreferrer">Inkscape</a>
-        </div>
-      </div>
-
-      <div class="footer-column">
-        <h4 class="footer-column-title">Contact me</h4>
-        <a class="clickable" href="mailto:simad3647@gmail.com" target="_blank" rel="noopener noreferrer">Email</a>
-        <a class="clickable" href="https://calendly.com/simad3647/30min" target="_blank" rel="noopener noreferrer"
-          >Book a meeting</a
-        >
-      </div>
-
-      <div class="footer-column">
-        <h4 class="footer-column-title">Controls</h4>
-
-        <div class="footer-effects-container">
-          <div class="footer-effects-toggle-names">
-            <p>Star effect</p>
-            <p>Comet effect</p>
+        <div class="footer-column">
+          <h4 class="footer-column-title">Follow me</h4>
+          <div class="footer-icon-text-container">
+            <img :src="githubLogo" alt="GitHub logo" />
+            <a class="clickable" href="https://github.com/ImadSaddik" target="_blank" rel="noopener noreferrer"
+              >GitHub</a
+            >
           </div>
-          <div class="footer-effects-toggle-buttons">
-            <label for="star-effect" class="effects-toggle">
-              <input
-                id="star-effect"
-                type="checkbox"
-                :checked="starEffectEnabled"
-                @change="handleStarEffectToggle($event.target.checked)"
-              />
-              <span class="effects-slider"></span>
-            </label>
 
-            <label for="comet-effect" class="effects-toggle">
-              <input
-                id="comet-effect"
-                type="checkbox"
-                :checked="cometEffectEnabled"
-                @change="handleCometEffectToggle($event.target.checked)"
-              />
-              <span class="effects-slider"></span>
-            </label>
+          <div class="footer-icon-text-container">
+            <img :src="huggingFaceLogo" alt="Hugging Face logo" />
+            <a class="clickable" href="https://huggingface.co/ImadSaddik" target="_blank" rel="noopener noreferrer"
+              >Hugging Face</a
+            >
+          </div>
+
+          <div class="footer-icon-text-container">
+            <img :src="youtubeLogo" alt="YouTube logo" />
+            <a class="clickable" href="https://www.youtube.com/@3CodeCampers" target="_blank" rel="noopener noreferrer"
+              >YouTube</a
+            >
+          </div>
+
+          <div class="footer-icon-text-container">
+            <img :src="mediumLogo" alt="Medium logo" />
+            <a class="clickable" href="https://medium.com/@imadsaddik" target="_blank" rel="noopener noreferrer"
+              >Medium</a
+            >
+          </div>
+
+          <div class="footer-icon-text-container">
+            <img :src="linkedinLogo" alt="LinkedIn logo" />
+            <a
+              class="clickable"
+              href="https://www.linkedin.com/in/imadsaddik/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >LinkedIn</a
+            >
           </div>
         </div>
+
+        <div class="footer-column">
+          <h4 class="footer-column-title">Website built with</h4>
+
+          <div class="footer-icon-text-container">
+            <img :src="vueLogo" alt="Vue.js logo" />
+            <a class="clickable" href="https://vuejs.org/" target="_blank" rel="noopener noreferrer">Vue.js</a>
+          </div>
+
+          <div class="footer-icon-text-container">
+            <img :src="pythonLogo" alt="Python logo" />
+            <a class="clickable" href="https://www.python.org/" target="_blank" rel="noopener noreferrer">Python</a>
+          </div>
+
+          <div class="footer-icon-text-container">
+            <img :src="inkscapeLogo" alt="Inkscape logo" />
+            <a class="clickable" href="https://inkscape.org/" target="_blank" rel="noopener noreferrer">Inkscape</a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4 class="footer-column-title">Contact me</h4>
+          <a class="clickable" href="mailto:simad3647@gmail.com" target="_blank" rel="noopener noreferrer">Email</a>
+          <a class="clickable" href="https://calendly.com/simad3647/30min" target="_blank" rel="noopener noreferrer"
+            >Book a meeting</a
+          >
+        </div>
+
+        <div class="footer-column">
+          <h4 class="footer-column-title">Controls</h4>
+
+          <div class="footer-effects-container">
+            <div class="footer-effects-toggle-names">
+              <p>Star effect</p>
+              <p>Comet effect</p>
+            </div>
+            <div class="footer-effects-toggle-buttons">
+              <label for="star-effect" class="effects-toggle">
+                <input
+                  id="star-effect"
+                  type="checkbox"
+                  :checked="starEffectEnabled"
+                  @change="handleStarEffectToggle($event.target.checked)"
+                />
+                <span class="effects-slider"></span>
+              </label>
+
+              <label for="comet-effect" class="effects-toggle">
+                <input
+                  id="comet-effect"
+                  type="checkbox"
+                  :checked="cometEffectEnabled"
+                  @change="handleCometEffectToggle($event.target.checked)"
+                />
+                <span class="effects-slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="footer-rights">
-      <p>All rights reserved &copy; {{ currentYear }} Imad Saddik</p>
-    </div>
+      <div class="footer-rights">
+        <p>All rights reserved &copy; {{ currentYear }} Imad Saddik</p>
+      </div>
 
-    <div class="footer-images">
-      <img class="landscape-image" :src="footerLandscape" alt="A beautiful landscape." />
-      <img class="moon-image" :src="crescentMoon" alt="An image of a crescent moon." />
+      <div class="footer-images">
+        <img class="landscape-image" :src="footerLandscape" alt="A beautiful landscape." />
+        <img class="moon-image" :src="crescentMoon" alt="An image of a crescent moon." />
+      </div>
     </div>
   </section>
 </template>
@@ -217,7 +225,6 @@ p:hover {
   width: 100%;
   margin-top: var(--gap-between-sections-big);
   position: relative;
-  padding: var(--gap-xl);
 }
 
 .footer-container::before {
@@ -230,6 +237,10 @@ p:hover {
   height: 1px;
   background-color: var(--color-text-secondary);
   z-index: 1;
+}
+
+.footer-content {
+  padding: var(--gap-xl);
 }
 
 .footer-name {
