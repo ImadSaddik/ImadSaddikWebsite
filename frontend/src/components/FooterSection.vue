@@ -281,15 +281,15 @@ p:hover {
 .landscape-image {
   position: absolute;
   bottom: 0;
-  left: 0;
+  width: 100%;
   z-index: -1;
 }
 
 .moon-image {
   position: absolute;
-  top: 150px;
-  right: 50px;
-  width: 100px;
+  top: 75px;
+  right: 75px;
+  width: 75px;
   height: auto;
 }
 
@@ -395,25 +395,24 @@ p:hover {
     margin-bottom: var(--gap-md);
   }
 
-  .telescope-image {
-    position: absolute;
-    bottom: 0;
-    left: 40%;
-  }
-
   .moon-image {
-    top: 250px;
-    right: 50px;
+    position: absolute;
+    top: 50%;
+    right: 75px;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .moon-image {
+    position: absolute;
+    top: 60%;
+    right: 75px;
   }
 }
 
 @media screen and (max-width: 1100px) {
-  .footer-container {
+  .footer-content {
     padding: var(--gap-lg);
-  }
-
-  .footer-images {
-    display: none;
   }
 
   .footer-name {
@@ -423,9 +422,15 @@ p:hover {
   }
 
   .footer-rights {
-    width: 100%;
-    margin-top: var(--gap-sm);
-    margin-bottom: 3rem;
+    margin: var(--gap-between-sections-small) 0;
+  }
+
+  .footer-columns-container {
+    gap: var(--gap-lg);
+  }
+
+  .footer-images {
+    display: none;
   }
 }
 
@@ -434,7 +439,7 @@ p:hover {
     margin-top: var(--gap-between-sections-small);
   }
 
-  .footer-container {
+  .footer-content {
     padding: var(--gap-md);
   }
 
@@ -443,15 +448,11 @@ p:hover {
   }
 
   .footer-rights {
-    width: 100%;
-    margin-top: var(--gap-xs);
-    margin-bottom: 2rem;
+    margin: var(--gap-between-sections-small) 0;
   }
-}
 
-@media screen and (max-width: 576px) {
-  .effects-toggle {
-    margin-left: 1rem;
+  .footer-columns-container {
+    gap: var(--gap-md);
   }
 }
 </style>
