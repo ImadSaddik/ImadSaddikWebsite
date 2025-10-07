@@ -12,9 +12,13 @@
       @show-toast="handleShowToastEvent"
     />
 
-    <div class="article-body">
-      <slot></slot>
-      <EditArticleOnGitHub :slug="slug" />
+    <div class="article-body-wrapper">
+      <div class="article-body">
+        <slot></slot>
+        <EditArticleOnGitHub :slug="slug" />
+      </div>
+
+      <TableOfContents />
     </div>
 
     <div class="clap-container">
@@ -43,6 +47,7 @@ import { getCardsDataFromDocumentHits } from "@/utils.js";
 import ArticleHeader from "@/components/ArticleHeader.vue";
 import ArticleFooter from "@/components/ArticleFooter.vue";
 import EditArticleOnGitHub from "./EditArticleOnGitHub.vue";
+import TableOfContents from "./TableOfContents.vue";
 
 export default {
   name: "ArticleLayout",
@@ -90,6 +95,7 @@ export default {
     ArticleHeader,
     ArticleFooter,
     EditArticleOnGitHub,
+    TableOfContents,
   },
   data() {
     return {
@@ -184,6 +190,11 @@ export default {
 </script>
 
 <style scoped>
+.article-body-wrapper {
+  display: flex;
+  position: relative;
+}
+
 .article-body {
   width: 75%;
 }
