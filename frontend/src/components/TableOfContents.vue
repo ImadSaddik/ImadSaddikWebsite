@@ -43,15 +43,18 @@ export default {
       this.activeSectionId = sectionId;
 
       const sectionElement = document.getElementById(sectionId);
-      const articleHeaderElement = document.getElementsByClassName("article-header")[0];
-      const navbarContainerElement = document.getElementsByClassName("navbar-container")[0];
-      if (sectionElement && articleHeaderElement && navbarContainerElement) {
+      const articleBodyElement = document.querySelector(".article-body");
+
+      if (sectionElement && articleBodyElement) {
+        const topPadding = 24;
+        const currentScroll = window.pageYOffset;
+        const bodyTopFromViewport = articleBodyElement.getBoundingClientRect().top;
+
+        const bodyAbsoluteTop = bodyTopFromViewport + currentScroll - topPadding;
+        const targetScrollPosition = bodyAbsoluteTop + sectionElement.offsetTop;
+
         window.scrollTo({
-          top:
-            sectionElement.offsetTop +
-            articleHeaderElement.offsetHeight +
-            navbarContainerElement.offsetHeight +
-            this.getArticleContainerMarginTop(),
+          top: targetScrollPosition,
           behavior: "smooth",
         });
       }
