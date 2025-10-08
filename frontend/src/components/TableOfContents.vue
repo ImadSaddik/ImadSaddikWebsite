@@ -7,7 +7,7 @@
           :href="`#${value.id}`"
           :class="[`level-${value.level}`, { active: value.id === activeSectionId }]"
           @click.prevent="handleSectionClick(value.id)"
-          >{{ value.text }} ({{ value.yOffset }})</a
+          >{{ value.text }}</a
         >
       </li>
     </ul>
@@ -62,15 +62,11 @@ export default {
       this.activeSectionId = sectionId;
 
       const sectionElement = document.getElementById(sectionId);
-      const articleBodyElement = document.querySelector(".article-body");
+      const scrollInfo = this.getArticleBodyScrollInfo();
 
-      if (sectionElement && articleBodyElement) {
+      if (sectionElement && scrollInfo) {
         const topPadding = 24;
-        const currentScroll = window.pageYOffset;
-        const bodyTopFromViewport = articleBodyElement.getBoundingClientRect().top;
-
-        const bodyAbsoluteTop = bodyTopFromViewport + currentScroll - topPadding;
-        const targetScrollPosition = bodyAbsoluteTop + sectionElement.offsetTop;
+        const targetScrollPosition = scrollInfo.bodyAbsoluteTop + sectionElement.offsetTop - topPadding;
 
         window.scrollTo({
           top: targetScrollPosition,
@@ -84,26 +80,39 @@ export default {
       return parseInt(computedStyle.getPropertyValue("margin-top"), 10);
     },
     handleScrollEvent() {
-      const articleBodyElement = document.querySelector(".article-body");
-      if (articleBodyElement) {
-        const currentScroll = window.pageYOffset;
-        const bodyTopFromViewport = articleBodyElement.getBoundingClientRect().top;
-        const bodyAbsoluteTop = bodyTopFromViewport + currentScroll;
-        const relativeScrollAmount = currentScroll - bodyAbsoluteTop;
+      const scrollInfo = this.getArticleBodyScrollInfo();
+      if (!scrollInfo) return;
 
-        if (relativeScrollAmount <= 0) {
-          this.activeSectionId = null;
+      if (scrollInfo.relativeScrollAmount <= 0) {
+        this.activeSectionId = null;
+        return;
+      }
+
+      for (let i = 0; i < this.yIntervalsBetweenSections.length; i++) {
+        const interval = this.yIntervalsBetweenSections[i];
+        const scrollAmount = scrollInfo.relativeScrollAmount;
+        if (scrollAmount >= interval.yOffsetCurrent && scrollAmount < interval.yOffsetNext) {
+          this.activeSectionId = interval.currentSectionId;
           return;
         }
-
-        for (let i = 0; i < this.yIntervalsBetweenSections.length; i++) {
-          const interval = this.yIntervalsBetweenSections[i];
-          if (relativeScrollAmount >= interval.yOffsetCurrent && relativeScrollAmount < interval.yOffsetNext) {
-            this.activeSectionId = interval.currentSectionId;
-            return;
-          }
-        }
       }
+    },
+    getArticleBodyScrollInfo() {
+      const articleBodyElement = document.querySelector(".article-body");
+      if (!articleBodyElement) return null;
+
+      const currentScroll = window.pageYOffset;
+      const bodyTopFromViewport = articleBodyElement.getBoundingClientRect().top;
+      const bodyAbsoluteTop = bodyTopFromViewport + currentScroll;
+      const relativeScrollAmount = currentScroll - bodyAbsoluteTop;
+
+      return {
+        articleBodyElement,
+        currentScroll,
+        bodyTopFromViewport,
+        bodyAbsoluteTop,
+        relativeScrollAmount,
+      };
     },
   },
 };
