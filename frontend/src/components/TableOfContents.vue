@@ -22,6 +22,7 @@ export default {
       activeSectionId: null,
       sections: [],
       yIntervalsBetweenSections: [],
+      topPadding: 24,
     };
   },
   mounted() {
@@ -59,20 +60,17 @@ export default {
       }
     },
     handleSectionClick(sectionId) {
-      this.activeSectionId = sectionId;
-
       const sectionElement = document.getElementById(sectionId);
-      const scrollInfo = this.getArticleBodyScrollInfo();
+      if (!sectionElement) return;
 
-      if (sectionElement && scrollInfo) {
-        const topPadding = 24;
-        const targetScrollPosition = scrollInfo.bodyAbsoluteTop + sectionElement.offsetTop - topPadding;
+      const y = sectionElement.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: y - this.topPadding,
+        behavior: "smooth",
+      });
 
-        window.scrollTo({
-          top: targetScrollPosition,
-          behavior: "smooth",
-        });
-      }
+      this.activeSectionId = sectionId;
+      history.replaceState(null, "", `#${sectionId}`);
     },
     getArticleContainerMarginTop() {
       const articleContainerElement = document.getElementsByClassName("article-container")[0];
