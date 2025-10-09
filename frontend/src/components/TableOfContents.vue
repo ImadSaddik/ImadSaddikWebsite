@@ -7,7 +7,7 @@
           :href="`#`"
           :class="[`level-${value.level}`, { active: value.id === activeSectionId }]"
           @click.prevent="handleSectionClick(value.id)"
-          >{{ value.text }} ({{ value.yOffset }})</a
+          >{{ value.text }}</a
         >
       </li>
     </ul>
@@ -26,12 +26,14 @@ export default {
     };
   },
   mounted() {
-    this.$nextTick(() => {
-      this.collectSections();
+    setTimeout(() => {
+      this.$nextTick(() => {
+        this.collectSections();
 
-      window.addEventListener("scroll", this.handleScrollEvent);
-      window.addEventListener("resize", this.handleResize);
-    });
+        window.addEventListener("scroll", this.handleScrollEvent);
+        window.addEventListener("resize", this.handleResize);
+      });
+    }, 500);
   },
   beforeUnmount() {
     window.removeEventListener("scroll", this.handleScrollEvent);
@@ -42,12 +44,15 @@ export default {
       const selectors = [".article-body h2[id]", ".article-body h3[id]", ".article-body h4[id]"];
       const headersNodeList = document.querySelectorAll(selectors.join(", "));
 
-      this.sections = Array.from(headersNodeList).map((headerNode) => ({
-        id: headerNode.id,
-        text: headerNode.textContent.trim(),
-        level: parseInt(headerNode.tagName.charAt(1)), // tagName is like 'H2', 'H3', so we take the number part
-        yOffset: headerNode.offsetTop,
-      }));
+      this.sections = Array.from(headersNodeList).map((headerNode) => {
+        const y = headerNode.getBoundingClientRect().top + window.scrollY - this.topPadding;
+        return {
+          id: headerNode.id,
+          text: headerNode.textContent.trim(),
+          level: parseInt(headerNode.tagName.charAt(1)), // tagName is like 'H2', 'H3', so we take the number part
+          y: parseInt(y, 10),
+        };
+      });
       this.computeYIntervalsBetweenSections();
     },
     computeYIntervalsBetweenSections() {
@@ -55,8 +60,8 @@ export default {
         const currentSection = this.sections[i];
         const nextSection = this.sections[i + 1];
 
-        const yOffsetCurrent = currentSection.yOffset;
-        const yOffsetNext = nextSection ? nextSection.yOffset : Infinity;
+        const yOffsetCurrent = currentSection.y;
+        const yOffsetNext = nextSection ? nextSection.y : Infinity;
         const currentSectionId = currentSection.id;
 
         this.yIntervalsBetweenSections.push({ yOffsetCurrent, yOffsetNext, currentSectionId });
@@ -81,39 +86,15 @@ export default {
       return parseInt(computedStyle.getPropertyValue("margin-top"), 10);
     },
     handleScrollEvent() {
-      const scrollInfo = this.getArticleBodyScrollInfo();
-      if (!scrollInfo) return;
-
-      if (scrollInfo.relativeScrollAmount <= 0) {
-        this.activeSectionId = null;
-        return;
-      }
+      const scrollAmount = window.scrollY;
 
       for (let i = 0; i < this.yIntervalsBetweenSections.length; i++) {
         const interval = this.yIntervalsBetweenSections[i];
-        const scrollAmount = scrollInfo.relativeScrollAmount;
         if (scrollAmount >= interval.yOffsetCurrent && scrollAmount < interval.yOffsetNext) {
           this.activeSectionId = interval.currentSectionId;
           return;
         }
       }
-    },
-    getArticleBodyScrollInfo() {
-      const articleBodyElement = document.querySelector(".article-body");
-      if (!articleBodyElement) return null;
-
-      const currentScroll = window.pageYOffset;
-      const bodyTopFromViewport = articleBodyElement.getBoundingClientRect().top;
-      const bodyAbsoluteTop = bodyTopFromViewport + currentScroll;
-      const relativeScrollAmount = currentScroll - bodyAbsoluteTop;
-
-      return {
-        articleBodyElement,
-        currentScroll,
-        bodyTopFromViewport,
-        bodyAbsoluteTop,
-        relativeScrollAmount,
-      };
     },
     handleResize() {
       this.collectSections();
