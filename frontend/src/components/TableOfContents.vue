@@ -29,6 +29,7 @@ export default {
     setTimeout(() => {
       this.$nextTick(() => {
         this.collectSections();
+        this.checkIfURLContainsHash();
 
         window.addEventListener("scroll", this.handleScrollEvent);
         window.addEventListener("resize", this.handleResize);
@@ -54,6 +55,13 @@ export default {
         };
       });
       this.computeYIntervalsBetweenSections();
+    },
+    checkIfURLContainsHash() {
+      const hash = window.location.hash;
+      if (hash) {
+        const sectionIdWithoutHash = hash.substring(1);
+        this.handleSectionClick(sectionIdWithoutHash);
+      }
     },
     computeYIntervalsBetweenSections() {
       for (let i = 0; i < this.sections.length; i++) {
