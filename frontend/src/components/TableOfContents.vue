@@ -4,7 +4,7 @@
     <ul>
       <li v-for="value in sections" :key="value.id" :class="{ active: value.id === activeSectionId }">
         <a
-          :href="`#`"
+          href="#"
           :class="[`level-${value.level}`, { active: value.id === activeSectionId }]"
           @click.prevent="handleSectionClick(value.id)"
           >{{ value.text }}</a
