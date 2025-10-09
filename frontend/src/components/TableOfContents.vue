@@ -22,7 +22,7 @@ export default {
       activeSectionId: null,
       sections: [],
       yIntervalsBetweenSections: [],
-      topPadding: 24,
+      topPadding: 0,
       initializationDelayMilliseconds: 500,
     };
   },
