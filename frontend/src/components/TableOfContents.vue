@@ -95,11 +95,6 @@ export default {
 
       this.activeSectionId = sectionId;
     },
-    getArticleContainerMarginTop() {
-      const articleContainerElement = document.getElementsByClassName("article-container")[0];
-      const computedStyle = window.getComputedStyle(articleContainerElement);
-      return parseInt(computedStyle.getPropertyValue("margin-top"), 10);
-    },
     handleScrollEvent() {
       const scrollAmount = window.scrollY;
 
