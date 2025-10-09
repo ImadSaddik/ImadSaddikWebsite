@@ -40,6 +40,13 @@ export default {
     window.removeEventListener("scroll", this.handleScrollEvent);
     window.removeEventListener("resize", this.handleResize);
   },
+  watch: {
+    activeSectionId(newId) {
+      if (newId) {
+        history.replaceState(null, "", `#${newId}`);
+      }
+    },
+  },
   methods: {
     collectSections() {
       const selectors = [".article-body h2[id]", ".article-body h3[id]", ".article-body h4[id]"];
@@ -86,7 +93,6 @@ export default {
       });
 
       this.activeSectionId = sectionId;
-      history.replaceState(null, "", `#${sectionId}`);
     },
     getArticleContainerMarginTop() {
       const articleContainerElement = document.getElementsByClassName("article-container")[0];
