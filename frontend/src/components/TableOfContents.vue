@@ -7,7 +7,7 @@
           :href="`#`"
           :class="[`level-${value.level}`, { active: value.id === activeSectionId }]"
           @click.prevent="handleSectionClick(value.id)"
-          >{{ value.text }}</a
+          >{{ value.text }} ({{ value.yOffset }})</a
         >
       </li>
     </ul>
@@ -28,11 +28,14 @@ export default {
   mounted() {
     this.$nextTick(() => {
       this.collectSections();
+
       window.addEventListener("scroll", this.handleScrollEvent);
+      window.addEventListener("resize", this.handleResize);
     });
   },
   beforeUnmount() {
     window.removeEventListener("scroll", this.handleScrollEvent);
+    window.removeEventListener("resize", this.handleResize);
   },
   methods: {
     collectSections() {
@@ -111,6 +114,9 @@ export default {
         bodyAbsoluteTop,
         relativeScrollAmount,
       };
+    },
+    handleResize() {
+      this.collectSections();
     },
   },
 };
