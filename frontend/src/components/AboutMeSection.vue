@@ -67,9 +67,5 @@
   .about-me-title {
     font-size: var(--font-size-big-medium);
   }
-
-  .about-me-paragraph {
-    text-align: justify;
-  }
 }
 </style>
