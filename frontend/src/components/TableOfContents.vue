@@ -23,6 +23,7 @@ export default {
       sections: [],
       yIntervalsBetweenSections: [],
       topPadding: 24,
+      initializationDelayMilliseconds: 500,
     };
   },
   mounted() {
@@ -34,7 +35,7 @@ export default {
         window.addEventListener("scroll", this.handleScrollEvent);
         window.addEventListener("resize", this.handleResize);
       });
-    }, 500);
+    }, this.initializationDelayMilliseconds);
   },
   beforeUnmount() {
     window.removeEventListener("scroll", this.handleScrollEvent);
