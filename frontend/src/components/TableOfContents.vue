@@ -26,26 +26,26 @@ export default {
     };
   },
   mounted() {
-    this.extractSections();
-    window.addEventListener("scroll", this.handleScrollEvent);
+    this.$nextTick(() => {
+      this.collectSections();
+      window.addEventListener("scroll", this.handleScrollEvent);
+    });
   },
   beforeUnmount() {
     window.removeEventListener("scroll", this.handleScrollEvent);
   },
   methods: {
-    extractSections() {
-      this.$nextTick(() => {
-        const selectors = [".article-body h2[id]", ".article-body h3[id]", ".article-body h4[id]"];
-        const headersNodeList = document.querySelectorAll(selectors.join(", "));
+    collectSections() {
+      const selectors = [".article-body h2[id]", ".article-body h3[id]", ".article-body h4[id]"];
+      const headersNodeList = document.querySelectorAll(selectors.join(", "));
 
-        this.sections = Array.from(headersNodeList).map((headerNode) => ({
-          id: headerNode.id,
-          text: headerNode.textContent.trim(),
-          level: parseInt(headerNode.tagName.charAt(1)), // tagName is like 'H2', 'H3', so we take the number part
-          yOffset: headerNode.offsetTop,
-        }));
-        this.computeYIntervalsBetweenSections();
-      });
+      this.sections = Array.from(headersNodeList).map((headerNode) => ({
+        id: headerNode.id,
+        text: headerNode.textContent.trim(),
+        level: parseInt(headerNode.tagName.charAt(1)), // tagName is like 'H2', 'H3', so we take the number part
+        yOffset: headerNode.offsetTop,
+      }));
+      this.computeYIntervalsBetweenSections();
     },
     computeYIntervalsBetweenSections() {
       for (let i = 0; i < this.sections.length; i++) {
