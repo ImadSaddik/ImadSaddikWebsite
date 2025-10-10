@@ -8,7 +8,7 @@
 
       <div class="footer-columns-container">
         <div class="footer-column">
-          <h4 class="footer-column-title">Quick access</h4>
+          <h4 class="footer-column-title">Explore</h4>
           <RouterLink to="/"><p class="clickable">Home</p></RouterLink>
           <RouterLink to="/blogs"><p class="clickable">Blogs</p></RouterLink>
           <RouterLink to="/courses"><p class="clickable">Courses</p></RouterLink>
@@ -18,7 +18,7 @@
         </div>
 
         <div class="footer-column">
-          <h4 class="footer-column-title">Follow me</h4>
+          <h4 class="footer-column-title">Connect</h4>
           <div class="footer-icon-text-container">
             <img :src="githubLogo" alt="GitHub logo" />
             <a class="clickable" href="https://github.com/ImadSaddik" target="_blank" rel="noopener noreferrer"
@@ -60,7 +60,7 @@
         </div>
 
         <div class="footer-column">
-          <h4 class="footer-column-title">Website built with</h4>
+          <h4 class="footer-column-title">Built with</h4>
 
           <div class="footer-icon-text-container">
             <img :src="vueLogo" alt="Vue.js logo" />
@@ -79,7 +79,7 @@
         </div>
 
         <div class="footer-column">
-          <h4 class="footer-column-title">Contact me</h4>
+          <h4 class="footer-column-title">Contact</h4>
           <a class="clickable" href="mailto:simad3647@gmail.com" target="_blank" rel="noopener noreferrer">Email</a>
           <a class="clickable" href="https://calendly.com/simad3647/30min" target="_blank" rel="noopener noreferrer"
             >Book a meeting</a
@@ -94,7 +94,7 @@
         </div>
 
         <div class="footer-column">
-          <h4 class="footer-column-title">Controls</h4>
+          <h4 class="footer-column-title">Preferences</h4>
 
           <div class="footer-effects-container">
             <div class="footer-effects-toggle-names">
