@@ -179,6 +179,7 @@ li .level-4 {
 }
 
 .table-of-contents-container {
+  width: 25%;
   position: sticky;
   top: var(--gap-xxl);
   align-self: flex-start;
