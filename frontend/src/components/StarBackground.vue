@@ -3,7 +3,6 @@
 </template>
 
 <script>
-// Constants
 import {
   STAR_COLORS,
   DEFAULT_NUM_STARS,
