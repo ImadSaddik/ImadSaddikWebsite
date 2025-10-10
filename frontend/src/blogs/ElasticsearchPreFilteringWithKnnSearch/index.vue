@@ -14,7 +14,7 @@
   >
     <section>
       <h2 class="article-body-header" id="introduction">
-        <a href="#introduction">Introduction</a>
+        <a class="clickable-header-link" href="#introduction">Introduction</a>
       </h2>
       <p>
         In this article, I will show you how to use pre-filtering with kNN search. For a more detailed walkthrough,
@@ -30,7 +30,7 @@
 
     <section>
       <h2 class="article-body-header" id="pre-filtering">
-        <a href="#pre-filtering">Pre-filtering</a>
+        <a class="clickable-header-link" href="#pre-filtering">Pre-filtering</a>
       </h2>
       <p>
         <InlineCode text="Pre-filtering" /> means we apply filters to an index before doing anything else. For example,
@@ -39,7 +39,7 @@
 
       <section>
         <h3 class="article-body-subheader" id="preparing-the-index">
-          <a href="#preparing-the-index">Preparing the index</a>
+          <a class="clickable-header-link" href="#preparing-the-index">Preparing the index</a>
         </h3>
 
         <div>
@@ -54,7 +54,7 @@
 
       <section>
         <h3 class="article-body-subheader" id="indexing-documents">
-          <a href="#indexing-documents">Indexing documents</a>
+          <a class="clickable-header-link" href="#indexing-documents">Indexing documents</a>
         </h3>
 
         <div>
@@ -116,7 +116,7 @@
 
       <section>
         <h3 class="article-body-subheader" id="pre-filtering-knn-search">
-          <a href="#pre-filtering-knn-search">Pre-filtering & kNN search</a>
+          <a class="clickable-header-link" href="#pre-filtering-knn-search">Pre-filtering & kNN search</a>
         </h3>
 
         <div>
@@ -180,7 +180,7 @@
 
     <section>
       <h2 class="article-body-header" id="conclusion">
-        <a href="#conclusion">Conclusion</a>
+        <a class="clickable-header-link" href="#conclusion">Conclusion</a>
       </h2>
       <p>
         We've reached the end of this journey! I hope you had fun and learned a lot. I also hope I did a good job

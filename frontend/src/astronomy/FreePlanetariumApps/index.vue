@@ -14,7 +14,7 @@
   >
     <section>
       <h2 class="article-body-header" id="introduction">
-        <a href="#introduction">Introduction</a>
+        <a class="clickable-header-link" href="#introduction">Introduction</a>
       </h2>
       <p>
         <a href="https://en.wikipedia.org/wiki/Planetarium_software" target="_blank">Planetarium</a> applications helped
@@ -35,13 +35,13 @@
 
     <section>
       <h2 class="article-body-header" id="computer-applications">
-        <a href="#computer-applications">Computer applications</a>
+        <a class="clickable-header-link" href="#computer-applications">Computer applications</a>
       </h2>
 
       <div>
         <div>
           <h3 class="article-body-subheader" id="stellarium">
-            <a href="#stellarium">Stellarium</a>
+            <a class="clickable-header-link" href="#stellarium">Stellarium</a>
           </h3>
           <ImageWithCaption
             :image-src="stellariumMilkyWay"
@@ -62,7 +62,7 @@
 
         <div>
           <h4 class="article-body-sub-subheader" id="stellarium-object-information">
-            <a href="#stellarium-object-information">Object information</a>
+            <a class="clickable-header-link" href="#stellarium-object-information">Object information</a>
           </h4>
           <p>
             Clicking on any object, whether it is a star, planet, galaxy, or something else, displays a lot of
@@ -79,7 +79,7 @@
 
         <div>
           <h4 class="article-body-sub-subheader" id="stellarium-whats-up-today">
-            <a href="#stellarium-whats-up-today">What's up today</a>
+            <a class="clickable-header-link" href="#stellarium-whats-up-today">What's up today</a>
           </h4>
           <p>
             The <InlineCode text="What's up today" /> feature shows you a list of interesting celestial events happening
@@ -109,7 +109,7 @@
 
         <div>
           <h4 class="article-body-sub-subheader" id="stellarium-phenomena">
-            <a href="#stellarium-phenomena">Phenomena</a>
+            <a class="clickable-header-link" href="#stellarium-phenomena">Phenomena</a>
           </h4>
           <p>
             The <InlineCode text="Phenomena" /> feature allows you to calculate when certain celestial events will occur
@@ -141,7 +141,7 @@
 
         <div>
           <h4 class="article-body-sub-subheader" id="stellarium-eclipses">
-            <a href="#stellarium-eclipses">Eclipses</a>
+            <a class="clickable-header-link" href="#stellarium-eclipses">Eclipses</a>
           </h4>
           <p>
             The <InlineCode text="Eclipses" /> feature allows you to calculate all types of eclipses, including lunar,
@@ -163,7 +163,7 @@
 
         <div>
           <h4 class="article-body-sub-subheader" id="stellarium-image-sensor-frame">
-            <a href="#stellarium-image-sensor-frame">Image sensor frame</a>
+            <a class="clickable-header-link" href="#stellarium-image-sensor-frame">Image sensor frame</a>
           </h4>
           <p>
             For astrophotographers, the <InlineCode text="Image sensor frame" /> feature is extremely useful. It allows
@@ -193,7 +193,7 @@
 
         <div>
           <h4 class="article-body-sub-subheader" id="stellarium-sky-culture">
-            <a href="#stellarium-sky-culture">Sky culture</a>
+            <a class="clickable-header-link" href="#stellarium-sky-culture">Sky culture</a>
           </h4>
           <p>
             Stellarium supports a variety of
@@ -215,7 +215,7 @@
 
         <div>
           <h4 class="article-body-sub-subheader" id="stellarium-simulating-sky-conditions">
-            <a href="#stellarium-simulating-sky-conditions">Simulating sky conditions</a>
+            <a class="clickable-header-link" href="#stellarium-simulating-sky-conditions">Simulating sky conditions</a>
           </h4>
 
           <p>
@@ -277,7 +277,7 @@
 
         <div>
           <h4 class="article-body-sub-subheader" id="stellarium-plugins">
-            <a href="#stellarium-plugins">Plugins</a>
+            <a class="clickable-header-link" href="#stellarium-plugins">Plugins</a>
           </h4>
           <p>
             Because Stellarium is open source, it offers a wide range of plugins that add extra features to the
@@ -300,8 +300,10 @@
           />
           <p>
             For example, I enabled a plugin that measures
-            <a href="https://en.wikipedia.org/wiki/Angular_distance" target="_blank">angular distances</a> between
-            objects in the sky. After restarting Stellarium, I could use this plugin by clicking on the
+            <a class="clickable-header-link" href="https://en.wikipedia.org/wiki/Angular_distance" target="_blank"
+              >angular distances</a
+            >
+            between objects in the sky. After restarting Stellarium, I could use this plugin by clicking on the
             <InlineCode text="angular distance measurement tool" /> on the bottom toolbar.
           </p>
           <ImageWithCaption
@@ -314,7 +316,7 @@
 
         <div>
           <h4 class="article-body-sub-subheader" id="stellarium-full-guide">
-            <a href="#stellarium-full-guide">Full guide</a>
+            <a class="clickable-header-link" href="#stellarium-full-guide">Full guide</a>
           </h4>
           <p>
             I could write about Stellarium all day, but I will stop here. If you want to learn more about Stellarium and
@@ -328,7 +330,7 @@
 
     <section>
       <h2 class="article-body-header" id="mobile-applications">
-        <a href="#mobile-applications">Mobile applications</a>
+        <a class="clickable-header-link" href="#mobile-applications">Mobile applications</a>
       </h2>
       <p>
         I have used many planetarium applications on my phone over the years. Currently, I only use
@@ -339,7 +341,7 @@
 
       <div>
         <h3 class="article-body-subheader" id="sky-tonight">
-          <a href="#sky-tonight">Sky Tonight</a>
+          <a class="clickable-header-link" href="#sky-tonight">Sky Tonight</a>
         </h3>
         <ImageWithCaption
           :image-src="scorpiusSkyTonight"
@@ -368,7 +370,7 @@
 
       <div>
         <h4 class="article-body-sub-subheader" id="sky-tonight-calendar">
-          <a href="#sky-tonight-calendar">Calendar</a>
+          <a class="clickable-header-link" href="#sky-tonight-calendar">Calendar</a>
         </h4>
         <p>To use the calendar feature, tap the <InlineCode text="calendar" /> icon on the main screen.</p>
         <ImageWithCaption
@@ -420,7 +422,7 @@
 
       <div>
         <h4 class="article-body-sub-subheader" id="sky-tonight-stargazing-index">
-          <a href="#sky-tonight-stargazing-index">Stargazing index</a>
+          <a class="clickable-header-link" href="#sky-tonight-stargazing-index">Stargazing index</a>
         </h4>
         <p>To use this feature, click on the telescope icon at the bottom of the screen in the main view.</p>
         <ImageWithCaption
@@ -456,7 +458,7 @@
 
       <div>
         <h4 class="article-body-sub-subheader" id="sky-tonight-stargazing-news">
-          <a href="#sky-tonight-stargazing-news">Stargazing news</a>
+          <a class="clickable-header-link" href="#sky-tonight-stargazing-news">Stargazing news</a>
         </h4>
         <p>
           The team behind Sky Tonight regularly publishes articles and quizzes about astronomy. You can find these by
@@ -473,7 +475,7 @@
 
       <div>
         <h3 class="article-body-subheader" id="other-applications">
-          <a href="#other-applications">Other applications</a>
+          <a class="clickable-header-link" href="#other-applications">Other applications</a>
         </h3>
         <p>
           I have also used other planetarium applications like <InlineCode text="Star Walk 2" />,
@@ -485,7 +487,7 @@
 
     <section>
       <h2 class="article-body-header" id="conclusion">
-        <a href="#conclusion">Conclusion</a>
+        <a class="clickable-header-link" href="#conclusion">Conclusion</a>
       </h2>
       <p>
         Exploring the night sky is incredibly easy with free planetarium applications. Over time, I’ve tried many of

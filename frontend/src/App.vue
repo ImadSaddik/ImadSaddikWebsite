@@ -229,6 +229,10 @@ a:hover {
   background-color: var(--color-secondary-hover);
 }
 
+.clickable-header-link {
+  color: var(--color-text-primary);
+}
+
 @media screen and (max-width: 1900px) {
   .title {
     font-size: var(--font-size-big-medium);

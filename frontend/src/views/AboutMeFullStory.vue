@@ -2,7 +2,7 @@
   <div class="about-me-full-story-container">
     <section>
       <h1 id="read-my-story">
-        <a href="#read-my-story">Read my story</a>
+        <a class="clickable-header-link" href="#read-my-story">Read my story</a>
       </h1>
 
       <div>
@@ -28,12 +28,12 @@
 
     <section>
       <h2 id="my-academic-journey">
-        <a href="#my-academic-journey">My academic journey</a>
+        <a class="clickable-header-link" href="#my-academic-journey">My academic journey</a>
       </h2>
 
       <div>
         <h3 id="lycee-moulay-ismail">
-          <a href="#lycee-moulay-ismail">Lycee Moulay Ismail</a>
+          <a class="clickable-header-link" href="#lycee-moulay-ismail">Lycee Moulay Ismail</a>
         </h3>
         <p>
           My academic journey started in <b>2016</b> when I joined <b>Lycee (high school in French) Moulay Ismail</b>.
@@ -67,7 +67,9 @@
 
       <div>
         <h3 id="estm-ecole-superieure-de-technologie-de-meknes">
-          <a href="#estm-ecole-superieure-de-technologie-de-meknes">ESTM - Ecole Superieure de Technologie de Meknes</a>
+          <a class="clickable-header-link" href="#estm-ecole-superieure-de-technologie-de-meknes"
+            >ESTM - Ecole Superieure de Technologie de Meknes</a
+          >
         </h3>
         <p>
           EST schools in Morocco focus on hands-on training to prepare students for specific jobs. The programs are
@@ -106,7 +108,7 @@
 
       <div>
         <h3 id="ensam-ecole-nationale-superieure-darts-et-metiers">
-          <a href="#ensam-ecole-nationale-superieure-darts-et-metiers"
+          <a class="clickable-header-link" href="#ensam-ecole-nationale-superieure-darts-et-metiers"
             >ENSAM - Ecole Nationale Superieure d'Arts et Metiers</a
           >
         </h3>
@@ -166,12 +168,12 @@
 
     <section>
       <h2 id="how-i-became-a-programmer">
-        <a href="#how-i-became-a-programmer">How I became a programmer</a>
+        <a class="clickable-header-link" href="#how-i-became-a-programmer">How I became a programmer</a>
       </h2>
 
       <div>
         <h3 id="assembly-language">
-          <a href="#assembly-language">Assembly language</a>
+          <a class="clickable-header-link" href="#assembly-language">Assembly language</a>
         </h3>
         <p>
           I got my first taste of programming at Lycee Moulay Ismail, where we used
@@ -192,7 +194,7 @@
 
       <div>
         <h3 id="the-c-programming-language">
-          <a href="#the-c-programming-language">The C programming language</a>
+          <a class="clickable-header-link" href="#the-c-programming-language">The C programming language</a>
         </h3>
         <p>
           When I studied at ESTM, I spent two years programming in <b>C</b>. I focused on solving difficult problems,
@@ -204,7 +206,7 @@
 
       <div>
         <h3 id="java">
-          <a href="#java">Java</a>
+          <a class="clickable-header-link" href="#java">Java</a>
         </h3>
         <p>
           Everything changed when I started at ENSAM. In my first year, we learned <b>Java</b> and studied
@@ -222,7 +224,7 @@
         </p>
 
         <h4 id="random-ayah-generator">
-          <a href="#random-ayah-generator">Random ayah generator</a>
+          <a class="clickable-header-link" href="#random-ayah-generator">Random ayah generator</a>
         </h4>
         <p>
           I use this app every day before I go to
@@ -243,7 +245,7 @@
 
       <div>
         <h4 id="docamp-rag-on-mobile">
-          <a href="#docamp-rag-on-mobile">DoCamp - RAG on mobile</a>
+          <a class="clickable-header-link" href="#docamp-rag-on-mobile">DoCamp - RAG on mobile</a>
         </h4>
         <p>
           I created this app to participate in the
@@ -274,7 +276,7 @@
 
       <div>
         <h3 id="python">
-          <a href="#python">Python</a>
+          <a class="clickable-header-link" href="#python">Python</a>
         </h3>
         <p>
           I started learning Python during my last two years at ENSAM while studying data science and machine learning.
@@ -290,7 +292,7 @@
 
       <div>
         <h3 id="web-development">
-          <a href="#web-development">Web development</a>
+          <a class="clickable-header-link" href="#web-development">Web development</a>
         </h3>
         <ImageWithCaption
           :image-src="reactBadVueGood"
@@ -351,7 +353,7 @@
 
     <section>
       <h2 id="linux-changed-my-life">
-        <a href="#linux-changed-my-life">Linux changed my life</a>
+        <a class="clickable-header-link" href="#linux-changed-my-life">Linux changed my life</a>
       </h2>
       <ImageWithCaption
         :image-src="windowsBadLinuxGood"
@@ -453,7 +455,7 @@
 
     <section>
       <h2 id="i-love-the-universe">
-        <a href="#i-love-the-universe">I love the universe!</a>
+        <a class="clickable-header-link" href="#i-love-the-universe">I love the universe!</a>
       </h2>
 
       <div>
@@ -546,7 +548,7 @@
 
     <section>
       <h2 id="what-i-do-now">
-        <a href="#what-i-do-now">What I do now</a>
+        <a class="clickable-header-link" href="#what-i-do-now">What I do now</a>
       </h2>
       <p>
         My life today is a balance of all the things I love. I try to juggle between programming, gaming for an hour

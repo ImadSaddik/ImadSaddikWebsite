@@ -14,7 +14,7 @@
   >
     <section>
       <h2 class="article-body-header" id="introduction">
-        <a href="#introduction">Introduction</a>
+        <a class="clickable-header-link" href="#introduction">Introduction</a>
       </h2>
       <p>
         In this article, I will show you how to change the <InlineCode text="heap size" />. For a more detailed
@@ -30,7 +30,7 @@
 
     <section>
       <h2 class="article-body-header" id="heap-size">
-        <a href="#heap-size">Heap size</a>
+        <a class="clickable-header-link" href="#heap-size">Heap size</a>
       </h2>
 
       <div>
@@ -54,14 +54,14 @@
 
     <section>
       <h2 class="article-body-header" id="changing-the-heap-size">
-        <a href="#changing-the-heap-size">Changing the heap size</a>
+        <a class="clickable-header-link" href="#changing-the-heap-size">Changing the heap size</a>
       </h2>
 
       <p>Follow these steps to adjust the heap size.</p>
 
       <section>
         <h3 class="article-body-subheader" id="start-the-container">
-          <a href="#start-the-container">Start the container</a>
+          <a class="clickable-header-link" href="#start-the-container">Start the container</a>
         </h3>
 
         <div>
@@ -78,7 +78,7 @@
 
       <section>
         <h3 class="article-body-subheader" id="access-the-container">
-          <a href="#access-the-container">Access the container</a>
+          <a class="clickable-header-link" href="#access-the-container">Access the container</a>
         </h3>
 
         <div>
@@ -89,7 +89,7 @@
 
       <section>
         <h3 class="article-body-subheader" id="create-the-heap-options-file">
-          <a href="#create-the-heap-options-file">Create the "heap.options" file</a>
+          <a class="clickable-header-link" href="#create-the-heap-options-file">Create the "heap.options" file</a>
         </h3>
 
         <div>
@@ -119,7 +119,7 @@
 
     <section>
       <h2 class="article-body-header" id="conclusion">
-        <a href="#conclusion">Conclusion</a>
+        <a class="clickable-header-link" href="#conclusion">Conclusion</a>
       </h2>
       <p>
         Changing the <InlineCode text="heap size" /> for <InlineCode text="Elasticsearch" /> is key to making it work

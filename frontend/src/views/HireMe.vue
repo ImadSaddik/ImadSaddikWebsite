@@ -2,7 +2,7 @@
   <div class="hire-me-container">
     <section>
       <h1 id="lets-build-something-great">
-        <a href="#lets-build-something-great">Let's build something great</a>
+        <a class="clickable-header-link" href="#lets-build-something-great">Let's build something great</a>
       </h1>
       <p>
         I'm an engineer and technical educator with experience in <b>web & mobile development</b> and
@@ -20,7 +20,7 @@
 
     <section>
       <h2 id="services">
-        <a href="#services">Services</a>
+        <a class="clickable-header-link" href="#services">Services</a>
       </h2>
       <p>I offer a range of services to help you achieve your goals:</p>
 
@@ -28,7 +28,7 @@
         <div class="card">
           <i class="fa-solid fa-pen-nib service-icon"></i>
           <h3 id="technical-writing">
-            <a href="#technical-writing">Technical writing</a>
+            <a class="clickable-header-link" href="#technical-writing">Technical writing</a>
           </h3>
           <p>
             I enjoy explaining complex topics in a clear and concise manner through writing. I can write articles,
@@ -38,7 +38,7 @@
         <div class="card">
           <i class="fa-solid fa-code service-icon"></i>
           <h3 id="software-development">
-            <a href="#software-development">Software development</a>
+            <a class="clickable-header-link" href="#software-development">Software development</a>
           </h3>
           <p>
             I can build full stack web applications with your preferred tech stack and native Android applications. I
@@ -48,7 +48,7 @@
         <div class="card">
           <i class="fa-solid fa-database service-icon"></i>
           <h3 id="data-science">
-            <a href="#data-science">Data Science</a>
+            <a class="clickable-header-link" href="#data-science">Data Science</a>
           </h3>
           <p>
             I analyze data, build predictive models, and create data-driven solutions using Python. I can help you
@@ -58,7 +58,7 @@
         <div class="card">
           <i class="fa-solid fa-headset service-icon"></i>
           <h3 id="support-maintenance">
-            <a href="#support-maintenance">Support & maintenance</a>
+            <a class="clickable-header-link" href="#support-maintenance">Support & maintenance</a>
           </h3>
           <p>
             I provide ongoing support and maintenance for your software solutions. I can help you troubleshoot issues,
@@ -68,7 +68,7 @@
         <div class="card">
           <i class="fa-solid fa-chalkboard-user service-icon"></i>
           <h3 id="tutorials">
-            <a href="#tutorials">Tutorials</a>
+            <a class="clickable-header-link" href="#tutorials">Tutorials</a>
           </h3>
           <p>
             I create step-by-step tutorials to help teach people new skills. I create tutorials on everything related to
@@ -78,7 +78,7 @@
         <div class="card">
           <i class="fa-solid fa-magnifying-glass-chart service-icon"></i>
           <h3 id="code-reviews">
-            <a href="#code-reviews">Code reviews</a>
+            <a class="clickable-header-link" href="#code-reviews">Code reviews</a>
           </h3>
           <p>
             I provide detailed code reviews to help improve the quality of your codebase. I can identify potential
@@ -90,7 +90,7 @@
 
     <section>
       <h2 id="get-in-touch">
-        <a href="#get-in-touch">Get in touch</a>
+        <a class="clickable-header-link" href="#get-in-touch">Get in touch</a>
       </h2>
       <p>
         If you're interested in working together or have any questions, please don't hesitate to reach out. You can

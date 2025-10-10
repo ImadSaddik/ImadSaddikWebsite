@@ -14,7 +14,7 @@
   >
     <section>
       <h2 class="article-body-header" id="course-overview">
-        <a href="#course-overview">Course overview</a>
+        <a class="clickable-header-link" href="#course-overview">Course overview</a>
       </h2>
       <p>
         This course will teach you how to use
@@ -46,7 +46,7 @@
 
     <section>
       <h2 class="article-body-header" id="watch-the-course">
-        <a href="#watch-the-course">Watch the course</a>
+        <a class="clickable-header-link" href="#watch-the-course">Watch the course</a>
       </h2>
       <p>
         I believe knowledge should be free, so I am sharing this course for free on the freeCodeCamp YouTube channel.

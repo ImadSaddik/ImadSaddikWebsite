@@ -14,7 +14,7 @@
   >
     <section>
       <h2 class="article-body-header" id="introduction">
-        <a href="#introduction">Introduction</a>
+        <a class="clickable-header-link" href="#introduction">Introduction</a>
       </h2>
       <p>
         In this article, I will show you how to collapse search results. For a more detailed walkthrough, check out the
@@ -30,7 +30,7 @@
 
     <section>
       <h2 class="article-body-header" id="collapse-search-results">
-        <a href="#collapse-search-results">Collapse search results</a>
+        <a class="clickable-header-link" href="#collapse-search-results">Collapse search results</a>
       </h2>
       <p>
         <InlineCode text="Collapsing" /> is a cool feature that helps you show only the best document for each
@@ -40,7 +40,7 @@
 
       <section>
         <h3 class="article-body-subheader" id="indexing-documents">
-          <a href="#indexing-documents">Indexing documents</a>
+          <a class="clickable-header-link" href="#indexing-documents">Indexing documents</a>
         </h3>
 
         <div>
@@ -71,7 +71,7 @@
 
       <section>
         <h3 class="article-body-subheader" id="collapsing">
-          <a href="#collapsing">Collapsing</a>
+          <a class="clickable-header-link" href="#collapsing">Collapsing</a>
         </h3>
 
         <div>
@@ -155,7 +155,7 @@
 
       <section>
         <h3 class="article-body-subheader" id="expanding-collapsed-results">
-          <a href="#expanding-collapsed-results">Expanding collapsed results</a>
+          <a class="clickable-header-link" href="#expanding-collapsed-results">Expanding collapsed results</a>
         </h3>
 
         <div>
@@ -202,7 +202,7 @@
 
       <section>
         <h3 class="article-body-subheader" id="collapsing-with-search_after">
-          <a href="#collapsing-with-search_after">Collapsing with search_after</a>
+          <a class="clickable-header-link" href="#collapsing-with-search_after">Collapsing with search_after</a>
         </h3>
 
         <div>
@@ -251,7 +251,7 @@
 
     <section>
       <h2 class="article-body-header" id="conclusion">
-        <a href="#conclusion">Conclusion</a>
+        <a class="clickable-header-link" href="#conclusion">Conclusion</a>
       </h2>
       <p>
         In this article, we explored how <InlineCode text="collapsing" /> search results works in
