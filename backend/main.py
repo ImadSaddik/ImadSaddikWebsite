@@ -19,7 +19,10 @@ app.add_exception_handler(Exception, unhandled_exception_handler)
 app.middleware("http")(log_request_middleware)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8080", "http://192.168.1.15:8080"],
+    allow_origins=[
+        "http://localhost:8080",
+        "http://192.168.1.15:8080",
+    ],  # TODO: Change this before deploying
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
