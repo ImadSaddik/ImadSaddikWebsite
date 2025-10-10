@@ -1,4 +1,8 @@
-from api import article, search
+from contextlib import asynccontextmanager
+from typing import AsyncGenerator
+
+from api import article, search, visitors
+from database import initialize_database
 from exception_handlers import (
     http_exception_handler,
     request_validation_exception_handler,
@@ -10,7 +14,16 @@ from fastapi.middleware.cors import CORSMiddleware
 from middleware import log_request_middleware
 from starlette.exceptions import HTTPException
 
-app = FastAPI(title="API for ImadSaddik.com", version="1.0.0")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
+    # Before yield, we put code that will be executed before the application starts.
+    initialize_database()
+    yield
+    # After yield, we put code that will be executed after the application has finished.
+
+
+app = FastAPI(title="API for ImadSaddik.com", version="1.0.0", lifespan=lifespan)
 
 app.add_exception_handler(RequestValidationError, request_validation_exception_handler)
 app.add_exception_handler(HTTPException, http_exception_handler)
@@ -30,6 +43,7 @@ app.add_middleware(
 
 app.include_router(search.router, prefix="/api", tags=["search"])
 app.include_router(article.router, prefix="/api", tags=["article"])
+app.include_router(visitors.router, prefix="/api/visitors", tags=["visitors"])
 
 
 @app.get("/")
