@@ -36,3 +36,6 @@ export const STAR_SPIKE_WIDTH_MULTIPLIER = 0.5;
 export const STAR_SPIKE_SHADOW_BLUR = 8;
 export const STAR_SPIKE_ALPHA_MULTIPLIER = 0.7;
 export const STAR_SHADOW_BLUR = 8;
+
+// Animation
+export const STAR_ANIMATION_FPS = 30;

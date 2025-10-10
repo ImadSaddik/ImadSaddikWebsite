@@ -20,6 +20,7 @@ import {
   STAR_SPIKE_SHADOW_BLUR,
   STAR_SPIKE_ALPHA_MULTIPLIER,
   STAR_SHADOW_BLUR,
+  STAR_ANIMATION_FPS,
 } from "@/constants.js";
 
 export default {
@@ -32,9 +33,17 @@ export default {
       height: window.innerHeight,
       context: null,
       animationFrameId: null,
+      fpsValue: STAR_ANIMATION_FPS,
+      fpsIntervalMilliseconds: null,
+      lastFrameTime: null,
     };
   },
   methods: {
+    startAnimation() {
+      this.fpsIntervalMilliseconds = 1000 / this.fpsValue;
+      this.lastFrameTime = Date.now();
+      this.animateStars();
+    },
     initStars() {
       this.stars = [];
       for (let i = 0; i < this.numStars; i++) {
@@ -48,6 +57,18 @@ export default {
           color: STAR_COLORS[Math.floor(Math.random() * STAR_COLORS.length)],
           hasSpikes: Math.random() < STAR_SPIKE_CHANCE,
         });
+      }
+    },
+    animateStars() {
+      this.animationFrameId = requestAnimationFrame(this.animateStars);
+
+      const currentFrameTime = Date.now();
+      const elapsedTimeBetweenFrames = currentFrameTime - this.lastFrameTime;
+
+      if (elapsedTimeBetweenFrames > this.fpsIntervalMilliseconds) {
+        const elapsedTimeRemainder = elapsedTimeBetweenFrames % this.fpsIntervalMilliseconds;
+        this.lastFrameTime = currentFrameTime - elapsedTimeRemainder;
+        this.drawStars();
       }
     },
     drawStars() {
@@ -64,7 +85,6 @@ export default {
         star.positionY += star.stepSizeY;
         this.handleStarOutOfBounds(star);
       }
-      this.animationFrameId = requestAnimationFrame(this.drawStars);
     },
     drawJWSTDiffractionSpikes(star) {
       for (let i = 0; i < STAR_SPIKE_NUM; i++) {
@@ -127,7 +147,7 @@ export default {
   mounted() {
     this.setupCanvas();
     this.initStars();
-    this.drawStars();
+    this.startAnimation();
     window.addEventListener("resize", this.handleResize);
   },
   beforeUnmount() {
