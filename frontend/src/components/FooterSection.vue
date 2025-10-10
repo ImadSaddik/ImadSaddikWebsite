@@ -84,6 +84,13 @@
           <a class="clickable" href="https://calendly.com/simad3647/30min" target="_blank" rel="noopener noreferrer"
             >Book a meeting</a
           >
+          <a
+            class="clickable"
+            href="https://github.com/ImadSaddik/ImadSaddikWebsite/issues/new"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Report an issue</a
+          >
         </div>
 
         <div class="footer-column">
