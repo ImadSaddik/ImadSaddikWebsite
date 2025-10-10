@@ -1,15 +1,34 @@
-<!-- TODO: Optimize this component so that it does not drop the FPS -->
 <template>
   <canvas id="star-bg"></canvas>
 </template>
 
 <script>
+// Constants
+import {
+  STAR_COLORS,
+  DEFAULT_NUM_STARS,
+  STAR_RADIUS_MIN,
+  STAR_RADIUS_RANGE,
+  STAR_ALPHA_MIN,
+  STAR_ALPHA_RANGE,
+  STAR_STEP_SIZE_RANGE,
+  STAR_SPIKE_CHANCE,
+  STAR_SPIKE_NUM,
+  STAR_SPIKE_LENGTH_MULTIPLIER,
+  STAR_SPIKE_LENGTH_RANDOM,
+  STAR_SPIKE_WIDTH_MIN,
+  STAR_SPIKE_WIDTH_MULTIPLIER,
+  STAR_SPIKE_SHADOW_BLUR,
+  STAR_SPIKE_ALPHA_MULTIPLIER,
+  STAR_SHADOW_BLUR,
+} from "@/constants.js";
+
 export default {
   name: "StarBackground",
   data() {
     return {
       stars: [],
-      numStars: 120,
+      numStars: DEFAULT_NUM_STARS,
       width: window.innerWidth,
       height: window.innerHeight,
       context: null,
@@ -18,26 +37,17 @@ export default {
   },
   methods: {
     initStars() {
-      const starColors = [
-        "#ffffff", // White
-        "#ffe9c4", // Pale yellow
-        "#b5d0ff", // Blue-white
-        "#f7f7a8", // Yellowish
-        "#c4e1ff", // Light blue
-        "#ffd700", // Gold
-        "#ffb347", // Orange
-      ];
       this.stars = [];
       for (let i = 0; i < this.numStars; i++) {
         this.stars.push({
           positionX: Math.random() * this.width,
           positionY: Math.random() * this.height,
-          radius: Math.random() * 1.2 + 0.3,
-          alpha: Math.random() * 0.5 + 0.3,
-          stepSizeX: (Math.random() - 0.5) * 0.15,
-          stepSizeY: (Math.random() - 0.5) * 0.15,
-          color: starColors[Math.floor(Math.random() * starColors.length)],
-          hasSpikes: Math.random() < 0.1,
+          radius: Math.random() * STAR_RADIUS_RANGE + STAR_RADIUS_MIN,
+          alpha: Math.random() * STAR_ALPHA_RANGE + STAR_ALPHA_MIN,
+          stepSizeX: (Math.random() - 0.5) * STAR_STEP_SIZE_RANGE,
+          stepSizeY: (Math.random() - 0.5) * STAR_STEP_SIZE_RANGE,
+          color: STAR_COLORS[Math.floor(Math.random() * STAR_COLORS.length)],
+          hasSpikes: Math.random() < STAR_SPIKE_CHANCE,
         });
       }
     },
@@ -47,45 +57,51 @@ export default {
         this.context.save();
         this.context.globalAlpha = star.alpha;
         if (star.hasSpikes) {
-          // Draw diffraction spikes (JWST style)
-          const numSpikes = 6;
-          const spikeLength = star.radius * 3 + Math.random() * 2;
-          const spikeWidth = Math.max(0.5, star.radius * 0.5);
-          for (let i = 0; i < numSpikes; i++) {
-            const angle = (i * Math.PI) / (numSpikes / 2);
-            this.context.save();
-            this.context.translate(star.positionX, star.positionY);
-            this.context.rotate(angle);
-            this.context.beginPath();
-            this.context.moveTo(0, 0);
-            this.context.lineTo(0, -spikeLength);
-            this.context.strokeStyle = star.color;
-            this.context.shadowColor = star.color;
-            this.context.shadowBlur = 8;
-            this.context.lineWidth = spikeWidth;
-            this.context.globalAlpha = star.alpha * 0.7;
-            this.context.stroke();
-            this.context.restore();
-          }
+          this.drawJWSTDiffractionSpikes(star);
         }
-        // Draw the star circle
-        this.context.beginPath();
-        this.context.arc(star.positionX, star.positionY, star.radius, 0, 2 * Math.PI);
-        this.context.fillStyle = star.color;
-        this.context.shadowColor = star.color;
-        this.context.shadowBlur = 8;
-        this.context.globalAlpha = star.alpha;
-        this.context.fill();
-        this.context.restore();
+        this.drawStarCircle(star);
 
         star.positionX += star.stepSizeX;
         star.positionY += star.stepSizeY;
-        if (star.positionX < 0) star.positionX = this.width;
-        if (star.positionX > this.width) star.positionX = 0;
-        if (star.positionY < 0) star.positionY = this.height;
-        if (star.positionY > this.height) star.positionY = 0;
+        this.handleStarOutOfBounds(star);
       }
       this.animationFrameId = requestAnimationFrame(this.drawStars);
+    },
+    drawJWSTDiffractionSpikes(star) {
+      for (let i = 0; i < STAR_SPIKE_NUM; i++) {
+        const angle = (i * Math.PI) / (STAR_SPIKE_NUM / 2);
+        this.context.save();
+        this.context.translate(star.positionX, star.positionY);
+        this.context.rotate(angle);
+        this.context.beginPath();
+        this.context.moveTo(0, 0);
+        const spikeLength = star.radius * STAR_SPIKE_LENGTH_MULTIPLIER + Math.random() * STAR_SPIKE_LENGTH_RANDOM;
+        const spikeWidth = Math.max(STAR_SPIKE_WIDTH_MIN, star.radius * STAR_SPIKE_WIDTH_MULTIPLIER);
+        this.context.lineTo(0, -spikeLength);
+        this.context.strokeStyle = star.color;
+        this.context.shadowColor = star.color;
+        this.context.shadowBlur = STAR_SPIKE_SHADOW_BLUR;
+        this.context.lineWidth = spikeWidth;
+        this.context.globalAlpha = star.alpha * STAR_SPIKE_ALPHA_MULTIPLIER;
+        this.context.stroke();
+        this.context.restore();
+      }
+    },
+    drawStarCircle(star) {
+      this.context.beginPath();
+      this.context.arc(star.positionX, star.positionY, star.radius, 0, 2 * Math.PI);
+      this.context.fillStyle = star.color;
+      this.context.shadowColor = star.color;
+      this.context.shadowBlur = STAR_SHADOW_BLUR;
+      this.context.globalAlpha = star.alpha;
+      this.context.fill();
+      this.context.restore();
+    },
+    handleStarOutOfBounds(star) {
+      if (star.positionX < 0) star.positionX = this.width;
+      if (star.positionX > this.width) star.positionX = 0;
+      if (star.positionY < 0) star.positionY = this.height;
+      if (star.positionY > this.height) star.positionY = 0;
     },
     handleResize() {
       this.width = window.innerWidth;
