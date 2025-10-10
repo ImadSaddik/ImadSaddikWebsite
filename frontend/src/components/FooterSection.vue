@@ -250,6 +250,11 @@ p:hover {
   padding: var(--gap-xl);
 }
 
+.footer-name-and-mission > a {
+  display: inline-block;
+  width: auto;
+}
+
 .footer-name {
   font-size: var(--font-size-big);
   margin-top: 5rem;
