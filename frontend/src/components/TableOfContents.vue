@@ -22,7 +22,6 @@ export default {
       activeSectionId: null,
       sections: [],
       yIntervalsBetweenSections: [],
-      topPadding: 0,
       initializationDelayMilliseconds: 500,
     };
   },
@@ -54,7 +53,7 @@ export default {
       const headersNodeList = document.querySelectorAll(selectors.join(", "));
 
       this.sections = Array.from(headersNodeList).map((headerNode) => {
-        const y = headerNode.getBoundingClientRect().top + window.scrollY - this.topPadding;
+        const y = headerNode.getBoundingClientRect().top + window.scrollY;
         return {
           id: headerNode.id,
           text: headerNode.textContent.trim(),
@@ -89,7 +88,7 @@ export default {
 
       const y = sectionElement.getBoundingClientRect().top + window.scrollY;
       window.scrollTo({
-        top: y - this.topPadding,
+        top: y,
         behavior: "smooth",
       });
 
