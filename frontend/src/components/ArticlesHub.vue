@@ -84,7 +84,6 @@
           />
         </div>
 
-        <!-- TODO: Replace this with an illustration in the future -->
         <div v-else class="articles-hub-no-search-results">
           <p v-if="isSearchResponseEmpty">No results found</p>
         </div>
