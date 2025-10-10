@@ -187,7 +187,6 @@ a {
 
 a:hover {
   color: var(--color-primary-hover);
-  text-decoration: underline;
 }
 
 .title {
