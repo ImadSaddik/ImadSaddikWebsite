@@ -2,7 +2,7 @@
   <section class="footer-container">
     <div class="footer-content">
       <div class="footer-name-and-mission">
-        <h3 class="footer-name">Imad Saddik</h3>
+        <RouterLink to="/"><h3 class="footer-name">Imad Saddik</h3></RouterLink>
         <p class="footer-mission">Sharing knowledge about programming and astronomy.</p>
       </div>
 
@@ -254,6 +254,12 @@ p:hover {
   font-size: var(--font-size-big);
   margin-top: 5rem;
   margin-bottom: 0;
+  color: var(--color-text-primary);
+}
+
+.footer-name:hover {
+  color: var(--color-primary);
+  cursor: pointer;
 }
 
 .footer-mission {

@@ -96,7 +96,7 @@ export default {
 }
 
 .nav-bar-home:hover {
-  color: var(--color-text-primary);
+  color: var(--color-primary);
 }
 
 .expanded-nav-bar-item {
