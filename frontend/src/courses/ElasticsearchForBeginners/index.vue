@@ -13,7 +13,7 @@
     @show-toast="handleShowToastEvent"
   >
     <section>
-      <h2 class="article-body-header" id="course-overview">
+      <h2 class="article-body-header" id="course-overview" data-table-of-contents>
         <a class="clickable-header-link" href="#course-overview">Course overview</a>
       </h2>
       <p>
@@ -49,7 +49,7 @@
     </section>
 
     <section>
-      <h2 class="article-body-header" id="watch-the-course">
+      <h2 class="article-body-header" id="watch-the-course" data-table-of-contents>
         <a class="clickable-header-link" href="#watch-the-course">Watch the course</a>
       </h2>
       <p>

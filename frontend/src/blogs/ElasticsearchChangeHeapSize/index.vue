@@ -13,7 +13,7 @@
     @show-toast="handleShowToastEvent"
   >
     <section>
-      <h2 class="article-body-header" id="introduction">
+      <h2 class="article-body-header" id="introduction" data-table-of-contents>
         <a class="clickable-header-link" href="#introduction">Introduction</a>
       </h2>
       <p>
@@ -29,7 +29,7 @@
     </section>
 
     <section>
-      <h2 class="article-body-header" id="heap-size">
+      <h2 class="article-body-header" id="heap-size" data-table-of-contents>
         <a class="clickable-header-link" href="#heap-size">Heap size</a>
       </h2>
 
@@ -53,14 +53,14 @@
     </section>
 
     <section>
-      <h2 class="article-body-header" id="changing-the-heap-size">
+      <h2 class="article-body-header" id="changing-the-heap-size" data-table-of-contents>
         <a class="clickable-header-link" href="#changing-the-heap-size">Changing the heap size</a>
       </h2>
 
       <p>Follow these steps to adjust the heap size.</p>
 
       <section>
-        <h3 class="article-body-subheader" id="start-the-container">
+        <h3 class="article-body-subheader" id="start-the-container" data-table-of-contents>
           <a class="clickable-header-link" href="#start-the-container">Start the container</a>
         </h3>
 
@@ -77,7 +77,7 @@
       </section>
 
       <section>
-        <h3 class="article-body-subheader" id="access-the-container">
+        <h3 class="article-body-subheader" id="access-the-container" data-table-of-contents>
           <a class="clickable-header-link" href="#access-the-container">Access the container</a>
         </h3>
 
@@ -88,7 +88,7 @@
       </section>
 
       <section>
-        <h3 class="article-body-subheader" id="create-the-heap-options-file">
+        <h3 class="article-body-subheader" id="create-the-heap-options-file" data-table-of-contents>
           <a class="clickable-header-link" href="#create-the-heap-options-file">Create the "heap.options" file</a>
         </h3>
 
@@ -118,7 +118,7 @@
     </section>
 
     <section>
-      <h2 class="article-body-header" id="conclusion">
+      <h2 class="article-body-header" id="conclusion" data-table-of-contents>
         <a class="clickable-header-link" href="#conclusion">Conclusion</a>
       </h2>
       <p>

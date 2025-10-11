@@ -13,7 +13,7 @@
     @show-toast="handleShowToastEvent"
   >
     <section>
-      <h2 class="article-body-header" id="introduction">
+      <h2 class="article-body-header" id="introduction" data-table-of-contents>
         <a class="clickable-header-link" href="#introduction">Introduction</a>
       </h2>
       <p>
@@ -29,7 +29,7 @@
     </section>
 
     <section>
-      <h2 class="article-body-header" id="collapse-search-results">
+      <h2 class="article-body-header" id="collapse-search-results" data-table-of-contents>
         <a class="clickable-header-link" href="#collapse-search-results">Collapse search results</a>
       </h2>
       <p>
@@ -39,7 +39,7 @@
       </p>
 
       <section>
-        <h3 class="article-body-subheader" id="indexing-documents">
+        <h3 class="article-body-subheader" id="indexing-documents" data-table-of-contents>
           <a class="clickable-header-link" href="#indexing-documents">Indexing documents</a>
         </h3>
 
@@ -70,7 +70,7 @@
       </section>
 
       <section>
-        <h3 class="article-body-subheader" id="collapsing">
+        <h3 class="article-body-subheader" id="collapsing" data-table-of-contents>
           <a class="clickable-header-link" href="#collapsing">Collapsing</a>
         </h3>
 
@@ -154,7 +154,7 @@
       </section>
 
       <section>
-        <h3 class="article-body-subheader" id="expanding-collapsed-results">
+        <h3 class="article-body-subheader" id="expanding-collapsed-results" data-table-of-contents>
           <a class="clickable-header-link" href="#expanding-collapsed-results">Expanding collapsed results</a>
         </h3>
 
@@ -201,7 +201,7 @@
       </section>
 
       <section>
-        <h3 class="article-body-subheader" id="collapsing-with-search_after">
+        <h3 class="article-body-subheader" id="collapsing-with-search_after" data-table-of-contents>
           <a class="clickable-header-link" href="#collapsing-with-search_after">Collapsing with search_after</a>
         </h3>
 
@@ -250,7 +250,7 @@
     </section>
 
     <section>
-      <h2 class="article-body-header" id="conclusion">
+      <h2 class="article-body-header" id="conclusion" data-table-of-contents>
         <a class="clickable-header-link" href="#conclusion">Conclusion</a>
       </h2>
       <p>

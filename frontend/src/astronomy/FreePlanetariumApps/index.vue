@@ -13,7 +13,7 @@
     @show-toast="handleShowToastEvent"
   >
     <section>
-      <h2 class="article-body-header" id="introduction">
+      <h2 class="article-body-header" id="introduction" data-table-of-contents>
         <a class="clickable-header-link" href="#introduction">Introduction</a>
       </h2>
       <p>
@@ -34,13 +34,13 @@
     </section>
 
     <section>
-      <h2 class="article-body-header" id="computer-applications">
+      <h2 class="article-body-header" id="computer-applications" data-table-of-contents>
         <a class="clickable-header-link" href="#computer-applications">Computer applications</a>
       </h2>
 
       <div>
         <div>
-          <h3 class="article-body-subheader" id="stellarium">
+          <h3 class="article-body-subheader" id="stellarium" data-table-of-contents>
             <a class="clickable-header-link" href="#stellarium">Stellarium</a>
           </h3>
           <ImageWithCaption
@@ -61,7 +61,7 @@
         </div>
 
         <div>
-          <h4 class="article-body-sub-subheader" id="stellarium-object-information">
+          <h4 class="article-body-sub-subheader" id="stellarium-object-information" data-table-of-contents>
             <a class="clickable-header-link" href="#stellarium-object-information">Object information</a>
           </h4>
           <p>
@@ -78,7 +78,7 @@
         </div>
 
         <div>
-          <h4 class="article-body-sub-subheader" id="stellarium-whats-up-today">
+          <h4 class="article-body-sub-subheader" id="stellarium-whats-up-today" data-table-of-contents>
             <a class="clickable-header-link" href="#stellarium-whats-up-today">What's up today</a>
           </h4>
           <p>
@@ -108,7 +108,7 @@
         </div>
 
         <div>
-          <h4 class="article-body-sub-subheader" id="stellarium-phenomena">
+          <h4 class="article-body-sub-subheader" id="stellarium-phenomena" data-table-of-contents>
             <a class="clickable-header-link" href="#stellarium-phenomena">Phenomena</a>
           </h4>
           <p>
@@ -140,7 +140,7 @@
         </div>
 
         <div>
-          <h4 class="article-body-sub-subheader" id="stellarium-eclipses">
+          <h4 class="article-body-sub-subheader" id="stellarium-eclipses" data-table-of-contents>
             <a class="clickable-header-link" href="#stellarium-eclipses">Eclipses</a>
           </h4>
           <p>
@@ -162,7 +162,7 @@
         </div>
 
         <div>
-          <h4 class="article-body-sub-subheader" id="stellarium-image-sensor-frame">
+          <h4 class="article-body-sub-subheader" id="stellarium-image-sensor-frame" data-table-of-contents>
             <a class="clickable-header-link" href="#stellarium-image-sensor-frame">Image sensor frame</a>
           </h4>
           <p>
@@ -192,7 +192,7 @@
         </div>
 
         <div>
-          <h4 class="article-body-sub-subheader" id="stellarium-sky-culture">
+          <h4 class="article-body-sub-subheader" id="stellarium-sky-culture" data-table-of-contents>
             <a class="clickable-header-link" href="#stellarium-sky-culture">Sky culture</a>
           </h4>
           <p>
@@ -214,7 +214,7 @@
         </div>
 
         <div>
-          <h4 class="article-body-sub-subheader" id="stellarium-simulating-sky-conditions">
+          <h4 class="article-body-sub-subheader" id="stellarium-simulating-sky-conditions" data-table-of-contents>
             <a class="clickable-header-link" href="#stellarium-simulating-sky-conditions">Simulating sky conditions</a>
           </h4>
 
@@ -276,7 +276,7 @@
         </div>
 
         <div>
-          <h4 class="article-body-sub-subheader" id="stellarium-plugins">
+          <h4 class="article-body-sub-subheader" id="stellarium-plugins" data-table-of-contents>
             <a class="clickable-header-link" href="#stellarium-plugins">Plugins</a>
           </h4>
           <p>
@@ -315,7 +315,7 @@
         </div>
 
         <div>
-          <h4 class="article-body-sub-subheader" id="stellarium-full-guide">
+          <h4 class="article-body-sub-subheader" id="stellarium-full-guide" data-table-of-contents>
             <a class="clickable-header-link" href="#stellarium-full-guide">Full guide</a>
           </h4>
           <p>
@@ -329,7 +329,7 @@
     </section>
 
     <section>
-      <h2 class="article-body-header" id="mobile-applications">
+      <h2 class="article-body-header" id="mobile-applications" data-table-of-contents>
         <a class="clickable-header-link" href="#mobile-applications">Mobile applications</a>
       </h2>
       <p>
@@ -340,7 +340,7 @@
       </p>
 
       <div>
-        <h3 class="article-body-subheader" id="sky-tonight">
+        <h3 class="article-body-subheader" id="sky-tonight" data-table-of-contents>
           <a class="clickable-header-link" href="#sky-tonight">Sky Tonight</a>
         </h3>
         <ImageWithCaption
@@ -369,7 +369,7 @@
       </div>
 
       <div>
-        <h4 class="article-body-sub-subheader" id="sky-tonight-calendar">
+        <h4 class="article-body-sub-subheader" id="sky-tonight-calendar" data-table-of-contents>
           <a class="clickable-header-link" href="#sky-tonight-calendar">Calendar</a>
         </h4>
         <p>To use the calendar feature, tap the <InlineCode text="calendar" /> icon on the main screen.</p>
@@ -421,7 +421,7 @@
       </div>
 
       <div>
-        <h4 class="article-body-sub-subheader" id="sky-tonight-stargazing-index">
+        <h4 class="article-body-sub-subheader" id="sky-tonight-stargazing-index" data-table-of-contents>
           <a class="clickable-header-link" href="#sky-tonight-stargazing-index">Stargazing index</a>
         </h4>
         <p>To use this feature, click on the telescope icon at the bottom of the screen in the main view.</p>
@@ -457,7 +457,7 @@
       </div>
 
       <div>
-        <h4 class="article-body-sub-subheader" id="sky-tonight-stargazing-news">
+        <h4 class="article-body-sub-subheader" id="sky-tonight-stargazing-news" data-table-of-contents>
           <a class="clickable-header-link" href="#sky-tonight-stargazing-news">Stargazing news</a>
         </h4>
         <p>
@@ -474,7 +474,7 @@
       </div>
 
       <div>
-        <h3 class="article-body-subheader" id="other-applications">
+        <h3 class="article-body-subheader" id="other-applications" data-table-of-contents>
           <a class="clickable-header-link" href="#other-applications">Other applications</a>
         </h3>
         <p>
@@ -486,7 +486,7 @@
     </section>
 
     <section>
-      <h2 class="article-body-header" id="conclusion">
+      <h2 class="article-body-header" id="conclusion" data-table-of-contents>
         <a class="clickable-header-link" href="#conclusion">Conclusion</a>
       </h2>
       <p>
