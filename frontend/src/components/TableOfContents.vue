@@ -1,11 +1,11 @@
 <template>
   <aside v-if="sections.length > 0" class="table-of-contents-container">
-    <h2>In this article</h2>
+    <h2>On this page</h2>
     <ul>
-      <li v-for="value in sections" :key="value.id" :class="{ active: value.id === activeSectionId }">
+      <li v-for="value in sections" :key="value.id" :class="{ active: shouldActivateSection(value.y) }">
         <a
           href="#"
-          :class="[`level-${value.level}`, { active: value.id === activeSectionId }]"
+          :class="[`level-${value.level}`, { active: shouldActivateSection(value.y) }]"
           @click.prevent="handleSectionClick(value.id)"
           >{{ value.text }}</a
         >
@@ -21,20 +21,16 @@ export default {
     return {
       activeSectionId: null,
       sections: [],
-      yIntervalsBetweenSections: [],
-      initializationDelayMilliseconds: 500,
     };
   },
   mounted() {
-    setTimeout(() => {
-      this.$nextTick(() => {
-        this.collectSections();
-        this.checkIfURLContainsHash();
+    this.$nextTick(() => {
+      this.collectSections();
+      this.checkIfURLContainsHash();
 
-        window.addEventListener("scroll", this.handleScrollEvent);
-        window.addEventListener("resize", this.handleResize);
-      });
-    }, this.initializationDelayMilliseconds);
+      window.addEventListener("scroll", this.handleScrollEvent);
+      window.addEventListener("resize", this.handleResize);
+    });
   },
   beforeUnmount() {
     window.removeEventListener("scroll", this.handleScrollEvent);
@@ -49,11 +45,15 @@ export default {
   },
   methods: {
     collectSections() {
-      const selectors = [".article-body h2[id]", ".article-body h3[id]", ".article-body h4[id]"];
+      const selectors = [
+        "h2[id][data-table-of-contents]",
+        "h3[id][data-table-of-contents]",
+        "h4[id][data-table-of-contents]",
+      ];
       const headersNodeList = document.querySelectorAll(selectors.join(", "));
 
       this.sections = Array.from(headersNodeList).map((headerNode) => {
-        const y = headerNode.getBoundingClientRect().top + window.scrollY;
+        const y = this.computeAbsoluteYPosition(headerNode);
         return {
           id: headerNode.id,
           text: headerNode.textContent.trim(),
@@ -61,7 +61,6 @@ export default {
           y: parseInt(y, 10),
         };
       });
-      this.computeYIntervalsBetweenSections();
     },
     checkIfURLContainsHash() {
       const hash = window.location.hash;
@@ -70,23 +69,11 @@ export default {
         this.handleSectionClick(sectionIdWithoutHash);
       }
     },
-    computeYIntervalsBetweenSections() {
-      for (let i = 0; i < this.sections.length; i++) {
-        const currentSection = this.sections[i];
-        const nextSection = this.sections[i + 1];
-
-        const yOffsetCurrent = currentSection.y;
-        const yOffsetNext = nextSection ? nextSection.y : Infinity;
-        const currentSectionId = currentSection.id;
-
-        this.yIntervalsBetweenSections.push({ yOffsetCurrent, yOffsetNext, currentSectionId });
-      }
-    },
     handleSectionClick(sectionId) {
       const sectionElement = document.getElementById(sectionId);
       if (!sectionElement) return;
 
-      const y = sectionElement.getBoundingClientRect().top + window.scrollY;
+      const y = this.computeAbsoluteYPosition(sectionElement);
       window.scrollTo({
         top: y,
         behavior: "smooth",
@@ -94,19 +81,18 @@ export default {
 
       this.activeSectionId = sectionId;
     },
+    computeAbsoluteYPosition(element) {
+      const rect = element.getBoundingClientRect();
+      return rect.top + window.scrollY;
+    },
     handleScrollEvent() {
-      const scrollAmount = window.scrollY;
-
-      for (let i = 0; i < this.yIntervalsBetweenSections.length; i++) {
-        const interval = this.yIntervalsBetweenSections[i];
-        if (scrollAmount >= interval.yOffsetCurrent && scrollAmount < interval.yOffsetNext) {
-          this.activeSectionId = interval.currentSectionId;
-          return;
-        }
-      }
+      this.collectSections();
     },
     handleResize() {
       this.collectSections();
+    },
+    shouldActivateSection(sectionYValue) {
+      return sectionYValue - window.scrollY <= 0;
     },
   },
 };
