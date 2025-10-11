@@ -101,6 +101,11 @@ export default {
 <style scoped>
 a {
   color: var(--color-text-disabled);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  max-width: 100%;
 }
 
 a:hover {
