@@ -34,6 +34,6 @@ export default {
 .bullet-point span {
   font-size: var(--font-size-small);
   color: var(--color-text-secondary);
-  line-height: 1;
+  line-height: 1.4;
 }
 </style>
