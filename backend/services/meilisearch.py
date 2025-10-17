@@ -68,7 +68,6 @@ class MeilisearchService:
         hits = [
             SearchHit(
                 id=hit.get("id", ""),
-                chunk_number=hit.get("chunk_number", 0),
                 name=hit.get("name", ""),
                 title=hit.get("title", ""),
                 content=hit.get("content", ""),
@@ -194,14 +193,13 @@ class MeilisearchService:
     ) -> RecommendationArticleResponse:
         response = self.index.get_documents(
             {
-                "filter": f"type = '{document_type}' AND name != '{document_name_to_ignore}' AND chunk_number = 0",
+                "filter": f"type = '{document_type}' AND name != '{document_name_to_ignore}'",
                 "limit": 3,
             }
         )
         hits = [
             RecommendationArticleHit(
                 id=hit.id,
-                chunk_number=hit.chunk_number,
                 name=hit.name,
                 title=hit.title,
                 content=hit.content,
@@ -223,7 +221,7 @@ class MeilisearchService:
     async def get_latest_articles(self, document_type: str) -> LatestArticleResponse:
         response = self.index.get_documents(
             {
-                "filter": f"type = '{document_type}' AND chunk_number = 0",
+                "filter": f"type = '{document_type}'",
                 "sort": ["creation_date:desc"],
                 "limit": 3,
             }
@@ -231,7 +229,6 @@ class MeilisearchService:
         hits = [
             LatestArticleHit(
                 id=hit.id,
-                chunk_number=hit.chunk_number,
                 name=hit.name,
                 title=hit.title,
                 content=hit.content,
