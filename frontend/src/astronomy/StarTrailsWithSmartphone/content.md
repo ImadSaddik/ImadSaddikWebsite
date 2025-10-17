@@ -1,186 +1,341 @@
-# Learn the night sky with free planetarium applications
+# How to shoot star trails with your smartphone
 
-A list of free planetarium applications to explore the night sky on your computer or mobile device.
+This complete guide covers everything you need to know to capture beautiful star trail photos using just your smartphone.
 
-**Date:** September 20, 2025  
-**Tags:** Astronomy, Planetarium, Stellarium, Sky Tonight, SkySafari
+**Date:** October 17, 2025
+**Tags:** Astronomy, Star trails, Timelapse, Sky Tonight, Astrophotography
 
------
+---
 
 ## Introduction
 
-[Planetarium](https://en.wikipedia.org/wiki/Planetarium_software) applications helped me learn a lot about the universe. I read stories about [constellations](https://en.wikipedia.org/wiki/Constellation), stars, and planets. I memorized the names of the brightest stars. I learned how to read astronomical data like [right ascension](https://en.wikipedia.org/wiki/Right_ascension), [declination](https://en.wikipedia.org/wiki/Declination), [magnitude](https://en.wikipedia.org/wiki/Magnitude_(astronomy)), [star type](https://en.wikipedia.org/wiki/Stellar_classification), etc.
+In this guide, I'll show you how to photograph [circumpolar star trails](https://en.wikipedia.org/wiki/Circumpolar_star) with your smartphone. The image I used as the thumbnail for this article was taken with my phone under a [Bortle level](https://en.wikipedia.org/wiki/Bortle_scale) 3 sky, just before sunrise.
 
-I use planetarium applications on both my phone and my computer. Some are free, others are paid. Some are simple, others are complex. Overall, I believe everyone should have a planetarium app at hand. In this article, I will share with you the free applications that I have used over the past years.
+The Bortle scale is a nine-level scale used by astronomers to describe the brightness of the night sky caused by [light pollution](https://en.wikipedia.org/wiki/Light_pollution).
 
------
+- **A Bortle 1** sky is extremely dark.
+- **A Bortle 9** sky is bright and blocks most starlight.
 
-## Computer applications
+The image below shows how much `light pollution` affects what you can see in the night sky, from a dark `Bortle 1` location (left) to a bright `Bortle 9` city sky (right).
 
-### Stellarium
+By following this guide, you'll learn how to:
 
-*A view of the Milky Way as seen from Stellarium.*
+- Locate the [north star (Polaris)](https://en.wikipedia.org/wiki/Polaris) or the [south star (Sigma Octantis)](https://en.wikipedia.org/wiki/Sigma_Octantis) to find the center of rotation in the night sky.
+- Use your phone's `pro mode` to take long-exposure photos.
+- Automatically capture hundreds of photos throughout the night.
+- Combine those images into a single image to create star trails.
+- Create a [time-lapse](https://en.wikipedia.org/wiki/Time-lapse_photography) video from the same photos (Bonus).
 
-[Stellarium](https://stellarium.org/) was the first planetarium application I used. I installed it on my Ubuntu computer after discovering that it is free and open source. I don’t remember exactly how I found it, but I think it was through a YouTube video about astronomy.
+Everything in this article is explained step-by-step, so even if you've never tried astrophotography before, you'll be able to follow along easily.
 
-Stellarium has a simple, intuitive user interface and is packed with features. It is my favorite application, and I’d like to share some of the features I really enjoy.
+---
 
-#### Object information
+## Star Trails
 
-Clicking on any object, whether it is a star, planet, galaxy, or something else, displays a lot of information about it. You can see details such as its magnitude, distance, position in the night sky, and many other useful facts.
+Star trails are photographs that show the motion of stars across the night sky, which is caused by the Earth's rotation. Capturing a star trail is one of the best ways to get started with [astrophotography](https://en.wikipedia.org/wiki/Astrophotography).
 
-*Clicking on an object in Stellarium reveals detailed information about it.*
+The look of your final image depends entirely on where you point your camera. Each direction creates a different effect:
 
-#### What's up today
+- **Pointing north or south:** This creates a circular pattern around the celestial poles (Polaris in the north, Sigma Octantis in the south).
+- **Pointing east:** You will capture stars as long arcs rising from the horizon.
+- **Pointing west:** You will capture stars as long arcs setting toward the horizon.
 
-The `What's up today` feature shows you a list of interesting celestial events happening on the current day, such as planets, galaxies, and comets. It's a great way to discover new objects to observe in the night sky.
+### Northern Hemisphere
 
-To access this feature, click on the `Astronomical calculations window` icon on the left toolbar or press `F10`, then go to the `What's up today (WUT)` tab.
+If you live in the [northern hemisphere](https://en.wikipedia.org/wiki/Northern_Hemisphere), you can see the star **Polaris**. The Earth's [north celestial pole](https://en.wikipedia.org/wiki/Celestial_pole#Finding_the_north_celestial_pole) is almost perfectly aligned with it, which means **Polaris remains visible all year round** and never sets below the horizon.
 
-Within the `WUT` tab, you can filter events by category (for example, planets or comets) and by the time of day (such as any time during the night or just in the evening). You can also filter the results by magnitude, which is useful if you want to see only the brightest objects.
+Stars that never set below the horizon are called [circumpolar stars](https://en.wikipedia.org/wiki/Circumpolar_star). When you take a photo with Polaris in the center, you capture these circumpolar stars creating perfect circles around it, while other stars form arcs across the sky.
 
-The results appear in the `Matching objects` table. You can double-click any row to center the view on that object.
+### Southern Hemisphere
 
-*The **What's up today** feature in Stellarium helps you discover interesting celestial events.*
+If you live in the [southern hemisphere](https://en.wikipedia.org/wiki/Celestial_pole#Finding_the_south_celestial_pole), try to locate the star **Sigma Octantis**. If you've never heard of it before, don't worry, I'll show you how to use a planetarium app to help you find any object in the sky.
 
-#### Phenomena
+---
 
-The `Phenomena` feature allows you to calculate when certain celestial events will occur between two objects. By default, the tool calculates only [conjunctions](https://en.wikipedia.org/wiki/Conjunction_(astronomy)), but you can also select [oppositions](https://en.wikipedia.org/wiki/Opposition_(astronomy)), [elongations](https://en.wikipedia.org/wiki/Elongation_(astronomy)), [quadratures](https://en.wikipedia.org/wiki/Quadrature_(astronomy)), [perihelion](https://simple.wikipedia.org/wiki/Perihelion), and [aphelion](https://simple.wikipedia.org/wiki/Aphelion).
+## Required Equipment
 
-Before starting the calculation, choose the start and end dates, the two objects, the type of phenomena you want to calculate, and the maximum allowed separation. Then click the `Calculate` button.
+To capture a star trail, **you take hundreds of short-exposure images over several hours**. Later, you will combine those images using photo-editing software to create the final star trail effect.
 
-Double-clicking any row in the results table will take you to that event in time and center the objects in the view.
+Here is what you will need:
 
-*The **Phenomena** feature in Stellarium helps you find interesting celestial events between two objects.*
+- A tripod.
+- Your smartphone.
+- An app that can automatically tap the shutter button.
+- A planetarium app to help find Polaris or Sigma Octantis.
 
-#### Eclipses
+### Smartphone
 
-The `Eclipses` feature allows you to calculate all types of eclipses, including lunar, solar, and planetary transits. By default, the `All solar eclipses` tab is selected, but you can choose any type of eclipse from the tabs at the bottom. Select the starting year and the number of years you want to search, then click the `Calculate eclipses` button.
+Both Android and iPhone users can follow this guide. What matters most is that your camera app allows you to shoot in **pro mode**.
 
-As with the previous features, double-clicking any row in the results table will take you to that event in time and center the relevant objects in the view.
+Pro mode lets you change the camera settings manually. This is important because every photo needs to have the same settings throughout the night.
 
-*The **Eclipses** feature in Stellarium helps you find upcoming eclipses.*
+If you don't use pro mode, your phone will keep changing the camera settings on its own while shooting, which will ruin the final image.
 
-#### Image sensor frame
+In the steps below, I will show you how to find pro mode on your phone. I am using an Android device, but iPhone users should be able to find similar options in their camera app.
 
-For astrophotographers, the `Image sensor frame` feature is extremely useful. It allows you to simulate the field of view of your camera and telescope setup, so you can see exactly what portion of the sky will be captured in your images.
+Launch your camera app and tap the pro mode option.
 
-You can select your sensor type, and the tool will display details such as the sensor's dimensions, [binning](https://en.wikipedia.org/wiki/Pixel_binning), X and Y scale, and rotation angle. You can also choose your telescope and lens configuration, including [focal reducers](https://en.wikipedia.org/wiki/Telecompressor) or [extenders](https://en.wikipedia.org/wiki/Extension_tube), and see the resulting field of view and multiplicity.
+Inside pro mode, you will need to adjust three main settings:
 
-This makes it easy to plan your [astrophotography](https://en.wikipedia.org/wiki/Astrophotography) sessions and ensure your target fits perfectly within your camera's frame.
+- **ISO:** Controls how sensitive your camera sensor is to light.
+- **Shutter speed:** How long the camera's shutter stays open.
+- **Focus:** Adjusts the lens to make a specific area in your frame appear sharp and clear.
 
-*The **Image sensor frame** feature in Stellarium helps you visualize your camera and telescope setup.*
+Found them? Great! I'll explain how to set them later in this guide.
 
-#### Sky culture
+### Planetarium App
 
-Stellarium supports a variety of [sky cultures](https://en.wikipedia.org/wiki/Cultural_astronomy), allowing you to view the night sky as interpreted by different cultures around the world. You can choose from a wide range of cultural sky representations.
+A planetarium app lets you see the sky directly on your phone. The app uses your location and your phone's compass to accurately show celestial objects.
 
-To explore these options, click on the `Sky and viewing options window` icon on the left toolbar or press `F4`, then go to the `Sky culture` tab.
+This guide is written for people in the `northern hemisphere`, where Polaris is visible and easy to find.
 
-*On the left is the modern sky culture, and on the right is the Arabic sky culture.*
+If you're in the `southern hemisphere`, Polaris won't be visible. Instead, look for `Sigma Octantis`, the South Star, which is much fainter and harder to spot.
 
-#### Simulating sky conditions
+There are many free apps that work on both Android and iPhone. I use [Sky Tonight](https://vitotechnology.com/apps/sky-tonight) every day, it's simple and works well. Give it a try.
 
-In the past, [people enjoyed the night sky](https://harmoniouscosmos.com/ancient-astronomies-and-the-human-fascination-with-the-sky/) without the effects of [light pollution](https://en.wikipedia.org/wiki/Light_pollution). Today, in most cities, it is difficult to see more than a few stars due to artificial lights, which means we miss out on much of the sky’s beauty.
+Open the app and go through the setup. Once done, click on the `compass icon` in the lower-right corner, or just move your phone around. This helps the app match your view to the real sky.
 
-Stellarium allows you to simulate different sky conditions, such as light pollution, and atmospheric effects. This is especially useful for planning observations based on your local environment.
+Keep moving your phone until you see the `south` direction (in the southern hemisphere) or `north` (in the northern hemisphere).
 
-To adjust these settings, click on the `Sky and viewing options window` on the left toolbar or press `F4`, then go to the `Sky` tab.
+When you're pointing north, Polaris should be highlighted by the app.
 
-*The **Sky and viewing options window** in Stellarium allows you to customize various sky settings.*
+If it's not, tap the **search button**.
 
-To control whether the atmosphere is rendered, check the `Atmosphere visualization` checkbox. For more options, click the wrench icon next to it to adjust temperature, pressure, and other parameters.
+Type `Polaris`, then press the locate icon.
 
-*Comparison between a sky with atmosphere (left) and without atmosphere (right).*
+Now you should see Polaris highlighted. Move your phone slowly until the star is in the center of the screen.
 
-To simulate light pollution, use the slider in the `light pollution` section. This slider lets you change the [Bortle scale](https://en.wikipedia.org/wiki/Bortle_scale) from 1 (excellent dark sky) to 9 (inner city sky). Move the slider to see how the sky changes under different conditions.
+### Automatic Clicker App
 
-*Comparison between a Bortle 1 sky (left) and a Bortle 9 sky (right).*
+Since you'll be taking hundreds of photos, you need an app that can take them automatically for you. The built-in camera apps on most phones don't have this feature.
 
-You can also adjust other settings, such as making stars twinkle, changing the [sky projection](https://en.wikipedia.org/wiki/General_Perspective_projection), and modifying the [field of view (FOV)](https://en.wikipedia.org/wiki/Field_of_view).
+On Android, I use [Auto Clicker-Automatic tap](https://play.google.com/store/apps/details?id=com.truedevelopersstudio.automatictap.autoclicker&hl=en-US). It is free, easy to use, and works well. Unfortunately, it's not available for iPhone, but you can find similar apps in the App Store.
 
-#### Plugins
+Open the app and enable `single target mode`, since we only need to tap one thing, the shutter button.
 
-Because Stellarium is open source, it offers a wide range of plugins that add extra features to the application. You can find plugins that add [quasars](https://en.wikipedia.org/wiki/Quasar), [pulsars](https://en.wikipedia.org/wiki/Pulsar), simulate periodic [meteor showers](https://en.wikipedia.org/wiki/Meteor_shower), and much more.
+Make sure the control panel is showing on screen.
 
-To explore plugins, click on the `Configuration window` icon on the left toolbar or press `F2`, then go to the `Plugins` tab. Select a plugin and check the `Load at startup` box to enable it. Some plugins have additional settings you can configure by clicking the `Configure` button.
+You can disable this mode now, I will show you how to use it properly later.
 
-*The **Plugins** tab in Stellarium allows you to manage and configure various plugins.*
+### Tripod
 
-For example, I enabled a plugin that measures [angular distances](https://en.wikipedia.org/wiki/Angular_distance) between objects in the sky. After restarting Stellarium, I could use this plugin by clicking on the `angular distance measurement tool` on the bottom toolbar.
+To get a clean star trail, your phone must stay completely still during the entire shoot. That's why a tripod is important.
 
-*The **angular distance measurement** plugin in Stellarium helps you measure distances between celestial objects.*
+Any tripod that can hold your phone will do. No need to spend a lot, even a cheap one works fine.
 
-#### Full guide
+If you don't have a tripod, you can lean your phone against a wall or somewhere solid that won't move. I have done this many times when I couldn't afford a tripod :)
 
-I could write about Stellarium all day, but I will stop here. If you want to learn more about Stellarium and its features, I recommend checking out the [official Stellarium guide](https://stellarium.org/files/guide.pdf). It is a complete resource that covers all aspects of the application.
+---
 
------
+## Collecting Data
 
-## Mobile applications
+Place your smartphone on the tripod. Then, open the planetarium app you downloaded. Search for the star Polaris and follow it until you find it. Try to center it in the screen, or put it in a corner if you prefer.
 
-I have used many planetarium applications on my phone over the years. Currently, I only use `Sky Tonight` and `SkySafari Legacy`. Unfortunately, I can't discuss SkySafari Legacy because it is no longer available for download. The other SkySafari versions are paid, and in this article, I only cover free applications that I use.
+Make sure the phone stays still all night. If it is windy, cover the phone gently, but don't block the camera lens.
 
-### Sky Tonight
+Now, open the auto clicker app and turn on `single target mode`.
 
-*A view of the Scorpius constellation as seen from Sky Tonight.*
+Exit the auto clicker, then open the camera app. Switch to `pro mode`, and place the auto clicker's floating blue circle over the shutter button.
 
-`Sky Tonight` is a free planetarium application developed by [Vito Technology](https://vitotechnology.com/) and is available on both [Android](https://play.google.com/store/apps/details?id=com.vitotechnology.sky.tonight.map.star.walk&referrer=utm_source%3Dvitosite%26utm_medium%3Dsky-tonight%26utm_campaign%3Dproduct) and [iOS](https://apps.apple.com/us/app/sky-tonight-stargazing-guide/id1570594940). Vito Technology has also developed other applications, such as [Star Walk 2](https://starwalk.space/en), which I used previously. However, since the launch of Sky Tonight, I have switched to it.
+Now, it is time to adjust the settings. First, tap on `AF` and set it to **infinity**. This locks the camera focus on distant stars. If you skip this, the camera will try to focus on something nearby, and your photos will be blurry.
 
-I love the graphics and user interface of Sky Tonight. The application has many features that I will discuss below.
+Now, tap `S` (it might say something different depending on your app) to change the shutter speed. Set it to 10 seconds. That means the camera stays open for 10 seconds each time, gathering as much light as possible.
 
-#### Calendar
+Don't go over 20 seconds, especially if you're using a tripod. If you set it too high, stars will show up as streaks, not circles. Try taking a test shot at 30 seconds just to see what happens. You'll see that the stars are all stretched.
 
-To use the calendar feature, tap the `calendar` icon on the main screen.
+So stick to 10–20 seconds. For now, use 10.
 
-*The **calendar** button in Sky Tonight opens the calendar view.*
+Next, tap the `ISO` button and set it between 800 and 1600. If you're in a city with light pollution, keep it at 800 or less. Again, don't push the ISO too high, like 25600, unless you want to hurt your eyes later when looking at the photo 😅
 
-The calendar displays a list of interesting celestial events happening today, and you can also select any future date to see upcoming events for that day. Unlike Stellarium, you can't filter events by category or magnitude, but you can view all events by selecting a date.
+Now, set the timer to 3 or 5 seconds. This helps reduce blur caused by shaking the phone when pressing the shutter. The timer lets the phone settle before taking the shot.
 
-*The calendar in Sky Tonight shows celestial events for the selected date.*
+I said it's rare to find an intervalometer built into the camera app. But in my case, it's there. Not sure if all Android phones have it.
 
-The calendar also shows [moon phases](https://en.wikipedia.org/wiki/Lunar_phase). When you tap on a date, you'll see detailed information about the moon phase for that day, including age, illumination, angular size, magnitude, rise and set times, and more.
+If your app has the `Interval` option, set it to 1 or 2 seconds. That means: after a 10-second exposure, the camera waits 1 or 2 seconds before taking the next one.
 
-*Detailed information about the moon phase in Sky Tonight.*
+If your camera app doesn't have this, no problem, we'll use the auto clicker instead. But first, let's take a test shot. Make sure your camera settings are as follows:
 
-There is a tab for meteor showers you can observe, and another tab that provides information about the sky, such as the length of the day, total darkness start and end times, and more.
+- **ISO:** 1200.
+- **Timer:** 3 or 5 seconds.
+- **Shutter speed:** 10 seconds.
+- **Focus:** Infinity (max number).
 
-*The **meteor showers** and **sky details** tabs in Sky Tonight.*
+Take a photo. Open it and check if the stars show up. Here's what I got:
 
-You can also use the `share` button to send calendar information to your friends.
+Zoom in on a star. Is it a clean circle? If not, check your focus or increase the timer. If the image is too
+dark, increase the ISO a little. Take another photo, look at it, adjust, repeat. Keep doing this until you're
+happy with the result.
 
-*The **share** button in Sky Tonight allows you to share celestial event information.*
+Once you have found the settings you like, delete the earlier test shots. Now you're ready to let the phone run
+on its own and collect data.
 
-#### Stargazing index
+Make sure the phone is fully charged before starting. Then, disable Wi-Fi, turn on airplane mode, and set the
+phone to silent. This helps prevent interruption, like incoming calls, that could stop the photo sequence.
 
-To use this feature, click on the telescope icon at the bottom of the screen in the main view.
+Put the auto clicker's floating circle on the shutter speed again, and open the settings.
 
-*The **Visible Tonight** icon in Sky Tonight.*
+Set the **Stop after** to `Run indefinitely`. Then calculate the interval like this:
 
-The `Stargazing index` feature gathers information about the start and end of the night, the moon phase, light pollution, and the percentage of cloudiness. All of this data is combined to give you a final score from 0 to 100%. A higher score means better conditions for stargazing.
+```text
+Interval = shutter speed + timer + 1 second
+Interval = 10 + 3 + 1
+Interval = 14 seconds
+```
 
-*The **Stargazing index** in Sky Tonight provides a score based on various factors affecting stargazing conditions.*
+The extra second gives your phone time to save the photo and prepare for the next one. If you want to gain a few
+seconds, decrease the timer as much as you can. Once done, click Save.
 
-You can adjust the forecast horizon to see how the stargazing index changes over time. This is helpful for planning your stargazing sessions. You can choose between `1 day`, `3 days`, or `7 days`. When you select 3 days or 7 days, additional tabs appear, one for each day.
+Now tap the blue icon to start the auto clicker. Don't touch the phone. Leave it alone for 3 to 5 hours.
 
-*You can change the forecast horizon in the **Stargazing index** feature of Sky Tonight.*
+You're done waiting? Good. Tap the same icon again, it is now a square, to stop the auto clicker. If you think
+the last photo was affected by you touching the phone, go ahead and delete it.
 
-#### Stargazing news
+---
 
-The team behind Sky Tonight regularly publishes articles and quizzes about astronomy. You can find these by clicking the hamburger menu icon, then selecting the `Stargazing news` option.
+## Processing the Data
 
-They also create beautiful infographics. I really enjoy reading these articles and taking the quizzes.
+### Windows & macOS
 
-*The **Stargazing news** section in Sky Tonight provides articles and quizzes about astronomy.*
+You are now ready to process the data you collected. For Windows & macOS users, download the [StarStax program](https://markus-enzweiler.de/software/starstax/). Then connect your phone to your computer with a USB cable and transfer your photos.
 
-### Other applications
+Create a folder named `StarTrails` to stay organized. Inside it, create another folder called `images`, and move only your `jpg` files there.
 
-I have also used other planetarium applications like `Star Walk 2`, `SkyView`, and several others. While I no longer use them, they are still solid options. You can try them out and see which one you like best.
+Now, open `StarStax`. Drag and drop all your images where it says "Drop Images Here."
 
------
+Once the images are loaded, click on a file name to preview it. Every checked image will be used when
+stacking. If you notice any with artifacts, simply uncheck them before continuing.
+
+Next, click the `Preferences` button in the top-right corner to open the blending
+settings.
+
+By default, `Lighten` mode is selected, this is what we want. You can also select
+`Gap filling` to smooth out any breaks in the star trails. Keep
+`Lighten` active, then press `Ctrl+P` or click
+`Start processing` in the top-left corner to begin stacking.
+
+To save your final image, click `Save as` next to the
+`Start processing` button or press `Ctrl+S`.
+
+Inside your `StarTrails` folder, create another folder called
+`StackedImage` and save the result there.
+
+Before saving, make sure to add the correct file extension. If you just want the final image, use
+`.png` or `.jpg`. If you plan to edit it further, for example, to
+remove satellites or add effects, save it as `.tiff`.
+
+### Linux
+
+There's an excellent open-source project on GitHub called [startrails](https://github.com/gkyle/startrails). It lets you stack images, remove
+artifacts, and fill gaps in your star trails. It's completely free and open source.
+
+On GitHub, click on the `Code` button and download the project as a ZIP file.
+
+Unzip the file and navigate to the project folder using these commands:
+
+```bash
+cd Downloads
+cd startrails
+```
+
+To start the program, run this script:
+
+```bash
+./run.sh
+```
+
+Now wait, the script will create a virtual environment using the
+[uv package manager](https://docs.astral.sh/uv/). If you have an **NVIDIA GPU**,
+the script will automatically detect it and install the required dependencies to use your GPU for faster
+processing.
+
+At the end of the installation, you should see this window:
+
+Click on the `Add star frames` button and import your images.
+
+After loading the images, you will be able to preview the images in the app.
+
+Next, click `Stack images` to start the stacking process. In the options, set
+`Fade Frames` to None. If you have a GPU, enable it and adjust the
+`Batch Size` based on your GPU's available VRAM.
+
+Higher batch sizes will speed up processing but also use more memory. Click `OK` to start
+the stacking process.
+
+The final image will be saved in the `projects` folder:
+
+```bash
+cd Downloads/startrails/projects/
+tree default.project/
+```
+
+Output:
+
+```text
+default.project/
+├── stacked-IMG_20240818_035232-2025-10-14-22-40.jpg
+└── stacked-IMG_20240818_035232-2025-10-14-22-47.jpg
+```
+
+To fill gaps in the star trails, click the `Fill gaps` button. The result will be saved in
+the same folder.
+
+You can also remove satellite streaks from the images by clicking on the
+`Detect streaks` button. This uses a deep learning model to find and remove streaks
+automatically.
+
+Click `Stack images` again. Choose `Remove` in the streaks section and
+set `Fade frames` to None and click `OK`. Your new image will now be
+free of satellite trails.
+
+---
+
+## Bonus: Time-Lapse
+
+Here is a bonus for you, with the same data, you can create a time-lapse like this one.
+
+To do this, you'll need video editing software to combine your images into a video. I use
+[Shotcut](https://www.shotcut.org/), but feel free to use any other program you like.
+
+### StarStax
+
+In StarStax, enable the `Save after each step` option. Enter a name in the
+`image name` field, this will be used as a prefix for each frame. Then click
+`Browse` to select where the images should be saved.
+
+Create a new folder inside `StarTrails` and call it `Timelapse`.
+Inside it, create another folder named `Images`.
+
+Select the `Images` folder when clicking on `Browse`.
+
+If you downloaded [Shotcut](https://www.shotcut.org/), follow these steps.
+Otherwise, try to reproduce them in your own editing software.
+
+Open Shotcut and go to `Settings` → `Video mode` →
+`Custom` → `Add` to create a new video mode.
+
+Set the resolution and aspect ratio based on your phone camera's resolution. Set the frame rate to
+**30 or 60 FPS**, then click **OK**.
+
+Drag your first image (for example, `image_name_00000000`) into Shotcut. Then open the
+`Properties` panel and check `Image sequence`, this tells Shotcut to
+combine all the images into a single video.
+
+Press the `+` button or the `A` key to add the video to the track.
+
+Click `Export` → `Advanced`, and make sure the format is
+`MP4`. Check that the resolution and FPS match your project settings. Finally, click
+`Export file` to create your time-lapse.
+
+---
 
 ## Conclusion
 
-Exploring the night sky is incredibly easy with free planetarium applications. Over time, I’ve tried many of these applications on both my computer and my phone, and each one has taught me something new about the universe.
+In this guide, you learned how to use **pro mode** on your camera app to control every setting manually.
 
-If you have not already, I encourage you to try some of these tools. You might be surprised by how much you can learn, and how much fun you will have just by looking up.
+You used an **auto clicker** to capture images automatically throughout the night, and learned how to use
+computer programs to **stack** those images into a single star trail, and even how to turn them into a
+**time-lapse** video.
+
+Everything you've learned here also applies to digital cameras.
+
+Happy stargazing
