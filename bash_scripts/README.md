@@ -19,3 +19,14 @@ Use the [optimize_png_images.sh](./optimize_png_images.sh) script to optimize PN
 ```bash
 ./optimize_png_images.sh /path/to/input_file.png /path/to/output_file.png
 ```
+
+## Run all services with tmux
+
+Use the [run_all_services_tmux.sh](./run_all_services_tmux.sh) script to start all services in a tmux session.
+
+> [!NOTE]
+> Change the paths inside the script.
+
+```bash
+./run_all_services_tmux.sh
+```
