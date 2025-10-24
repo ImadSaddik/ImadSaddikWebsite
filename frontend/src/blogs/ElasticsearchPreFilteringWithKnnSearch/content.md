@@ -5,17 +5,17 @@ How to apply filters to an index to remove documents that don’t meet certain r
 **Date:** August 12, 2025
 **Tags:** Elasticsearch, kNN, Semantic search
 
------
+---
 
 ## Introduction
 
 In this article, I will show you how to use pre-filtering with kNN search. For a more detailed walkthrough, check out the video tutorial:
 
-https://www.youtube.com/watch?v=ESC-ome_Q1o
+[https://www.youtube.com/watch?v=ESC-ome_Q1o](https://www.youtube.com/watch?v=ESC-ome_Q1o)
 
 You can also find all related notebooks and slides in my [GitHub repository](https://github.com/ImadSaddik/ElasticSearch_Python_Course).
 
------
+---
 
 ## Pre-filtering
 
@@ -242,7 +242,7 @@ Explanation: What's happening to the big black hole in the center of our galaxy?
 --------------------------------------------------------------------------------
 ```
 
------
+---
 
 ## Conclusion
 

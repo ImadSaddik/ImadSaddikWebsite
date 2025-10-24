@@ -5,17 +5,17 @@ How to show only the best documents for each group with collapsing.
 **Date:** August 20, 2025
 **Tags:** Elasticsearch
 
------
+---
 
 ## Introduction
 
 In this article, I'll show you how to collapse search results. For a more detailed walkthrough, check out the video tutorial:
 
-[[https://www.youtube.com/embed/znhN54KVqbY](https://www.youtube.com/embed/znhN54KVqbY)](https://www.youtube.com/watch?v=znhN54KVqbY)
+[https://www.youtube.com/embed/znhN54KVqbY](https://www.youtube.com/embed/znhN54KVqbY)
 
 You can also find all related notebooks and slides in my [GitHub repository](https://github.com/ImadSaddik/ElasticSearch_Python_Course).
 
------
+---
 
 ## Collapse search results
 
@@ -391,11 +391,11 @@ Last user ID: 19999
 Total collapsed hits: 20000
 ```
 
------
+---
 
 ## Conclusion
 
- In this article, we explored how `collapsing` search results works in `Elasticsearch`. This feature helps you refine your search output by showing only the most relevant document from each `group`, like getting just one top result per year.
+In this article, we explored how `collapsing` search results works in `Elasticsearch`. This feature helps you refine your search output by showing only the most relevant document from each `group`, like getting just one top result per year.
 
 We learned how `collapsing` reduces the number of returned hits for a cleaner view, and how `inner_hits` can expand those results to show more details within each group.
 

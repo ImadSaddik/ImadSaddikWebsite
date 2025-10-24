@@ -5,17 +5,17 @@ How to change the heap size for Elasticsearch to improve performance and reduce 
 **Date:** August 21, 2025
 **Tags:** Elasticsearch
 
------
+---
 
 ## Introduction
 
 In this article, I'll show you how to change the **heap size**. For a more detailed walkthrough, check out the video tutorial:
 
-https://www.youtube.com/watch?v=guQuHmpPMXs
+[https://www.youtube.com/watch?v=guQuHmpPMXs](https://www.youtube.com/watch?v=guQuHmpPMXs)
 
 You can also find all related notebooks and slides in my [GitHub repository](https://github.com/ImadSaddik/ElasticSearch_Python_Course).
 
------
+---
 
 ## Heap size
 
@@ -25,7 +25,7 @@ Heap size is the amount of memory given to an application to use while it's runn
 
 For small projects and local setups, just **1–2GB** is usually enough.
 
------
+---
 
 ## Changing the heap size
 
@@ -73,7 +73,7 @@ You should see this in the output:
 
 In this example, **Elasticsearch** is set to use **2GB** of memory. You can change the value by replacing `2` with the amount you want.
 
------
+---
 
 ## Conclusion
 
