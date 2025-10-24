@@ -704,13 +704,7 @@
       </h2>
 
       <p>Here is a bonus for you, with the same data, you can create a time-lapse like this one.</p>
-
-      <ImageWithCaption
-        :image-src="timelapseGif60Fps"
-        image-alt="Animated GIF showing a time-lapse of the night sky with moving stars."
-        image-caption="Time-lapse of the night sky."
-        @open-image-modal="handleOpenImageModal"
-      />
+      <VideoWithCaption :video-src="timelapse60Fps" video-caption="Time-lapse of the night sky." />
 
       <p>
         To do this, you'll need video editing software to combine your images into a video. I use
@@ -867,7 +861,7 @@ import starTrailsGithubLoadedImages from "./star_trails_github_loaded_images.jpg
 import githubStarTrailProjectStep1 from "./github_star_trail_project_step_1.svg";
 import githubStarTrailProjectStep2 from "./github_star_trail_project_step_2.svg";
 import githubStarTrailProjectStep3 from "./github_star_trail_project_step_3.svg";
-import timelapseGif60Fps from "./timelapse_gif_60_fps.gif";
+import timelapse60Fps from "./timelapse_gif_60_fps.mp4";
 import starTrailTimelapseStep1 from "./star_trail_timelapse_step_1.svg";
 import starTrailTimelapseStep2 from "./star_trail_timelapse_step_2.svg";
 import starTrailTimelapseStep3 from "./star_trail_timelapse_step_3.svg";
@@ -881,6 +875,7 @@ import InlineCode from "@/components/InlineCode.vue";
 import BulletPoint from "@/components/BulletPoint.vue";
 import CodeOutput from "@/components/CodeOutput.vue";
 import CodeBlock from "@/components/CodeBlock.vue";
+import VideoWithCaption from "@/components/VideoWithCaption.vue";
 
 export default {
   name: "StarTrailsWithSmartphone",
@@ -893,6 +888,7 @@ export default {
     BulletPoint,
     CodeOutput,
     CodeBlock,
+    VideoWithCaption,
   },
   computed: {
     slug() {
@@ -944,7 +940,7 @@ export default {
       githubStarTrailProjectStep1,
       githubStarTrailProjectStep2,
       githubStarTrailProjectStep3,
-      timelapseGif60Fps,
+      timelapse60Fps,
       starTrailTimelapseStep1,
       starTrailTimelapseStep2,
       starTrailTimelapseStep3,
