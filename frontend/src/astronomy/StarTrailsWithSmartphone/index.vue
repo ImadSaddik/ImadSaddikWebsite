@@ -861,7 +861,7 @@ import starTrailsGithubLoadedImages from "./star_trails_github_loaded_images.jpg
 import githubStarTrailProjectStep1 from "./github_star_trail_project_step_1.svg";
 import githubStarTrailProjectStep2 from "./github_star_trail_project_step_2.svg";
 import githubStarTrailProjectStep3 from "./github_star_trail_project_step_3.svg";
-import timelapse60Fps from "./timelapse_gif_60_fps.mp4";
+import timelapse60Fps from "./timelapse_60_fps.mp4";
 import starTrailTimelapseStep1 from "./star_trail_timelapse_step_1.svg";
 import starTrailTimelapseStep2 from "./star_trail_timelapse_step_2.svg";
 import starTrailTimelapseStep3 from "./star_trail_timelapse_step_3.svg";
