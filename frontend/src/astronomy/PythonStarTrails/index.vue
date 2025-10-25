@@ -451,7 +451,7 @@ export default {
     return {
       ...codeSnippets,
 
-      blogTags: ["Python", "Astrophotography", "Image processing", "Time-lapse", "Star trails"],
+      blogTags: ["Python", "Astrophotography", "Image processing", "Timelapse", "Star trails"],
       readingTime: 0,
       markdownContent,
       enlargedImageSrc: "",

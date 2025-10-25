@@ -3,7 +3,7 @@
 A guide to creating star trail images and time-lapse videos on any platform using Python.
 
 **Date:** October 24, 2025
-**Tags:** Python, Astrophotography, Image processing, Time-lapse, Star trails
+**Tags:** Python, Astrophotography, Image processing, Timelapse, Star trails
 
 ---
 
