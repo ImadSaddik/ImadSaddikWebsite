@@ -4,8 +4,8 @@
     title="How to make star trails and time-lapses with Python"
     sub-title="A guide to creating star trail images and time-lapse videos on any platform using Python."
     creation-date="October 24, 2025"
-    article-type="blog-post"
-    :article-tags="blogTags"
+    article-type="astronomy-post"
+    :article-tags="tags"
     :cover-image="coverImage"
     :reading-time="readingTime"
     :slug="slug"
@@ -451,7 +451,7 @@ export default {
     return {
       ...codeSnippets,
 
-      blogTags: ["Python", "Astrophotography", "Image processing", "Timelapse", "Star trails"],
+      tags: ["Python", "Astrophotography", "Image processing", "Timelapse", "Star trails"],
       readingTime: 0,
       markdownContent,
       enlargedImageSrc: "",
