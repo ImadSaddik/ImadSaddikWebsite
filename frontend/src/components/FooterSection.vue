@@ -96,32 +96,28 @@
         <div class="footer-column">
           <h4 class="footer-column-title">Preferences</h4>
 
-          <div class="footer-effects-container">
-            <div class="footer-effects-toggle-names">
-              <p>Star effect</p>
-              <p>Meteorite effect</p>
-            </div>
-            <div class="footer-effects-toggle-buttons">
-              <label for="star-effect" class="effects-toggle">
-                <input
-                  id="star-effect"
-                  type="checkbox"
-                  :checked="starEffectEnabled"
-                  @change="handleStarEffectToggle($event.target.checked)"
-                />
-                <span class="effects-slider"></span>
-              </label>
+          <div class="footer-effects-toggle-buttons">
+            <label for="star-effect" class="effects-toggle">
+              <span class="effects-toggle-label clickable">Star effect</span>
+              <input
+                id="star-effect"
+                type="checkbox"
+                :checked="starEffectEnabled"
+                @change="handleStarEffectToggle($event.target.checked)"
+              />
+              <span class="effects-slider"></span>
+            </label>
 
-              <label for="meteorite-effect" class="effects-toggle">
-                <input
-                  id="meteorite-effect"
-                  type="checkbox"
-                  :checked="meteoriteEffectEnabled"
-                  @change="handleMeteoriteEffectToggle($event.target.checked)"
-                />
-                <span class="effects-slider"></span>
-              </label>
-            </div>
+            <label for="meteorite-effect" class="effects-toggle">
+              <span class="effects-toggle-label clickable">Meteorite effect</span>
+              <input
+                id="meteorite-effect"
+                type="checkbox"
+                :checked="meteoriteEffectEnabled"
+                @change="handleMeteoriteEffectToggle($event.target.checked)"
+              />
+              <span class="effects-slider"></span>
+            </label>
           </div>
         </div>
       </div>
@@ -253,11 +249,12 @@ p:hover {
 .footer-name-and-mission > a {
   display: inline-block;
   width: auto;
+  margin-top: 5rem;
 }
 
 .footer-name {
   font-size: var(--font-size-big);
-  margin-top: 5rem;
+  margin-top: 0;
   margin-bottom: 0;
   color: var(--color-text-primary);
 }
@@ -311,34 +308,15 @@ p:hover {
   height: auto;
 }
 
-.footer-effects-container {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  margin: 0;
-}
-
-.footer-effects-toggle-container {
-  display: flex;
-  align-items: center;
-  gap: var(--gap-sm);
-}
-
-.footer-effects-toggle-names,
 .footer-effects-toggle-buttons {
   display: flex;
   flex-direction: column;
   gap: var(--gap-md);
 }
 
-.footer-effects-toggle-buttons {
-  margin-left: var(--gap-md);
-}
-
 .effects-toggle {
   display: inline-flex;
   align-items: center;
-  margin-left: 1rem;
   cursor: pointer;
   user-select: none;
 }
@@ -353,7 +331,7 @@ p:hover {
   background: var(--color-text-secondary);
   position: relative;
   transition: background 0.3s;
-  margin-right: 0.5rem;
+  margin-left: auto;
 }
 
 .effects-slider::before {
@@ -379,7 +357,7 @@ p:hover {
 .effects-toggle-label {
   font-size: var(--font-size-small);
   color: var(--color-text-secondary);
-  margin-left: 0.25rem;
+  margin-right: 1rem;
 }
 
 .footer-columns-container {
