@@ -2,13 +2,13 @@
   <NavBar :visited-page="visitedPage" />
   <RouterView @show-toast="handleShowToastEvent" @page-visited="handlePageVisitedEvent" />
   <StarBackground v-if="starEffectEnabled" />
-  <MeteorShowers v-if="cometEffectEnabled" />
+  <MeteorShowers v-if="meteoriteEffectEnabled" />
   <ScrollBackToTop />
   <FooterSection
     :star-effect-enabled="starEffectEnabled"
-    :comet-effect-enabled="cometEffectEnabled"
+    :meteorite-effect-enabled="meteoriteEffectEnabled"
     @star-effect-toggle="handleStarEffectToggle"
-    @comet-effect-toggle="handleCometEffectToggle"
+    @meteorite-effect-toggle="handleMeteoriteEffectToggle"
   />
   <ToastNotificationManager ref="toastManager" />
 </template>
@@ -22,7 +22,7 @@ import FooterSection from "@/components/FooterSection.vue";
 import ToastNotificationManager from "@/components/ToastNotificationManager.vue";
 
 // Constants
-import { STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, COMET_EFFECT_TOGGLE_LOCAL_STORAGE_KEY } from "@/constants";
+import { STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY } from "@/constants";
 
 export default {
   name: "App",
@@ -38,7 +38,7 @@ export default {
     return {
       visitedPage: "",
       starEffectEnabled: true,
-      cometEffectEnabled: true,
+      meteoriteEffectEnabled: true,
     };
   },
   mounted() {
@@ -48,17 +48,17 @@ export default {
     handleStarEffectToggle(enabled) {
       this.starEffectEnabled = enabled;
     },
-    handleCometEffectToggle(enabled) {
-      this.cometEffectEnabled = enabled;
+    handleMeteoriteEffectToggle(enabled) {
+      this.meteoriteEffectEnabled = enabled;
     },
     loadEffectsPreference() {
       const storedStarEffectEnabled = localStorage.getItem(STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY);
-      const storedCometEffectEnabled = localStorage.getItem(COMET_EFFECT_TOGGLE_LOCAL_STORAGE_KEY);
+      const storedMeteoriteEffectEnabled = localStorage.getItem(METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY);
       if (storedStarEffectEnabled !== null) {
         this.starEffectEnabled = JSON.parse(storedStarEffectEnabled);
       }
-      if (storedCometEffectEnabled !== null) {
-        this.cometEffectEnabled = JSON.parse(storedCometEffectEnabled);
+      if (storedMeteoriteEffectEnabled !== null) {
+        this.meteoriteEffectEnabled = JSON.parse(storedMeteoriteEffectEnabled);
       }
     },
     handleShowToastEvent(data) {

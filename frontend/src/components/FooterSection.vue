@@ -99,7 +99,7 @@
           <div class="footer-effects-container">
             <div class="footer-effects-toggle-names">
               <p>Star effect</p>
-              <p>Comet effect</p>
+              <p>Meteorite effect</p>
             </div>
             <div class="footer-effects-toggle-buttons">
               <label for="star-effect" class="effects-toggle">
@@ -112,12 +112,12 @@
                 <span class="effects-slider"></span>
               </label>
 
-              <label for="comet-effect" class="effects-toggle">
+              <label for="meteorite-effect" class="effects-toggle">
                 <input
-                  id="comet-effect"
+                  id="meteorite-effect"
                   type="checkbox"
-                  :checked="cometEffectEnabled"
-                  @change="handleCometEffectToggle($event.target.checked)"
+                  :checked="meteoriteEffectEnabled"
+                  @change="handleMeteoriteEffectToggle($event.target.checked)"
                 />
                 <span class="effects-slider"></span>
               </label>
@@ -157,17 +157,17 @@ import footerLandscape from "@/assets/footer_landscape.svg";
 import crescentMoon from "@/assets/crescentMoon.svg";
 
 // Constants
-import { STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, COMET_EFFECT_TOGGLE_LOCAL_STORAGE_KEY } from "@/constants";
+import { STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY } from "@/constants";
 
 export default {
   name: "FooterSection",
-  emits: ["star-effect-toggle", "comet-effect-toggle"],
+  emits: ["star-effect-toggle", "meteorite-effect-toggle"],
   props: {
     starEffectEnabled: {
       type: Boolean,
       default: true,
     },
-    cometEffectEnabled: {
+    meteoriteEffectEnabled: {
       type: Boolean,
       default: true,
     },
@@ -200,9 +200,9 @@ export default {
       this.$emit("star-effect-toggle", value);
       localStorage.setItem(STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, value);
     },
-    handleCometEffectToggle(value) {
-      this.$emit("comet-effect-toggle", value);
-      localStorage.setItem(COMET_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, value);
+    handleMeteoriteEffectToggle(value) {
+      this.$emit("meteorite-effect-toggle", value);
+      localStorage.setItem(METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, value);
     },
   },
 };
