@@ -98,7 +98,15 @@
 
           <div class="footer-effects-toggle-buttons">
             <label for="star-effect" class="effects-toggle">
-              <span class="effects-toggle-label clickable">Star effect</span>
+              <span
+                class="effects-toggle-label clickable"
+                tabindex="0"
+                role="button"
+                :aria-pressed="starEffectEnabled"
+                @keydown.enter.prevent="handleStarEffectToggle(!starEffectEnabled)"
+                @keydown.space.prevent="handleStarEffectToggle(!starEffectEnabled)"
+                >Star effect</span
+              >
               <input
                 id="star-effect"
                 type="checkbox"
@@ -109,7 +117,15 @@
             </label>
 
             <label for="meteorite-effect" class="effects-toggle">
-              <span class="effects-toggle-label clickable">Meteorite effect</span>
+              <span
+                class="effects-toggle-label clickable"
+                tabindex="0"
+                role="button"
+                :aria-pressed="meteoriteEffectEnabled"
+                @keydown.enter.prevent="handleMeteoriteEffectToggle(!meteoriteEffectEnabled)"
+                @keydown.space.prevent="handleMeteoriteEffectToggle(!meteoriteEffectEnabled)"
+                >Meteorite effect</span
+              >
               <input
                 id="meteorite-effect"
                 type="checkbox"
