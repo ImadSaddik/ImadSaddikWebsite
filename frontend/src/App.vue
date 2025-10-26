@@ -1,4 +1,5 @@
 <template>
+  <SkipLink />
   <NavBar :visited-page="visitedPage" />
   <RouterView @show-toast="handleShowToastEvent" @page-visited="handlePageVisitedEvent" />
   <StarBackground v-if="starEffectEnabled" />
@@ -14,12 +15,14 @@
 </template>
 
 <script>
+// Components
 import NavBar from "@/components/NavBar.vue";
 import StarBackground from "@/components/StarBackground.vue";
 import MeteorShowers from "./components/MeteorShowers.vue";
 import ScrollBackToTop from "./components/ScrollBackToTop.vue";
 import FooterSection from "@/components/FooterSection.vue";
 import ToastNotificationManager from "@/components/ToastNotificationManager.vue";
+import SkipLink from "./components/SkipLink.vue";
 
 // Constants
 import { STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY } from "@/constants";
@@ -33,6 +36,7 @@ export default {
     ScrollBackToTop,
     FooterSection,
     ToastNotificationManager,
+    SkipLink,
   },
   data() {
     return {
