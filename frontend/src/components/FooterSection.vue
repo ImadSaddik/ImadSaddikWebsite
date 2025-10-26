@@ -402,9 +402,8 @@ p:hover {
     margin-top: var(--gap-between-sections-medium);
   }
 
-  .footer-name {
+  .footer-name-and-mission > a {
     margin-top: var(--gap-xl);
-    margin-bottom: var(--gap-md);
   }
 
   .moon-image {
@@ -427,10 +426,12 @@ p:hover {
     padding: var(--gap-lg);
   }
 
+  .footer-name-and-mission > a {
+    margin-top: var(--gap-xl);
+  }
+
   .footer-name {
     font-size: var(--font-size-big-medium);
-    margin-top: var(--gap-lg);
-    margin-bottom: var(--gap-sm);
   }
 
   .footer-rights {
