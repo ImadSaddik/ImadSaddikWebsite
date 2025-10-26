@@ -114,8 +114,7 @@ class MeilisearchService:
                 {"id": chunk.id, "view_count": new_view_count} for chunk in chunks
             ]
 
-            task = self.index.update_documents(documents_to_update)
-            self.client.wait_for_task(task.task_uid)
+            self.index.update_documents(documents_to_update)
 
             return {
                 "success": True,
@@ -145,8 +144,7 @@ class MeilisearchService:
                 {"id": chunk.id, "read_count": new_read_count} for chunk in chunks
             ]
 
-            task = self.index.update_documents(documents_to_update)
-            self.client.wait_for_task(task.task_uid)
+            self.index.update_documents(documents_to_update)
 
             return {
                 "success": True,
@@ -176,8 +174,7 @@ class MeilisearchService:
                 {"id": chunk.id, "claps_count": new_claps_count} for chunk in chunks
             ]
 
-            task = self.index.update_documents(documents_to_update)
-            self.client.wait_for_task(task.task_uid)
+            self.index.update_documents(documents_to_update)
 
             return {
                 "success": True,
