@@ -8,8 +8,10 @@
   <FooterSection
     :star-effect-enabled="starEffectEnabled"
     :meteorite-effect-enabled="meteoriteEffectEnabled"
+    :custom-cursor-enabled="customCursorEnabled"
     @star-effect-toggle="handleStarEffectToggle"
     @meteorite-effect-toggle="handleMeteoriteEffectToggle"
+    @custom-cursor-toggle="handleCustomCursorToggle"
   />
   <ToastNotificationManager ref="toastManager" />
 </template>
@@ -25,7 +27,12 @@ import ToastNotificationManager from "@/components/ToastNotificationManager.vue"
 import SkipLink from "./components/SkipLink.vue";
 
 // Constants
-import { STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY } from "@/constants";
+import {
+  STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY,
+  METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY,
+  CUSTOM_CURSOR_TOGGLE_LOCAL_STORAGE_KEY,
+  CUSTOM_CURSOR_CLASS_NAME,
+} from "@/constants";
 
 export default {
   name: "App",
@@ -43,10 +50,12 @@ export default {
       visitedPage: "",
       starEffectEnabled: true,
       meteoriteEffectEnabled: true,
+      customCursorEnabled: true,
     };
   },
   mounted() {
     this.loadEffectsPreference();
+    this.updateCursorClass(this.customCursorEnabled);
   },
   methods: {
     handleStarEffectToggle(enabled) {
@@ -55,14 +64,22 @@ export default {
     handleMeteoriteEffectToggle(enabled) {
       this.meteoriteEffectEnabled = enabled;
     },
+    handleCustomCursorToggle(enabled) {
+      this.customCursorEnabled = enabled;
+      this.updateCursorClass(enabled);
+    },
     loadEffectsPreference() {
       const storedStarEffectEnabled = localStorage.getItem(STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY);
       const storedMeteoriteEffectEnabled = localStorage.getItem(METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY);
+      const storedCustomCursorEnabled = localStorage.getItem(CUSTOM_CURSOR_TOGGLE_LOCAL_STORAGE_KEY);
       if (storedStarEffectEnabled !== null) {
         this.starEffectEnabled = JSON.parse(storedStarEffectEnabled);
       }
       if (storedMeteoriteEffectEnabled !== null) {
         this.meteoriteEffectEnabled = JSON.parse(storedMeteoriteEffectEnabled);
+      }
+      if (storedCustomCursorEnabled !== null) {
+        this.customCursorEnabled = JSON.parse(storedCustomCursorEnabled);
       }
     },
     handleShowToastEvent(data) {
@@ -70,6 +87,13 @@ export default {
     },
     handlePageVisitedEvent(pageKey) {
       this.visitedPage = pageKey;
+    },
+    updateCursorClass(enabled) {
+      if (enabled) {
+        document.body.classList.add(CUSTOM_CURSOR_CLASS_NAME);
+      } else {
+        document.body.classList.remove(CUSTOM_CURSOR_CLASS_NAME);
+      }
     },
   },
 };
@@ -181,6 +205,10 @@ body {
   padding: 0;
   overflow-x: hidden;
   background: var(--color-background);
+  cursor: auto;
+}
+
+body.custom-cursor {
   cursor: url("@/assets/customCursor.svg"), auto;
 }
 

@@ -134,6 +134,25 @@
               />
               <span class="effects-slider"></span>
             </label>
+
+            <label for="custom-cursor" class="effects-toggle">
+              <span
+                class="effects-toggle-label clickable"
+                tabindex="0"
+                role="button"
+                :aria-pressed="customCursorEnabled"
+                @keydown.enter.prevent="handleCustomCursorToggle(!customCursorEnabled)"
+                @keydown.space.prevent="handleCustomCursorToggle(!customCursorEnabled)"
+                >Custom cursor</span
+              >
+              <input
+                id="custom-cursor"
+                type="checkbox"
+                :checked="customCursorEnabled"
+                @change="handleCustomCursorToggle($event.target.checked)"
+              />
+              <span class="effects-slider"></span>
+            </label>
           </div>
         </div>
       </div>
@@ -171,19 +190,24 @@ import footerLandscape from "@/assets/footer_landscape.svg";
 import {
   STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY,
   METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY,
+  CUSTOM_CURSOR_TOGGLE_LOCAL_STORAGE_KEY,
   KNOWN_NEW_MOON_DATE,
   LUNAR_MONTH_DAYS,
 } from "@/constants";
 
 export default {
   name: "FooterSection",
-  emits: ["star-effect-toggle", "meteorite-effect-toggle"],
+  emits: ["star-effect-toggle", "meteorite-effect-toggle", "custom-cursor-toggle"],
   props: {
     starEffectEnabled: {
       type: Boolean,
       default: true,
     },
     meteoriteEffectEnabled: {
+      type: Boolean,
+      default: true,
+    },
+    customCursorEnabled: {
       type: Boolean,
       default: true,
     },
@@ -223,6 +247,10 @@ export default {
     handleMeteoriteEffectToggle(value) {
       this.$emit("meteorite-effect-toggle", value);
       localStorage.setItem(METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, value);
+    },
+    handleCustomCursorToggle(value) {
+      this.$emit("custom-cursor-toggle", value);
+      localStorage.setItem(CUSTOM_CURSOR_TOGGLE_LOCAL_STORAGE_KEY, value);
     },
     getLunarDay() {
       const now = new Date();

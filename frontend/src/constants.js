@@ -1,6 +1,7 @@
 // Local storage keys
 export const STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY = "starEffectEnabled";
 export const METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY = "meteoriteEffectEnabled";
+export const CUSTOM_CURSOR_TOGGLE_LOCAL_STORAGE_KEY = "customCursorEnabled";
 
 // Navigation bar
 export const HOME_PAGE_VISITED_KEY = "HOME";
@@ -43,3 +44,6 @@ export const STAR_ANIMATION_FPS = 30;
 // Moon phases
 export const LUNAR_MONTH_DAYS = 29.530588853;
 export const KNOWN_NEW_MOON_DATE = new Date("2025-10-21T12:59:00Z");
+
+// Custom cursor
+export const CUSTOM_CURSOR_CLASS_NAME = "custom-cursor";
