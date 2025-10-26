@@ -101,11 +101,7 @@ export default {
 <style scoped>
 a {
   color: var(--color-text-disabled);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: block;
-  max-width: 100%;
+  width: 100%;
 }
 
 a:hover {
@@ -119,7 +115,8 @@ a.active {
 
 h2 {
   font-size: var(--font-size-big-medium);
-  margin: 0;
+  margin-top: var(--gap-md);
+  margin-bottom: 0;
 }
 
 ul {
@@ -155,31 +152,51 @@ li.active::before {
 
 li .level-2 {
   font-weight: bold;
-  padding-right: var(--gap-md);
-  padding-left: var(--gap-md);
+  padding: 0 var(--gap-md);
 }
 
 li .level-3 {
-  padding-right: var(--gap-lg);
-  padding-left: var(--gap-lg);
+  padding: 0 var(--gap-lg);
 }
 
 li .level-4 {
-  padding-right: var(--gap-xl);
-  padding-left: var(--gap-xl);
+  padding: 0 var(--gap-xl);
 }
 
 .table-of-contents-container {
-  width: 25%;
   position: sticky;
   top: var(--gap-xxl);
   align-self: flex-start;
-  z-index: 2;
-  margin: var(--gap-md) 0;
+  width: 50%;
+  margin: 0;
   margin-left: var(--gap-xxl);
+  z-index: 2;
 }
 
-@media screen and (max-width: 1500px) {
+@media screen and (max-width: 1300px) {
+  li {
+    padding: var(--gap-xs) var(--gap-sm);
+  }
+
+  li .level-2 {
+    padding: 0 var(--gap-xs);
+  }
+
+  li .level-3 {
+    padding: 0 var(--gap-sm);
+  }
+
+  li .level-4 {
+    padding: 0 var(--gap-md);
+  }
+
+  .table-of-contents-container {
+    width: 35%;
+    margin-left: var(--gap-lg);
+  }
+}
+
+@media screen and (max-width: 1100px) {
   .table-of-contents-container {
     display: none;
   }

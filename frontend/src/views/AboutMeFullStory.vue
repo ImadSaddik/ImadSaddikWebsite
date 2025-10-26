@@ -746,16 +746,20 @@ img {
 }
 
 .about-me-full-story-content {
-  width: 75%;
+  width: 50%;
 }
 
-@media screen and (max-width: 1500px) {
+@media screen and (max-width: 1300px) {
   .about-me-full-story-content {
-    width: 100%;
+    width: 65%;
   }
 }
 
 @media screen and (max-width: 1100px) {
+  .about-me-full-story-content {
+    width: 100%;
+  }
+
   .about-me-full-story-container h1 {
     font-size: var(--font-size-big-medium);
   }

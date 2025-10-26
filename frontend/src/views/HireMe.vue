@@ -210,7 +210,7 @@ h3 {
 }
 
 .hire-me-content {
-  width: 75%;
+  width: 50%;
 }
 
 .card-group {
@@ -239,13 +239,17 @@ h3 {
   width: 200px;
 }
 
-@media screen and (max-width: 1500px) {
+@media screen and (max-width: 1300px) {
   .hire-me-content {
-    width: 100%;
+    width: 65%;
   }
 }
 
 @media screen and (max-width: 1100px) {
+  .hire-me-content {
+    width: 100%;
+  }
+
   .hire-me-container h1 {
     font-size: var(--font-size-big-medium);
   }

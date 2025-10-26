@@ -38,7 +38,7 @@ export default {
 
 <style scoped>
 .article-footer {
-  width: 75%;
+  width: 100%;
 }
 
 .article-footer-header {
@@ -49,15 +49,9 @@ export default {
 
 .article-footer-cards-group {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   width: 100%;
   gap: var(--gap-md);
-}
-
-@media screen and (max-width: 1500px) {
-  .article-footer {
-    width: 100%;
-  }
 }
 
 @media screen and (max-width: 1300px) {

@@ -196,7 +196,7 @@ export default {
 }
 
 .article-body {
-  width: 75%;
+  width: 50%;
 }
 
 .article-container {
@@ -296,13 +296,17 @@ export default {
   }
 }
 
-@media screen and (max-width: 1500px) {
+@media screen and (max-width: 1300px) {
   .article-body {
-    width: 100%;
+    width: 65%;
   }
 }
 
 @media screen and (max-width: 1100px) {
+  .article-body {
+    width: 100%;
+  }
+
   .article-body :deep(.article-body-header) {
     font-size: var(--font-size-medium);
   }

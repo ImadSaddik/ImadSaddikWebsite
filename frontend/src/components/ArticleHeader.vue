@@ -132,7 +132,7 @@ export default {
 
 <style scoped>
 .article-header {
-  width: 75%;
+  width: 50%;
 }
 
 .article-header-title {
@@ -214,13 +214,17 @@ export default {
   color: var(--color-secondary);
 }
 
-@media screen and (max-width: 1500px) {
+@media screen and (max-width: 1300px) {
   .article-header {
-    width: 100%;
+    width: 65%;
   }
 }
 
 @media screen and (max-width: 1100px) {
+  .article-header {
+    width: 100%;
+  }
+
   .article-header-title {
     font-size: var(--font-size-big-medium);
   }
