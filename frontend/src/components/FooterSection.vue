@@ -144,7 +144,7 @@
 
       <div class="footer-images">
         <img class="landscape-image" :src="footerLandscape" alt="A beautiful landscape." />
-        <img class="moon-image" :src="crescentMoon" alt="An image of a crescent moon." />
+        <img class="moon-image" :src="moonPhaseImage" alt="An image of a crescent moon." />
       </div>
     </div>
   </section>
@@ -166,10 +166,14 @@ import fontAwesomeLogo from "@/assets/logos/fontAwesome.svg";
 
 // Images
 import footerLandscape from "@/assets/footer_landscape.svg";
-import crescentMoon from "@/assets/crescentMoon.svg";
 
 // Constants
-import { STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY } from "@/constants";
+import {
+  STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY,
+  METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY,
+  KNOWN_NEW_MOON_DATE,
+  LUNAR_MONTH_DAYS,
+} from "@/constants";
 
 export default {
   name: "FooterSection",
@@ -188,6 +192,11 @@ export default {
     currentYear() {
       return new Date().getFullYear();
     },
+
+    moonPhaseImage() {
+      const lunarDay = this.getLunarDay();
+      return require(`@/assets/moon_phases/moon_day_${lunarDay}.svg`);
+    },
   },
   data() {
     return {
@@ -203,7 +212,6 @@ export default {
       svgRepoLogo,
       fontAwesomeLogo,
 
-      crescentMoon,
       footerLandscape,
     };
   },
@@ -215,6 +223,15 @@ export default {
     handleMeteoriteEffectToggle(value) {
       this.$emit("meteorite-effect-toggle", value);
       localStorage.setItem(METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, value);
+    },
+    getLunarDay() {
+      const now = new Date();
+      const millisecondsInDay = 1000 * 60 * 60 * 24;
+      const daysSinceKnownNewMoon = (now.getTime() - KNOWN_NEW_MOON_DATE.getTime()) / millisecondsInDay;
+
+      const lunarDayFloat = daysSinceKnownNewMoon % LUNAR_MONTH_DAYS;
+      const lunarDayInteger = Math.ceil(lunarDayFloat);
+      return Math.max(1, Math.min(30, lunarDayInteger));
     },
   },
 };
