@@ -2,10 +2,11 @@
   <section class="about-me-container">
     <h2 class="about-me-title">About me</h2>
     <p class="about-me-paragraph">
-      I'm Imad Saddik from Morocco. I enjoy programming, astronomy, and teaching. I created a YouTube channel called
-      3CodeCamp where I share tutorials about cool things I learn, like mobile apps, web development, AI, and more. At
-      night, I love looking at the stars and capturing images of the sky.
+      I'm Imad Saddik, a software developer from Morocco. I love programming, astronomy, and sharing what I learn with
+      others. I run a YouTube channel called 3CodeCamp where I post tutorials about mobile apps, web development, AI,
+      and other fun projects. At night, I enjoy stargazing, finding constellations, and taking photos of the sky.
     </p>
+
     <button class="about-me-button primary-button">Read my full story</button>
   </section>
 </template>
@@ -32,6 +33,7 @@
   margin-bottom: var(--gap-xl);
   margin-top: 0;
   text-align: center;
+  line-height: 1.6;
 }
 
 .about-me-button {
