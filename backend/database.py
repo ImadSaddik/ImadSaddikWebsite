@@ -4,8 +4,6 @@ from pathlib import Path
 from sqlite3 import Connection
 from typing import Generator
 
-from models.visitor import Visitor
-
 DB_FILE = Path(__file__).parent / "visitors.db"
 
 
@@ -24,44 +22,28 @@ def initialize_database() -> None:
         cursor.execute(
             """
             CREATE TABLE IF NOT EXISTS visitors (
-                ip_address TEXT PRIMARY KEY,
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                ip_address TEXT NOT NULL,
                 country TEXT NOT NULL,
-                first_visit_date TEXT NOT NULL,
-                visit_count INTEGER NOT NULL DEFAULT 1
+                visit_date TEXT NOT NULL,
+                visited_page TEXT NOT NULL DEFAULT 'home',
+                is_bot INTEGER NOT NULL DEFAULT 0
             )
         """
         )
         connection.commit()
 
 
-def add_visitor(ip_address: str, country: str) -> None:
+def add_visitor(
+    ip_address: str, country: str, visited_page: str = "home", is_bot: bool = False
+) -> None:
     with get_database_connection() as connection:
         cursor = connection.cursor()
         cursor.execute(
             """
-            INSERT INTO visitors (ip_address, country, first_visit_date, visit_count)
-            VALUES (?, ?, datetime('now'), 1)
-            ON CONFLICT(ip_address) DO UPDATE SET
-                visit_count = visit_count + 1;
+            INSERT INTO visitors (ip_address, country, visit_date, visited_page, is_bot)
+            VALUES (?, ?, datetime('now'), ?, ?)
             """,
-            (ip_address, country),
+            (ip_address, country, visited_page, int(is_bot)),
         )
         connection.commit()
-
-
-def get_visitor_by_ip(ip_address: str) -> Visitor | None:
-    with get_database_connection() as connection:
-        cursor = connection.cursor()
-        cursor.execute(
-            "SELECT ip_address, country, first_visit_date, visit_count FROM visitors WHERE ip_address = ?",
-            (ip_address,),
-        )
-        row = cursor.fetchone()
-        if row:
-            return Visitor(
-                ip_address=row[0],
-                country=row[1],
-                first_visit_date=row[2],
-                visit_count=row[3],
-            )
-        return None
