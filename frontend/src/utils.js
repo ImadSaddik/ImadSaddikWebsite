@@ -1,3 +1,5 @@
+import axios from "axios";
+
 function calculateReadingTime(refs) {
   const WORDS_PER_MINUTE = 200;
   const articleText = refs.articleContent.$el.innerText;
@@ -35,4 +37,14 @@ function getCardsDataFromDocumentHits({ hits, articleType }) {
   }));
 }
 
-export { calculateReadingTime, convertUnixTimestampToReadableFormat, getCardsDataFromDocumentHits };
+async function trackVisitorData(visitedPageKey) {
+  try {
+    await axios.post("/api/visitors/track", {
+      visited_page: visitedPageKey,
+    });
+  } catch {
+    // I don't want to log this error, nor show it in a toast.
+  }
+}
+
+export { calculateReadingTime, convertUnixTimestampToReadableFormat, getCardsDataFromDocumentHits, trackVisitorData };

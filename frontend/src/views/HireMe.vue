@@ -116,6 +116,9 @@
 // Constants
 import { HIRE_ME_PAGE_VISITED_KEY } from "@/constants.js";
 
+// Utils
+import { trackVisitorData } from "@/utils.js";
+
 // Components
 import ImageWithCaption from "@/components/ImageWithCaption.vue";
 import ImageEnlarger from "@/components/ImageEnlarger.vue";
@@ -135,6 +138,7 @@ export default {
   mounted() {
     document.title = "Hire Imad Saddik";
     this.$emit("page-visited", HIRE_ME_PAGE_VISITED_KEY);
+    trackVisitorData(HIRE_ME_PAGE_VISITED_KEY);
   },
   data() {
     return {

@@ -44,7 +44,7 @@
 import axios from "axios";
 
 // Utils
-import { getCardsDataFromDocumentHits } from "@/utils.js";
+import { getCardsDataFromDocumentHits, trackVisitorData } from "@/utils.js";
 
 // Constants
 import { HOME_PAGE_VISITED_KEY } from "@/constants.js";
@@ -88,7 +88,7 @@ export default {
     this.blogsCardData = await this.getLatestArticlesPerType("blog-post");
     this.coursesCardData = await this.getLatestArticlesPerType("course-post");
     this.universeImagesCardData = await this.getLatestArticlesPerType("astronomy-post");
-    await this.trackVisitorData();
+    trackVisitorData(HOME_PAGE_VISITED_KEY);
   },
   methods: {
     async getLatestArticlesPerType(articleType) {
@@ -105,14 +105,6 @@ export default {
         });
       } catch {
         this.$emit("show-toast", { message: `Failed to fetch the latest ${articleType} articles`, type: "error" });
-      }
-    },
-    async trackVisitorData() {
-      try {
-        await axios.post("/api/visitors/track");
-      } catch {
-        // I don't want to log this error, nor show it in a toast.
-        return;
       }
     },
   },

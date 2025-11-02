@@ -15,6 +15,9 @@ import ArticlesHub from "@/components/ArticlesHub.vue";
 // Constants
 import { COURSES_PAGE_VISITED_KEY } from "@/constants.js";
 
+// Utils
+import { trackVisitorData } from "@/utils.js";
+
 export default {
   name: "CoursesHub",
   emits: ["show-toast", "page-visited"],
@@ -29,6 +32,7 @@ export default {
   mounted() {
     document.title = "Courses by Imad Saddik";
     this.$emit("page-visited", COURSES_PAGE_VISITED_KEY);
+    trackVisitorData(COURSES_PAGE_VISITED_KEY);
   },
 };
 </script>
