@@ -19,7 +19,7 @@ async def track_visitor_endpoint(
     return {"message": "Visit tracking initiated"}
 
 
-async def _track_task(client_ip: str | None = None, visited_page: str = "home") -> None:
+async def _track_task(client_ip: str | None = None, visited_page: str = "HOME") -> None:
     try:
         if not client_ip:
             return None

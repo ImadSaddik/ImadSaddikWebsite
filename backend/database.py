@@ -26,7 +26,7 @@ def initialize_database() -> None:
                 ip_address TEXT NOT NULL,
                 country TEXT NOT NULL,
                 visit_date TEXT NOT NULL,
-                visited_page TEXT NOT NULL DEFAULT 'home',
+                visited_page TEXT NOT NULL DEFAULT 'HOME',
                 is_bot INTEGER NOT NULL DEFAULT 0
             )
         """
@@ -35,7 +35,7 @@ def initialize_database() -> None:
 
 
 def add_visitor(
-    ip_address: str, country: str, visited_page: str = "home", is_bot: bool = False
+    ip_address: str, country: str, visited_page: str = "HOME", is_bot: bool = False
 ) -> None:
     with get_database_connection() as connection:
         cursor = connection.cursor()
