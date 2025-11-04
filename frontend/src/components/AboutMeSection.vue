@@ -7,9 +7,20 @@
       and other fun projects. At night, I enjoy stargazing, finding constellations, and taking photos of the sky.
     </p>
 
-    <button class="about-me-button primary-button">Read my full story</button>
+    <button class="about-me-button primary-button" @click="navigateToPath('about-me')">Read my full story</button>
   </section>
 </template>
+
+<script>
+export default {
+  name: "AboutMeSection",
+  methods: {
+    navigateToPath(path) {
+      this.$router.push({ path });
+    },
+  },
+};
+</script>
 
 <style scoped>
 .about-me-container {
