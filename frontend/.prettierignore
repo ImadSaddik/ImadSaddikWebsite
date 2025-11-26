@@ -1,0 +1,18 @@
+# Ignore build output
+dist
+build
+out
+
+# Ignore dependencies
+node_modules
+
+# Ignore package manager lockfiles (handled by the package manager)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Ignore other common generated or large files if necessary
+# e.g., coverage reports
+coverage
+.DS_Store
+*.log
