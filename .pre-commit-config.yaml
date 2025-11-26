@@ -11,7 +11,7 @@ repos:
         files: ^backend/
 
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: "v9.39.0"
+    rev: "v9.39.1"
     hooks:
       - id: eslint
         name: eslint (frontend)
@@ -19,9 +19,9 @@ repos:
         types: [file]
         args: [--fix, --config, frontend/eslint.config.js]
         additional_dependencies:
-          - eslint@9.27.0
-          - eslint-plugin-vue@10.1.0
-          - eslint-config-prettier@10.1.5
+          - eslint@9.39.1
+          - eslint-plugin-vue@10.6.1
+          - eslint-config-prettier@10.1.8
 
   - repo: local
     hooks:
