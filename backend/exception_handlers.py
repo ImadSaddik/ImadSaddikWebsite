@@ -3,18 +3,14 @@ from typing import Union
 
 from fastapi import Request
 from fastapi.exception_handlers import http_exception_handler as _http_exception_handler
-from fastapi.exception_handlers import (
-    request_validation_exception_handler as _request_validation_exception_handler,
-)
+from fastapi.exception_handlers import request_validation_exception_handler as _request_validation_exception_handler
 from fastapi.exceptions import HTTPException, RequestValidationError
 from fastapi.responses import JSONResponse, PlainTextResponse, Response
+
 from logger import logger
 
 
-# This function will be called when the client input is not valid.
-async def request_validation_exception_handler(
-    request: Request, exception: RequestValidationError
-) -> JSONResponse:
+async def request_validation_exception_handler(request: Request, exception: RequestValidationError) -> JSONResponse:
     body = await request.body()
     query_params = request.query_params._dict
     detail = {
@@ -26,17 +22,11 @@ async def request_validation_exception_handler(
     return await _request_validation_exception_handler(request, exception)
 
 
-# This function will be called when a HTTPException is explicitly raised.
-async def http_exception_handler(
-    request: Request, exception: HTTPException
-) -> Union[JSONResponse, Response]:
+async def http_exception_handler(request: Request, exception: HTTPException) -> Union[JSONResponse, Response]:
     return await _http_exception_handler(request, exception)
 
 
-# This function will be called when an unhandled exception occurs.
-async def unhandled_exception_handler(
-    request: Request, exception: Exception
-) -> PlainTextResponse:
+async def unhandled_exception_handler(request: Request, exception: Exception) -> PlainTextResponse:
     host = getattr(getattr(request, "client", None), "host", None)
     port = getattr(getattr(request, "client", None), "port", None)
 
