@@ -1,6 +1,7 @@
 from typing import List
 
 import meilisearch
+
 from core.config import settings
 from models.article import (
     LatestArticleHit,
@@ -8,20 +9,12 @@ from models.article import (
     RecommendationArticleHit,
     RecommendationArticleResponse,
 )
-from models.search import (
-    FacetDistribution,
-    SearchHit,
-    SearchRequest,
-    SearchResponse,
-    SortableFields,
-)
+from models.search import FacetDistribution, SearchHit, SearchRequest, SearchResponse, SortableFields
 
 
 class MeilisearchService:
     def __init__(self):
-        self.client = meilisearch.Client(
-            url=settings.MEILISEARCH_URL, api_key=settings.MEILISEARCH_MASTER_KEY
-        )
+        self.client = meilisearch.Client(url=settings.MEILISEARCH_URL, api_key=settings.MEILISEARCH_MASTER_KEY)
         self.index = self.client.index(uid=settings.MEILISEARCH_INDEX_NAME)
 
     def get_filter_conditions(self, data: SearchRequest) -> str:
@@ -97,9 +90,7 @@ class MeilisearchService:
 
     async def increment_view_count(self, document_name: str) -> dict:
         try:
-            response = self.index.get_documents(
-                {"filter": f"name = '{document_name}'", "limit": 100}
-            )
+            response = self.index.get_documents({"filter": f"name = '{document_name}'", "limit": 100})
             chunks = response.results
 
             if not chunks:
@@ -110,9 +101,7 @@ class MeilisearchService:
                 }
 
             new_view_count = chunks[0].view_count + 1
-            documents_to_update = [
-                {"id": chunk.id, "view_count": new_view_count} for chunk in chunks
-            ]
+            documents_to_update = [{"id": chunk.id, "view_count": new_view_count} for chunk in chunks]
 
             self.index.update_documents(documents_to_update)
 
@@ -127,9 +116,7 @@ class MeilisearchService:
 
     async def increment_read_count(self, document_name: str) -> dict:
         try:
-            response = self.index.get_documents(
-                {"filter": f"name = '{document_name}'", "limit": 100}
-            )
+            response = self.index.get_documents({"filter": f"name = '{document_name}'", "limit": 100})
             chunks = response.results
 
             if not chunks:
@@ -140,9 +127,7 @@ class MeilisearchService:
                 }
 
             new_read_count = chunks[0].read_count + 1
-            documents_to_update = [
-                {"id": chunk.id, "read_count": new_read_count} for chunk in chunks
-            ]
+            documents_to_update = [{"id": chunk.id, "read_count": new_read_count} for chunk in chunks]
 
             self.index.update_documents(documents_to_update)
 
@@ -157,9 +142,7 @@ class MeilisearchService:
 
     async def increment_claps_count(self, document_name: str) -> dict:
         try:
-            response = self.index.get_documents(
-                {"filter": f"name = '{document_name}'", "limit": 100}
-            )
+            response = self.index.get_documents({"filter": f"name = '{document_name}'", "limit": 100})
             chunks = response.results
 
             if not chunks:
@@ -170,9 +153,7 @@ class MeilisearchService:
                 }
 
             new_claps_count = chunks[0].claps_count + 1
-            documents_to_update = [
-                {"id": chunk.id, "claps_count": new_claps_count} for chunk in chunks
-            ]
+            documents_to_update = [{"id": chunk.id, "claps_count": new_claps_count} for chunk in chunks]
 
             self.index.update_documents(documents_to_update)
 
@@ -246,9 +227,7 @@ class MeilisearchService:
 
     async def get_claps_count(self, document_name: str) -> dict:
         try:
-            response = self.index.get_documents(
-                {"filter": f"name = '{document_name}'", "limit": 1}
-            )
+            response = self.index.get_documents({"filter": f"name = '{document_name}'", "limit": 1})
             chunks = response.results
 
             if not chunks:
