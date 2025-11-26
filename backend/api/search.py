@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException
+
 from models.search import SearchRequest, SearchResponse
 from services.meilisearch import MeilisearchService
 
@@ -12,5 +13,7 @@ async def search_articles(request: SearchRequest):
         results = await meilisearch_service.search(request)
         return results
 
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException
+
 from models.article import (
     IncrementClapsCountResponse,
     IncrementReadCountResponse,
@@ -14,9 +15,7 @@ router = APIRouter()
 meilisearch_service = MeilisearchService()
 
 
-@router.patch(
-    "/articles/{name}/increment-view-count", response_model=IncrementViewCountResponse
-)
+@router.patch("/articles/{name}/increment-view-count", response_model=IncrementViewCountResponse)
 async def increment_article_view_count(name: str):
     try:
         result = await meilisearch_service.increment_view_count(name)
@@ -33,13 +32,13 @@ async def increment_article_view_count(name: str):
             view_count=result["view_count"],
         )
 
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.patch(
-    "/articles/{name}/increment-read-count", response_model=IncrementReadCountResponse
-)
+@router.patch("/articles/{name}/increment-read-count", response_model=IncrementReadCountResponse)
 async def increment_article_read_count(name: str):
     try:
         result = await meilisearch_service.increment_read_count(name)
@@ -56,13 +55,13 @@ async def increment_article_read_count(name: str):
             read_count=result["read_count"],
         )
 
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.patch(
-    "/articles/{name}/increment-claps-count", response_model=IncrementClapsCountResponse
-)
+@router.patch("/articles/{name}/increment-claps-count", response_model=IncrementClapsCountResponse)
 async def increment_article_claps_count(name: str):
     try:
         result = await meilisearch_service.increment_claps_count(name)
@@ -79,6 +78,8 @@ async def increment_article_claps_count(name: str):
             claps_count=result["claps_count"],
         )
 
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -124,5 +125,7 @@ async def get_article_claps_count(name: str):
             "claps_count": result["claps_count"],
         }
 
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
