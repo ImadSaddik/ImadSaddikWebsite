@@ -1,4 +1,5 @@
 import httpx
+
 from logger import logger
 from models.visitor import IpAPIResponse
 
@@ -16,9 +17,7 @@ async def get_country_and_check_bot_from_ip(ip_address: str) -> IpAPIResponse:
             data = response.json()
 
             if "error" in data:
-                logger.warning(
-                    f"ipapi.is returned an error for IP {ip_address}: {data['error']}"
-                )
+                logger.warning(f"ipapi.is returned an error for IP {ip_address}: {data['error']}")
                 return IpAPIResponse(country=None, is_bot=False)
 
             if data.get("is_proxy") or data.get("is_abuser") or data.get("is_crawler"):

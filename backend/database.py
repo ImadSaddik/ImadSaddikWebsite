@@ -34,9 +34,7 @@ def initialize_database() -> None:
         connection.commit()
 
 
-def add_visitor(
-    ip_address: str, country: str, visited_page: str = "HOME", is_bot: bool = False
-) -> None:
+def add_visitor(ip_address: str, country: str, visited_page: str = "HOME", is_bot: bool = False) -> None:
     with get_database_connection() as connection:
         cursor = connection.cursor()
         cursor.execute(
