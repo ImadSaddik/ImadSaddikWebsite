@@ -53,14 +53,17 @@ export default {
     viewCount: {
       type: Number,
       required: false,
+      default: 0,
     },
     readCount: {
       type: Number,
       required: false,
+      default: 0,
     },
     clapsCount: {
       type: Number,
       required: false,
+      default: 0,
     },
   },
   data() {

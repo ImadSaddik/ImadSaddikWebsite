@@ -9,6 +9,7 @@ export default [
   {
     rules: {
       "vue/no-unused-vars": "error",
+      "vue/no-v-html": "off",
     },
     languageOptions: {
       sourceType: "module",

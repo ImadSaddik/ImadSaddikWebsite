@@ -17,6 +17,7 @@ export default {
     videoUrl: {
       type: String,
       required: false,
+      default: "",
     },
   },
 };
