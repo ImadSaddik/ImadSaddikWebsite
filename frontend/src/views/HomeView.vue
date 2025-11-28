@@ -63,12 +63,12 @@ import verticalSolarSystemIllustration from "@/assets/illustrations/solarSystemV
 
 export default {
   name: "HomeView",
-  emits: ["page-visited"],
   components: {
     HeroSection,
     AboutMeSection,
     CardGroup,
   },
+  emits: ["page-visited", "show-toast"],
   data() {
     return {
       scorpiusIllustration,
