@@ -1,7 +1,7 @@
 <template>
   <component
-    v-if="blogToDisplay"
     :is="blogToDisplay"
+    v-if="blogToDisplay"
     :key="slug"
     @show-toast="handleShowToastEvent"
     @article-read="handleArticleReadEvent"
@@ -15,13 +15,14 @@ import { defineAsyncComponent } from "vue";
 
 // Constants
 import { OTHER_PAGES_VISITED_KEY } from "@/constants.js";
+import { blogArticles } from "@/articles.js";
 
 export default {
   name: "BlogPage",
-  emits: ["show-toast", "page-visited"],
   props: {
     slug: { type: String, required: true },
   },
+  emits: ["show-toast", "page-visited"],
   data() {
     return {
       blogToDisplay: null,
@@ -31,7 +32,10 @@ export default {
     slug: {
       immediate: true,
       async handler(newSlug) {
-        this.blogToDisplay = defineAsyncComponent(() => import(`@/blogs/${newSlug}`));
+        const path = `/src/blogs/${newSlug}/index.vue`;
+        if (blogArticles[path]) {
+          this.blogToDisplay = defineAsyncComponent(blogArticles[path]);
+        }
         this.incrementBlogViewCount();
       },
     },

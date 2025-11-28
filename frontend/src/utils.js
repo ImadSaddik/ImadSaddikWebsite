@@ -1,4 +1,17 @@
 import axios from "axios";
+import { blogCoverImages, courseCoverImages, astronomyCoverImages } from "@/articles.js";
+
+const coverImagesByType = {
+  "blog-post": blogCoverImages,
+  "course-post": courseCoverImages,
+  "astronomy-post": astronomyCoverImages,
+};
+
+const directoryMapping = {
+  "blog-post": "blogs",
+  "course-post": "courses",
+  "astronomy-post": "astronomy",
+};
 
 function calculateReadingTime(refs) {
   const WORDS_PER_MINUTE = 200;
@@ -18,23 +31,23 @@ function convertUnixTimestampToReadableFormat(unixTimestamp) {
 }
 
 function getCardsDataFromDocumentHits({ hits, articleType }) {
-  const directoryMapping = {
-    "blog-post": "blogs",
-    "course-post": "courses",
-    "astronomy-post": "astronomy",
-  };
+  const coverImages = coverImagesByType[articleType];
+  const directory = directoryMapping[articleType];
 
-  return hits.map((hit) => ({
-    imageSrc: require(`@/${directoryMapping[articleType]}/${hit.name}/coverImage.svg`),
-    altText: `Cover image for the ${articleType} titled ${hit.title}`,
-    title: hit.title,
-    creationDate: convertUnixTimestampToReadableFormat(hit.creation_date),
-    articleType: articleType,
-    articleId: hit.name,
-    viewCount: hit.view_count,
-    readCount: hit.read_count,
-    clapsCount: hit.claps_count,
-  }));
+  return hits.map((hit) => {
+    const imagePath = `/src/${directory}/${hit.name}/coverImage.svg`;
+    return {
+      imageSrc: coverImages[imagePath],
+      altText: `Cover image for the ${articleType} titled ${hit.title}`,
+      title: hit.title,
+      creationDate: convertUnixTimestampToReadableFormat(hit.creation_date),
+      articleType: articleType,
+      articleId: hit.name,
+      viewCount: hit.view_count,
+      readCount: hit.read_count,
+      clapsCount: hit.claps_count,
+    };
+  });
 }
 
 async function trackVisitorData(visitedPageKey) {

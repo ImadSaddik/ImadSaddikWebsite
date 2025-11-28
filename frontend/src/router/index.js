@@ -9,6 +9,12 @@ import HireMe from "@/views/HireMe.vue";
 import CoursePage from "@/views/CoursePage.vue";
 import AstronomyPage from "@/views/AstronomyPage.vue";
 import NotFoundPage from "@/views/NotFoundPage.vue";
+import { blogArticles, courseArticles, astronomyArticles } from "@/articles.js";
+
+const isValidSlug = (articles, type, slug) => {
+  const path = `/src/${type}/${slug}/index.vue`;
+  return path in articles;
+};
 
 const routes = [
   {
@@ -26,15 +32,13 @@ const routes = [
     name: "blog-post",
     component: BlogPage,
     props: true,
-    async beforeEnter(to) {
-      try {
-        const slug = to.params.slug;
-        await import(`@/blogs/${slug}`);
-        return true;
-      } catch (error) {
-        // Redirect to the blogs endpoint if the slug is invalid
+    beforeEnter(to) {
+      const slug = to.params.slug;
+      if (!isValidSlug(blogArticles, "blogs", slug)) {
+        console.error(`Invalid blog slug: ${slug}`);
         return { name: "blogs" };
       }
+      return true;
     },
   },
   {
@@ -47,15 +51,13 @@ const routes = [
     name: "course-post",
     component: CoursePage,
     props: true,
-    async beforeEnter(to) {
-      try {
-        const slug = to.params.slug;
-        await import(`@/courses/${slug}`);
-        return true;
-      } catch (error) {
-        // Redirect to the courses endpoint if the slug is invalid
+    beforeEnter(to) {
+      const slug = to.params.slug;
+      if (!isValidSlug(courseArticles, "courses", slug)) {
+        console.error(`Invalid course slug: ${slug}`);
         return { name: "courses" };
       }
+      return true;
     },
   },
   {
@@ -68,15 +70,13 @@ const routes = [
     name: "astronomy-post",
     component: AstronomyPage,
     props: true,
-    async beforeEnter(to) {
-      try {
-        const slug = to.params.slug;
-        await import(`@/astronomy/${slug}`);
-        return true;
-      } catch (error) {
-        // Redirect to the astronomy endpoint if the slug is invalid
+    beforeEnter(to) {
+      const slug = to.params.slug;
+      if (!isValidSlug(astronomyArticles, "astronomy", slug)) {
+        console.error(`Invalid astronomy slug: ${slug}`);
         return { name: "astronomy" };
       }
+      return true;
     },
   },
   {
@@ -97,7 +97,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes,
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {

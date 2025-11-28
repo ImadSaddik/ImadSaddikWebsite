@@ -1,7 +1,7 @@
 <template>
   <component
-    v-if="courseArticleToDisplay"
     :is="courseArticleToDisplay"
+    v-if="courseArticleToDisplay"
     :key="slug"
     @show-toast="handleShowToastEvent"
     @article-read="handleArticleReadEvent"
@@ -15,13 +15,14 @@ import { defineAsyncComponent } from "vue";
 
 // Constants
 import { OTHER_PAGES_VISITED_KEY } from "@/constants.js";
+import { courseArticles } from "@/articles.js";
 
 export default {
   name: "CoursePage",
-  emits: ["show-toast", "page-visited"],
   props: {
     slug: { type: String, required: true },
   },
+  emits: ["show-toast", "page-visited"],
   data() {
     return {
       courseArticleToDisplay: null,
@@ -31,7 +32,10 @@ export default {
     slug: {
       immediate: true,
       async handler(newSlug) {
-        this.courseArticleToDisplay = defineAsyncComponent(() => import(`@/courses/${newSlug}`));
+        const path = `/src/courses/${newSlug}/index.vue`;
+        if (courseArticles[path]) {
+          this.courseArticleToDisplay = defineAsyncComponent(courseArticles[path]);
+        }
         this.incrementCourseArticleViewCount();
       },
     },
