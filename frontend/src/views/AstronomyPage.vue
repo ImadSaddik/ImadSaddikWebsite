@@ -15,7 +15,7 @@ import { defineAsyncComponent } from "vue";
 
 // Constants
 import { OTHER_PAGES_VISITED_KEY } from "@/constants.js";
-import { astronomyArticles } from "@/articles.js";
+import { astronomyArticles } from "@/assetRegistry.js";
 
 export default {
   name: "AstronomyPage",

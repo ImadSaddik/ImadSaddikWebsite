@@ -9,7 +9,7 @@ import HireMe from "@/views/HireMe.vue";
 import CoursePage from "@/views/CoursePage.vue";
 import AstronomyPage from "@/views/AstronomyPage.vue";
 import NotFoundPage from "@/views/NotFoundPage.vue";
-import { blogArticles, courseArticles, astronomyArticles } from "@/articles.js";
+import { blogArticles, courseArticles, astronomyArticles } from "@/assetRegistry.js";
 
 const isValidSlug = (articles, type, slug) => {
   const path = `/src/${type}/${slug}/index.vue`;

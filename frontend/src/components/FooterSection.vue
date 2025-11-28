@@ -194,10 +194,10 @@ import {
   KNOWN_NEW_MOON_DATE,
   LUNAR_MONTH_DAYS,
 } from "@/constants";
+import { moonPhaseImages } from "@/assetRegistry.js";
 
 export default {
   name: "FooterSection",
-  emits: ["star-effect-toggle", "meteorite-effect-toggle", "custom-cursor-toggle"],
   props: {
     starEffectEnabled: {
       type: Boolean,
@@ -212,16 +212,7 @@ export default {
       default: true,
     },
   },
-  computed: {
-    currentYear() {
-      return new Date().getFullYear();
-    },
-
-    moonPhaseImage() {
-      const lunarDay = this.getLunarDay();
-      return require(`@/assets/moon_phases/moon_day_${lunarDay}.svg`);
-    },
-  },
+  emits: ["star-effect-toggle", "meteorite-effect-toggle", "custom-cursor-toggle"],
   data() {
     return {
       githubLogo,
@@ -238,6 +229,17 @@ export default {
 
       footerLandscape,
     };
+  },
+  computed: {
+    currentYear() {
+      return new Date().getFullYear();
+    },
+
+    moonPhaseImage() {
+      const lunarDay = this.getLunarDay();
+      const imagePath = `/src/assets/moon_phases/moon_day_${lunarDay}.svg`;
+      return moonPhaseImages[imagePath];
+    },
   },
   methods: {
     handleStarEffectToggle(value) {

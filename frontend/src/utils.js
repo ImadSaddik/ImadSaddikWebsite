@@ -1,5 +1,5 @@
 import axios from "axios";
-import { blogCoverImages, courseCoverImages, astronomyCoverImages } from "@/articles.js";
+import { blogCoverImages, courseCoverImages, astronomyCoverImages } from "@/assetRegistry.js";
 
 const coverImagesByType = {
   "blog-post": blogCoverImages,
