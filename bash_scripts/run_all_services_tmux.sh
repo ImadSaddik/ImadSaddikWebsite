@@ -12,7 +12,7 @@ FRONTEND_DIR="$WEBSITE_CODE_DIR/frontend"
 BASH_ENV_CMD="source $HOME/.bashrc"
 MEILISEARCH_CMD="sudo ./meilisearch --master-key='aStrongMasterKey'"
 BACKEND_CMD="conda activate meilisearch && uvicorn main:app --reload --host 0.0.0.0 --port 8000"
-FRONTEND_CMD="pnpm run serve"
+FRONTEND_CMD="pnpm run dev"
 
 # Kill any old session and start a new one
 tmux kill-session -t $SESSION_NAME 2>/dev/null
