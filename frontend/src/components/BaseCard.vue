@@ -63,6 +63,9 @@ export default {
       required: false,
     },
   },
+  data() {
+    return {};
+  },
   computed: {
     articleRoute() {
       return { name: this.articleType, params: { slug: this.articleId } };
@@ -70,9 +73,6 @@ export default {
     canShowDotSeparator() {
       return this.viewCount || this.readCount || this.clapsCount;
     },
-  },
-  data() {
-    return {};
   },
   methods: {},
 };

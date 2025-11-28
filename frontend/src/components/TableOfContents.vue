@@ -23,6 +23,13 @@ export default {
       sections: [],
     };
   },
+  watch: {
+    activeSectionId(newId) {
+      if (newId) {
+        history.replaceState(null, "", `#${newId}`);
+      }
+    },
+  },
   mounted() {
     this.$nextTick(() => {
       this.collectSections();
@@ -35,13 +42,6 @@ export default {
   beforeUnmount() {
     window.removeEventListener("scroll", this.handleScrollEvent);
     window.removeEventListener("resize", this.handleResize);
-  },
-  watch: {
-    activeSectionId(newId) {
-      if (newId) {
-        history.replaceState(null, "", `#${newId}`);
-      }
-    },
   },
   methods: {
     collectSections() {

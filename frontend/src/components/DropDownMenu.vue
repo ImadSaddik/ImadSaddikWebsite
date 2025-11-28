@@ -1,6 +1,6 @@
 <template>
-  <section class="dropdown" ref="dropdownReference">
-    <button class="dropdown-toggle" @click="toggleDropdown" :aria-expanded="isOpen" aria-haspopup="listbox">
+  <section ref="dropdownReference" class="dropdown">
+    <button class="dropdown-toggle" :aria-expanded="isOpen" aria-haspopup="listbox" @click="toggleDropdown">
       <span class="dropdown-label" :class="{ 'is-placeholder': selectedOption.value === null }">{{
         selectedOption.label
       }}</span>
@@ -17,9 +17,9 @@
     <ul v-if="isOpen" class="dropdown-menu" role="listbox" aria-label="Options">
       <li
         v-for="option in options"
+        :key="option.value"
         role="option"
         tabindex="0"
-        :key="option.value"
         :class="{ 'is-selected': option.value === modelValue }"
         :aria-selected="option.value === modelValue"
         @click="selectOption(option)"
@@ -35,7 +35,6 @@
 <script>
 export default {
   name: "DropDownMenu",
-  emits: ["update:modelValue"],
   props: {
     options: {
       type: Array,
@@ -55,6 +54,7 @@ export default {
       default: false,
     },
   },
+  emits: ["update:modelValue"],
   data() {
     return {
       isOpen: false,
@@ -66,6 +66,18 @@ export default {
       const selectedOption = this.options.find((option) => option.value === this.modelValue);
       return selectedOption || defaultOption;
     },
+  },
+  watch: {
+    isOpen(value) {
+      if (value) {
+        document.addEventListener("click", this.handleClickOutside, true);
+      } else {
+        document.removeEventListener("click", this.handleClickOutside, true);
+      }
+    },
+  },
+  beforeUnmount() {
+    document.removeEventListener("click", this.handleClickOutside, true);
   },
   methods: {
     toggleDropdown() {
@@ -90,18 +102,6 @@ export default {
         this.isOpen = false;
       }
     },
-  },
-  watch: {
-    isOpen(value) {
-      if (value) {
-        document.addEventListener("click", this.handleClickOutside, true);
-      } else {
-        document.removeEventListener("click", this.handleClickOutside, true);
-      }
-    },
-  },
-  beforeUnmount() {
-    document.removeEventListener("click", this.handleClickOutside, true);
   },
 };
 </script>

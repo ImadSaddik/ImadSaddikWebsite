@@ -625,7 +625,6 @@ import reactBadVueGood from "@/assets/react_bad_vue_good.svg";
 
 export default {
   name: "AboutMeFullStory",
-  emits: ["page-visited", "show-toast"],
   components: {
     ImageWithCaption,
     ImageEnlarger,
@@ -633,11 +632,7 @@ export default {
     InlineCode,
     TableOfContents,
   },
-  mounted() {
-    document.title = "About Imad Saddik";
-    this.$emit("page-visited", ABOUT_ME_PAGE_VISITED_KEY);
-    trackVisitorData(ABOUT_ME_PAGE_VISITED_KEY);
-  },
+  emits: ["page-visited", "show-toast"],
   data() {
     return {
       myYouTubeChannel,
@@ -682,6 +677,11 @@ fin     swi
         fcb     -16,-2,-3,-4,0,0,21,31,14,15
         end`,
     };
+  },
+  mounted() {
+    document.title = "About Imad Saddik";
+    this.$emit("page-visited", ABOUT_ME_PAGE_VISITED_KEY);
+    trackVisitorData(ABOUT_ME_PAGE_VISITED_KEY);
   },
   methods: {
     handleOpenImageModal(event) {

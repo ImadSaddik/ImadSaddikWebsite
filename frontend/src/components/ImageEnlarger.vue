@@ -7,7 +7,6 @@
 <script>
 export default {
   name: "ImageEnlarger",
-  emits: ["close-image-modal"],
   props: {
     isVisible: {
       type: Boolean,
@@ -18,6 +17,7 @@ export default {
       required: true,
     },
   },
+  emits: ["close-image-modal"],
   methods: {
     closeImageModal() {
       this.$emit("close-image-modal");

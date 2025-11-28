@@ -13,7 +13,7 @@
     @show-toast="handleShowToastEvent"
   >
     <section>
-      <h2 class="article-body-header" id="introduction" data-table-of-contents>
+      <h2 id="introduction" class="article-body-header" data-table-of-contents>
         <a class="clickable-header-link" href="#introduction">Introduction</a>
       </h2>
 
@@ -37,14 +37,14 @@
     </section>
 
     <section>
-      <h2 class="article-body-header" id="creating-your-first-star-trail-image" data-table-of-contents>
+      <h2 id="creating-your-first-star-trail-image" class="article-body-header" data-table-of-contents>
         <a class="clickable-header-link" href="#creating-your-first-star-trail-image"
           >Creating your first star trail image</a
         >
       </h2>
 
       <div>
-        <h3 class="article-body-subheader" id="how-it-works" data-table-of-contents>
+        <h3 id="how-it-works" class="article-body-subheader" data-table-of-contents>
           <a class="clickable-header-link" href="#how-it-works">How it works</a>
         </h3>
 
@@ -132,7 +132,7 @@
       </div>
 
       <div>
-        <h3 class="article-body-subheader" id="putting-it-into-practice" data-table-of-contents>
+        <h3 id="putting-it-into-practice" class="article-body-subheader" data-table-of-contents>
           <a class="clickable-header-link" href="#putting-it-into-practice">Putting it into practice</a>
         </h3>
 
@@ -177,12 +177,12 @@
     </section>
 
     <section>
-      <h2 class="article-body-header" id="stylizing-your-star-trails" data-table-of-contents>
+      <h2 id="stylizing-your-star-trails" class="article-body-header" data-table-of-contents>
         <a class="clickable-header-link" href="#stylizing-your-star-trails">Stylizing your star trails</a>
       </h2>
 
       <div>
-        <h3 class="article-body-subheader" id="creating-a-comet-effect" data-table-of-contents>
+        <h3 id="creating-a-comet-effect" class="article-body-subheader" data-table-of-contents>
           <a class="clickable-header-link" href="#creating-a-comet-effect">Creating a comet effect</a>
         </h3>
 
@@ -280,7 +280,7 @@
       </div>
 
       <div>
-        <h3 class="article-body-subheader" id="adding-a-fade-in-and-fade-out" data-table-of-contents>
+        <h3 id="adding-a-fade-in-and-fade-out" class="article-body-subheader" data-table-of-contents>
           <a class="clickable-header-link" href="#adding-a-fade-in-and-fade-out">Adding a fade in and fade out</a>
         </h3>
 
@@ -335,7 +335,7 @@
     </section>
 
     <section>
-      <h2 class="article-body-header" id="creating-a-star-trail-time-lapse" data-table-of-contents>
+      <h2 id="creating-a-star-trail-time-lapse" class="article-body-header" data-table-of-contents>
         <a class="clickable-header-link" href="#creating-a-star-trail-time-lapse">Creating a star trail time-lapse</a>
       </h2>
 
@@ -369,7 +369,7 @@
     </section>
 
     <section>
-      <h2 class="article-body-header" id="conclusion" data-table-of-contents>
+      <h2 id="conclusion" class="article-body-header" data-table-of-contents>
         <a class="clickable-header-link" href="#conclusion">Conclusion</a>
       </h2>
 
@@ -431,7 +431,6 @@ import SuperscriptText from "@/components/SuperscriptText.vue";
 
 export default {
   name: "PythonStarTrails",
-  emits: ["show-toast", "article-read"],
   components: {
     ArticleLayout,
     ImageWithCaption,
@@ -442,11 +441,7 @@ export default {
     VideoWithCaption,
     SuperscriptText,
   },
-  computed: {
-    slug() {
-      return this.$route.params.slug;
-    },
-  },
+  emits: ["show-toast", "article-read"],
   data() {
     return {
       ...codeSnippets,
@@ -472,6 +467,11 @@ export default {
       fadeInOutPhasesBrightness,
       fadeInOutResult,
     };
+  },
+  computed: {
+    slug() {
+      return this.$route.params.slug;
+    },
   },
   mounted() {
     document.title = "How to make star trails and time-lapses with Python";

@@ -11,13 +11,13 @@
       <p class="article-header-meta-info">{{ creationDate }} - {{ readingTime }} min read</p>
       <div class="article-header-share-buttons">
         <p class="article-header-share-title">Share:</p>
-        <button class="article-header-share-button" @click="shareOnTwitter" title="Share on Twitter">
+        <button class="article-header-share-button" title="Share on Twitter" @click="shareOnTwitter">
           <img :src="twitterLogo" alt="Share on Twitter" />
         </button>
-        <button class="article-header-share-button" @click="shareOnLinkedIn" title="Share on LinkedIn">
+        <button class="article-header-share-button" title="Share on LinkedIn" @click="shareOnLinkedIn">
           <img :src="linkedinLogo" alt="Share on LinkedIn" />
         </button>
-        <button class="article-header-share-button" @click="copyLink" title="Copy link">
+        <button class="article-header-share-button" title="Copy link" @click="copyLink">
           <img :src="copyLinkIcon" alt="Copy link" />
         </button>
       </div>
@@ -25,7 +25,7 @@
 
     <p class="article-header-copy-info">
       Copy this article as markdown to use it with your favorite LLM. It's free.
-      <InlineButton fontAwesomeIcon="fa-solid fa-copy" label="Copy" @button-clicked="handleCopyContentInMarkdown" />
+      <InlineButton font-awesome-icon="fa-solid fa-copy" label="Copy" @button-clicked="handleCopyContentInMarkdown" />
     </p>
   </section>
 </template>
@@ -42,7 +42,10 @@ import InlineButton from "./InlineButton.vue";
 
 export default {
   name: "ArticleHeader",
-  emits: ["show-toast"],
+  components: {
+    BaseTag,
+    InlineButton,
+  },
   props: {
     title: {
       type: String,
@@ -77,10 +80,7 @@ export default {
       required: true,
     },
   },
-  components: {
-    BaseTag,
-    InlineButton,
-  },
+  emits: ["show-toast"],
   data() {
     return {
       twitterLogo,

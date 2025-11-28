@@ -16,6 +16,18 @@ export default {
       meteorTimeoutId: null,
     };
   },
+  mounted() {
+    this.radiant = { x: this.width / 2, y: -50 };
+    this.setupCanvas();
+    this.drawMeteors();
+    this.scheduleNextMeteor();
+    window.addEventListener("resize", this.handleResize);
+  },
+  beforeUnmount() {
+    window.removeEventListener("resize", this.handleResize);
+    cancelAnimationFrame(this.animationFrameId);
+    clearTimeout(this.meteorTimeoutId);
+  },
   methods: {
     spawnMeteor() {
       const spawnZoneWidth = this.width * 0.2;
@@ -125,18 +137,6 @@ export default {
         Math.random() < 0.5 ? minPauseMs : maxPauseMs
       );
     },
-  },
-  mounted() {
-    this.radiant = { x: this.width / 2, y: -50 };
-    this.setupCanvas();
-    this.drawMeteors();
-    this.scheduleNextMeteor();
-    window.addEventListener("resize", this.handleResize);
-  },
-  beforeUnmount() {
-    window.removeEventListener("resize", this.handleResize);
-    cancelAnimationFrame(this.animationFrameId);
-    clearTimeout(this.meteorTimeoutId);
   },
 };
 </script>

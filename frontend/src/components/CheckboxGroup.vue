@@ -1,10 +1,10 @@
 <template>
   <section>
     <ul v-if="options.length > 0" class="checkbox-group">
-      <li v-for="option in options" class="checkbox-item" :key="option.value" @click="toggleSelection(option.value)">
+      <li v-for="option in options" :key="option.value" class="checkbox-item" @click="toggleSelection(option.value)">
         <input
-          type="checkbox"
           :id="`checkbox-${option.value}`"
+          type="checkbox"
           :value="option.value"
           :checked="isSelected(option.value)"
         />
@@ -91,7 +91,9 @@ p {
   background-color: transparent;
   border: 4px solid var(--color-disabled);
   cursor: pointer;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .checkbox-item:hover input[type="checkbox"] {

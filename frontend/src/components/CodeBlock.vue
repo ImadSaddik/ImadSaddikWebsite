@@ -21,7 +21,6 @@ import { transformerNotationHighlight } from "@shikijs/transformers";
 
 export default {
   name: "CodeBlock",
-  emits: ["show-toast"],
   props: {
     code: {
       type: String,
@@ -32,13 +31,7 @@ export default {
       required: true,
     },
   },
-  computed: {
-    iconClass() {
-      if (this.errorOccured) return "fa-solid fa-xmark fa-2xl";
-      if (this.copied) return "fa-solid fa-check fa-2xl";
-      return "fa-regular fa-clipboard fa-2xl";
-    },
-  },
+  emits: ["show-toast"],
   data() {
     return {
       highlightedHtml: null,
@@ -47,6 +40,13 @@ export default {
       hovering: false,
       resetIconIntervalInMilliseconds: 1500,
     };
+  },
+  computed: {
+    iconClass() {
+      if (this.errorOccured) return "fa-solid fa-xmark fa-2xl";
+      if (this.copied) return "fa-solid fa-check fa-2xl";
+      return "fa-regular fa-clipboard fa-2xl";
+    },
   },
   async created() {
     const highlighter = await getHighlighter();

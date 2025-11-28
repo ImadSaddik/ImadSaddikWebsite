@@ -38,6 +38,16 @@ export default {
       lastFrameTime: null,
     };
   },
+  mounted() {
+    this.setupCanvas();
+    this.initStars();
+    this.startAnimation();
+    window.addEventListener("resize", this.handleResize);
+  },
+  beforeUnmount() {
+    window.removeEventListener("resize", this.handleResize);
+    cancelAnimationFrame(this.animationFrameId);
+  },
   methods: {
     startAnimation() {
       this.fpsIntervalMilliseconds = 1000 / this.fpsValue;
@@ -143,16 +153,6 @@ export default {
       canvas.style.height = "100vh";
       canvas.style.pointerEvents = "none";
     },
-  },
-  mounted() {
-    this.setupCanvas();
-    this.initStars();
-    this.startAnimation();
-    window.addEventListener("resize", this.handleResize);
-  },
-  beforeUnmount() {
-    window.removeEventListener("resize", this.handleResize);
-    cancelAnimationFrame(this.animationFrameId);
   },
 };
 </script>

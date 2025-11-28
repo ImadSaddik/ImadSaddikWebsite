@@ -24,14 +24,14 @@ import BaseCard from "@/components/BaseCard.vue";
 
 export default {
   name: "ArticleFooter",
+  components: {
+    BaseCard,
+  },
   props: {
     cardData: {
       type: Array,
       required: true,
     },
-  },
-  components: {
-    BaseCard,
   },
 };
 </script>
