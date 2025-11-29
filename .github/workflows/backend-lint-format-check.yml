@@ -1,0 +1,29 @@
+name: Backend lint & format
+
+on:
+  workflow_call:
+
+jobs:
+  lint-format:
+    name: Lint & format
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Install Ruff
+        run: pip install ruff==0.14.6
+
+      - name: Run Ruff linter
+        run: ruff check .
+
+      - name: Run Ruff formatter check
+        run: ruff format . --check
