@@ -8,10 +8,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  frontend-lint-format:
+  frontend-lint-format-check:
     name: Frontend
-    uses: ./.github/workflows/frontend-lint.yml
+    uses: ./.github/workflows/frontend-lint-format-check.yml
 
-  backend-lint-format:
+  backend-lint-format-check:
     name: Backend
-    uses: ./.github/workflows/backend-lint.yml
+    uses: ./.github/workflows/backend-lint-format-check.yml
