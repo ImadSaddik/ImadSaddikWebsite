@@ -25,8 +25,8 @@
   "devDependencies": {
     "@faker-js/faker": "^10.1.0",
     "@vitejs/plugin-vue": "^6.0.2",
-    "@vitest/coverage-v8": "4.0.14",
-    "@vitest/ui": "4.0.14",
+    "@vitest/coverage-v8": "^4.0.14",
+    "@vitest/ui": "^4.0.14",
     "@vue/test-utils": "^2.4.6",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
