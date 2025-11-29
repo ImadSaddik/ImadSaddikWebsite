@@ -35,8 +35,8 @@ export default {
         const path = `/src/astronomy/${newSlug}/index.vue`;
         if (astronomyArticles[path]) {
           this.astronomyArticleToDisplay = defineAsyncComponent(astronomyArticles[path]);
+          this.incrementAstronomyArticleViewCount();
         }
-        this.incrementAstronomyArticleViewCount();
       },
     },
   },

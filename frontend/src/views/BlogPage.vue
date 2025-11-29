@@ -35,8 +35,8 @@ export default {
         const path = `/src/blogs/${newSlug}/index.vue`;
         if (blogArticles[path]) {
           this.blogToDisplay = defineAsyncComponent(blogArticles[path]);
+          this.incrementBlogViewCount();
         }
-        this.incrementBlogViewCount();
       },
     },
   },

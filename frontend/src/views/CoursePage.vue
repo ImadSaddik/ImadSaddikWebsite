@@ -35,8 +35,8 @@ export default {
         const path = `/src/courses/${newSlug}/index.vue`;
         if (courseArticles[path]) {
           this.courseArticleToDisplay = defineAsyncComponent(courseArticles[path]);
+          this.incrementCourseArticleViewCount();
         }
-        this.incrementCourseArticleViewCount();
       },
     },
   },
