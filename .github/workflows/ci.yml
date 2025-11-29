@@ -9,19 +9,19 @@ on:
 
 jobs:
   frontend-lint-format-check:
-    name: Frontend Lint & Format
+    name: Frontend
     uses: ./.github/workflows/frontend-lint-format-check.yml
 
   backend-lint-format-check:
-    name: Backend Lint & Format
+    name: Backend
     uses: ./.github/workflows/backend-lint-format-check.yml
 
   frontend-tests:
-    name: Frontend Tests
+    name: Frontend
     needs: frontend-lint-format-check
     uses: ./.github/workflows/frontend-unit-tests.yml
 
   backend-tests:
-    name: Backend Tests
+    name: Backend
     needs: backend-lint-format-check
     uses: ./.github/workflows/backend-unit-tests.yml
