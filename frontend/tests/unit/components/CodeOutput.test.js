@@ -11,7 +11,7 @@ describe("CodeOutput", () => {
 
   it("raises an error when no code output is provided", () => {
     try {
-      const wrapper = mount(CodeOutput);
+      mount(CodeOutput);
     } catch (e) {
       expect(e.message).toContain('Missing required prop: "codeOutput"');
     }
