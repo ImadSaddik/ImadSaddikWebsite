@@ -68,7 +68,6 @@ export default {
     },
     articleTags: {
       type: Array,
-      required: true,
       default: () => [],
     },
     coverImage: {

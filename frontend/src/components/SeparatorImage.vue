@@ -10,12 +10,10 @@ export default {
   props: {
     imageSrc: {
       type: String,
-      required: true,
       default: null,
     },
     altText: {
       type: String,
-      required: true,
       default: null,
     },
     imageWidth: {
