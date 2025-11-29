@@ -1,5 +1,6 @@
 import axios from "axios";
 import { blogCoverImages, courseCoverImages, astronomyCoverImages } from "@/assetRegistry.js";
+import fallbackCoverImage from "@/assets/fallbackCoverImage.svg";
 
 const coverImagesByType = {
   "blog-post": blogCoverImages,
@@ -37,7 +38,7 @@ function getCardsDataFromDocumentHits({ hits, articleType }) {
   return hits.map((hit) => {
     const imagePath = `/src/${directory}/${hit.name}/coverImage.svg`;
     return {
-      imageSrc: coverImages[imagePath],
+      imageSrc: coverImages[imagePath] || fallbackCoverImage,
       altText: `Cover image for the ${articleType} titled ${hit.title}`,
       title: hit.title,
       creationDate: convertUnixTimestampToReadableFormat(hit.creation_date),
