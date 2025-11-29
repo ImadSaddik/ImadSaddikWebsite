@@ -9,24 +9,34 @@
     "preview": "vite preview",
     "lint": "eslint . --fix",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@shikijs/transformers": "^3.17.0",
     "axios": "^1.13.2",
     "shiki": "^3.17.0",
-    "@shikijs/transformers": "^3.17.0",
     "vue": "^3.5.25",
     "vue-router": "^4.6.3"
   },
   "devDependencies": {
+    "@faker-js/faker": "^10.1.0",
     "@vitejs/plugin-vue": "^6.0.2",
+    "@vitest/coverage-v8": "4.0.14",
+    "@vitest/ui": "4.0.14",
+    "@vue/test-utils": "^2.4.6",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-vue": "^10.6.2",
     "globals": "^16.5.0",
+    "jsdom": "^26.1.0",
     "prettier": "^3.7.2",
     "vite": "^7.2.4",
+    "vitest": "^4.0.14",
     "vue-eslint-parser": "^10.2.0"
   }
 }
