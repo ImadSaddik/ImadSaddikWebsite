@@ -13,7 +13,7 @@
     @show-toast="handleShowToastEvent"
   >
     <section>
-      <h2 class="article-body-header" id="introduction" data-table-of-contents>
+      <h2 id="introduction" class="article-body-header" data-table-of-contents>
         <a class="clickable-header-link" href="#introduction">Introduction</a>
       </h2>
 
@@ -71,7 +71,7 @@
 
     <section>
       <div>
-        <h2 class="article-body-header" id="star-trails" data-table-of-contents>
+        <h2 id="star-trails" class="article-body-header" data-table-of-contents>
           <a class="clickable-header-link" href="#star-trails">Star trails</a>
         </h2>
 
@@ -94,7 +94,7 @@
 
       <div>
         <div>
-          <h3 class="article-body-subheader" id="northern-hemisphere" data-table-of-contents>
+          <h3 id="northern-hemisphere" class="article-body-subheader" data-table-of-contents>
             <a class="clickable-header-link" href="#northern-hemisphere">Northern hemisphere</a>
           </h3>
 
@@ -124,7 +124,7 @@
         </div>
 
         <div>
-          <h3 class="article-body-subheader" id="southern-hemisphere" data-table-of-contents>
+          <h3 id="southern-hemisphere" class="article-body-subheader" data-table-of-contents>
             <a class="clickable-header-link" href="#southern-hemisphere">Southern hemisphere</a>
           </h3>
 
@@ -147,7 +147,7 @@
     </section>
 
     <section>
-      <h2 class="article-body-header" id="required-equipment" data-table-of-contents>
+      <h2 id="required-equipment" class="article-body-header" data-table-of-contents>
         <a class="clickable-header-link" href="#required-equipment">Required equipment</a>
       </h2>
 
@@ -162,7 +162,7 @@
       <BulletPoint>A planetarium app to help find Polaris or Sigma Octantis.</BulletPoint>
 
       <div>
-        <h3 class="article-body-subheader" id="smartphone" data-table-of-contents>
+        <h3 id="smartphone" class="article-body-subheader" data-table-of-contents>
           <a class="clickable-header-link" href="#smartphone">Smartphone</a>
         </h3>
 
@@ -207,7 +207,7 @@
       </div>
 
       <div>
-        <h3 class="article-body-subheader" id="planetarium-app" data-table-of-contents>
+        <h3 id="planetarium-app" class="article-body-subheader" data-table-of-contents>
           <a class="clickable-header-link" href="#planetarium-app">Planetarium app</a>
         </h3>
 
@@ -279,7 +279,7 @@
       </div>
 
       <div>
-        <h3 class="article-body-subheader" id="automatic-app-clicker" data-table-of-contents>
+        <h3 id="automatic-app-clicker" class="article-body-subheader" data-table-of-contents>
           <a class="clickable-header-link" href="#automatic-app-clicker">Automatic clicker app</a>
         </h3>
 
@@ -320,7 +320,7 @@
       </div>
 
       <div>
-        <h3 class="article-body-subheader" id="tripod" data-table-of-contents>
+        <h3 id="tripod" class="article-body-subheader" data-table-of-contents>
           <a class="clickable-header-link" href="#tripod">Tripod</a>
         </h3>
 
@@ -344,7 +344,7 @@
     </section>
 
     <section>
-      <h2 class="article-body-header" id="collecting-data" data-table-of-contents>
+      <h2 id="collecting-data" class="article-body-header" data-table-of-contents>
         <a class="clickable-header-link" href="#collecting-data">Collecting data</a>
       </h2>
 
@@ -495,12 +495,12 @@
     </section>
 
     <section>
-      <h2 class="article-body-header" id="processing-the-data" data-table-of-contents>
+      <h2 id="processing-the-data" class="article-body-header" data-table-of-contents>
         <a class="clickable-header-link" href="#processing-the-data">Processing the data</a>
       </h2>
 
       <div>
-        <h3 class="article-body-subheader" id="windows-macos" data-table-of-contents>
+        <h3 id="windows-macos" class="article-body-subheader" data-table-of-contents>
           <a class="clickable-header-link" href="#windows-macos">Windows & macOS</a>
         </h3>
 
@@ -594,7 +594,7 @@
       </div>
 
       <div>
-        <h3 class="article-body-subheader" id="linux" data-table-of-contents>
+        <h3 id="linux" class="article-body-subheader" data-table-of-contents>
           <a class="clickable-header-link" href="#linux">Linux</a>
         </h3>
 
@@ -699,7 +699,7 @@
     </section>
 
     <section>
-      <h2 class="article-body-header" id="bonus-time-lapse" data-table-of-contents>
+      <h2 id="bonus-time-lapse" class="article-body-header" data-table-of-contents>
         <a class="clickable-header-link" href="#bonus-time-lapse">Bonus: Time-lapse</a>
       </h2>
 
@@ -712,7 +712,7 @@
       </p>
 
       <div>
-        <h3 class="article-body-subheader" id="starstax-timelapse" data-table-of-contents>
+        <h3 id="starstax-timelapse" class="article-body-subheader" data-table-of-contents>
           <a class="clickable-header-link" href="#starstax-timelapse">StarStax</a>
         </h3>
 
@@ -798,7 +798,7 @@
     </section>
 
     <section>
-      <h2 class="article-body-header" id="conclusion" data-table-of-contents>
+      <h2 id="conclusion" class="article-body-header" data-table-of-contents>
         <a class="clickable-header-link" href="#conclusion">Conclusion</a>
       </h2>
       <p>In this guide, you learned how to use <b>pro mode</b> on your camera app to control every setting manually.</p>
@@ -879,7 +879,6 @@ import VideoWithCaption from "@/components/VideoWithCaption.vue";
 
 export default {
   name: "StarTrailsWithSmartphone",
-  emits: ["show-toast", "article-read"],
   components: {
     ArticleLayout,
     ImageWithCaption,
@@ -890,11 +889,7 @@ export default {
     CodeBlock,
     VideoWithCaption,
   },
-  computed: {
-    slug() {
-      return this.$route.params.slug;
-    },
-  },
+  emits: ["show-toast", "article-read"],
   data() {
     return {
       ...codeSnippets,
@@ -946,6 +941,11 @@ export default {
       starTrailTimelapseStep3,
       addCustomVideoMode,
     };
+  },
+  computed: {
+    slug() {
+      return this.$route.params.slug;
+    },
   },
   mounted() {
     document.title = "How to shoot star trails with your smartphone";

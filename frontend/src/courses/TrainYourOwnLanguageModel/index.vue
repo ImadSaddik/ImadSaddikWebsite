@@ -13,7 +13,7 @@
     @show-toast="handleShowToastEvent"
   >
     <section>
-      <h2 class="article-body-header" id="course-overview" data-table-of-contents>
+      <h2 id="course-overview" class="article-body-header" data-table-of-contents>
         <a class="clickable-header-link" href="#course-overview">Course overview</a>
       </h2>
       <p>
@@ -50,7 +50,7 @@
     </section>
 
     <section>
-      <h2 class="article-body-header" id="watch-the-course" data-table-of-contents>
+      <h2 id="watch-the-course" class="article-body-header" data-table-of-contents>
         <a class="clickable-header-link" href="#watch-the-course">Watch the course</a>
       </h2>
       <p>
@@ -90,18 +90,13 @@ import InlineCode from "@/components/InlineCode.vue";
 
 export default {
   name: "TrainYourOwnLanguageModel",
-  emits: ["show-toast", "article-read"],
   components: {
     ImageEnlarger,
     YouTubePlayer,
     ArticleLayout,
     InlineCode,
   },
-  computed: {
-    slug() {
-      return this.$route.params.slug;
-    },
-  },
+  emits: ["show-toast", "article-read"],
   data() {
     return {
       tags: ["LLM", "Transformer", "Fine-tuning", "Attention", "PyTorch", "Python", "AI", "NLP", "Machine learning"],
@@ -111,6 +106,11 @@ export default {
       readingTime: 0,
       markdownContent,
     };
+  },
+  computed: {
+    slug() {
+      return this.$route.params.slug;
+    },
   },
   mounted() {
     document.title = "Train your own language model";

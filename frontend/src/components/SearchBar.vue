@@ -12,17 +12,17 @@
     <div v-if="modelValue" class="search-actions">
       <i
         class="fa-solid fa-times fa-lg search-clear"
-        @click="clearSearch"
         aria-label="Clear search"
         role="button"
         title="Click to clear search"
+        @click="clearSearch"
       ></i>
       <i
         class="fa-solid fa-paper-plane search-send"
-        @click="sendRequestToPerformSearch"
         aria-label="Perform search"
         role="button"
         title="Click to search or press Enter"
+        @click="sendRequestToPerformSearch"
       ></i>
     </div>
   </div>
@@ -32,7 +32,6 @@
 <script>
 export default {
   name: "SearchBar",
-  emits: ["update:modelValue", "perform-search"],
   props: {
     placeHolder: {
       type: String,
@@ -43,6 +42,7 @@ export default {
       default: "",
     },
   },
+  emits: ["update:modelValue", "perform-search"],
   data() {
     return {};
   },

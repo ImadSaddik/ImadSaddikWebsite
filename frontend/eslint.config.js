@@ -1,6 +1,6 @@
 import pluginVue from "eslint-plugin-vue";
 import globals from "globals";
-import eslintConfigPrettier from "eslint-config-prettier/flat";
+import eslintConfigPrettier from "eslint-config-prettier";
 
 export default [
   ...pluginVue.configs["flat/recommended"],
@@ -9,6 +9,7 @@ export default [
   {
     rules: {
       "vue/no-unused-vars": "error",
+      "vue/no-v-html": "off",
     },
     languageOptions: {
       sourceType: "module",

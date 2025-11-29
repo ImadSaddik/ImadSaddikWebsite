@@ -55,12 +55,16 @@ export default {
   z-index: 3;
   background-color: var(--color-primary);
   transition: background-color 0.3s ease;
-  box-shadow: 0 4px 6px var(--color-shadow), 0 1px 3px var(--color-shadow);
+  box-shadow:
+    0 4px 6px var(--color-shadow),
+    0 1px 3px var(--color-shadow);
 }
 
 .scroll-back-to-top-button:hover {
   background-color: var(--color-primary-hover);
-  box-shadow: 0 6px 8px var(--color-shadow-hover), 0 2px 4px var(--color-shadow-hover);
+  box-shadow:
+    0 6px 8px var(--color-shadow-hover),
+    0 2px 4px var(--color-shadow-hover);
 }
 
 .scroll-back-to-top-button-icon {

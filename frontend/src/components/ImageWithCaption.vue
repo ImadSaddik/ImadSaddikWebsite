@@ -10,7 +10,6 @@
 <script>
 export default {
   name: "ImageWithCaption",
-  emits: ["open-image-modal"],
   props: {
     imageSrc: {
       type: String,
@@ -25,6 +24,7 @@ export default {
       required: true,
     },
   },
+  emits: ["open-image-modal"],
   methods: {
     openImageModal(event) {
       this.$emit("open-image-modal", event);

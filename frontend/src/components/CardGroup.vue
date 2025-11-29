@@ -27,6 +27,9 @@ import BaseCard from "@/components/BaseCard.vue";
 
 export default {
   name: "CardGroup",
+  components: {
+    BaseCard,
+  },
   props: {
     title: {
       type: String,
@@ -47,9 +50,6 @@ export default {
       type: String,
       required: true,
     },
-  },
-  components: {
-    BaseCard,
   },
   data() {
     return {};

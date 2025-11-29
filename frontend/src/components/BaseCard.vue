@@ -53,15 +53,21 @@ export default {
     viewCount: {
       type: Number,
       required: false,
+      default: 0,
     },
     readCount: {
       type: Number,
       required: false,
+      default: 0,
     },
     clapsCount: {
       type: Number,
       required: false,
+      default: 0,
     },
+  },
+  data() {
+    return {};
   },
   computed: {
     articleRoute() {
@@ -70,9 +76,6 @@ export default {
     canShowDotSeparator() {
       return this.viewCount || this.readCount || this.clapsCount;
     },
-  },
-  data() {
-    return {};
   },
   methods: {},
 };

@@ -52,6 +52,7 @@ export default {
     visitedPage: {
       type: String,
       required: false,
+      default: "",
     },
   },
   data() {

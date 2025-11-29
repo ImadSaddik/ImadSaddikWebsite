@@ -22,7 +22,9 @@ export default {
   font-size: var(--font-size-small);
   font-weight: 600;
   text-align: center;
-  transition: left 0.2s ease, background-color 0.3s ease;
+  transition:
+    left 0.2s ease,
+    background-color 0.3s ease;
   z-index: 1000;
 }
 

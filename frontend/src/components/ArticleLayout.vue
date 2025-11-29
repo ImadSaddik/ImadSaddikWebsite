@@ -22,11 +22,11 @@
     </div>
 
     <div class="clap-container">
-      <button class="clap-button" @click="handleClap" :disabled="userClapCount >= maxPossibleClaps || isClapping">
+      <button class="clap-button" :disabled="userClapCount >= maxPossibleClaps || isClapping" @click="handleClap">
         <i class="fa-solid fa-hands-clapping"></i>
         <span>{{ totalClapCount }}</span>
 
-        <div v-if="showClapAnimation" class="clap-animation-circle" :key="userClapCount" @animationend="onAnimationEnd">
+        <div v-if="showClapAnimation" :key="userClapCount" class="clap-animation-circle" @animationend="onAnimationEnd">
           +{{ userClapCount }}
         </div>
       </button>
@@ -51,7 +51,12 @@ import TableOfContents from "./TableOfContents.vue";
 
 export default {
   name: "ArticleLayout",
-  emits: ["show-toast"],
+  components: {
+    ArticleHeader,
+    ArticleFooter,
+    EditArticleOnGitHub,
+    TableOfContents,
+  },
   props: {
     title: {
       type: String,
@@ -91,12 +96,7 @@ export default {
       required: true,
     },
   },
-  components: {
-    ArticleHeader,
-    ArticleFooter,
-    EditArticleOnGitHub,
-    TableOfContents,
-  },
+  emits: ["show-toast"],
   data() {
     return {
       cardData: [],

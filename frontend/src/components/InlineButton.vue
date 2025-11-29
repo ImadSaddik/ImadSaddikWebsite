@@ -7,7 +7,6 @@
 <script>
 export default {
   name: "InlineButton",
-  emits: ["button-clicked"],
   props: {
     fontAwesomeIcon: {
       type: String,
@@ -18,6 +17,7 @@ export default {
       required: true,
     },
   },
+  emits: ["button-clicked"],
   methods: {
     handleClick() {
       this.$emit("button-clicked");

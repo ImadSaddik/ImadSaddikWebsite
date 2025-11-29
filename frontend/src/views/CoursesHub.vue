@@ -20,10 +20,10 @@ import { trackVisitorData } from "@/utils.js";
 
 export default {
   name: "CoursesHub",
-  emits: ["show-toast", "page-visited"],
   components: {
     ArticlesHub,
   },
+  emits: ["show-toast", "page-visited"],
   data() {
     return {
       articleType: "course-post",

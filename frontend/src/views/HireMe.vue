@@ -129,17 +129,12 @@ import heartShapedAntennaGalaxies from "@/assets/heart_shaped_antenna_galaxies.j
 
 export default {
   name: "HireMe",
-  emits: ["page-visited", "show-toast"],
   components: {
     ImageWithCaption,
     ImageEnlarger,
     TableOfContents,
   },
-  mounted() {
-    document.title = "Hire Imad Saddik";
-    this.$emit("page-visited", HIRE_ME_PAGE_VISITED_KEY);
-    trackVisitorData(HIRE_ME_PAGE_VISITED_KEY);
-  },
+  emits: ["page-visited", "show-toast"],
   data() {
     return {
       heartShapedAntennaGalaxies,
@@ -147,6 +142,11 @@ export default {
       enlargedImageSrc: "",
       isImageModalVisible: false,
     };
+  },
+  mounted() {
+    document.title = "Hire Imad Saddik";
+    this.$emit("page-visited", HIRE_ME_PAGE_VISITED_KEY);
+    trackVisitorData(HIRE_ME_PAGE_VISITED_KEY);
   },
   methods: {
     openCalendlyLink() {

@@ -20,10 +20,10 @@ import { trackVisitorData } from "@/utils.js";
 
 export default {
   name: "BlogHub",
-  emits: ["show-toast", "page-visited"],
   components: {
     ArticlesHub,
   },
+  emits: ["show-toast", "page-visited"],
   data() {
     return {
       articleType: "blog-post",

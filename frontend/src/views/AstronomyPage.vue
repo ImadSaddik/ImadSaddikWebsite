@@ -1,7 +1,7 @@
 <template>
   <component
-    v-if="astronomyArticleToDisplay"
     :is="astronomyArticleToDisplay"
+    v-if="astronomyArticleToDisplay"
     :key="slug"
     @show-toast="handleShowToastEvent"
     @article-read="handleArticleReadEvent"
@@ -15,13 +15,14 @@ import { defineAsyncComponent } from "vue";
 
 // Constants
 import { OTHER_PAGES_VISITED_KEY } from "@/constants.js";
+import { astronomyArticles } from "@/assetRegistry.js";
 
 export default {
   name: "AstronomyPage",
-  emits: ["show-toast", "page-visited"],
   props: {
     slug: { type: String, required: true },
   },
+  emits: ["show-toast", "page-visited"],
   data() {
     return {
       astronomyArticleToDisplay: null,
@@ -31,8 +32,11 @@ export default {
     slug: {
       immediate: true,
       async handler(newSlug) {
-        this.astronomyArticleToDisplay = defineAsyncComponent(() => import(`@/astronomy/${newSlug}`));
-        this.incrementAstronomyArticleViewCount();
+        const path = `/src/astronomy/${newSlug}/index.vue`;
+        if (astronomyArticles[path]) {
+          this.astronomyArticleToDisplay = defineAsyncComponent(astronomyArticles[path]);
+          this.incrementAstronomyArticleViewCount();
+        }
       },
     },
   },

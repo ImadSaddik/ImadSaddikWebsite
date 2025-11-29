@@ -2,18 +2,18 @@
   <section class="articles-hub-container">
     <div>
       <h1 class="articles-hub-title">{{ articleTitle }} hub</h1>
-      <SearchBar v-model="searchQuery" :placeHolder="searchPlaceholder" @perform-search="performSearchRequest" />
+      <SearchBar v-model="searchQuery" :place-holder="searchPlaceholder" @perform-search="performSearchRequest" />
     </div>
 
     <div class="articles-hub-columns">
       <div class="articles-hub-filters-column">
         <div class="articles-hub-filters-sorting">
-          <h2 @click="toggleSortingExpanded" class="collapsible-header">
+          <h2 class="collapsible-header" @click="toggleSortingExpanded">
             Sort
             <i class="fa-solid" :class="sortingExpanded ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
           </h2>
           <div v-if="sortingExpanded" class="collapsible-content">
-            <DropDownMenu clearable v-model="sortOption" :placeholder="sortPlaceholder" :options="sortOptions" />
+            <DropDownMenu v-model="sortOption" clearable :placeholder="sortPlaceholder" :options="sortOptions" />
             <div v-if="sortOption" class="order-container">
               <p>Order:</p>
               <div class="order-options">
@@ -33,7 +33,7 @@
         </div>
 
         <div class="articles-hub-filters-year">
-          <h2 @click="toggleYearExpanded" class="collapsible-header">
+          <h2 class="collapsible-header" @click="toggleYearExpanded">
             Year
             <i class="fa-solid" :class="yearExpanded ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
           </h2>
@@ -50,7 +50,7 @@
         </div>
 
         <div class="articles-hub-filters-tags">
-          <h2 @click="toggleTagsExpanded" class="collapsible-header">
+          <h2 class="collapsible-header" @click="toggleTagsExpanded">
             Tags
             <i class="fa-solid" :class="tagsExpanded ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
           </h2>
@@ -111,7 +111,6 @@ import SearchBar from "@/components/SearchBar.vue";
 
 export default {
   name: "ArticlesHub",
-  emits: ["show-toast"],
   components: {
     DropDownMenu,
     CheckboxGroup,
@@ -138,13 +137,7 @@ export default {
       default: "Show me articles sorted by...",
     },
   },
-  computed: {
-    showLoadMoreButton() {
-      return (
-        !this.isSearchResponseEmpty && this.cardData.length > 0 && this.cardData.length < this.totalDocumentsInIndex
-      );
-    },
-  },
+  emits: ["show-toast"],
   data() {
     return {
       sortingExpanded: true,
@@ -174,6 +167,13 @@ export default {
       batchSize: 10,
       totalDocumentsInIndex: 0,
     };
+  },
+  computed: {
+    showLoadMoreButton() {
+      return (
+        !this.isSearchResponseEmpty && this.cardData.length > 0 && this.cardData.length < this.totalDocumentsInIndex
+      );
+    },
   },
   watch: {
     sortOption(oldValue, newValue) {
@@ -414,7 +414,9 @@ p {
   height: 24px;
   padding: var(--gap-xs);
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .order-options i:hover {

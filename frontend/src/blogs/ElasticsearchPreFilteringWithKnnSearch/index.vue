@@ -13,7 +13,7 @@
     @show-toast="handleShowToastEvent"
   >
     <section>
-      <h2 class="article-body-header" id="introduction" data-table-of-contents>
+      <h2 id="introduction" class="article-body-header" data-table-of-contents>
         <a class="clickable-header-link" href="#introduction">Introduction</a>
       </h2>
       <p>
@@ -29,7 +29,7 @@
     </section>
 
     <section>
-      <h2 class="article-body-header" id="pre-filtering" data-table-of-contents>
+      <h2 id="pre-filtering" class="article-body-header" data-table-of-contents>
         <a class="clickable-header-link" href="#pre-filtering">Pre-filtering</a>
       </h2>
       <p>
@@ -38,7 +38,7 @@
       </p>
 
       <section>
-        <h3 class="article-body-subheader" id="preparing-the-index" data-table-of-contents>
+        <h3 id="preparing-the-index" class="article-body-subheader" data-table-of-contents>
           <a class="clickable-header-link" href="#preparing-the-index">Preparing the index</a>
         </h3>
 
@@ -53,7 +53,7 @@
       </section>
 
       <section>
-        <h3 class="article-body-subheader" id="indexing-documents" data-table-of-contents>
+        <h3 id="indexing-documents" class="article-body-subheader" data-table-of-contents>
           <a class="clickable-header-link" href="#indexing-documents">Indexing documents</a>
         </h3>
 
@@ -115,7 +115,7 @@
       </section>
 
       <section>
-        <h3 class="article-body-subheader" id="pre-filtering-knn-search" data-table-of-contents>
+        <h3 id="pre-filtering-knn-search" class="article-body-subheader" data-table-of-contents>
           <a class="clickable-header-link" href="#pre-filtering-knn-search">Pre-filtering & kNN search</a>
         </h3>
 
@@ -179,7 +179,7 @@
     </section>
 
     <section>
-      <h2 class="article-body-header" id="conclusion" data-table-of-contents>
+      <h2 id="conclusion" class="article-body-header" data-table-of-contents>
         <a class="clickable-header-link" href="#conclusion">Conclusion</a>
       </h2>
       <p>
@@ -218,7 +218,6 @@ import ArticleLayout from "@/components/ArticleLayout.vue";
 
 export default {
   name: "ElasticsearchPreFilteringWithKnnSearch",
-  emits: ["show-toast", "article-read"],
   components: {
     CodeBlock,
     CodeOutput,
@@ -228,11 +227,7 @@ export default {
     ImageWithCaption,
     ArticleLayout,
   },
-  computed: {
-    slug() {
-      return this.$route.params.slug;
-    },
-  },
+  emits: ["show-toast", "article-read"],
   data() {
     return {
       ...codeSnippets,
@@ -245,6 +240,11 @@ export default {
       readingTime: 0,
       markdownContent,
     };
+  },
+  computed: {
+    slug() {
+      return this.$route.params.slug;
+    },
   },
   mounted() {
     document.title = "Pre-filtering with kNN search in Elasticsearch";
