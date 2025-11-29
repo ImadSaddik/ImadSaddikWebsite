@@ -238,7 +238,8 @@ export default {
     moonPhaseImage() {
       const lunarDay = this.getLunarDay();
       const imagePath = `/src/assets/moon_phases/moon_day_${lunarDay}.svg`;
-      return moonPhaseImages[imagePath];
+      const fallbackPath = "/src/assets/moon_phases/moon_day_15.svg";
+      return moonPhaseImages[imagePath] || moonPhaseImages[fallbackPath];
     },
   },
   methods: {
