@@ -1,0 +1,17 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  frontend-lint-format:
+    name: Frontend
+    uses: ./.github/workflows/frontend-lint.yml
+
+  backend-lint-format:
+    name: Backend
+    uses: ./.github/workflows/backend-lint.yml
