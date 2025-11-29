@@ -33,17 +33,14 @@ export default {
   props: {
     title: {
       type: String,
-      required: true,
       default: null,
     },
     cardsData: {
       type: Array,
-      required: true,
       default: () => [],
     },
     buttonText: {
       type: String,
-      required: true,
       default: null,
     },
     path: {

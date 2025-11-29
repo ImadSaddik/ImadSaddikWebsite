@@ -128,12 +128,10 @@ export default {
     },
     searchPlaceholder: {
       type: String,
-      required: true,
       default: "What article are you curious about today?",
     },
     sortPlaceholder: {
       type: String,
-      required: true,
       default: "Show me articles sorted by...",
     },
   },
