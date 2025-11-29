@@ -25,4 +25,13 @@ export default defineConfig({
   server: {
     port: 8080,
   },
+  test: {
+    globals: true,
+    environment: "jsdom",
+    include: ["tests/unit/**/*.spec.{js,ts,jsx,tsx}"],
+    coverage: {
+      enabled: true,
+      provider: "v8",
+    },
+  },
 });
