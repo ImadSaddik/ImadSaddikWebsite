@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import { directoryMapping } from "@/utils";
+
 export default {
   name: "BaseTag",
   props: {
@@ -15,18 +17,9 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      routeMapping: {
-        "blog-post": "blogs",
-        "course-post": "courses",
-        "astronomy-post": "astronomy",
-      },
-    };
-  },
   methods: {
     handleClick() {
-      const routeName = this.routeMapping[this.articleType];
+      const routeName = directoryMapping[this.articleType];
 
       if (routeName) {
         this.$router.push({

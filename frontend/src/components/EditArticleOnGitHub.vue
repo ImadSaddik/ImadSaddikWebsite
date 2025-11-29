@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import { directoryMapping } from "@/utils";
+
 export default {
   name: "EditArticleOnGitHub",
   props: {
@@ -15,11 +17,16 @@ export default {
       type: String,
       required: true,
     },
+    articleType: {
+      type: String,
+      required: true,
+    },
   },
   computed: {
     githubEditUrl() {
       const baseRepoUrl = "https://github.com/ImadSaddik/ImadSaddikWebsite/edit/master";
-      const filePath = `frontend/src/blogs/${this.slug}/index.vue`;
+      const directory = directoryMapping[this.articleType];
+      const filePath = `frontend/src/${directory}/${this.slug}/index.vue`;
       return `${baseRepoUrl}/${filePath}`;
     },
   },

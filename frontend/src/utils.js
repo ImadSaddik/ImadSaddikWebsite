@@ -8,7 +8,7 @@ const coverImagesByType = {
   "astronomy-post": astronomyCoverImages,
 };
 
-const directoryMapping = {
+export const directoryMapping = {
   "blog-post": "blogs",
   "course-post": "courses",
   "astronomy-post": "astronomy",

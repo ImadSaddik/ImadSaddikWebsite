@@ -248,3 +248,5 @@ __marimo__/
 *.sqlite-shm
 *.sqlite-wal
 *.sqlite
+
+frontend/coverage/

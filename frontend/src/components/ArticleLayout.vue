@@ -15,7 +15,7 @@
     <div class="article-body-wrapper">
       <div class="article-body">
         <slot></slot>
-        <EditArticleOnGitHub :slug="slug" />
+        <EditArticleOnGitHub :slug="slug" :article-type="articleType" />
       </div>
 
       <TableOfContents />
