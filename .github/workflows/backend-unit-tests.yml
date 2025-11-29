@@ -1,11 +1,11 @@
-name: Backend lint & format
+name: Backend tests
 
 on:
   workflow_call:
 
 jobs:
-  lint-format:
-    name: Lint & format
+  tests:
+    name: Run tests
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -19,13 +19,9 @@ jobs:
         with:
           python-version: "3.13"
           cache: "pip"
-          cache-dependency-path: backend/ruff.toml
 
-      - name: Install Ruff
-        run: pip install ruff==0.14.6
+      - name: Install dependencies
+        run: pip install -r requirements.txt
 
-      - name: Run Ruff linter
-        run: ruff check .
-
-      - name: Run Ruff formatter check
-        run: ruff format . --check
+      - name: Run tests
+        run: pytest --tb=short

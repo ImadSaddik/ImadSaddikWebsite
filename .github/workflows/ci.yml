@@ -15,3 +15,13 @@ jobs:
   backend-lint-format-check:
     name: Backend
     uses: ./.github/workflows/backend-lint-format-check.yml
+
+  frontend-tests:
+    name: Frontend
+    needs: frontend-lint-format-check
+    uses: ./.github/workflows/frontend-unit-tests.yml
+
+  backend-tests:
+    name: Backend
+    needs: backend-lint-format-check
+    uses: ./.github/workflows/backend-unit-tests.yml
