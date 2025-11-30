@@ -25,3 +25,17 @@ jobs:
     name: Backend
     needs: backend-lint-format-check
     uses: ./.github/workflows/backend-unit-tests.yml
+
+  success:
+    name: Pipeline success
+    needs:
+      [
+        frontend-lint-format-check,
+        backend-lint-format-check,
+        frontend-tests,
+        backend-tests,
+      ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pipeline succeeded
+        run: echo "All checks passed successfully!"
