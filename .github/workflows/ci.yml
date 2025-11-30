@@ -31,6 +31,11 @@ jobs:
     needs: backend-unit-tests
     uses: ./.github/workflows/backend-integration-tests.yml
 
+  e2e-tests:
+    name: E2E
+    needs: [frontend-unit-tests, backend-integration-tests]
+    uses: ./.github/workflows/e2e-tests.yml
+
   success:
     name: Pipeline success
     needs:
@@ -40,6 +45,7 @@ jobs:
         frontend-unit-tests,
         backend-unit-tests,
         backend-integration-tests,
+        e2e-tests,
       ]
     runs-on: ubuntu-latest
     if: always()
