@@ -45,6 +45,10 @@ jobs:
             echo "Attempt $i: Meilisearch not ready yet..."
             sleep 1
           done
+          if ! curl -s http://localhost:7700/health | grep -q "available"; then
+            echo "Meilisearch failed to start after 30 attempts"
+            exit 1
+          fi
 
       - name: Run integration tests
         run: pytest tests/integration --tb=short -v
