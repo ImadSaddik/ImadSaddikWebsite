@@ -13,10 +13,10 @@ def test_get_filter_conditions():
     assert service.get_filter_conditions(request) == 'type = "blog-post"'
 
     request = SearchRequest(articleType="blog-post", filters=SearchFilters(years=["2023"]))
-    assert service.get_filter_conditions(request) == "type = \"blog\" AND year IN ['2023']"
+    assert service.get_filter_conditions(request) == "type = \"blog-post\" AND year IN ['2023']"
 
     request = SearchRequest(articleType="blog-post", filters=SearchFilters(tags=["tag1", "tag2"]))
-    assert service.get_filter_conditions(request) == "type = \"blog\" AND tags IN ['tag1', 'tag2']"
+    assert service.get_filter_conditions(request) == "type = \"blog-post\" AND tags IN ['tag1', 'tag2']"
 
 
 def test_get_sorting_criteria():
