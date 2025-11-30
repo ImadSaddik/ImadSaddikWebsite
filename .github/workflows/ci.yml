@@ -36,6 +36,8 @@ jobs:
         backend-tests,
       ]
     runs-on: ubuntu-latest
+    if: always()
     steps:
       - name: Pipeline succeeded
+        if: "!contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')"
         run: echo "All checks passed successfully!"
