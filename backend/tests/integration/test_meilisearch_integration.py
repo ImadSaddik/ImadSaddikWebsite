@@ -24,7 +24,7 @@ class TestSearch:
 
     @pytest.mark.asyncio
     async def test_search_returns_facets(self, meilisearch_service: IntegrationMeilisearchService) -> None:
-        request = SearchRequest(articleType="blog", query="Elasticsearch", size=10)
+        request = SearchRequest(articleType="blog-post", query="Elasticsearch", size=10)
         response = await meilisearch_service.search(request)
 
         assert response.facet_distribution is not None

@@ -62,7 +62,7 @@ def test_get_article_recommendations(mock_service, client):
         name="rec-1",
         title="Rec 1",
         content="Content",
-        type="blog",
+        type="blog-post",
         year="2023",
         tags=["tag1"],
         creation_date=1234567890,
@@ -73,7 +73,7 @@ def test_get_article_recommendations(mock_service, client):
     mock_response = RecommendationArticleResponse(hits=[mock_hit], total_hits=1)
     mock_service.get_article_recommendations = AsyncMock(return_value=mock_response)
 
-    payload = {"documentNameToIgnore": "current-article", "articleType": "blog"}
+    payload = {"documentNameToIgnore": "current-article", "articleType": "blog-post"}
     response = client.post("/api/articles/recommendations", json=payload)
 
     assert response.status_code == 200
@@ -81,7 +81,7 @@ def test_get_article_recommendations(mock_service, client):
     assert data["total_hits"] == 1
     assert data["hits"][0]["name"] == "rec-1"
     mock_service.get_article_recommendations.assert_called_once_with(
-        document_name_to_ignore="current-article", document_type="blog"
+        document_name_to_ignore="current-article", document_type="blog-post"
     )
 
 
@@ -92,7 +92,7 @@ def test_get_latest_articles(mock_service, client):
         name="latest-1",
         title="Latest 1",
         content="Content",
-        type="blog",
+        type="blog-post",
         year="2023",
         tags=["tag2"],
         creation_date=1234567890,
@@ -103,14 +103,14 @@ def test_get_latest_articles(mock_service, client):
     mock_response = LatestArticleResponse(hits=[mock_hit], total_hits=1)
     mock_service.get_latest_articles = AsyncMock(return_value=mock_response)
 
-    payload = {"articleType": "blog"}
+    payload = {"articleType": "blog-post"}
     response = client.post("/api/articles/latest", json=payload)
 
     assert response.status_code == 200
     data = response.json()
     assert data["total_hits"] == 1
     assert data["hits"][0]["name"] == "latest-1"
-    mock_service.get_latest_articles.assert_called_once_with(document_type="blog")
+    mock_service.get_latest_articles.assert_called_once_with(document_type="blog-post")
 
 
 @patch("api.article.meilisearch_service")

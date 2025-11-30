@@ -9,23 +9,23 @@ from services.meilisearch import MeilisearchService
 def test_get_filter_conditions():
     service = MeilisearchService()
 
-    request = SearchRequest(articleType="blog")
-    assert service.get_filter_conditions(request) == 'type = "blog"'
+    request = SearchRequest(articleType="blog-post")
+    assert service.get_filter_conditions(request) == 'type = "blog-post"'
 
-    request = SearchRequest(articleType="blog", filters=SearchFilters(years=["2023"]))
+    request = SearchRequest(articleType="blog-post", filters=SearchFilters(years=["2023"]))
     assert service.get_filter_conditions(request) == "type = \"blog\" AND year IN ['2023']"
 
-    request = SearchRequest(articleType="blog", filters=SearchFilters(tags=["tag1", "tag2"]))
+    request = SearchRequest(articleType="blog-post", filters=SearchFilters(tags=["tag1", "tag2"]))
     assert service.get_filter_conditions(request) == "type = \"blog\" AND tags IN ['tag1', 'tag2']"
 
 
 def test_get_sorting_criteria():
     service = MeilisearchService()
 
-    request = SearchRequest(articleType="blog")
+    request = SearchRequest(articleType="blog-post")
     assert service.get_sorting_criteria(request) == ["creation_date:desc"]
 
-    request = SearchRequest(articleType="blog", sortBy=SearchSortBy(field=SortableFields.POPULARITY, order="asc"))
+    request = SearchRequest(articleType="blog-post", sortBy=SearchSortBy(field=SortableFields.POPULARITY, order="asc"))
     assert service.get_sorting_criteria(request) == ["view_count:asc"]
 
 
@@ -46,14 +46,14 @@ async def test_search(mock_client_class):
         "processingTimeMs": 1,
     }
 
-    request = SearchRequest(articleType="blog", query="test")
+    request = SearchRequest(articleType="blog-post", query="test")
     response = await service.search(request)
 
     assert response.total_hits == 0
     mock_index.search.assert_called_once()
     call_args = mock_index.search.call_args
     assert call_args.kwargs["query"] == "test"
-    assert 'type = "blog"' in call_args.kwargs["opt_params"]["filter"]
+    assert 'type = "blog-post"' in call_args.kwargs["opt_params"]["filter"]
 
 
 @patch("services.meilisearch.meilisearch.Client")
@@ -155,7 +155,7 @@ async def test_get_article_recommendations(mock_client_class):
     mock_hit.name = "rec-1"
     mock_hit.title = "Rec 1"
     mock_hit.content = "Content"
-    mock_hit.type = "blog"
+    mock_hit.type = "blog-post"
     mock_hit.year = "2023"
     mock_hit.tags = ["tag1"]
     mock_hit.creation_date = 1234567890
@@ -165,13 +165,13 @@ async def test_get_article_recommendations(mock_client_class):
 
     mock_index.get_documents.return_value.results = [mock_hit]
 
-    response = await service.get_article_recommendations("current", "blog")
+    response = await service.get_article_recommendations("current", "blog-post")
 
     assert response.total_hits == 1
     assert response.hits[0].name == "rec-1"
     assert response.hits[0].title == "Rec 1"
     assert response.hits[0].content == "Content"
-    assert response.hits[0].type == "blog"
+    assert response.hits[0].type == "blog-post"
     assert response.hits[0].year == "2023"
     assert response.hits[0].tags == ["tag1"]
     assert response.hits[0].creation_date == 1234567890
@@ -195,7 +195,7 @@ async def test_get_latest_articles(mock_client_class):
     mock_hit.name = "latest-1"
     mock_hit.title = "Latest 1"
     mock_hit.content = "Content"
-    mock_hit.type = "blog"
+    mock_hit.type = "blog-post"
     mock_hit.year = "2023"
     mock_hit.tags = ["tag2"]
     mock_hit.creation_date = 1234567890
@@ -205,13 +205,13 @@ async def test_get_latest_articles(mock_client_class):
 
     mock_index.get_documents.return_value.results = [mock_hit]
 
-    response = await service.get_latest_articles("blog")
+    response = await service.get_latest_articles("blog-post")
 
     assert response.total_hits == 1
     assert response.hits[0].name == "latest-1"
     assert response.hits[0].title == "Latest 1"
     assert response.hits[0].content == "Content"
-    assert response.hits[0].type == "blog"
+    assert response.hits[0].type == "blog-post"
     assert response.hits[0].year == "2023"
     assert response.hits[0].tags == ["tag2"]
     assert response.hits[0].creation_date == 1234567890
