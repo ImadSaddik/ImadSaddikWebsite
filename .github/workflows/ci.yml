@@ -16,15 +16,20 @@ jobs:
     name: Backend
     uses: ./.github/workflows/backend-lint-format-check.yml
 
-  frontend-tests:
+  frontend-unit-tests:
     name: Frontend
     needs: frontend-lint-format-check
     uses: ./.github/workflows/frontend-unit-tests.yml
 
-  backend-tests:
+  backend-unit-tests:
     name: Backend
     needs: backend-lint-format-check
     uses: ./.github/workflows/backend-unit-tests.yml
+
+  backend-integration-tests:
+    name: Backend
+    needs: backend-unit-tests
+    uses: ./.github/workflows/backend-integration-tests.yml
 
   success:
     name: Pipeline success
@@ -32,8 +37,9 @@ jobs:
       [
         frontend-lint-format-check,
         backend-lint-format-check,
-        frontend-tests,
-        backend-tests,
+        frontend-unit-tests,
+        backend-unit-tests,
+        backend-integration-tests,
       ]
     runs-on: ubuntu-latest
     if: always()

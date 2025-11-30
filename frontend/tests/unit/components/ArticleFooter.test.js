@@ -9,7 +9,7 @@ describe("ArticleFooter", () => {
       altText: "Cover 1",
       title: "Introduction to Kubernetes",
       creationDate: "March 2024",
-      articleType: "blog",
+      articleType: "blog-post",
       articleId: "intro-kubernetes",
       viewCount: 100,
       readCount: 50,

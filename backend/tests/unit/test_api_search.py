@@ -10,7 +10,7 @@ def test_search_articles(mock_service, client):
         name="search-1",
         title="Search 1",
         content="Content",
-        type="blog",
+        type="blog-post",
         year="2023",
         tags=["tag1"],
         creation_date=1234567890,
@@ -27,7 +27,7 @@ def test_search_articles(mock_service, client):
     )
     mock_service.search = AsyncMock(return_value=mock_response)
 
-    payload = {"query": "test", "articleType": "blog", "filters": {"years": ["2023"], "tags": ["tag1"]}, "size": 5}
+    payload = {"query": "test", "articleType": "blog-post", "filters": {"years": ["2023"], "tags": ["tag1"]}, "size": 5}
     response = client.post("/api/search", json=payload)
 
     assert response.status_code == 200

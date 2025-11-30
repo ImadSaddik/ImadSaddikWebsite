@@ -7,7 +7,7 @@ describe("BaseCard", () => {
     altText: "Cover alt",
     title: "Understanding Infrared Telescopes",
     creationDate: "2024-10-20",
-    articleType: "blog",
+    articleType: "blog-post",
     articleId: "infrared-telescopes",
   };
 

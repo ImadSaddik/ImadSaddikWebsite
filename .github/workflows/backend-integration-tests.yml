@@ -1,0 +1,58 @@
+name: Backend integration tests
+
+on:
+  workflow_call:
+
+env:
+  MEILISEARCH_MASTER_KEY: "aStrongMasterKeyForTestingPurposes"
+  MEILISEARCH_URL: "http://localhost:7700"
+  MEILISEARCH_INDEX_NAME: "articles_test"
+
+jobs:
+  tests:
+    name: Run integration tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Download Meilisearch binary
+        run: |
+          curl -L https://install.meilisearch.com | sh
+          chmod +x meilisearch
+
+      - name: Start Meilisearch
+        run: |
+          ./meilisearch --master-key="${MEILISEARCH_MASTER_KEY}" &
+          echo "Waiting for Meilisearch to start..."
+          for i in {1..30}; do
+            if curl -s http://localhost:7700/health | grep -q "available"; then
+              echo "Meilisearch is ready!"
+              break
+            fi
+            echo "Attempt $i: Meilisearch not ready yet..."
+            sleep 1
+          done
+          if ! curl -s http://localhost:7700/health | grep -q "available"; then
+            echo "Meilisearch failed to start after 30 attempts"
+            exit 1
+          fi
+
+      - name: Run integration tests
+        run: pytest tests/integration --tb=short -v
+        env:
+          MEILISEARCH_URL: ${{ env.MEILISEARCH_URL }}
+          MEILISEARCH_MASTER_KEY: ${{ env.MEILISEARCH_MASTER_KEY }}
+          MEILISEARCH_INDEX_NAME: ${{ env.MEILISEARCH_INDEX_NAME }}
