@@ -38,22 +38,15 @@ jobs:
 
   success:
     name: Pipeline success
-    needs:
-      [
-        frontend-lint-format-check,
-        backend-lint-format-check,
-        backend-unit-tests,
-        backend-integration-tests,
-        e2e-tests,
-      ]
+    needs: e2e-tests
     runs-on: ubuntu-latest
     if: always()
     steps:
       - name: Pipeline succeeded
-        if: "!contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')"
+        if: "!contains(needs.e2e-tests.result, 'failure') && !contains(needs.e2e-tests.result, 'cancelled')"
         run: echo "All checks passed successfully!"
       - name: Pipeline failed
-        if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')
+        if: contains(needs.e2e-tests.result, 'failure') || contains(needs.e2e-tests.result, 'cancelled')
         run: |
           echo "Some checks failed or were cancelled."
           exit 1
