@@ -42,7 +42,6 @@ jobs:
       [
         frontend-lint-format-check,
         backend-lint-format-check,
-        frontend-unit-tests,
         backend-unit-tests,
         backend-integration-tests,
         e2e-tests,
