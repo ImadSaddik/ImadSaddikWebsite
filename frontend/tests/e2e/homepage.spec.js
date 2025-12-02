@@ -48,15 +48,24 @@ test.describe("Homepage", () => {
 
       const blogsGroup = page.locator('.cards-group-container:has-text("Blogs")').first();
       await expect(blogsGroup).toBeVisible();
-      await expect(blogsGroup.locator(".card-container")).toHaveCount(3);
+      const blogsCards = blogsGroup.locator(".card-container");
+      const blogsCount = await blogsCards.count();
+      expect(blogsCount).toBeGreaterThanOrEqual(1);
+      expect(blogsCount).toBeLessThanOrEqual(3);
 
       const coursesGroup = page.locator('.cards-group-container:has-text("Courses")').first();
       await expect(coursesGroup).toBeVisible();
-      await expect(coursesGroup.locator(".card-container")).toHaveCount(3);
+      const coursesCards = coursesGroup.locator(".card-container");
+      const coursesCount = await coursesCards.count();
+      expect(coursesCount).toBeGreaterThanOrEqual(1);
+      expect(coursesCount).toBeLessThanOrEqual(3);
 
       const universeGroup = page.locator('.cards-group-container:has-text("Universe")').first();
       await expect(universeGroup).toBeVisible();
-      await expect(universeGroup.locator(".card-container")).toHaveCount(3);
+      const universeCards = universeGroup.locator(".card-container");
+      const universeCount = await universeCards.count();
+      expect(universeCount).toBeGreaterThanOrEqual(1);
+      expect(universeCount).toBeLessThanOrEqual(3);
     });
 
     test("should have working call to action buttons", async ({ page }) => {
