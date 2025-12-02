@@ -1,18 +1,15 @@
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
-from api import article, search, visitors
-from database import initialize_database
-from exception_handlers import (
-    http_exception_handler,
-    request_validation_exception_handler,
-    unhandled_exception_handler,
-)
 from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from middleware import log_request_middleware
 from starlette.exceptions import HTTPException
+
+from api import article, search, visitors
+from database import initialize_database
+from exception_handlers import http_exception_handler, request_validation_exception_handler, unhandled_exception_handler
+from middleware import log_request_middleware
 
 
 @asynccontextmanager
@@ -49,3 +46,8 @@ app.include_router(visitors.router, prefix="/api/visitors", tags=["visitors"])
 @app.get("/")
 async def root():
     return {"message": "API is alive"}
+
+
+@app.get("/health")
+async def health():
+    return {"status": "ok"}

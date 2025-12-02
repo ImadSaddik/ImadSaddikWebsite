@@ -250,3 +250,5 @@ __marimo__/
 *.sqlite
 
 frontend/coverage/
+frontend/playwright-report/
+frontend/test-results/

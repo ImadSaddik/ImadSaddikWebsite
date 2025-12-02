@@ -31,24 +31,22 @@ jobs:
     needs: backend-unit-tests
     uses: ./.github/workflows/backend-integration-tests.yml
 
+  e2e-tests:
+    name: E2E
+    needs: [frontend-unit-tests, backend-integration-tests]
+    uses: ./.github/workflows/e2e-tests.yml
+
   success:
     name: Pipeline success
-    needs:
-      [
-        frontend-lint-format-check,
-        backend-lint-format-check,
-        frontend-unit-tests,
-        backend-unit-tests,
-        backend-integration-tests,
-      ]
+    needs: e2e-tests
     runs-on: ubuntu-latest
     if: always()
     steps:
       - name: Pipeline succeeded
-        if: "!contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')"
+        if: "!contains(needs.e2e-tests.result, 'failure') && !contains(needs.e2e-tests.result, 'cancelled')"
         run: echo "All checks passed successfully!"
       - name: Pipeline failed
-        if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')
+        if: contains(needs.e2e-tests.result, 'failure') || contains(needs.e2e-tests.result, 'cancelled')
         run: |
           echo "Some checks failed or were cancelled."
           exit 1
