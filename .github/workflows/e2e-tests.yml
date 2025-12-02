@@ -99,11 +99,13 @@ jobs:
 
       - name: Create frontend .env file
         working-directory: ./frontend
-        run: echo "VITE_API_BASE_URL=http://localhost:8000" > .env
+        run: |
+          echo "VITE_API_BASE_URL=http://localhost:8000" > .env
+          echo "BASE_URL=http://localhost:8080" >> .env
 
       - name: Install Playwright browsers
         working-directory: ./frontend
-        run: pnpm exec playwright install --with-deps chromium
+        run: pnpm exec playwright install --with-deps chromium firefox
 
       - name: Run E2E tests
         working-directory: ./frontend
