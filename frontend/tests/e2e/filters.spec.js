@@ -34,12 +34,8 @@ test.describe("Filters and sorting", () => {
       await expect(sortHeader.locator(".fa-chevron-up")).toBeVisible();
 
       await sortHeader.click();
-      await page.waitForTimeout(300);
-
       await expect(sortHeader.locator(".fa-chevron-down")).toBeVisible();
-
       await sortHeader.click();
-      await page.waitForTimeout(300);
 
       const sortContent = page.locator(".articles-hub-filters-sorting .collapsible-content");
       await expect(sortContent).toBeVisible();
@@ -54,12 +50,8 @@ test.describe("Filters and sorting", () => {
       await expect(yearHeader.locator(".fa-chevron-up")).toBeVisible();
 
       await yearHeader.click();
-      await page.waitForTimeout(300);
-
       await expect(yearHeader.locator(".fa-chevron-down")).toBeVisible();
-
       await yearHeader.click();
-      await page.waitForTimeout(300);
 
       await expect(yearHeader.locator(".fa-chevron-up")).toBeVisible();
     });
@@ -72,15 +64,12 @@ test.describe("Filters and sorting", () => {
       await expect(tagsHeader.locator(".fa-chevron-up")).toBeVisible();
 
       await tagsHeader.click();
-      await page.waitForTimeout(300);
-
       await expect(tagsHeader.locator(".fa-chevron-down")).toBeVisible();
 
       await tagsHeader.click();
-      await page.waitForTimeout(300);
+      await expect(tagsHeader.locator(".fa-chevron-up")).toBeVisible();
 
       const tagsContent = page.locator(".articles-hub-filters-tags .collapsible-content");
-      await expect(tagsHeader.locator(".fa-chevron-up")).toBeVisible();
       await expect(tagsContent).toBeVisible();
     });
 
@@ -93,7 +82,7 @@ test.describe("Filters and sorting", () => {
       await sortSection.click();
 
       const dropdown = sortSection.locator(".dropdown").first();
-      await dropdown.isVisible();
+      await expect(dropdown).toBeVisible();
 
       const dropdownMenus = dropdown.locator("ul.dropdown-menu li");
       const menuCount = await dropdownMenus.count();
@@ -105,9 +94,6 @@ test.describe("Filters and sorting", () => {
         const itemText = await item.textContent();
         expect(correctLabels).toContain(itemText?.trim() || "");
       }
-
-      await dropdown.click();
-      await !dropdown.isVisible();
     });
 
     test("should toggle sort order between ascending and descending", async ({ page }) => {
@@ -119,7 +105,7 @@ test.describe("Filters and sorting", () => {
       await sortSection.click();
 
       const dropdown = sortSection.locator(".dropdown").first();
-      await dropdown.isVisible();
+      await expect(dropdown).toBeVisible();
 
       const dropdownMenus = dropdown.locator("ul.dropdown-menu li");
       const menuCount = await dropdownMenus.count();
@@ -173,7 +159,7 @@ test.describe("Filters and sorting", () => {
       await yearCheckboxes.first().check();
 
       const clearButton = page.locator('button:has-text("Clear all years")');
-      await clearButton.isVisible();
+      await expect(clearButton).toBeVisible();
       await clearButton.click();
 
       await expect(yearCheckboxes.first()).not.toBeChecked();

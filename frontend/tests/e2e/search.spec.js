@@ -84,8 +84,6 @@ test.describe("Search functionality", () => {
       await searchInput.fill("Half-life 3");
       await searchInput.press("Enter");
 
-      await page.waitForTimeout(500);
-
       const noResults = page.locator('text="No results found"');
       await expect(noResults).toBeVisible();
     });
@@ -99,8 +97,6 @@ test.describe("Search functionality", () => {
 
       const searchButton = page.locator(".search-send");
       await searchButton.click();
-
-      await page.waitForTimeout(500);
 
       const noResults = page.locator('text="No results found"');
       await expect(noResults).toBeVisible();
@@ -134,8 +130,6 @@ test.describe("Search functionality", () => {
       const searchInput = page.locator(".search-input");
       await searchInput.fill("Half-life 3");
       await searchInput.press("Enter");
-
-      await page.waitForTimeout(500);
 
       const noResults = page.locator('text="No results found"');
       await expect(noResults).toBeVisible();
