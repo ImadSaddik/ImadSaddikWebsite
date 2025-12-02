@@ -107,7 +107,7 @@ jobs:
 
       - name: Run E2E tests
         working-directory: ./frontend
-        run: pnpm exec playwright test --project=chromium
+        run: pnpm run test:e2e
         env:
           CI: true
 
