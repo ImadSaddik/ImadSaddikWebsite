@@ -42,7 +42,7 @@ jobs:
           script: |
             BACKEND_DIR="/web_app/backend"
             BACKUP_DIR="/web_app/backups"
-            MEILI_DUMPS_DIR="/var/lib/meilisearch/dumps"
+            BACKUP_RETENTION_COUNT=5
             TIMESTAMP=$(date +%Y%m%d%H%M%S)
 
             # 1. Create backup directory
@@ -67,14 +67,7 @@ jobs:
               exit 1
             fi
 
-            # 4. Rolling retention (Keep last 5)
-            echo "Cleaning old backups (keeping last 5)..."
-
-            # Clean SQLite backups in /web_app/backups/
-            cd $BACKUP_DIR
-            ls -tp | grep -v '/$' | tail -n +6 | xargs -I {} rm -- "{}" || true
-
-            # Clean Meilisearch dumps in /var/lib/meilisearch/dumps/
-            sudo ls -tp "$MEILI_DUMPS_DIR" | grep -v '/$' | tail -n +6 | xargs -I {} sudo rm -- "$MEILI_DUMPS_DIR/{}" || true
-
+            # 4. Rolling Retention
+            echo "Cleaning old backups..."
+            sudo /usr/local/bin/clean_backups.sh $BACKUP_RETENTION_COUNT
             echo "Backup process finished."
