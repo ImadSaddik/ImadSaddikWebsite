@@ -149,7 +149,7 @@ jobs:
             MEILISEARCH_MASTER_KEY=$MEILISEARCH_KEY
             EOF
 
-      - name: Install Python dependencies
+      - name: Install Python dependencies (atomic venv swap)
         uses: appleboy/ssh-action@v1.2.4
         with:
           host: ${{ secrets.DIGITAL_OCEAN_HOST_IP }}
@@ -158,16 +158,58 @@ jobs:
           script: |
             set -e
 
-            echo "Updating Python dependencies..."
-            cd /web_app/backend
-            source venv/bin/activate
+            BACKEND_DIR="/web_app/backend"
+            cd $BACKEND_DIR
 
+            echo "Creating new virtual environment..."
+            python3 -m venv venv_new
+
+            echo "Installing Python dependencies in new venv..."
+            source venv_new/bin/activate
             if pip install -r requirements.txt; then
               echo "Python dependencies installed successfully."
             else
               echo "Error: Failed to install Python dependencies."
+              echo "Cleaning up the new venv..."
+              rm -rf venv_new
               exit 1
             fi
+            deactivate
+
+            echo "Copying custom files from old venv to new venv..."
+            # Copy gunicorn_start script
+            if [ -f "venv/bin/gunicorn_start" ]; then
+              cp venv/bin/gunicorn_start venv_new/bin/gunicorn_start
+              chmod +x venv_new/bin/gunicorn_start
+              echo "Copied gunicorn_start script."
+            fi
+
+            # Copy logs directory (preserve existing logs)
+            if [ -d "venv/logs" ]; then
+              cp -r venv/logs venv_new/
+              echo "Copied logs directory."
+            else
+              mkdir -p venv_new/logs
+              echo "Created new logs directory."
+            fi
+
+            # Create run directory for socket file
+            mkdir -p venv_new/run
+            echo "Created run directory for socket."
+
+            echo "Swapping virtual environments atomically..."
+            if [ -d "venv_old" ]; then
+              rm -rf venv_old
+            fi
+
+            # Atomic swap: venv -> venv_old, new venv -> venv
+            if [ -d "venv" ]; then
+              mv venv venv_old
+            fi
+            mv venv_new venv
+
+            echo "Virtual environment swap completed successfully."
+            echo "venv backed up to venv_old (will be cleaned on next deploy)."
 
       - name: Restart backend service
         uses: appleboy/ssh-action@v1.2.4
