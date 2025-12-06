@@ -81,8 +81,25 @@ jobs:
           TARGET: "/web_app/"
           ARGS: "-avzr --delete --exclude-from='rsync_exclude.txt'"
 
+      - name: Create backend .env file
+        uses: appleboy/ssh-action@v1.2.4
+        env:
+          MEILISEARCH_KEY: ${{ secrets.MEILISEARCH_MASTER_KEY }}
+        with:
+          host: ${{ secrets.DIGITAL_OCEAN_HOST_IP }}
+          username: ${{ secrets.DIGITAL_OCEAN_USERNAME }}
+          key: ${{ secrets.DIGITAL_OCEAN_SSH_KEY }}
+          envs: MEILISEARCH_KEY
+          script: |
+            echo "Creating backend .env file..."
+            cat > /web_app/backend/.env <<EOF
+            MEILISEARCH_URL=http://127.0.0.1:7700
+            MEILISEARCH_INDEX_NAME=articles
+            MEILISEARCH_MASTER_KEY=$MEILISEARCH_KEY
+            EOF
+
       - name: Restart services
-        uses: appleboy/ssh-action@v1.2.0
+        uses: appleboy/ssh-action@v1.2.4
         with:
           host: ${{ secrets.DIGITAL_OCEAN_HOST_IP }}
           username: ${{ secrets.DIGITAL_OCEAN_USERNAME }}
