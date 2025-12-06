@@ -1,0 +1,266 @@
+name: Deploy to production
+
+on:
+  workflow_call:
+    secrets:
+      DIGITAL_OCEAN_HOST_IP:
+        required: true
+      DIGITAL_OCEAN_USERNAME:
+        required: true
+      DIGITAL_OCEAN_SSH_KEY:
+        required: true
+      MEILISEARCH_MASTER_KEY:
+        required: true
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://imadsaddik.com
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Download frontend artifact
+        uses: actions/download-artifact@v6
+        with:
+          name: frontend-build
+          path: ./frontend/dist
+
+      - name: Create backups (SQLite & Meilisearch)
+        uses: appleboy/ssh-action@v1.2.4
+        env:
+          MEILISEARCH_KEY: ${{ secrets.MEILISEARCH_MASTER_KEY }}
+        with:
+          host: ${{ secrets.DIGITAL_OCEAN_HOST_IP }}
+          username: ${{ secrets.DIGITAL_OCEAN_USERNAME }}
+          key: ${{ secrets.DIGITAL_OCEAN_SSH_KEY }}
+          envs: MEILISEARCH_KEY
+          script: |
+            set -e
+
+            BACKEND_DIR="/web_app/backend"
+            BACKUP_DIR="/web_app/backups"
+            BACKUP_RETENTION_COUNT=5
+            TIMESTAMP=$(date +%Y%m%d%H%M%S)
+
+            # 1. Create backup directory
+            mkdir -p $BACKUP_DIR
+
+            # 2. Backup SQLite database
+            echo "Backing up SQLite database..."
+            if [ -f "$BACKEND_DIR/visitors.db" ]; then
+              cp "$BACKEND_DIR/visitors.db" "$BACKUP_DIR/visitors_$TIMESTAMP.db"
+              echo "SQLite backup created successfully."
+            else
+              echo "Warning: No SQLite database found in $BACKEND_DIR"
+            fi
+
+            # 3. Backup Meilisearch
+            echo "Triggering Meilisearch dump..."
+            if [ -z "$MEILISEARCH_KEY" ]; then
+              echo "Error: MEILISEARCH_KEY secret is empty."
+              exit 1
+            fi
+
+            DUMP_RESPONSE=$(curl -s -w "\n%{http_code}" -X POST 'http://127.0.0.1:7700/dumps' \
+              -H "Authorization: Bearer $MEILISEARCH_KEY")
+            HTTP_CODE=$(echo "$DUMP_RESPONSE" | tail -n1)
+            RESPONSE_BODY=$(echo "$DUMP_RESPONSE" | sed '$d')
+
+            if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
+              echo "Meilisearch dump request accepted (HTTP $HTTP_CODE)."
+
+              TASK_UID=$(echo "$RESPONSE_BODY" | grep -o '"taskUid":[0-9]*' | cut -d':' -f2)
+              if [ -z "$TASK_UID" ]; then
+                echo "Error: Could not extract taskUid from response."
+                echo "Response: $RESPONSE_BODY"
+                exit 1
+              fi
+
+              echo "Dump task created with UID: $TASK_UID"
+              echo "Waiting for dump to complete..."
+
+              # Poll task status until completion (max 60 seconds)
+              MAX_ATTEMPTS=30
+              ATTEMPT=0
+              while [ $ATTEMPT -lt $MAX_ATTEMPTS ]; do
+                TASK_RESPONSE=$(curl -s "http://127.0.0.1:7700/tasks/$TASK_UID" \
+                  -H "Authorization: Bearer $MEILISEARCH_KEY")
+                TASK_STATUS=$(echo "$TASK_RESPONSE" | grep -o '"status":"[^"]*"' | cut -d'"' -f4)
+
+                if [ "$TASK_STATUS" = "succeeded" ]; then
+                  echo "Meilisearch dump completed successfully."
+                  break
+                elif [ "$TASK_STATUS" = "failed" ]; then
+                  echo "Error: Meilisearch dump task failed."
+                  echo "Task response: $TASK_RESPONSE"
+                  exit 1
+                else
+                  # Status is "enqueued" or "processing"
+                  ATTEMPT=$((ATTEMPT + 1))
+                  sleep 2
+                fi
+              done
+
+              if [ $ATTEMPT -eq $MAX_ATTEMPTS ]; then
+                echo "Error: Meilisearch dump timed out after 60 seconds."
+                echo "Last task status: $TASK_STATUS"
+                exit 1
+              fi
+            else
+              echo "Error: Meilisearch dump request failed with HTTP $HTTP_CODE"
+              echo "Response: $RESPONSE_BODY"
+              exit 1
+            fi
+
+            # 4. Rolling Retention
+            echo "Cleaning old backups..."
+            sudo /usr/local/bin/clean_backups.sh $BACKUP_RETENTION_COUNT
+            echo "Backup process finished successfully."
+
+      - name: Rsync files to droplet
+        uses: easingthemes/ssh-deploy@v5.1.0
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.DIGITAL_OCEAN_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.DIGITAL_OCEAN_HOST_IP }}
+          REMOTE_USER: ${{ secrets.DIGITAL_OCEAN_USERNAME }}
+          SOURCE: "./"
+          TARGET: "/web_app/"
+          ARGS: "-avzr --delete --exclude-from='rsync_exclude.txt'"
+
+      - name: Create backend .env file
+        uses: appleboy/ssh-action@v1.2.4
+        env:
+          MEILISEARCH_KEY: ${{ secrets.MEILISEARCH_MASTER_KEY }}
+        with:
+          host: ${{ secrets.DIGITAL_OCEAN_HOST_IP }}
+          username: ${{ secrets.DIGITAL_OCEAN_USERNAME }}
+          key: ${{ secrets.DIGITAL_OCEAN_SSH_KEY }}
+          envs: MEILISEARCH_KEY
+          script: |
+            echo "Creating backend .env file..."
+            cat > /web_app/backend/.env <<EOF
+            MEILISEARCH_URL=http://127.0.0.1:7700
+            MEILISEARCH_INDEX_NAME=articles
+            MEILISEARCH_MASTER_KEY=$MEILISEARCH_KEY
+            EOF
+
+      - name: Install Python dependencies (atomic venv swap)
+        uses: appleboy/ssh-action@v1.2.4
+        with:
+          host: ${{ secrets.DIGITAL_OCEAN_HOST_IP }}
+          username: ${{ secrets.DIGITAL_OCEAN_USERNAME }}
+          key: ${{ secrets.DIGITAL_OCEAN_SSH_KEY }}
+          script: |
+            set -e
+
+            BACKEND_DIR="/web_app/backend"
+            cd $BACKEND_DIR
+
+            echo "Creating new virtual environment..."
+            python3 -m venv venv_new
+
+            echo "Installing Python dependencies in new venv..."
+            source venv_new/bin/activate
+            if pip install -r requirements.txt; then
+              echo "Python dependencies installed successfully."
+            else
+              echo "Error: Failed to install Python dependencies."
+              echo "Cleaning up the new venv..."
+              rm -rf venv_new
+              exit 1
+            fi
+            deactivate
+
+            echo "Copying custom files from old venv to new venv..."
+            # Copy gunicorn_start script
+            if [ -f "venv/bin/gunicorn_start" ]; then
+              cp venv/bin/gunicorn_start venv_new/bin/gunicorn_start
+              chmod +x venv_new/bin/gunicorn_start
+              echo "Copied gunicorn_start script."
+            fi
+
+            # Copy logs directory (preserve existing logs)
+            if [ -d "venv/logs" ]; then
+              cp -r venv/logs venv_new/
+              echo "Copied logs directory."
+            else
+              mkdir -p venv_new/logs
+              echo "Created new logs directory."
+            fi
+
+            # Create run directory for socket file
+            mkdir -p venv_new/run
+            echo "Created run directory for socket."
+
+            echo "Swapping virtual environments atomically..."
+            if [ -d "venv_old" ]; then
+              rm -rf venv_old
+            fi
+
+            # Atomic swap: venv -> venv_old, new venv -> venv
+            if [ -d "venv" ]; then
+              mv venv venv_old
+            fi
+            mv venv_new venv
+
+            echo "Virtual environment swap completed successfully."
+            echo "venv backed up to venv_old (will be cleaned on next deploy)."
+
+      - name: Restart backend service
+        uses: appleboy/ssh-action@v1.2.4
+        with:
+          host: ${{ secrets.DIGITAL_OCEAN_HOST_IP }}
+          username: ${{ secrets.DIGITAL_OCEAN_USERNAME }}
+          key: ${{ secrets.DIGITAL_OCEAN_SSH_KEY }}
+          script: |
+            set -e
+
+            echo "Restarting FastAPI backend service..."
+            if sudo supervisorctl restart imadsaddik_com; then
+              echo "FastAPI backend restarted successfully."
+            else
+              echo "Error: Failed to restart FastAPI backend."
+              exit 1
+            fi
+
+            # Verify the service is running
+            sleep 5
+            if sudo supervisorctl status imadsaddik_com | grep -q "RUNNING"; then
+              echo "FastAPI backend is running."
+            else
+              echo "Error: FastAPI backend failed to start properly."
+              sudo supervisorctl status imadsaddik_com
+              exit 1
+            fi
+
+      - name: Reload Nginx
+        uses: appleboy/ssh-action@v1.2.4
+        with:
+          host: ${{ secrets.DIGITAL_OCEAN_HOST_IP }}
+          username: ${{ secrets.DIGITAL_OCEAN_USERNAME }}
+          key: ${{ secrets.DIGITAL_OCEAN_SSH_KEY }}
+          script: |
+            set -e
+
+            echo "Testing Nginx configuration..."
+            if sudo nginx -t; then
+              echo "Nginx configuration is valid."
+            else
+              echo "Error: Nginx configuration test failed."
+              exit 1
+            fi
+
+            echo "Reloading Nginx..."
+            if sudo systemctl reload nginx; then
+              echo "Nginx reloaded successfully."
+            else
+              echo "Error: Failed to reload Nginx."
+              exit 1
+            fi
+
+            echo "Deployment complete!"

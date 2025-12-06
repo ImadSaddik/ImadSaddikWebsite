@@ -1,4 +1,4 @@
-name: CI pipeline
+name: CI Pipeline
 
 on:
   push:
@@ -41,17 +41,21 @@ jobs:
     needs: e2e-tests
     uses: ./.github/workflows/frontend-build.yml
 
-  success:
-    name: Pipeline success
+  deploy-production:
+    name: Deploy to production
     needs: frontend-build
+    if: github.ref == 'refs/heads/master'
+    uses: ./.github/workflows/deploy.yml
+    secrets:
+      DIGITAL_OCEAN_HOST_IP: ${{ secrets.DIGITAL_OCEAN_HOST_IP }}
+      DIGITAL_OCEAN_USERNAME: ${{ secrets.DIGITAL_OCEAN_USERNAME }}
+      DIGITAL_OCEAN_SSH_KEY: ${{ secrets.DIGITAL_OCEAN_SSH_KEY }}
+      MEILISEARCH_MASTER_KEY: ${{ secrets.MEILISEARCH_MASTER_KEY }}
+
+  pipeline-success:
+    name: Pipeline success
+    needs: deploy-production
     runs-on: ubuntu-latest
-    if: always()
+    if: success()
     steps:
-      - name: Pipeline succeeded
-        if: "!contains(needs.frontend-build.result, 'failure') && !contains(needs.frontend-build.result, 'cancelled')"
-        run: echo "All checks passed successfully!"
-      - name: Pipeline failed
-        if: contains(needs.frontend-build.result, 'failure') || contains(needs.frontend-build.result, 'cancelled')
-        run: |
-          echo "Some checks failed or were cancelled."
-          exit 1
+      - run: echo "Deployment to imadsaddik.com was successful!"
