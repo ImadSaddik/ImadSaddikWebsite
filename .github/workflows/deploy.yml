@@ -161,55 +161,60 @@ jobs:
             BACKEND_DIR="/web_app/backend"
             cd $BACKEND_DIR
 
-            echo "Creating new virtual environment..."
-            python3 -m venv venv_new
+            echo "Backing up current venv..."
+            if [ -d "venv" ]; then
+              mv venv venv_backup
+              echo "Current venv backed up to venv_backup."
+            fi
 
-            echo "Installing Python dependencies in new venv..."
-            source venv_new/bin/activate
+            echo "Creating new virtual environment..."
+            python3 -m venv venv
+
+            echo "Installing Python dependencies..."
+            source venv/bin/activate
             if pip install -r requirements.txt; then
               echo "Python dependencies installed successfully."
             else
               echo "Error: Failed to install Python dependencies."
-              echo "Cleaning up the new venv..."
-              rm -rf venv_new
+              echo "Rolling back to previous venv..."
+              deactivate
+              rm -rf venv
+              if [ -d "venv_backup" ]; then
+                mv venv_backup venv
+                echo "Rollback complete."
+              fi
               exit 1
             fi
             deactivate
 
-            echo "Copying custom files from old venv to new venv..."
+            echo "Copying custom files from backup venv..."
             # Copy gunicorn_start script
-            if [ -f "venv/bin/gunicorn_start" ]; then
-              cp venv/bin/gunicorn_start venv_new/bin/gunicorn_start
-              chmod +x venv_new/bin/gunicorn_start
+            if [ -f "venv_backup/bin/gunicorn_start" ]; then
+              cp venv_backup/bin/gunicorn_start venv/bin/gunicorn_start
+              chmod +x venv/bin/gunicorn_start
               echo "Copied gunicorn_start script."
             fi
 
             # Copy logs directory (preserve existing logs)
-            if [ -d "venv/logs" ]; then
-              cp -r venv/logs venv_new/
+            if [ -d "venv_backup/logs" ]; then
+              cp -r venv_backup/logs venv/
               echo "Copied logs directory."
             else
-              mkdir -p venv_new/logs
+              mkdir -p venv/logs
               echo "Created new logs directory."
             fi
 
             # Create run directory for socket file
-            mkdir -p venv_new/run
+            mkdir -p venv/run
             echo "Created run directory for socket."
 
-            echo "Swapping virtual environments atomically..."
-            if [ -d "venv_old" ]; then
-              rm -rf venv_old
+            # Clean up backup after successful deploy
+            if [ -d "venv_backup" ]; then
+              rm -rf venv_backup
+              echo "Cleaned up venv_backup."
             fi
 
-            # Atomic swap: venv -> venv_old, new venv -> venv
-            if [ -d "venv" ]; then
-              mv venv venv_old
-            fi
-            mv venv_new venv
-
-            echo "Virtual environment swap completed successfully."
-            echo "venv backed up to venv_old (will be cleaned on next deploy)."
+            echo "Virtual environment setup completed successfully."
 
       - name: Restart backend service
         uses: appleboy/ssh-action@v1.2.4
