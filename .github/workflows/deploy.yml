@@ -1,0 +1,81 @@
+name: Deploy to production
+
+on:
+  workflow_call:
+    secrets:
+      DIGITAL_OCEAN_HOST_IP:
+        required: true
+      DIGITAL_OCEAN_USERNAME:
+        required: true
+      DIGITAL_OCEAN_SSH_KEY:
+        required: true
+      MEILISEARCH_MASTER_KEY:
+        required: true
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://imadsaddik.com
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Download frontend artifact
+        uses: actions/download-artifact@v6
+        with:
+          name: frontend-build
+          path: ./frontend/dist
+
+      - name: Create backups (SQLite & Meilisearch)
+        uses: appleboy/ssh-action@v1.2.4
+        env:
+          MEILISEARCH_KEY: ${{ secrets.MEILISEARCH_MASTER_KEY }}
+        with:
+          host: ${{ secrets.DIGITAL_OCEAN_HOST_IP }}
+          username: ${{ secrets.DIGITAL_OCEAN_USERNAME }}
+          key: ${{ secrets.DIGITAL_OCEAN_SSH_KEY }}
+          envs: MEILISEARCH_KEY
+          script: |
+            BACKEND_DIR="/web_app/backend"
+            BACKUP_DIR="/web_app/backups"
+            MEILI_DUMPS_DIR="/var/lib/meilisearch/dumps"
+            TIMESTAMP=$(date +%Y%m%d%H%M%S)
+
+            # 1. Create backup directory
+            mkdir -p $BACKUP_DIR
+
+            # 2. Backup SQLite database
+            echo "Backing up SQLite database..."
+            if [ -f "$BACKEND_DIR/visitors.db" ]; then
+              cp "$BACKEND_DIR/visitors.db" "$BACKUP_DIR/visitors_$TIMESTAMP.db"
+            else
+              echo "Warning: No SQLite database found in $BACKEND_DIR"
+            fi
+
+            # 3. Backup Meilisearch
+            if [ -f "$BACKEND_DIR/.env" ]; then
+              source "$BACKEND_DIR/.env"
+              echo "Triggering Meilisearch dump..."
+              curl -X POST 'http://127.0.0.1:7700/dumps' \
+                -H "Authorization: Bearer $MEILISEARCH_KEY"
+            else
+              echo "Error: .env file not found, cannot get Meilisearch key."
+              exit 1
+            fi
+
+            # 4. Rolling retention (Keep last 5)
+            echo "Cleaning old backups (keeping last 5)..."
+
+            # Clean SQLite backups in /web_app/backups/
+            cd $BACKUP_DIR
+            ls -tp | grep -v '/$' | tail -n +6 | xargs -I {} rm -- "{}" || true
+
+            # Clean Meilisearch dumps in /var/lib/meilisearch/dumps/
+            cd $MEILI_DUMPS_DIR
+            ls -tp | grep -v '/$' | tail -n +6 | xargs -I {} sudo rm -- "{}" || true
+
+            echo "Backup process finished."

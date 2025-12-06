@@ -1,0 +1,16 @@
+*.pyc
+
+.env
+.git/
+.github/
+.gitignore
+.DS_Store
+
+rsync_exclude.txt
+backups/
+
+frontend/node_modules/
+
+backend/venv/
+backend/__pycache__/
+backend/visitors.db
