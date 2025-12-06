@@ -57,14 +57,13 @@ jobs:
             fi
 
             # 3. Backup Meilisearch
-            if [ -f "$BACKEND_DIR/.env" ]; then
-              source "$BACKEND_DIR/.env"
-              echo "Triggering Meilisearch dump..."
-              curl -X POST 'http://127.0.0.1:7700/dumps' \
+            echo "Triggering Meilisearch dump..."
+            if [ -n "$MEILISEARCH_KEY" ]; then
+               curl -X POST 'http://127.0.0.1:7700/dumps' \
                 -H "Authorization: Bearer $MEILISEARCH_KEY"
             else
-              echo "Error: .env file not found, cannot get Meilisearch key."
-              exit 1
+               echo "Error: MEILISEARCH_KEY secret is empty."
+               exit 1
             fi
 
             # 4. Rolling Retention
