@@ -40,6 +40,8 @@ jobs:
           key: ${{ secrets.DIGITAL_OCEAN_SSH_KEY }}
           envs: MEILISEARCH_KEY
           script: |
+            set -e
+
             BACKEND_DIR="/web_app/backend"
             BACKUP_DIR="/web_app/backups"
             BACKUP_RETENTION_COUNT=5
@@ -52,24 +54,73 @@ jobs:
             echo "Backing up SQLite database..."
             if [ -f "$BACKEND_DIR/visitors.db" ]; then
               cp "$BACKEND_DIR/visitors.db" "$BACKUP_DIR/visitors_$TIMESTAMP.db"
+              echo "SQLite backup created successfully."
             else
               echo "Warning: No SQLite database found in $BACKEND_DIR"
             fi
 
             # 3. Backup Meilisearch
             echo "Triggering Meilisearch dump..."
-            if [ -n "$MEILISEARCH_KEY" ]; then
-               curl -X POST 'http://127.0.0.1:7700/dumps' \
-                -H "Authorization: Bearer $MEILISEARCH_KEY"
+            if [ -z "$MEILISEARCH_KEY" ]; then
+              echo "Error: MEILISEARCH_KEY secret is empty."
+              exit 1
+            fi
+
+            DUMP_RESPONSE=$(curl -s -w "\n%{http_code}" -X POST 'http://127.0.0.1:7700/dumps' \
+              -H "Authorization: Bearer $MEILISEARCH_KEY")
+            HTTP_CODE=$(echo "$DUMP_RESPONSE" | tail -n1)
+            RESPONSE_BODY=$(echo "$DUMP_RESPONSE" | sed '$d')
+
+            if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
+              echo "Meilisearch dump request accepted (HTTP $HTTP_CODE)."
+
+              TASK_UID=$(echo "$RESPONSE_BODY" | grep -o '"taskUid":[0-9]*' | cut -d':' -f2)
+              if [ -z "$TASK_UID" ]; then
+                echo "Error: Could not extract taskUid from response."
+                echo "Response: $RESPONSE_BODY"
+                exit 1
+              fi
+
+              echo "Dump task created with UID: $TASK_UID"
+              echo "Waiting for dump to complete..."
+
+              # Poll task status until completion (max 60 seconds)
+              MAX_ATTEMPTS=30
+              ATTEMPT=0
+              while [ $ATTEMPT -lt $MAX_ATTEMPTS ]; do
+                TASK_RESPONSE=$(curl -s "http://127.0.0.1:7700/tasks/$TASK_UID" \
+                  -H "Authorization: Bearer $MEILISEARCH_KEY")
+                TASK_STATUS=$(echo "$TASK_RESPONSE" | grep -o '"status":"[^"]*"' | cut -d'"' -f4)
+
+                if [ "$TASK_STATUS" = "succeeded" ]; then
+                  echo "Meilisearch dump completed successfully."
+                  break
+                elif [ "$TASK_STATUS" = "failed" ]; then
+                  echo "Error: Meilisearch dump task failed."
+                  echo "Task response: $TASK_RESPONSE"
+                  exit 1
+                else
+                  # Status is "enqueued" or "processing"
+                  ATTEMPT=$((ATTEMPT + 1))
+                  sleep 2
+                fi
+              done
+
+              if [ $ATTEMPT -eq $MAX_ATTEMPTS ]; then
+                echo "Error: Meilisearch dump timed out after 60 seconds."
+                echo "Last task status: $TASK_STATUS"
+                exit 1
+              fi
             else
-               echo "Error: MEILISEARCH_KEY secret is empty."
-               exit 1
+              echo "Error: Meilisearch dump request failed with HTTP $HTTP_CODE"
+              echo "Response: $RESPONSE_BODY"
+              exit 1
             fi
 
             # 4. Rolling Retention
             echo "Cleaning old backups..."
             sudo /usr/local/bin/clean_backups.sh $BACKUP_RETENTION_COUNT
-            echo "Backup process finished."
+            echo "Backup process finished successfully."
 
       - name: Rsync files to droplet
         uses: easingthemes/ssh-deploy@v5.1.0
@@ -98,22 +149,76 @@ jobs:
             MEILISEARCH_MASTER_KEY=$MEILISEARCH_KEY
             EOF
 
-      - name: Restart services
+      - name: Install Python dependencies
         uses: appleboy/ssh-action@v1.2.4
         with:
           host: ${{ secrets.DIGITAL_OCEAN_HOST_IP }}
           username: ${{ secrets.DIGITAL_OCEAN_USERNAME }}
           key: ${{ secrets.DIGITAL_OCEAN_SSH_KEY }}
           script: |
+            set -e
+
             echo "Updating Python dependencies..."
             cd /web_app/backend
             source venv/bin/activate
-            pip install -r requirements.txt
 
-            echo "Restarting supervisor..."
-            sudo supervisorctl restart all
+            if pip install -r requirements.txt; then
+              echo "Python dependencies installed successfully."
+            else
+              echo "Error: Failed to install Python dependencies."
+              exit 1
+            fi
+
+      - name: Restart backend service
+        uses: appleboy/ssh-action@v1.2.4
+        with:
+          host: ${{ secrets.DIGITAL_OCEAN_HOST_IP }}
+          username: ${{ secrets.DIGITAL_OCEAN_USERNAME }}
+          key: ${{ secrets.DIGITAL_OCEAN_SSH_KEY }}
+          script: |
+            set -e
+
+            echo "Restarting FastAPI backend service..."
+            if sudo supervisorctl restart imadsaddik_com; then
+              echo "FastAPI backend restarted successfully."
+            else
+              echo "Error: Failed to restart FastAPI backend."
+              exit 1
+            fi
+
+            # Verify the service is running
+            sleep 5
+            if sudo supervisorctl status imadsaddik_com | grep -q "RUNNING"; then
+              echo "FastAPI backend is running."
+            else
+              echo "Error: FastAPI backend failed to start properly."
+              sudo supervisorctl status imadsaddik_com
+              exit 1
+            fi
+
+      - name: Reload Nginx
+        uses: appleboy/ssh-action@v1.2.4
+        with:
+          host: ${{ secrets.DIGITAL_OCEAN_HOST_IP }}
+          username: ${{ secrets.DIGITAL_OCEAN_USERNAME }}
+          key: ${{ secrets.DIGITAL_OCEAN_SSH_KEY }}
+          script: |
+            set -e
+
+            echo "Testing Nginx configuration..."
+            if sudo nginx -t; then
+              echo "Nginx configuration is valid."
+            else
+              echo "Error: Nginx configuration test failed."
+              exit 1
+            fi
 
             echo "Reloading Nginx..."
-            sudo systemctl reload nginx
+            if sudo systemctl reload nginx; then
+              echo "Nginx reloaded successfully."
+            else
+              echo "Error: Failed to reload Nginx."
+              exit 1
+            fi
 
             echo "Deployment complete!"
