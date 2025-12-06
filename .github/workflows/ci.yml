@@ -44,7 +44,7 @@ jobs:
   deploy-production:
     name: Deploy to production
     needs: frontend-build
-    if: github.ref == 'refs/heads/master'
+    # if: github.ref == 'refs/heads/master'
     uses: ./.github/workflows/deploy.yml
     secrets:
       DIGITAL_OCEAN_HOST_IP: ${{ secrets.DIGITAL_OCEAN_HOST_IP }}
