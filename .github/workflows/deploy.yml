@@ -70,3 +70,33 @@ jobs:
             echo "Cleaning old backups..."
             sudo /usr/local/bin/clean_backups.sh $BACKUP_RETENTION_COUNT
             echo "Backup process finished."
+
+      - name: Rsync files to droplet
+        uses: easingthemes/ssh-deploy@v5.1.0
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.DIGITAL_OCEAN_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.DIGITAL_OCEAN_HOST_IP }}
+          REMOTE_USER: ${{ secrets.DIGITAL_OCEAN_USERNAME }}
+          SOURCE: "./"
+          TARGET: "/web_app/"
+          ARGS: "-avzr --delete --exclude-from='rsync_exclude.txt'"
+
+      - name: Restart services
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.DIGITAL_OCEAN_HOST_IP }}
+          username: ${{ secrets.DIGITAL_OCEAN_USERNAME }}
+          key: ${{ secrets.DIGITAL_OCEAN_SSH_KEY }}
+          script: |
+            echo "Updating Python dependencies..."
+            cd /web_app/backend
+            source venv/bin/activate
+            pip install -r requirements.txt
+
+            echo "Restarting supervisor..."
+            sudo supervisorctl restart all
+
+            echo "Reloading Nginx..."
+            sudo systemctl reload nginx
+
+            echo "Deployment complete!"
