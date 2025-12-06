@@ -8,12 +8,22 @@ on:
   workflow_dispatch:
 
 jobs:
+  frontend-vulnerability-check:
+    name: Frontend
+    uses: ./.github/workflows/frontend-vulnerability-check.yml
+
+  backend-vulnerability-check:
+    name: Backend
+    uses: ./.github/workflows/backend-vulnerability-check.yml
+
   frontend-lint-format-check:
     name: Frontend
+    needs: frontend-vulnerability-check
     uses: ./.github/workflows/frontend-lint-format-check.yml
 
   backend-lint-format-check:
     name: Backend
+    needs: backend-vulnerability-check
     uses: ./.github/workflows/backend-lint-format-check.yml
 
   frontend-unit-tests:
