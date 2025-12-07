@@ -10,6 +10,7 @@ rsync_exclude.txt
 backups/
 
 frontend/node_modules/
+frontend/dist/analytics.html
 
 backend/venv/
 backend/__pycache__/
