@@ -93,13 +93,15 @@
         </div>
       </section>
 
-      <section>
+      <section class="get-in-touch-section">
         <h2 id="get-in-touch" data-table-of-contents>
           <a class="clickable-header-link" href="#get-in-touch">Get in touch</a>
         </h2>
         <p>
-          If you're interested in working together or have any questions, please don't hesitate to reach out. You can
-          contact me via email at <a href="mailto:simad3647@gmail.com">simad3647@gmail.com</a>.
+          I am always open to discussing new projects or just chatting about technology and the universe. You can find
+          me on <a href="https://github.com/ImadSaddik" target="_blank">GitHub</a>,
+          <a href="https://www.linkedin.com/in/imadsaddik/" target="_blank">LinkedIn</a>, or send me an email at
+          <a href="mailto:simad3647@gmail.com">simad3647@gmail.com</a>.
         </p>
         <p>Prefer a quick call? Book a meeting directly with me:</p>
         <div class="action-buttons">
