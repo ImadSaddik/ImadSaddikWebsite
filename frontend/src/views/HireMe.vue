@@ -49,7 +49,7 @@
           <div class="card">
             <i class="fa-solid fa-database service-icon"></i>
             <h3 id="data-science" data-table-of-contents>
-              <a class="clickable-header-link" href="#data-science">Data Science</a>
+              <a class="clickable-header-link" href="#data-science">Data science</a>
             </h3>
             <p>
               I analyze data, build predictive models, and create data-driven solutions using Python. I can help you
