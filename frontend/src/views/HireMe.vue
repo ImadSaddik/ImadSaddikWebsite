@@ -6,10 +6,14 @@
           <a class="clickable-header-link" href="#lets-build-something-great">Let's build something great</a>
         </h1>
         <p>
-          I'm an engineer and technical educator with experience in <b>web & mobile development</b> and
-          <b>AI & Data Science</b>. I help individuals and organizations achieve their goals through high-quality
-          solutions and knowledge sharing. I'm seeking new opportunities — full-time or part-time — to work on exciting
-          projects and collaborate with others who share my interests.
+          I am Imad Saddik. I found my passion at the intersection of electrical engineering, programming, and
+          astronomy. My journey began in Meknes, Morocco, where I spent five years studying electrical engineering
+          before diving into machine learning, AI, and web development. I love solving problems, building applications,
+          and sharing what I learn with others.
+        </p>
+        <p>
+          I believe that great things happen when people work together. I am looking for opportunities to collaborate
+          and bring my engineering mindset to your team.
         </p>
         <ImageWithCaption
           :image-src="heartShapedAntennaGalaxies"
