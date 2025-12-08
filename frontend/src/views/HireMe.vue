@@ -106,7 +106,7 @@
         <p>Prefer a quick call? Book a meeting directly with me:</p>
         <div class="action-buttons">
           <button class="primary-button book-meeting-button" @click="openCalendlyLink">Book a meeting</button>
-          <button class="primary-button resume-button" @click="openResumeLink">Download resume</button>
+          <button class="secondary-button resume-button" @click="openResumeLink">Download resume</button>
         </div>
       </section>
     </div>
@@ -248,10 +248,23 @@ h3 {
   display: block;
 }
 
+.get-in-touch-section {
+  text-align: left;
+  border: 1px solid var(--color-tag-border);
+  margin-top: var(--gap-xxl);
+  padding: var(--gap-xxl) var(--gap-xl);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.get-in-touch-section h2 {
+  margin-top: 0;
+}
+
 .action-buttons {
   display: flex;
   flex-wrap: wrap;
   gap: var(--gap-md);
+  margin-top: var(--gap-lg);
 }
 
 .book-meeting-button,
@@ -259,12 +272,12 @@ h3 {
   padding: var(--gap-sm) var(--gap-md);
   font-size: var(--font-size-small);
   font-weight: 600;
-  width: 200px;
+  width: 220px;
 }
 
 @media screen and (max-width: 1300px) {
   .hire-me-content {
-    width: 65%;
+    width: 70%;
   }
 }
 
@@ -284,18 +297,27 @@ h3 {
   .hire-me-container {
     padding: var(--gap-lg);
     margin-top: var(--gap-md);
+    flex-direction: column;
   }
 
-  .card-group {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: var(--gap-md);
+  .get-in-touch-section {
+    padding: var(--gap-lg);
   }
 }
 
 @media screen and (max-width: 768px) {
   .hire-me-container {
     padding: var(--gap-md);
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .book-meeting-button,
+  .resume-button {
+    width: 100%;
   }
 }
 </style>
