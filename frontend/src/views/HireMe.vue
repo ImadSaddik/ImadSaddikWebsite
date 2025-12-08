@@ -27,7 +27,7 @@
         <h2 id="services" data-table-of-contents>
           <a class="clickable-header-link" href="#services">Services</a>
         </h2>
-        <p>I offer a range of services to help you achieve your goals:</p>
+        <p>Here is how I can help you build your next project:</p>
 
         <div class="card-group">
           <div class="card">
@@ -36,8 +36,8 @@
               <a class="clickable-header-link" href="#technical-writing">Technical writing</a>
             </h3>
             <p>
-              I enjoy explaining complex topics in a clear and concise manner through writing. I can write articles,
-              tutorials, and documentation on a variety of technical subjects.
+              I create educational content on complex topics. I have written courses for freeCodeCamp on Elasticsearch,
+              LLMs, and Transformers. I also run a YouTube channel called 3CodeCamp where I teach programming and Linux.
             </p>
           </div>
           <div class="card">
@@ -46,8 +46,8 @@
               <a class="clickable-header-link" href="#software-development">Software development</a>
             </h3>
             <p>
-              I can build full stack web applications with your preferred tech stack and native Android applications. I
-              write clean, maintainable code and follow best practices.
+              I build full stack web applications using Vue.js and Python and mobile apps with Java. I enjoy creating
+              useful tools.
             </p>
           </div>
           <div class="card">
@@ -56,8 +56,8 @@
               <a class="clickable-header-link" href="#data-science">Data science</a>
             </h3>
             <p>
-              I analyze data, build predictive models, and create data-driven solutions using Python. I can help you
-              extract insights and make informed decisions from your data.
+              I hold an engineering degree in Industrial Engineering, AI, and Data Science. I built an award winning
+              solar energy prediction model using machine learning during my time at a research lab in France.
             </p>
           </div>
           <div class="card">
@@ -66,8 +66,8 @@
               <a class="clickable-header-link" href="#support-maintenance">Support & maintenance</a>
             </h3>
             <p>
-              I provide ongoing support and maintenance for your software solutions. I can help you troubleshoot issues,
-              implement updates, and make sure that your applications run smoothly.
+              I approach software with an engineering mindset. I focus on building reliable systems that work well over
+              time. I can help maintain existing projects and ensure they keep running smoothly.
             </p>
           </div>
           <div class="card">
@@ -76,8 +76,8 @@
               <a class="clickable-header-link" href="#tutorials">Tutorials</a>
             </h3>
             <p>
-              I create step-by-step tutorials to help teach people new skills. I create tutorials on everything related
-              to programming, AI, and Linux.
+              Teaching is a big part of who I am. I started by sharing organized notes with classmates and now I create
+              step by step tutorials to help people learn new skills in programming and technology.
             </p>
           </div>
           <div class="card">
@@ -86,8 +86,8 @@
               <a class="clickable-header-link" href="#code-reviews">Code reviews</a>
             </h3>
             <p>
-              I provide detailed code reviews to help improve the quality of your codebase. I can identify potential
-              issues, suggest improvements, and help you follow best practices.
+              I believe in the power of open source and clean code. I can review your codebase to identify issues and
+              suggest improvements, helping you maintain high quality standards.
             </p>
           </div>
         </div>
