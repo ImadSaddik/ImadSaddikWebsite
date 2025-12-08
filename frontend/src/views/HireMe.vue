@@ -98,7 +98,10 @@
           contact me via email at <a href="mailto:simad3647@gmail.com">simad3647@gmail.com</a>.
         </p>
         <p>Prefer a quick call? Book a meeting directly with me:</p>
-        <button class="primary-button book-meeting-button" @click="openCalendlyLink">Book a meeting</button>
+        <div class="action-buttons">
+          <button class="primary-button book-meeting-button" @click="openCalendlyLink">Book a meeting</button>
+          <button class="primary-button resume-button" @click="openResumeLink">Download resume</button>
+        </div>
       </section>
     </div>
 
@@ -173,6 +176,9 @@ export default {
         this.handleCloseImageModal();
       }
     },
+    openResumeLink() {
+      window.open("https://imadsaddik.com/resume", "_blank");
+    },
     emitToastEvent(data) {
       this.$emit("show-toast", data);
     },
@@ -236,7 +242,14 @@ h3 {
   display: block;
 }
 
-.book-meeting-button {
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-md);
+}
+
+.book-meeting-button,
+.resume-button {
   padding: var(--gap-sm) var(--gap-md);
   font-size: var(--font-size-small);
   font-weight: 600;

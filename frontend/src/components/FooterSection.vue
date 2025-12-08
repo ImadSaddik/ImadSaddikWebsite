@@ -81,6 +81,7 @@
         <div class="footer-column">
           <h4 class="footer-column-title">Contact</h4>
           <a class="clickable" href="mailto:simad3647@gmail.com" target="_blank" rel="noopener noreferrer">Email</a>
+          <a class="clickable" href="https://imadsaddik.com/resume" target="_blank" rel="noopener noreferrer">Resume</a>
           <a class="clickable" href="https://calendly.com/simad3647/30min" target="_blank" rel="noopener noreferrer"
             >Book a meeting</a
           >
