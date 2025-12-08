@@ -230,22 +230,67 @@ h3 {
 }
 
 .card-group {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--gap-md);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-lg);
+}
+
+.card-group::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 24px;
+  bottom: 0px;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    rgba(249, 115, 22, 0) 0%,
+    var(--color-primary) 15%,
+    var(--color-secondary) 85%,
+    rgba(34, 211, 238, 0) 100%
+  );
+  opacity: 0.3;
 }
 
 .card {
-  background-color: var(--color-code-night-owl-background);
-  border: 1px solid var(--color-tag-border);
-  padding: var(--gap-md);
+  display: grid;
+  align-items: start;
+  grid-template-columns: 48px 1fr;
+  gap: 0 var(--gap-md);
+  border: none;
+  background: transparent;
+}
+
+.card h3 {
+  align-self: center;
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0;
 }
 
 .service-icon {
-  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  width: 48px;
+  height: 48px;
   color: var(--color-primary);
-  margin-bottom: var(--gap-xxl);
-  display: block;
+  border: 2px solid var(--color-tag-border);
+  font-size: 1.2rem;
+  background: var(--color-background);
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.card:hover .service-icon {
+  color: var(--color-secondary);
+  border-color: var(--color-secondary);
+  box-shadow:
+    0 0 15px rgba(34, 211, 238, 0.4),
+    0 0 0 4px var(--color-background);
 }
 
 .get-in-touch-section {
