@@ -99,8 +99,8 @@
         </h2>
         <p>
           I am always open to discussing new projects or just chatting about technology and the universe. You can find
-          me on <a href="https://github.com/ImadSaddik" target="_blank">GitHub</a>,
-          <a href="https://www.linkedin.com/in/imadsaddik/" target="_blank">LinkedIn</a>, or send me an email at
+          me on <a href="https://github.com/ImadSaddik" target="_blank" rel="noopener noreferrer">GitHub</a>,
+          <a href="https://www.linkedin.com/in/imadsaddik/" target="_blank" rel="noopener noreferrer">LinkedIn</a>, or send me an email at
           <a href="mailto:simad3647@gmail.com">simad3647@gmail.com</a>.
         </p>
         <p>Prefer a quick call? Book a meeting directly with me:</p>
