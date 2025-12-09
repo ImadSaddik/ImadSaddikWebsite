@@ -56,7 +56,7 @@
               <a class="clickable-header-link" href="#data-science">Data science</a>
             </h3>
             <p>
-              I hold an engineering degree in Industrial Engineering, AI, and Data Science. I built an award winning
+              I hold an engineering degree in Industrial Engineering, AI, and Data Science. I built an award-winning
               solar energy prediction model using machine learning during my time at a research lab in France.
             </p>
           </div>
