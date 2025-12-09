@@ -240,7 +240,7 @@ h3 {
   content: "";
   position: absolute;
   top: 0px;
-  left: 24px;
+  left: calc(48px / 2);
   bottom: 0px;
   width: 2px;
   background: linear-gradient(
