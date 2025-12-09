@@ -6,10 +6,14 @@
           <a class="clickable-header-link" href="#lets-build-something-great">Let's build something great</a>
         </h1>
         <p>
-          I'm an engineer and technical educator with experience in <b>web & mobile development</b> and
-          <b>AI & Data Science</b>. I help individuals and organizations achieve their goals through high-quality
-          solutions and knowledge sharing. I'm seeking new opportunities — full-time or part-time — to work on exciting
-          projects and collaborate with others who share my interests.
+          I am Imad Saddik. I found my passion at the intersection of electrical engineering, programming, and
+          astronomy. My journey began in Meknes, Morocco, where I spent five years studying electrical engineering
+          before diving into machine learning, AI, and web development. I love solving problems, building applications,
+          and sharing what I learn with others.
+        </p>
+        <p>
+          I believe that great things happen when people work together. I am looking for opportunities to collaborate
+          and bring my engineering mindset to your team.
         </p>
         <ImageWithCaption
           :image-src="heartShapedAntennaGalaxies"
@@ -23,84 +27,86 @@
         <h2 id="services" data-table-of-contents>
           <a class="clickable-header-link" href="#services">Services</a>
         </h2>
-        <p>I offer a range of services to help you achieve your goals:</p>
+        <p>Here is how I can help you build your next project:</p>
 
         <div class="card-group">
           <div class="card">
-            <i class="fa-solid fa-pen-nib service-icon"></i>
+            <i class="fa-solid fa-pen-nib service-icon" aria-hidden="true"></i>
             <h3 id="technical-writing" data-table-of-contents>
               <a class="clickable-header-link" href="#technical-writing">Technical writing</a>
             </h3>
             <p>
-              I enjoy explaining complex topics in a clear and concise manner through writing. I can write articles,
-              tutorials, and documentation on a variety of technical subjects.
+              I create educational content on complex topics. I have written courses for freeCodeCamp on Elasticsearch,
+              LLMs, and Transformers. I also run a YouTube channel called 3CodeCamp where I teach programming and Linux.
             </p>
           </div>
           <div class="card">
-            <i class="fa-solid fa-code service-icon"></i>
+            <i class="fa-solid fa-code service-icon" aria-hidden="true"></i>
             <h3 id="software-development" data-table-of-contents>
               <a class="clickable-header-link" href="#software-development">Software development</a>
             </h3>
             <p>
-              I can build full stack web applications with your preferred tech stack and native Android applications. I
-              write clean, maintainable code and follow best practices.
+              I build full stack web applications using Vue.js and Python and mobile apps with Java. I enjoy creating
+              useful tools.
             </p>
           </div>
           <div class="card">
-            <i class="fa-solid fa-database service-icon"></i>
+            <i class="fa-solid fa-database service-icon" aria-hidden="true"></i>
             <h3 id="data-science" data-table-of-contents>
-              <a class="clickable-header-link" href="#data-science">Data Science</a>
+              <a class="clickable-header-link" href="#data-science">Data science</a>
             </h3>
             <p>
-              I analyze data, build predictive models, and create data-driven solutions using Python. I can help you
-              extract insights and make informed decisions from your data.
+              I hold an engineering degree in Industrial Engineering, AI, and Data Science. I built an award-winning
+              solar energy prediction model using machine learning during my time at a research lab in France.
             </p>
           </div>
           <div class="card">
-            <i class="fa-solid fa-headset service-icon"></i>
+            <i class="fa-solid fa-headset service-icon" aria-hidden="true"></i>
             <h3 id="support-maintenance" data-table-of-contents>
               <a class="clickable-header-link" href="#support-maintenance">Support & maintenance</a>
             </h3>
             <p>
-              I provide ongoing support and maintenance for your software solutions. I can help you troubleshoot issues,
-              implement updates, and make sure that your applications run smoothly.
+              I approach software with an engineering mindset. I focus on building reliable systems that work well over
+              time. I can help maintain existing projects and ensure they keep running smoothly.
             </p>
           </div>
           <div class="card">
-            <i class="fa-solid fa-chalkboard-user service-icon"></i>
+            <i class="fa-solid fa-chalkboard-user service-icon" aria-hidden="true"></i>
             <h3 id="tutorials" data-table-of-contents>
               <a class="clickable-header-link" href="#tutorials">Tutorials</a>
             </h3>
             <p>
-              I create step-by-step tutorials to help teach people new skills. I create tutorials on everything related
-              to programming, AI, and Linux.
+              Teaching is a big part of who I am. I started by sharing organized notes with classmates and now I create
+              step-by-step tutorials to help people learn new skills in programming and technology.
             </p>
           </div>
           <div class="card">
-            <i class="fa-solid fa-magnifying-glass-chart service-icon"></i>
+            <i class="fa-solid fa-magnifying-glass-chart service-icon" aria-hidden="true"></i>
             <h3 id="code-reviews" data-table-of-contents>
               <a class="clickable-header-link" href="#code-reviews">Code reviews</a>
             </h3>
             <p>
-              I provide detailed code reviews to help improve the quality of your codebase. I can identify potential
-              issues, suggest improvements, and help you follow best practices.
+              I believe in the power of open source and clean code. I can review your codebase to identify issues and
+              suggest improvements, helping you maintain high quality standards.
             </p>
           </div>
         </div>
       </section>
 
-      <section>
+      <section class="get-in-touch-section">
         <h2 id="get-in-touch" data-table-of-contents>
           <a class="clickable-header-link" href="#get-in-touch">Get in touch</a>
         </h2>
         <p>
-          If you're interested in working together or have any questions, please don't hesitate to reach out. You can
-          contact me via email at <a href="mailto:simad3647@gmail.com">simad3647@gmail.com</a>.
+          I am always open to discussing new projects or just chatting about technology and the universe. You can find
+          me on <a href="https://github.com/ImadSaddik" target="_blank" rel="noopener noreferrer">GitHub</a>,
+          <a href="https://www.linkedin.com/in/imadsaddik/" target="_blank" rel="noopener noreferrer">LinkedIn</a>, or
+          send me an email at <a href="mailto:simad3647@gmail.com">simad3647@gmail.com</a>.
         </p>
         <p>Prefer a quick call? Book a meeting directly with me:</p>
         <div class="action-buttons">
           <button class="primary-button book-meeting-button" @click="openCalendlyLink">Book a meeting</button>
-          <button class="primary-button resume-button" @click="openResumeLink">Download resume</button>
+          <button class="secondary-button resume-button" @click="openResumeLink">Download resume</button>
         </div>
       </section>
     </div>
@@ -224,28 +230,90 @@ h3 {
 }
 
 .card-group {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--gap-md);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-lg);
+}
+
+.card-group::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: calc(48px / 2);
+  bottom: 0px;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    var(--color-primary-transparent) 0%,
+    var(--color-primary) 15%,
+    var(--color-secondary) 85%,
+    var(--color-secondary-transparent) 100%
+  );
+  opacity: 0.3;
 }
 
 .card {
-  background-color: var(--color-code-night-owl-background);
-  border: 1px solid var(--color-tag-border);
-  padding: var(--gap-md);
+  display: grid;
+  align-items: start;
+  grid-template-columns: 48px 1fr;
+  gap: 0 var(--gap-md);
+  border: none;
+  background: transparent;
+}
+
+.card p {
+  grid-column: 2;
+  grid-row: 2;
+}
+.card h3 {
+  align-self: center;
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0;
 }
 
 .service-icon {
-  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  width: 48px;
+  height: 48px;
   color: var(--color-primary);
-  margin-bottom: var(--gap-xxl);
-  display: block;
+  border: 2px solid var(--color-tag-border);
+  font-size: 1.2rem;
+  background: var(--color-background);
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.card:hover .service-icon {
+  color: var(--color-secondary);
+  border-color: var(--color-secondary);
+  box-shadow:
+    0 0 15px rgba(34, 211, 238, 0.4),
+    0 0 0 4px var(--color-background);
+}
+
+.get-in-touch-section {
+  text-align: left;
+  border: 1px solid var(--color-tag-border);
+  margin-top: var(--gap-xxl);
+  padding: var(--gap-xxl) var(--gap-xl);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.get-in-touch-section h2 {
+  margin-top: 0;
 }
 
 .action-buttons {
   display: flex;
   flex-wrap: wrap;
   gap: var(--gap-md);
+  margin-top: var(--gap-lg);
 }
 
 .book-meeting-button,
@@ -253,12 +321,12 @@ h3 {
   padding: var(--gap-sm) var(--gap-md);
   font-size: var(--font-size-small);
   font-weight: 600;
-  width: 200px;
+  width: 220px;
 }
 
 @media screen and (max-width: 1300px) {
   .hire-me-content {
-    width: 65%;
+    width: 70%;
   }
 }
 
@@ -278,18 +346,27 @@ h3 {
   .hire-me-container {
     padding: var(--gap-lg);
     margin-top: var(--gap-md);
+    flex-direction: column;
   }
 
-  .card-group {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: var(--gap-md);
+  .get-in-touch-section {
+    padding: var(--gap-lg);
   }
 }
 
 @media screen and (max-width: 768px) {
   .hire-me-container {
     padding: var(--gap-md);
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .book-meeting-button,
+  .resume-button {
+    width: 100%;
   }
 }
 </style>
