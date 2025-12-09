@@ -245,10 +245,10 @@ h3 {
   width: 2px;
   background: linear-gradient(
     180deg,
-    rgba(249, 115, 22, 0) 0%,
+    var(--color-primary-transparent) 0%,
     var(--color-primary) 15%,
     var(--color-secondary) 85%,
-    rgba(34, 211, 238, 0) 100%
+    var(--color-secondary-transparent) 100%
   );
   opacity: 0.3;
 }

@@ -107,8 +107,10 @@ export default {
   --color-background: #03071e;
   --color-primary: #f97316;
   --color-primary-hover: #cb5f12;
+  --color-primary-transparent: rgba(249, 115, 22, 0);
   --color-secondary: #22d3ee;
   --color-secondary-hover: #167595;
+  --color-secondary-transparent: rgba(34, 211, 238, 0);
   --color-disabled: #4b5563;
 
   /* Text colors */
