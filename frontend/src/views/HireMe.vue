@@ -31,7 +31,7 @@
 
         <div class="card-group">
           <div class="card">
-            <i class="fa-solid fa-pen-nib service-icon"></i>
+            <i class="fa-solid fa-pen-nib service-icon" aria-hidden="true"></i>
             <h3 id="technical-writing" data-table-of-contents>
               <a class="clickable-header-link" href="#technical-writing">Technical writing</a>
             </h3>
@@ -41,7 +41,7 @@
             </p>
           </div>
           <div class="card">
-            <i class="fa-solid fa-code service-icon"></i>
+            <i class="fa-solid fa-code service-icon" aria-hidden="true"></i>
             <h3 id="software-development" data-table-of-contents>
               <a class="clickable-header-link" href="#software-development">Software development</a>
             </h3>
@@ -51,7 +51,7 @@
             </p>
           </div>
           <div class="card">
-            <i class="fa-solid fa-database service-icon"></i>
+            <i class="fa-solid fa-database service-icon" aria-hidden="true"></i>
             <h3 id="data-science" data-table-of-contents>
               <a class="clickable-header-link" href="#data-science">Data science</a>
             </h3>
@@ -61,7 +61,7 @@
             </p>
           </div>
           <div class="card">
-            <i class="fa-solid fa-headset service-icon"></i>
+            <i class="fa-solid fa-headset service-icon" aria-hidden="true"></i>
             <h3 id="support-maintenance" data-table-of-contents>
               <a class="clickable-header-link" href="#support-maintenance">Support & maintenance</a>
             </h3>
@@ -71,7 +71,7 @@
             </p>
           </div>
           <div class="card">
-            <i class="fa-solid fa-chalkboard-user service-icon"></i>
+            <i class="fa-solid fa-chalkboard-user service-icon" aria-hidden="true"></i>
             <h3 id="tutorials" data-table-of-contents>
               <a class="clickable-header-link" href="#tutorials">Tutorials</a>
             </h3>
@@ -81,7 +81,7 @@
             </p>
           </div>
           <div class="card">
-            <i class="fa-solid fa-magnifying-glass-chart service-icon"></i>
+            <i class="fa-solid fa-magnifying-glass-chart service-icon" aria-hidden="true"></i>
             <h3 id="code-reviews" data-table-of-contents>
               <a class="clickable-header-link" href="#code-reviews">Code reviews</a>
             </h3>
