@@ -77,7 +77,7 @@
             </h3>
             <p>
               Teaching is a big part of who I am. I started by sharing organized notes with classmates and now I create
-              step by step tutorials to help people learn new skills in programming and technology.
+              step-by-step tutorials to help people learn new skills in programming and technology.
             </p>
           </div>
           <div class="card">
