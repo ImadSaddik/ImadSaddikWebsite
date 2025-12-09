@@ -262,6 +262,10 @@ h3 {
   background: transparent;
 }
 
+.card p {
+  grid-column: 2;
+  grid-row: 2;
+}
 .card h3 {
   align-self: center;
   grid-column: 2;
