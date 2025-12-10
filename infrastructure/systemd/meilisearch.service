@@ -1,0 +1,22 @@
+[Unit]
+Description=Meilisearch
+After=systemd-user-sessions.service
+
+[Service]
+Type=simple
+User=meilisearch
+Group=meilisearch
+WorkingDirectory=/var/lib/meilisearch
+
+ExecStart=/usr/local/bin/meilisearch \
+    --env "production" \
+    --master-key <YOUR_MASTER_KEY> \
+    --db-path "/var/lib/meilisearch/data" \
+    --dump-dir "/var/lib/meilisearch/dumps" \
+    --import-dump "/var/lib/meilisearch/<dump_name>.dump" \
+    --ignore-dump-if-db-exists
+
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

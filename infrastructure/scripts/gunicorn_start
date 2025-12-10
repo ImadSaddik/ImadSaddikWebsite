@@ -1,0 +1,32 @@
+#!/bin/bash
+
+NAME='imadsaddik_com'
+APPDIR=/web_app/backend
+SOCKFILE=/web_app/backend/venv/run/gunicorn.sock
+USER=imad
+GROUP=imad
+NUM_WORKERS=1
+TIMEOUT=120
+
+# Gunicorn needs to use Uvicorn's worker class for FastAPI
+WORKER_CLASS=uvicorn.workers.UvicornWorker
+
+echo "Starting $NAME"
+cd $APPDIR
+source venv/bin/activate
+
+# Create the run directory if it doesn't exist
+RUNDIR=$(dirname $SOCKFILE)
+test -d $RUNDIR || mkdir -p $RUNDIR
+
+# Start Gunicorn
+exec venv/bin/gunicorn main:app \
+  --name $NAME \
+  --workers $NUM_WORKERS \
+  --worker-class $WORKER_CLASS \
+  --timeout $TIMEOUT \
+  --user=$USER --group=$GROUP \
+  --bind=unix:$SOCKFILE \
+  --forwarded-allow-ips="*" \
+  --log-level=debug \
+  --log-file=-
