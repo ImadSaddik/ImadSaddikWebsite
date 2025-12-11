@@ -18,7 +18,27 @@ server {
     access_log /var/log/nginx/imadsaddik.com-access.log;
     error_log /var/log/nginx/imadsaddik.com-error.log;
 
-    # A. Resume PDF
+    # --- Security layers ---
+
+    # A. Block sensitive files (The "Well-Known" Exception)
+    # Return a real 404 if someone tries to access hidden system files (like .git or .env)
+    # But allow /.well-known/ so Certbot can renew SSL.
+    location ~ /\.(?!well-known).* {
+        deny all;
+        access_log off;
+        log_not_found off;
+        return 404;
+    }
+
+    # B. Block common bot targets & scripts
+    # Blocks PHP, backups, configs, and common CMS paths.
+    location ~* \.(php|pl|py|jsp|asp|sh|cgi|bak|old|sql|conf|ini|zip|tar|gz)$|/(wp-admin|wp-includes|node_modules) {
+        return 404;
+    }
+
+    # --- Application routes ---
+
+    # C. Resume PDF
     location = /resume {
         alias /web_app/frontend/dist/imad_saddik.pdf;
         default_type application/pdf;
@@ -26,7 +46,7 @@ server {
         add_header Cache-Control "no-cache, must-revalidate";
     }
 
-    # B. Secure analytics dashboard
+    # D. Secure analytics dashboard
     location = /analytics.html {
         root /web_app/frontend/dist;
         auth_basic "Restricted Area";
@@ -35,19 +55,19 @@ server {
 
     # --- Caching & SPA routing ---
 
-    # C. Never cache the entry point (index.html)
+    # E. Never cache the entry point (index.html)
     location = /index.html {
         root /web_app/frontend/dist;
         add_header Cache-Control "no-cache, no-store, must-revalidate";
     }
 
-    # D. Cache assets forever (Hashed files)
+    # F. Cache assets forever (Hashed files)
     location /assets/ {
         root /web_app/frontend/dist;
         add_header Cache-Control "public, max-age=31536000, immutable";
     }
 
-    # E. Handle SPA routing (Fallback)
+    # G. Handle SPA routing (Fallback)
     location / {
         root /web_app/frontend/dist;
         try_files $uri $uri/ /index.html;

@@ -261,10 +261,11 @@ jobs:
             fi
 
             echo "Reloading Nginx..."
-            if sudo systemctl reload nginx; then
-              echo "Nginx reloaded successfully."
+            if sudo nginx -t; then
+              echo "Configuration OK. Reloading Nginx..."
+              sudo systemctl reload nginx
             else
-              echo "Error: Failed to reload Nginx."
+              echo "Nginx configuration test failed! Not reloading."
               exit 1
             fi
 

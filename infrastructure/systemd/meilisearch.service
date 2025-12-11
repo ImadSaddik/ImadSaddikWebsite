@@ -1,0 +1,26 @@
+[Unit]
+Description=Meilisearch
+After=network.target
+
+[Service]
+Type=simple
+User=meilisearch
+Group=meilisearch
+
+# Load environment variables from the secure file
+EnvironmentFile=/etc/meilisearch/env
+
+WorkingDirectory=/var/lib/meilisearch
+
+ExecStart=/usr/local/bin/meilisearch \
+  --db-path "/var/lib/meilisearch/data" \
+  --dump-dir "/var/lib/meilisearch/dumps" \
+
+  # Delete these after importing the data
+  --import-dump "/var/lib/meilisearch/<your_dump_file.dump>" \
+  --ignore-dump-if-db-exists
+
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
