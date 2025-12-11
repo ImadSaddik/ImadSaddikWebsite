@@ -8,8 +8,8 @@ apt-get autoremove -y
 journalctl --vacuum-time=2d
 
 # 3. Clean package caches (Pip & PNPM)
-rm -rf /home/imad/.cache/pip
-rm -rf /home/imad/.local/share/pnpm/store
+rm -rf "$HOME/.cache/pip"
+rm -rf "$HOME/.local/share/pnpm/store"
 
 # 4. Remove node_modules if they reappear
 rm -rf /web_app/frontend/node_modules
