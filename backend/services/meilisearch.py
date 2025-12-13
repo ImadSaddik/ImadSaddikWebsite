@@ -7,6 +7,7 @@ from models.article import (
     LatestArticleHit,
     LatestArticleResponse,
     RecommendationArticleHit,
+    RecommendationArticleRequest,
     RecommendationArticleResponse,
 )
 from models.search import FacetDistribution, SearchHit, SearchRequest, SearchResponse, SortableFields
@@ -166,15 +167,22 @@ class MeilisearchService:
         except Exception as e:
             return {"success": False, "message": str(e), "claps_count": 0}
 
-    async def get_article_recommendations(
-        self, document_name_to_ignore: str, document_type: str
-    ) -> RecommendationArticleResponse:
+    async def get_article_recommendations(self, data: RecommendationArticleRequest) -> RecommendationArticleResponse:
+        filter_parts = [f"type = '{data.articleType}'", f"name != '{data.documentNameToIgnore}'"]
+
+        if data.documentTags:
+            tags_list = [f"'{tag}'" for tag in data.documentTags]
+            filter_parts.append(f"tags IN [{', '.join(tags_list)}]")
+
+        filter_str = " AND ".join(filter_parts)
+
         response = self.index.get_documents(
             {
-                "filter": f"type = '{document_type}' AND name != '{document_name_to_ignore}'",
+                "filter": filter_str,
                 "limit": 3,
             }
         )
+
         hits = [
             RecommendationArticleHit(
                 id=hit.id,

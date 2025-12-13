@@ -1,7 +1,7 @@
 <template>
   <section class="article-footer">
     <h2 class="article-footer-header">You might also like</h2>
-    <div class="article-footer-cards-group">
+    <div v-if="cardData.length > 0" class="article-footer-cards-group">
       <BaseCard
         v-for="(card, idx) in cardData"
         :key="idx"
@@ -16,11 +16,16 @@
         :claps-count="card.clapsCount"
       />
     </div>
+    <p v-else class="no-recommendations-message">
+      No related articles found at the moment. I'm constantly adding new content to this website. Check out the
+      <router-link :to="hubLink">{{ hubName }}</router-link> to explore all available articles.
+    </p>
   </section>
 </template>
 
 <script>
 import BaseCard from "@/components/BaseCard.vue";
+import { hubMapping } from "@/utils.js";
 
 export default {
   name: "ArticleFooter",
@@ -31,6 +36,18 @@ export default {
     cardData: {
       type: Array,
       required: true,
+    },
+    articleType: {
+      type: String,
+      required: true,
+    },
+  },
+  computed: {
+    hubLink() {
+      return hubMapping[this.articleType]?.path || "/blogs";
+    },
+    hubName() {
+      return hubMapping[this.articleType]?.name || "blogs page";
     },
   },
 };
@@ -52,6 +69,13 @@ export default {
   grid-template-columns: repeat(3, 1fr);
   width: 100%;
   gap: var(--gap-md);
+}
+
+.no-recommendations-message {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-small);
+  margin-top: var(--gap-md);
+  margin-bottom: 0;
 }
 
 @media screen and (max-width: 1300px) {

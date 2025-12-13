@@ -32,7 +32,7 @@
       </button>
     </div>
 
-    <ArticleFooter :card-data="cardData" />
+    <ArticleFooter :card-data="cardData" :article-type="articleType" />
   </section>
 </template>
 
@@ -136,6 +136,7 @@ export default {
         const response = await axios.post("/api/articles/recommendations", {
           documentNameToIgnore: this.slug,
           articleType: this.articleType,
+          documentTags: this.articleTags,
         });
 
         const recommendations = response.data;

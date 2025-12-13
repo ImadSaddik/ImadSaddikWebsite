@@ -26,6 +26,7 @@ class IncrementClapsCountResponse(BaseModel):
 class RecommendationArticleRequest(BaseModel):
     documentNameToIgnore: str
     articleType: str
+    documentTags: List[str]
 
 
 class RecommendationArticleHit(Hit): ...
