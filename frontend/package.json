@@ -24,7 +24,7 @@
     "axios": "^1.13.2",
     "shiki": "^3.19.0",
     "vue": "^3.5.25",
-    "vue-router": "^4.6.3"
+    "vue-router": "^4.6.4"
   },
   "devDependencies": {
     "@faker-js/faker": "^10.1.0",
