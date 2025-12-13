@@ -58,9 +58,9 @@
       <YouTubePlayer video-url="https://www.youtube.com/embed/8WBS0dT0h2I" />
       <p>
         Creating courses like this takes months of research, experiments, designing illustrations, recording, and more.
-        If you want to support my mission to share free knowledge, you can also watch the course on
-        <a href="https://www.udemy.com/course/train-your-own-language-model/" target="_blank">Udemy</a>. The Udemy
-        version includes extra content, such as quizzes, assignments, and a certificate of completion.
+        If you want to support my mission to share free knowledge, you can
+        <a href="https://github.com/sponsors/ImadSaddik" target="_blank">sponsor me on GitHub</a>
+        or <a href="https://www.patreon.com/3CodeCamp" target="_blank">support me on Patreon</a>.
       </p>
     </section>
   </ArticleLayout>

@@ -25,4 +25,5 @@ All course materials, slides, and Jupyter notebooks are available on my [GitHub 
 
 I believe knowledge should be free, so I am sharing this course for free on the freeCodeCamp YouTube channel. You can watch the full course below.
 
-Creating courses like this takes months of research, experiments, designing illustrations, recording, and more. If you want to support my mission to share free knowledge, you can also watch the course on [Udemy](https://www.udemy.com/course/train-your-own-language-model/). The Udemy version includes extra content, such as quizzes, assignments, and a certificate of completion.
+Creating courses like this takes months of research, experiments, designing illustrations, recording, and more.
+If you want to support my mission to share free knowledge, you can [sponsor me on GitHub](https://github.com/sponsors/ImadSaddik) or [support me on Patreon](https://www.patreon.com/3CodeCamp).
