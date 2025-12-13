@@ -59,8 +59,9 @@
       <p>
         Creating courses like this takes months of research, experiments, designing illustrations, recording, and more.
         If you want to support my mission to share free knowledge, you can
-        <a href="https://github.com/sponsors/ImadSaddik" target="_blank">sponsor me on GitHub</a>
-        or <a href="https://www.patreon.com/3CodeCamp" target="_blank">support me on Patreon</a>.
+        <a href="https://github.com/sponsors/ImadSaddik" target="_blank">sponsor me on GitHub</a>,
+        <a href="https://www.patreon.com/3CodeCamp" target="_blank">support me on Patreon</a>, or
+        <a href="https://www.paypal.com/paypalme/ImadSaddik" target="_blank">donate via PayPal</a>.
       </p>
     </section>
   </ArticleLayout>
