@@ -2,6 +2,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
+from models.article import RecommendationArticleRequest
 from models.search import SearchFilters, SearchRequest, SearchSortBy, SortableFields
 from services.meilisearch import MeilisearchService
 
@@ -165,7 +166,10 @@ async def test_get_article_recommendations(mock_client_class):
 
     mock_index.get_documents.return_value.results = [mock_hit]
 
-    response = await service.get_article_recommendations("current", "blog-post")
+    request = RecommendationArticleRequest(
+        documentNameToIgnore="current", articleType="blog-post", documentTags=["tag1", "tag2"]
+    )
+    response = await service.get_article_recommendations(request)
 
     assert response.total_hits == 1
     assert response.hits[0].name == "rec-1"

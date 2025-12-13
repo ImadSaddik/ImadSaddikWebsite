@@ -87,10 +87,7 @@ async def increment_article_claps_count(name: str):
 @router.post("/articles/recommendations", response_model=RecommendationArticleResponse)
 async def get_article_recommendations(request: RecommendationArticleRequest):
     try:
-        recommendations = await meilisearch_service.get_article_recommendations(
-            document_name_to_ignore=request.documentNameToIgnore,
-            document_type=request.articleType,
-        )
+        recommendations = await meilisearch_service.get_article_recommendations(request)
         return recommendations
 
     except Exception as e:

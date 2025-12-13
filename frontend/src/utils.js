@@ -14,6 +14,12 @@ export const directoryMapping = {
   "astronomy-post": "astronomy",
 };
 
+export const hubMapping = {
+  "blog-post": { path: "/blogs", name: "blogs page" },
+  "course-post": { path: "/courses", name: "courses page" },
+  "astronomy-post": { path: "/astronomy", name: "astronomy page" },
+};
+
 function calculateReadingTime(refs) {
   const WORDS_PER_MINUTE = 200;
   const articleText = refs.articleContent.$el.innerText;
