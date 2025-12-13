@@ -95,6 +95,35 @@
         </div>
 
         <div class="footer-column">
+          <h4 class="footer-column-title">Support</h4>
+
+          <div class="footer-icon-text-container">
+            <img :src="githubLogo" alt="GitHub sponsors logo" />
+            <a class="clickable" href="https://github.com/sponsors/ImadSaddik" target="_blank" rel="noopener noreferrer"
+              >GitHub</a
+            >
+          </div>
+
+          <div class="footer-icon-text-container">
+            <img :src="patreonLogo" alt="Patreon logo" />
+            <a class="clickable" href="https://www.patreon.com/3CodeCamp" target="_blank" rel="noopener noreferrer"
+              >Patreon</a
+            >
+          </div>
+
+          <div class="footer-icon-text-container">
+            <img :src="paypalLogo" alt="PayPal logo" />
+            <a
+              class="clickable"
+              href="https://www.paypal.com/paypalme/ImadSaddik"
+              target="_blank"
+              rel="noopener noreferrer"
+              >PayPal</a
+            >
+          </div>
+        </div>
+
+        <div class="footer-column">
           <h4 class="footer-column-title">Preferences</h4>
 
           <div class="footer-effects-toggle-buttons">
@@ -183,6 +212,8 @@ import emailLogo from "@/assets/logos/email.svg";
 import pythonLogo from "@/assets/logos/python.svg";
 import svgRepoLogo from "@/assets/logos/svg_repo.svg";
 import fontAwesomeLogo from "@/assets/logos/fontAwesome.svg";
+import patreonLogo from "@/assets/logos/patreon.svg";
+import paypalLogo from "@/assets/logos/paypal.svg";
 
 // Images
 import footerLandscape from "@/assets/footer_landscape.svg";
@@ -227,6 +258,8 @@ export default {
       pythonLogo,
       svgRepoLogo,
       fontAwesomeLogo,
+      patreonLogo,
+      paypalLogo,
 
       footerLandscape,
     };
@@ -451,13 +484,17 @@ p:hover {
     margin-top: var(--gap-between-sections-medium);
   }
 
+  .footer-columns-container {
+    width: 80%;
+  }
+
   .footer-name-and-mission > a {
     margin-top: var(--gap-xl);
   }
 
   .moon-image {
     position: absolute;
-    top: 50%;
+    top: 25%;
     right: 75px;
   }
 }
@@ -465,7 +502,7 @@ p:hover {
 @media screen and (max-width: 1300px) {
   .moon-image {
     position: absolute;
-    top: 60%;
+    top: 25%;
     right: 75px;
   }
 }
@@ -473,6 +510,10 @@ p:hover {
 @media screen and (max-width: 1100px) {
   .footer-content {
     padding: var(--gap-lg);
+  }
+
+  .footer-columns-container {
+    width: 100%;
   }
 
   .footer-name-and-mission > a {
