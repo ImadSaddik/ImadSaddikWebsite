@@ -16,7 +16,7 @@
         :claps-count="card.clapsCount"
       />
     </div>
-    <p v-else class="no-recommendations-message">
+    <p v-else class="article-footer-no-recommendations-message">
       No related articles found at the moment. I'm constantly adding new content to this website. Check out the
       <router-link :to="hubLink">{{ hubName }}</router-link> to explore all available articles.
     </p>
@@ -71,7 +71,7 @@ export default {
   gap: var(--gap-md);
 }
 
-.no-recommendations-message {
+.article-footer-no-recommendations-message {
   color: var(--color-text-secondary);
   font-size: var(--font-size-small);
   margin-top: var(--gap-md);
