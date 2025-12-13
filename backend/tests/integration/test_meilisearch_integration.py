@@ -1,5 +1,6 @@
 import pytest
 
+from models.article import RecommendationArticleRequest
 from models.search import SearchRequest
 from tests.integration.conftest import IntegrationMeilisearchService
 
@@ -126,9 +127,10 @@ class TestRecommendations:
     async def test_get_article_recommendations(
         self, meilisearch_service: IntegrationMeilisearchService, test_document_name: str
     ) -> None:
-        response = await meilisearch_service.get_article_recommendations(
-            document_name_to_ignore=test_document_name, document_type="blog-post"
+        request = RecommendationArticleRequest(
+            documentNameToIgnore=test_document_name, articleType="blog-post", documentTags=["Elasticsearch", "Search"]
         )
+        response = await meilisearch_service.get_article_recommendations(request)
 
         assert response is not None
         assert hasattr(response, "hits")

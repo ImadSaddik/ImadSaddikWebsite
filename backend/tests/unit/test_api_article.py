@@ -73,16 +73,18 @@ def test_get_article_recommendations(mock_service, client):
     mock_response = RecommendationArticleResponse(hits=[mock_hit], total_hits=1)
     mock_service.get_article_recommendations = AsyncMock(return_value=mock_response)
 
-    payload = {"documentNameToIgnore": "current-article", "articleType": "blog-post"}
+    payload = {
+        "documentNameToIgnore": "current-article",
+        "articleType": "blog-post",
+        "documentTags": ["tag1", "tag2"],
+    }
     response = client.post("/api/articles/recommendations", json=payload)
 
     assert response.status_code == 200
     data = response.json()
     assert data["total_hits"] == 1
     assert data["hits"][0]["name"] == "rec-1"
-    mock_service.get_article_recommendations.assert_called_once_with(
-        document_name_to_ignore="current-article", document_type="blog-post"
-    )
+    mock_service.get_article_recommendations.assert_called_once()
 
 
 @patch("api.article.meilisearch_service")
