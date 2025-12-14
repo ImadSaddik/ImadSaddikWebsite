@@ -6,7 +6,7 @@ pydantic_core==2.33.2
 meilisearch==0.37.0
 uvicorn==0.38.0
 httpx==0.28.1
-pytest==8.3.4
+pytest==9.0.2
 pytest-asyncio==0.25.0
 pytest-cov==7.0.0
 pre_commit==4.5.0
