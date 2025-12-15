@@ -63,4 +63,7 @@ streamToPromise(sitemap).then((data) => {
   console.log(`  - ${blogSlugs.length} blog articles`);
   console.log(`  - ${courseSlugs.length} course articles`);
   console.log(`  - ${astronomySlugs.length} astronomy articles`);
+}).catch((error) => {
+  console.error("✗ Failed to generate sitemap:", error);
+  process.exit(1);
 });
