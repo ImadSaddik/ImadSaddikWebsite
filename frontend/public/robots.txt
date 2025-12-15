@@ -1,0 +1,27 @@
+User-agent: *
+Allow: /
+
+Disallow: /analytics.html
+
+Disallow: /*.pdf$
+Allow: /resume
+
+User-agent: GPTBot
+User-agent: Claude-Web
+User-agent: ClaudeBot
+User-agent: anthropic-ai
+User-agent: cohere-ai
+User-agent: Bytespider
+User-agent: Google-Extended
+User-agent: PerplexityBot
+User-agent: Applebot-Extended
+User-agent: Diffbot
+Disallow: /
+
+User-agent: Scrapy
+User-agent: magpie-crawler
+User-agent: CCBot
+User-agent: omgili
+User-agent: omgilibot
+User-agent: Node/simplecrawler
+Disallow: /
