@@ -57,13 +57,15 @@ astronomySlugs.forEach((slug) => {
 
 sitemap.end();
 
-streamToPromise(sitemap).then((data) => {
-  createWriteStream(join(__dirname, "public", "sitemap.xml")).end(data);
-  console.log("✓ Sitemap generated successfully!");
-  console.log(`  - ${blogSlugs.length} blog articles`);
-  console.log(`  - ${courseSlugs.length} course articles`);
-  console.log(`  - ${astronomySlugs.length} astronomy articles`);
-}).catch((error) => {
-  console.error("✗ Failed to generate sitemap:", error);
-  process.exit(1);
-});
+streamToPromise(sitemap)
+  .then((data) => {
+    createWriteStream(join(__dirname, "public", "sitemap.xml")).end(data);
+    console.log("✓ Sitemap generated successfully!");
+    console.log(`  - ${blogSlugs.length} blog articles`);
+    console.log(`  - ${courseSlugs.length} course articles`);
+    console.log(`  - ${astronomySlugs.length} astronomy articles`);
+  })
+  .catch((error) => {
+    console.error("✗ Failed to generate sitemap:", error);
+    process.exit(1);
+  });
