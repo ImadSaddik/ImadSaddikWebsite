@@ -53,7 +53,6 @@ export default {
   align-items: center;
   width: 100%;
   gap: var(--gap-xxl);
-  margin-top: var(--gap-xxl);
 }
 
 .hero-title {
@@ -116,7 +115,6 @@ export default {
   }
 
   .vertical-big-dipper {
-    width: 70%;
     display: none;
   }
 
@@ -129,9 +127,6 @@ export default {
   .hero-title {
     font-size: var(--font-size-big-medium);
   }
-}
-
-@media screen and (max-width: 768px) {
 }
 
 @media screen and (max-width: 576px) {
