@@ -3,7 +3,7 @@ upstream imadsaddik_app_server {
     server unix:/web_app/backend/venv/run/gunicorn.sock fail_timeout=0;
 }
 
-# 2. HTTPS server block (The main application)
+# 2. HTTPS server block
 server {
     # SSL Configuration (Managed by Certbot)
     listen 443 ssl;
@@ -20,9 +20,7 @@ server {
 
     # --- Security layers ---
 
-    # A. Block sensitive files (The "Well-Known" Exception)
-    # Return a real 404 if someone tries to access hidden system files (like .git or .env)
-    # But allow /.well-known/ so Certbot can renew SSL.
+    # A. Block sensitive files
     location ~ /\.(?!well-known).* {
         deny all;
         access_log off;
@@ -30,8 +28,7 @@ server {
         return 404;
     }
 
-    # B. Block common bot targets & scripts
-    # Blocks PHP, backups, configs, and common CMS paths.
+    # B. Block common bot targets
     location ~* \.(php|pl|py|jsp|asp|sh|cgi|bak|old|sql|conf|ini|zip|tar|gz)$|/(wp-admin|wp-includes|node_modules) {
         return 404;
     }
@@ -67,7 +64,15 @@ server {
         add_header Cache-Control "public, max-age=31536000, immutable";
     }
 
-    # G. Handle SPA routing (Fallback)
+    # G. Root static files (og-image, favicon, robots.txt)
+    location ~* \.(ico|png|svg|xml|txt)$ {
+        root /web_app/frontend/dist;
+        try_files $uri =404;
+        expires 1d;
+        access_log off;
+    }
+
+    # H. Handle SPA routing (Fallback)
     location / {
         root /web_app/frontend/dist;
         try_files $uri $uri/ /index.html;
@@ -83,7 +88,7 @@ server {
     }
 }
 
-# 3. HTTP redirect block (Redirects http:// to https://)
+# 3. HTTP redirect block
 server {
     if ($host = www.imadsaddik.com) {
         return 301 https://$host$request_uri;
