@@ -25,3 +25,5 @@ User-agent: omgili
 User-agent: omgilibot
 User-agent: Node/simplecrawler
 Disallow: /
+
+Sitemap: https://imadsaddik.com/sitemap.xml
