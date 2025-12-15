@@ -58,7 +58,7 @@ astronomySlugs.forEach((slug) => {
 sitemap.end();
 
 streamToPromise(sitemap).then((data) => {
-  createWriteStream("./public/sitemap.xml").end(data);
+  createWriteStream(join(__dirname, "public", "sitemap.xml")).end(data);
   console.log("✓ Sitemap generated successfully!");
   console.log(`  - ${blogSlugs.length} blog articles`);
   console.log(`  - ${courseSlugs.length} course articles`);
