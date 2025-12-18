@@ -179,6 +179,7 @@ li .level-4 {
   margin-left: var(--gap-2xl);
   z-index: 2;
   transition: width 0.3s;
+  max-width: 400px;
 }
 
 .table-of-contents-container.wide {
