@@ -101,8 +101,10 @@ export default {
 
 <style scoped>
 a {
-  color: var(--color-text-disabled);
+  display: block;
   width: 100%;
+  box-sizing: border-box;
+  color: var(--color-text-disabled);
 }
 
 a:hover {
@@ -131,6 +133,7 @@ li {
   list-style: none;
   margin: 0;
   padding: var(--gap-xs) 0;
+  line-height: 1.6;
 }
 
 li::before {
@@ -141,14 +144,17 @@ li::before {
   width: 4px;
   height: 100%;
   background-color: var(--color-text-disabled);
+  opacity: 0.3;
 }
 
 li:hover::before {
   background-color: var(--color-primary);
+  opacity: 1;
 }
 
 li.active::before {
   background-color: var(--color-primary);
+  opacity: 1;
 }
 
 li .level-2 {
