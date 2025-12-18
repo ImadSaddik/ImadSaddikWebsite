@@ -172,11 +172,11 @@ li .level-4 {
 
 .table-of-contents-container {
   position: sticky;
-  top: var(--gap-xxl);
+  top: var(--gap-2xl);
   align-self: flex-start;
   width: 50%;
   margin: 0;
-  margin-left: var(--gap-xxl);
+  margin-left: var(--gap-2xl);
   z-index: 2;
   transition: width 0.3s;
 }
