@@ -19,6 +19,9 @@
 </template>
 
 <script>
+// Third-party libraries
+import { computed } from "vue";
+
 // Components
 import NavBar from "@/components/NavBar.vue";
 import StarBackground from "@/components/StarBackground.vue";
@@ -37,6 +40,9 @@ import {
   CUSTOM_CURSOR_CLASS_NAME,
 } from "@/constants";
 
+// Utils
+import { loadUserPreferences, saveUserPreference } from "./utils";
+
 export default {
   name: "App",
   components: {
@@ -48,6 +54,11 @@ export default {
     ToastNotificationManager,
     SkipLink,
   },
+  provide() {
+    return {
+      wideArticlesEnabled: computed(() => this.wideArticlesEnabled),
+    };
+  },
   data() {
     return {
       visitedPage: "",
@@ -57,42 +68,34 @@ export default {
       wideArticlesEnabled: false,
     };
   },
+  created() {
+    const userPreferences = loadUserPreferences();
+
+    if (userPreferences.starEffect !== null) this.starEffectEnabled = userPreferences.starEffect;
+    if (userPreferences.meteoriteEffect !== null) this.meteoriteEffectEnabled = userPreferences.meteoriteEffect;
+    if (userPreferences.customCursor !== null) this.customCursorEnabled = userPreferences.customCursor;
+    if (userPreferences.wideArticles !== null) this.wideArticlesEnabled = userPreferences.wideArticles;
+  },
   mounted() {
-    this.loadEffectsPreference();
     this.updateCursorClass(this.customCursorEnabled);
   },
   methods: {
     handleStarEffectToggle(enabled) {
       this.starEffectEnabled = enabled;
+      saveUserPreference(STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, enabled);
     },
     handleMeteoriteEffectToggle(enabled) {
       this.meteoriteEffectEnabled = enabled;
+      saveUserPreference(METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, enabled);
     },
     handleCustomCursorToggle(enabled) {
       this.customCursorEnabled = enabled;
       this.updateCursorClass(enabled);
+      saveUserPreference(CUSTOM_CURSOR_TOGGLE_LOCAL_STORAGE_KEY, enabled);
     },
     handleWideArticlesToggle(enabled) {
       this.wideArticlesEnabled = enabled;
-    },
-    loadEffectsPreference() {
-      const storedStarEffectEnabled = localStorage.getItem(STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY);
-      const storedMeteoriteEffectEnabled = localStorage.getItem(METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY);
-      const storedCustomCursorEnabled = localStorage.getItem(CUSTOM_CURSOR_TOGGLE_LOCAL_STORAGE_KEY);
-      const storedWideArticlesEnabled = localStorage.getItem(WIDE_ARTICLES_TOGGLE_LOCAL_STORAGE_KEY);
-
-      if (storedStarEffectEnabled !== null) {
-        this.starEffectEnabled = JSON.parse(storedStarEffectEnabled);
-      }
-      if (storedMeteoriteEffectEnabled !== null) {
-        this.meteoriteEffectEnabled = JSON.parse(storedMeteoriteEffectEnabled);
-      }
-      if (storedCustomCursorEnabled !== null) {
-        this.customCursorEnabled = JSON.parse(storedCustomCursorEnabled);
-      }
-      if (storedWideArticlesEnabled !== null) {
-        this.wideArticlesEnabled = JSON.parse(storedWideArticlesEnabled);
-      }
+      saveUserPreference(WIDE_ARTICLES_TOGGLE_LOCAL_STORAGE_KEY, enabled);
     },
     handleShowToastEvent(data) {
       this.$refs.toastManager.showToast(data);

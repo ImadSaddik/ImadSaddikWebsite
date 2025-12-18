@@ -238,14 +238,7 @@ import paypalLogo from "@/assets/logos/paypal.svg";
 import footerLandscape from "@/assets/footer_landscape.svg";
 
 // Constants
-import {
-  STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY,
-  METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY,
-  CUSTOM_CURSOR_TOGGLE_LOCAL_STORAGE_KEY,
-  WIDE_ARTICLES_TOGGLE_LOCAL_STORAGE_KEY,
-  KNOWN_NEW_MOON_DATE,
-  LUNAR_MONTH_DAYS,
-} from "@/constants";
+import { KNOWN_NEW_MOON_DATE, LUNAR_MONTH_DAYS } from "@/constants";
 import { moonPhaseImages } from "@/assetRegistry.js";
 
 export default {
@@ -303,19 +296,15 @@ export default {
   methods: {
     handleStarEffectToggle(value) {
       this.$emit("star-effect-toggle", value);
-      localStorage.setItem(STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, value);
     },
     handleMeteoriteEffectToggle(value) {
       this.$emit("meteorite-effect-toggle", value);
-      localStorage.setItem(METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, value);
     },
     handleCustomCursorToggle(value) {
       this.$emit("custom-cursor-toggle", value);
-      localStorage.setItem(CUSTOM_CURSOR_TOGGLE_LOCAL_STORAGE_KEY, value);
     },
     handleWideArticlesToggle(value) {
       this.$emit("wide-articles-toggle", value);
-      localStorage.setItem(WIDE_ARTICLES_TOGGLE_LOCAL_STORAGE_KEY, value);
     },
     getLunarDay() {
       const now = new Date();
