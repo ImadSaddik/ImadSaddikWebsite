@@ -331,13 +331,15 @@ h3 {
 }
 
 @media screen and (max-width: 1300px) {
-  .hire-me-content {
-    width: 70%;
+  .hire-me-content,
+  .hire-me-content.wide {
+    width: 65%;
   }
 }
 
 @media screen and (max-width: 1100px) {
-  .hire-me-content {
+  .hire-me-content,
+  .hire-me-content.wide {
     width: 100%;
   }
 

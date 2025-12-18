@@ -303,13 +303,15 @@ export default {
 }
 
 @media screen and (max-width: 1300px) {
-  .article-body {
+  .article-body,
+  .article-body.wide {
     width: 65%;
   }
 }
 
 @media screen and (max-width: 1100px) {
-  .article-body {
+  .article-body,
+  .article-body.wide {
     width: 100%;
   }
 

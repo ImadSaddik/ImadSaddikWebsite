@@ -186,6 +186,11 @@ li .level-4 {
 }
 
 @media screen and (max-width: 1300px) {
+  .table-of-contents-container,
+  .table-of-contents-container.wide {
+    width: 35%;
+  }
+
   li {
     padding: var(--gap-xs) var(--gap-sm);
   }

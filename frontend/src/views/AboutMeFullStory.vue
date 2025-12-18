@@ -760,13 +760,15 @@ img {
 }
 
 @media screen and (max-width: 1300px) {
-  .about-me-full-story-content {
+  .about-me-full-story-content,
+  .about-me-full-story-content.wide {
     width: 65%;
   }
 }
 
 @media screen and (max-width: 1100px) {
-  .about-me-full-story-content {
+  .about-me-full-story-content,
+  .about-me-full-story-content.wide {
     width: 100%;
   }
 
