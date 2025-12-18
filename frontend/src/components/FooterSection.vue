@@ -552,6 +552,10 @@ p:hover {
   .footer-images {
     display: none;
   }
+
+  label[for="wide-articles"] {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 768px) {
