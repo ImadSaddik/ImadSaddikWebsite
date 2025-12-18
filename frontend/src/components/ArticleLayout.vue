@@ -13,7 +13,7 @@
     />
 
     <div class="article-body-wrapper">
-      <div class="article-body">
+      <div class="article-body" :class="{ wide: wideArticlesEnabled }">
         <slot></slot>
         <EditArticleOnGitHub :slug="slug" :article-type="articleType" />
       </div>
@@ -57,6 +57,7 @@ export default {
     EditArticleOnGitHub,
     TableOfContents,
   },
+  inject: ["wideArticlesEnabled"],
   props: {
     title: {
       type: String,
@@ -197,6 +198,11 @@ export default {
 
 .article-body {
   width: 50%;
+  transition: width 0.3s;
+}
+
+.article-body.wide {
+  width: 75%;
 }
 
 .article-container {

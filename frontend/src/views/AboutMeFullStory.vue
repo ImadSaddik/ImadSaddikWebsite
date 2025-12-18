@@ -1,6 +1,6 @@
 <template>
   <div class="about-me-full-story-container">
-    <div class="about-me-full-story-content">
+    <div class="about-me-full-story-content" :class="{ wide: wideArticlesEnabled }">
       <section>
         <h1 id="read-my-story">
           <a class="clickable-header-link" href="#read-my-story">Read my story</a>
@@ -632,6 +632,7 @@ export default {
     InlineCode,
     TableOfContents,
   },
+  inject: ["wideArticlesEnabled"],
   emits: ["page-visited", "show-toast"],
   data() {
     return {
@@ -751,6 +752,11 @@ img {
 
 .about-me-full-story-content {
   width: 50%;
+  transition: width 0.3s;
+}
+
+.about-me-full-story-content.wide {
+  width: 75%;
 }
 
 @media screen and (max-width: 1300px) {

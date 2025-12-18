@@ -1,5 +1,5 @@
 <template>
-  <aside v-if="sections.length > 0" class="table-of-contents-container">
+  <aside v-if="sections.length > 0" class="table-of-contents-container" :class="{ wide: wideArticlesEnabled }">
     <h2>On this page</h2>
     <ul>
       <li v-for="value in sections" :key="value.id" :class="{ active: shouldActivateSection(value.y) }">
@@ -17,6 +17,7 @@
 <script>
 export default {
   name: "TableOfContents",
+  inject: ["wideArticlesEnabled"],
   data() {
     return {
       activeSectionId: null,
@@ -171,6 +172,11 @@ li .level-4 {
   margin: 0;
   margin-left: var(--gap-xxl);
   z-index: 2;
+  transition: width 0.3s;
+}
+
+.table-of-contents-container.wide {
+  width: 25%;
 }
 
 @media screen and (max-width: 1300px) {

@@ -1,6 +1,6 @@
 <template>
   <div class="hire-me-container">
-    <div class="hire-me-content">
+    <div class="hire-me-content" :class="{ wide: wideArticlesEnabled }">
       <section>
         <h1 id="lets-build-something-great">
           <a class="clickable-header-link" href="#lets-build-something-great">Let's build something great</a>
@@ -143,6 +143,7 @@ export default {
     ImageEnlarger,
     TableOfContents,
   },
+  inject: ["wideArticlesEnabled"],
   emits: ["page-visited", "show-toast"],
   data() {
     return {
@@ -227,6 +228,11 @@ h3 {
 
 .hire-me-content {
   width: 50%;
+  transition: width 0.3s;
+}
+
+.hire-me-content.wide {
+  width: 75%;
 }
 
 .card-group {
