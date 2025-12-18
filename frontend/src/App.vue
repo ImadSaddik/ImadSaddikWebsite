@@ -9,9 +9,11 @@
     :star-effect-enabled="starEffectEnabled"
     :meteorite-effect-enabled="meteoriteEffectEnabled"
     :custom-cursor-enabled="customCursorEnabled"
+    :wide-articles-enabled="wideArticlesEnabled"
     @star-effect-toggle="handleStarEffectToggle"
     @meteorite-effect-toggle="handleMeteoriteEffectToggle"
     @custom-cursor-toggle="handleCustomCursorToggle"
+    @wide-articles-toggle="handleWideArticlesToggle"
   />
   <ToastNotificationManager ref="toastManager" />
 </template>
@@ -31,6 +33,7 @@ import {
   STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY,
   METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY,
   CUSTOM_CURSOR_TOGGLE_LOCAL_STORAGE_KEY,
+  WIDE_ARTICLES_TOGGLE_LOCAL_STORAGE_KEY,
   CUSTOM_CURSOR_CLASS_NAME,
 } from "@/constants";
 
@@ -51,6 +54,7 @@ export default {
       starEffectEnabled: true,
       meteoriteEffectEnabled: true,
       customCursorEnabled: true,
+      wideArticlesEnabled: false,
     };
   },
   mounted() {
@@ -68,10 +72,15 @@ export default {
       this.customCursorEnabled = enabled;
       this.updateCursorClass(enabled);
     },
+    handleWideArticlesToggle(enabled) {
+      this.wideArticlesEnabled = enabled;
+    },
     loadEffectsPreference() {
       const storedStarEffectEnabled = localStorage.getItem(STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY);
       const storedMeteoriteEffectEnabled = localStorage.getItem(METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY);
       const storedCustomCursorEnabled = localStorage.getItem(CUSTOM_CURSOR_TOGGLE_LOCAL_STORAGE_KEY);
+      const storedWideArticlesEnabled = localStorage.getItem(WIDE_ARTICLES_TOGGLE_LOCAL_STORAGE_KEY);
+
       if (storedStarEffectEnabled !== null) {
         this.starEffectEnabled = JSON.parse(storedStarEffectEnabled);
       }
@@ -80,6 +89,9 @@ export default {
       }
       if (storedCustomCursorEnabled !== null) {
         this.customCursorEnabled = JSON.parse(storedCustomCursorEnabled);
+      }
+      if (storedWideArticlesEnabled !== null) {
+        this.wideArticlesEnabled = JSON.parse(storedWideArticlesEnabled);
       }
     },
     handleShowToastEvent(data) {

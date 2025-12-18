@@ -2,6 +2,7 @@
 export const STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY = "starEffectEnabled";
 export const METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY = "meteoriteEffectEnabled";
 export const CUSTOM_CURSOR_TOGGLE_LOCAL_STORAGE_KEY = "customCursorEnabled";
+export const WIDE_ARTICLES_TOGGLE_LOCAL_STORAGE_KEY = "wideArticlesEnabled";
 
 // Navigation bar
 export const HOME_PAGE_VISITED_KEY = "HOME";
