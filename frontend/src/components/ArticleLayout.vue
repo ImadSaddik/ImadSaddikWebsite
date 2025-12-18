@@ -207,7 +207,7 @@ export default {
 
 .article-container {
   padding: var(--gap-xl);
-  margin-top: var(--gap-xxl);
+  margin-top: var(--gap-2xl);
 }
 
 .article-body :deep(.article-body-header) {

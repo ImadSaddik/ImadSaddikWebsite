@@ -52,7 +52,7 @@ export default {
   flex-direction: row;
   align-items: center;
   width: 100%;
-  gap: var(--gap-xxl);
+  gap: var(--gap-2xl);
 }
 
 .hero-title {

@@ -188,7 +188,7 @@ export default {
   --gap-md: 1.5rem; /* 24px */
   --gap-lg: 2rem; /* 32px */
   --gap-xl: 3rem; /* 48px */
-  --gap-xxl: 4rem; /* 64px */
+  --gap-2xl: 4rem; /* 64px */
 
   /* Gaps between sections */
   --gap-between-sections-small: 5rem;

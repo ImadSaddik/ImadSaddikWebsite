@@ -222,7 +222,7 @@ h3 {
   position: relative;
   width: 100%;
   padding: var(--gap-xl);
-  margin-top: var(--gap-xxl);
+  margin-top: var(--gap-2xl);
   box-sizing: border-box;
 }
 
@@ -306,8 +306,8 @@ h3 {
 .get-in-touch-section {
   text-align: left;
   border: 1px solid var(--color-tag-border);
-  margin-top: var(--gap-xxl);
-  padding: var(--gap-xxl) var(--gap-xl);
+  margin-top: var(--gap-2xl);
+  padding: var(--gap-2xl) var(--gap-xl);
   background: rgba(255, 255, 255, 0.02);
 }
 

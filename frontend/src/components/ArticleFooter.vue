@@ -60,7 +60,7 @@ export default {
 
 .article-footer-header {
   font-size: var(--font-size-big-medium);
-  margin-top: var(--gap-xxl);
+  margin-top: var(--gap-2xl);
   margin-bottom: var(--gap-md);
 }
 

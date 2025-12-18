@@ -303,7 +303,7 @@ p {
 
 .articles-hub-container {
   padding: var(--gap-xl);
-  margin-top: var(--gap-xxl);
+  margin-top: var(--gap-2xl);
 }
 
 .articles-hub-title {
@@ -316,7 +316,7 @@ p {
   display: flex;
   flex-direction: row;
   gap: var(--gap-xl);
-  margin-top: var(--gap-xxl);
+  margin-top: var(--gap-2xl);
 }
 
 .articles-hub-filters-column {

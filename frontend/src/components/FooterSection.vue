@@ -479,7 +479,7 @@ p:hover {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: var(--gap-xxl);
+  gap: var(--gap-2xl);
   margin-top: var(--gap-xl);
 }
 
