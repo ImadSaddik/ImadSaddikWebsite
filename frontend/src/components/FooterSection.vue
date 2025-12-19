@@ -183,6 +183,25 @@
               />
               <span class="effects-slider"></span>
             </label>
+
+            <label for="wide-articles" class="effects-toggle">
+              <span
+                class="effects-toggle-label clickable"
+                tabindex="0"
+                role="button"
+                :aria-pressed="wideArticlesEnabled"
+                @keydown.enter.prevent="handleWideArticlesToggle(!wideArticlesEnabled)"
+                @keydown.space.prevent="handleWideArticlesToggle(!wideArticlesEnabled)"
+                >Wide articles</span
+              >
+              <input
+                id="wide-articles"
+                type="checkbox"
+                :checked="wideArticlesEnabled"
+                @change="handleWideArticlesToggle($event.target.checked)"
+              />
+              <span class="effects-slider"></span>
+            </label>
           </div>
         </div>
       </div>
@@ -219,13 +238,7 @@ import paypalLogo from "@/assets/logos/paypal.svg";
 import footerLandscape from "@/assets/footer_landscape.svg";
 
 // Constants
-import {
-  STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY,
-  METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY,
-  CUSTOM_CURSOR_TOGGLE_LOCAL_STORAGE_KEY,
-  KNOWN_NEW_MOON_DATE,
-  LUNAR_MONTH_DAYS,
-} from "@/constants";
+import { KNOWN_NEW_MOON_DATE, LUNAR_MONTH_DAYS } from "@/constants";
 import { moonPhaseImages } from "@/assetRegistry.js";
 
 export default {
@@ -243,8 +256,12 @@ export default {
       type: Boolean,
       default: true,
     },
+    wideArticlesEnabled: {
+      type: Boolean,
+      default: false,
+    },
   },
-  emits: ["star-effect-toggle", "meteorite-effect-toggle", "custom-cursor-toggle"],
+  emits: ["star-effect-toggle", "meteorite-effect-toggle", "custom-cursor-toggle", "wide-articles-toggle"],
   data() {
     return {
       githubLogo,
@@ -279,15 +296,15 @@ export default {
   methods: {
     handleStarEffectToggle(value) {
       this.$emit("star-effect-toggle", value);
-      localStorage.setItem(STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, value);
     },
     handleMeteoriteEffectToggle(value) {
       this.$emit("meteorite-effect-toggle", value);
-      localStorage.setItem(METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, value);
     },
     handleCustomCursorToggle(value) {
       this.$emit("custom-cursor-toggle", value);
-      localStorage.setItem(CUSTOM_CURSOR_TOGGLE_LOCAL_STORAGE_KEY, value);
+    },
+    handleWideArticlesToggle(value) {
+      this.$emit("wide-articles-toggle", value);
     },
     getLunarDay() {
       const now = new Date();
@@ -462,7 +479,7 @@ p:hover {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: var(--gap-xxl);
+  gap: var(--gap-2xl);
   margin-top: var(--gap-xl);
 }
 
@@ -533,6 +550,10 @@ p:hover {
   }
 
   .footer-images {
+    display: none;
+  }
+
+  label[for="wide-articles"] {
     display: none;
   }
 }

@@ -1,6 +1,12 @@
 import axios from "axios";
 import { blogCoverImages, courseCoverImages, astronomyCoverImages } from "@/assetRegistry.js";
 import fallbackCoverImage from "@/assets/fallbackCoverImage.svg";
+import {
+  STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY,
+  METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY,
+  CUSTOM_CURSOR_TOGGLE_LOCAL_STORAGE_KEY,
+  WIDE_ARTICLES_TOGGLE_LOCAL_STORAGE_KEY,
+} from "@/constants";
 
 const coverImagesByType = {
   "blog-post": blogCoverImages,
@@ -65,6 +71,24 @@ async function trackVisitorData(visitedPageKey) {
   } catch {
     // I don't want to log this error, nor show it in a toast.
   }
+}
+
+export function loadUserPreferences() {
+  const get = (key) => {
+    const value = localStorage.getItem(key);
+    return value !== null ? JSON.parse(value) : null;
+  };
+
+  return {
+    starEffect: get(STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY),
+    meteoriteEffect: get(METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY),
+    customCursor: get(CUSTOM_CURSOR_TOGGLE_LOCAL_STORAGE_KEY),
+    wideArticles: get(WIDE_ARTICLES_TOGGLE_LOCAL_STORAGE_KEY),
+  };
+}
+
+export function saveUserPreference(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
 }
 
 export { calculateReadingTime, convertUnixTimestampToReadableFormat, getCardsDataFromDocumentHits, trackVisitorData };

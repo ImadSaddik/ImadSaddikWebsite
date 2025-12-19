@@ -94,6 +94,32 @@ test.describe("User Preferences", () => {
       }
     });
 
+    test("should have toggle for wide articles", async ({ page }) => {
+      await page.goto("/");
+      const wideArticlesToggle = page.locator('label:has-text("Wide articles"), #wide-articles');
+      await expect(wideArticlesToggle.first()).toBeVisible();
+    });
+
+    test("should persist wide articles preference", async ({ page }) => {
+      await page.goto("/");
+      await page.locator(".footer-container").scrollIntoViewIfNeeded();
+
+      const wideArticlesCheckbox = page.locator("#wide-articles");
+      const wideArticlesLabel = page.locator('label[for="wide-articles"]');
+      if (await wideArticlesLabel.isVisible()) {
+        const wasChecked = await wideArticlesCheckbox.isChecked();
+        await wideArticlesLabel.click();
+
+        await page.reload();
+        await page.locator(".footer-container").scrollIntoViewIfNeeded();
+
+        const newState = await wideArticlesCheckbox.isChecked();
+        expect(newState).toBe(!wasChecked);
+
+        await wideArticlesLabel.click();
+      }
+    });
+
     test("should update body class when custom cursor is toggled", async ({ page }) => {
       await page.goto("/");
       await page.locator(".footer-container").scrollIntoViewIfNeeded();
@@ -114,6 +140,39 @@ test.describe("User Preferences", () => {
         await cursorLabel.click();
       }
     });
+  });
+
+  test("should apply wide articles class when toggled and remove it when untoggled", async ({ page }) => {
+    await page.goto("/about-me");
+
+    let wideArticlesLabel = page.locator('label[for="wide-articles"]');
+    let pageContent = page.locator(".about-me-full-story-content");
+
+    if (await wideArticlesLabel.isVisible()) {
+      // By default, the checkbox is not checked.
+      await expect(pageContent.first()).not.toHaveClass(/wide/);
+      await wideArticlesLabel.click();
+      await expect(pageContent.first()).toHaveClass(/wide/);
+    }
+
+    await page.goto("/hire-me");
+
+    pageContent = page.locator(".hire-me-content");
+    if (await wideArticlesLabel.isVisible()) {
+      // At this point, the checkbox should still be checked.
+      await expect(pageContent.first()).toHaveClass(/wide/);
+      await wideArticlesLabel.click();
+      await expect(pageContent.first()).not.toHaveClass(/wide/);
+    }
+
+    await page.goto("/blogs/ElasticsearchPreFilteringWithKnnSearch");
+    pageContent = page.locator(".article-body");
+    if (await wideArticlesLabel.isVisible()) {
+      // At this point, the checkbox should still be unchecked.
+      await expect(pageContent.first()).not.toHaveClass(/wide/);
+      await wideArticlesLabel.click();
+      await expect(pageContent.first()).toHaveClass(/wide/);
+    }
   });
 
   test.describe("Unhappy path", () => {

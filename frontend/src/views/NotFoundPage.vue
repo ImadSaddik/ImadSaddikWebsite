@@ -30,7 +30,7 @@ img {
 p {
   font-size: var(--font-size-small);
   color: var(--color-text-secondary);
-  margin: var(--gap-xxl) 0;
+  margin: var(--gap-2xl) 0;
   line-height: 1.6;
 }
 

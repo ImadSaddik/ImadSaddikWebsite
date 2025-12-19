@@ -9,14 +9,19 @@
     :star-effect-enabled="starEffectEnabled"
     :meteorite-effect-enabled="meteoriteEffectEnabled"
     :custom-cursor-enabled="customCursorEnabled"
+    :wide-articles-enabled="wideArticlesEnabled"
     @star-effect-toggle="handleStarEffectToggle"
     @meteorite-effect-toggle="handleMeteoriteEffectToggle"
     @custom-cursor-toggle="handleCustomCursorToggle"
+    @wide-articles-toggle="handleWideArticlesToggle"
   />
   <ToastNotificationManager ref="toastManager" />
 </template>
 
 <script>
+// Third-party libraries
+import { computed } from "vue";
+
 // Components
 import NavBar from "@/components/NavBar.vue";
 import StarBackground from "@/components/StarBackground.vue";
@@ -31,8 +36,12 @@ import {
   STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY,
   METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY,
   CUSTOM_CURSOR_TOGGLE_LOCAL_STORAGE_KEY,
+  WIDE_ARTICLES_TOGGLE_LOCAL_STORAGE_KEY,
   CUSTOM_CURSOR_CLASS_NAME,
 } from "@/constants";
+
+// Utils
+import { loadUserPreferences, saveUserPreference } from "./utils";
 
 export default {
   name: "App",
@@ -45,42 +54,48 @@ export default {
     ToastNotificationManager,
     SkipLink,
   },
+  provide() {
+    return {
+      wideArticlesEnabled: computed(() => this.wideArticlesEnabled),
+    };
+  },
   data() {
     return {
       visitedPage: "",
       starEffectEnabled: true,
       meteoriteEffectEnabled: true,
       customCursorEnabled: true,
+      wideArticlesEnabled: false,
     };
   },
+  created() {
+    const userPreferences = loadUserPreferences();
+
+    if (userPreferences.starEffect !== null) this.starEffectEnabled = userPreferences.starEffect;
+    if (userPreferences.meteoriteEffect !== null) this.meteoriteEffectEnabled = userPreferences.meteoriteEffect;
+    if (userPreferences.customCursor !== null) this.customCursorEnabled = userPreferences.customCursor;
+    if (userPreferences.wideArticles !== null) this.wideArticlesEnabled = userPreferences.wideArticles;
+  },
   mounted() {
-    this.loadEffectsPreference();
     this.updateCursorClass(this.customCursorEnabled);
   },
   methods: {
     handleStarEffectToggle(enabled) {
       this.starEffectEnabled = enabled;
+      saveUserPreference(STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, enabled);
     },
     handleMeteoriteEffectToggle(enabled) {
       this.meteoriteEffectEnabled = enabled;
+      saveUserPreference(METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, enabled);
     },
     handleCustomCursorToggle(enabled) {
       this.customCursorEnabled = enabled;
       this.updateCursorClass(enabled);
+      saveUserPreference(CUSTOM_CURSOR_TOGGLE_LOCAL_STORAGE_KEY, enabled);
     },
-    loadEffectsPreference() {
-      const storedStarEffectEnabled = localStorage.getItem(STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY);
-      const storedMeteoriteEffectEnabled = localStorage.getItem(METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY);
-      const storedCustomCursorEnabled = localStorage.getItem(CUSTOM_CURSOR_TOGGLE_LOCAL_STORAGE_KEY);
-      if (storedStarEffectEnabled !== null) {
-        this.starEffectEnabled = JSON.parse(storedStarEffectEnabled);
-      }
-      if (storedMeteoriteEffectEnabled !== null) {
-        this.meteoriteEffectEnabled = JSON.parse(storedMeteoriteEffectEnabled);
-      }
-      if (storedCustomCursorEnabled !== null) {
-        this.customCursorEnabled = JSON.parse(storedCustomCursorEnabled);
-      }
+    handleWideArticlesToggle(enabled) {
+      this.wideArticlesEnabled = enabled;
+      saveUserPreference(WIDE_ARTICLES_TOGGLE_LOCAL_STORAGE_KEY, enabled);
     },
     handleShowToastEvent(data) {
       this.$refs.toastManager.showToast(data);
@@ -173,7 +188,7 @@ export default {
   --gap-md: 1.5rem; /* 24px */
   --gap-lg: 2rem; /* 32px */
   --gap-xl: 3rem; /* 48px */
-  --gap-xxl: 4rem; /* 64px */
+  --gap-2xl: 4rem; /* 64px */
 
   /* Gaps between sections */
   --gap-between-sections-small: 5rem;

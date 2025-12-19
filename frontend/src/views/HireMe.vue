@@ -1,6 +1,6 @@
 <template>
   <div class="hire-me-container">
-    <div class="hire-me-content">
+    <div class="hire-me-content" :class="{ wide: wideArticlesEnabled }">
       <section>
         <h1 id="lets-build-something-great">
           <a class="clickable-header-link" href="#lets-build-something-great">Let's build something great</a>
@@ -143,6 +143,7 @@ export default {
     ImageEnlarger,
     TableOfContents,
   },
+  inject: ["wideArticlesEnabled"],
   emits: ["page-visited", "show-toast"],
   data() {
     return {
@@ -221,12 +222,17 @@ h3 {
   position: relative;
   width: 100%;
   padding: var(--gap-xl);
-  margin-top: var(--gap-xxl);
+  margin-top: var(--gap-2xl);
   box-sizing: border-box;
 }
 
 .hire-me-content {
   width: 50%;
+  transition: width 0.3s;
+}
+
+.hire-me-content.wide {
+  width: 75%;
 }
 
 .card-group {
@@ -300,8 +306,8 @@ h3 {
 .get-in-touch-section {
   text-align: left;
   border: 1px solid var(--color-tag-border);
-  margin-top: var(--gap-xxl);
-  padding: var(--gap-xxl) var(--gap-xl);
+  margin-top: var(--gap-2xl);
+  padding: var(--gap-2xl) var(--gap-xl);
   background: rgba(255, 255, 255, 0.02);
 }
 
@@ -325,13 +331,15 @@ h3 {
 }
 
 @media screen and (max-width: 1300px) {
-  .hire-me-content {
-    width: 70%;
+  .hire-me-content,
+  .hire-me-content.wide {
+    width: 65%;
   }
 }
 
 @media screen and (max-width: 1100px) {
-  .hire-me-content {
+  .hire-me-content,
+  .hire-me-content.wide {
     width: 100%;
   }
 
