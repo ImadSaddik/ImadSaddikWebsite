@@ -196,6 +196,7 @@ li .level-4 {
   .table-of-contents-container,
   .table-of-contents-container.wide {
     width: 35%;
+    margin-left: var(--gap-lg);
   }
 
   li {
@@ -212,11 +213,6 @@ li .level-4 {
 
   li .level-4 {
     padding: 0 var(--gap-md);
-  }
-
-  .table-of-contents-container {
-    width: 35%;
-    margin-left: var(--gap-lg);
   }
 }
 
