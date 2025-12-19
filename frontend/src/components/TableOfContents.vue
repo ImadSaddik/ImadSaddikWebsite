@@ -1,22 +1,25 @@
 <template>
-  <aside v-if="sections.length > 0" class="table-of-contents-container">
-    <h2>On this page</h2>
-    <ul>
-      <li v-for="value in sections" :key="value.id" :class="{ active: shouldActivateSection(value.y) }">
-        <a
-          href="#"
-          :class="[`level-${value.level}`, { active: shouldActivateSection(value.y) }]"
-          @click.prevent="handleSectionClick(value.id)"
-          >{{ value.text }}</a
-        >
-      </li>
-    </ul>
+  <aside v-if="sections.length > 0" class="table-of-contents-container" :class="{ wide: wideArticlesEnabled }">
+    <div class="toc-content-wrapper">
+      <h2>On this page</h2>
+      <ul>
+        <li v-for="value in sections" :key="value.id" :class="{ active: shouldActivateSection(value.y) }">
+          <a
+            href="#"
+            :class="[`level-${value.level}`, { active: shouldActivateSection(value.y) }]"
+            @click.prevent="handleSectionClick(value.id)"
+            >{{ value.text }}</a
+          >
+        </li>
+      </ul>
+    </div>
   </aside>
 </template>
 
 <script>
 export default {
   name: "TableOfContents",
+  inject: ["wideArticlesEnabled"],
   data() {
     return {
       activeSectionId: null,
@@ -100,8 +103,10 @@ export default {
 
 <style scoped>
 a {
-  color: var(--color-text-disabled);
+  display: block;
   width: 100%;
+  box-sizing: border-box;
+  color: var(--color-text-disabled);
 }
 
 a:hover {
@@ -130,6 +135,7 @@ li {
   list-style: none;
   margin: 0;
   padding: var(--gap-xs) 0;
+  line-height: 1.6;
 }
 
 li::before {
@@ -140,14 +146,17 @@ li::before {
   width: 4px;
   height: 100%;
   background-color: var(--color-text-disabled);
+  opacity: 0.3;
 }
 
 li:hover::before {
   background-color: var(--color-primary);
+  opacity: 1;
 }
 
 li.active::before {
   background-color: var(--color-primary);
+  opacity: 1;
 }
 
 li .level-2 {
@@ -165,15 +174,31 @@ li .level-4 {
 
 .table-of-contents-container {
   position: sticky;
-  top: var(--gap-xxl);
+  top: var(--gap-2xl);
   align-self: flex-start;
   width: 50%;
   margin: 0;
-  margin-left: var(--gap-xxl);
+  margin-left: var(--gap-2xl);
   z-index: 2;
+  transition: width 0.3s;
+}
+
+.table-of-contents-container.wide {
+  width: 25%;
+}
+
+.toc-content-wrapper {
+  max-width: 400px;
+  width: 100%;
 }
 
 @media screen and (max-width: 1300px) {
+  .table-of-contents-container,
+  .table-of-contents-container.wide {
+    width: 35%;
+    margin-left: var(--gap-lg);
+  }
+
   li {
     padding: var(--gap-xs) var(--gap-sm);
   }
@@ -188,11 +213,6 @@ li .level-4 {
 
   li .level-4 {
     padding: 0 var(--gap-md);
-  }
-
-  .table-of-contents-container {
-    width: 35%;
-    margin-left: var(--gap-lg);
   }
 }
 

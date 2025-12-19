@@ -19,12 +19,21 @@ vi.mock("axios", () => ({
   },
 }));
 
+vi.mock("@/constants", () => ({
+  STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY: "mock-star-key",
+  METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY: "mock-meteor-key",
+  CUSTOM_CURSOR_TOGGLE_LOCAL_STORAGE_KEY: "mock-cursor-key",
+  WIDE_ARTICLES_TOGGLE_LOCAL_STORAGE_KEY: "mock-wide-key",
+}));
+
 import axios from "axios";
 import {
   calculateReadingTime,
   convertUnixTimestampToReadableFormat,
   getCardsDataFromDocumentHits,
   trackVisitorData,
+  loadUserPreferences,
+  saveUserPreference,
 } from "@/utils.js";
 
 const getRefs = (text) => ({ articleContent: { $el: { innerText: text } } });
@@ -100,5 +109,45 @@ describe("trackVisitorData", () => {
   it("swallows errors", async () => {
     axios.post.mockRejectedValue(new Error("Bot bot bot!"));
     await expect(trackVisitorData("home")).resolves.toBeUndefined();
+  });
+});
+
+describe("loadUserPreferences", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("returns null for all keys when local storage is empty", () => {
+    const preferences = loadUserPreferences();
+    expect(preferences).toEqual({
+      starEffect: null,
+      meteoriteEffect: null,
+      customCursor: null,
+      wideArticles: null,
+    });
+  });
+
+  it("parses and returns values from local storage", () => {
+    localStorage.setItem("mock-star-key", "true");
+    localStorage.setItem("mock-wide-key", "false");
+
+    const preferences = loadUserPreferences();
+
+    expect(preferences.starEffect).toBe(true);
+    expect(preferences.wideArticles).toBe(false);
+    expect(preferences.customCursor).toBeNull();
+    expect(preferences.meteoriteEffect).toBeNull();
+  });
+});
+
+describe("saveUserPreference", () => {
+  it("serializes and saves value to local storage", () => {
+    const setItemSpy = vi.spyOn(Storage.prototype, "setItem");
+
+    saveUserPreference("test-key", true);
+    expect(setItemSpy).toHaveBeenCalledWith("test-key", "true");
+
+    saveUserPreference("test-key-2", { foo: "bar" });
+    expect(setItemSpy).toHaveBeenCalledWith("test-key-2", JSON.stringify({ foo: "bar" }));
   });
 });
