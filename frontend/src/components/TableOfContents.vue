@@ -1,16 +1,18 @@
 <template>
   <aside v-if="sections.length > 0" class="table-of-contents-container" :class="{ wide: wideArticlesEnabled }">
-    <h2>On this page</h2>
-    <ul>
-      <li v-for="value in sections" :key="value.id" :class="{ active: shouldActivateSection(value.y) }">
-        <a
-          href="#"
-          :class="[`level-${value.level}`, { active: shouldActivateSection(value.y) }]"
-          @click.prevent="handleSectionClick(value.id)"
-          >{{ value.text }}</a
-        >
-      </li>
-    </ul>
+    <div class="toc-content-wrapper">
+      <h2>On this page</h2>
+      <ul>
+        <li v-for="value in sections" :key="value.id" :class="{ active: shouldActivateSection(value.y) }">
+          <a
+            href="#"
+            :class="[`level-${value.level}`, { active: shouldActivateSection(value.y) }]"
+            @click.prevent="handleSectionClick(value.id)"
+            >{{ value.text }}</a
+          >
+        </li>
+      </ul>
+    </div>
   </aside>
 </template>
 
@@ -179,11 +181,15 @@ li .level-4 {
   margin-left: var(--gap-2xl);
   z-index: 2;
   transition: width 0.3s;
-  max-width: 400px;
 }
 
 .table-of-contents-container.wide {
   width: 25%;
+}
+
+.toc-content-wrapper {
+  max-width: 400px;
+  width: 100%;
 }
 
 @media screen and (max-width: 1300px) {
