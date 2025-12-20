@@ -17,6 +17,9 @@
 </template>
 
 <script>
+// Third-party libraries
+import { useThrottleFn } from "@vueuse/core";
+
 export default {
   name: "TableOfContents",
   inject: ["wideArticlesEnabled"],
@@ -24,6 +27,7 @@ export default {
     return {
       activeSectionId: null,
       sections: [],
+      throttledScrollHandler: null,
     };
   },
   watch: {
@@ -38,15 +42,33 @@ export default {
       this.collectSections();
       this.checkIfURLContainsHash();
 
-      window.addEventListener("scroll", this.handleScrollEvent);
+      this.throttledScrollHandler = useThrottleFn(
+        this.handleScrollEvent,
+        100 /* wait time in ms */,
+        true /* trailing */,
+        true /* leading */
+      );
+      window.addEventListener("scroll", this.throttledScrollHandler);
       window.addEventListener("resize", this.handleResize);
     });
   },
   beforeUnmount() {
-    window.removeEventListener("scroll", this.handleScrollEvent);
+    if (this.throttledScrollHandler) {
+      window.removeEventListener("scroll", this.throttledScrollHandler);
+    }
     window.removeEventListener("resize", this.handleResize);
   },
   methods: {
+    throttle(functionToThrottle, waitTime) {
+      let lastTime = 0;
+      return function (...args) {
+        const now = new Date().getTime();
+        if (now - lastTime >= waitTime) {
+          lastTime = now;
+          functionToThrottle.apply(this, args);
+        }
+      };
+    },
     collectSections() {
       const selectors = [
         "h2[id][data-table-of-contents]",
