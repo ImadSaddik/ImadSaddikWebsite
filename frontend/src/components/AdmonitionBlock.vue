@@ -35,7 +35,7 @@ export default {
 .admonition {
   padding: var(--gap-md);
   border-left: 5px solid;
-  margin-top: var(--gap-md);
+  margin: var(--gap-md) 0;
 }
 
 .admonition-note {
