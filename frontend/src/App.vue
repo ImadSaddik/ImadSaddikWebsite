@@ -116,6 +116,7 @@ export default {
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
 
 :root {
   /* General colors */
@@ -174,6 +175,10 @@ export default {
   --color-shadow: rgba(0, 0, 0, 0.1);
   --color-shadow-hover: rgba(0, 0, 0, 0.15);
 
+  /* Fonts */
+  --font-family-sans: "Inter", Avenir, Helvetica, Arial, sans-serif;
+  --font-family-mono: "JetBrains Mono", "Liberation Mono", Consolas, monospace;
+
   /* Font sizes */
   --font-size-big: 3rem; /* 48px */
   --font-size-big-medium: 2rem; /* 32px */
@@ -207,10 +212,10 @@ html {
 }
 
 #app {
-  font-family: "Inter", Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  font-family: var(--font-family-sans);
   color: var(--color-text-primary);
   caret-color: var(--color-primary);
   max-width: 2000px;
