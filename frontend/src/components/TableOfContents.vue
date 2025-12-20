@@ -17,6 +17,9 @@
 </template>
 
 <script>
+// Third-party libraries
+import { useThrottleFn } from "@vueuse/core";
+
 export default {
   name: "TableOfContents",
   inject: ["wideArticlesEnabled"],
@@ -39,8 +42,12 @@ export default {
       this.collectSections();
       this.checkIfURLContainsHash();
 
-      const waitTimeMilliseconds = 100;
-      this.throttledScrollHandler = this.throttle(this.handleScrollEvent, waitTimeMilliseconds);
+      this.throttledScrollHandler = useThrottleFn(
+        this.handleScrollEvent,
+        100 /* wait time in ms */,
+        true /* trailing */,
+        true /* leading */
+      );
       window.addEventListener("scroll", this.throttledScrollHandler);
       window.addEventListener("resize", this.handleResize);
     });
