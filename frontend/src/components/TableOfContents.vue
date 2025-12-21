@@ -134,6 +134,7 @@ a {
   width: 100%;
   box-sizing: border-box;
   color: var(--color-text-disabled);
+  transition: color 0.3s ease-in-out;
 }
 
 a:hover {
@@ -176,6 +177,9 @@ li::before {
   height: 100%;
   background-color: var(--color-text-disabled);
   opacity: 0.3;
+  transition:
+    background-color 0.3s ease,
+    opacity 0.3s ease;
 }
 
 li:hover::before {
