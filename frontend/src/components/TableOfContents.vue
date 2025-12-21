@@ -150,6 +150,8 @@ ul {
   margin: 0;
   margin-top: var(--gap-md);
   padding: 0;
+  padding-right: var(--gap-sm);
+  overflow-y: auto;
 }
 
 li {
@@ -199,6 +201,7 @@ li .level-4 {
   top: var(--gap-2xl);
   align-self: flex-start;
   width: 50%;
+  max-height: 85vh;
   margin: 0;
   margin-left: var(--gap-2xl);
   z-index: 2;
@@ -210,8 +213,12 @@ li .level-4 {
 }
 
 .toc-content-wrapper {
-  max-width: 400px;
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  height: 100%;
+  max-width: 400px;
+  max-height: inherit;
 }
 
 @media screen and (max-width: 1300px) {
