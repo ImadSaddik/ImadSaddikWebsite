@@ -30,13 +30,6 @@ export default {
       throttledScrollHandler: null,
     };
   },
-  watch: {
-    activeSectionId(newId) {
-      if (newId) {
-        history.replaceState(null, "", `#${newId}`);
-      }
-    },
-  },
   mounted() {
     this.$nextTick(() => {
       this.collectSections();
@@ -105,6 +98,7 @@ export default {
       });
 
       this.activeSectionId = sectionId;
+      history.replaceState(null, "", `#${sectionId}`);
     },
     computeAbsoluteYPosition(element) {
       const rect = element.getBoundingClientRect();
