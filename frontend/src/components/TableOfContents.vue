@@ -158,6 +158,11 @@ ul {
   padding: 0;
   padding-right: var(--gap-sm);
   overflow-y: auto;
+  scrollbar-width: none;
+}
+
+ul::-webkit-scrollbar {
+  display: none;
 }
 
 li {
