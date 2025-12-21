@@ -199,18 +199,23 @@ li.active::before {
 
 li .level-2 {
   font-weight: bold;
-  padding: 0 var(--gap-md);
+  padding-left: calc(1 * var(--toc-indent-unit));
+  padding-right: var(--gap-md);
 }
 
 li .level-3 {
-  padding: 0 var(--gap-lg);
+  padding-left: calc(2 * var(--toc-indent-unit));
+  padding-right: var(--gap-md);
 }
 
 li .level-4 {
-  padding: 0 var(--gap-xl);
+  padding-left: calc(3 * var(--toc-indent-unit));
+  padding-right: var(--gap-md);
 }
 
 .table-of-contents-container {
+  --toc-indent-unit: 1.5rem;
+
   position: sticky;
   top: var(--gap-2xl);
   align-self: flex-start;
@@ -240,22 +245,12 @@ li .level-4 {
   .table-of-contents-container.wide {
     width: 35%;
     margin-left: var(--gap-lg);
+
+    --toc-indent-unit: 0.5rem;
   }
 
   li {
     padding: var(--gap-xs) var(--gap-sm);
-  }
-
-  li .level-2 {
-    padding: 0 var(--gap-xs);
-  }
-
-  li .level-3 {
-    padding: 0 var(--gap-sm);
-  }
-
-  li .level-4 {
-    padding: 0 var(--gap-md);
   }
 }
 
