@@ -52,16 +52,6 @@ export default {
     window.removeEventListener("resize", this.handleResize);
   },
   methods: {
-    throttle(functionToThrottle, waitTime) {
-      let lastTime = 0;
-      return function (...args) {
-        const now = new Date().getTime();
-        if (now - lastTime >= waitTime) {
-          lastTime = now;
-          functionToThrottle.apply(this, args);
-        }
-      };
-    },
     collectSections() {
       const selectors = [
         "h2[id][data-table-of-contents]",
@@ -99,6 +89,8 @@ export default {
 
       this.activeSectionId = sectionId;
       history.replaceState(null, "", `#${sectionId}`);
+
+      this.scrollToActiveLink();
     },
     computeAbsoluteYPosition(element) {
       const rect = element.getBoundingClientRect();
@@ -106,6 +98,25 @@ export default {
     },
     handleScrollEvent() {
       this.collectSections();
+      this.scrollToActiveLink();
+    },
+    scrollToActiveLink() {
+      this.$nextTick(() => {
+        const container = this.$el.querySelector("ul");
+        const activeLinks = container.querySelectorAll("a.active");
+        const lastActiveLink = activeLinks[activeLinks.length - 1];
+
+        if (container && lastActiveLink) {
+          const containerRect = container.getBoundingClientRect();
+          const linkRect = lastActiveLink.getBoundingClientRect();
+          const distanceToLink = linkRect.top - containerRect.top;
+
+          container.scrollTo({
+            top: container.scrollTop + distanceToLink - containerRect.height / 2 + linkRect.height / 2,
+            behavior: "smooth",
+          });
+        }
+      });
     },
     handleResize() {
       this.collectSections();
