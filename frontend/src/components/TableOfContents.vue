@@ -82,8 +82,9 @@ export default {
       if (!sectionElement) return;
 
       const y = this.computeAbsoluteYPosition(sectionElement);
+      const topOffset = 20;
       window.scrollTo({
-        top: y,
+        top: y - topOffset,
         behavior: "smooth",
       });
 
