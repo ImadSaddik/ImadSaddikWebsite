@@ -243,6 +243,12 @@ a:hover {
   color: var(--color-primary-hover);
 }
 
+h2[id],
+h3[id],
+h4[id] {
+  scroll-margin-top: 20px;
+}
+
 .title {
   font-size: var(--font-size-big);
   margin-top: 0;

@@ -13,6 +13,9 @@ export const ABOUT_ME_PAGE_VISITED_KEY = "ABOUT_ME";
 export const HIRE_ME_PAGE_VISITED_KEY = "HIRE_ME";
 export const OTHER_PAGES_VISITED_KEY = "OTHER";
 
+// Scroll offsets
+export const SCROLL_MARGIN_TOP_OFFSET_PX = 20;
+
 // Star background effect constants
 export const STAR_COLORS = [
   "#ffffff", // White

@@ -103,13 +103,14 @@ const router = createRouter({
     if (savedPosition) {
       return savedPosition;
     }
+
     if (to.hash) {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve({ el: to.hash, behavior: "smooth" });
-        }, 300);
-      });
+      return {
+        el: to.hash,
+        behavior: "smooth",
+      };
     }
+
     return { top: 0 };
   },
 });

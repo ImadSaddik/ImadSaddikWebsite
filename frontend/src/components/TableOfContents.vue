@@ -30,13 +30,6 @@ export default {
       throttledScrollHandler: null,
     };
   },
-  watch: {
-    activeSectionId(newId) {
-      if (newId) {
-        history.replaceState(null, "", `#${newId}`);
-      }
-    },
-  },
   mounted() {
     this.$nextTick(() => {
       this.collectSections();
@@ -59,16 +52,6 @@ export default {
     window.removeEventListener("resize", this.handleResize);
   },
   methods: {
-    throttle(functionToThrottle, waitTime) {
-      let lastTime = 0;
-      return function (...args) {
-        const now = new Date().getTime();
-        if (now - lastTime >= waitTime) {
-          lastTime = now;
-          functionToThrottle.apply(this, args);
-        }
-      };
-    },
     collectSections() {
       const selectors = [
         "h2[id][data-table-of-contents]",
@@ -99,12 +82,16 @@ export default {
       if (!sectionElement) return;
 
       const y = this.computeAbsoluteYPosition(sectionElement);
+      const topOffset = 20;
       window.scrollTo({
-        top: y,
+        top: y - topOffset,
         behavior: "smooth",
       });
 
       this.activeSectionId = sectionId;
+      history.replaceState(null, "", `#${sectionId}`);
+
+      this.scrollToActiveLink();
     },
     computeAbsoluteYPosition(element) {
       const rect = element.getBoundingClientRect();
@@ -112,6 +99,25 @@ export default {
     },
     handleScrollEvent() {
       this.collectSections();
+      this.scrollToActiveLink();
+    },
+    scrollToActiveLink() {
+      this.$nextTick(() => {
+        const container = this.$el.querySelector("ul");
+        const activeLinks = container.querySelectorAll("a.active");
+        const lastActiveLink = activeLinks[activeLinks.length - 1];
+
+        if (container && lastActiveLink) {
+          const containerRect = container.getBoundingClientRect();
+          const linkRect = lastActiveLink.getBoundingClientRect();
+          const distanceToLink = linkRect.top - containerRect.top;
+
+          container.scrollTo({
+            top: container.scrollTop + distanceToLink - containerRect.height / 2 + linkRect.height / 2,
+            behavior: "smooth",
+          });
+        }
+      });
     },
     handleResize() {
       this.collectSections();
@@ -129,6 +135,7 @@ a {
   width: 100%;
   box-sizing: border-box;
   color: var(--color-text-disabled);
+  transition: color 0.3s ease-in-out;
 }
 
 a:hover {
@@ -150,6 +157,13 @@ ul {
   margin: 0;
   margin-top: var(--gap-md);
   padding: 0;
+  padding-right: var(--gap-sm);
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+ul::-webkit-scrollbar {
+  display: none;
 }
 
 li {
@@ -169,6 +183,9 @@ li::before {
   height: 100%;
   background-color: var(--color-text-disabled);
   opacity: 0.3;
+  transition:
+    background-color 0.3s ease,
+    opacity 0.3s ease;
 }
 
 li:hover::before {
@@ -183,22 +200,28 @@ li.active::before {
 
 li .level-2 {
   font-weight: bold;
-  padding: 0 var(--gap-md);
+  padding-left: calc(1 * var(--toc-indent-unit));
+  padding-right: var(--gap-md);
 }
 
 li .level-3 {
-  padding: 0 var(--gap-lg);
+  padding-left: calc(2 * var(--toc-indent-unit));
+  padding-right: var(--gap-md);
 }
 
 li .level-4 {
-  padding: 0 var(--gap-xl);
+  padding-left: calc(3 * var(--toc-indent-unit));
+  padding-right: var(--gap-md);
 }
 
 .table-of-contents-container {
+  --toc-indent-unit: 1.5rem;
+
   position: sticky;
   top: var(--gap-2xl);
   align-self: flex-start;
   width: 50%;
+  max-height: 85vh;
   margin: 0;
   margin-left: var(--gap-2xl);
   z-index: 2;
@@ -210,8 +233,12 @@ li .level-4 {
 }
 
 .toc-content-wrapper {
-  max-width: 400px;
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  height: 100%;
+  max-width: 400px;
+  max-height: inherit;
 }
 
 @media screen and (max-width: 1300px) {
@@ -219,22 +246,12 @@ li .level-4 {
   .table-of-contents-container.wide {
     width: 35%;
     margin-left: var(--gap-lg);
+
+    --toc-indent-unit: 0.5rem;
   }
 
   li {
     padding: var(--gap-xs) var(--gap-sm);
-  }
-
-  li .level-2 {
-    padding: 0 var(--gap-xs);
-  }
-
-  li .level-3 {
-    padding: 0 var(--gap-sm);
-  }
-
-  li .level-4 {
-    padding: 0 var(--gap-md);
   }
 }
 
