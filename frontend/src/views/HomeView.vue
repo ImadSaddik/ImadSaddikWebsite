@@ -58,8 +58,8 @@ import CardGroup from "@/components/CardGroup.vue";
 import scorpiusIllustration from "@/assets/illustrations/scorpius.svg";
 import orionIllustration from "@/assets/illustrations/orion.svg";
 import quasarIllustration from "@/assets/illustrations/quasar.svg";
-import horizontalSolarSystemIllustration from "@/assets/illustrations/solarSystemHorizontal.svg";
-import verticalSolarSystemIllustration from "@/assets/illustrations/solarSystemVertical.svg";
+import horizontalSolarSystemIllustration from "@/assets/illustrations/codingSolarSystemHorizontal.svg";
+import verticalSolarSystemIllustration from "@/assets/illustrations/codingSolarSystemVertical.svg";
 
 export default {
   name: "HomeView",
