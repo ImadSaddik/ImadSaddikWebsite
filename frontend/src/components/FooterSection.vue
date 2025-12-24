@@ -73,8 +73,15 @@
           </div>
 
           <div class="footer-icon-text-container">
-            <img :src="inkscapeLogo" alt="Inkscape logo" />
-            <a class="clickable" href="https://inkscape.org/" target="_blank" rel="noopener noreferrer">Inkscape</a>
+            <img :src="nginxLogo" alt="Nginx logo" />
+            <a class="clickable" href="https://nginx.org/" target="_blank" rel="noopener noreferrer">Nginx</a>
+          </div>
+
+          <div class="footer-icon-text-container">
+            <img :src="meilisearchLogo" alt="Meilisearch logo" />
+            <a class="clickable" href="https://www.meilisearch.com/" target="_blank" rel="noopener noreferrer"
+              >Meilisearch</a
+            >
           </div>
         </div>
 
@@ -225,7 +232,6 @@ import huggingFaceLogo from "@/assets/logos/huggingFace.svg";
 import youtubeLogo from "@/assets/logos/youtube.svg";
 import mediumLogo from "@/assets/logos/medium.svg";
 import linkedinLogo from "@/assets/logos/linkedin.svg";
-import inkscapeLogo from "@/assets/logos/inkscape.svg";
 import vueLogo from "@/assets/logos/vue.svg";
 import emailLogo from "@/assets/logos/email.svg";
 import pythonLogo from "@/assets/logos/python.svg";
@@ -233,6 +239,8 @@ import svgRepoLogo from "@/assets/logos/svg_repo.svg";
 import fontAwesomeLogo from "@/assets/logos/fontAwesome.svg";
 import patreonLogo from "@/assets/logos/patreon.svg";
 import paypalLogo from "@/assets/logos/paypal.svg";
+import nginxLogo from "@/assets/logos/nginx.svg";
+import meilisearchLogo from "@/assets/logos/meilisearch.svg";
 
 // Images
 import footerLandscape from "@/assets/footer_landscape.svg";
@@ -269,7 +277,6 @@ export default {
       youtubeLogo,
       mediumLogo,
       linkedinLogo,
-      inkscapeLogo,
       vueLogo,
       emailLogo,
       pythonLogo,
@@ -277,6 +284,8 @@ export default {
       fontAwesomeLogo,
       patreonLogo,
       paypalLogo,
+      nginxLogo,
+      meilisearchLogo,
 
       footerLandscape,
     };
