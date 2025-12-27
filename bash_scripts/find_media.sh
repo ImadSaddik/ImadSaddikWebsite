@@ -9,7 +9,7 @@ NO_COLOR='\033[0m'
 printf "${BOLD}%-10s %s${NO_COLOR}\n" "SIZE" "FILE PATH"
 echo "---------------------------------------------------"
 
-CMD="find . -type f \( \
+find_args=(. -type f \( \
     -iname '*.jpg' -o \
     -iname '*.jpeg' -o \
     -iname '*.png' -o \
@@ -22,10 +22,10 @@ CMD="find . -type f \( \
     -iname '*.webm' -o \
     -iname '*.avi' -o \
     -iname '*.mkv' \
-\)"
+\))
 
-if [ ! -z "$THRESHOLD" ]; then
-    CMD="$CMD -size +$THRESHOLD"
+if [ -n "$THRESHOLD" ]; then
+    find_args+=(-size "+$THRESHOLD")
 fi
 
-eval $CMD -print0 | xargs -0 -r du -h | sort -rh
+find "${find_args[@]}" -print0 | xargs -0 -r du -h | sort -rh
