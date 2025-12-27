@@ -1,3 +1,4 @@
+// Starfield effect
 export const STAR_COLORS = [
   "#ffffff", // White
   "#ffe9c4", // Pale yellow
