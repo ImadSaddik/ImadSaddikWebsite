@@ -19,12 +19,18 @@ vi.mock("axios", () => ({
   },
 }));
 
-vi.mock("@/constants", () => ({
-  STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY: "mock-star-key",
-  METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY: "mock-meteor-key",
-  CUSTOM_CURSOR_TOGGLE_LOCAL_STORAGE_KEY: "mock-cursor-key",
-  WIDE_ARTICLES_TOGGLE_LOCAL_STORAGE_KEY: "mock-wide-key",
-}));
+vi.mock("@/constants", async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual,
+    STORAGE_KEYS: {
+      STAR_EFFECT: "mock-star-key",
+      METEORITE_EFFECT: "mock-meteorite-key",
+      CUSTOM_CURSOR: "mock-cursor-key",
+      WIDE_ARTICLES: "mock-wide-key",
+    },
+  };
+});
 
 import axios from "axios";
 import {
@@ -34,14 +40,14 @@ import {
   trackVisitorData,
   loadUserPreferences,
   saveUserPreference,
-} from "@/utils.js";
+} from "@/utils";
 
 const getRefs = (text) => ({ articleContent: { $el: { innerText: text } } });
 
 describe("calculateReadingTime", () => {
   it("rounds up reading time based on words per minute", () => {
-    const refs = getRefs("word ".repeat(250));
-    expect(calculateReadingTime(refs)).toBe(2);
+    const text = "word ".repeat(250);
+    expect(calculateReadingTime(text)).toBe(2);
   });
 });
 
