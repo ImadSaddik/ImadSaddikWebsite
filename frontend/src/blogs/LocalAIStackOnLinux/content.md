@@ -2,7 +2,7 @@
 
 A complete guide to running LLMs, embedding models, and multimodal models locally with full control and automation.
 
-**Date:** October 5, 2025
+**Date:** December 27, 2025
 **Tags:** Linux, AI, LLM, llama.cpp, LibreChat, Local AI, llama-swap
 
 ---

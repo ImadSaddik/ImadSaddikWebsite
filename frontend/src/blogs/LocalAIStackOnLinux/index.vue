@@ -3,7 +3,7 @@
     ref="articleContent"
     title="How to build your own local AI stack on Linux with llama.cpp, llama-swap, LibreChat and more"
     sub-title="A complete guide to running LLMs, embedding models, and multimodal models locally with full control and automation."
-    creation-date="October 5, 2025"
+    creation-date="December 27, 2025"
     article-type="blog-post"
     :article-tags="tags"
     :cover-image="coverImage"
@@ -2335,7 +2335,7 @@ import markdownContent from "./content.md";
 import { calculateReadingTime } from "@/utils.js";
 
 // Images
-import coverImage from "./cover_image.svg";
+import coverImage from "./coverImage.svg";
 import architectureDiagram from "./1_architecture_diagram.svg";
 import qwenBenchmarkGraph from "./2_qwen_benchmark_graph.jpg";
 import cudaToolkitDownload from "./3_cuda_toolkit_download.png";
