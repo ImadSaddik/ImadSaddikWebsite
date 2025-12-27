@@ -21,7 +21,7 @@ export default {
 <style scoped>
 .bullet-point {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--gap-sm);
   margin-bottom: var(--gap-sm);
 }
@@ -34,6 +34,6 @@ export default {
 .bullet-point span {
   font-size: var(--font-size-small);
   color: var(--color-text-secondary);
-  line-height: 1.4;
+  line-height: 1.6;
 }
 </style>
