@@ -104,7 +104,7 @@ export default {
       this.context.arc(star.positionX, star.positionY, star.radius, 0, 2 * Math.PI);
       this.context.fillStyle = star.color;
       this.context.shadowColor = star.color;
-      this.context.shadowBlur = STAR_SPIKE_CONFIG.SHADOW_BLUR;
+      this.context.shadowBlur = STAR_CONFIG.SHADOW_BLUR;
       this.context.globalAlpha = star.alpha;
       this.context.fill();
       this.context.restore();

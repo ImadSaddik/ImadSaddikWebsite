@@ -16,6 +16,7 @@ export const STAR_CONFIG = {
   ALPHA_MIN: 0.3,
   ALPHA_RANGE: 0.5,
   STEP_SIZE_RANGE: 0.15,
+  SHADOW_BLUR: 8,
   ANIMATION_FPS: 30,
 };
 
