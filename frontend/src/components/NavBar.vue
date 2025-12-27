@@ -38,13 +38,7 @@
 </template>
 
 <script>
-import {
-  BLOGS_PAGE_VISITED_KEY,
-  COURSES_PAGE_VISITED_KEY,
-  ASTRONOMY_PAGE_VISITED_KEY,
-  ABOUT_ME_PAGE_VISITED_KEY,
-  HIRE_ME_PAGE_VISITED_KEY,
-} from "@/constants";
+import { PAGE_KEYS } from "@/constants";
 
 export default {
   name: "NavBar",
@@ -59,11 +53,11 @@ export default {
     return {
       isMenuOpen: false,
       navigationBarItems: [
-        { name: "Blogs", path: "/blogs", key: BLOGS_PAGE_VISITED_KEY },
-        { name: "Courses", path: "/courses", key: COURSES_PAGE_VISITED_KEY },
-        { name: "Astronomy", path: "/astronomy", key: ASTRONOMY_PAGE_VISITED_KEY },
-        { name: "About me", path: "/about-me", key: ABOUT_ME_PAGE_VISITED_KEY },
-        { name: "Hire me", path: "/hire-me", key: HIRE_ME_PAGE_VISITED_KEY },
+        { name: "Blogs", path: "/blogs", key: PAGE_KEYS.BLOGS },
+        { name: "Courses", path: "/courses", key: PAGE_KEYS.COURSES },
+        { name: "Astronomy", path: "/astronomy", key: PAGE_KEYS.ASTRONOMY },
+        { name: "About me", path: "/about-me", key: PAGE_KEYS.ABOUT_ME },
+        { name: "Hire me", path: "/hire-me", key: PAGE_KEYS.HIRE_ME },
       ],
     };
   },

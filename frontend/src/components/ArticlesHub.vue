@@ -101,7 +101,7 @@
 import axios from "axios";
 
 // Utils
-import { getCardsDataFromDocumentHits } from "@/utils.js";
+import { getCardsDataFromDocumentHits } from "@/utils";
 
 // Components
 import DropDownMenu from "@/components/DropDownMenu.vue";
