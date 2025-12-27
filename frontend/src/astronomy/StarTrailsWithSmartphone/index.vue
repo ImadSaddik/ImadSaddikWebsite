@@ -851,7 +851,7 @@ import collectDataStep8 from "./collect_data_step_8.svg";
 import testShot from "./test_shot.jpg";
 import jpgFolderStarTrails from "./jpg_folder_star_trails.jpg";
 import starTrailProcessingWindowsMacosStep1 from "./star_trail_processing_windows_macos_step_1.svg";
-import starTrailProcessingWindowsMacosStep2 from "./star_trail_processing_windows_macos_step_2.svg";
+import starTrailProcessingWindowsMacosStep2 from "./star_trail_processing_windows_macos_step_2.jpg";
 import starTrailProcessingWindowsMacosStep3 from "./star_trail_processing_windows_macos_step_3.svg";
 import starTrailProcessingWindowsMacosStep4 from "./star_trail_processing_windows_macos_step_4.svg";
 import starTrailProcessingWindowsMacosTimelapse from "./star_trail_processing_windows_macos_step_timelapse.svg";

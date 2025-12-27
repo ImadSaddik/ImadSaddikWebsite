@@ -47,3 +47,19 @@ Use the [run_all_services_tmux.sh](./run_all_services_tmux.sh) script to start a
 ```bash
 ./run_all_services_tmux.sh
 ```
+
+## Find large media files
+
+Use the [find_media.sh](./find_media.sh) script to find large media files (images and videos) from the directory where the script is run.
+
+The script accepts an optional size threshold argument (e.g., `500k`, `1M`). If provided, it lists only files larger than the specified size.
+
+```bash
+./find_media.sh 500k
+```
+
+If no threshold is provided, it lists all media files.
+
+```bash
+./find_media.sh
+```
