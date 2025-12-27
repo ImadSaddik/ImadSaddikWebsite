@@ -4,7 +4,7 @@ Allow: /
 Disallow: /analytics.html
 
 Disallow: /*.pdf$
-Allow: /resume.pdf
+Allow: /resume.pdf$
 
 User-agent: GPTBot
 User-agent: Claude-Web
