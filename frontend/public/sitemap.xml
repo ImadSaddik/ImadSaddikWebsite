@@ -55,6 +55,21 @@
         <priority>0.7</priority>
     </url>
     <url>
+        <loc>https://imadsaddik.com/blogs/FixKernelPanicLinux</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://imadsaddik.com/blogs/InkscapeCleanUpDocument</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://imadsaddik.com/blogs/LocalAIStackOnLinux</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
         <loc>https://imadsaddik.com/courses/ElasticsearchForBeginners</loc>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
