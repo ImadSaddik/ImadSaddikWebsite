@@ -36,7 +36,7 @@ server {
     # --- Application routes ---
 
     # C. Resume PDF
-    location = ~ ^/resume(\.pdf)?$ {
+    location ~ ^/resume(\.pdf)?$ {
         alias /web_app/frontend/dist/imad_saddik.pdf;
         default_type application/pdf;
         add_header Content-Disposition "inline; filename=imad_saddik.pdf";
