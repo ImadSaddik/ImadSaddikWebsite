@@ -200,7 +200,7 @@
 <script>
 // Text & Utils
 import * as codeSnippets from "./codeSnippets.js";
-import { calculateReadingTime } from "@/utils.js";
+import { calculateReadingTime } from "@/utils";
 import markdownContent from "./content.md";
 
 // Images
@@ -248,7 +248,8 @@ export default {
   },
   mounted() {
     document.title = "Pre-filtering with kNN search in Elasticsearch";
-    this.readingTime = calculateReadingTime(this.$refs);
+    const articleContent = this.$refs.articleContent.$el.innerText;
+    this.readingTime = calculateReadingTime(articleContent);
     const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
     setTimeout(() => {
       this.$emit("article-read");

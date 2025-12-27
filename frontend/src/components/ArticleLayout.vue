@@ -41,7 +41,7 @@
 import axios from "axios";
 
 // Utils
-import { getCardsDataFromDocumentHits } from "@/utils.js";
+import { getCardsDataFromDocumentHits } from "@/utils";
 
 // Components
 import ArticleHeader from "@/components/ArticleHeader.vue";

@@ -32,16 +32,10 @@ import ToastNotificationManager from "@/components/ToastNotificationManager.vue"
 import SkipLink from "./components/SkipLink.vue";
 
 // Constants
-import {
-  STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY,
-  METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY,
-  CUSTOM_CURSOR_TOGGLE_LOCAL_STORAGE_KEY,
-  WIDE_ARTICLES_TOGGLE_LOCAL_STORAGE_KEY,
-  CUSTOM_CURSOR_CLASS_NAME,
-} from "@/constants";
+import { STORAGE_KEYS, CUSTOM_CURSOR_CLASS_NAME } from "@/constants";
 
 // Utils
-import { loadUserPreferences, saveUserPreference } from "./utils";
+import { loadUserPreferences, saveUserPreference } from "@/utils";
 
 export default {
   name: "App",
@@ -82,20 +76,20 @@ export default {
   methods: {
     handleStarEffectToggle(enabled) {
       this.starEffectEnabled = enabled;
-      saveUserPreference(STAR_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, enabled);
+      saveUserPreference(STORAGE_KEYS.STAR_EFFECT, enabled);
     },
     handleMeteoriteEffectToggle(enabled) {
       this.meteoriteEffectEnabled = enabled;
-      saveUserPreference(METEORITE_EFFECT_TOGGLE_LOCAL_STORAGE_KEY, enabled);
+      saveUserPreference(STORAGE_KEYS.METEORITE_EFFECT, enabled);
     },
     handleCustomCursorToggle(enabled) {
       this.customCursorEnabled = enabled;
       this.updateCursorClass(enabled);
-      saveUserPreference(CUSTOM_CURSOR_TOGGLE_LOCAL_STORAGE_KEY, enabled);
+      saveUserPreference(STORAGE_KEYS.CUSTOM_CURSOR, enabled);
     },
     handleWideArticlesToggle(enabled) {
       this.wideArticlesEnabled = enabled;
-      saveUserPreference(WIDE_ARTICLES_TOGGLE_LOCAL_STORAGE_KEY, enabled);
+      saveUserPreference(STORAGE_KEYS.WIDE_ARTICLES, enabled);
     },
     handleShowToastEvent(data) {
       this.$refs.toastManager.showToast(data);

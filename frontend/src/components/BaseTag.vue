@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { directoryMapping } from "@/utils";
+import { DIRECTORY_MAPPING } from "@/constants";
 
 export default {
   name: "BaseTag",
@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     handleClick() {
-      const routeName = directoryMapping[this.articleType];
+      const routeName = DIRECTORY_MAPPING[this.articleType];
 
       if (routeName) {
         this.$router.push({

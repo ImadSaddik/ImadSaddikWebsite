@@ -595,10 +595,10 @@
 
 <script>
 // Constants
-import { ABOUT_ME_PAGE_VISITED_KEY } from "@/constants.js";
+import { PAGE_KEYS } from "@/constants";
 
 // Utils
-import { trackVisitorData } from "@/utils.js";
+import { trackVisitorData } from "@/utils";
 
 // Components
 import ImageWithCaption from "@/components/ImageWithCaption.vue";
@@ -681,8 +681,8 @@ fin     swi
   },
   mounted() {
     document.title = "About Imad Saddik";
-    this.$emit("page-visited", ABOUT_ME_PAGE_VISITED_KEY);
-    trackVisitorData(ABOUT_ME_PAGE_VISITED_KEY);
+    this.$emit("page-visited", PAGE_KEYS.ABOUT_ME);
+    trackVisitorData(PAGE_KEYS.ABOUT_ME);
   },
   methods: {
     handleOpenImageModal(event) {

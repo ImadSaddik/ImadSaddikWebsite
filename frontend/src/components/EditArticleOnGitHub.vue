@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { directoryMapping } from "@/utils";
+import { DIRECTORY_MAPPING } from "@/constants";
 
 export default {
   name: "EditArticleOnGitHub",
@@ -25,7 +25,7 @@ export default {
   computed: {
     githubEditUrl() {
       const baseRepoUrl = "https://github.com/ImadSaddik/ImadSaddikWebsite/edit/master";
-      const directory = directoryMapping[this.articleType];
+      const directory = DIRECTORY_MAPPING[this.articleType];
       const filePath = `frontend/src/${directory}/${this.slug}/index.vue`;
       return `${baseRepoUrl}/${filePath}`;
     },

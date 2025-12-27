@@ -1,7 +1,7 @@
 import { mount, RouterLinkStub } from "@vue/test-utils";
 import NavBar from "@/components/NavBar.vue";
 
-import { BLOGS_PAGE_VISITED_KEY } from "@/constants";
+import { PAGE_KEYS } from "@/constants";
 
 describe("NavBar", () => {
   const factory = (props = {}) =>
@@ -46,7 +46,7 @@ describe("NavBar", () => {
   });
 
   it("applies selected class to the visited page item", async () => {
-    const wrapper = factory({ visitedPage: BLOGS_PAGE_VISITED_KEY });
+    const wrapper = factory({ visitedPage: PAGE_KEYS.BLOGS });
     await wrapper.vm.$nextTick();
     const blogsItem = wrapper.findAll(".expanded-nav-bar-item")[0];
     expect(blogsItem.classes()).toContain("selected");
