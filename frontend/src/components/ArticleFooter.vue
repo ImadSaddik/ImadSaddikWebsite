@@ -25,7 +25,7 @@
 
 <script>
 import BaseCard from "@/components/BaseCard.vue";
-import { hubMapping } from "@/utils.js";
+import { HUB_MAPPING } from "@/constants";
 
 export default {
   name: "ArticleFooter",
@@ -44,10 +44,10 @@ export default {
   },
   computed: {
     hubLink() {
-      return hubMapping[this.articleType]?.path || "/blogs";
+      return HUB_MAPPING[this.articleType]?.path || "/blogs";
     },
     hubName() {
-      return hubMapping[this.articleType]?.name || "blogs page";
+      return HUB_MAPPING[this.articleType]?.name || "blogs page";
     },
   },
 };

@@ -13,10 +13,10 @@
 import ArticlesHub from "@/components/ArticlesHub.vue";
 
 // Constants
-import { ASTRONOMY_PAGE_VISITED_KEY } from "@/constants.js";
+import { PAGE_KEYS } from "@/constants";
 
 // Utils
-import { trackVisitorData } from "@/utils.js";
+import { trackVisitorData } from "@/utils";
 
 export default {
   name: "AstronomyHub",
@@ -31,8 +31,8 @@ export default {
   },
   mounted() {
     document.title = "Astronomy with Imad Saddik";
-    this.$emit("page-visited", ASTRONOMY_PAGE_VISITED_KEY);
-    trackVisitorData(ASTRONOMY_PAGE_VISITED_KEY);
+    this.$emit("page-visited", PAGE_KEYS.ASTRONOMY);
+    trackVisitorData(PAGE_KEYS.ASTRONOMY);
   },
 };
 </script>

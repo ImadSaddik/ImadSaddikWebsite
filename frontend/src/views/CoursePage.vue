@@ -14,7 +14,7 @@ import axios from "axios";
 import { defineAsyncComponent } from "vue";
 
 // Constants
-import { OTHER_PAGES_VISITED_KEY } from "@/constants.js";
+import { PAGE_KEYS } from "@/constants";
 import { courseArticles } from "@/assetRegistry.js";
 
 export default {
@@ -41,7 +41,7 @@ export default {
     },
   },
   mounted() {
-    this.$emit("page-visited", OTHER_PAGES_VISITED_KEY);
+    this.$emit("page-visited", PAGE_KEYS.OTHER);
   },
   methods: {
     handleShowToastEvent(data) {

@@ -123,10 +123,10 @@
 
 <script>
 // Constants
-import { HIRE_ME_PAGE_VISITED_KEY } from "@/constants.js";
+import { PAGE_KEYS } from "@/constants";
 
 // Utils
-import { trackVisitorData } from "@/utils.js";
+import { trackVisitorData } from "@/utils";
 
 // Components
 import ImageWithCaption from "@/components/ImageWithCaption.vue";
@@ -155,8 +155,8 @@ export default {
   },
   mounted() {
     document.title = "Hire Imad Saddik";
-    this.$emit("page-visited", HIRE_ME_PAGE_VISITED_KEY);
-    trackVisitorData(HIRE_ME_PAGE_VISITED_KEY);
+    this.$emit("page-visited", PAGE_KEYS.HIRE_ME);
+    trackVisitorData(PAGE_KEYS.HIRE_ME);
   },
   methods: {
     openCalendlyLink() {

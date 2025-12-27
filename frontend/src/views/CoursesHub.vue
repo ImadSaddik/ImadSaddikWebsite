@@ -13,10 +13,10 @@
 import ArticlesHub from "@/components/ArticlesHub.vue";
 
 // Constants
-import { COURSES_PAGE_VISITED_KEY } from "@/constants.js";
+import { PAGE_KEYS } from "@/constants";
 
 // Utils
-import { trackVisitorData } from "@/utils.js";
+import { trackVisitorData } from "@/utils";
 
 export default {
   name: "CoursesHub",
@@ -31,8 +31,8 @@ export default {
   },
   mounted() {
     document.title = "Courses by Imad Saddik";
-    this.$emit("page-visited", COURSES_PAGE_VISITED_KEY);
-    trackVisitorData(COURSES_PAGE_VISITED_KEY);
+    this.$emit("page-visited", PAGE_KEYS.COURSES);
+    trackVisitorData(PAGE_KEYS.COURSES);
   },
 };
 </script>
