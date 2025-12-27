@@ -45,9 +45,5 @@ export const STAR_SHADOW_BLUR = 8;
 // Animation
 export const STAR_ANIMATION_FPS = 30;
 
-// Moon phases
-export const LUNAR_MONTH_DAYS = 29.530588853;
-export const KNOWN_NEW_MOON_DATE = new Date("2025-10-21T12:59:00Z");
-
 // Custom cursor
 export const CUSTOM_CURSOR_CLASS_NAME = "custom-cursor";
