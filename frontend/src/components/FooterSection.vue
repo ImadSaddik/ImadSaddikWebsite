@@ -590,18 +590,14 @@ p:hover {
     margin-top: var(--gap-xl);
   }
 
-  .moon-image {
-    position: absolute;
-    top: 25%;
-    right: 75px;
+  .moon-wrapper {
+    top: 40%;
   }
 }
 
 @media screen and (max-width: 1300px) {
-  .moon-image {
-    position: absolute;
-    top: 25%;
-    right: 75px;
+  .moon-wrapper {
+    top: 60%;
   }
 }
 
