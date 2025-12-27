@@ -126,6 +126,21 @@ test.describe("Responsive Design", () => {
       await expect(page.locator(".moon-image")).toBeVisible();
       await expect(page.locator(".landscape-image")).toBeVisible();
     });
+
+    test("should display moon illumination tooltip on hover", async ({ page }) => {
+      await page.goto("/");
+
+      const moonWrapper = page.locator(".moon-wrapper");
+      const tooltip = page.locator(".moon-tooltip");
+
+      await moonWrapper.scrollIntoViewIfNeeded();
+      await expect(tooltip).not.toBeVisible();
+
+      await moonWrapper.hover();
+
+      await expect(tooltip).toBeVisible();
+      await expect(tooltip).toHaveText(/Illumination: \d+%/);
+    });
   });
 
   test.describe("Unhappy path", () => {
