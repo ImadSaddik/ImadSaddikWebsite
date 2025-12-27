@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="container">
     <a :href="githubEditUrl" target="_blank" rel="noopener noreferrer" class="edit-on-github-link">
       <i class="fa-solid fa-edit" aria-hidden="true"></i>
       Edit this page on GitHub
@@ -34,6 +34,10 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  margin-top: var(--gap-sm);
+}
+
 .edit-on-github-link {
   font-size: var(--font-size-small);
 }
