@@ -1,98 +1,58 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import BlogPage from "@/views/BlogPage.vue";
-import BlogsHub from "@/views/BlogsHub.vue";
-import CoursesHub from "@/views/CoursesHub.vue";
-import AstronomyHub from "@/views/AstronomyHub.vue";
-import AboutMeFullStory from "@/views/AboutMeFullStory.vue";
-import HireMe from "@/views/HireMe.vue";
-import CoursePage from "@/views/CoursePage.vue";
-import AstronomyPage from "@/views/AstronomyPage.vue";
-import NotFoundPage from "@/views/NotFoundPage.vue";
-import { blogArticles, courseArticles, astronomyArticles } from "@/assetRegistry.js";
-
-export const isValidSlug = (articles, type, slug) => {
-  const path = `/src/${type}/${slug}/index.vue`;
-  return path in articles;
-};
 
 const routes = [
   {
     path: "/",
     name: "home",
-    component: HomeView,
+    component: () => import("../views/HomeView.vue"),
   },
   {
     path: "/blogs",
     name: "blogs",
-    component: BlogsHub,
+    component: () => import("@/views/BlogsHub.vue"),
   },
   {
     path: "/blogs/:slug",
     name: "blog-post",
-    component: BlogPage,
+    component: () => import("@/views/BlogPage.vue"),
     props: true,
-    beforeEnter(to) {
-      const slug = to.params.slug;
-      if (!isValidSlug(blogArticles, "blogs", slug)) {
-        console.error(`Invalid blog slug: ${slug}`);
-        return { name: "blogs" };
-      }
-      return true;
-    },
   },
   {
     path: "/courses",
     name: "courses",
-    component: CoursesHub,
+    component: () => import("@/views/CoursesHub.vue"),
   },
   {
     path: "/courses/:slug",
     name: "course-post",
-    component: CoursePage,
+    component: () => import("@/views/CoursePage.vue"),
     props: true,
-    beforeEnter(to) {
-      const slug = to.params.slug;
-      if (!isValidSlug(courseArticles, "courses", slug)) {
-        console.error(`Invalid course slug: ${slug}`);
-        return { name: "courses" };
-      }
-      return true;
-    },
   },
   {
     path: "/astronomy",
     name: "astronomy",
-    component: AstronomyHub,
+    component: () => import("@/views/AstronomyHub.vue"),
   },
   {
     path: "/astronomy/:slug",
     name: "astronomy-post",
-    component: AstronomyPage,
+    component: () => import("@/views/AstronomyPage.vue"),
     props: true,
-    beforeEnter(to) {
-      const slug = to.params.slug;
-      if (!isValidSlug(astronomyArticles, "astronomy", slug)) {
-        console.error(`Invalid astronomy slug: ${slug}`);
-        return { name: "astronomy" };
-      }
-      return true;
-    },
   },
   {
     path: "/about-me",
     name: "about-me",
-    component: AboutMeFullStory,
+    component: () => import("@/views/AboutMeFullStory.vue"),
   },
   {
     path: "/hire-me",
     name: "hire-me",
-    component: HireMe,
+    component: () => import("@/views/HireMe.vue"),
   },
   {
     path: "/:pathMatch(.*)*",
     name: "NotFound",
-    component: NotFoundPage,
+    component: () => import("@/views/NotFoundPage.vue"),
   },
 ];
 

@@ -1,0 +1,1 @@
+export const TIME_OUT_MILLISECONDS = 10_000;

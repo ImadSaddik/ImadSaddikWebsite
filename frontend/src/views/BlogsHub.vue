@@ -3,7 +3,7 @@
     article-title="Blogs"
     search-placeholder="What blogs are you curious about today?"
     sort-placeholder="Show me blogs sorted by..."
-    :article-type="articleType"
+    article-type="blog-post"
     @show-toast="$emit('show-toast', $event)"
   />
 </template>
@@ -16,7 +16,7 @@ import ArticlesHub from "@/components/ArticlesHub.vue";
 import { PAGE_KEYS } from "@/constants";
 
 // Utils
-import { trackVisitorData } from "@/utils";
+import { useHubPage } from "@/composables/useHubPage";
 
 export default {
   name: "BlogHub",
@@ -24,17 +24,12 @@ export default {
     ArticlesHub,
   },
   emits: ["show-toast", "page-visited"],
-  data() {
-    return {
-      articleType: "blog-post",
-    };
-  },
-  mounted() {
-    document.title = "Blogs by Imad Saddik";
-    this.$emit("page-visited", PAGE_KEYS.BLOGS);
-    trackVisitorData(PAGE_KEYS.BLOGS);
+  setup(props, { emit }) {
+    useHubPage({
+      pageKey: PAGE_KEYS.BLOGS,
+      title: "Blogs by Imad Saddik",
+      emit,
+    });
   },
 };
 </script>
-
-<style scoped></style>

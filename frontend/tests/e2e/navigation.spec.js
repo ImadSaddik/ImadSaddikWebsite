@@ -109,21 +109,21 @@ test.describe("Navigation", () => {
       await expect(page).toHaveURL("/");
     });
 
-    test("should redirect invalid blog slug to blogs hub", async ({ page }) => {
+    test("should redirect invalid blog slug to 404 page", async ({ page }) => {
       await page.goto("/blogs/this-blog-does-not-exist-at-all");
-      await expect(page).toHaveURL("/blogs");
+      await expect(page).toHaveURL("/");
     });
 
-    test("should redirect invalid course slug to courses hub", async ({ page }) => {
+    test("should redirect invalid course slug to 404 page", async ({ page }) => {
       await page.goto("/courses/invalid-course-slug-12345");
 
-      await expect(page).toHaveURL("/courses");
+      await expect(page).toHaveURL("/");
     });
 
-    test("should redirect invalid astronomy slug to astronomy hub", async ({ page }) => {
+    test("should redirect invalid astronomy slug to 404 page", async ({ page }) => {
       await page.goto("/astronomy/non-existent-astronomy-article");
 
-      await expect(page).toHaveURL("/astronomy");
+      await expect(page).toHaveURL("/");
     });
   });
 });

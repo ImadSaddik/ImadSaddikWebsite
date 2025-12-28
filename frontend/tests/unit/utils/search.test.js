@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { faker } from "@faker-js/faker";
 import { getCardsDataFromDocumentHits } from "@/utils";
 
-vi.mock("@/assetRegistry.js", () => ({
+vi.mock("@/registries/images.js", () => ({
   blogCoverImages: {},
   courseCoverImages: {},
   astronomyCoverImages: {
