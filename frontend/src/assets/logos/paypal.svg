@@ -1,109 +1,119 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
-   width="27.333836"
-   height="32.000629"
-   viewBox="0 0 7.2320772 8.4668339"
-   version="1.1"
-   id="svg1"
-   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
-   sodipodi:docname="paypal.svg"
-   xml:space="preserve"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
-     id="namedview1"
-     pagecolor="#ffffff"
-     bordercolor="#000000"
-     borderopacity="0.25"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1"
-     inkscape:document-units="px"
-     inkscape:zoom="18.515626"
-     inkscape:cx="10.396624"
-     inkscape:cy="17.309704"
-     inkscape:window-width="2560"
-     inkscape:window-height="1371"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg1"
-     showguides="false"><sodipodi:guide
-       position="-0.61729771,1031.5048"
-       orientation="1,0"
-       id="guide98"
-       inkscape:locked="false" /><sodipodi:guide
-       position="269.48203,1156.5948"
-       orientation="1,0"
-       id="guide99"
-       inkscape:locked="false" /><sodipodi:guide
-       position="189.3618,1057.662"
-       orientation="0,-1"
-       id="guide100"
-       inkscape:locked="false" /><sodipodi:guide
-       position="212.89577,972.47814"
-       orientation="0,-1"
-       id="guide101"
-       inkscape:locked="false" /><sodipodi:guide
-       position="134.25741,710.03314"
-       orientation="-0.70710678,-0.70710678"
-       id="guide142"
-       inkscape:locked="false" /><sodipodi:guide
-       position="134.25741,647.82724"
-       orientation="0,-1"
-       id="guide205"
-       inkscape:locked="false" /><sodipodi:guide
-       position="191.14852,709.45944"
-       orientation="0,-1"
-       id="guide365"
-       inkscape:locked="false" /><sodipodi:guide
-       position="612.59507,609.21255"
-       orientation="0,-1"
-       id="guide374"
-       inkscape:locked="false" /><sodipodi:guide
-       position="616.61405,549.03015"
-       orientation="0,-1"
-       id="guide375"
-       inkscape:locked="false" /><inkscape:page
-       x="0"
-       y="0"
-       width="7.2320771"
-       height="8.4668341"
-       id="page1"
-       margin="0"
-       bleed="0" /></sodipodi:namedview><defs
-     id="defs1" /><g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     id="layer1"
-     transform="translate(-383.74257,-1437.816)" /><g
-     id="SVGRepo_bgCarrier"
-     stroke-width="0"
-     transform="matrix(0.26458334,0,0,0.26458334,6.0753627,1.3822705)" /><g
-     id="SVGRepo_tracerCarrier"
-     stroke-linecap="round"
-     stroke-linejoin="round"
-     transform="matrix(0.26458334,0,0,0.26458334,6.0753627,1.3822705)" /><g
-     id="SVGRepo_iconCarrier"
-     transform="scale(0.17639236)"
-     style="fill:#9ca3af;fill-opacity:1;stroke-width:1.49997"><title
-       id="title1">Paypal-color</title><desc
-       id="desc1">Created with Sketch.</desc><defs
-       id="defs1-7" /><g
-       id="Icons"
-       stroke="none"
-       stroke-width="1.49997"
-       fill="none"
-       fill-rule="evenodd"
-       style="fill:#9ca3af;fill-opacity:1"><g
-         id="Color-"
-         transform="translate(-804,-660)"
-         fill="#022b87"
-         style="fill:#9ca3af;fill-opacity:1;stroke-width:1.49997"><path
-           d="M 838.91167,663.61944 C 836.67088,661.08598 832.62173,660 827.4401,660 h -15.03537 c -1.05991,0 -1.96107,0.76499 -2.12739,1.80147 l -6.2612,39.39239 c -0.12399,0.77698 0.48232,1.48047 1.27613,1.48047 h 9.28219 l 2.33151,-14.66977 -0.0726,0.459 c 0.16632,-1.03649 1.06143,-1.80148 2.11983,-1.80148 h 4.41052 c 8.6668,0 15.45116,-3.49194 17.4334,-13.59278 0.059,-0.3 0.15422,-0.87449 0.15422,-0.87449 0.56247,-3.73794 -0.005,-6.2744 -2.03969,-8.57537 z m 4.38935,10.48859 c -2.15612,9.94484 -9.02969,15.20826 -19.93728,15.20826 h -3.95541 L 816.45841,708 h 6.41544 c 0.92685,0 1.71461,-0.66899 1.85976,-1.57647 l 0.0756,-0.396 1.47572,-9.27285 0.0952,-0.5115 c 0.14364,-0.90748 0.93291,-1.57647 1.85825,-1.57647 h 1.17181 c 7.57967,0 13.5158,-3.05545 15.25007,-11.89032 0.69552,-3.54594 0.36137,-6.51889 -1.35929,-8.66836 z"
-           id="Paypal"
-           style="fill:#9ca3af;fill-opacity:1;stroke-width:1.49997" /></g></g></g></svg>
+  width="27.333836"
+  height="32.000629"
+  viewBox="0 0 7.2320772 8.4668339"
+  version="1.1"
+  id="svg1"
+  inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+  sodipodi:docname="paypal.svg"
+  xml:space="preserve"
+  xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+  xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:svg="http://www.w3.org/2000/svg"
+><sodipodi:namedview
+    id="namedview1"
+    pagecolor="#ffffff"
+    bordercolor="#000000"
+    borderopacity="0.25"
+    inkscape:showpageshadow="2"
+    inkscape:pageopacity="0.0"
+    inkscape:pagecheckerboard="0"
+    inkscape:deskcolor="#d1d1d1"
+    inkscape:document-units="px"
+    inkscape:zoom="18.515626"
+    inkscape:cx="10.396624"
+    inkscape:cy="17.309704"
+    inkscape:window-width="2560"
+    inkscape:window-height="1371"
+    inkscape:window-x="0"
+    inkscape:window-y="0"
+    inkscape:window-maximized="1"
+    inkscape:current-layer="svg1"
+    showguides="false"
+  ><sodipodi:guide
+      position="-0.61729771,1031.5048"
+      orientation="1,0"
+      id="guide98"
+      inkscape:locked="false"
+    /><sodipodi:guide
+      position="269.48203,1156.5948"
+      orientation="1,0"
+      id="guide99"
+      inkscape:locked="false"
+    /><sodipodi:guide
+      position="189.3618,1057.662"
+      orientation="0,-1"
+      id="guide100"
+      inkscape:locked="false"
+    /><sodipodi:guide
+      position="212.89577,972.47814"
+      orientation="0,-1"
+      id="guide101"
+      inkscape:locked="false"
+    /><sodipodi:guide
+      position="134.25741,710.03314"
+      orientation="-0.70710678,-0.70710678"
+      id="guide142"
+      inkscape:locked="false"
+    /><sodipodi:guide
+      position="134.25741,647.82724"
+      orientation="0,-1"
+      id="guide205"
+      inkscape:locked="false"
+    /><sodipodi:guide
+      position="191.14852,709.45944"
+      orientation="0,-1"
+      id="guide365"
+      inkscape:locked="false"
+    /><sodipodi:guide
+      position="612.59507,609.21255"
+      orientation="0,-1"
+      id="guide374"
+      inkscape:locked="false"
+    /><sodipodi:guide
+      position="616.61405,549.03015"
+      orientation="0,-1"
+      id="guide375"
+      inkscape:locked="false"
+    /><inkscape:page
+      x="0"
+      y="0"
+      width="7.2320771"
+      height="8.4668341"
+      id="page1"
+      margin="0"
+      bleed="0"
+    /></sodipodi:namedview><defs id="defs1" /><g
+    inkscape:label="Layer 1"
+    inkscape:groupmode="layer"
+    id="layer1"
+    transform="translate(-383.74257,-1437.816)"
+  /><g id="SVGRepo_bgCarrier" stroke-width="0" transform="matrix(0.26458334,0,0,0.26458334,6.0753627,1.3822705)" /><g
+    id="SVGRepo_tracerCarrier"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    transform="matrix(0.26458334,0,0,0.26458334,6.0753627,1.3822705)"
+  /><g
+    id="SVGRepo_iconCarrier"
+    transform="scale(0.17639236)"
+    style="fill:#9ca3af;fill-opacity:1;stroke-width:1.49997"
+  ><title id="title1">Paypal-color</title><desc id="desc1">Created with Sketch.</desc><defs id="defs1-7" /><g
+      id="Icons"
+      stroke="none"
+      stroke-width="1.49997"
+      fill="none"
+      fill-rule="evenodd"
+      style="fill:#9ca3af;fill-opacity:1"
+    ><g
+        id="Color-"
+        transform="translate(-804,-660)"
+        fill="#022b87"
+        style="fill:#9ca3af;fill-opacity:1;stroke-width:1.49997"
+      ><path
+          d="M 838.91167,663.61944 C 836.67088,661.08598 832.62173,660 827.4401,660 h -15.03537 c -1.05991,0 -1.96107,0.76499 -2.12739,1.80147 l -6.2612,39.39239 c -0.12399,0.77698 0.48232,1.48047 1.27613,1.48047 h 9.28219 l 2.33151,-14.66977 -0.0726,0.459 c 0.16632,-1.03649 1.06143,-1.80148 2.11983,-1.80148 h 4.41052 c 8.6668,0 15.45116,-3.49194 17.4334,-13.59278 0.059,-0.3 0.15422,-0.87449 0.15422,-0.87449 0.56247,-3.73794 -0.005,-6.2744 -2.03969,-8.57537 z m 4.38935,10.48859 c -2.15612,9.94484 -9.02969,15.20826 -19.93728,15.20826 h -3.95541 L 816.45841,708 h 6.41544 c 0.92685,0 1.71461,-0.66899 1.85976,-1.57647 l 0.0756,-0.396 1.47572,-9.27285 0.0952,-0.5115 c 0.14364,-0.90748 0.93291,-1.57647 1.85825,-1.57647 h 1.17181 c 7.57967,0 13.5158,-3.05545 15.25007,-11.89032 0.69552,-3.54594 0.36137,-6.51889 -1.35929,-8.66836 z"
+          id="Paypal"
+          style="fill:#9ca3af;fill-opacity:1;stroke-width:1.49997"
+        /></g></g></g></svg>
