@@ -5,7 +5,7 @@ module.exports = {
   printWidth: 120,
   tabWidth: 2,
   useTabs: false,
-  plugins: ["@prettier/plugin-xml"],
+  plugins: [require.resolve("@prettier/plugin-xml")],
   overrides: [
     {
       files: ["*.xml"],
