@@ -48,6 +48,16 @@ Use the [run_all_services_tmux.sh](./run_all_services_tmux.sh) script to start a
 ./run_all_services_tmux.sh
 ```
 
+## Stop all services with tmux
+
+First, detach from the tmux session if you are attached to it: `Ctrl +b`, then `d`.
+
+Then, use the [stop_all_services_tmux.sh](./stop_all_services_tmux.sh) script to stop all services and close the tmux session.
+
+```bash
+./stop_all_services_tmux.sh
+```
+
 ## Find large media files
 
 Use the [find_media.sh](./find_media.sh) script to find large media files (images and videos) from the directory where the script is run.
