@@ -249,7 +249,7 @@ import meilisearchLogo from "@/assets/logos/meilisearch.svg";
 import footerLandscape from "@/assets/footer_landscape.svg";
 
 // Constants
-import { moonPhaseImages } from "@/assetRegistry.js";
+import { moonPhaseImages } from "@/registries/images.js";
 
 export default {
   name: "FooterSection",

@@ -1,4 +1,4 @@
-import { blogCoverImages, courseCoverImages, astronomyCoverImages } from "@/assetRegistry.js";
+import { blogCoverImages, courseCoverImages, astronomyCoverImages } from "@/registries/images.js";
 import fallbackCoverImage from "@/assets/fallbackCoverImage.svg";
 import { convertUnixTimestampToReadableFormat } from "./formatting";
 import { ARTICLE_TYPES, DIRECTORY_MAPPING } from "@/constants";
