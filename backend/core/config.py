@@ -9,6 +9,20 @@ class Settings(BaseSettings):
     MEILISEARCH_MASTER_KEY: str = "aStrongMasterKey"
     MEILISEARCH_INDEX_NAME: str = "articles"
 
+    ENVIRONMENT: str = "development"
+
+    @property
+    def CORS_ORIGINS(self):
+        if self.ENVIRONMENT == "production":
+            return [
+                "https://imadsaddik.com",
+                "https://www.imadsaddik.com",
+            ]
+        return [
+            "http://localhost:8080",
+            "http://192.168.1.15:8080",
+        ]
+
     model_config = SettingsConfigDict(env_file="../env")
 
 

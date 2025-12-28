@@ -147,6 +147,7 @@ jobs:
             MEILISEARCH_URL=http://127.0.0.1:7700
             MEILISEARCH_INDEX_NAME=articles
             MEILISEARCH_MASTER_KEY=$MEILISEARCH_KEY
+            ENVIRONMENT=production
             EOF
 
       - name: Install Python dependencies (atomic venv swap)
