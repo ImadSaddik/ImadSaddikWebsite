@@ -7,6 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from starlette.exceptions import HTTPException
 
 from api import article, search, visitors
+from core.config import settings
 from database import initialize_database
 from exception_handlers import http_exception_handler, request_validation_exception_handler, unhandled_exception_handler
 from middleware import log_request_middleware
@@ -29,10 +30,7 @@ app.add_exception_handler(Exception, unhandled_exception_handler)
 app.middleware("http")(log_request_middleware)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:8080",
-        "http://192.168.1.15:8080",
-    ],  # TODO: Change this before deploying
+    allow_origins=settings.CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
