@@ -1,21 +1,16 @@
 <template>
   <component
-    :is="courseArticleToDisplay"
-    v-if="courseArticleToDisplay"
+    :is="articleToDisplay"
+    v-if="articleToDisplay"
     :key="slug"
-    @show-toast="handleShowToastEvent"
-    @article-read="handleArticleReadEvent"
+    @show-toast="$emit('show-toast', $event)"
+    @article-read="handleArticleRead"
   />
 </template>
 
 <script>
-// Third-party libraries
-import axios from "axios";
-import { defineAsyncComponent } from "vue";
-
-// Constants
-import { PAGE_KEYS } from "@/constants";
-import { courseArticles } from "@/assetRegistry.js";
+import { courseArticles } from "@/registries/articles.js";
+import { useArticleLoader } from "@/composables/useArticleLoader";
 
 export default {
   name: "CoursePage",
@@ -23,70 +18,17 @@ export default {
     slug: { type: String, required: true },
   },
   emits: ["show-toast", "page-visited"],
-  data() {
+  setup(props, { emit }) {
+    const { articleToDisplay, handleArticleRead } = useArticleLoader({
+      props,
+      registry: courseArticles,
+      section: "courses",
+      emit,
+    });
     return {
-      courseArticleToDisplay: null,
+      articleToDisplay,
+      handleArticleRead,
     };
-  },
-  watch: {
-    slug: {
-      immediate: true,
-      async handler(newSlug) {
-        const path = `/src/courses/${newSlug}/index.vue`;
-        if (courseArticles[path]) {
-          this.courseArticleToDisplay = defineAsyncComponent(courseArticles[path]);
-          this.incrementCourseArticleViewCount();
-        }
-      },
-    },
-  },
-  mounted() {
-    this.$emit("page-visited", PAGE_KEYS.OTHER);
-  },
-  methods: {
-    handleShowToastEvent(data) {
-      this.$emit("show-toast", data);
-    },
-    handleArticleReadEvent() {
-      this.incrementCourseArticleReadCount();
-    },
-    async incrementCourseArticleViewCount() {
-      try {
-        const response = await axios.patch(`/api/articles/${this.slug}/increment-view-count`, {
-          timeout: 10_000,
-        });
-        const { success, message } = response.data;
-        if (!success) {
-          this.$emit("show-toast", {
-            message: `Failed to increment article view count: ${message}`,
-            type: "error",
-          });
-        }
-      } catch {
-        this.$emit("show-toast", {
-          message: "Failed to increment article view count",
-          type: "error",
-        });
-      }
-    },
-    async incrementCourseArticleReadCount() {
-      try {
-        const response = await axios.patch(`/api/articles/${this.slug}/increment-read-count`, {
-          timeout: 10_000,
-        });
-        const { success, message } = response.data;
-        if (!success) {
-          throw new Error(`Failed to increment article read count: ${message}`);
-        }
-      } catch {
-        this.$emit("show-toast", {
-          message: "Failed to increment article read count",
-          type: "error",
-        });
-      }
-    },
   },
 };
 </script>
-
-<style scoped></style>
