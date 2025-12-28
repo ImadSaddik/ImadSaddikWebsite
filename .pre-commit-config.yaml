@@ -34,3 +34,12 @@ repos:
         language_version: system
         files: ^frontend/.*\.(js|vue|css|scss|html|json)$
         types_or: [javascript, vue, css, scss, html, json]
+
+  - repo: local
+    hooks:
+      - id: generate-sitemap
+        name: Generate Sitemap
+        entry: bash -c 'cd frontend && pnpm run sitemap && git add public/sitemap.xml'
+        language: system
+        files: ^frontend/src/.*
+        pass_filenames: false
