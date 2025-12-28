@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException
 
+from logger import logger
 from models.article import (
     IncrementClapsCountResponse,
     IncrementReadCountResponse,
@@ -35,7 +36,8 @@ async def increment_article_view_count(name: str):
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.error(f"Error incrementing view count for article '{name}': {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
 
 
 @router.patch("/articles/{name}/increment-read-count", response_model=IncrementReadCountResponse)
@@ -58,7 +60,8 @@ async def increment_article_read_count(name: str):
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.error(f"Error incrementing read count for article '{name}': {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
 
 
 @router.patch("/articles/{name}/increment-claps-count", response_model=IncrementClapsCountResponse)
@@ -81,7 +84,8 @@ async def increment_article_claps_count(name: str):
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.error(f"Error incrementing claps count for article '{name}': {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
 
 
 @router.post("/articles/recommendations", response_model=RecommendationArticleResponse)
@@ -91,7 +95,8 @@ async def get_article_recommendations(request: RecommendationArticleRequest):
         return recommendations
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.error(f"Error getting article recommendations: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
 
 
 @router.post("/articles/latest", response_model=LatestArticleResponse)
@@ -103,7 +108,8 @@ async def get_latest_articles(request: LatestArticleRequest):
         return latest_articles
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.error(f"Error getting latest articles: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
 
 
 @router.get("/articles/{name}/claps-count")
@@ -125,4 +131,5 @@ async def get_article_claps_count(name: str):
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.error(f"Error getting claps count for article '{name}': {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")

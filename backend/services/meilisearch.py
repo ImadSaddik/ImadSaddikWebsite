@@ -3,6 +3,7 @@ from typing import List
 import meilisearch
 
 from core.config import settings
+from logger import logger
 from models.article import (
     LatestArticleHit,
     LatestArticleResponse,
@@ -113,7 +114,8 @@ class MeilisearchService:
             }
 
         except Exception as e:
-            return {"success": False, "message": str(e), "view_count": 0}
+            logger.error(f"Error incrementing view count for document '{document_name}': {e}")
+            return {"success": False, "message": "Internal server error", "view_count": 0}
 
     async def increment_read_count(self, document_name: str) -> dict:
         try:
@@ -139,7 +141,8 @@ class MeilisearchService:
             }
 
         except Exception as e:
-            return {"success": False, "message": str(e), "read_count": 0}
+            logger.error(f"Error incrementing read count for document '{document_name}': {e}")
+            return {"success": False, "message": "Internal server error", "read_count": 0}
 
     async def increment_claps_count(self, document_name: str) -> dict:
         try:
@@ -165,7 +168,8 @@ class MeilisearchService:
             }
 
         except Exception as e:
-            return {"success": False, "message": str(e), "claps_count": 0}
+            logger.error(f"Error incrementing claps count for document '{document_name}': {e}")
+            return {"success": False, "message": "Internal server error", "claps_count": 0}
 
     async def get_article_recommendations(self, data: RecommendationArticleRequest) -> RecommendationArticleResponse:
         filter_parts = [f"type = '{data.articleType}'", f"name != '{data.documentNameToIgnore}'"]
@@ -252,8 +256,9 @@ class MeilisearchService:
             }
 
         except Exception as e:
+            logger.error(f"Error retrieving claps count for document '{document_name}': {e}")
             return {
                 "success": False,
-                "message": f"Failed to retrieve claps count: {str(e)}",
+                "message": "Internal server error",
                 "claps_count": 0,
             }
