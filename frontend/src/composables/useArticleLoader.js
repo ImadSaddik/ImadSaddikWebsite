@@ -69,6 +69,7 @@ export function useArticleLoader({ props, registry, section, emit }) {
         emit("show-toast", errorData);
       }
     } catch (e) {
+      console.error(`Failed to update article count for slug "${slug}" (${countType}):`, e);
       emit("show-toast", errorData);
     }
   }
