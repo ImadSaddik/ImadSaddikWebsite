@@ -13,7 +13,7 @@ class Settings(BaseSettings):
 
     @property
     def CORS_ORIGINS(self):
-        if self.ENVIRONMENT == "production":
+        if self.ENVIRONMENT.lower() == "production":
             return [
                 "https://imadsaddik.com",
                 "https://www.imadsaddik.com",
