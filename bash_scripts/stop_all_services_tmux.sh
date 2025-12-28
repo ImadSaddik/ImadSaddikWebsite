@@ -7,7 +7,7 @@ if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
   tmux send-keys -t "$SESSION_NAME:0.0" C-c
   tmux send-keys -t "$SESSION_NAME:0.1" C-c
   tmux send-keys -t "$SESSION_NAME:0.2" C-c
-  sleep 1 # Allow processes to terminate gracefully
+  sleep 1
   tmux kill-session -t "$SESSION_NAME"
   echo "Session '$SESSION_NAME' stopped."
 else
