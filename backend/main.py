@@ -41,11 +41,6 @@ app.include_router(article.router, prefix="/api", tags=["article"])
 app.include_router(visitors.router, prefix="/api/visitors", tags=["visitors"])
 
 
-@app.get("/")
-async def root():
-    return {"message": "API is alive"}
-
-
-@app.get("/health")
+@app.get("/api/health")
 async def health():
     return {"status": "ok"}

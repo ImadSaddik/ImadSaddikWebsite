@@ -57,14 +57,14 @@ jobs:
           uvicorn main:app --host 0.0.0.0 --port 8000 &
           echo "Waiting for backend to start..."
           for i in {1..30}; do
-            if curl -s http://localhost:8000/health | grep -q "ok"; then
+            if curl -s http://localhost:8000/api/health | grep -q "ok"; then
               echo "Backend is ready!"
               break
             fi
             echo "Attempt $i: Backend not ready yet..."
             sleep 1
           done
-          if ! curl -s http://localhost:8000/health | grep -q "ok"; then
+          if ! curl -s http://localhost:8000/api/health | grep -q "ok"; then
             echo "Backend failed to start after 30 attempts"
             exit 1
           fi
