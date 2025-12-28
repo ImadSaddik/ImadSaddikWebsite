@@ -5,4 +5,16 @@ module.exports = {
   printWidth: 120,
   tabWidth: 2,
   useTabs: false,
+  plugins: [require.resolve("@prettier/plugin-xml")],
+  overrides: [
+    {
+      files: ["*.xml"],
+      options: {
+        parser: "xml",
+        tabWidth: 4,
+        printWidth: 120,
+        xmlWhitespaceSensitivity: "ignore",
+      },
+    },
+  ],
 };
