@@ -33,5 +33,5 @@ async def _track_task(client_ip: str | None = None, visited_page: str = "HOME") 
                 visited_page=visited_page,
                 is_bot=ip_api_response.is_bot,
             )
-    except Exception as e:
-        logger.exception(f"Error tracking visitor via endpoint: {e}")
+    except Exception:
+        logger.exception("Error tracking visitor via endpoint")

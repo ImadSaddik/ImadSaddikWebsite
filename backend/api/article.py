@@ -35,8 +35,8 @@ async def increment_article_view_count(name: str):
 
     except HTTPException:
         raise
-    except Exception as e:
-        logger.exception(f"Error incrementing view count for article '{name}': {e}")
+    except Exception:
+        logger.exception(f"Error incrementing view count for article '{name}'")
         raise HTTPException(status_code=500, detail="Internal server error")
 
 
@@ -59,8 +59,8 @@ async def increment_article_read_count(name: str):
 
     except HTTPException:
         raise
-    except Exception as e:
-        logger.exception(f"Error incrementing read count for article '{name}': {e}")
+    except Exception:
+        logger.exception(f"Error incrementing read count for article '{name}'")
         raise HTTPException(status_code=500, detail="Internal server error")
 
 
@@ -83,8 +83,8 @@ async def increment_article_claps_count(name: str):
 
     except HTTPException:
         raise
-    except Exception as e:
-        logger.exception(f"Error incrementing claps count for article '{name}': {e}")
+    except Exception:
+        logger.exception(f"Error incrementing claps count for article '{name}'")
         raise HTTPException(status_code=500, detail="Internal server error")
 
 
@@ -94,8 +94,8 @@ async def get_article_recommendations(request: RecommendationArticleRequest):
         recommendations = await meilisearch_service.get_article_recommendations(request)
         return recommendations
 
-    except Exception as e:
-        logger.exception(f"Error getting article recommendations: {e}")
+    except Exception:
+        logger.exception("Error getting article recommendations")
         raise HTTPException(status_code=500, detail="Internal server error")
 
 
@@ -107,8 +107,8 @@ async def get_latest_articles(request: LatestArticleRequest):
         )
         return latest_articles
 
-    except Exception as e:
-        logger.exception(f"Error getting latest articles: {e}")
+    except Exception:
+        logger.exception("Error getting latest articles")
         raise HTTPException(status_code=500, detail="Internal server error")
 
 
@@ -130,6 +130,6 @@ async def get_article_claps_count(name: str):
 
     except HTTPException:
         raise
-    except Exception as e:
-        logger.exception(f"Error getting claps count for article '{name}': {e}")
+    except Exception:
+        logger.exception(f"Error getting claps count for article '{name}'")
         raise HTTPException(status_code=500, detail="Internal server error")
