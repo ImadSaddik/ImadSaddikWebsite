@@ -11,3 +11,4 @@ pytest-cov==7.0.0
 pre_commit==4.5.0
 gunicorn==23.0.0
 locust==2.42.6
+slowapi==0.1.9

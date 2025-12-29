@@ -1,5 +1,7 @@
-from database import add_visitor
 from fastapi import APIRouter, BackgroundTasks, Request
+
+from core.limiter import limiter
+from database import add_visitor
 from logger import logger
 from models.visitor import TrackVisitorRequest
 from services.geolocation import get_country_and_check_bot_from_ip
@@ -8,6 +10,7 @@ router = APIRouter()
 
 
 @router.post("/track")
+@limiter.limit("30/minute")
 async def track_visitor_endpoint(
     request: Request, background_tasks: BackgroundTasks, body: TrackVisitorRequest
 ) -> dict:
