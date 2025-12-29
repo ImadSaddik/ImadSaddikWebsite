@@ -18,6 +18,6 @@ async def search_articles(request: Request, body: SearchRequest):
 
     except HTTPException:
         raise
-    except Exception as e:
-        logger.error(f"Error searching articles with query '{body.query}': {e}")
+    except Exception:
+        logger.exception(f"Error searching articles with query '{body.query}'")
         raise HTTPException(status_code=500, detail="Internal server error")
