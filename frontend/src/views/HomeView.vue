@@ -93,9 +93,8 @@ export default {
   methods: {
     async getLatestArticlesPerType(articleType) {
       try {
-        const response = await axios.post("/api/articles/latest", {
-          articleType,
-        });
+        const endpoint = "/api/articles/latest";
+        const response = await axios.post(endpoint, { articleType });
 
         const data = response.data;
         const hits = data?.hits || [];
@@ -103,8 +102,18 @@ export default {
           hits,
           articleType,
         });
-      } catch {
-        this.$emit("show-toast", { message: `Failed to fetch the latest ${articleType} articles`, type: "error" });
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          this.$emit("show-toast", {
+            message: "Patience, stargazer! Even the universe needs a second to update the latest discoveries.",
+            type: "warning",
+          });
+        } else {
+          this.$emit("show-toast", {
+            message: `Failed to fetch the latest ${articleType} articles`,
+            type: "error",
+          });
+        }
       }
     },
   },

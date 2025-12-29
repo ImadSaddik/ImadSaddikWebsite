@@ -68,9 +68,15 @@ export function useArticleLoader({ props, registry, section, emit }) {
         errorData.message += `: ${message}`;
         emit("show-toast", errorData);
       }
-    } catch (e) {
-      console.error(`Failed to update article count for slug "${slug}" (${countType}):`, e);
-      emit("show-toast", errorData);
+    } catch (error) {
+      if (error.response && error.response.status === 429) {
+        emit("show-toast", {
+          message: "Hold up! You're refreshing too much. Please wait a minute before trying again.",
+          type: "warning",
+        });
+      } else {
+        emit("show-toast", errorData);
+      }
     }
   }
 
