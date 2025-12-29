@@ -45,8 +45,9 @@ export default {
   font-size: var(--font-size-small);
   font-weight: 500;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  min-width: 280px;
-  max-width: 400px;
+  width: max-content;
+  min-width: 300px;
+  max-width: 600px;
 }
 
 .toast-success {
