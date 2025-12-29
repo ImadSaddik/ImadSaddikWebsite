@@ -36,7 +36,7 @@ async def increment_article_view_count(name: str):
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"Error incrementing view count for article '{name}': {e}")
+        logger.exception(f"Error incrementing view count for article '{name}': {e}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
 
@@ -60,7 +60,7 @@ async def increment_article_read_count(name: str):
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"Error incrementing read count for article '{name}': {e}")
+        logger.exception(f"Error incrementing read count for article '{name}': {e}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
 
@@ -84,7 +84,7 @@ async def increment_article_claps_count(name: str):
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"Error incrementing claps count for article '{name}': {e}")
+        logger.exception(f"Error incrementing claps count for article '{name}': {e}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
 
@@ -95,7 +95,7 @@ async def get_article_recommendations(request: RecommendationArticleRequest):
         return recommendations
 
     except Exception as e:
-        logger.error(f"Error getting article recommendations: {e}")
+        logger.exception(f"Error getting article recommendations: {e}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
 
@@ -108,7 +108,7 @@ async def get_latest_articles(request: LatestArticleRequest):
         return latest_articles
 
     except Exception as e:
-        logger.error(f"Error getting latest articles: {e}")
+        logger.exception(f"Error getting latest articles: {e}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
 
@@ -131,5 +131,5 @@ async def get_article_claps_count(name: str):
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"Error getting claps count for article '{name}': {e}")
+        logger.exception(f"Error getting claps count for article '{name}': {e}")
         raise HTTPException(status_code=500, detail="Internal server error")

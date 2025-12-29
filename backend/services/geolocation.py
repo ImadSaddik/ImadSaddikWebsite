@@ -40,5 +40,5 @@ async def get_country_and_check_bot_from_ip(ip_address: str) -> IpAPIResponse:
 
             return IpAPIResponse(country=None, is_bot=False)
         except Exception as e:
-            logger.error(f"Error calling ipapi.is: {e}")
+            logger.exception(f"Error calling ipapi.is: {e}")
             return IpAPIResponse(country=None, is_bot=False)
