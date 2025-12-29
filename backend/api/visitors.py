@@ -1,5 +1,6 @@
-from database import add_visitor
 from fastapi import APIRouter, BackgroundTasks, Request
+
+from database import add_visitor
 from logger import logger
 from models.visitor import TrackVisitorRequest
 from services.geolocation import get_country_and_check_bot_from_ip
@@ -32,5 +33,5 @@ async def _track_task(client_ip: str | None = None, visited_page: str = "HOME") 
                 visited_page=visited_page,
                 is_bot=ip_api_response.is_bot,
             )
-    except Exception as e:
-        logger.error(f"Error tracking visitor via endpoint: {e}")
+    except Exception:
+        logger.exception("Error tracking visitor via endpoint")

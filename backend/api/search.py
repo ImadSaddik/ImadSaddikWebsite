@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException
 
+from logger import logger
 from models.search import SearchRequest, SearchResponse
 from services.meilisearch import MeilisearchService
 
@@ -15,5 +16,6 @@ async def search_articles(request: SearchRequest):
 
     except HTTPException:
         raise
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    except Exception:
+        logger.exception(f"Error searching articles with query '{request.query}'")
+        raise HTTPException(status_code=500, detail="Internal server error")

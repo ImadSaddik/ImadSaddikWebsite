@@ -3,6 +3,7 @@ from typing import List
 import meilisearch
 
 from core.config import settings
+from logger import logger
 from models.article import (
     LatestArticleHit,
     LatestArticleResponse,
@@ -112,8 +113,9 @@ class MeilisearchService:
                 "view_count": new_view_count,
             }
 
-        except Exception as e:
-            return {"success": False, "message": str(e), "view_count": 0}
+        except Exception:
+            logger.exception(f"Error incrementing view count for document '{document_name}'")
+            return {"success": False, "message": "Internal server error", "view_count": 0}
 
     async def increment_read_count(self, document_name: str) -> dict:
         try:
@@ -138,8 +140,9 @@ class MeilisearchService:
                 "read_count": new_read_count,
             }
 
-        except Exception as e:
-            return {"success": False, "message": str(e), "read_count": 0}
+        except Exception:
+            logger.exception(f"Error incrementing read count for document '{document_name}'")
+            return {"success": False, "message": "Internal server error", "read_count": 0}
 
     async def increment_claps_count(self, document_name: str) -> dict:
         try:
@@ -164,8 +167,9 @@ class MeilisearchService:
                 "claps_count": new_claps_count,
             }
 
-        except Exception as e:
-            return {"success": False, "message": str(e), "claps_count": 0}
+        except Exception:
+            logger.exception(f"Error incrementing claps count for document '{document_name}'")
+            return {"success": False, "message": "Internal server error", "claps_count": 0}
 
     async def get_article_recommendations(self, data: RecommendationArticleRequest) -> RecommendationArticleResponse:
         filter_parts = [f"type = '{data.articleType}'", f"name != '{data.documentNameToIgnore}'"]
@@ -251,9 +255,10 @@ class MeilisearchService:
                 "claps_count": chunks[0].claps_count,
             }
 
-        except Exception as e:
+        except Exception:
+            logger.exception(f"Error retrieving claps count for document '{document_name}'")
             return {
                 "success": False,
-                "message": f"Failed to retrieve claps count: {str(e)}",
+                "message": "Internal server error",
                 "claps_count": 0,
             }
