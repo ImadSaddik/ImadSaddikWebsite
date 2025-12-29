@@ -194,7 +194,7 @@ export default {
           });
         } else {
           this.$emit("show-toast", {
-            message: "Failed to increment clap count. Please try again later.",
+            message: "Failed to increment clap count",
             type: "error",
           });
         }
