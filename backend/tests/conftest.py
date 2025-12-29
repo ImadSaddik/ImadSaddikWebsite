@@ -1,3 +1,5 @@
+from typing import Generator
+
 import pytest
 from fastapi.testclient import TestClient
 
@@ -6,37 +8,38 @@ from main import app
 
 
 @pytest.fixture(scope="module")
-def client():
+def client() -> Generator[TestClient, None, None]:
     with TestClient(app) as test_client:
         yield test_client
 
 
 @pytest.fixture(autouse=True)
-def reset_rate_limit():
+def reset_rate_limit() -> None:
+    """
+    Resets the rate limiter storage before every test.
+    """
     limiter.limiter.storage.reset()
 
 
 @pytest.fixture
 def assert_rate_limit(client):
-    def _hit_until_429(url: str, method: str, payload: dict = None, limit: int = 30):
-        # Hit the endpoint 'limit' times (should succeed)
-        for i in range(limit):
-            if method == "POST":
-                response = client.post(url, json=payload)
-            elif method == "PATCH":
-                response = client.patch(url)
-            elif method == "GET":
-                response = client.get(url)
+    """
+    A helper to test rate limits.
+    It hits an endpoint repeatedly until it expects a 429 error.
+    """
 
+    def _hit_until_429(url: str, method: str, payload: dict = None, limit: int = 30):
+        request_function = getattr(client, method.lower())
+
+        request_kwargs = {}
+        if method.upper() in ("POST", "PATCH", "PUT") and payload:
+            request_kwargs["json"] = payload
+
+        for i in range(limit):
+            response = request_function(url, **request_kwargs)
             assert response.status_code != 429, f"Request {i + 1} failed with 429 too early."
 
-        # The next hit must fail with 429
-        if method == "POST":
-            response = client.post(url, json=payload)
-        elif method == "PATCH":
-            response = client.patch(url)
-        elif method == "GET":
-            response = client.get(url)
+        response = request_function(url, **request_kwargs)
 
         assert response.status_code == 429
         assert "Rate limit exceeded" in response.text
