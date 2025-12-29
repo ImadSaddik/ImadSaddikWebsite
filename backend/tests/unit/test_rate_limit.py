@@ -17,6 +17,8 @@ def _hit_endpoint_until_limit(client: TestClient, url: str, method: str, payload
             response = client.post(url, json=payload)
         elif method == "PATCH":
             response = client.patch(url)
+        elif method == "GET":
+            response = client.get(url)
 
         assert response.status_code != 429, f"Request {i + 1} failed with 429 too early."
 
@@ -24,6 +26,8 @@ def _hit_endpoint_until_limit(client: TestClient, url: str, method: str, payload
         response = client.post(url, json=payload)
     elif method == "PATCH":
         response = client.patch(url)
+    elif method == "GET":
+        response = client.get(url)
 
     assert response.status_code == 429
     assert "Rate limit exceeded" in response.text
@@ -58,6 +62,11 @@ def test_rate_limit_latest_articles(client) -> None:
     url = "/api/articles/latest"
     payload = {"articleType": "blog-post"}
     _hit_endpoint_until_limit(client, url, "POST", payload)
+
+
+def test_rate_limit_get_claps_count(client) -> None:
+    url = "/api/articles/test-rate-limit-article/claps-count"
+    _hit_endpoint_until_limit(client, url, "GET")
 
 
 def test_rate_limit_search(client) -> None:

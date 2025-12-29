@@ -119,7 +119,8 @@ async def get_latest_articles(request: Request, body: LatestArticleRequest):
 
 
 @router.get("/articles/{name}/claps-count")
-async def get_article_claps_count(name: str):
+@limiter.limit("30/minute")
+async def get_article_claps_count(request: Request, name: str):
     try:
         result = await meilisearch_service.get_claps_count(name)
 
