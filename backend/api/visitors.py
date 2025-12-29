@@ -1,5 +1,6 @@
 from fastapi import APIRouter, BackgroundTasks, Request
 
+from core.limiter import limiter
 from database import add_visitor
 from logger import logger
 from models.visitor import TrackVisitorRequest
@@ -9,6 +10,7 @@ router = APIRouter()
 
 
 @router.post("/track")
+@limiter.limit("30/minute")
 async def track_visitor_endpoint(
     request: Request, background_tasks: BackgroundTasks, body: TrackVisitorRequest
 ) -> dict:

@@ -49,6 +49,9 @@ import ArticleFooter from "@/components/ArticleFooter.vue";
 import EditArticleOnGitHub from "./EditArticleOnGitHub.vue";
 import TableOfContents from "./TableOfContents.vue";
 
+// Constants
+import { TIME_OUT_MILLISECONDS } from "@/constants";
+
 export default {
   name: "ArticleLayout",
   components: {
@@ -147,7 +150,17 @@ export default {
           articleType: this.articleType,
         });
       } catch (error) {
-        this.$emit("show-toast", { message: "Failed to fetch article recommendations", type: "error" });
+        if (error.response && error.response.status === 429) {
+          this.$emit("show-toast", {
+            message: "Are you a bot? Take a tiny break while I cool down the recommendation engine.",
+            type: "warning",
+          });
+        } else {
+          this.$emit("show-toast", {
+            message: "Failed to fetch article recommendations",
+            type: "error",
+          });
+        }
       }
     },
     async handleClap() {
@@ -158,9 +171,8 @@ export default {
       this.isClapping = true;
 
       try {
-        const response = await axios.patch(`/api/articles/${this.slug}/increment-claps-count`, {
-          timeout: 10_000,
-        });
+        const endpoint = `/api/articles/${this.slug}/increment-claps-count`;
+        const response = await axios.patch(endpoint, { timeout: TIME_OUT_MILLISECONDS });
 
         const { success, message, claps_count } = response.data;
 
@@ -175,10 +187,17 @@ export default {
           });
         }
       } catch (error) {
-        this.$emit("show-toast", {
-          message: "Failed to increment clap count",
-          type: "error",
-        });
+        if (error.response && error.response.status === 429) {
+          this.$emit("show-toast", {
+            message: "Woah there! You are hammering the button too fast. Please wait a minute before clapping again.",
+            type: "warning",
+          });
+        } else {
+          this.$emit("show-toast", {
+            message: "Failed to increment clap count",
+            type: "error",
+          });
+        }
       } finally {
         this.isClapping = false;
       }

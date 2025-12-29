@@ -109,6 +109,9 @@ import CheckboxGroup from "@/components/CheckboxGroup.vue";
 import BaseCard from "@/components/BaseCard.vue";
 import SearchBar from "@/components/SearchBar.vue";
 
+// Constants
+import { TIME_OUT_MILLISECONDS } from "@/constants";
+
 export default {
   name: "ArticlesHub",
   components: {
@@ -248,7 +251,7 @@ export default {
           headers: {
             "Content-Type": "application/json",
           },
-          timeout: 10_000,
+          timeout: TIME_OUT_MILLISECONDS,
         });
         searchResponse = response.data;
         const hits = searchResponse?.hits || [];
@@ -261,11 +264,19 @@ export default {
 
         this.updateTagsFromFacetDistribution(facetDistribution.tags || {});
         this.updateYearsFromFacetDistribution(facetDistribution.year || {});
-      } catch {
-        this.$emit("show-toast", {
-          message: "Failed to perform search",
-          type: "error",
-        });
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          this.$emit("show-toast", {
+            message:
+              "Sherlock, put down the magnifying glass! You're searching faster than I can think. Give me a moment.",
+            type: "warning",
+          });
+        } else {
+          this.$emit("show-toast", {
+            message: "Failed to perform search",
+            type: "error",
+          });
+        }
       }
 
       this.isSearchResponseEmpty = !searchResponse || searchResponse.hits.length === 0;
