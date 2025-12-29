@@ -80,6 +80,12 @@ export default {
   line-height: 1.6;
 }
 
+@media screen and (max-width: 1100px) {
+  .toast-message {
+    max-width: 480px;
+  }
+}
+
 @media screen and (max-width: 576px) {
   .toast-message {
     width: 100%;
