@@ -116,6 +116,10 @@ export default {
       } else {
         this.baseTopOffset = 32;
       }
+
+      this.$nextTick(() => {
+        this.updateToastPositions();
+      });
     },
   },
 };
