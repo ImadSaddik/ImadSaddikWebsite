@@ -35,6 +35,10 @@ jobs:
     needs: backend-lint-format-check
     uses: ./.github/workflows/dast-scan.yml
     secrets: inherit
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
 
   frontend-unit-tests:
     name: Frontend
