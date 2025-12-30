@@ -136,4 +136,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           target: "http://localhost:8080"
           allow_issue_writing: true
-          fail_on: "high,medium"
+          fail_action: true
