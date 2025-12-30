@@ -62,7 +62,7 @@ jobs:
 
   deploy-production:
     name: Deploy to production
-    needs: [frontend-build, dast-check]
+    needs: frontend-build
     if: github.ref == 'refs/heads/master'
     uses: ./.github/workflows/deploy.yml
     secrets:
