@@ -7,6 +7,7 @@ env:
   MEILISEARCH_MASTER_KEY: "aStrongMasterKeyForTestingPurposes"
   MEILISEARCH_URL: "http://localhost:7700"
   MEILISEARCH_INDEX_NAME: "articles_test"
+  ENVIRONMENT: "development"
 
 jobs:
   tests:
@@ -56,3 +57,4 @@ jobs:
           MEILISEARCH_URL: ${{ env.MEILISEARCH_URL }}
           MEILISEARCH_MASTER_KEY: ${{ env.MEILISEARCH_MASTER_KEY }}
           MEILISEARCH_INDEX_NAME: ${{ env.MEILISEARCH_INDEX_NAME }}
+          ENVIRONMENT: ${{ env.ENVIRONMENT }}

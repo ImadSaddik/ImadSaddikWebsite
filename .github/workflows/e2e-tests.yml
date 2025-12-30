@@ -7,6 +7,7 @@ env:
   MEILISEARCH_MASTER_KEY: "aStrongMasterKeyForTestingPurposes"
   MEILISEARCH_URL: "http://localhost:7700"
   MEILISEARCH_INDEX_NAME: "articles_test"
+  ENVIRONMENT: "development"
 
 jobs:
   tests:
@@ -72,6 +73,7 @@ jobs:
           MEILISEARCH_URL: ${{ env.MEILISEARCH_URL }}
           MEILISEARCH_MASTER_KEY: ${{ env.MEILISEARCH_MASTER_KEY }}
           MEILISEARCH_INDEX_NAME: ${{ env.MEILISEARCH_INDEX_NAME }}
+          ENVIRONMENT: ${{ env.ENVIRONMENT }}
 
       - name: Seed E2E test data
         working-directory: ./backend
@@ -80,6 +82,7 @@ jobs:
           MEILISEARCH_URL: ${{ env.MEILISEARCH_URL }}
           MEILISEARCH_MASTER_KEY: ${{ env.MEILISEARCH_MASTER_KEY }}
           MEILISEARCH_INDEX_NAME: ${{ env.MEILISEARCH_INDEX_NAME }}
+          ENVIRONMENT: ${{ env.ENVIRONMENT }}
 
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
