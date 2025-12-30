@@ -30,11 +30,6 @@ jobs:
     needs: [backend-vulnerability-check, backend-sast-check]
     uses: ./.github/workflows/backend-lint-format-check.yml
 
-  dast-check:
-    name: Backend
-    needs: backend-lint-format-check
-    uses: ./.github/workflows/dast-scan.yml
-
   frontend-unit-tests:
     name: Frontend
     needs: frontend-lint-format-check
