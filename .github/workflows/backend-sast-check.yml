@@ -1,11 +1,11 @@
-name: Backend vulnerability check
+name: Backend SAST check
 
 on:
   workflow_call:
 
 jobs:
-  vulnerability-check:
-    name: Audit dependencies
+  bandit-check:
+    name: Bandit SAST scan
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -20,7 +20,8 @@ jobs:
           python-version: "3.13"
           cache: "pip"
 
-      - name: Run pip-audit
-        uses: pypa/gh-action-pip-audit@v1.1.0
-        with:
-          inputs: backend/requirements.txt
+      - name: Install Bandit
+        run: pip install bandit
+
+      - name: Run Bandit
+        run: bandit -r . -ll
