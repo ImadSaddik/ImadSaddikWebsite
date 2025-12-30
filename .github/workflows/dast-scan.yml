@@ -1,4 +1,4 @@
-name: DAST API scan
+name: DAST API Scan
 
 on:
   workflow_call:
@@ -15,8 +15,13 @@ permissions:
 
 jobs:
   zap_scan:
-    name: OWASP ZAP API scan
+    name: OWASP ZAP API Scan
     runs-on: ubuntu-latest
+    env:
+      MEILISEARCH_MASTER_KEY: "aStrongMasterKeyForTestingPurposes"
+      MEILISEARCH_URL: "http://localhost:7700"
+      MEILISEARCH_INDEX_NAME: "articles_test"
+      ENVIRONMENT: "development"
     defaults:
       run:
         working-directory: ./backend
@@ -30,20 +35,47 @@ jobs:
           python-version: "3.13"
           cache: "pip"
 
-      - name: Install dependencies
+      - name: Install backend dependencies
         run: pip install -r requirements.txt
+
+      - name: Download Meilisearch binary
+        working-directory: ./backend
+        run: |
+          curl -L https://install.meilisearch.com | sh
+          chmod +x meilisearch
+
+      - name: Start Meilisearch
+        working-directory: ./backend
+        run: |
+          ./meilisearch --master-key="${MEILISEARCH_MASTER_KEY}" &
+          echo "Waiting for Meilisearch to start..."
+          for i in {1..30}; do
+            if curl -s http://localhost:7700/health | grep -q "available"; then
+              echo "Meilisearch is ready!"
+              break
+            fi
+            echo "Attempt $i: Meilisearch not ready yet..."
+            sleep 1
+          done
+          if ! curl -s http://localhost:7700/health | grep -q "available"; then
+            echo "Meilisearch failed to start after 30 attempts"
+            exit 1
+          fi
+
+      - name: Seed test data
+        run: python -m tests.test_data
 
       - name: Start backend
         run: |
           nohup uvicorn main:app --host 0.0.0.0 --port 8000 &
           echo "Waiting for backend to start..."
-          sleep 10
+          sleep 5
 
-      - name: ZAP API scan
-        uses: zaproxy/action-api-scan@v0.10.0
+      - name: ZAP API Scan
+        uses: zaproxy/action-api-scan@v0.7.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           target: "http://localhost:8000/openapi.json"
           format: openapi
           allow_issue_writing: ${{ inputs.allow_issue_writing }}
-          fail_action: "high,medium"
+          fail_action: true
