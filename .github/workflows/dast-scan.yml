@@ -37,5 +37,5 @@ jobs:
         uses: zaproxy/action-baseline@v0.15.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          target: "http://localhost:8000"
+          target: "http://172.17.0.1:8000"
           allow_issue_writing: true
