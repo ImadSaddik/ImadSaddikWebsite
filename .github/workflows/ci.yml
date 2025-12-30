@@ -31,7 +31,7 @@ jobs:
     uses: ./.github/workflows/backend-lint-format-check.yml
 
   dast-check:
-    name: Backend
+    name: Backend DAST
     needs: backend-lint-format-check
     uses: ./.github/workflows/dast-scan.yml
 
