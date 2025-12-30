@@ -1,7 +1,12 @@
-name: DAST baseline scan
+name: DAST API scan
 
 on:
   workflow_call:
+    inputs:
+      allow_issue_writing:
+        required: false
+        type: boolean
+        default: true
 
 permissions:
   contents: read
@@ -10,7 +15,7 @@ permissions:
 
 jobs:
   zap_scan:
-    name: OWASP ZAP baseline
+    name: OWASP ZAP API scan
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -31,11 +36,14 @@ jobs:
       - name: Start backend
         run: |
           nohup uvicorn main:app --host 0.0.0.0 --port 8000 &
-          sleep 5
+          echo "Waiting for backend to start..."
+          sleep 10
 
-      - name: ZAP scan
-        uses: zaproxy/action-baseline@v0.15.0
+      - name: ZAP API scan
+        uses: zaproxy/action-api-scan@v0.10.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          target: "http://172.17.0.1:8000"
-          allow_issue_writing: true
+          target: "http://localhost:8000/openapi.json"
+          format: openapi
+          allow_issue_writing: ${{ inputs.allow_issue_writing }}
+          fail_action: "high,medium"
