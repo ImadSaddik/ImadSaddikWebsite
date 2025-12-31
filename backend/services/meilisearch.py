@@ -16,16 +16,9 @@ from models.search import FacetDistribution, SearchHit, SearchRequest, SearchRes
 
 
 class MeilisearchService:
-    def __init__(self):
+    def __init__(self) -> None:
         self.client = meilisearch.Client(url=settings.MEILISEARCH_URL, api_key=settings.MEILISEARCH_MASTER_KEY)
         self.index = self.client.index(uid=settings.MEILISEARCH_INDEX_NAME)
-
-    def _sanitize(self, text: str) -> str:
-        """
-        Sanitizes input to prevent Meilisearch filter injection.
-        Escapes backslashes first, then single and double quotes.
-        """
-        return text.replace("\\", "\\\\").replace("'", "\\'").replace('"', '\\"')
 
     def get_filter_conditions(self, data: SearchRequest) -> str:
         conditions = []
@@ -102,35 +95,6 @@ class MeilisearchService:
             facet_distribution=facet_distribution,
             processing_time_ms=results.get("processingTimeMs", 0),
         )
-
-    async def _increment_counter(self, document_name: str, field_name: str) -> dict:
-        try:
-            safe_name = self._sanitize(document_name)
-            response = self.index.get_documents({"filter": f"name = '{safe_name}'", "limit": 100})
-            chunks = response.results
-
-            if not chunks:
-                return {
-                    "success": False,
-                    "message": "Document not found",
-                    field_name: 0,
-                }
-
-            new_count = getattr(chunks[0], field_name) + 1
-            documents_to_update = [{"id": chunk.id, field_name: new_count} for chunk in chunks]
-
-            self.index.update_documents(documents_to_update)
-
-            display_field = field_name.replace("_count", "").replace("_", " ")
-            return {
-                "success": True,
-                "message": f"Incremented {display_field} count to {new_count}",
-                field_name: new_count,
-            }
-
-        except Exception:
-            logger.exception(f"Error incrementing {field_name} for document '{document_name}'")
-            return {"success": False, "message": "Internal server error", field_name: 0}
 
     async def increment_view_count(self, document_name: str) -> dict:
         return await self._increment_counter(document_name, "view_count")
@@ -236,3 +200,39 @@ class MeilisearchService:
                 "message": "Internal server error",
                 "claps_count": 0,
             }
+
+    async def _increment_counter(self, document_name: str, field_name: str) -> dict:
+        try:
+            safe_name = self._sanitize(document_name)
+            response = self.index.get_documents({"filter": f"name = '{safe_name}'", "limit": 100})
+            chunks = response.results
+
+            if not chunks:
+                return {
+                    "success": False,
+                    "message": "Document not found",
+                    field_name: 0,
+                }
+
+            new_count = getattr(chunks[0], field_name) + 1
+            documents_to_update = [{"id": chunk.id, field_name: new_count} for chunk in chunks]
+
+            self.index.update_documents(documents_to_update)
+
+            display_field = field_name.replace("_count", "").replace("_", " ")
+            return {
+                "success": True,
+                "message": f"Incremented {display_field} count to {new_count}",
+                field_name: new_count,
+            }
+
+        except Exception:
+            logger.exception(f"Error incrementing {field_name} for document '{document_name}'")
+            return {"success": False, "message": "Internal server error", field_name: 0}
+
+    def _sanitize(self, text: str) -> str:
+        """
+        Sanitizes input to prevent Meilisearch filter injection.
+        Escapes backslashes first, then single and double quotes.
+        """
+        return text.replace("\\", "\\\\").replace("'", "\\'").replace('"', '\\"')
