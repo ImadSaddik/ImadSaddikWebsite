@@ -67,5 +67,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           target: "http://localhost:8000/openapi.json"
           format: openapi
+          rules_file_name: '.github/zap-rules.tsv'
           allow_issue_writing: false
           fail_action: true
