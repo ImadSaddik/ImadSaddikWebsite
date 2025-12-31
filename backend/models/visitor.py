@@ -1,16 +1,6 @@
-from enum import Enum
-
 from pydantic import BaseModel
 
-
-class VisitorPageType(str, Enum):
-    HOME = "HOME"
-    BLOGS = "BLOGS"
-    COURSES = "COURSES"
-    ASTRONOMY = "ASTRONOMY"
-    ABOUT_ME = "ABOUT_ME"
-    HIRE_ME = "HIRE_ME"
-    OTHER = "OTHER"
+from enums.visitor import VisitorPageType
 
 
 class Visitor(BaseModel):

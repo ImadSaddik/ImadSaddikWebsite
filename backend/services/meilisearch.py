@@ -3,6 +3,7 @@ from typing import List
 import meilisearch
 
 from core.config import settings
+from enums.search import SortableFields, SortOrder
 from logger import logger
 from models.article import (
     LatestArticleHit,
@@ -11,7 +12,7 @@ from models.article import (
     RecommendationArticleRequest,
     RecommendationArticleResponse,
 )
-from models.search import FacetDistribution, SearchHit, SearchRequest, SearchResponse, SortableFields
+from models.search import FacetDistribution, SearchHit, SearchRequest, SearchResponse
 
 
 class MeilisearchService:
@@ -22,8 +23,8 @@ class MeilisearchService:
     def get_filter_conditions(self, data: SearchRequest) -> str:
         conditions = []
 
-        if data.articleType:
-            conditions.append(f'type = "{data.articleType}"')
+        if data.article_type:
+            conditions.append(f'type = "{data.article_type.value}"')
 
         if data.filters.years:
             conditions.append(f"year IN {data.filters.years}")
@@ -35,8 +36,13 @@ class MeilisearchService:
         return " AND ".join(conditions) if conditions else ""
 
     def get_sorting_criteria(self, data: SearchRequest) -> List[str]:
-        sort_by = data.sortBy.field if data.sortBy else SortableFields.DATE
-        sort_order = data.sortBy.order if data.sortBy else "desc"
+        sort_by = SortableFields.DATE
+        sort_order = SortOrder.DESC.value
+
+        if data.sort_by:
+            sort_by = data.sort_by.field
+            sort_order = data.sort_by.order.value
+
         field_mapping = {
             SortableFields.DATE: f"creation_date:{sort_order}",
             SortableFields.POPULARITY: f"view_count:{sort_order}",
@@ -172,7 +178,7 @@ class MeilisearchService:
             return {"success": False, "message": "Internal server error", "claps_count": 0}
 
     async def get_article_recommendations(self, data: RecommendationArticleRequest) -> RecommendationArticleResponse:
-        filter_parts = [f"type = '{data.articleType}'", f"name != '{data.documentNameToIgnore}'"]
+        filter_parts = [f"type = '{data.article_type.value}'", f"name != '{data.documentNameToIgnore}'"]
 
         if data.documentTags:
             tags_list = [f"'{tag}'" for tag in data.documentTags]

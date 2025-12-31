@@ -2,6 +2,7 @@ from typing import List
 
 from pydantic import BaseModel
 
+from enums.article import ArticleType
 from models.document import Hit
 
 
@@ -38,7 +39,7 @@ class RecommendationArticleResponse(BaseModel):
 
 
 class LatestArticleRequest(BaseModel):
-    articleType: str
+    articleType: ArticleType
 
 
 class LatestArticleHit(Hit): ...

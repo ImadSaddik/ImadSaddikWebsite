@@ -1,17 +1,10 @@
-from enum import Enum
 from typing import Dict, List, Optional
 
 from pydantic import BaseModel
 
+from enums.article import ArticleType
+from enums.search import SortableFields, SortOrder
 from models.document import Hit
-
-
-class SortableFields(str, Enum):
-    DATE = "date"
-    POPULARITY = "popularity"
-    ENGAGEMENT = "engagement"
-    CLAPS = "claps"
-    NONE = ""
 
 
 class SearchFilters(BaseModel):
@@ -21,13 +14,13 @@ class SearchFilters(BaseModel):
 
 class SearchSortBy(BaseModel):
     field: SortableFields = SortableFields.DATE
-    order: str = "desc"
+    order: SortOrder = SortOrder.DESC
 
 
 class SearchRequest(BaseModel):
     query: str = ""
-    articleType: str
-    sortBy: Optional[SearchSortBy] = SearchSortBy()
+    article_type: ArticleType = ArticleType.BLOG_POST
+    sort_by: Optional[SearchSortBy] = SearchSortBy()
     filters: SearchFilters = SearchFilters()
     size: int = 10
 
