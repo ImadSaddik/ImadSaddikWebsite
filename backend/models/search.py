@@ -1,6 +1,6 @@
 from typing import Dict, List, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 
 from enums.article import ArticleType
 from enums.search import SortableField, SortOrder
@@ -10,6 +10,13 @@ from models.document import Hit
 class SearchFilters(BaseModel):
     years: List[str] = []
     tags: List[str] = []
+
+    @field_validator("years")
+    def validate_years(cls, values: List[str]) -> List[str]:
+        for year in values:
+            if not year.isdigit() or len(year) != 4:
+                raise ValueError("Year must be a 4-digit number")
+        return values
 
 
 class SearchSortBy(BaseModel):
