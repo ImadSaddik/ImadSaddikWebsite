@@ -1,7 +1,7 @@
 import { mount, RouterLinkStub } from "@vue/test-utils";
 import NavBar from "@/components/NavBar.vue";
 
-import { PAGE_KEYS } from "@/constants";
+import { PAGE_KEYS, ROUTES } from "@/constants";
 
 describe("NavBar", () => {
   const factory = (props = {}) =>
@@ -22,7 +22,7 @@ describe("NavBar", () => {
     const homeLink = wrapper.find(".nav-bar-home");
     expect(homeLink.text()).toBe("Imad Saddik");
     const homeLinkComponent = homeLink.findComponent(RouterLinkStub);
-    expect(homeLinkComponent.props("to")).toBe("/");
+    expect(homeLinkComponent.props("to")).toBe(ROUTES.HOME.path);
   });
 
   it("renders all navigation items", () => {
@@ -38,7 +38,13 @@ describe("NavBar", () => {
   it("renders the correct navigation links", () => {
     const wrapper = factory();
     const navItems = wrapper.findAll(".expanded-nav-bar-item");
-    const expectedLinks = ["/blogs", "/courses", "/astronomy", "/about-me", "/hire-me"];
+    const expectedLinks = [
+      ROUTES.BLOGS_HUB.path,
+      ROUTES.COURSES_HUB.path,
+      ROUTES.ASTRONOMY_HUB.path,
+      ROUTES.ABOUT_ME.path,
+      ROUTES.HIRE_ME.path,
+    ];
     navItems.forEach((item, index) => {
       const linkComponent = item.findComponent(RouterLinkStub);
       expect(linkComponent.props("to")).toBe(expectedLinks[index]);

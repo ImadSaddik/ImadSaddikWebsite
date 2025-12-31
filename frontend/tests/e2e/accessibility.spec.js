@@ -1,16 +1,17 @@
 import { test, expect } from "@playwright/test";
+import { ROUTES } from "@/constants";
 
 test.describe("Accessibility", () => {
   test.describe("Happy path", () => {
     test("should have skip link for keyboard navigation", async ({ page }) => {
-      await page.goto("/");
+      await page.goto(ROUTES.HOME.path);
 
       const skipLink = page.locator('a:has-text("Skip to main content"), .skip-link');
       await expect(skipLink).toBeAttached();
     });
 
     test("should have alt text on images", async ({ page }) => {
-      await page.goto("/");
+      await page.goto(ROUTES.HOME.path);
       await page.waitForLoadState("networkidle");
 
       const allImages = await page.locator("img").all();
@@ -23,7 +24,7 @@ test.describe("Accessibility", () => {
     });
 
     test("should support keyboard navigation in the home page", async ({ page }) => {
-      await page.goto("/");
+      await page.goto(ROUTES.HOME.path);
       await page.waitForLoadState("networkidle");
 
       const focusableElements = [
@@ -51,7 +52,7 @@ test.describe("Accessibility", () => {
     });
 
     test("should have focusable search bar", async ({ page }) => {
-      const pages = ["/blogs", "/courses", "/astronomy"];
+      const pages = [ROUTES.BLOGS_HUB.path, ROUTES.COURSES_HUB.path, ROUTES.ASTRONOMY_HUB.path];
 
       for (const url of pages) {
         await page.goto(url);
@@ -64,7 +65,7 @@ test.describe("Accessibility", () => {
     });
 
     test("should have proper link text", async ({ page }) => {
-      await page.goto("/");
+      await page.goto(ROUTES.HOME.path);
 
       const links = page.locator('a:not(:has-text("click here"))');
       const count = await links.count();
@@ -74,7 +75,7 @@ test.describe("Accessibility", () => {
 
   test.describe("Unhappy path", () => {
     test("should handle focus trap correctly on modal-like elements", async ({ page }) => {
-      await page.goto("/");
+      await page.goto(ROUTES.HOME.path);
 
       for (let i = 0; i < 20; i++) {
         await page.keyboard.press("Tab");

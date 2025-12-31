@@ -1,18 +1,26 @@
 <template>
   <div class="not-found-page-container">
     <img :src="notFoundIllustration" alt="404 Not Found" />
-    <p>The page you are looking for does not exist. <router-link to="/">Go back to home</router-link></p>
+    <p>
+      The page you are looking for does not exist. <router-link :to="ROUTES.HOME.path">Go back to home</router-link>
+    </p>
   </div>
 </template>
 
 <script>
+// Images
 import notFoundIllustration from "@/assets/404_page.svg";
+
+// Constants
+import { ROUTES } from "@/constants";
 
 export default {
   name: "NotFoundPage",
   data() {
     return {
       notFoundIllustration,
+
+      ROUTES,
     };
   },
   mounted() {

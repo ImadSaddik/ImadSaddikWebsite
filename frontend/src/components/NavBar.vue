@@ -1,7 +1,7 @@
 <template>
   <section class="navbar-container">
     <div class="expanded-nav-bar">
-      <RouterLink class="nav-bar-home" to="/">Imad Saddik</RouterLink>
+      <RouterLink class="nav-bar-home" :to="ROUTES.HOME.path">Imad Saddik</RouterLink>
 
       <div>
         <RouterLink
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { PAGE_KEYS } from "@/constants";
+import { PAGE_KEYS, ROUTES, PAGE_NAMES } from "@/constants";
 
 export default {
   name: "NavBar",
@@ -53,12 +53,14 @@ export default {
     return {
       isMenuOpen: false,
       navigationBarItems: [
-        { name: "Blogs", path: "/blogs", key: PAGE_KEYS.BLOGS },
-        { name: "Courses", path: "/courses", key: PAGE_KEYS.COURSES },
-        { name: "Astronomy", path: "/astronomy", key: PAGE_KEYS.ASTRONOMY },
-        { name: "About me", path: "/about-me", key: PAGE_KEYS.ABOUT_ME },
-        { name: "Hire me", path: "/hire-me", key: PAGE_KEYS.HIRE_ME },
+        { name: PAGE_NAMES[PAGE_KEYS.BLOGS], path: ROUTES.BLOGS_HUB.path, key: PAGE_KEYS.BLOGS },
+        { name: PAGE_NAMES[PAGE_KEYS.COURSES], path: ROUTES.COURSES_HUB.path, key: PAGE_KEYS.COURSES },
+        { name: PAGE_NAMES[PAGE_KEYS.ASTRONOMY], path: ROUTES.ASTRONOMY_HUB.path, key: PAGE_KEYS.ASTRONOMY },
+        { name: PAGE_NAMES[PAGE_KEYS.ABOUT_ME], path: ROUTES.ABOUT_ME.path, key: PAGE_KEYS.ABOUT_ME },
+        { name: PAGE_NAMES[PAGE_KEYS.HIRE_ME], path: ROUTES.HIRE_ME.path, key: PAGE_KEYS.HIRE_ME },
       ],
+
+      ROUTES,
     };
   },
 };

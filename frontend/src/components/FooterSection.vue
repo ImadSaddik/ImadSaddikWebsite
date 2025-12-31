@@ -2,19 +2,16 @@
   <section class="footer-container">
     <div class="footer-content">
       <div class="footer-name-and-mission">
-        <RouterLink to="/"><h3 class="footer-name">Imad Saddik</h3></RouterLink>
+        <RouterLink :to="ROUTES.HOME.path"><h3 class="footer-name">Imad Saddik</h3></RouterLink>
         <p class="footer-mission">Sharing knowledge about programming and astronomy.</p>
       </div>
 
       <div class="footer-columns-container">
         <div class="footer-column">
           <h4 class="footer-column-title">Explore</h4>
-          <RouterLink to="/"><p class="clickable">Home</p></RouterLink>
-          <RouterLink to="/blogs"><p class="clickable">Blogs</p></RouterLink>
-          <RouterLink to="/courses"><p class="clickable">Courses</p></RouterLink>
-          <RouterLink to="/astronomy"><p class="clickable">Astronomy</p></RouterLink>
-          <RouterLink to="/about-me"><p class="clickable">About me</p></RouterLink>
-          <RouterLink to="/hire-me"><p class="clickable">Hire me</p></RouterLink>
+          <RouterLink v-for="item in footerNavItems" :key="item.key" :to="item.path">
+            <p class="clickable">{{ item.name }}</p>
+          </RouterLink>
         </div>
 
         <div class="footer-column">
@@ -250,6 +247,7 @@ import footerLandscape from "@/assets/footer_landscape.svg";
 
 // Constants
 import { moonPhaseImages } from "@/registries/images.js";
+import { ROUTES, PAGE_KEYS, PAGE_NAMES } from "@/constants";
 
 export default {
   name: "FooterSection",
@@ -288,8 +286,18 @@ export default {
       paypalLogo,
       nginxLogo,
       meilisearchLogo,
-
       footerLandscape,
+
+      footerNavItems: [
+        { name: PAGE_NAMES[PAGE_KEYS.HOME], path: ROUTES.HOME.path, key: PAGE_KEYS.HOME },
+        { name: PAGE_NAMES[PAGE_KEYS.BLOGS], path: ROUTES.BLOGS_HUB.path, key: PAGE_KEYS.BLOGS },
+        { name: PAGE_NAMES[PAGE_KEYS.COURSES], path: ROUTES.COURSES_HUB.path, key: PAGE_KEYS.COURSES },
+        { name: PAGE_NAMES[PAGE_KEYS.ASTRONOMY], path: ROUTES.ASTRONOMY_HUB.path, key: PAGE_KEYS.ASTRONOMY },
+        { name: PAGE_NAMES[PAGE_KEYS.ABOUT_ME], path: ROUTES.ABOUT_ME.path, key: PAGE_KEYS.ABOUT_ME },
+        { name: PAGE_NAMES[PAGE_KEYS.HIRE_ME], path: ROUTES.HIRE_ME.path, key: PAGE_KEYS.HIRE_ME },
+      ],
+
+      ROUTES,
     };
   },
   computed: {
