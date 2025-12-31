@@ -30,7 +30,7 @@ class MeilisearchService:
     def get_filter_conditions(self, data: SearchRequest) -> str:
         conditions = []
         if data.article_type:
-            conditions.append(f'type = "{data.article_type.value}"')
+            conditions.append(f"type = '{data.article_type.value}'")
 
         if data.filters.years:
             years_list = [f"'{year}'" for year in data.filters.years]
