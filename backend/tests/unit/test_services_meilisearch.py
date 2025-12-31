@@ -3,8 +3,9 @@ from unittest.mock import MagicMock, patch
 import pytest
 
 from enums.article import ArticleType
+from enums.search import SortableField, SortOrder
 from models.article import RecommendationArticleRequest
-from models.search import SearchFilters, SearchRequest, SearchSortBy, SortableField, SortOrder
+from models.search import SearchFilters, SearchRequest, SearchSortBy
 from services.meilisearch import MeilisearchService
 
 
@@ -26,12 +27,12 @@ def test_get_sorting_criteria():
     service = MeilisearchService()
 
     request = SearchRequest(article_type=ArticleType.BLOG_POST)
-    assert service.get_sorting_criteria(request) == ["creation_date:desc"]
+    assert service.get_sorting_criteria(request) == [f"creation_date:{SortOrder.DESC.value}"]
 
     request = SearchRequest(
         article_type=ArticleType.BLOG_POST, sort_by=SearchSortBy(field=SortableField.POPULARITY, order=SortOrder.ASC)
     )
-    assert service.get_sorting_criteria(request) == ["view_count:asc"]
+    assert service.get_sorting_criteria(request) == [f"view_count:{SortOrder.ASC.value}"]
 
 
 @patch("services.meilisearch.meilisearch.Client")
