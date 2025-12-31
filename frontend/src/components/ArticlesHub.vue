@@ -233,8 +233,8 @@ export default {
     async performSearchRequest() {
       const data = {
         query: this.searchQuery,
-        articleType: this.articleType,
-        sortBy: {
+        article_type: this.articleType,
+        sort_by: {
           field: this.sortOption,
           order: this.sortOrder,
         },
