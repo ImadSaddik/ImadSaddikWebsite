@@ -26,16 +26,16 @@ class WebsiteUser(FastHttpUser):
         endpoint = "/api/articles/latest"
         article_type = random.choice(self.article_types)
 
-        payload = {"articleType": article_type}
+        payload = {"article_type": article_type}
         self.client.post(endpoint, json=payload, name=endpoint)
 
     @task(7)
     def get_recommendations(self):
         endpoint = "/api/articles/recommendations"
         payload = {
-            "articleType": "blog-post",
-            "documentNameToIgnore": "ElasticsearchChangeHeapSize",
-            "documentTags": ["elasticsearch"],
+            "article_type": "blog-post",
+            "document_name_to_ignore": "ElasticsearchChangeHeapSize",
+            "document_tags": ["elasticsearch"],
         }
         self.client.post(endpoint, json=payload, name=endpoint)
 
@@ -49,8 +49,8 @@ class WebsiteUser(FastHttpUser):
 
         payload = {
             "query": query,
-            "articleType": article_type,
+            "article_type": article_type,
             "size": 10,
-            "sortBy": {"field": sort_field, "order": sort_order},
+            "sort_by": {"field": sort_field, "order": sort_order},
         }
         self.client.post(endpoint, json=payload, name=endpoint)
