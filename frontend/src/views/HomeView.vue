@@ -94,7 +94,7 @@ export default {
     async getLatestArticlesPerType(articleType) {
       try {
         const endpoint = "/api/articles/latest";
-        const response = await axios.post(endpoint, { articleType });
+        const response = await axios.post(endpoint, { article_type: articleType });
 
         const data = response.data;
         const hits = data?.hits || [];

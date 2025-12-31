@@ -39,7 +39,7 @@ class RecommendationArticleResponse(BaseModel):
 
 
 class LatestArticleRequest(BaseModel):
-    articleType: ArticleType
+    article_type: ArticleType
 
 
 class LatestArticleHit(Hit): ...
