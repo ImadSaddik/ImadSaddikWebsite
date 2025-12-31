@@ -27,7 +27,12 @@ def test_search_articles(mock_service, client):
     )
     mock_service.search = AsyncMock(return_value=mock_response)
 
-    payload = {"query": "test", "articleType": "blog-post", "filters": {"years": ["2023"], "tags": ["tag1"]}, "size": 5}
+    payload = {
+        "query": "test",
+        "article_type": "blog-post",
+        "filters": {"years": ["2023"], "tags": ["tag1"]},
+        "size": 5,
+    }
     response = client.post("/api/search", json=payload)
 
     assert response.status_code == 200

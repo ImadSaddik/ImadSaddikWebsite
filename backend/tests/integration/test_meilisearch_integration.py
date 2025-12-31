@@ -8,7 +8,7 @@ from tests.integration.conftest import IntegrationMeilisearchService
 class TestSearch:
     @pytest.mark.asyncio
     async def test_search_returns_results(self, meilisearch_service: IntegrationMeilisearchService) -> None:
-        request = SearchRequest(articleType="blog-post", query="", size=10)
+        request = SearchRequest(article_type="blog-post", query="", size=10)
         response = await meilisearch_service.search(request)
 
         assert response is not None
@@ -17,7 +17,7 @@ class TestSearch:
 
     @pytest.mark.asyncio
     async def test_search_with_query(self, meilisearch_service: IntegrationMeilisearchService) -> None:
-        request = SearchRequest(articleType="blog-post", query="Elasticsearch", size=10)
+        request = SearchRequest(article_type="blog-post", query="Elasticsearch", size=10)
         response = await meilisearch_service.search(request)
 
         assert response is not None
@@ -25,7 +25,7 @@ class TestSearch:
 
     @pytest.mark.asyncio
     async def test_search_returns_facets(self, meilisearch_service: IntegrationMeilisearchService) -> None:
-        request = SearchRequest(articleType="blog-post", query="Elasticsearch", size=10)
+        request = SearchRequest(article_type="blog-post", query="Elasticsearch", size=10)
         response = await meilisearch_service.search(request)
 
         assert response.facet_distribution is not None
@@ -128,7 +128,9 @@ class TestRecommendations:
         self, meilisearch_service: IntegrationMeilisearchService, test_document_name: str
     ) -> None:
         request = RecommendationArticleRequest(
-            documentNameToIgnore=test_document_name, articleType="blog-post", documentTags=["Elasticsearch", "Search"]
+            document_name_to_ignore=test_document_name,
+            article_type="blog-post",
+            document_tags=["Elasticsearch", "Search"],
         )
         response = await meilisearch_service.get_article_recommendations(request)
 

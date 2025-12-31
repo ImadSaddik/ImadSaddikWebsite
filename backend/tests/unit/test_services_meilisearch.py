@@ -10,23 +10,25 @@ from services.meilisearch import MeilisearchService
 def test_get_filter_conditions():
     service = MeilisearchService()
 
-    request = SearchRequest(articleType="blog-post")
+    request = SearchRequest(article_type="blog-post")
     assert service.get_filter_conditions(request) == 'type = "blog-post"'
 
-    request = SearchRequest(articleType="blog-post", filters=SearchFilters(years=["2023"]))
+    request = SearchRequest(article_type="blog-post", filters=SearchFilters(years=["2023"]))
     assert service.get_filter_conditions(request) == "type = \"blog-post\" AND year IN ['2023']"
 
-    request = SearchRequest(articleType="blog-post", filters=SearchFilters(tags=["tag1", "tag2"]))
+    request = SearchRequest(article_type="blog-post", filters=SearchFilters(tags=["tag1", "tag2"]))
     assert service.get_filter_conditions(request) == "type = \"blog-post\" AND tags IN ['tag1', 'tag2']"
 
 
 def test_get_sorting_criteria():
     service = MeilisearchService()
 
-    request = SearchRequest(articleType="blog-post")
+    request = SearchRequest(article_type="blog-post")
     assert service.get_sorting_criteria(request) == ["creation_date:desc"]
 
-    request = SearchRequest(articleType="blog-post", sortBy=SearchSortBy(field=SortableFields.POPULARITY, order="asc"))
+    request = SearchRequest(
+        article_type="blog-post", sort_by=SearchSortBy(field=SortableFields.POPULARITY, order="asc")
+    )
     assert service.get_sorting_criteria(request) == ["view_count:asc"]
 
 
@@ -47,7 +49,7 @@ async def test_search(mock_client_class):
         "processingTimeMs": 1,
     }
 
-    request = SearchRequest(articleType="blog-post", query="test")
+    request = SearchRequest(article_type="blog-post", query="test")
     response = await service.search(request)
 
     assert response.total_hits == 0
@@ -167,7 +169,7 @@ async def test_get_article_recommendations(mock_client_class):
     mock_index.get_documents.return_value.results = [mock_hit]
 
     request = RecommendationArticleRequest(
-        documentNameToIgnore="current", articleType="blog-post", documentTags=["tag1", "tag2"]
+        document_name_to_ignore="current", article_type="blog-post", document_tags=["tag1", "tag2"]
     )
     response = await service.get_article_recommendations(request)
 

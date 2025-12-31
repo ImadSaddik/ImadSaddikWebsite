@@ -74,9 +74,9 @@ def test_get_article_recommendations(mock_service, client):
     mock_service.get_article_recommendations = AsyncMock(return_value=mock_response)
 
     payload = {
-        "documentNameToIgnore": "current-article",
-        "articleType": "blog-post",
-        "documentTags": ["tag1", "tag2"],
+        "document_name_to_ignore": "current-article",
+        "article_type": "blog-post",
+        "document_tags": ["tag1", "tag2"],
     }
     response = client.post("/api/articles/recommendations", json=payload)
 
@@ -105,7 +105,7 @@ def test_get_latest_articles(mock_service, client):
     mock_response = LatestArticleResponse(hits=[mock_hit], total_hits=1)
     mock_service.get_latest_articles = AsyncMock(return_value=mock_response)
 
-    payload = {"articleType": "blog-post"}
+    payload = {"article_type": "blog-post"}
     response = client.post("/api/articles/latest", json=payload)
 
     assert response.status_code == 200
