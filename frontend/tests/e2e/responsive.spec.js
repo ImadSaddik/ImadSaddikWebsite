@@ -115,11 +115,10 @@ test.describe("Responsive Design", () => {
     test("should display expanded navbar on desktop", async ({ page }) => {
       await page.goto(ROUTES.HOME.path);
 
-      await expect(page.locator('a.expanded-nav-bar-item:has-text("Blogs")')).toBeVisible();
-      await expect(page.locator('a.expanded-nav-bar-item:has-text("Courses")')).toBeVisible();
-      await expect(page.locator('a.expanded-nav-bar-item:has-text("Astronomy")')).toBeVisible();
-      await expect(page.locator('a.expanded-nav-bar-item:has-text("About me")')).toBeVisible();
-      await expect(page.locator('a.expanded-nav-bar-item:has-text("Hire me")')).toBeVisible();
+      const navItems = ["Blogs", "Courses", "Astronomy", "About me", "Hire me"];
+      for (const item of navItems) {
+        await expect(page.locator(`a.expanded-nav-bar-item:has-text("${item}")`)).toBeVisible();
+      }
     });
 
     test("should show moon and landscape images on desktop", async ({ page }) => {
