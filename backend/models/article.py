@@ -6,21 +6,20 @@ from enums.article import ArticleType
 from models.document import Hit
 
 
-class IncrementViewCountResponse(BaseModel):
+class IncrementCountResponse(BaseModel):
     success: bool
     message: str
+
+
+class IncrementViewCountResponse(IncrementCountResponse):
     view_count: int
 
 
-class IncrementReadCountResponse(BaseModel):
-    success: bool
-    message: str
+class IncrementReadCountResponse(IncrementCountResponse):
     read_count: int
 
 
-class IncrementClapsCountResponse(BaseModel):
-    success: bool
-    message: str
+class IncrementClapsCountResponse(IncrementCountResponse):
     claps_count: int
 
 
