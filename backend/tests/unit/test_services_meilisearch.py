@@ -14,13 +14,13 @@ def test_get_filter_conditions():
 
     article_type = ArticleType.BLOG_POST
     request = SearchRequest(article_type=article_type)
-    assert service.get_filter_conditions(request) == f'type = "{article_type.value}"'
+    assert service.get_filter_conditions(request) == f"type = '{article_type.value}'"
 
     request = SearchRequest(article_type=article_type, filters=SearchFilters(years=["2023"]))
-    assert service.get_filter_conditions(request) == f"type = \"{article_type.value}\" AND year IN ['2023']"
+    assert service.get_filter_conditions(request) == f"type = '{article_type.value}' AND year IN ['2023']"
 
     request = SearchRequest(article_type=article_type, filters=SearchFilters(tags=["tag1", "tag2"]))
-    assert service.get_filter_conditions(request) == f"type = \"{article_type.value}\" AND tags IN ['tag1', 'tag2']"
+    assert service.get_filter_conditions(request) == f"type = '{article_type.value}' AND tags IN ['tag1', 'tag2']"
 
 
 def test_get_sorting_criteria():
@@ -60,7 +60,7 @@ async def test_search(mock_client_class):
     mock_index.search.assert_called_once()
     call_args = mock_index.search.call_args
     assert call_args.kwargs["query"] == "test"
-    assert f'type = "{article_type.value}"' in call_args.kwargs["opt_params"]["filter"]
+    assert f"type = '{article_type.value}'" in call_args.kwargs["opt_params"]["filter"]
 
 
 @patch("services.meilisearch.meilisearch.Client")
