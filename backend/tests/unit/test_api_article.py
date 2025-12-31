@@ -116,6 +116,28 @@ def test_get_latest_articles(mock_service, client):
     mock_service.get_latest_articles.assert_called_once_with(document_type=ArticleType.BLOG_POST)
 
 
+def test_get_latest_articles_filter_injection_attempt(client):
+    """
+    Test that attempting a filter injection (SQL/NoSQL injection style)
+    is caught by Pydantic validation and returns a 422 error.
+    """
+    payload = {"article_type": "' OR type != 'nothing'"}
+    response = client.post("/api/articles/latest", json=payload)
+
+    assert response.status_code == 422
+
+    response_data = response.json()
+    print(response_data)
+    assert "Input should be 'blog-post', 'course-post' or 'astronomy-post'" in response_data["detail"][0]["msg"]
+
+
+def test_get_latest_articles_invalid_type(client):
+    payload = {"article_type": "invalid-type"}
+    response = client.post("/api/articles/latest", json=payload)
+
+    assert response.status_code == 422
+
+
 @patch("api.article.meilisearch_service")
 def test_get_article_claps_count(mock_service, client):
     mock_service.get_claps_count = AsyncMock(
