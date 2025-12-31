@@ -3,6 +3,8 @@ import { createWriteStream, readdirSync, statSync, existsSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { format, resolveConfig } from "prettier";
+import { ROUTES } from "./src/constants/routes.js";
+import { DIRECTORY_MAPPING } from "./src/constants/content.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -49,14 +51,14 @@ const addSectionToSitemap = (sectionName) => {
 };
 
 const now = new Date().toISOString();
-sitemap.write({ url: "/", lastmod: now, changefreq: "daily", priority: 1.0 });
-sitemap.write({ url: "/about-me", lastmod: now, changefreq: "monthly", priority: 0.8 });
-sitemap.write({ url: "/hire-me", lastmod: now, changefreq: "monthly", priority: 0.8 });
-sitemap.write({ url: "/resume", lastmod: now, changefreq: "yearly", priority: 0.5 });
+sitemap.write({ url: ROUTES.HOME.path, lastmod: now, changefreq: "daily", priority: 1.0 });
+sitemap.write({ url: ROUTES.ABOUT_ME.path, lastmod: now, changefreq: "monthly", priority: 0.8 });
+sitemap.write({ url: ROUTES.HIRE_ME.path, lastmod: now, changefreq: "monthly", priority: 0.8 });
+sitemap.write({ url: ROUTES.RESUME.path, lastmod: now, changefreq: "yearly", priority: 0.5 });
 
-addSectionToSitemap("blogs");
-addSectionToSitemap("courses");
-addSectionToSitemap("astronomy");
+Object.values(DIRECTORY_MAPPING).forEach((section) => {
+  addSectionToSitemap(section);
+});
 
 sitemap.end();
 

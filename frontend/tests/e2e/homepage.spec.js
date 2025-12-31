@@ -1,23 +1,24 @@
 import { test, expect } from "@playwright/test";
+import { ROUTES } from "@/constants";
 
 test.describe("Homepage", () => {
   test.describe("Happy path", () => {
     test("should load and display the homepage correctly", async ({ page }) => {
-      await page.goto("/");
+      await page.goto(ROUTES.HOME.path);
       await page.waitForLoadState("networkidle");
 
       await expect(page).toHaveTitle("Imad Saddik");
     });
 
     test("should display the hero section", async ({ page }) => {
-      await page.goto("/");
+      await page.goto(ROUTES.HOME.path);
 
       const heroSection = page.locator(".hero-section, .hero-container").first();
       await expect(heroSection).toBeVisible();
     });
 
     test("should display the navbar with all navigation items", async ({ page }) => {
-      await page.goto("/");
+      await page.goto(ROUTES.HOME.path);
 
       const navbar = page.locator(".navbar-container");
       await expect(navbar).toBeVisible();
@@ -30,7 +31,7 @@ test.describe("Homepage", () => {
     });
 
     test("should display the footer section", async ({ page }) => {
-      await page.goto("/");
+      await page.goto(ROUTES.HOME.path);
 
       const footer = page.locator(".footer-container");
       await expect(footer).toBeVisible();
@@ -43,7 +44,7 @@ test.describe("Homepage", () => {
     });
 
     test("should display card groups for blogs, courses and astronomy", async ({ page }) => {
-      await page.goto("/");
+      await page.goto(ROUTES.HOME.path);
       await page.waitForLoadState("networkidle");
 
       const blogsGroup = page.locator('.cards-group-container:has-text("Blogs")').first();
@@ -69,16 +70,16 @@ test.describe("Homepage", () => {
     });
 
     test("should have working call to action buttons", async ({ page }) => {
-      await page.goto("/");
+      await page.goto(ROUTES.HOME.path);
       await page.waitForLoadState("networkidle");
 
       const buttonsToTest = [
-        { text: "Explore articles", url: "/blogs" },
-        { text: "View courses", url: "/courses" },
-        { text: "Read my full story", url: "/about-me" },
-        { text: "View all blogs", url: "/blogs" },
-        { text: "View all courses", url: "/courses" },
-        { text: "View all images", url: "/astronomy" },
+        { text: "Explore articles", url: ROUTES.BLOGS_HUB.path },
+        { text: "View courses", url: ROUTES.COURSES_HUB.path },
+        { text: "Read my full story", url: ROUTES.ABOUT_ME.path },
+        { text: "View all blogs", url: ROUTES.BLOGS_HUB.path },
+        { text: "View all courses", url: ROUTES.COURSES_HUB.path },
+        { text: "View all images", url: ROUTES.ASTRONOMY_HUB.path },
       ];
 
       for (const { text, url } of buttonsToTest) {
@@ -87,7 +88,7 @@ test.describe("Homepage", () => {
         await expect(button).toBeVisible(); // Wait for button to appear
         await button.click();
         await expect(page).toHaveURL(url);
-        await page.goto("/");
+        await page.goto(ROUTES.HOME.path);
         await page.waitForLoadState("networkidle");
       }
     });
@@ -97,7 +98,7 @@ test.describe("Homepage", () => {
     test("should handle missing API gracefully", async ({ page }) => {
       await page.route("**/api/**", (route) => route.abort());
 
-      await page.goto("/");
+      await page.goto(ROUTES.HOME.path);
       await page.waitForLoadState("networkidle");
 
       const blogsGroup = page.locator('.cards-group-container:has-text("Blogs")').first();

@@ -109,7 +109,7 @@ async def get_article_recommendations(request: Request, body: RecommendationArti
 async def get_latest_articles(request: Request, body: LatestArticleRequest):
     try:
         latest_articles = await meilisearch_service.get_latest_articles(
-            document_type=body.articleType,
+            document_type=body.article_type.value,
         )
         return latest_articles
 

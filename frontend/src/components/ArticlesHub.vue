@@ -19,13 +19,13 @@
               <div class="order-options">
                 <i
                   class="fa-solid fa-arrow-up"
-                  :class="{ selected: sortOrder === 'asc' }"
-                  @click="setSortOrder('asc')"
+                  :class="{ selected: sortOrder === SORT_ORDER.ASC }"
+                  @click="setSortOrder(SORT_ORDER.ASC)"
                 ></i>
                 <i
                   class="fa-solid fa-arrow-down"
-                  :class="{ selected: sortOrder === 'desc' }"
-                  @click="setSortOrder('desc')"
+                  :class="{ selected: sortOrder === SORT_ORDER.DESC }"
+                  @click="setSortOrder(SORT_ORDER.DESC)"
                 ></i>
               </div>
             </div>
@@ -110,7 +110,7 @@ import BaseCard from "@/components/BaseCard.vue";
 import SearchBar from "@/components/SearchBar.vue";
 
 // Constants
-import { TIME_OUT_MILLISECONDS } from "@/constants";
+import { TIME_OUT_MILLISECONDS, SORT_ORDER, SORTABLE_FIELDS } from "@/constants";
 
 export default {
   name: "ArticlesHub",
@@ -147,14 +147,9 @@ export default {
 
       searchQuery: "",
 
-      sortOrder: "desc",
+      sortOrder: SORT_ORDER.DESC,
       sortOption: "",
-      sortOptions: [
-        { value: "date", label: "Date" },
-        { value: "popularity", label: "Popularity (Views)" },
-        { value: "engagement", label: "Engagement (Reads)" },
-        { value: "claps", label: "Claps" },
-      ],
+      sortOptions: SORTABLE_FIELDS,
 
       selectedYears: [],
       yearOptions: [],
@@ -167,6 +162,9 @@ export default {
 
       batchSize: 10,
       totalDocumentsInIndex: 0,
+
+      SORT_ORDER,
+      SORTABLE_FIELDS,
     };
   },
   computed: {
@@ -233,8 +231,8 @@ export default {
     async performSearchRequest() {
       const data = {
         query: this.searchQuery,
-        articleType: this.articleType,
-        sortBy: {
+        article_type: this.articleType,
+        sort_by: {
           field: this.sortOption,
           order: this.sortOrder,
         },

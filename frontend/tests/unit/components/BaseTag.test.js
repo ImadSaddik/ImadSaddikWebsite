@@ -1,12 +1,13 @@
 import { mount } from "@vue/test-utils";
 import BaseTag from "@/components/BaseTag.vue";
+import { ARTICLE_TYPES } from "@/constants";
 
 describe("BaseTag", () => {
   const factory = (props = {}, options = {}) =>
     mount(BaseTag, {
       props: {
         name: "python",
-        articleType: "blog-post",
+        articleType: ARTICLE_TYPES.BLOG,
         ...props,
       },
       global: {
@@ -25,7 +26,7 @@ describe("BaseTag", () => {
   it("navigates to the correct hub with selectedTag query on click", async () => {
     const push = vi.fn();
     const wrapper = factory(
-      { name: "fastapi", articleType: "blog-post" },
+      { name: "fastapi", articleType: ARTICLE_TYPES.BLOG },
       { global: { mocks: { $router: { push } } } }
     );
     await wrapper.trigger("click");
@@ -33,9 +34,9 @@ describe("BaseTag", () => {
   });
 
   it.each([
-    ["blog-post", "blogs"],
-    ["course-post", "courses"],
-    ["astronomy-post", "astronomy"],
+    [ARTICLE_TYPES.BLOG, "blogs"],
+    [ARTICLE_TYPES.COURSE, "courses"],
+    [ARTICLE_TYPES.ASTRONOMY, "astronomy"],
   ])("maps articleType '%s' to route '%s'", async (articleType, expectedRoute) => {
     const push = vi.fn();
     const wrapper = factory({ articleType }, { global: { mocks: { $router: { push } } } });

@@ -4,7 +4,7 @@
     title="How to remove hidden data from Inkscape files to reduce the file size"
     sub-title="A simple guide to removing invisible data from embedded images to keep your Inkscape projects lightweight."
     creation-date="December 21, 2025"
-    article-type="blog-post"
+    :article-type="ARTICLE_TYPES.BLOG"
     :article-tags="tags"
     :cover-image="coverImage"
     :reading-time="readingTime"
@@ -142,6 +142,9 @@ import importDialog from "./image_import_dialog.jpg";
 import shapeBuilder from "./shape_builder_clipping.jpg";
 import cleanUpMenu from "./clean_up_document_menu.jpg";
 
+// Constants
+import { ARTICLE_TYPES } from "@/constants";
+
 // Components
 import ArticleLayout from "@/components/ArticleLayout.vue";
 import ImageWithCaption from "@/components/ImageWithCaption.vue";
@@ -170,6 +173,8 @@ export default {
       importDialog,
       shapeBuilder,
       cleanUpMenu,
+
+      ARTICLE_TYPES,
     };
   },
   computed: {

@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
 import { faker } from "@faker-js/faker";
 import { getCardsDataFromDocumentHits } from "@/utils";
+import { ARTICLE_TYPES } from "@/constants";
 
 vi.mock("@/registries/images.js", () => ({
   blogCoverImages: {},
@@ -29,7 +30,7 @@ describe("getCardsDataFromDocumentHits", () => {
     const hit = buildHit();
     const cards = getCardsDataFromDocumentHits({
       hits: [hit],
-      articleType: "astronomy-post",
+      articleType: ARTICLE_TYPES.ASTRONOMY,
     });
 
     expect(cards).toEqual([
@@ -38,7 +39,7 @@ describe("getCardsDataFromDocumentHits", () => {
         altText: `Cover image for the astronomy-post titled ${hit.title}`,
         title: hit.title,
         creationDate: "November 29, 2024",
-        articleType: "astronomy-post",
+        articleType: ARTICLE_TYPES.ASTRONOMY,
         articleId: "existing-slug",
         viewCount: hit.view_count,
         readCount: hit.read_count,
@@ -50,7 +51,7 @@ describe("getCardsDataFromDocumentHits", () => {
   it("falls back to default cover when image is missing", () => {
     const cards = getCardsDataFromDocumentHits({
       hits: [buildHit({ name: "missing" })],
-      articleType: "astronomy-post",
+      articleType: ARTICLE_TYPES.ASTRONOMY,
     });
 
     expect(cards[0].imageSrc).toBe("fallback-cover.svg");

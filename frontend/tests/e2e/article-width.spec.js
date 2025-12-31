@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { ROUTES } from "@/constants";
 
 async function getWidthPercentage(page, childSelector, parentSelector) {
   const child = page.locator(childSelector);
@@ -21,19 +22,19 @@ test.describe("Article width", () => {
   const pagesToTest = [
     {
       name: "Hire me page",
-      url: "/hire-me",
+      url: ROUTES.HIRE_ME.path,
       contentSelector: ".hire-me-content",
       parentSelector: ".hire-me-container",
     },
     {
       name: "About me page",
-      url: "/about-me",
+      url: ROUTES.ABOUT_ME.path,
       contentSelector: ".about-me-full-story-content",
       parentSelector: ".about-me-full-story-container",
     },
     {
       name: "Article page",
-      url: "/blogs/ElasticsearchPreFilteringWithKnnSearch",
+      url: `${ROUTES.BLOGS_HUB.path}/ElasticsearchPreFilteringWithKnnSearch`,
       contentSelector: ".article-body",
       parentSelector: ".article-body-wrapper",
     },

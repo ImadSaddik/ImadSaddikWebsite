@@ -1,9 +1,10 @@
 import { test, expect } from "@playwright/test";
+import { ROUTES } from "@/constants";
 
 test.describe("Filters and sorting", () => {
   test.describe("Happy path", () => {
     test("should display sorting options on articles hub", async ({ page }) => {
-      await page.goto("/blogs");
+      await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
 
       const sortHeader = page.locator('h2.collapsible-header:has-text("Sort")');
@@ -11,7 +12,7 @@ test.describe("Filters and sorting", () => {
     });
 
     test("should display year filter options", async ({ page }) => {
-      await page.goto("/blogs");
+      await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
 
       const yearHeader = page.locator('h2.collapsible-header:has-text("Year")');
@@ -19,7 +20,7 @@ test.describe("Filters and sorting", () => {
     });
 
     test("should display tags filter options", async ({ page }) => {
-      await page.goto("/blogs");
+      await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
 
       const tagsHeader = page.locator('h2.collapsible-header:has-text("Tags")');
@@ -27,7 +28,7 @@ test.describe("Filters and sorting", () => {
     });
 
     test("should collapse and expand sort section", async ({ page }) => {
-      await page.goto("/blogs");
+      await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
 
       const sortHeader = page.locator('h2.collapsible-header:has-text("Sort")');
@@ -43,7 +44,7 @@ test.describe("Filters and sorting", () => {
     });
 
     test("should collapse and expand year section", async ({ page }) => {
-      await page.goto("/blogs");
+      await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
 
       const yearHeader = page.locator('h2.collapsible-header:has-text("Year")');
@@ -57,7 +58,7 @@ test.describe("Filters and sorting", () => {
     });
 
     test("should collapse and expand tags section", async ({ page }) => {
-      await page.goto("/blogs");
+      await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
 
       const tagsHeader = page.locator('h2.collapsible-header:has-text("Tags")');
@@ -74,7 +75,7 @@ test.describe("Filters and sorting", () => {
     });
 
     test("should show order options when sort is selected", async ({ page }) => {
-      await page.goto("/blogs");
+      await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
 
       const sortSection = page.locator(".articles-hub-filters-sorting");
@@ -97,7 +98,7 @@ test.describe("Filters and sorting", () => {
     });
 
     test("should toggle sort order between ascending and descending", async ({ page }) => {
-      await page.goto("/blogs");
+      await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
 
       const sortSection = page.locator(".articles-hub-filters-sorting");
@@ -141,7 +142,7 @@ test.describe("Filters and sorting", () => {
         });
       });
 
-      await page.goto("/blogs");
+      await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
 
       const noResults = page.locator('text="No results found"');
@@ -149,7 +150,7 @@ test.describe("Filters and sorting", () => {
     });
 
     test("should reset filters when clear all is clicked", async ({ page }) => {
-      await page.goto("/blogs");
+      await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
 
       const yearCheckboxes = page.locator(".articles-hub-filters-year input[type='checkbox']");

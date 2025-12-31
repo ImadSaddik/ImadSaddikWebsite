@@ -18,6 +18,7 @@ def reset_rate_limit() -> None:
     """
     Resets the rate limiter storage before every test.
     """
+    limiter.enabled = True
     limiter.limiter.storage.reset()
 
 

@@ -4,7 +4,7 @@
     title="How to shoot star trails with your smartphone"
     sub-title="This complete guide covers everything you need to know to capture beautiful star trail photos using just your smartphone."
     creation-date="October 17, 2025"
-    article-type="astronomy-post"
+    :article-type="ARTICLE_TYPES.ASTRONOMY"
     :article-tags="tags"
     :cover-image="coverImage"
     :reading-time="readingTime"
@@ -867,6 +867,9 @@ import starTrailTimelapseStep2 from "./star_trail_timelapse_step_2.svg";
 import starTrailTimelapseStep3 from "./star_trail_timelapse_step_3.svg";
 import addCustomVideoMode from "./add_custom_video_mode.jpg";
 
+// Constants
+import { ARTICLE_TYPES } from "@/constants";
+
 // Components
 import ArticleLayout from "@/components/ArticleLayout.vue";
 import ImageWithCaption from "@/components/ImageWithCaption.vue";
@@ -940,6 +943,8 @@ export default {
       starTrailTimelapseStep2,
       starTrailTimelapseStep3,
       addCustomVideoMode,
+
+      ARTICLE_TYPES,
     };
   },
   computed: {

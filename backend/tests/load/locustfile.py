@@ -2,14 +2,17 @@ import random
 
 from locust import FastHttpUser, between, task
 
+from enums.article import ArticleType
+from enums.search import SortableField, SortOrder
+
 
 class WebsiteUser(FastHttpUser):
     wait_time = between(1, 5)
 
     search_queries = ["inkscape", "python", "meilisearch", "astronomy", "elasticsearch"]
-    article_types = ["blog-post", "course-post", "astronomy-post"]
-    sort_fields = ["date", "popularity", "engagement", "claps"]
-    sort_orders = ["asc", "desc"]
+    article_types = [ArticleType.BLOG_POST, ArticleType.COURSE_POST, ArticleType.ASTRONOMY_POST]
+    sort_fields = [SortableField.DATE, SortableField.POPULARITY, SortableField.ENGAGEMENT, SortableField.CLAPS]
+    sort_orders = [SortOrder.ASC, SortOrder.DESC]
 
     @task(1)
     def get_article_claps_count(self):
@@ -26,16 +29,16 @@ class WebsiteUser(FastHttpUser):
         endpoint = "/api/articles/latest"
         article_type = random.choice(self.article_types)
 
-        payload = {"articleType": article_type}
+        payload = {"article_type": article_type}
         self.client.post(endpoint, json=payload, name=endpoint)
 
     @task(7)
     def get_recommendations(self):
         endpoint = "/api/articles/recommendations"
         payload = {
-            "articleType": "blog-post",
-            "documentNameToIgnore": "ElasticsearchChangeHeapSize",
-            "documentTags": ["elasticsearch"],
+            "article_type": ArticleType.BLOG_POST,
+            "document_name_to_ignore": "ElasticsearchChangeHeapSize",
+            "document_tags": ["elasticsearch"],
         }
         self.client.post(endpoint, json=payload, name=endpoint)
 
@@ -49,8 +52,8 @@ class WebsiteUser(FastHttpUser):
 
         payload = {
             "query": query,
-            "articleType": article_type,
+            "article_type": article_type,
             "size": 10,
-            "sortBy": {"field": sort_field, "order": sort_order},
+            "sort_by": {"field": sort_field, "order": sort_order},
         }
         self.client.post(endpoint, json=payload, name=endpoint)
