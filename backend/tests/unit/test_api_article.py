@@ -150,10 +150,33 @@ def test_get_article_claps_count(mock_service, client):
     mock_service.get_claps_count.assert_called_once_with("test-article")
 
 
-def test_get_article_recommendations_injection_attempt(client):
+@patch("api.article.meilisearch_service")
+def test_get_article_recommendations_injection_attempt(mock_service, client):
     """
     Verify that 'document_name_to_ignore' is sanitized and does not allow filter bypassing.
     """
+    size = 3
+    mocked_hits = []
+    for i in range(size):
+        mocked_hits.append(
+            RecommendationArticleHit(
+                id=str(i),
+                name=f"rec-{i}",
+                title=f"Rec {i}",
+                content="Content",
+                type=ArticleType.BLOG_POST.value,
+                year="2023",
+                tags=["tag1"],
+                creation_date=1234567890 + i,
+                view_count=10 + i,
+                read_count=5 + i,
+                claps_count=2 + i,
+            )
+        )
+
+    mock_response = RecommendationArticleResponse(hits=mocked_hits, total_hits=size)
+    mock_service.get_article_recommendations = AsyncMock(return_value=mock_response)
+
     # Payload attempts to close the name quote and ask for EVERYTHING (OR name != 'nothing')
     payload = {
         "document_name_to_ignore": "nothing' OR name != 'nothing",
@@ -162,13 +185,20 @@ def test_get_article_recommendations_injection_attempt(client):
     }
     response = client.post("/api/articles/recommendations", json=payload)
 
+    data = response.json()
     assert response.status_code == 200
+    assert data["total_hits"] == size
+    assert len(data["hits"]) == size
 
 
-def test_increment_view_count_injection_attempt(client):
+@patch("api.article.meilisearch_service")
+def test_increment_view_count_injection_attempt(mock_service, client):
     """
-    Verify that URL injection in document name is sanitized and does not cause a 'Mass Update' or Crash.
+    Verify that URL injection in document name is sanitized and does not cause a 'Mass update' or Crash.
     """
+    mock_response = {"success": False, "message": "Document not found", "view_count": 0}
+    mock_service.increment_view_count = AsyncMock(return_value=mock_response)
+
     # Attempt to inject "OR 1=1" into the URL path
     malicious_name = "test-article' OR 1=1"
     response = client.patch(f"/api/articles/{malicious_name}/increment-view-count")
