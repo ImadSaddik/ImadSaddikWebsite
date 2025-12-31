@@ -13,7 +13,7 @@ export const PAGE_NAMES = {
   [PAGE_KEYS.BLOGS]: "Blogs",
   [PAGE_KEYS.COURSES]: "Courses",
   [PAGE_KEYS.ASTRONOMY]: "Astronomy",
-  [PAGE_KEYS.ABOUT_ME]: "About Me",
-  [PAGE_KEYS.HIRE_ME]: "Hire Me",
+  [PAGE_KEYS.ABOUT_ME]: "About me",
+  [PAGE_KEYS.HIRE_ME]: "Hire me",
   [PAGE_KEYS.OTHER]: "Other",
 };
