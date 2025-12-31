@@ -251,3 +251,26 @@ async def test_get_claps_count(mock_client_class):
     assert result["success"] is True
     assert result["message"] == "Claps count retrieved successfully"
     assert result["claps_count"] == 15
+
+
+@pytest.mark.parametrize(
+    "input_text, expected_output",
+    [
+        ("O'Reilly", "O\\'Reilly"),
+        ("Test\\", "Test\\\\"),
+        ("\\'", "\\\\\\'"),
+        ("", ""),
+        ("no quotes", "no quotes"),
+        ("'''", "\\'\\'\\'"),
+        ('"""', '\\"\\"\\"'),
+        ("\\\\\\", "\\\\\\\\\\\\"),
+        ('I\'m a "test"', 'I\\\'m a \\"test\\"'),
+        ("Complex'One\\And\"Two\\\\", "Complex\\'One\\\\And\\\"Two\\\\\\\\"),
+        ("✨Unicode'Check✨", "✨Unicode\\'Check✨"),
+        ("   '   ", "   \\'   "),
+        ("\n'\t", "\n\\'\t"),
+    ],
+)
+def test_sanitize_logic(input_text, expected_output):
+    service = MeilisearchService()
+    assert service._sanitize(input_text) == expected_output

@@ -20,9 +20,15 @@ class MeilisearchService:
         self.client = meilisearch.Client(url=settings.MEILISEARCH_URL, api_key=settings.MEILISEARCH_MASTER_KEY)
         self.index = self.client.index(uid=settings.MEILISEARCH_INDEX_NAME)
 
+    def _sanitize(self, text: str) -> str:
+        """
+        Sanitizes input to prevent Meilisearch filter injection.
+        Escapes backslashes first, then single and double quotes.
+        """
+        return text.replace("\\", "\\\\").replace("'", "\\'").replace('"', '\\"')
+
     def get_filter_conditions(self, data: SearchRequest) -> str:
         conditions = []
-
         if data.article_type:
             conditions.append(f'type = "{data.article_type.value}"')
 
@@ -31,12 +37,7 @@ class MeilisearchService:
             conditions.append(f"year IN [{', '.join(years_list)}]")
 
         if data.filters.tags:
-            safe_tags = []
-            for tag in data.filters.tags:
-                sanitized_tag = tag.replace("\\", "\\\\").replace("'", "\\'")
-                safe_tags.append(sanitized_tag)
-
-            tags_list = [f"'{tag}'" for tag in safe_tags]
+            tags_list = [f"'{self._sanitize(tag)}'" for tag in data.filters.tags]
             conditions.append(f"tags IN [{', '.join(tags_list)}]")
 
         return " AND ".join(conditions) if conditions else ""
@@ -104,7 +105,8 @@ class MeilisearchService:
 
     async def increment_view_count(self, document_name: str) -> dict:
         try:
-            response = self.index.get_documents({"filter": f"name = '{document_name}'", "limit": 100})
+            safe_name = self._sanitize(document_name)
+            response = self.index.get_documents({"filter": f"name = '{safe_name}'", "limit": 100})
             chunks = response.results
 
             if not chunks:
@@ -131,7 +133,8 @@ class MeilisearchService:
 
     async def increment_read_count(self, document_name: str) -> dict:
         try:
-            response = self.index.get_documents({"filter": f"name = '{document_name}'", "limit": 100})
+            safe_name = self._sanitize(document_name)
+            response = self.index.get_documents({"filter": f"name = '{safe_name}'", "limit": 100})
             chunks = response.results
 
             if not chunks:
@@ -158,7 +161,8 @@ class MeilisearchService:
 
     async def increment_claps_count(self, document_name: str) -> dict:
         try:
-            response = self.index.get_documents({"filter": f"name = '{document_name}'", "limit": 100})
+            safe_name = self._sanitize(document_name)
+            response = self.index.get_documents({"filter": f"name = '{safe_name}'", "limit": 100})
             chunks = response.results
 
             if not chunks:
@@ -184,10 +188,11 @@ class MeilisearchService:
             return {"success": False, "message": "Internal server error", "claps_count": 0}
 
     async def get_article_recommendations(self, data: RecommendationArticleRequest) -> RecommendationArticleResponse:
-        filter_parts = [f"type = '{data.article_type.value}'", f"name != '{data.document_name_to_ignore}'"]
+        safe_ignore_name = self._sanitize(data.document_name_to_ignore)
+        filter_parts = [f"type = '{data.article_type.value}'", f"name != '{safe_ignore_name}'"]
 
         if data.document_tags:
-            tags_list = [f"'{tag}'" for tag in data.document_tags]
+            tags_list = [f"'{self._sanitize(tag)}'" for tag in data.document_tags]
             filter_parts.append(f"tags IN [{', '.join(tags_list)}]")
 
         filter_str = " AND ".join(filter_parts)
@@ -252,7 +257,8 @@ class MeilisearchService:
 
     async def get_claps_count(self, document_name: str) -> dict:
         try:
-            response = self.index.get_documents({"filter": f"name = '{document_name}'", "limit": 1})
+            safe_name = self._sanitize(document_name)
+            response = self.index.get_documents({"filter": f"name = '{safe_name}'", "limit": 1})
             chunks = response.results
 
             if not chunks:

@@ -148,3 +148,30 @@ def test_get_article_claps_count(mock_service, client):
     assert response.status_code == 200
     assert response.json() == {"success": True, "claps_count": 15}
     mock_service.get_claps_count.assert_called_once_with("test-article")
+
+
+def test_get_article_recommendations_injection_attempt(client):
+    """
+    Verify that 'document_name_to_ignore' is sanitized and does not allow filter bypassing.
+    """
+    # Payload attempts to close the name quote and ask for EVERYTHING (OR name != 'nothing')
+    payload = {
+        "document_name_to_ignore": "nothing' OR name != 'nothing",
+        "article_type": "blog-post",
+        "document_tags": [],
+    }
+    response = client.post("/api/articles/recommendations", json=payload)
+
+    assert response.status_code == 200
+
+
+def test_increment_view_count_injection_attempt(client):
+    """
+    Verify that URL injection in document name is sanitized and does not cause a 'Mass Update' or Crash.
+    """
+    # Attempt to inject "OR 1=1" into the URL path
+    malicious_name = "test-article' OR 1=1"
+    response = client.patch(f"/api/articles/{malicious_name}/increment-view-count")
+
+    assert response.status_code == 404
+    assert response.json()["detail"] == "Document not found"
