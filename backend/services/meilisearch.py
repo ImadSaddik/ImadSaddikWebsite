@@ -27,10 +27,13 @@ class MeilisearchService:
             conditions.append(f'type = "{data.article_type.value}"')
 
         if data.filters.years:
-            conditions.append(f"year IN {data.filters.years}")
+            years_list = [f"'{year}'" for year in data.filters.years]
+            conditions.append(f"year IN [{', '.join(years_list)}]")
 
         if data.filters.tags:
-            tags_list = [f"'{tag}'" for tag in data.filters.tags]
+            safe_tags = [tag.replace("'", "\\'") for tag in data.filters.tags]
+
+            tags_list = [f"'{tag}'" for tag in safe_tags]
             conditions.append(f"tags IN [{', '.join(tags_list)}]")
 
         return " AND ".join(conditions) if conditions else ""

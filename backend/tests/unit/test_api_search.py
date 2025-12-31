@@ -43,3 +43,31 @@ def test_search_articles(mock_service, client):
     assert mock_service.search.called
     assert data["hits"][0]["name"] == "search-1"
     assert mock_service.search.called
+
+
+def test_search_filter_injection_attempt(client):
+    """
+    Verify that injection attempts in 'tags' are sanitized
+    and do NOT leak data or crash the server.
+    """
+
+    # The payload attempts to break out of the tags list and dump all data
+    payload = {"query": "", "filters": {"tags": ["'] OR type != 'nothing' OR tags IN ['"]}}
+    response = client.post("/api/search", json=payload)
+
+    assert response.status_code == 200
+
+    data = response.json()
+    assert data["total_hits"] == 0
+    assert len(data["hits"]) == 0
+
+
+def test_search_year_validation(client):
+    """
+    Verify that invalid years are rejected by Pydantic validation.
+    """
+    payload = {"filters": {"years": ["2025' OR 1=1"]}}
+    response = client.post("/api/search", json=payload)
+
+    assert response.status_code == 422
+    assert "Year must be a 4-digit number" in response.json()["detail"][0]["msg"]
