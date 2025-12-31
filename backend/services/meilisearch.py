@@ -178,10 +178,10 @@ class MeilisearchService:
             return {"success": False, "message": "Internal server error", "claps_count": 0}
 
     async def get_article_recommendations(self, data: RecommendationArticleRequest) -> RecommendationArticleResponse:
-        filter_parts = [f"type = '{data.article_type.value}'", f"name != '{data.documentNameToIgnore}'"]
+        filter_parts = [f"type = '{data.article_type.value}'", f"name != '{data.document_name_to_ignore}'"]
 
-        if data.documentTags:
-            tags_list = [f"'{tag}'" for tag in data.documentTags]
+        if data.document_tags:
+            tags_list = [f"'{tag}'" for tag in data.document_tags]
             filter_parts.append(f"tags IN [{', '.join(tags_list)}]")
 
         filter_str = " AND ".join(filter_parts)

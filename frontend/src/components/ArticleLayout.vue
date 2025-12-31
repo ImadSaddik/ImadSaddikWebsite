@@ -138,9 +138,9 @@ export default {
     async getArticleRecommendations() {
       try {
         const response = await axios.post("/api/articles/recommendations", {
-          documentNameToIgnore: this.slug,
-          articleType: this.articleType,
-          documentTags: this.articleTags,
+          document_name_to_ignore: this.slug,
+          article_type: this.articleType,
+          document_tags: this.articleTags,
         });
 
         const recommendations = response.data;

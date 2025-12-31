@@ -24,9 +24,9 @@ class IncrementClapsCountResponse(IncrementCountResponse):
 
 
 class RecommendationArticleRequest(BaseModel):
-    documentNameToIgnore: str
-    articleType: str
-    documentTags: List[str]
+    document_name_to_ignore: str
+    article_type: ArticleType
+    document_tags: List[str]
 
 
 class RecommendationArticleHit(Hit): ...
