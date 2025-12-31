@@ -103,7 +103,7 @@ class MeilisearchService:
             processing_time_ms=results.get("processingTimeMs", 0),
         )
 
-    async def increment_view_count(self, document_name: str) -> dict:
+    async def _increment_counter(self, document_name: str, field_name: str) -> dict:
         try:
             safe_name = self._sanitize(document_name)
             response = self.index.get_documents({"filter": f"name = '{safe_name}'", "limit": 100})
@@ -113,79 +113,33 @@ class MeilisearchService:
                 return {
                     "success": False,
                     "message": "Document not found",
-                    "view_count": 0,
+                    field_name: 0,
                 }
 
-            new_view_count = chunks[0].view_count + 1
-            documents_to_update = [{"id": chunk.id, "view_count": new_view_count} for chunk in chunks]
+            new_count = getattr(chunks[0], field_name) + 1
+            documents_to_update = [{"id": chunk.id, field_name: new_count} for chunk in chunks]
 
             self.index.update_documents(documents_to_update)
 
+            display_field = field_name.replace("_count", "").replace("_", " ")
             return {
                 "success": True,
-                "message": f"Incremented view count to {new_view_count}",
-                "view_count": new_view_count,
+                "message": f"Incremented {display_field} count to {new_count}",
+                field_name: new_count,
             }
 
         except Exception:
-            logger.exception(f"Error incrementing view count for document '{document_name}'")
-            return {"success": False, "message": "Internal server error", "view_count": 0}
+            logger.exception(f"Error incrementing {field_name} for document '{document_name}'")
+            return {"success": False, "message": "Internal server error", field_name: 0}
+
+    async def increment_view_count(self, document_name: str) -> dict:
+        return await self._increment_counter(document_name, "view_count")
 
     async def increment_read_count(self, document_name: str) -> dict:
-        try:
-            safe_name = self._sanitize(document_name)
-            response = self.index.get_documents({"filter": f"name = '{safe_name}'", "limit": 100})
-            chunks = response.results
-
-            if not chunks:
-                return {
-                    "success": False,
-                    "message": "Document not found",
-                    "read_count": 0,
-                }
-
-            new_read_count = chunks[0].read_count + 1
-            documents_to_update = [{"id": chunk.id, "read_count": new_read_count} for chunk in chunks]
-
-            self.index.update_documents(documents_to_update)
-
-            return {
-                "success": True,
-                "message": f"Incremented read count to {new_read_count}",
-                "read_count": new_read_count,
-            }
-
-        except Exception:
-            logger.exception(f"Error incrementing read count for document '{document_name}'")
-            return {"success": False, "message": "Internal server error", "read_count": 0}
+        return await self._increment_counter(document_name, "read_count")
 
     async def increment_claps_count(self, document_name: str) -> dict:
-        try:
-            safe_name = self._sanitize(document_name)
-            response = self.index.get_documents({"filter": f"name = '{safe_name}'", "limit": 100})
-            chunks = response.results
-
-            if not chunks:
-                return {
-                    "success": False,
-                    "message": "Document not found",
-                    "claps_count": 0,
-                }
-
-            new_claps_count = chunks[0].claps_count + 1
-            documents_to_update = [{"id": chunk.id, "claps_count": new_claps_count} for chunk in chunks]
-
-            self.index.update_documents(documents_to_update)
-
-            return {
-                "success": True,
-                "message": f"Incremented claps count to {new_claps_count}",
-                "claps_count": new_claps_count,
-            }
-
-        except Exception:
-            logger.exception(f"Error incrementing claps count for document '{document_name}'")
-            return {"success": False, "message": "Internal server error", "claps_count": 0}
+        return await self._increment_counter(document_name, "claps_count")
 
     async def get_article_recommendations(self, data: RecommendationArticleRequest) -> RecommendationArticleResponse:
         safe_ignore_name = self._sanitize(data.document_name_to_ignore)
