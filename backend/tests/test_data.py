@@ -2,6 +2,7 @@ import meilisearch
 from meilisearch import Client
 
 from core.config import settings
+from enums.article import ArticleType
 from logger import logger
 
 TEST_INDEX_NAME = "articles_test"
@@ -40,7 +41,7 @@ TEST_DOCUMENTS = [
         "name": "ElasticsearchPreFilteringWithKnnSearch",
         "title": "Pre-filtering with KNN Search in Elasticsearch",
         "content": "Learn how to use pre-filtering with KNN search in Elasticsearch for better results.",
-        "type": "blog-post",
+        "type": ArticleType.BLOG_POST.value,
         "year": "2024",
         "tags": ["elasticsearch", "knn", "search"],
         "creation_date": 1700000000,
@@ -53,7 +54,7 @@ TEST_DOCUMENTS = [
         "name": "ElasticsearchCollapseSearchResults",
         "title": "Collapse Search Results in Elasticsearch",
         "content": "How to collapse search results in Elasticsearch to group similar documents.",
-        "type": "blog-post",
+        "type": ArticleType.BLOG_POST.value,
         "year": "2024",
         "tags": ["elasticsearch", "collapse", "search"],
         "creation_date": 1699000000,
@@ -66,7 +67,7 @@ TEST_DOCUMENTS = [
         "name": "ElasticsearchChangeHeapSize",
         "title": "Change Heap Size in Elasticsearch",
         "content": "Guide to changing heap size in Elasticsearch for optimal performance.",
-        "type": "blog-post",
+        "type": ArticleType.BLOG_POST.value,
         "year": "2023",
         "tags": ["elasticsearch", "performance", "configuration"],
         "creation_date": 1680000000,
@@ -79,7 +80,7 @@ TEST_DOCUMENTS = [
         "name": "VueJsForBeginners",
         "title": "Vue.js for Beginners",
         "content": "Getting started with Vue.js framework for building modern web applications.",
-        "type": "course-post",
+        "type": ArticleType.COURSE_POST.value,
         "year": "2024",
         "tags": ["vue", "javascript", "frontend"],
         "creation_date": 1698000000,
@@ -92,7 +93,7 @@ TEST_DOCUMENTS = [
         "name": "FastAPITutorial",
         "title": "Building APIs with FastAPI",
         "content": "Learn how to build fast and modern APIs using Python and FastAPI.",
-        "type": "course-post",
+        "type": ArticleType.COURSE_POST.value,
         "year": "2024",
         "tags": ["python", "fastapi", "api"],
         "creation_date": 1695000000,
@@ -105,7 +106,7 @@ TEST_DOCUMENTS = [
         "name": "OrionConstellation",
         "title": "Exploring the Orion Constellation",
         "content": "A journey through the stars of Orion, one of the most recognizable constellations.",
-        "type": "astronomy-post",
+        "type": ArticleType.ASTRONOMY_POST.value,
         "year": "2024",
         "tags": ["astronomy", "constellations", "stars"],
         "creation_date": 1697000000,
@@ -118,7 +119,7 @@ TEST_DOCUMENTS = [
         "name": "MoonPhases",
         "title": "Understanding Moon Phases",
         "content": "Learn about the different phases of the Moon and why they occur.",
-        "type": "astronomy-post",
+        "type": ArticleType.ASTRONOMY_POST.value,
         "year": "2023",
         "tags": ["astronomy", "moon", "lunar"],
         "creation_date": 1675000000,
