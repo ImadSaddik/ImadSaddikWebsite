@@ -40,6 +40,15 @@ export default defineConfig({
   },
   server: {
     port: 8080,
+    headers: {
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "Cross-Origin-Resource-Policy": "same-origin",
+    },
+    cors: {
+      origin: ["http://localhost:8080", "http://127.0.0.1:8080"],
+      credentials: true,
+    },
   },
   test: {
     globals: true,
