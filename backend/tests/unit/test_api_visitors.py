@@ -23,3 +23,19 @@ def test_track_visitor_endpoint(mock_get_country, mock_add_visitor, client):
     assert call_kwargs["country"] == "MOROCCO"
     assert call_kwargs["visited_page"] == VisitorPageType.ABOUT_ME.value
     assert call_kwargs["is_bot"] is False
+
+
+def test_track_visitor_invalid_page_type(client):
+    payload = {"visited_page": "RANDOM_JUNK"}
+    response = client.post("/api/visitors/track", json=payload)
+
+    data = response.json()
+    assert response.status_code == 422
+    assert "Input should be 'HOME', 'BLOGS', 'COURSES'" in data["detail"][0]["msg"]
+
+
+def test_track_visitor_injection_attempt(client):
+    payload = {"visited_page": "<script>alert(1)</script>"}
+    response = client.post("/api/visitors/track", json=payload)
+
+    assert response.status_code == 422
