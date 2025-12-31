@@ -1,12 +1,13 @@
 import { mount } from "@vue/test-utils";
 import EditArticleOnGitHub from "@/components/EditArticleOnGitHub.vue";
+import { ARTICLE_TYPES } from "@/constants";
 
 describe("EditArticleOnGitHub", () => {
   const factory = (props = {}) =>
     mount(EditArticleOnGitHub, {
       props: {
         slug: "my-awesome-article",
-        articleType: "blog-post",
+        articleType: ARTICLE_TYPES.BLOG,
         ...props,
       },
     });
@@ -20,7 +21,7 @@ describe("EditArticleOnGitHub", () => {
   });
 
   it("renders the edit link with correct URL for courses", () => {
-    const wrapper = factory({ slug: "course_name", articleType: "course-post" });
+    const wrapper = factory({ slug: "course_name", articleType: ARTICLE_TYPES.COURSE });
     const link = wrapper.find("a");
     expect(link.attributes("href")).toBe(
       "https://github.com/ImadSaddik/ImadSaddikWebsite/edit/master/frontend/src/courses/course_name/index.vue"
@@ -28,7 +29,7 @@ describe("EditArticleOnGitHub", () => {
   });
 
   it("renders the edit link with correct URL for astronomy", () => {
-    const wrapper = factory({ slug: "astronomy_name", articleType: "astronomy-post" });
+    const wrapper = factory({ slug: "astronomy_name", articleType: ARTICLE_TYPES.ASTRONOMY });
     const link = wrapper.find("a");
     expect(link.attributes("href")).toBe(
       "https://github.com/ImadSaddik/ImadSaddikWebsite/edit/master/frontend/src/astronomy/astronomy_name/index.vue"

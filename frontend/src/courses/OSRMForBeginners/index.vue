@@ -4,7 +4,7 @@
     title="OSRM for beginners"
     sub-title="Learn the different ways to use OSRM (Open Source Routing Machine) with practical examples in Python."
     creation-date="September 26, 2025"
-    article-type="course-post"
+    :article-type="ARTICLE_TYPES.COURSE"
     :article-tags="tags"
     :cover-image="coverImage"
     :reading-time="readingTime"
@@ -78,6 +78,9 @@ import markdownContent from "./content.md";
 // Images
 import coverImage from "./coverImage.svg";
 
+// Constants
+import { ARTICLE_TYPES } from "@/constants";
+
 // Components
 import ImageEnlarger from "@/components/ImageEnlarger.vue";
 import YouTubePlayer from "@/components/YouTubePlayer.vue";
@@ -108,6 +111,8 @@ export default {
         "How to generate a distance matrix (table) between multiple locations.",
         "How to solve the Traveling Salesman Problem (TSP).",
       ],
+
+      ARTICLE_TYPES,
     };
   },
   computed: {

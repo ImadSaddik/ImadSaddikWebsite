@@ -1,13 +1,14 @@
 import { mount, RouterLinkStub } from "@vue/test-utils";
 import ArticleHeader from "@/components/ArticleHeader.vue";
 import BaseTag from "@/components/BaseTag.vue";
+import { ARTICLE_TYPES } from "@/constants";
 
 describe("ArticleHeader", () => {
   const defaultProps = {
     title: "Understanding Elasticsearch",
     subTitle: "A deep dive into search engines",
     articleTags: ["elasticsearch", "search"],
-    articleType: "blog-post",
+    articleType: ARTICLE_TYPES.BLOG,
     coverImage: "cover.png",
     creationDate: "January 2024",
     readingTime: "10",

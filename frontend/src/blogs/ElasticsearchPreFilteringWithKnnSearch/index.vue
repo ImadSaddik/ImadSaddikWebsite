@@ -4,7 +4,7 @@
     title="Pre-filtering with kNN search in Elasticsearch"
     sub-title="How to apply filters to an index to remove documents that don’t meet certain requirements before using kNN search."
     creation-date="August 12, 2025"
-    article-type="blog-post"
+    :article-type="ARTICLE_TYPES.BLOG"
     :article-tags="blogTags"
     :cover-image="coverImage"
     :reading-time="readingTime"
@@ -207,6 +207,9 @@ import markdownContent from "./content.md";
 import coverImage from "./coverImage.svg";
 import allMiniLMModelHuggingFaceHub from "./allMiniLmL6V2ModelHF.png";
 
+// Constants
+import { ARTICLE_TYPES } from "@/constants";
+
 // Components
 import CodeBlock from "@/components/CodeBlock.vue";
 import CodeOutput from "@/components/CodeOutput.vue";
@@ -239,6 +242,8 @@ export default {
       isImageModalVisible: false,
       readingTime: 0,
       markdownContent,
+
+      ARTICLE_TYPES,
     };
   },
   computed: {

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { ARTICLE_TYPES } from "@/constants";
 
 const routes = [
   {
@@ -13,7 +14,7 @@ const routes = [
   },
   {
     path: "/blogs/:slug",
-    name: "blog-post",
+    name: ARTICLE_TYPES.BLOG,
     component: () => import("@/views/BlogPage.vue"),
     props: true,
   },
@@ -24,7 +25,7 @@ const routes = [
   },
   {
     path: "/courses/:slug",
-    name: "course-post",
+    name: ARTICLE_TYPES.COURSE,
     component: () => import("@/views/CoursePage.vue"),
     props: true,
   },
@@ -35,7 +36,7 @@ const routes = [
   },
   {
     path: "/astronomy/:slug",
-    name: "astronomy-post",
+    name: ARTICLE_TYPES.ASTRONOMY,
     component: () => import("@/views/AstronomyPage.vue"),
     props: true,
   },

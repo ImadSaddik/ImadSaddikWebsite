@@ -4,7 +4,7 @@
     title="How to fix the kernel panic problem after installing a new version of the kernel"
     sub-title="A step-by-step guide to recovering your Linux system from a broken kernel update using GRUB."
     creation-date="December 20, 2025"
-    article-type="blog-post"
+    :article-type="ARTICLE_TYPES.BLOG"
     :article-tags="tags"
     :cover-image="coverImage"
     :reading-time="readingTime"
@@ -218,6 +218,9 @@ import grubMenu from "./grub_menu.svg";
 import kernelVersionsList from "./kernel_versions_list.svg";
 import ubuntuDesktopSuccess from "./ubuntu_desktop_success.jpg";
 
+// Constants
+import { ARTICLE_TYPES } from "@/constants";
+
 // Components
 import ArticleLayout from "@/components/ArticleLayout.vue";
 import ImageWithCaption from "@/components/ImageWithCaption.vue";
@@ -256,6 +259,8 @@ export default {
       grubMenu,
       kernelVersionsList,
       ubuntuDesktopSuccess,
+
+      ARTICLE_TYPES,
     };
   },
   computed: {

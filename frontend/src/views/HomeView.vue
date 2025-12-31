@@ -47,7 +47,7 @@ import axios from "axios";
 import { getCardsDataFromDocumentHits, trackVisitorData } from "@/utils";
 
 // Constants
-import { PAGE_KEYS } from "@/constants";
+import { PAGE_KEYS, ARTICLE_TYPES } from "@/constants";
 
 // Components
 import HeroSection from "@/components/HeroSection.vue";
@@ -85,9 +85,9 @@ export default {
   async mounted() {
     document.title = "Imad Saddik";
     this.$emit("page-visited", PAGE_KEYS.HOME);
-    this.blogsCardData = await this.getLatestArticlesPerType("blog-post");
-    this.coursesCardData = await this.getLatestArticlesPerType("course-post");
-    this.universeImagesCardData = await this.getLatestArticlesPerType("astronomy-post");
+    this.blogsCardData = await this.getLatestArticlesPerType(ARTICLE_TYPES.BLOG);
+    this.coursesCardData = await this.getLatestArticlesPerType(ARTICLE_TYPES.COURSE);
+    this.universeImagesCardData = await this.getLatestArticlesPerType(ARTICLE_TYPES.ASTRONOMY);
     trackVisitorData(PAGE_KEYS.HOME);
   },
   methods: {

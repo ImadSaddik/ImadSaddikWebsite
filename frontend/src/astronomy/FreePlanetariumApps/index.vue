@@ -4,7 +4,7 @@
     title="Learn the night sky with free planetarium applications"
     sub-title="A list of free planetarium applications to explore the night sky on your computer or mobile device."
     creation-date="September 20, 2025"
-    article-type="astronomy-post"
+    :article-type="ARTICLE_TYPES.ASTRONOMY"
     :article-tags="tags"
     :cover-image="coverImage"
     :reading-time="readingTime"
@@ -538,6 +538,9 @@ import stargazingIndexInformation from "./stargazing_index_information.svg";
 import changeForecastHorizonStargazingIndex from "./change_forecast_horizon_stargazing_index.svg";
 import stargazingNewsSteps from "./sky_tonight_stargazing_news_steps.svg";
 
+// Constants
+import { ARTICLE_TYPES } from "@/constants/articleTypes";
+
 // Components
 import ArticleLayout from "@/components/ArticleLayout.vue";
 import ImageWithCaption from "@/components/ImageWithCaption.vue";
@@ -584,6 +587,8 @@ export default {
       stargazingIndexInformation,
       changeForecastHorizonStargazingIndex,
       stargazingNewsSteps,
+
+      ARTICLE_TYPES,
     };
   },
   computed: {
