@@ -3,6 +3,7 @@ import random
 from locust import FastHttpUser, between, task
 
 from enums.article import ArticleType
+from enums.search import SortableField, SortOrder
 
 
 class WebsiteUser(FastHttpUser):
@@ -10,8 +11,8 @@ class WebsiteUser(FastHttpUser):
 
     search_queries = ["inkscape", "python", "meilisearch", "astronomy", "elasticsearch"]
     article_types = [ArticleType.BLOG_POST, ArticleType.COURSE_POST, ArticleType.ASTRONOMY_POST]
-    sort_fields = ["date", "popularity", "engagement", "claps"]
-    sort_orders = ["asc", "desc"]
+    sort_fields = [SortableField.DATE, SortableField.POPULARITY, SortableField.ENGAGEMENT, SortableField.CLAPS]
+    sort_orders = [SortOrder.ASC, SortOrder.DESC]
 
     @task(1)
     def get_article_claps_count(self):

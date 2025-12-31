@@ -4,7 +4,7 @@ import pytest
 
 from enums.article import ArticleType
 from models.article import RecommendationArticleRequest
-from models.search import SearchFilters, SearchRequest, SearchSortBy, SortableField
+from models.search import SearchFilters, SearchRequest, SearchSortBy, SortableField, SortOrder
 from services.meilisearch import MeilisearchService
 
 
@@ -29,7 +29,7 @@ def test_get_sorting_criteria():
     assert service.get_sorting_criteria(request) == ["creation_date:desc"]
 
     request = SearchRequest(
-        article_type=ArticleType.BLOG_POST, sort_by=SearchSortBy(field=SortableField.POPULARITY, order="asc")
+        article_type=ArticleType.BLOG_POST, sort_by=SearchSortBy(field=SortableField.POPULARITY, order=SortOrder.ASC)
     )
     assert service.get_sorting_criteria(request) == ["view_count:asc"]
 
