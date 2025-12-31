@@ -45,11 +45,19 @@ def test_search_articles(mock_service, client):
     assert mock_service.search.called
 
 
-def test_search_filter_injection_attempt(client):
+@patch("api.search.meilisearch_service")
+def test_search_filter_injection_attempt(mock_service, client):
     """
     Verify that injection attempts in 'tags' are sanitized
     and do NOT leak data or crash the server.
     """
+    mock_response = SearchResponse(
+        hits=[],
+        total_hits=0,
+        facet_distribution=FacetDistribution(tags={}, year={}),
+        processing_time_ms=1,
+    )
+    mock_service.search = AsyncMock(return_value=mock_response)
 
     # The payload attempts to break out of the tags list and dump all data
     payload = {"query": "", "filters": {"tags": ["'] OR type != 'nothing' OR tags IN ['"]}}
@@ -73,10 +81,19 @@ def test_search_year_validation(client):
     assert "Year must be a 4-digit number" in response.json()["detail"][0]["msg"]
 
 
-def test_search_backslash_sanitization(client):
+@patch("api.search.meilisearch_service")
+def test_search_backslash_sanitization(mock_service, client):
     """
     Verify that backslashes are escaped and do not cause a Syntax Error (500).
     """
+    mock_response = SearchResponse(
+        hits=[],
+        total_hits=0,
+        facet_distribution=FacetDistribution(tags={}, year={}),
+        processing_time_ms=0,
+    )
+    mock_service.search = AsyncMock(return_value=mock_response)
+
     payload = {"query": "", "filters": {"tags": ["test\\"]}}
     response = client.post("/api/search", json=payload)
 

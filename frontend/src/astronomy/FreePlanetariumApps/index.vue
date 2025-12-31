@@ -539,7 +539,7 @@ import changeForecastHorizonStargazingIndex from "./change_forecast_horizon_star
 import stargazingNewsSteps from "./sky_tonight_stargazing_news_steps.svg";
 
 // Constants
-import { ARTICLE_TYPES } from "@/constants/articleTypes";
+import { ARTICLE_TYPES } from "@/constants";
 
 // Components
 import ArticleLayout from "@/components/ArticleLayout.vue";
