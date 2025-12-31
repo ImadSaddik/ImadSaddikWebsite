@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class SortableFields(str, Enum):
+class SortableField(str, Enum):
     DATE = "date"
     POPULARITY = "popularity"
     ENGAGEMENT = "engagement"

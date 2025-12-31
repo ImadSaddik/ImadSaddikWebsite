@@ -3,7 +3,7 @@ from typing import Dict, List, Optional
 from pydantic import BaseModel
 
 from enums.article import ArticleType
-from enums.search import SortableFields, SortOrder
+from enums.search import SortableField, SortOrder
 from models.document import Hit
 
 
@@ -13,7 +13,7 @@ class SearchFilters(BaseModel):
 
 
 class SearchSortBy(BaseModel):
-    field: SortableFields = SortableFields.DATE
+    field: SortableField = SortableField.DATE
     order: SortOrder = SortOrder.DESC
 
 

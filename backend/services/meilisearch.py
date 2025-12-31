@@ -3,7 +3,7 @@ from typing import List
 import meilisearch
 
 from core.config import settings
-from enums.search import SortableFields, SortOrder
+from enums.search import SortableField, SortOrder
 from logger import logger
 from models.article import (
     LatestArticleHit,
@@ -36,7 +36,7 @@ class MeilisearchService:
         return " AND ".join(conditions) if conditions else ""
 
     def get_sorting_criteria(self, data: SearchRequest) -> List[str]:
-        sort_by = SortableFields.DATE
+        sort_by = SortableField.DATE
         sort_order = SortOrder.DESC.value
 
         if data.sort_by:
@@ -44,10 +44,10 @@ class MeilisearchService:
             sort_order = data.sort_by.order.value
 
         field_mapping = {
-            SortableFields.DATE: f"creation_date:{sort_order}",
-            SortableFields.POPULARITY: f"view_count:{sort_order}",
-            SortableFields.ENGAGEMENT: f"read_count:{sort_order}",
-            SortableFields.CLAPS: f"claps_count:{sort_order}",
+            SortableField.DATE: f"creation_date:{sort_order}",
+            SortableField.POPULARITY: f"view_count:{sort_order}",
+            SortableField.ENGAGEMENT: f"read_count:{sort_order}",
+            SortableField.CLAPS: f"claps_count:{sort_order}",
         }
         default_sorting = f"creation_date:{sort_order}"
         return [field_mapping.get(sort_by, default_sorting)]
