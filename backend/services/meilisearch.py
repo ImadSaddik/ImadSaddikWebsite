@@ -227,9 +227,10 @@ class MeilisearchService:
 
     async def get_latest_articles(self, document_type: str) -> LatestArticleResponse:
         sort_order = SortOrder.DESC.value
+        safe_document_type = self._sanitize(document_type)
         response = self.index.get_documents(
             {
-                "filter": f"type = '{document_type}'",
+                "filter": f"type = '{safe_document_type}'",
                 "sort": [f"creation_date:{sort_order}"],
                 "limit": 3,
             }
