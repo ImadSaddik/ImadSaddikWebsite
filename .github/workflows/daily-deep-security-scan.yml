@@ -123,7 +123,7 @@ jobs:
       - name: Run ZAP Full scan
         uses: zaproxy/action-full-scan@v0.13.0
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           target: "http://localhost:8080"
+          rules_file_name: ".github/zap-rules.tsv"
           allow_issue_writing: false
           fail_action: true
