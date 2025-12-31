@@ -71,3 +71,15 @@ def test_search_year_validation(client):
 
     assert response.status_code == 422
     assert "Year must be a 4-digit number" in response.json()["detail"][0]["msg"]
+
+
+def test_search_backslash_sanitization(client):
+    """
+    Verify that backslashes are escaped and do not cause a Syntax Error (500).
+    """
+    payload = {"query": "", "filters": {"tags": ["test\\"]}}
+    response = client.post("/api/search", json=payload)
+
+    data = response.json()
+    assert response.status_code == 200
+    assert data["total_hits"] == 0

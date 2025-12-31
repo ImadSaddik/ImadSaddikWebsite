@@ -31,7 +31,10 @@ class MeilisearchService:
             conditions.append(f"year IN [{', '.join(years_list)}]")
 
         if data.filters.tags:
-            safe_tags = [tag.replace("'", "\\'") for tag in data.filters.tags]
+            safe_tags = []
+            for tag in data.filters.tags:
+                sanitized_tag = tag.replace("\\", "\\\\").replace("'", "\\'")
+                safe_tags.append(sanitized_tag)
 
             tags_list = [f"'{tag}'" for tag in safe_tags]
             conditions.append(f"tags IN [{', '.join(tags_list)}]")
