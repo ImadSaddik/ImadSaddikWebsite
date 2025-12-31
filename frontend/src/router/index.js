@@ -1,58 +1,58 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { ARTICLE_TYPES } from "@/constants";
+import { ARTICLE_TYPES, ROUTES } from "@/constants";
 
 const routes = [
   {
-    path: "/",
-    name: "home",
+    path: ROUTES.HOME.path,
+    name: ROUTES.HOME.name,
     component: () => import("../views/HomeView.vue"),
   },
   {
-    path: "/blogs",
-    name: "blogs",
+    path: ROUTES.BLOGS_HUB.path,
+    name: ROUTES.BLOGS_HUB.name,
     component: () => import("@/views/BlogsHub.vue"),
   },
   {
-    path: "/blogs/:slug",
-    name: ARTICLE_TYPES.BLOG,
+    path: ROUTES.BLOG_PAGE.path,
+    name: ROUTES.BLOG_PAGE.name,
     component: () => import("@/views/BlogPage.vue"),
     props: true,
   },
   {
-    path: "/courses",
-    name: "courses",
+    path: ROUTES.COURSES_HUB.path,
+    name: ROUTES.COURSES_HUB.name,
     component: () => import("@/views/CoursesHub.vue"),
   },
   {
-    path: "/courses/:slug",
-    name: ARTICLE_TYPES.COURSE,
+    path: ROUTES.COURSE_PAGE.path,
+    name: ROUTES.COURSE_PAGE.name,
     component: () => import("@/views/CoursePage.vue"),
     props: true,
   },
   {
-    path: "/astronomy",
-    name: "astronomy",
+    path: ROUTES.ASTRONOMY_HUB.path,
+    name: ROUTES.ASTRONOMY_HUB.name,
     component: () => import("@/views/AstronomyHub.vue"),
   },
   {
-    path: "/astronomy/:slug",
-    name: ARTICLE_TYPES.ASTRONOMY,
+    path: ROUTES.ASTRONOMY_PAGE.path,
+    name: ROUTES.ASTRONOMY_PAGE.name,
     component: () => import("@/views/AstronomyPage.vue"),
     props: true,
   },
   {
-    path: "/about-me",
-    name: "about-me",
+    path: ROUTES.ABOUT_ME.path,
+    name: ROUTES.ABOUT_ME.name,
     component: () => import("@/views/AboutMeFullStory.vue"),
   },
   {
-    path: "/hire-me",
-    name: "hire-me",
+    path: ROUTES.HIRE_ME.path,
+    name: ROUTES.HIRE_ME.name,
     component: () => import("@/views/HireMe.vue"),
   },
   {
-    path: "/:pathMatch(.*)*",
-    name: "NotFound",
+    path: ROUTES.NOT_FOUND.path,
+    name: ROUTES.NOT_FOUND.name,
     component: () => import("@/views/NotFoundPage.vue"),
   },
 ];
