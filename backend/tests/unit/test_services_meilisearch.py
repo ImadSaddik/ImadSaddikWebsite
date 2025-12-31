@@ -2,6 +2,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
+from enums.article import ArticleType
 from models.article import RecommendationArticleRequest
 from models.search import SearchFilters, SearchRequest, SearchSortBy, SortableFields
 from services.meilisearch import MeilisearchService
@@ -10,24 +11,25 @@ from services.meilisearch import MeilisearchService
 def test_get_filter_conditions():
     service = MeilisearchService()
 
-    request = SearchRequest(article_type="blog-post")
-    assert service.get_filter_conditions(request) == 'type = "blog-post"'
+    article_type = ArticleType.BLOG_POST
+    request = SearchRequest(article_type=article_type)
+    assert service.get_filter_conditions(request) == f'type = "{article_type.value}"'
 
-    request = SearchRequest(article_type="blog-post", filters=SearchFilters(years=["2023"]))
-    assert service.get_filter_conditions(request) == "type = \"blog-post\" AND year IN ['2023']"
+    request = SearchRequest(article_type=article_type, filters=SearchFilters(years=["2023"]))
+    assert service.get_filter_conditions(request) == f"type = \"{article_type.value}\" AND year IN ['2023']"
 
-    request = SearchRequest(article_type="blog-post", filters=SearchFilters(tags=["tag1", "tag2"]))
-    assert service.get_filter_conditions(request) == "type = \"blog-post\" AND tags IN ['tag1', 'tag2']"
+    request = SearchRequest(article_type=article_type, filters=SearchFilters(tags=["tag1", "tag2"]))
+    assert service.get_filter_conditions(request) == f"type = \"{article_type.value}\" AND tags IN ['tag1', 'tag2']"
 
 
 def test_get_sorting_criteria():
     service = MeilisearchService()
 
-    request = SearchRequest(article_type="blog-post")
+    request = SearchRequest(article_type=ArticleType.BLOG_POST)
     assert service.get_sorting_criteria(request) == ["creation_date:desc"]
 
     request = SearchRequest(
-        article_type="blog-post", sort_by=SearchSortBy(field=SortableFields.POPULARITY, order="asc")
+        article_type=ArticleType.BLOG_POST, sort_by=SearchSortBy(field=SortableFields.POPULARITY, order="asc")
     )
     assert service.get_sorting_criteria(request) == ["view_count:asc"]
 
@@ -49,14 +51,15 @@ async def test_search(mock_client_class):
         "processingTimeMs": 1,
     }
 
-    request = SearchRequest(article_type="blog-post", query="test")
+    article_type = ArticleType.BLOG_POST
+    request = SearchRequest(article_type=article_type, query="test")
     response = await service.search(request)
 
     assert response.total_hits == 0
     mock_index.search.assert_called_once()
     call_args = mock_index.search.call_args
     assert call_args.kwargs["query"] == "test"
-    assert 'type = "blog-post"' in call_args.kwargs["opt_params"]["filter"]
+    assert f'type = "{article_type.value}"' in call_args.kwargs["opt_params"]["filter"]
 
 
 @patch("services.meilisearch.meilisearch.Client")
@@ -151,6 +154,7 @@ async def test_get_article_recommendations(mock_client_class):
     mock_client.index.return_value = mock_index
     mock_client_class.return_value = mock_client
 
+    article_type = ArticleType.BLOG_POST
     service = MeilisearchService()
 
     mock_hit = MagicMock()
@@ -158,7 +162,7 @@ async def test_get_article_recommendations(mock_client_class):
     mock_hit.name = "rec-1"
     mock_hit.title = "Rec 1"
     mock_hit.content = "Content"
-    mock_hit.type = "blog-post"
+    mock_hit.type = article_type.value
     mock_hit.year = "2023"
     mock_hit.tags = ["tag1"]
     mock_hit.creation_date = 1234567890
@@ -169,7 +173,7 @@ async def test_get_article_recommendations(mock_client_class):
     mock_index.get_documents.return_value.results = [mock_hit]
 
     request = RecommendationArticleRequest(
-        document_name_to_ignore="current", article_type="blog-post", document_tags=["tag1", "tag2"]
+        document_name_to_ignore="current", article_type=article_type, document_tags=["tag1", "tag2"]
     )
     response = await service.get_article_recommendations(request)
 
@@ -177,7 +181,7 @@ async def test_get_article_recommendations(mock_client_class):
     assert response.hits[0].name == "rec-1"
     assert response.hits[0].title == "Rec 1"
     assert response.hits[0].content == "Content"
-    assert response.hits[0].type == "blog-post"
+    assert response.hits[0].type == article_type.value
     assert response.hits[0].year == "2023"
     assert response.hits[0].tags == ["tag1"]
     assert response.hits[0].creation_date == 1234567890
@@ -194,6 +198,7 @@ async def test_get_latest_articles(mock_client_class):
     mock_client.index.return_value = mock_index
     mock_client_class.return_value = mock_client
 
+    article_type = ArticleType.BLOG_POST
     service = MeilisearchService()
 
     mock_hit = MagicMock()
@@ -201,7 +206,7 @@ async def test_get_latest_articles(mock_client_class):
     mock_hit.name = "latest-1"
     mock_hit.title = "Latest 1"
     mock_hit.content = "Content"
-    mock_hit.type = "blog-post"
+    mock_hit.type = article_type.value
     mock_hit.year = "2023"
     mock_hit.tags = ["tag2"]
     mock_hit.creation_date = 1234567890
@@ -211,13 +216,13 @@ async def test_get_latest_articles(mock_client_class):
 
     mock_index.get_documents.return_value.results = [mock_hit]
 
-    response = await service.get_latest_articles("blog-post")
+    response = await service.get_latest_articles(document_type=article_type.value)
 
     assert response.total_hits == 1
     assert response.hits[0].name == "latest-1"
     assert response.hits[0].title == "Latest 1"
     assert response.hits[0].content == "Content"
-    assert response.hits[0].type == "blog-post"
+    assert response.hits[0].type == article_type.value
     assert response.hits[0].year == "2023"
     assert response.hits[0].tags == ["tag2"]
     assert response.hits[0].creation_date == 1234567890

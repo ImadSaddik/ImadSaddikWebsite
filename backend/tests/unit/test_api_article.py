@@ -1,5 +1,6 @@
 from unittest.mock import AsyncMock, patch
 
+from enums.article import ArticleType
 from models.article import (
     LatestArticleHit,
     LatestArticleResponse,
@@ -62,7 +63,7 @@ def test_get_article_recommendations(mock_service, client):
         name="rec-1",
         title="Rec 1",
         content="Content",
-        type="blog-post",
+        type=ArticleType.BLOG_POST.value,
         year="2023",
         tags=["tag1"],
         creation_date=1234567890,
@@ -75,7 +76,7 @@ def test_get_article_recommendations(mock_service, client):
 
     payload = {
         "document_name_to_ignore": "current-article",
-        "article_type": "blog-post",
+        "article_type": ArticleType.BLOG_POST,
         "document_tags": ["tag1", "tag2"],
     }
     response = client.post("/api/articles/recommendations", json=payload)
@@ -94,7 +95,7 @@ def test_get_latest_articles(mock_service, client):
         name="latest-1",
         title="Latest 1",
         content="Content",
-        type="blog-post",
+        type=ArticleType.BLOG_POST.value,
         year="2023",
         tags=["tag2"],
         creation_date=1234567890,
@@ -105,14 +106,14 @@ def test_get_latest_articles(mock_service, client):
     mock_response = LatestArticleResponse(hits=[mock_hit], total_hits=1)
     mock_service.get_latest_articles = AsyncMock(return_value=mock_response)
 
-    payload = {"article_type": "blog-post"}
+    payload = {"article_type": ArticleType.BLOG_POST}
     response = client.post("/api/articles/latest", json=payload)
 
     assert response.status_code == 200
     data = response.json()
     assert data["total_hits"] == 1
     assert data["hits"][0]["name"] == "latest-1"
-    mock_service.get_latest_articles.assert_called_once_with(document_type="blog-post")
+    mock_service.get_latest_articles.assert_called_once_with(document_type=ArticleType.BLOG_POST)
 
 
 @patch("api.article.meilisearch_service")

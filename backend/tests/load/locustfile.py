@@ -2,12 +2,14 @@ import random
 
 from locust import FastHttpUser, between, task
 
+from enums.article import ArticleType
+
 
 class WebsiteUser(FastHttpUser):
     wait_time = between(1, 5)
 
     search_queries = ["inkscape", "python", "meilisearch", "astronomy", "elasticsearch"]
-    article_types = ["blog-post", "course-post", "astronomy-post"]
+    article_types = [ArticleType.BLOG_POST, ArticleType.COURSE_POST, ArticleType.ASTRONOMY_POST]
     sort_fields = ["date", "popularity", "engagement", "claps"]
     sort_orders = ["asc", "desc"]
 
@@ -33,7 +35,7 @@ class WebsiteUser(FastHttpUser):
     def get_recommendations(self):
         endpoint = "/api/articles/recommendations"
         payload = {
-            "article_type": "blog-post",
+            "article_type": ArticleType.BLOG_POST,
             "document_name_to_ignore": "ElasticsearchChangeHeapSize",
             "document_tags": ["elasticsearch"],
         }

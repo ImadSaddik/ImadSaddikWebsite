@@ -1,5 +1,6 @@
 from unittest.mock import AsyncMock, patch
 
+from enums.article import ArticleType
 from models.search import FacetDistribution, SearchHit, SearchResponse
 
 
@@ -10,7 +11,7 @@ def test_search_articles(mock_service, client):
         name="search-1",
         title="Search 1",
         content="Content",
-        type="blog-post",
+        type=ArticleType.BLOG_POST.value,
         year="2023",
         tags=["tag1"],
         creation_date=1234567890,
@@ -29,7 +30,7 @@ def test_search_articles(mock_service, client):
 
     payload = {
         "query": "test",
-        "article_type": "blog-post",
+        "article_type": ArticleType.BLOG_POST,
         "filters": {"years": ["2023"], "tags": ["tag1"]},
         "size": 5,
     }
