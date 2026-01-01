@@ -102,10 +102,14 @@ jobs:
           echo "VITE_API_BASE_URL=http://localhost:8000" > .env
           echo "BASE_URL=http://localhost:8080" >> .env
 
-      - name: Start frontend
+      - name: Build frontend
+        working-directory: ./frontend
+        run: pnpm build
+
+      - name: Start frontend (Production preview)
         working-directory: ./frontend
         run: |
-          nohup pnpm run dev --host &
+          nohup pnpm preview --host &
           echo "Waiting for frontend to start..."
           for i in {1..30}; do
             if curl -s http://localhost:8080/ | grep -q "<title>Imad Saddik</title>"; then
@@ -120,7 +124,7 @@ jobs:
             exit 1
           fi
 
-      - name: Run ZAP Full scan
+      - name: Run ZAP full scan
         uses: zaproxy/action-full-scan@v0.13.0
         with:
           target: "http://localhost:8080"
