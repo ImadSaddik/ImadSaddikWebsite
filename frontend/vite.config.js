@@ -56,7 +56,7 @@ export default defineConfig({
       "Cross-Origin-Resource-Policy": "same-origin",
       "Referrer-Policy": "strict-origin-when-cross-origin",
       "Content-Security-Policy":
-        "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data: https:; connect-src 'self' http://localhost:8000 https:;",
+        "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data: https:; connect-src 'self' http://localhost:8000 https:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';",
     },
   },
   test: {
