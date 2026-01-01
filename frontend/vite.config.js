@@ -46,6 +46,9 @@ export default defineConfig({
       "Cross-Origin-Resource-Policy": "same-origin",
     },
   },
+  preview: {
+    port: 8080,
+  },
   test: {
     globals: true,
     environment: "jsdom",
