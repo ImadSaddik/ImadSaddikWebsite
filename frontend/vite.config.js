@@ -43,6 +43,10 @@ export default defineConfig({
   },
   preview: {
     port: 8080,
+    cors: {
+      origin: ["http://localhost:8080"],
+      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"],
+    },
     headers: {
       "X-Frame-Options": "DENY",
       "X-Content-Type-Options": "nosniff",
