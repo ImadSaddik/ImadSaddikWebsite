@@ -93,10 +93,9 @@ Start Meilisearch:
 ```
 
 >[!NOTE]
-> The master key used here is a dummy key for local development. In a production environment, make sure to use a strong and secure master key.
+>The master key used here is a dummy key for local development. In a production environment, make sure to use a strong and secure master key.
 >
-> `aStrongMasterKey` is the same key used in the `.env` file created earlier.
->
+>`aStrongMasterKey` is the same key used in the `.env` file created earlier.
 
 If that last command fails with a permission error like this:
 
@@ -139,6 +138,50 @@ Thank you for using Meilisearch!
 #### Populate Meilisearch with data
 
 >[!IMPORTANT]
-> To myself:
+>To myself:
 >
 >Don't forget to document this step in the future! All I need to do is to dump the database, reset counters, and provide that data in the repo so that we can populate the local Meilisearch instance with it.
+
+## Run all services using tmux
+
+If you don't want to start each server in a separate window manually, you can use [run_all_services_tmux.sh](./bash_scripts/run_all_services_tmux.sh) to start everything in a `tmux` session.
+
+>[!WARNING]
+>Open the bash script and make sure that the paths, and commands are correct before running it.
+
+Now, install `tmux` if you don't have it already. On Debian or Ubuntu, you can install it using:
+
+```bash
+apt install tmux
+```
+
+For other operating systems, refer to the [official tmux installation guide](https://github.com/tmux/tmux/wiki/Installing).
+
+After installing `tmux`, navigate to the `bash_scripts` directory and run the script:
+
+```bash
+cd bash_scripts
+./run_all_services_tmux.sh
+```
+
+This will create a new `tmux` session named `imad_saddik_personal_website` with three panes: one for Meilisearch, one for the frontend, and one for the backend.
+
+The backend pane is located at the bottom and spans the full width of the window, while the top half is split into two panes for Meilisearch (left) and the frontend (right).
+
+>[!WARNING]
+>The script might not work for you because I configured `tmux` to start windows and panes at `1` instead of the default `0`.
+>
+>You can use my custom `tmux.conf` if you want. You will find that in this [GitHub repository](https://github.com/ImadSaddik/MyTmuxConfig).
+>
+>If you don't want to use my custom configuration, you will need to modify the pane indices in the script accordingly.
+>
+>```bash
+>tmux split-window -v -p 50 -t "$SESSION_NAME:0.0"
+>
+>tmux select-pane -t "$SESSION_NAME:0.0"
+>tmux split-window -h -p 50 -t "$SESSION_NAME:0.0"
+>
+>tmux send-keys -t "$SESSION_NAME:0.0" "..." C-m
+>tmux send-keys -t "$SESSION_NAME:0.1" "..." C-m
+>tmux send-keys -t "$SESSION_NAME:0.2" "..." C-m
+>```
