@@ -1,8 +1,8 @@
 # Imad Saddik's website
 
 [![ci_pipeline_status](https://github.com/ImadSaddik/ImadSaddikWebsite/actions/workflows/ci.yml/badge.svg)](https://github.com/ImadSaddik/ImadSaddikWebsite/actions/workflows/ci.yml)
-[![codecov_unit_tests_coverage_backend](https://img.shields.io/codecov/c/github/ImadSaddik/ImadSaddikWebsite?flag=backend&label=codecov_unit_tests_coverage_backend&logo=codecov)](https://codecov.io/gh/ImadSaddik/ImadSaddikWebsite)
-[![codecov_unit_tests_coverage_frontend](https://img.shields.io/codecov/c/github/ImadSaddik/ImadSaddikWebsite?flag=frontend&label=codecov_unit_tests_coverage_frontend&logo=codecov)](https://codecov.io/gh/ImadSaddik/ImadSaddikWebsite)
+[![Backend Coverage](https://img.shields.io/codecov/c/github/ImadSaddik/ImadSaddikWebsite?flag=backend&label=Backend%20Coverage&logo=codecov)](https://codecov.io/gh/ImadSaddik/ImadSaddikWebsite)
+[![Frontend Coverage](https://img.shields.io/codecov/c/github/ImadSaddik/ImadSaddikWebsite?flag=frontend&label=Frontend%20Coverage&logo=codecov)](https://codecov.io/gh/ImadSaddik/ImadSaddikWebsite)
 [![gitHub_license](https://img.shields.io/github/license/ImadSaddik/ImadSaddikWebsite)](https://github.com/ImadSaddik/ImadSaddikWebsite/blob/master/LICENSE)
 [![website_status](https://img.shields.io/website?url=https%3A%2F%2Fimadsaddik.com%2F&up_message=online&down_message=offline&label=imadsaddik.com)](https://imadsaddik.com/)
 
