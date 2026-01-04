@@ -113,7 +113,13 @@ export default {
         this.baseTopOffset = 16;
       } else if (this.pageWidth < 1100) {
         this.baseTopOffset = 24;
+      } else {
+        this.baseTopOffset = 32;
       }
+
+      this.$nextTick(() => {
+        this.updateToastPositions();
+      });
     },
   },
 };

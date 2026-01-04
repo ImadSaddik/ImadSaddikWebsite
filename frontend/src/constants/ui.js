@@ -1,0 +1,2 @@
+export const SCROLL_MARGIN_TOP_OFFSET_PX = 20;
+export const AVERAGE_READING_SPEED_WPM = 200;

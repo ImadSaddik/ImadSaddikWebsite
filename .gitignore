@@ -252,3 +252,7 @@ __marimo__/
 frontend/coverage/
 frontend/playwright-report/
 frontend/test-results/
+frontend/stats.json
+frontend/stats.html
+
+dashboard_analysis/*.json

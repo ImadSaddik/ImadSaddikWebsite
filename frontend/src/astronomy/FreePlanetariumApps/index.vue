@@ -4,7 +4,7 @@
     title="Learn the night sky with free planetarium applications"
     sub-title="A list of free planetarium applications to explore the night sky on your computer or mobile device."
     creation-date="September 20, 2025"
-    article-type="astronomy-post"
+    :article-type="ARTICLE_TYPES.ASTRONOMY"
     :article-tags="tags"
     :cover-image="coverImage"
     :reading-time="readingTime"
@@ -511,7 +511,7 @@
 <script>
 // Text & Utils
 import markdownContent from "./content.md";
-import { calculateReadingTime } from "@/utils.js";
+import { calculateReadingTime } from "@/utils";
 
 // Images
 import coverImage from "./coverImage.svg";
@@ -537,6 +537,9 @@ import visibleTonightIcon from "./visible_tonight_icon.svg";
 import stargazingIndexInformation from "./stargazing_index_information.svg";
 import changeForecastHorizonStargazingIndex from "./change_forecast_horizon_stargazing_index.svg";
 import stargazingNewsSteps from "./sky_tonight_stargazing_news_steps.svg";
+
+// Constants
+import { ARTICLE_TYPES } from "@/constants";
 
 // Components
 import ArticleLayout from "@/components/ArticleLayout.vue";
@@ -584,6 +587,8 @@ export default {
       stargazingIndexInformation,
       changeForecastHorizonStargazingIndex,
       stargazingNewsSteps,
+
+      ARTICLE_TYPES,
     };
   },
   computed: {
@@ -593,7 +598,8 @@ export default {
   },
   mounted() {
     document.title = "Learn the night sky with free planetarium applications";
-    this.readingTime = calculateReadingTime(this.$refs);
+    const articleContent = this.$refs.articleContent.$el.innerText;
+    this.readingTime = calculateReadingTime(articleContent);
     const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
     setTimeout(() => {
       this.$emit("article-read");

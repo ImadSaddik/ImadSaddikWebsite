@@ -1,6 +1,7 @@
 import { mount, RouterLinkStub } from "@vue/test-utils";
 import CardGroup from "@/components/CardGroup.vue";
 import BaseCard from "@/components/BaseCard.vue";
+import { ARTICLE_TYPES } from "@/constants";
 
 describe("CardGroup", () => {
   const sampleCards = [
@@ -9,7 +10,7 @@ describe("CardGroup", () => {
       altText: "Cover A",
       title: "Kubernetes tips",
       creationDate: "Jan 2024",
-      articleType: "blog-post",
+      articleType: ARTICLE_TYPES.BLOG,
       articleId: "kubernetes-tips",
       viewCount: 3,
       readCount: 2,
@@ -20,7 +21,7 @@ describe("CardGroup", () => {
       altText: "Cover B",
       title: "Python pipelines",
       creationDate: "Feb 2024",
-      articleType: "blog-post",
+      articleType: ARTICLE_TYPES.BLOG,
       articleId: "python-pipelines",
       viewCount: 30,
       readCount: 10,

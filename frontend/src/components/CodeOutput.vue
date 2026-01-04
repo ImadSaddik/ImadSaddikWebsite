@@ -29,7 +29,7 @@ export default {
 }
 
 .code-output-container code {
-  font-family: "Inter";
+  font-family: var(--font-family-mono);
 }
 
 @media screen and (max-width: 576px) {

@@ -3,7 +3,7 @@
     article-title="Courses"
     search-placeholder="What courses are you curious about today?"
     sort-placeholder="Show me courses sorted by..."
-    :article-type="articleType"
+    :article-type="ARTICLE_TYPES.COURSE"
     @show-toast="$emit('show-toast', $event)"
   />
 </template>
@@ -13,10 +13,10 @@
 import ArticlesHub from "@/components/ArticlesHub.vue";
 
 // Constants
-import { COURSES_PAGE_VISITED_KEY } from "@/constants.js";
+import { PAGE_KEYS, ARTICLE_TYPES } from "@/constants";
 
 // Utils
-import { trackVisitorData } from "@/utils.js";
+import { useHubPage } from "@/composables/useHubPage";
 
 export default {
   name: "CoursesHub",
@@ -24,15 +24,17 @@ export default {
     ArticlesHub,
   },
   emits: ["show-toast", "page-visited"],
+  setup(props, { emit }) {
+    useHubPage({
+      pageKey: PAGE_KEYS.COURSES,
+      title: "Courses by Imad Saddik",
+      emit,
+    });
+  },
   data() {
     return {
-      articleType: "course-post",
+      ARTICLE_TYPES,
     };
-  },
-  mounted() {
-    document.title = "Courses by Imad Saddik";
-    this.$emit("page-visited", COURSES_PAGE_VISITED_KEY);
-    trackVisitorData(COURSES_PAGE_VISITED_KEY);
   },
 };
 </script>

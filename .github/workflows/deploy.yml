@@ -147,6 +147,7 @@ jobs:
             MEILISEARCH_URL=http://127.0.0.1:7700
             MEILISEARCH_INDEX_NAME=articles
             MEILISEARCH_MASTER_KEY=$MEILISEARCH_KEY
+            ENVIRONMENT=production
             EOF
 
       - name: Install Python dependencies (atomic venv swap)
@@ -261,10 +262,11 @@ jobs:
             fi
 
             echo "Reloading Nginx..."
-            if sudo systemctl reload nginx; then
-              echo "Nginx reloaded successfully."
+            if sudo nginx -t; then
+              echo "Configuration OK. Reloading Nginx..."
+              sudo systemctl reload nginx
             else
-              echo "Error: Failed to reload Nginx."
+              echo "Nginx configuration test failed! Not reloading."
               exit 1
             fi
 

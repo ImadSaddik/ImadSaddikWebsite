@@ -4,7 +4,7 @@
     title="Change the heap size for Elasticsearch"
     sub-title="How to change the heap size for Elasticsearch to improve performance and reduce memory usage."
     creation-date="August 21, 2025"
-    article-type="blog-post"
+    :article-type="ARTICLE_TYPES.BLOG"
     :article-tags="blogTags"
     :cover-image="coverImage"
     :reading-time="readingTime"
@@ -134,10 +134,13 @@
 // Text & Utils
 import * as codeSnippets from "./codeSnippets.js";
 import markdownContent from "./content.md";
-import { calculateReadingTime } from "@/utils.js";
+import { calculateReadingTime } from "@/utils";
 
 // Images
 import coverImage from "./coverImage.svg";
+
+// Constants
+import { ARTICLE_TYPES } from "@/constants";
 
 // Components
 import CodeBlock from "@/components/CodeBlock.vue";
@@ -166,6 +169,8 @@ export default {
       coverImage,
       readingTime: 0,
       markdownContent,
+
+      ARTICLE_TYPES,
     };
   },
   computed: {
@@ -175,7 +180,8 @@ export default {
   },
   mounted() {
     document.title = "Change the heap size for Elasticsearch";
-    this.readingTime = calculateReadingTime(this.$refs);
+    const articleContent = this.$refs.articleContent.$el.innerText;
+    this.readingTime = calculateReadingTime(articleContent);
     const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
     setTimeout(() => {
       this.$emit("article-read");

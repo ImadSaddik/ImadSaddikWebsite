@@ -4,7 +4,7 @@
     title="Train your own language model"
     sub-title="Learn every step needed to train a language model from scratch in Python."
     creation-date="September 26, 2025"
-    article-type="course-post"
+    :article-type="ARTICLE_TYPES.COURSE"
     :article-tags="tags"
     :cover-image="coverImage"
     :reading-time="readingTime"
@@ -60,9 +60,10 @@
       <YouTubePlayer video-url="https://www.youtube.com/embed/9Ge0sMm65jo" />
       <p>
         Creating courses like this takes months of research, experiments, designing illustrations, recording, and more.
-        If you want to support my mission to share free knowledge, you can also watch the course on
-        <a href="https://www.udemy.com/course/train-your-own-language-model/" target="_blank">Udemy</a>. The Udemy
-        version has extra content, including quizzes, assignments, and a certificate of completion.
+        If you want to support my mission to share free knowledge, you can
+        <a href="https://github.com/sponsors/ImadSaddik" target="_blank">sponsor me on GitHub</a>,
+        <a href="https://www.patreon.com/3CodeCamp" target="_blank">support me on Patreon</a>, or
+        <a href="https://www.paypal.com/paypalme/ImadSaddik" target="_blank">donate via PayPal</a>.
       </p>
     </section>
   </ArticleLayout>
@@ -76,11 +77,14 @@
 
 <script>
 // Text & Utils
-import { calculateReadingTime } from "@/utils.js";
+import { calculateReadingTime } from "@/utils";
 import markdownContent from "./content.md";
 
 // Images
 import coverImage from "./coverImage.svg";
+
+// Constants
+import { ARTICLE_TYPES } from "@/constants";
 
 // Components
 import ImageEnlarger from "@/components/ImageEnlarger.vue";
@@ -105,6 +109,8 @@ export default {
       isImageModalVisible: false,
       readingTime: 0,
       markdownContent,
+
+      ARTICLE_TYPES,
     };
   },
   computed: {
@@ -114,7 +120,8 @@ export default {
   },
   mounted() {
     document.title = "Train your own language model";
-    this.readingTime = calculateReadingTime(this.$refs);
+    const articleContent = this.$refs.articleContent.$el.innerText;
+    this.readingTime = calculateReadingTime(articleContent);
     const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
     setTimeout(() => {
       this.$emit("article-read");

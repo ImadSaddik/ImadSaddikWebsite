@@ -1,9 +1,10 @@
 import { test, expect } from "@playwright/test";
+import { ROUTES } from "@/constants";
 
 test.describe("User Preferences", () => {
   test.describe("Happy path", () => {
     test("should display preferences section in footer", async ({ page }) => {
-      await page.goto("/");
+      await page.goto(ROUTES.HOME.path);
       await page.locator(".footer-container").scrollIntoViewIfNeeded();
 
       const preferencesTitle = page.locator('.footer-column-title:has-text("Preferences")');
@@ -11,7 +12,7 @@ test.describe("User Preferences", () => {
     });
 
     test("should have toggle for star effect", async ({ page }) => {
-      await page.goto("/");
+      await page.goto(ROUTES.HOME.path);
       await page.locator(".footer-container").scrollIntoViewIfNeeded();
 
       const starEffectToggle = page.locator('label:has-text("Star effect"), #star-effect');
@@ -19,7 +20,7 @@ test.describe("User Preferences", () => {
     });
 
     test("should persist star effect preference", async ({ page }) => {
-      await page.goto("/");
+      await page.goto(ROUTES.HOME.path);
       await page.locator(".footer-container").scrollIntoViewIfNeeded();
 
       const starEffectCheckbox = page.locator("#star-effect");
@@ -39,7 +40,7 @@ test.describe("User Preferences", () => {
     });
 
     test("should have toggle for meteorite effect", async ({ page }) => {
-      await page.goto("/");
+      await page.goto(ROUTES.HOME.path);
       await page.locator(".footer-container").scrollIntoViewIfNeeded();
 
       const meteoriteToggle = page.locator('label:has-text("Meteorite effect"), #meteorite-effect');
@@ -47,7 +48,7 @@ test.describe("User Preferences", () => {
     });
 
     test("should persist meteorite effect preference", async ({ page }) => {
-      await page.goto("/");
+      await page.goto(ROUTES.HOME.path);
       await page.locator(".footer-container").scrollIntoViewIfNeeded();
 
       const meteoriteEffectCheckbox = page.locator("#meteorite-effect");
@@ -67,7 +68,7 @@ test.describe("User Preferences", () => {
     });
 
     test("should have toggle for custom cursor", async ({ page }) => {
-      await page.goto("/");
+      await page.goto(ROUTES.HOME.path);
       await page.locator(".footer-container").scrollIntoViewIfNeeded();
 
       const cursorToggle = page.locator('label:has-text("Custom cursor"), #custom-cursor');
@@ -75,7 +76,7 @@ test.describe("User Preferences", () => {
     });
 
     test("should persist custom cursor preference", async ({ page }) => {
-      await page.goto("/");
+      await page.goto(ROUTES.HOME.path);
       await page.locator(".footer-container").scrollIntoViewIfNeeded();
 
       const customCursorCheckbox = page.locator("#custom-cursor");
@@ -94,8 +95,34 @@ test.describe("User Preferences", () => {
       }
     });
 
+    test("should have toggle for wide articles", async ({ page }) => {
+      await page.goto(ROUTES.HOME.path);
+      const wideArticlesToggle = page.locator('label:has-text("Wide articles"), #wide-articles');
+      await expect(wideArticlesToggle.first()).toBeVisible();
+    });
+
+    test("should persist wide articles preference", async ({ page }) => {
+      await page.goto(ROUTES.HOME.path);
+      await page.locator(".footer-container").scrollIntoViewIfNeeded();
+
+      const wideArticlesCheckbox = page.locator("#wide-articles");
+      const wideArticlesLabel = page.locator('label[for="wide-articles"]');
+      if (await wideArticlesLabel.isVisible()) {
+        const wasChecked = await wideArticlesCheckbox.isChecked();
+        await wideArticlesLabel.click();
+
+        await page.reload();
+        await page.locator(".footer-container").scrollIntoViewIfNeeded();
+
+        const newState = await wideArticlesCheckbox.isChecked();
+        expect(newState).toBe(!wasChecked);
+
+        await wideArticlesLabel.click();
+      }
+    });
+
     test("should update body class when custom cursor is toggled", async ({ page }) => {
-      await page.goto("/");
+      await page.goto(ROUTES.HOME.path);
       await page.locator(".footer-container").scrollIntoViewIfNeeded();
 
       const cursorCheckbox = page.locator("#custom-cursor");
@@ -116,6 +143,39 @@ test.describe("User Preferences", () => {
     });
   });
 
+  test("should apply wide articles class when toggled and remove it when untoggled", async ({ page }) => {
+    await page.goto("/about-me");
+
+    let wideArticlesLabel = page.locator('label[for="wide-articles"]');
+    let pageContent = page.locator(".about-me-full-story-content");
+
+    if (await wideArticlesLabel.isVisible()) {
+      // By default, the checkbox is not checked.
+      await expect(pageContent.first()).not.toHaveClass(/wide/);
+      await wideArticlesLabel.click();
+      await expect(pageContent.first()).toHaveClass(/wide/);
+    }
+
+    await page.goto("/hire-me");
+
+    pageContent = page.locator(".hire-me-content");
+    if (await wideArticlesLabel.isVisible()) {
+      // At this point, the checkbox should still be checked.
+      await expect(pageContent.first()).toHaveClass(/wide/);
+      await wideArticlesLabel.click();
+      await expect(pageContent.first()).not.toHaveClass(/wide/);
+    }
+
+    await page.goto(`${ROUTES.BLOGS_HUB.path}/ElasticsearchPreFilteringWithKnnSearch`);
+    pageContent = page.locator(".article-body");
+    if (await wideArticlesLabel.isVisible()) {
+      // At this point, the checkbox should still be unchecked.
+      await expect(pageContent.first()).not.toHaveClass(/wide/);
+      await wideArticlesLabel.click();
+      await expect(pageContent.first()).toHaveClass(/wide/);
+    }
+  });
+
   test.describe("Unhappy path", () => {
     test("should load website even if localStorage is unavailable", async ({ page, context }) => {
       await context.addInitScript(() => {
@@ -132,7 +192,7 @@ test.describe("User Preferences", () => {
         });
       });
 
-      await page.goto("/");
+      await page.goto(ROUTES.HOME.path);
     });
 
     test("should use default preferences when localStorage is empty", async ({ page, context }) => {
@@ -140,7 +200,7 @@ test.describe("User Preferences", () => {
         localStorage.clear();
       });
 
-      await page.goto("/");
+      await page.goto(ROUTES.HOME.path);
       const starEffectCheckbox = page.locator("#star-effect");
       const meteoriteEffectCheckbox = page.locator("#meteorite-effect");
       const customCursorCheckbox = page.locator("#custom-cursor");

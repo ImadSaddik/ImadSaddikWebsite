@@ -1,9 +1,10 @@
 import { test, expect } from "@playwright/test";
+import { ROUTES } from "@/constants";
 
 test.describe("Search functionality", () => {
   test.describe("Happy path", () => {
     test("should display search bar on blogs hub", async ({ page }) => {
-      await page.goto("/blogs");
+      await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
 
       const searchBar = page.locator(".search-bar");
@@ -15,7 +16,7 @@ test.describe("Search functionality", () => {
     });
 
     test("should display search bar on courses hub", async ({ page }) => {
-      await page.goto("/courses");
+      await page.goto(ROUTES.COURSES_HUB.path);
       await page.waitForLoadState("networkidle");
 
       const searchBar = page.locator(".search-bar");
@@ -27,7 +28,7 @@ test.describe("Search functionality", () => {
     });
 
     test("should display search bar on astronomy hub", async ({ page }) => {
-      await page.goto("/astronomy");
+      await page.goto(ROUTES.ASTRONOMY_HUB.path);
       await page.waitForLoadState("networkidle");
 
       const searchBar = page.locator(".search-bar");
@@ -39,7 +40,7 @@ test.describe("Search functionality", () => {
     });
 
     test("should allow typing in search bar", async ({ page }) => {
-      await page.goto("/blogs");
+      await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
 
       const searchInput = page.locator(".search-input");
@@ -49,7 +50,7 @@ test.describe("Search functionality", () => {
     });
 
     test("should show clear and search buttons when text is entered", async ({ page }) => {
-      await page.goto("/blogs");
+      await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
 
       const searchInput = page.locator(".search-input");
@@ -64,7 +65,7 @@ test.describe("Search functionality", () => {
     });
 
     test("should clear search when clear button is clicked", async ({ page }) => {
-      await page.goto("/blogs");
+      await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
 
       const searchInput = page.locator(".search-input");
@@ -77,7 +78,7 @@ test.describe("Search functionality", () => {
     });
 
     test("should trigger search on Enter key", async ({ page }) => {
-      await page.goto("/blogs");
+      await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
 
       const searchInput = page.locator(".search-input");
@@ -89,7 +90,7 @@ test.describe("Search functionality", () => {
     });
 
     test("should trigger search on search button click", async ({ page }) => {
-      await page.goto("/blogs");
+      await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
 
       const searchInput = page.locator(".search-input");
@@ -105,7 +106,7 @@ test.describe("Search functionality", () => {
 
   test.describe("Unhappy path", () => {
     test("should handle empty search gracefully", async ({ page }) => {
-      await page.goto("/blogs");
+      await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
 
       const searchInput = page.locator(".search-input");
@@ -124,7 +125,7 @@ test.describe("Search functionality", () => {
         });
       });
 
-      await page.goto("/blogs");
+      await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
 
       const searchInput = page.locator(".search-input");
@@ -136,7 +137,7 @@ test.describe("Search functionality", () => {
     });
 
     test("should handle API error during search gracefully", async ({ page }) => {
-      await page.goto("/blogs");
+      await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
 
       await page.route("**/api/search**", (route) => route.abort());
@@ -150,7 +151,7 @@ test.describe("Search functionality", () => {
     });
 
     test("should handle special characters in search", async ({ page }) => {
-      await page.goto("/blogs");
+      await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
 
       const searchInput = page.locator(".search-input");
@@ -166,7 +167,7 @@ test.describe("Search functionality", () => {
     });
 
     test("should handle very long search queries", async ({ page }) => {
-      await page.goto("/blogs");
+      await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
 
       const searchInput = page.locator(".search-input");

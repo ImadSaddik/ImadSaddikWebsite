@@ -1,6 +1,7 @@
 import { mount, RouterLinkStub } from "@vue/test-utils";
 import ArticleFooter from "@/components/ArticleFooter.vue";
 import BaseCard from "@/components/BaseCard.vue";
+import { ARTICLE_TYPES } from "@/constants";
 
 describe("ArticleFooter", () => {
   const sampleCards = [
@@ -9,7 +10,7 @@ describe("ArticleFooter", () => {
       altText: "Cover 1",
       title: "Introduction to Kubernetes",
       creationDate: "March 2024",
-      articleType: "blog-post",
+      articleType: ARTICLE_TYPES.BLOG,
       articleId: "intro-kubernetes",
       viewCount: 100,
       readCount: 50,

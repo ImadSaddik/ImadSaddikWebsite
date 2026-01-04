@@ -3,7 +3,7 @@
     article-title="Astronomy"
     search-placeholder="What astronomy articles are you curious about today?"
     sort-placeholder="Show me astronomy articles sorted by..."
-    :article-type="articleType"
+    :article-type="ARTICLE_TYPES.ASTRONOMY"
     @show-toast="$emit('show-toast', $event)"
   />
 </template>
@@ -13,10 +13,10 @@
 import ArticlesHub from "@/components/ArticlesHub.vue";
 
 // Constants
-import { ASTRONOMY_PAGE_VISITED_KEY } from "@/constants.js";
+import { PAGE_KEYS, ARTICLE_TYPES } from "@/constants";
 
 // Utils
-import { trackVisitorData } from "@/utils.js";
+import { useHubPage } from "@/composables/useHubPage";
 
 export default {
   name: "AstronomyHub",
@@ -24,17 +24,17 @@ export default {
     ArticlesHub,
   },
   emits: ["show-toast", "page-visited"],
+  setup(props, { emit }) {
+    useHubPage({
+      pageKey: PAGE_KEYS.ASTRONOMY,
+      title: "Astronomy with Imad Saddik",
+      emit,
+    });
+  },
   data() {
     return {
-      articleType: "astronomy-post",
+      ARTICLE_TYPES,
     };
-  },
-  mounted() {
-    document.title = "Astronomy with Imad Saddik";
-    this.$emit("page-visited", ASTRONOMY_PAGE_VISITED_KEY);
-    trackVisitorData(ASTRONOMY_PAGE_VISITED_KEY);
   },
 };
 </script>
-
-<style scoped></style>

@@ -4,7 +4,7 @@
     title="How to make star trails and time-lapses with Python"
     sub-title="A guide to creating star trail images and time-lapse videos on any platform using Python."
     creation-date="October 24, 2025"
-    article-type="astronomy-post"
+    :article-type="ARTICLE_TYPES.ASTRONOMY"
     :article-tags="tags"
     :cover-image="coverImage"
     :reading-time="readingTime"
@@ -401,7 +401,7 @@
 // Text & Utils
 import * as codeSnippets from "./codeSnippets.js";
 import markdownContent from "./content.md";
-import { calculateReadingTime } from "@/utils.js";
+import { calculateReadingTime } from "@/utils";
 
 // Images
 import coverImage from "./coverImage.svg";
@@ -418,6 +418,9 @@ import cometStyleResult from "./comet_style_final_image.jpg";
 import fadeInOutPhases from "./fade_in_fade_out_phases.svg";
 import fadeInOutPhasesBrightness from "./fade_in_fade_out_phases_brightness.svg";
 import fadeInOutResult from "./fade_in_fade_out_final_image.jpg";
+
+// Constants
+import { ARTICLE_TYPES } from "@/constants";
 
 // Components
 import ArticleLayout from "@/components/ArticleLayout.vue";
@@ -466,6 +469,8 @@ export default {
       fadeInOutPhases,
       fadeInOutPhasesBrightness,
       fadeInOutResult,
+
+      ARTICLE_TYPES,
     };
   },
   computed: {
@@ -475,7 +480,8 @@ export default {
   },
   mounted() {
     document.title = "How to make star trails and time-lapses with Python";
-    this.readingTime = calculateReadingTime(this.$refs);
+    const articleContent = this.$refs.articleContent.$el.innerText;
+    this.readingTime = calculateReadingTime(articleContent);
     const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
     setTimeout(() => {
       this.$emit("article-read");

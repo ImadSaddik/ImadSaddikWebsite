@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="container">
     <a :href="githubEditUrl" target="_blank" rel="noopener noreferrer" class="edit-on-github-link">
       <i class="fa-solid fa-edit" aria-hidden="true"></i>
       Edit this page on GitHub
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { directoryMapping } from "@/utils";
+import { DIRECTORY_MAPPING } from "@/constants";
 
 export default {
   name: "EditArticleOnGitHub",
@@ -25,7 +25,7 @@ export default {
   computed: {
     githubEditUrl() {
       const baseRepoUrl = "https://github.com/ImadSaddik/ImadSaddikWebsite/edit/master";
-      const directory = directoryMapping[this.articleType];
+      const directory = DIRECTORY_MAPPING[this.articleType];
       const filePath = `frontend/src/${directory}/${this.slug}/index.vue`;
       return `${baseRepoUrl}/${filePath}`;
     },
@@ -34,6 +34,10 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  margin-top: var(--gap-sm);
+}
+
 .edit-on-github-link {
   font-size: var(--font-size-small);
 }

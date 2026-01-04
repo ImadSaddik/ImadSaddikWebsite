@@ -1,5 +1,6 @@
 import { mount, RouterLinkStub } from "@vue/test-utils";
 import BaseCard from "@/components/BaseCard.vue";
+import { ARTICLE_TYPES } from "@/constants";
 
 describe("BaseCard", () => {
   const baseProps = {
@@ -7,7 +8,7 @@ describe("BaseCard", () => {
     altText: "Cover alt",
     title: "Understanding Infrared Telescopes",
     creationDate: "2024-10-20",
-    articleType: "blog-post",
+    articleType: ARTICLE_TYPES.BLOG,
     articleId: "infrared-telescopes",
   };
 

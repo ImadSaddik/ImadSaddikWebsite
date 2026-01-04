@@ -1,98 +1,59 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import BlogPage from "@/views/BlogPage.vue";
-import BlogsHub from "@/views/BlogsHub.vue";
-import CoursesHub from "@/views/CoursesHub.vue";
-import AstronomyHub from "@/views/AstronomyHub.vue";
-import AboutMeFullStory from "@/views/AboutMeFullStory.vue";
-import HireMe from "@/views/HireMe.vue";
-import CoursePage from "@/views/CoursePage.vue";
-import AstronomyPage from "@/views/AstronomyPage.vue";
-import NotFoundPage from "@/views/NotFoundPage.vue";
-import { blogArticles, courseArticles, astronomyArticles } from "@/assetRegistry.js";
-
-export const isValidSlug = (articles, type, slug) => {
-  const path = `/src/${type}/${slug}/index.vue`;
-  return path in articles;
-};
+import { ARTICLE_TYPES, ROUTES } from "@/constants";
 
 const routes = [
   {
-    path: "/",
-    name: "home",
-    component: HomeView,
+    path: ROUTES.HOME.path,
+    name: ROUTES.HOME.name,
+    component: () => import("../views/HomeView.vue"),
   },
   {
-    path: "/blogs",
-    name: "blogs",
-    component: BlogsHub,
+    path: ROUTES.BLOGS_HUB.path,
+    name: ROUTES.BLOGS_HUB.name,
+    component: () => import("@/views/BlogsHub.vue"),
   },
   {
-    path: "/blogs/:slug",
-    name: "blog-post",
-    component: BlogPage,
+    path: ROUTES.BLOG_PAGE.path,
+    name: ROUTES.BLOG_PAGE.name,
+    component: () => import("@/views/BlogPage.vue"),
     props: true,
-    beforeEnter(to) {
-      const slug = to.params.slug;
-      if (!isValidSlug(blogArticles, "blogs", slug)) {
-        console.error(`Invalid blog slug: ${slug}`);
-        return { name: "blogs" };
-      }
-      return true;
-    },
   },
   {
-    path: "/courses",
-    name: "courses",
-    component: CoursesHub,
+    path: ROUTES.COURSES_HUB.path,
+    name: ROUTES.COURSES_HUB.name,
+    component: () => import("@/views/CoursesHub.vue"),
   },
   {
-    path: "/courses/:slug",
-    name: "course-post",
-    component: CoursePage,
+    path: ROUTES.COURSE_PAGE.path,
+    name: ROUTES.COURSE_PAGE.name,
+    component: () => import("@/views/CoursePage.vue"),
     props: true,
-    beforeEnter(to) {
-      const slug = to.params.slug;
-      if (!isValidSlug(courseArticles, "courses", slug)) {
-        console.error(`Invalid course slug: ${slug}`);
-        return { name: "courses" };
-      }
-      return true;
-    },
   },
   {
-    path: "/astronomy",
-    name: "astronomy",
-    component: AstronomyHub,
+    path: ROUTES.ASTRONOMY_HUB.path,
+    name: ROUTES.ASTRONOMY_HUB.name,
+    component: () => import("@/views/AstronomyHub.vue"),
   },
   {
-    path: "/astronomy/:slug",
-    name: "astronomy-post",
-    component: AstronomyPage,
+    path: ROUTES.ASTRONOMY_PAGE.path,
+    name: ROUTES.ASTRONOMY_PAGE.name,
+    component: () => import("@/views/AstronomyPage.vue"),
     props: true,
-    beforeEnter(to) {
-      const slug = to.params.slug;
-      if (!isValidSlug(astronomyArticles, "astronomy", slug)) {
-        console.error(`Invalid astronomy slug: ${slug}`);
-        return { name: "astronomy" };
-      }
-      return true;
-    },
   },
   {
-    path: "/about-me",
-    name: "about-me",
-    component: AboutMeFullStory,
+    path: ROUTES.ABOUT_ME.path,
+    name: ROUTES.ABOUT_ME.name,
+    component: () => import("@/views/AboutMeFullStory.vue"),
   },
   {
-    path: "/hire-me",
-    name: "hire-me",
-    component: HireMe,
+    path: ROUTES.HIRE_ME.path,
+    name: ROUTES.HIRE_ME.name,
+    component: () => import("@/views/HireMe.vue"),
   },
   {
-    path: "/:pathMatch(.*)*",
-    name: "NotFound",
-    component: NotFoundPage,
+    path: ROUTES.NOT_FOUND.path,
+    name: ROUTES.NOT_FOUND.name,
+    component: () => import("@/views/NotFoundPage.vue"),
   },
 ];
 
@@ -103,13 +64,14 @@ const router = createRouter({
     if (savedPosition) {
       return savedPosition;
     }
+
     if (to.hash) {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve({ el: to.hash, behavior: "smooth" });
-        }, 300);
-      });
+      return {
+        el: to.hash,
+        behavior: "smooth",
+      };
     }
+
     return { top: 0 };
   },
 });

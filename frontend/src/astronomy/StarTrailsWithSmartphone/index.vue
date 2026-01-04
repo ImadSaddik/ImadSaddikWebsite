@@ -4,7 +4,7 @@
     title="How to shoot star trails with your smartphone"
     sub-title="This complete guide covers everything you need to know to capture beautiful star trail photos using just your smartphone."
     creation-date="October 17, 2025"
-    article-type="astronomy-post"
+    :article-type="ARTICLE_TYPES.ASTRONOMY"
     :article-tags="tags"
     :cover-image="coverImage"
     :reading-time="readingTime"
@@ -823,7 +823,7 @@
 // Text & Utils
 import * as codeSnippets from "./codeSnippets.js";
 import markdownContent from "./content.md";
-import { calculateReadingTime } from "@/utils.js";
+import { calculateReadingTime } from "@/utils";
 
 // Images
 import coverImage from "./coverImage.svg";
@@ -851,7 +851,7 @@ import collectDataStep8 from "./collect_data_step_8.svg";
 import testShot from "./test_shot.jpg";
 import jpgFolderStarTrails from "./jpg_folder_star_trails.jpg";
 import starTrailProcessingWindowsMacosStep1 from "./star_trail_processing_windows_macos_step_1.svg";
-import starTrailProcessingWindowsMacosStep2 from "./star_trail_processing_windows_macos_step_2.svg";
+import starTrailProcessingWindowsMacosStep2 from "./star_trail_processing_windows_macos_step_2.jpg";
 import starTrailProcessingWindowsMacosStep3 from "./star_trail_processing_windows_macos_step_3.svg";
 import starTrailProcessingWindowsMacosStep4 from "./star_trail_processing_windows_macos_step_4.svg";
 import starTrailProcessingWindowsMacosTimelapse from "./star_trail_processing_windows_macos_step_timelapse.svg";
@@ -866,6 +866,9 @@ import starTrailTimelapseStep1 from "./star_trail_timelapse_step_1.svg";
 import starTrailTimelapseStep2 from "./star_trail_timelapse_step_2.svg";
 import starTrailTimelapseStep3 from "./star_trail_timelapse_step_3.svg";
 import addCustomVideoMode from "./add_custom_video_mode.jpg";
+
+// Constants
+import { ARTICLE_TYPES } from "@/constants";
 
 // Components
 import ArticleLayout from "@/components/ArticleLayout.vue";
@@ -940,6 +943,8 @@ export default {
       starTrailTimelapseStep2,
       starTrailTimelapseStep3,
       addCustomVideoMode,
+
+      ARTICLE_TYPES,
     };
   },
   computed: {
@@ -949,7 +954,8 @@ export default {
   },
   mounted() {
     document.title = "How to shoot star trails with your smartphone";
-    this.readingTime = calculateReadingTime(this.$refs);
+    const articleContent = this.$refs.articleContent.$el.innerText;
+    this.readingTime = calculateReadingTime(articleContent);
     const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
     setTimeout(() => {
       this.$emit("article-read");

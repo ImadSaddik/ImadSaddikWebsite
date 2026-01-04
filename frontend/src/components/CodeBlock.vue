@@ -151,6 +151,7 @@ pre.shiki {
 }
 
 pre.shiki code {
+  font-family: var(--font-family-mono);
   display: grid;
   grid-auto-rows: min-content;
   row-gap: 0px;

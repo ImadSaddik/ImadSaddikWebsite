@@ -1,6 +1,6 @@
 <template>
   <div class="about-me-full-story-container">
-    <div class="about-me-full-story-content">
+    <div class="about-me-full-story-content" :class="{ wide: wideArticlesEnabled }">
       <section>
         <h1 id="read-my-story">
           <a class="clickable-header-link" href="#read-my-story">Read my story</a>
@@ -595,10 +595,10 @@
 
 <script>
 // Constants
-import { ABOUT_ME_PAGE_VISITED_KEY } from "@/constants.js";
+import { PAGE_KEYS } from "@/constants";
 
 // Utils
-import { trackVisitorData } from "@/utils.js";
+import { trackVisitorData } from "@/utils";
 
 // Components
 import ImageWithCaption from "@/components/ImageWithCaption.vue";
@@ -632,6 +632,7 @@ export default {
     InlineCode,
     TableOfContents,
   },
+  inject: ["wideArticlesEnabled"],
   emits: ["page-visited", "show-toast"],
   data() {
     return {
@@ -680,8 +681,8 @@ fin     swi
   },
   mounted() {
     document.title = "About Imad Saddik";
-    this.$emit("page-visited", ABOUT_ME_PAGE_VISITED_KEY);
-    trackVisitorData(ABOUT_ME_PAGE_VISITED_KEY);
+    this.$emit("page-visited", PAGE_KEYS.ABOUT_ME);
+    trackVisitorData(PAGE_KEYS.ABOUT_ME);
   },
   methods: {
     handleOpenImageModal(event) {
@@ -745,22 +746,29 @@ img {
   display: flex;
   position: relative;
   padding: var(--gap-xl);
-  margin-top: var(--gap-xxl);
+  margin-top: var(--gap-2xl);
   box-sizing: border-box;
 }
 
 .about-me-full-story-content {
   width: 50%;
+  transition: width 0.3s;
+}
+
+.about-me-full-story-content.wide {
+  width: 75%;
 }
 
 @media screen and (max-width: 1300px) {
-  .about-me-full-story-content {
+  .about-me-full-story-content,
+  .about-me-full-story-content.wide {
     width: 65%;
   }
 }
 
 @media screen and (max-width: 1100px) {
-  .about-me-full-story-content {
+  .about-me-full-story-content,
+  .about-me-full-story-content.wide {
     width: 100%;
   }
 

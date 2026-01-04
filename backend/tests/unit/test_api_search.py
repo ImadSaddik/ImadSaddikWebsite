@@ -1,5 +1,6 @@
 from unittest.mock import AsyncMock, patch
 
+from enums.article import ArticleType
 from models.search import FacetDistribution, SearchHit, SearchResponse
 
 
@@ -10,7 +11,7 @@ def test_search_articles(mock_service, client):
         name="search-1",
         title="Search 1",
         content="Content",
-        type="blog-post",
+        type=ArticleType.BLOG_POST.value,
         year="2023",
         tags=["tag1"],
         creation_date=1234567890,
@@ -27,7 +28,12 @@ def test_search_articles(mock_service, client):
     )
     mock_service.search = AsyncMock(return_value=mock_response)
 
-    payload = {"query": "test", "articleType": "blog-post", "filters": {"years": ["2023"], "tags": ["tag1"]}, "size": 5}
+    payload = {
+        "query": "test",
+        "article_type": ArticleType.BLOG_POST,
+        "filters": {"years": ["2023"], "tags": ["tag1"]},
+        "size": 5,
+    }
     response = client.post("/api/search", json=payload)
 
     assert response.status_code == 200
@@ -37,3 +43,60 @@ def test_search_articles(mock_service, client):
     assert mock_service.search.called
     assert data["hits"][0]["name"] == "search-1"
     assert mock_service.search.called
+
+
+@patch("api.search.meilisearch_service")
+def test_search_filter_injection_attempt(mock_service, client):
+    """
+    Verify that injection attempts in 'tags' are sanitized
+    and do NOT leak data or crash the server.
+    """
+    mock_response = SearchResponse(
+        hits=[],
+        total_hits=0,
+        facet_distribution=FacetDistribution(tags={}, year={}),
+        processing_time_ms=1,
+    )
+    mock_service.search = AsyncMock(return_value=mock_response)
+
+    # The payload attempts to break out of the tags list and dump all data
+    payload = {"query": "", "filters": {"tags": ["'] OR type != 'nothing' OR tags IN ['"]}}
+    response = client.post("/api/search", json=payload)
+
+    assert response.status_code == 200
+
+    data = response.json()
+    assert data["total_hits"] == 0
+    assert len(data["hits"]) == 0
+
+
+def test_search_year_validation(client):
+    """
+    Verify that invalid years are rejected by Pydantic validation.
+    """
+    payload = {"filters": {"years": ["2025' OR 1=1"]}}
+    response = client.post("/api/search", json=payload)
+
+    assert response.status_code == 422
+    assert "Year must be a 4-digit number" in response.json()["detail"][0]["msg"]
+
+
+@patch("api.search.meilisearch_service")
+def test_search_backslash_sanitization(mock_service, client):
+    """
+    Verify that backslashes are escaped and do not cause a Syntax Error (500).
+    """
+    mock_response = SearchResponse(
+        hits=[],
+        total_hits=0,
+        facet_distribution=FacetDistribution(tags={}, year={}),
+        processing_time_ms=0,
+    )
+    mock_service.search = AsyncMock(return_value=mock_response)
+
+    payload = {"query": "", "filters": {"tags": ["test\\"]}}
+    response = client.post("/api/search", json=payload)
+
+    data = response.json()
+    assert response.status_code == 200
+    assert data["total_hits"] == 0

@@ -1,46 +1,54 @@
 <template>
-  <aside v-if="sections.length > 0" class="table-of-contents-container">
-    <h2>On this page</h2>
-    <ul>
-      <li v-for="value in sections" :key="value.id" :class="{ active: shouldActivateSection(value.y) }">
-        <a
-          href="#"
-          :class="[`level-${value.level}`, { active: shouldActivateSection(value.y) }]"
-          @click.prevent="handleSectionClick(value.id)"
-          >{{ value.text }}</a
-        >
-      </li>
-    </ul>
+  <aside v-if="sections.length > 0" class="table-of-contents-container" :class="{ wide: wideArticlesEnabled }">
+    <div class="toc-content-wrapper">
+      <h2>On this page</h2>
+      <ul>
+        <li v-for="value in sections" :key="value.id" :class="{ active: shouldActivateSection(value.y) }">
+          <a
+            href="#"
+            :class="[`level-${value.level}`, { active: shouldActivateSection(value.y) }]"
+            @click.prevent="handleSectionClick(value.id)"
+            >{{ value.text }}</a
+          >
+        </li>
+      </ul>
+    </div>
   </aside>
 </template>
 
 <script>
+// Third-party libraries
+import { useThrottleFn } from "@vueuse/core";
+
 export default {
   name: "TableOfContents",
+  inject: ["wideArticlesEnabled"],
   data() {
     return {
       activeSectionId: null,
       sections: [],
+      throttledScrollHandler: null,
     };
-  },
-  watch: {
-    activeSectionId(newId) {
-      if (newId) {
-        history.replaceState(null, "", `#${newId}`);
-      }
-    },
   },
   mounted() {
     this.$nextTick(() => {
       this.collectSections();
       this.checkIfURLContainsHash();
 
-      window.addEventListener("scroll", this.handleScrollEvent);
+      this.throttledScrollHandler = useThrottleFn(
+        this.handleScrollEvent,
+        100 /* wait time in ms */,
+        true /* trailing */,
+        true /* leading */
+      );
+      window.addEventListener("scroll", this.throttledScrollHandler);
       window.addEventListener("resize", this.handleResize);
     });
   },
   beforeUnmount() {
-    window.removeEventListener("scroll", this.handleScrollEvent);
+    if (this.throttledScrollHandler) {
+      window.removeEventListener("scroll", this.throttledScrollHandler);
+    }
     window.removeEventListener("resize", this.handleResize);
   },
   methods: {
@@ -74,12 +82,16 @@ export default {
       if (!sectionElement) return;
 
       const y = this.computeAbsoluteYPosition(sectionElement);
+      const topOffset = 20;
       window.scrollTo({
-        top: y,
+        top: y - topOffset,
         behavior: "smooth",
       });
 
       this.activeSectionId = sectionId;
+      history.replaceState(null, "", `#${sectionId}`);
+
+      this.scrollToActiveLink();
     },
     computeAbsoluteYPosition(element) {
       const rect = element.getBoundingClientRect();
@@ -87,6 +99,25 @@ export default {
     },
     handleScrollEvent() {
       this.collectSections();
+      this.scrollToActiveLink();
+    },
+    scrollToActiveLink() {
+      this.$nextTick(() => {
+        const container = this.$el.querySelector("ul");
+        const activeLinks = container.querySelectorAll("a.active");
+        const lastActiveLink = activeLinks[activeLinks.length - 1];
+
+        if (container && lastActiveLink) {
+          const containerRect = container.getBoundingClientRect();
+          const linkRect = lastActiveLink.getBoundingClientRect();
+          const distanceToLink = linkRect.top - containerRect.top;
+
+          container.scrollTo({
+            top: container.scrollTop + distanceToLink - containerRect.height / 2 + linkRect.height / 2,
+            behavior: "smooth",
+          });
+        }
+      });
     },
     handleResize() {
       this.collectSections();
@@ -100,8 +131,11 @@ export default {
 
 <style scoped>
 a {
-  color: var(--color-text-disabled);
+  display: block;
   width: 100%;
+  box-sizing: border-box;
+  color: var(--color-text-disabled);
+  transition: color 0.3s ease-in-out;
 }
 
 a:hover {
@@ -123,6 +157,13 @@ ul {
   margin: 0;
   margin-top: var(--gap-md);
   padding: 0;
+  padding-right: var(--gap-sm);
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+ul::-webkit-scrollbar {
+  display: none;
 }
 
 li {
@@ -130,6 +171,7 @@ li {
   list-style: none;
   margin: 0;
   padding: var(--gap-xs) 0;
+  line-height: 1.6;
 }
 
 li::before {
@@ -140,59 +182,76 @@ li::before {
   width: 4px;
   height: 100%;
   background-color: var(--color-text-disabled);
+  opacity: 0.3;
+  transition:
+    background-color 0.3s ease,
+    opacity 0.3s ease;
 }
 
 li:hover::before {
   background-color: var(--color-primary);
+  opacity: 1;
 }
 
 li.active::before {
   background-color: var(--color-primary);
+  opacity: 1;
 }
 
 li .level-2 {
   font-weight: bold;
-  padding: 0 var(--gap-md);
+  padding-left: calc(1 * var(--toc-indent-unit));
+  padding-right: var(--gap-md);
 }
 
 li .level-3 {
-  padding: 0 var(--gap-lg);
+  padding-left: calc(2 * var(--toc-indent-unit));
+  padding-right: var(--gap-md);
 }
 
 li .level-4 {
-  padding: 0 var(--gap-xl);
+  padding-left: calc(3 * var(--toc-indent-unit));
+  padding-right: var(--gap-md);
 }
 
 .table-of-contents-container {
+  --toc-indent-unit: 1.5rem;
+
   position: sticky;
-  top: var(--gap-xxl);
+  top: var(--gap-2xl);
   align-self: flex-start;
   width: 50%;
+  max-height: 85vh;
   margin: 0;
-  margin-left: var(--gap-xxl);
+  margin-left: var(--gap-2xl);
   z-index: 2;
+  transition: width 0.3s;
+}
+
+.table-of-contents-container.wide {
+  width: 25%;
+}
+
+.toc-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  max-width: 400px;
+  max-height: inherit;
 }
 
 @media screen and (max-width: 1300px) {
-  li {
-    padding: var(--gap-xs) var(--gap-sm);
-  }
-
-  li .level-2 {
-    padding: 0 var(--gap-xs);
-  }
-
-  li .level-3 {
-    padding: 0 var(--gap-sm);
-  }
-
-  li .level-4 {
-    padding: 0 var(--gap-md);
-  }
-
-  .table-of-contents-container {
+  .table-of-contents-container,
+  .table-of-contents-container.wide {
     width: 35%;
     margin-left: var(--gap-lg);
+
+    --toc-indent-unit: 0.5rem;
+  }
+
+  li {
+    padding: var(--gap-xs) var(--gap-sm);
   }
 }
 

@@ -44,10 +44,10 @@
 import axios from "axios";
 
 // Utils
-import { getCardsDataFromDocumentHits, trackVisitorData } from "@/utils.js";
+import { getCardsDataFromDocumentHits, trackVisitorData } from "@/utils";
 
 // Constants
-import { HOME_PAGE_VISITED_KEY } from "@/constants.js";
+import { PAGE_KEYS, ARTICLE_TYPES } from "@/constants";
 
 // Components
 import HeroSection from "@/components/HeroSection.vue";
@@ -58,8 +58,8 @@ import CardGroup from "@/components/CardGroup.vue";
 import scorpiusIllustration from "@/assets/illustrations/scorpius.svg";
 import orionIllustration from "@/assets/illustrations/orion.svg";
 import quasarIllustration from "@/assets/illustrations/quasar.svg";
-import horizontalSolarSystemIllustration from "@/assets/illustrations/solarSystemHorizontal.svg";
-import verticalSolarSystemIllustration from "@/assets/illustrations/solarSystemVertical.svg";
+import horizontalSolarSystemIllustration from "@/assets/illustrations/codingSolarSystemHorizontal.svg";
+import verticalSolarSystemIllustration from "@/assets/illustrations/codingSolarSystemVertical.svg";
 
 export default {
   name: "HomeView",
@@ -84,18 +84,17 @@ export default {
   },
   async mounted() {
     document.title = "Imad Saddik";
-    this.$emit("page-visited", HOME_PAGE_VISITED_KEY);
-    this.blogsCardData = await this.getLatestArticlesPerType("blog-post");
-    this.coursesCardData = await this.getLatestArticlesPerType("course-post");
-    this.universeImagesCardData = await this.getLatestArticlesPerType("astronomy-post");
-    trackVisitorData(HOME_PAGE_VISITED_KEY);
+    this.$emit("page-visited", PAGE_KEYS.HOME);
+    this.blogsCardData = await this.getLatestArticlesPerType(ARTICLE_TYPES.BLOG);
+    this.coursesCardData = await this.getLatestArticlesPerType(ARTICLE_TYPES.COURSE);
+    this.universeImagesCardData = await this.getLatestArticlesPerType(ARTICLE_TYPES.ASTRONOMY);
+    trackVisitorData(PAGE_KEYS.HOME);
   },
   methods: {
     async getLatestArticlesPerType(articleType) {
       try {
-        const response = await axios.post("/api/articles/latest", {
-          articleType,
-        });
+        const endpoint = "/api/articles/latest";
+        const response = await axios.post(endpoint, { article_type: articleType });
 
         const data = response.data;
         const hits = data?.hits || [];
@@ -103,8 +102,18 @@ export default {
           hits,
           articleType,
         });
-      } catch {
-        this.$emit("show-toast", { message: `Failed to fetch the latest ${articleType} articles`, type: "error" });
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          this.$emit("show-toast", {
+            message: "Patience, stargazer! Even the universe needs a second to update the latest discoveries.",
+            type: "warning",
+          });
+        } else {
+          this.$emit("show-toast", {
+            message: `Failed to fetch the latest ${articleType} articles`,
+            type: "error",
+          });
+        }
       }
     },
   },

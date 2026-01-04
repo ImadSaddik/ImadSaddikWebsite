@@ -4,7 +4,7 @@
     title="Pre-filtering with kNN search in Elasticsearch"
     sub-title="How to apply filters to an index to remove documents that don’t meet certain requirements before using kNN search."
     creation-date="August 12, 2025"
-    article-type="blog-post"
+    :article-type="ARTICLE_TYPES.BLOG"
     :article-tags="blogTags"
     :cover-image="coverImage"
     :reading-time="readingTime"
@@ -200,12 +200,15 @@
 <script>
 // Text & Utils
 import * as codeSnippets from "./codeSnippets.js";
-import { calculateReadingTime } from "@/utils.js";
+import { calculateReadingTime } from "@/utils";
 import markdownContent from "./content.md";
 
 // Images
 import coverImage from "./coverImage.svg";
 import allMiniLMModelHuggingFaceHub from "./allMiniLmL6V2ModelHF.png";
+
+// Constants
+import { ARTICLE_TYPES } from "@/constants";
 
 // Components
 import CodeBlock from "@/components/CodeBlock.vue";
@@ -239,6 +242,8 @@ export default {
       isImageModalVisible: false,
       readingTime: 0,
       markdownContent,
+
+      ARTICLE_TYPES,
     };
   },
   computed: {
@@ -248,7 +253,8 @@ export default {
   },
   mounted() {
     document.title = "Pre-filtering with kNN search in Elasticsearch";
-    this.readingTime = calculateReadingTime(this.$refs);
+    const articleContent = this.$refs.articleContent.$el.innerText;
+    this.readingTime = calculateReadingTime(articleContent);
     const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
     setTimeout(() => {
       this.$emit("article-read");
