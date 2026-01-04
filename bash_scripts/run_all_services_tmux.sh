@@ -18,16 +18,13 @@ FRONTEND_CMD="pnpm run dev"
 tmux kill-session -t $SESSION_NAME 2>/dev/null
 tmux new-session -d -s $SESSION_NAME -n "Dev"
 
-# Split the window to create a new pane on top for the other services.
-tmux split-window -v -p 50 -t "$SESSION_NAME:0.0"
+PANE_TOP_LEFT_ID=$(tmux list-panes -t "$SESSION_NAME" -F '#{pane_id}')
+PANE_BOTTOM_ID=$(tmux split-window -v -p 50 -t "$PANE_TOP_LEFT_ID" -P -F '#{pane_id}')
+PANE_TOP_RIGHT_ID=$(tmux split-window -h -p 50 -t "$PANE_TOP_LEFT_ID" -P -F '#{pane_id}')
 
-# Select the top pane and split it horizontally.
-tmux select-pane -t "$SESSION_NAME:0.0"
-tmux split-window -h -p 50 -t "$SESSION_NAME:0.0"
-
-# Start services in their respective panes
-tmux send-keys -t "$SESSION_NAME:0.0" "echo 'Starting Meilisearch...'; cd '$MEILISEARCH_DIR' && $MEILISEARCH_CMD" C-m
-tmux send-keys -t "$SESSION_NAME:0.1" "echo 'Starting Frontend...'; $BASH_ENV_CMD && cd '$FRONTEND_DIR' && $FRONTEND_CMD" C-m
-tmux send-keys -t "$SESSION_NAME:0.2" "echo 'Starting Backend...'; $BASH_ENV_CMD && cd '$BACKEND_DIR' && $BACKEND_CMD" C-m
+# Start services in their respective panes using their unique IDs
+tmux send-keys -t "$PANE_TOP_LEFT_ID" "echo 'Starting Meilisearch...'; cd '$MEILISEARCH_DIR' && $MEILISEARCH_CMD" C-m
+tmux send-keys -t "$PANE_TOP_RIGHT_ID" "echo 'Starting Frontend...'; $BASH_ENV_CMD && cd '$FRONTEND_DIR' && $FRONTEND_CMD" C-m
+tmux send-keys -t "$PANE_BOTTOM_ID" "echo 'Starting Backend...'; $BASH_ENV_CMD && cd '$BACKEND_DIR' && $BACKEND_CMD" C-m
 
 tmux attach-session -t $SESSION_NAME
