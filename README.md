@@ -157,7 +157,7 @@ If you don't want to start each server in a separate window manually, you can us
 Now, install `tmux` if you don't have it already. On Debian or Ubuntu, you can install it using:
 
 ```bash
-apt install tmux
+sudo apt install tmux
 ```
 
 For other operating systems, refer to the [official tmux installation guide](https://github.com/tmux/tmux/wiki/Installing).
