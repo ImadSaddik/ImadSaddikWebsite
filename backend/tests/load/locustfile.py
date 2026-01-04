@@ -16,7 +16,7 @@ class WebsiteUser(FastHttpUser):
 
     @task(1)
     def get_article_claps_count(self):
-        article_name = "ElasticsearchChangeHeapSize"
+        article_name = "elasticsearch-change-heap-size"
         endpoint = f"/api/articles/{article_name}/claps-count"
         self.client.get(endpoint, name="/articles/[name]/claps-count")
 
@@ -37,7 +37,7 @@ class WebsiteUser(FastHttpUser):
         endpoint = "/api/articles/recommendations"
         payload = {
             "article_type": ArticleType.BLOG_POST,
-            "document_name_to_ignore": "ElasticsearchChangeHeapSize",
+            "document_name_to_ignore": "elasticsearch-change-heap-size",
             "document_tags": ["elasticsearch"],
         }
         self.client.post(endpoint, json=payload, name=endpoint)
