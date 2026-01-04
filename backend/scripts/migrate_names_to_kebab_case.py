@@ -36,7 +36,7 @@ def migrate() -> None:
     updates = []
 
     for document in documents:
-        doc_dict = document.__dict__
+        doc_dict = vars(document)
         old_name = doc_dict.get("name")
 
         if not old_name:
