@@ -41,7 +41,7 @@ Navigate to the `backend` directory and create a virtual environment. I prefer t
 
 ```bash
 # Using conda
-conda create -n venv python=3.12 -y
+conda create -n venv python=3.13 -y
 conda activate venv
 
 # Using venv
