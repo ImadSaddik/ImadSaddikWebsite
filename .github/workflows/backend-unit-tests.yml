@@ -24,4 +24,11 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run unit tests
-        run: pytest tests/unit --tb=short
+        run: pytest tests/unit --tb=short --cov --cov-branch --cov-report=xml
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: ImadSaddik/ImadSaddikWebsite
+          flags: backend

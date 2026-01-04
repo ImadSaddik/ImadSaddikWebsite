@@ -1,0 +1,50 @@
+{
+  "displayedAttributes": ["*"],
+  "searchableAttributes": ["title", "content"],
+  "filterableAttributes": ["type", "year", "tags", "name"],
+  "sortableAttributes": [
+    "claps_count",
+    "creation_date",
+    "read_count",
+    "view_count"
+  ],
+  "rankingRules": [
+    "words",
+    "typo",
+    "proximity",
+    "attribute",
+    "sort",
+    "exactness"
+  ],
+  "stopWords": [],
+  "nonSeparatorTokens": [],
+  "separatorTokens": [],
+  "dictionary": [],
+  "synonyms": {},
+  "distinctAttribute": null,
+  "proximityPrecision": "byWord",
+  "typoTolerance": {
+    "enabled": true,
+    "minWordSizeForTypos": {
+      "oneTypo": 5,
+      "twoTypos": 9
+    },
+    "disableOnWords": [],
+    "disableOnAttributes": [],
+    "disableOnNumbers": false
+  },
+  "faceting": {
+    "maxValuesPerFacet": 100,
+    "sortFacetValuesBy": {
+      "*": "alpha"
+    }
+  },
+  "pagination": {
+    "maxTotalHits": 1000
+  },
+  "embedders": {},
+  "searchCutoffMs": null,
+  "localizedAttributes": null,
+  "facetSearch": true,
+  "prefixSearch": "indexingTime"
+}
