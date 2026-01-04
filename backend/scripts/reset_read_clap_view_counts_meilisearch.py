@@ -68,7 +68,7 @@ def main():
     print("Reset Meilisearch count fields script")
     print("=" * 60)
     print(f"Meilisearch URL: {settings.MEILISEARCH_URL}")
-    print(f"Index Name: {settings.MEILISEARCH_INDEX_NAME}")
+    print(f"Index name: {settings.MEILISEARCH_INDEX_NAME}")
     print("=" * 60)
 
     confirmation = input(
@@ -93,5 +93,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
     main()

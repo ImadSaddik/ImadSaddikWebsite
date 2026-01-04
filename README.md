@@ -137,10 +137,14 @@ Thank you for using Meilisearch!
 
 #### Populate Meilisearch with data
 
-> [!IMPORTANT]
-> To myself:
->
-> Don't forget to document this step in the future! All I need to do is to dump the database, reset counters, and provide that data in the repo so that we can populate the local Meilisearch instance with it.
+To load the initial settings and documents into Meilisearch, run the seeding script:
+
+```bash
+cd backend/scripts/
+python seed_meilisearch.py
+```
+
+For more details about the seed data, refer to the [seed README](./backend/seed/README.md).
 
 ## Run all services using tmux
 
