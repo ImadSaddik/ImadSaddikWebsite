@@ -25,4 +25,4 @@ def meilisearch_service() -> IntegrationMeilisearchService:
 
 @pytest.fixture(scope="module")
 def test_document_name() -> str:
-    return "ElasticsearchPreFilteringWithKnnSearch"
+    return "elasticsearch-pre-filtering-with-knn-search"

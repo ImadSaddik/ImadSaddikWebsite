@@ -8,103 +8,103 @@
 >
     <url>
         <loc>https://imadsaddik.com/</loc>
-        <lastmod>2025-12-31T19:32:06.505Z</lastmod>
+        <lastmod>2026-01-04T08:38:29.079Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/about-me</loc>
-        <lastmod>2025-12-31T19:32:06.505Z</lastmod>
+        <lastmod>2026-01-04T08:38:29.079Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/hire-me</loc>
-        <lastmod>2025-12-31T19:32:06.505Z</lastmod>
+        <lastmod>2026-01-04T08:38:29.079Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/resume</loc>
-        <lastmod>2025-12-31T19:32:06.505Z</lastmod>
+        <lastmod>2026-01-04T08:38:29.079Z</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
-        <loc>https://imadsaddik.com/blogs/ElasticsearchChangeHeapSize</loc>
-        <lastmod>2025-12-31T11:33:38.981Z</lastmod>
+        <loc>https://imadsaddik.com/blogs/elasticsearch-change-heap-size</loc>
+        <lastmod>2026-01-04T08:26:05.825Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://imadsaddik.com/blogs/ElasticsearchCollapseSearchResults</loc>
-        <lastmod>2025-12-31T11:33:18.345Z</lastmod>
+        <loc>https://imadsaddik.com/blogs/elasticsearch-collapse-search-results</loc>
+        <lastmod>2026-01-04T08:26:05.825Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://imadsaddik.com/blogs/ElasticsearchPreFilteringWithKnnSearch</loc>
-        <lastmod>2025-12-31T11:33:07.931Z</lastmod>
+        <loc>https://imadsaddik.com/blogs/elasticsearch-pre-filtering-with-knn-search</loc>
+        <lastmod>2026-01-04T08:26:05.826Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://imadsaddik.com/blogs/FixKernelPanicLinux</loc>
-        <lastmod>2025-12-31T11:32:56.756Z</lastmod>
+        <loc>https://imadsaddik.com/blogs/fix-kernel-panic-linux</loc>
+        <lastmod>2026-01-04T08:26:05.827Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://imadsaddik.com/blogs/InkscapeCleanUpDocument</loc>
-        <lastmod>2025-12-31T11:32:40.708Z</lastmod>
+        <loc>https://imadsaddik.com/blogs/inkscape-clean-up-document</loc>
+        <lastmod>2026-01-04T08:26:05.829Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://imadsaddik.com/blogs/LocalAIStackOnLinux</loc>
-        <lastmod>2025-12-31T11:32:24.267Z</lastmod>
+        <loc>https://imadsaddik.com/blogs/local-ai-stack-on-linux</loc>
+        <lastmod>2026-01-04T08:26:05.855Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://imadsaddik.com/courses/ElasticsearchForBeginners</loc>
-        <lastmod>2025-12-31T11:35:27.629Z</lastmod>
+        <loc>https://imadsaddik.com/courses/elasticsearch-for-beginners</loc>
+        <lastmod>2026-01-04T08:26:05.855Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://imadsaddik.com/courses/EvolutionOfTheTransformer</loc>
-        <lastmod>2025-12-31T11:35:18.014Z</lastmod>
+        <loc>https://imadsaddik.com/courses/evolution-of-the-transformer</loc>
+        <lastmod>2026-01-04T08:26:05.855Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://imadsaddik.com/courses/OSRMForBeginners</loc>
-        <lastmod>2025-12-31T11:35:08.487Z</lastmod>
+        <loc>https://imadsaddik.com/courses/osrm-for-beginners</loc>
+        <lastmod>2026-01-04T08:26:05.857Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://imadsaddik.com/courses/TrainYourOwnLanguageModel</loc>
-        <lastmod>2025-12-31T11:34:54.874Z</lastmod>
+        <loc>https://imadsaddik.com/courses/train-your-own-language-model</loc>
+        <lastmod>2026-01-04T08:26:05.858Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://imadsaddik.com/astronomy/FreePlanetariumApps</loc>
-        <lastmod>2025-12-31T19:31:40.355Z</lastmod>
+        <loc>https://imadsaddik.com/astronomy/free-planetarium-apps</loc>
+        <lastmod>2026-01-04T08:26:05.778Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://imadsaddik.com/astronomy/PythonStarTrails</loc>
-        <lastmod>2025-12-31T11:37:04.569Z</lastmod>
+        <loc>https://imadsaddik.com/astronomy/python-star-trails</loc>
+        <lastmod>2026-01-04T08:26:05.788Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://imadsaddik.com/astronomy/StarTrailsWithSmartphone</loc>
-        <lastmod>2025-12-31T11:36:45.752Z</lastmod>
+        <loc>https://imadsaddik.com/astronomy/star-trails-with-smartphone</loc>
+        <lastmod>2026-01-04T08:26:05.825Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>

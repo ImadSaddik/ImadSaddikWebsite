@@ -34,7 +34,7 @@ test.describe("Article width", () => {
     },
     {
       name: "Article page",
-      url: `${ROUTES.BLOGS_HUB.path}/ElasticsearchPreFilteringWithKnnSearch`,
+      url: `${ROUTES.BLOGS_HUB.path}/elasticsearch-pre-filtering-with-knn-search`,
       contentSelector: ".article-body",
       parentSelector: ".article-body-wrapper",
     },

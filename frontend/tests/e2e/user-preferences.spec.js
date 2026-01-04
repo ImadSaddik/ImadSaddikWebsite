@@ -166,7 +166,7 @@ test.describe("User Preferences", () => {
       await expect(pageContent.first()).not.toHaveClass(/wide/);
     }
 
-    await page.goto(`${ROUTES.BLOGS_HUB.path}/ElasticsearchPreFilteringWithKnnSearch`);
+    await page.goto(`${ROUTES.BLOGS_HUB.path}/elasticsearch-pre-filtering-with-knn-search`);
     pageContent = page.locator(".article-body");
     if (await wideArticlesLabel.isVisible()) {
       // At this point, the checkbox should still be unchecked.
