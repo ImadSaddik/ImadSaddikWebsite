@@ -10,9 +10,9 @@ from core.config import settings
 
 
 def camel_to_kebab(name: str) -> str:
-    string1 = re.sub("(.)([A-Z][a-z]+)", r"\1-\2", name)
-    string2 = re.sub("([a-z0-9])([A-Z])", r"\1-\2", string1)
-    return string2.lower()
+    name = re.sub("(.)([A-Z][a-z]+)", r"\1-\2", name)
+    name = re.sub("([a-z0-9])([A-Z])", r"\1-\2", name)
+    return name.lower()
 
 
 def migrate() -> None:
