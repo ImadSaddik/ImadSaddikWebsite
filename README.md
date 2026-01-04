@@ -139,11 +139,10 @@ Thank you for using Meilisearch!
 
 #### Populate Meilisearch with data
 
-To load the initial settings and documents into Meilisearch, run the seeding script:
+To load the initial settings and documents into Meilisearch, run the following script from the project root:
 
 ```bash
-cd backend/scripts/
-python seed_meilisearch.py
+python backend/scripts/seed_meilisearch.py
 ```
 
 For more details about the seed data, refer to the [seed README](./backend/seed/README.md).
