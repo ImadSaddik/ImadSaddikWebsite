@@ -172,3 +172,7 @@ cd bash_scripts
 This will create a new `tmux` session named `imad_saddik_personal_website` with three panes: one for Meilisearch, one for the frontend, and one for the backend.
 
 The backend pane is located at the bottom and spans the full width of the window, while the top half is split into two panes for Meilisearch (left) and the frontend (right).
+
+## Licence
+
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
