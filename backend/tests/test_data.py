@@ -1,5 +1,5 @@
-import meilisearch
 from meilisearch import Client
+from meilisearch.errors import MeilisearchApiError
 
 from core.config import settings
 from enums.article import ArticleType
@@ -38,7 +38,7 @@ TEST_INDEX_SETTINGS = {
 TEST_DOCUMENTS = [
     {
         "id": "1",
-        "name": "ElasticsearchPreFilteringWithKnnSearch",
+        "name": "elasticsearch-pre-filtering-with-knn-search",
         "title": "Pre-filtering with KNN Search in Elasticsearch",
         "content": "Learn how to use pre-filtering with KNN search in Elasticsearch for better results.",
         "type": ArticleType.BLOG_POST.value,
@@ -51,7 +51,7 @@ TEST_DOCUMENTS = [
     },
     {
         "id": "2",
-        "name": "ElasticsearchCollapseSearchResults",
+        "name": "elasticsearch-collapse-search-results",
         "title": "Collapse Search Results in Elasticsearch",
         "content": "How to collapse search results in Elasticsearch to group similar documents.",
         "type": ArticleType.BLOG_POST.value,
@@ -64,7 +64,7 @@ TEST_DOCUMENTS = [
     },
     {
         "id": "3",
-        "name": "ElasticsearchChangeHeapSize",
+        "name": "elasticsearch-change-heap-size",
         "title": "Change Heap Size in Elasticsearch",
         "content": "Guide to changing heap size in Elasticsearch for optimal performance.",
         "type": ArticleType.BLOG_POST.value,
@@ -77,7 +77,7 @@ TEST_DOCUMENTS = [
     },
     {
         "id": "4",
-        "name": "VueJsForBeginners",
+        "name": "vue-js-for-beginners",
         "title": "Vue.js for Beginners",
         "content": "Getting started with Vue.js framework for building modern web applications.",
         "type": ArticleType.COURSE_POST.value,
@@ -90,7 +90,7 @@ TEST_DOCUMENTS = [
     },
     {
         "id": "5",
-        "name": "FastAPITutorial",
+        "name": "fastapi-tutorial",
         "title": "Building APIs with FastAPI",
         "content": "Learn how to build fast and modern APIs using Python and FastAPI.",
         "type": ArticleType.COURSE_POST.value,
@@ -103,7 +103,7 @@ TEST_DOCUMENTS = [
     },
     {
         "id": "6",
-        "name": "OrionConstellation",
+        "name": "orion-constellation",
         "title": "Exploring the Orion Constellation",
         "content": "A journey through the stars of Orion, one of the most recognizable constellations.",
         "type": ArticleType.ASTRONOMY_POST.value,
@@ -116,7 +116,7 @@ TEST_DOCUMENTS = [
     },
     {
         "id": "7",
-        "name": "MoonPhases",
+        "name": "moon-phases",
         "title": "Understanding Moon Phases",
         "content": "Learn about the different phases of the Moon and why they occur.",
         "type": ArticleType.ASTRONOMY_POST.value,
@@ -139,7 +139,7 @@ def delete_test_index_if_exists(client: Client) -> None:
         task = client.delete_index(TEST_INDEX_NAME)
         client.wait_for_task(task.task_uid)
         logger.info(f"Deleted existing test index '{TEST_INDEX_NAME}'.")
-    except meilisearch.errors.MeilisearchApiError:
+    except MeilisearchApiError:
         logger.info(f"Test index '{TEST_INDEX_NAME}' does not exist. Skipping delete.")
 
 
