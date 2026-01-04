@@ -182,9 +182,20 @@ This repository contains several helper tools to assist with maintenance and ana
   - Optimizing images (`optimize_jpeg_images.sh`, `optimize_png_images.sh`)
   - Finding large media files (`find_media.sh`)
   - Managing backups (`clean_backups.sh`)
+  
+  Check the respective README files in those directories for more usage details.
+  
+## Production infrastructure
 
-Check the respective README files in those directories for more usage details.
+The `infrastructure/` directory contains configuration files and scripts used to deploy the website in a production environment:
 
+- **nginx/**: Configuration files for the Nginx web server, including Cloudflare-specific settings.
+- **supervisor/**: Configuration for [Supervisor](http://supervisord.org/) to manage the backend process.
+- **systemd/**: Systemd service files (e.g., for Meilisearch).
+- **scripts/**: Deployment and maintenance scripts, such as Gunicorn startup and monthly cleanup tasks.
+
+For more details, refer to the [infrastructure README](./infrastructure/README.md).
+  
 ## Contributing
 
 Contributions are welcome! To keep the code clean and consistent, please follow these simple steps:
