@@ -2,6 +2,7 @@ import sys
 from pathlib import Path
 
 import meilisearch
+from meilisearch.index import Index
 
 # Add parent directory to path to import from core
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -9,7 +10,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from core.config import settings
 
 
-def fetch_all_documents(index: meilisearch.index.Index) -> list:
+def fetch_all_documents(index: Index) -> list:
     all_documents = []
     limit = 1000
     offset = 0
@@ -30,7 +31,7 @@ def fetch_all_documents(index: meilisearch.index.Index) -> list:
     return all_documents
 
 
-def reset_counts(meilisearch_client: meilisearch.Client, index: meilisearch.index.Index) -> None:
+def reset_counts(meilisearch_client: meilisearch.Client, index: Index) -> None:
     all_documents = fetch_all_documents(index)
 
     if not all_documents:
