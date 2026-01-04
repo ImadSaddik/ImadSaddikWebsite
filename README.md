@@ -173,6 +173,52 @@ This will create a new `tmux` session named `imad_saddik_personal_website` with 
 
 The backend pane is located at the bottom and spans the full width of the window, while the top half is split into two panes for Meilisearch (left) and the frontend (right).
 
+## Contributing
+
+Contributions are welcome! To keep the code clean and consistent, please follow these simple steps:
+
+### Pre-commit hooks
+
+I use **pre-commit hooks** to check the code automatically before every commit. This helps catch small mistakes early.
+
+First, install `pre-commit` in your virtual environment:
+
+```bash
+pip install pre-commit
+```
+
+Then, set up the hooks:
+
+```bash
+pre-commit install
+```
+
+>[!NOTE]
+>The pre-commit hooks will also automatically regenerate the `sitemap.xml` file if you make changes to the frontend.
+
+### Code style (Linting and Formatting)
+
+Please make sure your code follows the project style. You can run these commands to fix most style issues:
+
+- **Frontend**: Run `pnpm lint` and `pnpm format` in the `frontend` folder.
+- **Backend**: Run `ruff check . --fix` in the `backend` folder.
+
+### Testing
+
+Before submitting your changes, run the tests to make sure everything still works:
+
+Inside the `frontend` folder run these tests:
+
+- **Unit tests**: `pnpm run test:run`
+- **E2E tests**: `pnpm run test:e2e` (requires the frontend, meilisearch, and backend to be running)
+
+Inside the `backend` folder run these tests:
+
+- **Unit tests**: `pytest tests/unit`
+- **Integration tests**: `pytest tests/integration` (requires Meilisearch to be running)
+
+If you find a typo or have a suggestion, feel free to open an issue or a pull request!
+
 ## Licence
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
