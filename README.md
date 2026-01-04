@@ -27,11 +27,22 @@ npm install -g pnpm@latest-10
 > [!NOTE]
 > You can install `pnpm` using other methods. For more details, check the [official pnpm installation guide](https://pnpm.io/installation).
 
-After installing `pnpm`, navigate to the `frontend` directory, install dependencies, and start the development server:
+After installing `pnpm`, navigate to the `frontend` directory and install the dependencies:
 
 ```bash
 cd frontend
 pnpm install
+```
+
+Next, create a `.env` file by copying the example file:
+
+```bash
+cp .env.example .env
+```
+
+Finally, start the development server:
+
+```bash
 pnpm dev
 ```
 
@@ -70,6 +81,22 @@ uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 You are almost done! The next and final step is to start Meilisearch, and populate it with data. This will enable the search functionality, list blogs, courses, and more.
+
+### Configuration
+
+Both the frontend and backend use `.env` files to manage configuration.
+
+In the backend, the `.env` file contains the following variables:
+
+- `MEILISEARCH_URL`: The URL of your Meilisearch instance (default: `http://localhost:7700`).
+- `MEILISEARCH_MASTER_KEY`: The master key to secure your search engine. **Must match** the key used when starting Meilisearch.
+- `MEILISEARCH_INDEX_NAME`: The name of the index to store articles (default: `articles`).
+- `ENVIRONMENT`: Set to `development` or `production`.
+
+In the frontend, the `.env` file contains the following variables:
+
+- `VITE_API_BASE_URL`: The URL of the backend API (default: `http://localhost:8000`).
+- `BASE_URL`: The base URL used by Playwright for E2E testing (default: `http://localhost:8080`).
 
 ### Meilisearch
 
