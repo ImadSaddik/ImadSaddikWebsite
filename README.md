@@ -1,6 +1,8 @@
 # Imad Saddik's website
 
 [![ci_pipeline_status](https://github.com/ImadSaddik/ImadSaddikWebsite/actions/workflows/ci.yml/badge.svg)](https://github.com/ImadSaddik/ImadSaddikWebsite/actions/workflows/ci.yml)
+[![codecov_backend](https://codecov.io/gh/ImadSaddik/ImadSaddikWebsite/graph/badge.svg?flag=backend)](https://codecov.io/gh/ImadSaddik/ImadSaddikWebsite)
+[![codecov_frontend](https://codecov.io/gh/ImadSaddik/ImadSaddikWebsite/graph/badge.svg?flag=frontend)](https://codecov.io/gh/ImadSaddik/ImadSaddikWebsite)
 [![gitHub_license](https://img.shields.io/github/license/ImadSaddik/ImadSaddikWebsite)](https://github.com/ImadSaddik/ImadSaddikWebsite/blob/master/LICENSE)
 [![website_status](https://img.shields.io/website?url=https%3A%2F%2Fimadsaddik.com%2F&up_message=online&down_message=offline&label=imadsaddik.com)](https://imadsaddik.com/)
 

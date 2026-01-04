@@ -45,6 +45,9 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
     include: ["tests/unit/**/*.test.{js,ts,jsx,tsx}"],
+    coverage: {
+      reporter: ["text", "lcov"],
+    },
   },
 });
 
