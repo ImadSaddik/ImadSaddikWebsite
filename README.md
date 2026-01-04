@@ -173,6 +173,18 @@ This will create a new `tmux` session named `imad_saddik_personal_website` with 
 
 The backend pane is located at the bottom and spans the full width of the window, while the top half is split into two panes for Meilisearch (left) and the frontend (right).
 
+## Useful tools & scripts
+
+This repository contains several helper tools to assist with maintenance and analysis:
+
+- **[Dashboard analysis](./dashboard_analysis/README.md)**: A collection of tools to analyze Nginx logs using [GoAccess](https://goaccess.io/) data. Useful for tracking traffic and identifying bad actors.
+- **[Bash scripts](./bash_scripts/README.md)**: A set of utility scripts for tasks such as:
+  - Optimizing images (`optimize_jpeg_images.sh`, `optimize_png_images.sh`)
+  - Finding large media files (`find_media.sh`)
+  - Managing backups (`clean_backups.sh`)
+
+Check the respective README files in those directories for more usage details.
+
 ## Contributing
 
 Contributions are welcome! To keep the code clean and consistent, please follow these simple steps:
