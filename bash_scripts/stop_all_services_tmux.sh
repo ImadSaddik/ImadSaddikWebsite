@@ -4,9 +4,7 @@ SESSION_NAME="imad_saddik_personal_website"
 
 if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
   echo "Session found. Stopping services..."
-  tmux send-keys -t "$SESSION_NAME:1.1" C-c
-  tmux send-keys -t "$SESSION_NAME:1.2" C-c
-  tmux send-keys -t "$SESSION_NAME:1.3" C-c
+  tmux list-panes -t "$SESSION_NAME" -F '#{pane_id}' | xargs -I paneID tmux send-keys -t paneID C-c
   sleep 1
   tmux kill-session -t "$SESSION_NAME"
   echo "Session '$SESSION_NAME' stopped."
