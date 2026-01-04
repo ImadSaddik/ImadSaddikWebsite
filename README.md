@@ -239,6 +239,13 @@ Inside the `backend` folder run these tests:
 
 - **Unit tests**: `pytest tests/unit`
 - **Integration tests**: `pytest tests/integration` (requires Meilisearch to be running)
+- **Load tests**:
+
+  ```bash
+  locust -f tests/load/locustfile.py
+  ```
+
+  Then open [http://localhost:8089](http://localhost:8089) to start the swarm.
 
 If you find a typo or have a suggestion, feel free to open an issue or a pull request!
 
