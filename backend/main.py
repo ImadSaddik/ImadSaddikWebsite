@@ -1,7 +1,7 @@
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from slowapi import _rate_limit_exceeded_handler
@@ -29,25 +29,6 @@ app = FastAPI(title="API for ImadSaddik.com", version="1.0.0", lifespan=lifespan
 app.add_exception_handler(RequestValidationError, request_validation_exception_handler)
 app.add_exception_handler(HTTPException, http_exception_handler)
 app.add_exception_handler(Exception, unhandled_exception_handler)
-
-
-@app.middleware("http")
-async def add_security_headers(request: Request, call_next):
-    response = await call_next(request)
-
-    # Stop browsers from guessing media types (MIME sniffing)
-    # https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Content-Type-Options
-    response.headers["X-Content-Type-Options"] = "nosniff"
-
-    # Stop other sites from putting my site in an iframe (Clickjacking)
-    # https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Frame-Options
-    response.headers["X-Frame-Options"] = "DENY"
-
-    # Stop other sites from loading my resources (Hotlinking)
-    # https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cross-Origin_Resource_Policy
-    response.headers["Cross-Origin-Resource-Policy"] = "same-origin"
-
-    return response
 
 
 app.middleware("http")(log_request_middleware)
