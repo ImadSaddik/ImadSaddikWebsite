@@ -6,3 +6,7 @@
 10035	IGNORE	(Strict-Transport-Security - Handled by Nginx)
 10038	IGNORE	(Content Security Policy - Handled by Nginx)
 10063	IGNORE	(Permissions Policy - Handled by Nginx)
+10055	IGNORE	(CSP Wildcards and Unsafe - Handled by Nginx)
+40040	IGNORE	(CORS Header - Handled by Nginx)
+10049	IGNORE	(Cache Headers - Handled by Nginx)
+10027	IGNORE	(Suspicious Comments - False positives in vendor libraries)
