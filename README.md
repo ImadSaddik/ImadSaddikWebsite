@@ -16,7 +16,7 @@ I created this website to bring together everything I do online. You will find h
 
 Check out the video below for a quick tour of the website!
 
-[![Watch the Project Tour](https://img.youtube.com/vi/OfBNIRxqGIU/maxresdefault.jpg)](https://www.youtube.com/watch?v=OfBNIRxqGIU)
+[![Watch the Project Tour](./images/project_showcase_thumbnail.svg)](https://www.youtube.com/watch?v=OfBNIRxqGIU)
 
 ## Project setup
 
