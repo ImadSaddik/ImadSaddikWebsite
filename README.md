@@ -12,6 +12,10 @@ I created this website to bring together everything I do online. You will find h
 
 ![readme_thumbnail](./images/readme_thumbnail.svg)
 
+## Project showcase
+
+Check out the video below for a quick tour of the website!
+
 ## Project setup
 
 To set up the project locally, follow these steps:
@@ -206,12 +210,13 @@ This repository contains several helper tools to assist with maintenance and ana
 
 - **[Dashboard analysis](./dashboard_analysis/README.md)**: A collection of tools to analyze Nginx logs using [GoAccess](https://goaccess.io/) data. Useful for tracking traffic and identifying bad actors.
 - **[Bash scripts](./bash_scripts/README.md)**: A set of utility scripts for tasks such as:
+
   - Optimizing images (`optimize_jpeg_images.sh`, `optimize_png_images.sh`)
   - Finding large media files (`find_media.sh`)
   - Managing backups (`clean_backups.sh`)
-  
+
   Check the respective README files in those directories for more usage details.
-  
+
 ## Production infrastructure
 
 The `infrastructure/` directory contains configuration files and scripts used to deploy the website in a production environment:
@@ -222,7 +227,7 @@ The `infrastructure/` directory contains configuration files and scripts used to
 - **scripts/**: Deployment and maintenance scripts, such as Gunicorn startup and monthly cleanup tasks.
 
 For more details, refer to the [infrastructure README](./infrastructure/README.md).
-  
+
 ## Contributing
 
 Contributions are welcome! To keep the code clean and consistent, please follow these simple steps:
@@ -243,8 +248,8 @@ Then, set up the hooks:
 pre-commit install
 ```
 
->[!NOTE]
->The pre-commit hooks will also automatically regenerate the `sitemap.xml` file if you make changes to the frontend.
+> [!NOTE]
+> The pre-commit hooks will also automatically regenerate the `sitemap.xml` file if you make changes to the frontend.
 
 ### Code style (Linting and Formatting)
 
@@ -282,7 +287,7 @@ This project is licensed under the MIT License. See the [LICENSE](./LICENSE) fil
 
 ## Contact
 
-You can reach me through:  
+You can reach me through:
 
-- **Email** – [simad3647@gmail.com](mailto:simad3647@gmail.com).  
-- **LinkedIn** – [Connect with me](https://www.linkedin.com/in/imadsaddik/).  
+- **Email** – [simad3647@gmail.com](mailto:simad3647@gmail.com).
+- **LinkedIn** – [Connect with me](https://www.linkedin.com/in/imadsaddik/).
