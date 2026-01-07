@@ -641,6 +641,10 @@ p:hover {
   label[for="wide-articles"] {
     display: none;
   }
+
+  label[for="custom-cursor"] {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 768px) {
