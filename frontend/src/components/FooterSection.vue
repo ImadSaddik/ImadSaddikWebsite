@@ -638,7 +638,8 @@ p:hover {
     display: none;
   }
 
-  label[for="wide-articles"] {
+  label[for="wide-articles"],
+  label[for="custom-cursor"] {
     display: none;
   }
 }
