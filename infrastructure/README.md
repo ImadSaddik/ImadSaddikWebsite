@@ -69,7 +69,7 @@ sudo fail2ban-client status sshd
 # sudo ufw deny from <IP> to any
 ```
 
-### 5. Check Nginx logs
+### Check Nginx logs
 
 Make sure that log rotation is working and the disk isn't being filled by massive log files.
 
