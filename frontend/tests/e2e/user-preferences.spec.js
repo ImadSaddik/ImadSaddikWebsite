@@ -141,6 +141,18 @@ test.describe("User Preferences", () => {
         await cursorLabel.click();
       }
     });
+
+    test("should hide wide articles and custom cursor labels on small screens", async ({ page }) => {
+      await page.setViewportSize({ width: 1000, height: 800 });
+      await page.goto(ROUTES.HOME.path);
+      await page.locator(".footer-container").scrollIntoViewIfNeeded();
+
+      const wideArticlesLabel = page.locator('label[for="wide-articles"]');
+      const customCursorLabel = page.locator('label[for="custom-cursor"]');
+
+      await expect(wideArticlesLabel).not.toBeVisible();
+      await expect(customCursorLabel).not.toBeVisible();
+    });
   });
 
   test("should apply wide articles class when toggled and remove it when untoggled", async ({ page }) => {
