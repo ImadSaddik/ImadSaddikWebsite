@@ -180,6 +180,20 @@ python backend/scripts/seed_meilisearch.py
 
 For more details about the seed data, refer to the [seed README](./backend/seed/README.md).
 
+#### Managing Meilisearch with a GUI
+
+Instead of interacting with Meilisearch only through code or scripts, you can use a graphical user interface (GUI) to manage indexes, documents, and settings more easily.
+
+A recommended option is **Meilisearch Mini Dashboard**, an open-source web-based GUI that provides a clean and user-friendly interface.
+
+**How to use:**
+1. Make sure your Meilisearch instance is running.
+2. Open the Meilisearch Dashboard in your browser.
+3. Connect it to your Meilisearch server by providing the host URL and master key.
+4. Manage indexes, documents, and settings visually.
+
+🔗 **GUI Tool:** https://github.com/meilisearch/mini-dashboard
+
 ## Run all services using tmux
 
 If you don't want to start each server in a separate window manually, you can use [run_all_services_tmux.sh](./bash_scripts/run_all_services_tmux.sh) to start everything in a `tmux` session.
