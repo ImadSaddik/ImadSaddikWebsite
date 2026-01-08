@@ -188,7 +188,7 @@ A recommended option is **Meilisearch Mini Dashboard**, an open-source web-based
 
 **How to use:**
 1. Make sure your Meilisearch instance is running.
-2. Open the Meilisearch Dashboard in your browser.
+2. Open the hosted [Meilisearch Mini Dashboard](https://dashboard.meilisearch.com/) in your browser.
 3. Connect it to your Meilisearch server by providing the host URL and master key.
 4. Manage indexes, documents, and settings visually.
 
