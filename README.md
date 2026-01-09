@@ -182,17 +182,17 @@ For more details about the seed data, refer to the [seed README](./backend/seed/
 
 #### Managing Meilisearch with a GUI
 
-Instead of interacting with Meilisearch only through code or scripts, you can use a graphical user interface (GUI) to manage indexes, documents, and settings more easily.
+Instead of interacting with Meilisearch only through code or scripts, you can use a graphical user interface (GUI).
 
-A recommended option is **Meilisearch Mini Dashboard**, an open-source web-based GUI that provides a clean and user-friendly interface.
+A recommended option is meilisearch-ui, an open-source web-based UI for Meilisearch that runs locally.
 
-**How to use:**
+How to use:
 1. Make sure your Meilisearch instance is running.
-2. Open the hosted [Meilisearch Mini Dashboard](https://dashboard.meilisearch.com/) in your browser.
-3. Connect it to your Meilisearch server by providing the host URL and master key.
+2. Follow the setup instructions in the repository to run the UI locally.
+3. Connect it to your Meilisearch server using the host URL and master key.
 4. Manage indexes, documents, and settings visually.
 
-🔗 **GUI Tool:** https://github.com/meilisearch/mini-dashboard
+GUI Tool: https://github.com/eyeix/meilisearch-ui
 
 ## Run all services using tmux
 
