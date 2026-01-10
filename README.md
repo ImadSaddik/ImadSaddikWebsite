@@ -182,17 +182,43 @@ For more details about the seed data, refer to the [seed README](./backend/seed/
 
 #### Managing Meilisearch with a GUI
 
-Instead of interacting with Meilisearch only through code or scripts, you can use a graphical user interface (GUI).
+Instead of interacting with Meilisearch only through code or scripts, you can use this [useful GUI tool](https://github.com/eyeix/meilisearch-ui) to manage your Meilisearch instance visually.
 
-A recommended option is meilisearch-ui, an open-source web-based UI for Meilisearch that runs locally.
+To use this tool, go to [this hosted dashboard](https://meilisearch-ui.vercel.app/) and click on the plus button to add a new Meilisearch instance.
 
-How to use:
-1. Make sure your Meilisearch instance is running.
-2. Follow the setup instructions in the repository to run the UI locally.
-3. Connect it to your Meilisearch server using the host URL and master key.
-4. Manage indexes, documents, and settings visually.
+![meilisearch_ui_add_instance](./images/add_instance_melisearch_ui.svg)
+_Click the plus button to add a new Meilisearch instance._
 
-GUI Tool: https://github.com/eyeix/meilisearch-ui
+> [!NOTE]
+> If you want to run the GUI tool locally, follow the instructions in the [meilisearch-ui repository](https://github.com/eyeix/meilisearch-ui).
+
+Depending on where your Meilisearch is running, the connection process is different:
+
+1. **Running locally:** If Meilisearch is running on your own computer, it works immediately. Meilisearch allows all connections by default, so you can simply enter `http://127.0.0.1:7700` as the host and your master key.
+
+2. **Running on a VM (Production):** If Meilisearch is running on your DigitalOcean Droplet, you cannot connect directly because the firewall blocks port 7700 for security. You should **not** open this port to the public. Instead, you must create a secure "bridge" ([SSH tunnel](https://en.wikipedia.org/wiki/Tunneling_protocol)) that maps your local port to the server's port.
+
+> [!IMPORTANT]
+> Meilisearch is already configured to accept connections. You only need to establish a secure tunnel to reach it.
+
+Open a new terminal window and run this command to create the bridge:
+
+```bash
+# Syntax: ssh -L <local_port>:127.0.0.1:<remote_port> <user>@<server_ip>
+ssh -L 7700:127.0.0.1:7700 -i ~/.ssh/<your_key_name> <your_username>@<your_droplet_ip>
+```
+
+Keep this terminal open. This command tells SSH to listen to port `7700` on your computer and forward any traffic securely to port `7700` on the server.
+
+In the dialog that appears, give your instance a name. Since you are using a bridge (or running locally), enter `http://127.0.0.1:7700` as the URL and the master key you used when starting Meilisearch.
+
+![meilisearch_ui_instance_details](./images/add_instance_details_ui.jpg)
+_Enter the details of your Meilisearch instance._
+
+Click "Confirm" to add the instance. You should now be able to manage your Meilisearch instance visually. You can view indexes, search documents, update settings, monitor activity and more.
+
+![meilisearch_ui_dashboard](./images/meilisearch_ui_dashboard.jpg)
+_The Meilisearch home page._
 
 ## Run all services using tmux
 
