@@ -1,20 +1,16 @@
-name: Deploy to production
+name: Manual deploy
 
 on:
-  workflow_call:
-    secrets:
-      DIGITAL_OCEAN_HOST_IP:
-        required: true
-      DIGITAL_OCEAN_USERNAME:
-        required: true
-      DIGITAL_OCEAN_SSH_KEY:
-        required: true
-      MEILISEARCH_MASTER_KEY:
-        required: true
+  workflow_dispatch:
 
 jobs:
+  build:
+    name: Build frontend
+    uses: ./.github/workflows/frontend-build.yml
+
   deploy:
     name: Deploy
+    needs: build
     runs-on: ubuntu-latest
     environment:
       name: production
