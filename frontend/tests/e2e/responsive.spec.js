@@ -39,6 +39,7 @@ test.describe("Responsive Design", () => {
 
     test("should toggle hamburger icon between bars and X", async ({ page }) => {
       await page.goto(ROUTES.HOME.path);
+      await page.evaluate(() => document.fonts.ready);
 
       const hamburgerMenu = page.locator(".nav-menu");
 

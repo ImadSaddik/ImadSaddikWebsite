@@ -30,6 +30,7 @@ test.describe("Filters and sorting", () => {
     test("should collapse and expand sort section", async ({ page }) => {
       await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
+      await page.evaluate(() => document.fonts.ready);
 
       const sortHeader = page.locator('h2.collapsible-header:has-text("Sort")');
       await expect(sortHeader.locator(".fa-chevron-up")).toBeVisible();
@@ -46,6 +47,7 @@ test.describe("Filters and sorting", () => {
     test("should collapse and expand year section", async ({ page }) => {
       await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
+      await page.evaluate(() => document.fonts.ready);
 
       const yearHeader = page.locator('h2.collapsible-header:has-text("Year")');
       await expect(yearHeader.locator(".fa-chevron-up")).toBeVisible();
@@ -60,6 +62,7 @@ test.describe("Filters and sorting", () => {
     test("should collapse and expand tags section", async ({ page }) => {
       await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
+      await page.evaluate(() => document.fonts.ready);
 
       const tagsHeader = page.locator('h2.collapsible-header:has-text("Tags")');
       await expect(tagsHeader.locator(".fa-chevron-up")).toBeVisible();
