@@ -60,22 +60,3 @@ jobs:
     name: Frontend
     needs: e2e-tests
     uses: ./.github/workflows/frontend-build.yml
-
-  deploy-production:
-    name: Deploy to production
-    needs: [frontend-build, dast-check]
-    if: github.ref == 'refs/heads/master'
-    uses: ./.github/workflows/deploy.yml
-    secrets:
-      DIGITAL_OCEAN_HOST_IP: ${{ secrets.DIGITAL_OCEAN_HOST_IP }}
-      DIGITAL_OCEAN_USERNAME: ${{ secrets.DIGITAL_OCEAN_USERNAME }}
-      DIGITAL_OCEAN_SSH_KEY: ${{ secrets.DIGITAL_OCEAN_SSH_KEY }}
-      MEILISEARCH_MASTER_KEY: ${{ secrets.MEILISEARCH_MASTER_KEY }}
-
-  pipeline-success:
-    name: Pipeline success
-    needs: deploy-production
-    runs-on: ubuntu-latest
-    if: success()
-    steps:
-      - run: echo "Deployment to imadsaddik.com was successful!"
