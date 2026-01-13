@@ -60,3 +60,11 @@ jobs:
     name: Frontend
     needs: e2e-tests
     uses: ./.github/workflows/frontend-build.yml
+
+  pipeline-success:
+    name: Pipeline success
+    needs: frontend-build
+    runs-on: ubuntu-latest
+    if: success()
+    steps:
+      - run: echo "Pipeline completed successfully!"
