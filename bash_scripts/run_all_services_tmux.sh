@@ -7,9 +7,10 @@ MEILISEARCH_DIR="$HOME/Programs/meilisearch"
 WEBSITE_CODE_DIR="$HOME/Projects/MyWebsite/code"
 BACKEND_DIR="$WEBSITE_CODE_DIR/backend"
 FRONTEND_DIR="$WEBSITE_CODE_DIR/frontend"
+CONDA_DIR="$HOME/anaconda3"
 
 # Environment setup
-CONDA_INIT="source $HOME/anaconda3/etc/profile.d/conda.sh"
+CONDA_INIT="source $CONDA_DIR/etc/profile.d/conda.sh"
 NVM_INIT="export NVM_DIR=\"$HOME/.nvm\"; [ -s \"\$NVM_DIR/nvm.sh\" ] && . \"\$NVM_DIR/nvm.sh\""
 
 # Commands
