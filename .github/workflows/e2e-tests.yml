@@ -127,10 +127,6 @@ jobs:
         working-directory: ./frontend
         run: pnpm exec playwright install-deps chromium firefox
 
-      - name: Build frontend
-        working-directory: ./frontend
-        run: pnpm run build
-
       - name: Run E2E tests
         working-directory: ./frontend
         run: pnpm run test:e2e

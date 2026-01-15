@@ -29,7 +29,7 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: process.env.CI ? "pnpm run preview" : "pnpm run dev",
+    command: "pnpm run dev",
     url: process.env.BASE_URL || "http://localhost:8080",
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,
