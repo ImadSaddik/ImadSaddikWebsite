@@ -1,7 +1,6 @@
 <template>
   <ArticleLayout
-    ref="articleContent"
-    title="Change the heap size for Elasticsearch"
+    :title="title"
     sub-title="How to change the heap size for Elasticsearch to improve performance and reduce memory usage."
     creation-date="August 21, 2025"
     :article-type="ARTICLE_TYPES.BLOG"
@@ -134,7 +133,6 @@
 // Text & Utils
 import * as codeSnippets from "./codeSnippets.js";
 import markdownContent from "./content.md";
-import { calculateReadingTime } from "@/utils";
 
 // Images
 import coverImage from "./coverImage.svg";
@@ -150,6 +148,9 @@ import YouTubePlayer from "@/components/YouTubePlayer.vue";
 import ArticleLayout from "@/components/ArticleLayout.vue";
 import AdmonitionBlock from "@/components/AdmonitionBlock.vue";
 
+// Composables
+import { useArticleContent } from "@/composables/useArticleContent.js";
+
 export default {
   name: "ElasticsearchChangeHeapSize",
   components: {
@@ -161,31 +162,26 @@ export default {
     AdmonitionBlock,
   },
   emits: ["show-toast", "article-read"],
+  setup(_, { emit }) {
+    const title = "Change the heap size for Elasticsearch";
+    const { slug, readingTime } = useArticleContent({ title, emit, content: markdownContent });
+    return {
+      // Variables
+      title,
+      slug,
+      readingTime,
+    };
+  },
   data() {
     return {
       ...codeSnippets,
 
       blogTags: ["Elasticsearch"],
       coverImage,
-      readingTime: 0,
       markdownContent,
 
       ARTICLE_TYPES,
     };
-  },
-  computed: {
-    slug() {
-      return this.$route.params.slug;
-    },
-  },
-  mounted() {
-    document.title = "Change the heap size for Elasticsearch";
-    const articleContent = this.$refs.articleContent.$el.innerText;
-    this.readingTime = calculateReadingTime(articleContent);
-    const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
-    setTimeout(() => {
-      this.$emit("article-read");
-    }, readTimeThresholdInMilliseconds);
   },
   methods: {
     handleShowToastEvent(data) {

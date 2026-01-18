@@ -1,7 +1,6 @@
 <template>
   <ArticleLayout
-    ref="articleContent"
-    title="How to fix the kernel panic problem after installing a new version of the kernel"
+    :title="title"
     sub-title="A step-by-step guide to recovering your Linux system from a broken kernel update using GRUB."
     creation-date="December 20, 2025"
     :article-type="ARTICLE_TYPES.BLOG"
@@ -209,7 +208,6 @@
 // Text & Utils
 import * as codeSnippets from "./codeSnippets.js";
 import markdownContent from "./content.md";
-import { calculateReadingTime } from "@/utils";
 
 // Images
 import coverImage from "./coverImage.svg";
@@ -231,6 +229,10 @@ import CodeOutput from "@/components/CodeOutput.vue";
 import BulletPoint from "@/components/BulletPoint.vue";
 import AdmonitionBlock from "@/components/AdmonitionBlock.vue";
 
+// Composables
+import { useImageModal } from "@/composables/useImageModal.js";
+import { useArticleContent } from "@/composables/useArticleContent.js";
+
 export default {
   name: "FixKernelPanicLinux",
   components: {
@@ -244,55 +246,45 @@ export default {
     AdmonitionBlock,
   },
   emits: ["show-toast", "article-read"],
+  setup(_, { emit }) {
+    const title = "How to fix the kernel panic problem after installing a new version of the kernel";
+
+    const { enlargedImageSrc, isImageModalVisible, handleOpenImageModal, handleCloseImageModal } = useImageModal();
+    const { slug, readingTime } = useArticleContent({ title, emit, content: markdownContent });
+    return {
+      // Variables
+      title,
+      slug,
+      readingTime,
+      enlargedImageSrc,
+      isImageModalVisible,
+
+      // Methods
+      handleOpenImageModal,
+      handleCloseImageModal,
+    };
+  },
   data() {
     return {
+      // Code
       ...codeSnippets,
 
+      // Variables
       tags: ["Linux", "Ubuntu", "Kernel Panic", "Grub", "Troubleshooting"],
-      readingTime: 0,
       markdownContent,
-      enlargedImageSrc: "",
-      isImageModalVisible: false,
 
+      // Images
       coverImage,
       kernelPanicScreen,
       grubMenu,
       kernelVersionsList,
       ubuntuDesktopSuccess,
 
+      // Constants
       ARTICLE_TYPES,
     };
   },
-  computed: {
-    slug() {
-      return this.$route.params.slug;
-    },
-  },
-  mounted() {
-    document.title = "How to fix the kernel panic problem after installing a new version of the kernel";
-    const articleContent = this.$refs.articleContent.$el.innerText;
-    this.readingTime = calculateReadingTime(articleContent);
-    const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
-    setTimeout(() => {
-      this.$emit("article-read");
-    }, readTimeThresholdInMilliseconds);
-  },
   methods: {
-    handleOpenImageModal(event) {
-      this.enlargedImageSrc = event.target.src;
-      this.isImageModalVisible = true;
-      window.addEventListener("keydown", this.handleEscape);
-    },
-    handleCloseImageModal() {
-      this.isImageModalVisible = false;
-      this.enlargedImageSrc = "";
-      window.removeEventListener("keydown", this.handleEscape);
-    },
-    handleEscape(event) {
-      if (event.key === "Escape") {
-        this.handleCloseImageModal();
-      }
-    },
     handleShowToastEvent(data) {
       this.$emit("show-toast", data);
     },

@@ -1,7 +1,6 @@
 <template>
   <ArticleLayout
-    ref="articleContent"
-    title="Pre-filtering with kNN search in Elasticsearch"
+    :title="title"
     sub-title="How to apply filters to an index to remove documents that don’t meet certain requirements before using kNN search."
     creation-date="August 12, 2025"
     :article-type="ARTICLE_TYPES.BLOG"
@@ -200,7 +199,6 @@
 <script>
 // Text & Utils
 import * as codeSnippets from "./codeSnippets.js";
-import { calculateReadingTime } from "@/utils";
 import markdownContent from "./content.md";
 
 // Images
@@ -219,6 +217,10 @@ import YouTubePlayer from "@/components/YouTubePlayer.vue";
 import ImageWithCaption from "@/components/ImageWithCaption.vue";
 import ArticleLayout from "@/components/ArticleLayout.vue";
 
+// Composables
+import { useImageModal } from "@/composables/useImageModal.js";
+import { useArticleContent } from "@/composables/useArticleContent.js";
+
 export default {
   name: "ElasticsearchPreFilteringWithKnnSearch",
   components: {
@@ -231,51 +233,40 @@ export default {
     ArticleLayout,
   },
   emits: ["show-toast", "article-read"],
+  setup(_, { emit }) {
+    const title = "Pre-filtering with kNN search in Elasticsearch";
+
+    const { enlargedImageSrc, isImageModalVisible, handleOpenImageModal, handleCloseImageModal } = useImageModal();
+    const { slug, readingTime } = useArticleContent({ title, emit, content: markdownContent });
+    return {
+      // Variables
+      title,
+      slug,
+      readingTime,
+      enlargedImageSrc,
+      isImageModalVisible,
+
+      // Methods
+      handleOpenImageModal,
+      handleCloseImageModal,
+    };
+  },
   data() {
     return {
+      // Code
       ...codeSnippets,
 
+      // Images
       allMiniLMModelHuggingFaceHub,
       blogTags: ["Elasticsearch", "kNN", "Semantic search"],
       coverImage,
-      enlargedImageSrc: "",
-      isImageModalVisible: false,
-      readingTime: 0,
       markdownContent,
 
+      // Constants
       ARTICLE_TYPES,
     };
   },
-  computed: {
-    slug() {
-      return this.$route.params.slug;
-    },
-  },
-  mounted() {
-    document.title = "Pre-filtering with kNN search in Elasticsearch";
-    const articleContent = this.$refs.articleContent.$el.innerText;
-    this.readingTime = calculateReadingTime(articleContent);
-    const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
-    setTimeout(() => {
-      this.$emit("article-read");
-    }, readTimeThresholdInMilliseconds);
-  },
   methods: {
-    handleOpenImageModal(event) {
-      this.enlargedImageSrc = event.target.src;
-      this.isImageModalVisible = true;
-      window.addEventListener("keydown", this.handleEscape);
-    },
-    handleCloseImageModal() {
-      this.isImageModalVisible = false;
-      this.enlargedImageSrc = "";
-      window.removeEventListener("keydown", this.handleEscape);
-    },
-    handleEscape(event) {
-      if (event.key === "Escape") {
-        this.handleCloseImageModal();
-      }
-    },
     handleShowToastEvent(data) {
       this.$emit("show-toast", data);
     },

@@ -623,6 +623,9 @@ import sombreroGalaxy from "@/assets/sombrero_galaxy.jpeg";
 import windowsBadLinuxGood from "@/assets/windows_bad_linux_good.svg";
 import reactBadVueGood from "@/assets/react_bad_vue_good.svg";
 
+// Composables
+import { useImageModal } from "@/composables/useImageModal.js";
+
 export default {
   name: "AboutMeFullStory",
   components: {
@@ -634,8 +637,47 @@ export default {
   },
   inject: ["wideArticlesEnabled"],
   emits: ["page-visited", "show-toast"],
+  setup() {
+    const { enlargedImageSrc, isImageModalVisible, handleOpenImageModal, handleCloseImageModal } = useImageModal();
+    return {
+      // Refs
+      enlargedImageSrc,
+      isImageModalVisible,
+
+      // Methods
+      handleOpenImageModal,
+      handleCloseImageModal,
+    };
+  },
   data() {
     return {
+      // Variables
+      assemblyCodeSnippet: `org     $fe00
+
+        ldx     #$0100
+        clr     $0050
+        clr     $0051
+        clr     $0052
+    loopn   cpx     #$010a
+        beq     fin
+        ldaa    ,x
+        bmi     negatif
+        beq     null
+        inc     $0052
+        inx
+        bra     loopn
+    null    inc     $0051
+        inx
+        bra     loopn
+    negatif inc     $0050
+        inx
+        bra     loopn
+    fin     swi
+        org     $0100
+        fcb     -16,-2,-3,-4,0,0,21,31,14,15
+        end`,
+
+      // Images
       myYouTubeChannel,
       freeCodeCampContributions,
       venusDuringSunset,
@@ -650,33 +692,6 @@ export default {
       sombreroGalaxy,
       windowsBadLinuxGood,
       reactBadVueGood,
-
-      enlargedImageSrc: "",
-      isImageModalVisible: false,
-      assemblyCodeSnippet: `org     $fe00
-
-        ldx     #$0100
-        clr     $0050
-        clr     $0051
-        clr     $0052
-loopn   cpx     #$010a
-        beq     fin
-        ldaa    ,x
-        bmi     negatif
-        beq     null
-        inc     $0052
-        inx
-        bra     loopn
-null    inc     $0051
-        inx
-        bra     loopn
-negatif inc     $0050
-        inx
-        bra     loopn
-fin     swi
-        org     $0100
-        fcb     -16,-2,-3,-4,0,0,21,31,14,15
-        end`,
     };
   },
   mounted() {
@@ -685,21 +700,6 @@ fin     swi
     trackVisitorData(PAGE_KEYS.ABOUT_ME);
   },
   methods: {
-    handleOpenImageModal(event) {
-      this.enlargedImageSrc = event.target.src;
-      this.isImageModalVisible = true;
-      window.addEventListener("keydown", this.handleEscape);
-    },
-    handleCloseImageModal() {
-      this.isImageModalVisible = false;
-      this.enlargedImageSrc = "";
-      window.removeEventListener("keydown", this.handleEscape);
-    },
-    handleEscape(event) {
-      if (event.key === "Escape") {
-        this.handleCloseImageModal();
-      }
-    },
     handleShowToastEvent(data) {
       this.$emit("show-toast", data);
     },

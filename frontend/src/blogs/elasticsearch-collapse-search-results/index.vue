@@ -1,7 +1,6 @@
 <template>
   <ArticleLayout
-    ref="articleContent"
-    title="Collapse search results in Elasticsearch"
+    :title="title"
     sub-title="How to show only the best documents for each group with collapsing."
     creation-date="August 20, 2025"
     :article-type="ARTICLE_TYPES.BLOG"
@@ -275,7 +274,6 @@
 <script>
 // Text & Utils
 import * as codeSnippets from "./codeSnippets.js";
-import { calculateReadingTime } from "@/utils";
 import markdownContent from "./content.md";
 
 // Images
@@ -292,6 +290,9 @@ import YouTubePlayer from "@/components/YouTubePlayer.vue";
 import AdmonitionBlock from "@/components/AdmonitionBlock.vue";
 import ArticleLayout from "@/components/ArticleLayout.vue";
 
+// Composables
+import { useArticleContent } from "@/composables/useArticleContent.js";
+
 export default {
   name: "ElasticsearchCollapseSearchResults",
   components: {
@@ -303,31 +304,26 @@ export default {
     ArticleLayout,
   },
   emits: ["show-toast", "article-read"],
+  setup(_, { emit }) {
+    const title = "Collapse search results in Elasticsearch";
+    const { slug, readingTime } = useArticleContent({ title, emit, content: markdownContent });
+    return {
+      // Variables
+      title,
+      slug,
+      readingTime,
+    };
+  },
   data() {
     return {
       ...codeSnippets,
 
       blogTags: ["Elasticsearch"],
       coverImage,
-      readingTime: 0,
       markdownContent,
 
       ARTICLE_TYPES,
     };
-  },
-  computed: {
-    slug() {
-      return this.$route.params.slug;
-    },
-  },
-  mounted() {
-    document.title = "Collapse search results in Elasticsearch";
-    const articleContent = this.$refs.articleContent.$el.innerText;
-    this.readingTime = calculateReadingTime(articleContent);
-    const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
-    setTimeout(() => {
-      this.$emit("article-read");
-    }, readTimeThresholdInMilliseconds);
   },
   methods: {
     handleShowToastEvent(data) {

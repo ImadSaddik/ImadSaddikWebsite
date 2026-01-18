@@ -1,7 +1,6 @@
 <template>
   <ArticleLayout
-    ref="articleContent"
-    title="Learn the night sky with free planetarium applications"
+    :title="title"
     sub-title="A list of free planetarium applications to explore the night sky on your computer or mobile device."
     creation-date="September 20, 2025"
     :article-type="ARTICLE_TYPES.ASTRONOMY"
@@ -511,7 +510,6 @@
 <script>
 // Text & Utils
 import markdownContent from "./content.md";
-import { calculateReadingTime } from "@/utils";
 
 // Images
 import coverImage from "./coverImage.svg";
@@ -547,6 +545,10 @@ import ImageWithCaption from "@/components/ImageWithCaption.vue";
 import ImageEnlarger from "@/components/ImageEnlarger.vue";
 import InlineCode from "@/components/InlineCode.vue";
 
+// Composables
+import { useImageModal } from "@/composables/useImageModal.js";
+import { useArticleContent } from "@/composables/useArticleContent.js";
+
 export default {
   name: "FreePlanetariumApps",
   components: {
@@ -556,14 +558,31 @@ export default {
     InlineCode,
   },
   emits: ["show-toast", "article-read"],
+  setup(_, { emit }) {
+    const title = "Learn the night sky with free planetarium applications";
+
+    const { enlargedImageSrc, isImageModalVisible, handleOpenImageModal, handleCloseImageModal } = useImageModal();
+    const { slug, readingTime } = useArticleContent({ title, emit, content: markdownContent });
+    return {
+      // Variables
+      title,
+      slug,
+      readingTime,
+      enlargedImageSrc,
+      isImageModalVisible,
+
+      // Methods
+      handleOpenImageModal,
+      handleCloseImageModal,
+    };
+  },
   data() {
     return {
+      // Variables
       tags: ["Astronomy", "Planetarium", "Stellarium", "Sky Tonight", "SkySafari"],
-      readingTime: 0,
       markdownContent,
-      enlargedImageSrc: "",
-      isImageModalVisible: false,
 
+      // Images
       coverImage,
       stellariumMilkyWay,
       stellariumClickObjectInformation,
@@ -588,39 +607,11 @@ export default {
       changeForecastHorizonStargazingIndex,
       stargazingNewsSteps,
 
+      // Constants
       ARTICLE_TYPES,
     };
   },
-  computed: {
-    slug() {
-      return this.$route.params.slug;
-    },
-  },
-  mounted() {
-    document.title = "Learn the night sky with free planetarium applications";
-    const articleContent = this.$refs.articleContent.$el.innerText;
-    this.readingTime = calculateReadingTime(articleContent);
-    const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
-    setTimeout(() => {
-      this.$emit("article-read");
-    }, readTimeThresholdInMilliseconds);
-  },
   methods: {
-    handleOpenImageModal(event) {
-      this.enlargedImageSrc = event.target.src;
-      this.isImageModalVisible = true;
-      window.addEventListener("keydown", this.handleEscape);
-    },
-    handleCloseImageModal() {
-      this.isImageModalVisible = false;
-      this.enlargedImageSrc = "";
-      window.removeEventListener("keydown", this.handleEscape);
-    },
-    handleEscape(event) {
-      if (event.key === "Escape") {
-        this.handleCloseImageModal();
-      }
-    },
     handleShowToastEvent(data) {
       this.$emit("show-toast", data);
     },

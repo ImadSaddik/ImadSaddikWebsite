@@ -1,7 +1,6 @@
 <template>
   <ArticleLayout
-    ref="articleContent"
-    title="How to remove hidden data from Inkscape files to reduce the file size"
+    :title="title"
     sub-title="A simple guide to removing invisible data from embedded images to keep your Inkscape projects lightweight."
     creation-date="December 21, 2025"
     :article-type="ARTICLE_TYPES.BLOG"
@@ -133,7 +132,6 @@
 <script>
 // Text & Utils
 import markdownContent from "./content.md";
-import { calculateReadingTime } from "@/utils";
 
 // Images
 import coverImage from "./coverImage.svg";
@@ -151,6 +149,10 @@ import ImageWithCaption from "@/components/ImageWithCaption.vue";
 import ImageEnlarger from "@/components/ImageEnlarger.vue";
 import InlineCode from "@/components/InlineCode.vue";
 
+// Composables
+import { useImageModal } from "@/composables/useImageModal.js";
+import { useArticleContent } from "@/composables/useArticleContent.js";
+
 export default {
   name: "InkscapeCleanUpDocument",
   components: {
@@ -160,53 +162,42 @@ export default {
     InlineCode,
   },
   emits: ["show-toast", "article-read"],
+  setup(_, { emit }) {
+    const title = "How to remove hidden data from Inkscape files to reduce the file size";
+
+    const { enlargedImageSrc, isImageModalVisible, handleOpenImageModal, handleCloseImageModal } = useImageModal();
+    const { slug, readingTime } = useArticleContent({ title, emit, content: markdownContent });
+    return {
+      // Variables
+      title,
+      slug,
+      readingTime,
+      enlargedImageSrc,
+      isImageModalVisible,
+
+      // Methods
+      handleOpenImageModal,
+      handleCloseImageModal,
+    };
+  },
   data() {
     return {
+      // Variables
       tags: ["Inkscape", "SVG", "Optimization"],
-      readingTime: 0,
       markdownContent,
-      enlargedImageSrc: "",
-      isImageModalVisible: false,
 
+      // Images
       coverImage,
       layersPanel,
       importDialog,
       shapeBuilder,
       cleanUpMenu,
 
+      // Constants
       ARTICLE_TYPES,
     };
   },
-  computed: {
-    slug() {
-      return this.$route.params.slug;
-    },
-  },
-  mounted() {
-    document.title = "How to remove hidden data from Inkscape files";
-    const articleContent = this.$refs.articleContent.$el.innerText;
-    this.readingTime = calculateReadingTime(articleContent);
-    const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
-    setTimeout(() => {
-      this.$emit("article-read");
-    }, readTimeThresholdInMilliseconds);
-  },
   methods: {
-    handleOpenImageModal(event) {
-      this.enlargedImageSrc = event.target.src;
-      this.isImageModalVisible = true;
-      window.addEventListener("keydown", this.handleEscape);
-    },
-    handleCloseImageModal() {
-      this.isImageModalVisible = false;
-      this.enlargedImageSrc = "";
-      window.removeEventListener("keydown", this.handleEscape);
-    },
-    handleEscape(event) {
-      if (event.key === "Escape") {
-        this.handleCloseImageModal();
-      }
-    },
     handleShowToastEvent(data) {
       this.$emit("show-toast", data);
     },

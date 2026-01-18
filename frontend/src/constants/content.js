@@ -1,3 +1,5 @@
+export const DEFAULT_ARTICLE_TITLE = "Imad Saddik - Articles";
+
 export const ARTICLE_TYPES = {
   BLOG: "blog-post",
   COURSE: "course-post",

@@ -1,7 +1,6 @@
 <template>
   <ArticleLayout
-    ref="articleContent"
-    title="How to shoot star trails with your smartphone"
+    :title="title"
     sub-title="This complete guide covers everything you need to know to capture beautiful star trail photos using just your smartphone."
     creation-date="October 17, 2025"
     :article-type="ARTICLE_TYPES.ASTRONOMY"
@@ -823,7 +822,6 @@
 // Text & Utils
 import * as codeSnippets from "./codeSnippets.js";
 import markdownContent from "./content.md";
-import { calculateReadingTime } from "@/utils";
 
 // Images
 import coverImage from "./coverImage.svg";
@@ -880,6 +878,10 @@ import CodeOutput from "@/components/CodeOutput.vue";
 import CodeBlock from "@/components/CodeBlock.vue";
 import VideoWithCaption from "@/components/VideoWithCaption.vue";
 
+// Composables
+import { useImageModal } from "@/composables/useImageModal.js";
+import { useArticleContent } from "@/composables/useArticleContent.js";
+
 export default {
   name: "StarTrailsWithSmartphone",
   components: {
@@ -893,16 +895,34 @@ export default {
     VideoWithCaption,
   },
   emits: ["show-toast", "article-read"],
+  setup(_, { emit }) {
+    const title = "How to shoot star trails with your smartphone";
+
+    const { enlargedImageSrc, isImageModalVisible, handleOpenImageModal, handleCloseImageModal } = useImageModal();
+    const { slug, readingTime } = useArticleContent({ title, emit, content: markdownContent });
+    return {
+      // Variables
+      title,
+      slug,
+      readingTime,
+      enlargedImageSrc,
+      isImageModalVisible,
+
+      // Methods
+      handleOpenImageModal,
+      handleCloseImageModal,
+    };
+  },
   data() {
     return {
+      // Code
       ...codeSnippets,
 
+      // Variables
       tags: ["Astronomy", "Star trails", "Timelapse", "Sky Tonight", "Astrophotography"],
-      readingTime: 0,
       markdownContent,
-      enlargedImageSrc: "",
-      isImageModalVisible: false,
 
+      // Images
       coverImage,
       bortle1VsBortle9Skies,
       earthPointingAtPolaris,
@@ -944,39 +964,11 @@ export default {
       starTrailTimelapseStep3,
       addCustomVideoMode,
 
+      // Constants
       ARTICLE_TYPES,
     };
   },
-  computed: {
-    slug() {
-      return this.$route.params.slug;
-    },
-  },
-  mounted() {
-    document.title = "How to shoot star trails with your smartphone";
-    const articleContent = this.$refs.articleContent.$el.innerText;
-    this.readingTime = calculateReadingTime(articleContent);
-    const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
-    setTimeout(() => {
-      this.$emit("article-read");
-    }, readTimeThresholdInMilliseconds);
-  },
   methods: {
-    handleOpenImageModal(event) {
-      this.enlargedImageSrc = event.target.src;
-      this.isImageModalVisible = true;
-      window.addEventListener("keydown", this.handleEscape);
-    },
-    handleCloseImageModal() {
-      this.isImageModalVisible = false;
-      this.enlargedImageSrc = "";
-      window.removeEventListener("keydown", this.handleEscape);
-    },
-    handleEscape(event) {
-      if (event.key === "Escape") {
-        this.handleCloseImageModal();
-      }
-    },
     handleShowToastEvent(data) {
       this.$emit("show-toast", data);
     },
