@@ -7,6 +7,8 @@ env:
   MEILISEARCH_MASTER_KEY: "aStrongMasterKeyForTestingPurposes"
   MEILISEARCH_URL: "http://localhost:7700"
   MEILISEARCH_INDEX_NAME: "articles_test"
+  MEILISEARCH_DOWNLOAD_MAX_RETRIES: "3"
+  MEILISEARCH_DOWNLOAD_RETRY_DELAY: "5"
 
 jobs:
   tests:
@@ -30,8 +32,8 @@ jobs:
 
       - name: Download Meilisearch binary
         run: |
-          MAX_RETRIES=3
-          RETRY_DELAY=5
+          MAX_RETRIES="${MEILISEARCH_DOWNLOAD_MAX_RETRIES}"
+          RETRY_DELAY="${MEILISEARCH_DOWNLOAD_RETRY_DELAY}"
           for i in $(seq 1 $MAX_RETRIES); do
             echo "Attempt $i of $MAX_RETRIES to download Meilisearch..."
             if curl -L https://install.meilisearch.com | sh; then

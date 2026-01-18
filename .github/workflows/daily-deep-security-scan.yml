@@ -15,6 +15,8 @@ jobs:
       MEILISEARCH_URL: "http://localhost:7700"
       MEILISEARCH_INDEX_NAME: "articles_test"
       ENVIRONMENT: "development"
+      MEILISEARCH_DOWNLOAD_MAX_RETRIES: "3"
+      MEILISEARCH_DOWNLOAD_RETRY_DELAY: "5"
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
@@ -32,8 +34,8 @@ jobs:
       - name: Download Meilisearch binary
         working-directory: ./backend
         run: |
-          MAX_RETRIES=3
-          RETRY_DELAY=5
+          MAX_RETRIES="${MEILISEARCH_DOWNLOAD_MAX_RETRIES}"
+          RETRY_DELAY="${MEILISEARCH_DOWNLOAD_RETRY_DELAY}"
           for i in $(seq 1 $MAX_RETRIES); do
             echo "Attempt $i of $MAX_RETRIES to download Meilisearch..."
             if curl -L https://install.meilisearch.com | sh; then
