@@ -11,6 +11,8 @@ import { trackVisitorData } from "@/utils";
  * @param {string} config.pageKey - The PAGE_KEYS constant for this page
  * @param {string} config.title - The browser tab title
  * @param {Function} config.emit - The component's emit function
+ *
+ * @returns {void}
  */
 export function useHubPage({ pageKey, title, emit }) {
   onMounted(() => {
