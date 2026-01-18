@@ -5,12 +5,19 @@ import axios from "axios";
 
 /**
  * Composable to load article components and handle analytics.
+ * - Dynamically loads article components based on slug
+ * - Handles view and read count tracking
+ * - Manages rate limiting with appropriate user feedback
  *
  * @param {Object} config
  * @param {Object} config.props - The component props (must contain slug)
  * @param {Object} config.registry - The map of lazy-loaded components (from registries/articles.js)
  * @param {string} config.section - The folder name in /src/ (e.g. 'blogs', 'courses')
  * @param {Function} config.emit - The component's emit function
+ *
+ * @returns {Object}
+ * @returns {import('vue').Ref<Object|null>} articleToDisplay - The loaded article component
+ * @returns {Function} handleArticleRead - Increments the read count for the current article
  */
 export function useArticleLoader({ props, registry, section, emit }) {
   const articleToDisplay = ref(null);

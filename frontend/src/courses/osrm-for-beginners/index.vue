@@ -1,7 +1,6 @@
 <template>
   <ArticleLayout
-    ref="articleContent"
-    title="OSRM for beginners"
+    :title="title"
     sub-title="Learn the different ways to use OSRM (Open Source Routing Machine) with practical examples in Python."
     creation-date="September 26, 2025"
     :article-type="ARTICLE_TYPES.COURSE"
@@ -72,7 +71,6 @@
 
 <script>
 // Text & Utils
-import { calculateReadingTime } from "@/utils";
 import markdownContent from "./content.md";
 
 // Images
@@ -87,6 +85,10 @@ import YouTubePlayer from "@/components/YouTubePlayer.vue";
 import ArticleLayout from "@/components/ArticleLayout.vue";
 import BulletPoint from "@/components/BulletPoint.vue";
 
+// Composables
+import { useImageModal } from "@/composables/useImageModal.js";
+import { useArticleContent } from "@/composables/useArticleContent.js";
+
 export default {
   name: "OSRMForBeginners",
   components: {
@@ -96,13 +98,28 @@ export default {
     BulletPoint,
   },
   emits: ["show-toast", "article-read"],
+  setup(_, { emit }) {
+    const title = "OSRM for beginners";
+
+    const { enlargedImageSrc, isImageModalVisible, handleOpenImageModal, handleCloseImageModal } = useImageModal();
+    const { slug, readingTime } = useArticleContent({ title, emit, content: markdownContent });
+    return {
+      // Variables
+      title,
+      slug,
+      readingTime,
+      enlargedImageSrc,
+      isImageModalVisible,
+
+      // Methods
+      handleOpenImageModal,
+      handleCloseImageModal,
+    };
+  },
   data() {
     return {
+      // Variables
       tags: ["OSRM", "Routing", "Python", "Docker", "TSP"],
-      coverImage,
-      enlargedImageSrc: "",
-      isImageModalVisible: false,
-      readingTime: 0,
       markdownContent,
       bulletPoints: [
         "How to set up OSRM with Docker.",
@@ -112,39 +129,14 @@ export default {
         "How to solve the Traveling Salesman Problem (TSP).",
       ],
 
+      // Images
+      coverImage,
+
+      // Constants
       ARTICLE_TYPES,
     };
   },
-  computed: {
-    slug() {
-      return this.$route.params.slug;
-    },
-  },
-  mounted() {
-    document.title = "OSRM for beginners";
-    const articleContent = this.$refs.articleContent.$el.innerText;
-    this.readingTime = calculateReadingTime(articleContent);
-    const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
-    setTimeout(() => {
-      this.$emit("article-read");
-    }, readTimeThresholdInMilliseconds);
-  },
   methods: {
-    handleOpenImageModal(event) {
-      this.enlargedImageSrc = event.target.src;
-      this.isImageModalVisible = true;
-      window.addEventListener("keydown", this.handleEscape);
-    },
-    handleCloseImageModal() {
-      this.isImageModalVisible = false;
-      this.enlargedImageSrc = "";
-      window.removeEventListener("keydown", this.handleEscape);
-    },
-    handleEscape(event) {
-      if (event.key === "Escape") {
-        this.handleCloseImageModal();
-      }
-    },
     handleShowToastEvent(data) {
       this.$emit("show-toast", data);
     },

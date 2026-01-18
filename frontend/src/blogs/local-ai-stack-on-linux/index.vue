@@ -1,7 +1,6 @@
 <template>
   <ArticleLayout
-    ref="articleContent"
-    title="How to build your own local AI stack on Linux with llama.cpp, llama-swap, LibreChat and more"
+    :title="title"
     sub-title="A complete guide to running LLMs, embedding models, and multimodal models locally with full control and automation."
     creation-date="December 27, 2025"
     :article-type="ARTICLE_TYPES.BLOG"
@@ -2332,7 +2331,6 @@ docker compose restart"
 // Text & Utils
 import * as codeSnippets from "./codeSnippets.js";
 import markdownContent from "./content.md";
-import { calculateReadingTime } from "@/utils";
 
 // Images
 import coverImage from "./coverImage.svg";
@@ -2387,6 +2385,10 @@ import CodeBlock from "@/components/CodeBlock.vue";
 import AdmonitionBlock from "@/components/AdmonitionBlock.vue";
 import VideoWithCaption from "@/components/VideoWithCaption.vue";
 
+// Composables
+import { useImageModal } from "@/composables/useImageModal.js";
+import { useArticleContent } from "@/composables/useArticleContent.js";
+
 export default {
   name: "LocalAIStackOnLinux",
   components: {
@@ -2401,16 +2403,34 @@ export default {
     VideoWithCaption,
   },
   emits: ["show-toast", "article-read"],
+  setup(_, { emit }) {
+    const title = "How to build your own local AI stack on Linux with llama.cpp, llama-swap, LibreChat and more";
+
+    const { enlargedImageSrc, isImageModalVisible, handleOpenImageModal, handleCloseImageModal } = useImageModal();
+    const { slug, readingTime } = useArticleContent({ title, emit, content: markdownContent });
+    return {
+      // Variables
+      title,
+      slug,
+      readingTime,
+      enlargedImageSrc,
+      isImageModalVisible,
+
+      // Methods
+      handleOpenImageModal,
+      handleCloseImageModal,
+    };
+  },
   data() {
     return {
+      // Code
       ...codeSnippets,
 
+      // Variables
       tags: ["Linux", "AI", "LLM", "llama.cpp", "LibreChat", "Local AI", "llama-swap"],
-      readingTime: 0,
       markdownContent,
-      enlargedImageSrc: "",
-      isImageModalVisible: false,
 
+      // Images
       coverImage,
       architectureDiagram,
       qwenBenchmarkGraph,
@@ -2449,39 +2469,11 @@ export default {
       conclusionImage,
       llamaCppWebUI,
 
+      // Constants
       ARTICLE_TYPES,
     };
   },
-  computed: {
-    slug() {
-      return this.$route.params.slug;
-    },
-  },
-  mounted() {
-    document.title = "How to build your own local AI stack on Linux";
-    const articleContent = this.$refs.articleContent.$el.innerText;
-    this.readingTime = calculateReadingTime(articleContent);
-    const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
-    setTimeout(() => {
-      this.$emit("article-read");
-    }, readTimeThresholdInMilliseconds);
-  },
   methods: {
-    handleOpenImageModal(event) {
-      this.enlargedImageSrc = event.target.src;
-      this.isImageModalVisible = true;
-      window.addEventListener("keydown", this.handleEscape);
-    },
-    handleCloseImageModal() {
-      this.isImageModalVisible = false;
-      this.enlargedImageSrc = "";
-      window.removeEventListener("keydown", this.handleEscape);
-    },
-    handleEscape(event) {
-      if (event.key === "Escape") {
-        this.handleCloseImageModal();
-      }
-    },
     handleShowToastEvent(data) {
       this.$emit("show-toast", data);
     },

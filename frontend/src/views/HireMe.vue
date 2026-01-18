@@ -128,6 +128,9 @@ import { PAGE_KEYS } from "@/constants";
 // Utils
 import { trackVisitorData } from "@/utils";
 
+// Composables
+import { useImageModal } from "@/composables/useImageModal.js";
+
 // Components
 import ImageWithCaption from "@/components/ImageWithCaption.vue";
 import ImageEnlarger from "@/components/ImageEnlarger.vue";
@@ -145,12 +148,22 @@ export default {
   },
   inject: ["wideArticlesEnabled"],
   emits: ["page-visited", "show-toast"],
+  setup() {
+    const { enlargedImageSrc, isImageModalVisible, handleOpenImageModal, handleCloseImageModal } = useImageModal();
+    return {
+      // Refs
+      enlargedImageSrc,
+      isImageModalVisible,
+
+      // Methods
+      handleOpenImageModal,
+      handleCloseImageModal,
+    };
+  },
   data() {
     return {
+      // Images
       heartShapedAntennaGalaxies,
-
-      enlargedImageSrc: "",
-      isImageModalVisible: false,
     };
   },
   mounted() {
@@ -166,21 +179,6 @@ export default {
           type: "error",
           message: "Popup was blocked! Please allow popups for this site to book a meeting.",
         });
-      }
-    },
-    handleOpenImageModal(event) {
-      this.enlargedImageSrc = event.target.src;
-      this.isImageModalVisible = true;
-      window.addEventListener("keydown", this.handleEscape);
-    },
-    handleCloseImageModal() {
-      this.isImageModalVisible = false;
-      this.enlargedImageSrc = "";
-      window.removeEventListener("keydown", this.handleEscape);
-    },
-    handleEscape(event) {
-      if (event.key === "Escape") {
-        this.handleCloseImageModal();
       }
     },
     openResumeLink() {

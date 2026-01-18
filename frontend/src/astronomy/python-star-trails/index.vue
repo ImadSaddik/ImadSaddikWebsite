@@ -1,7 +1,6 @@
 <template>
   <ArticleLayout
-    ref="articleContent"
-    title="How to make star trails and time-lapses with Python"
+    :title="title"
     sub-title="A guide to creating star trail images and time-lapse videos on any platform using Python."
     creation-date="October 24, 2025"
     :article-type="ARTICLE_TYPES.ASTRONOMY"
@@ -401,7 +400,6 @@
 // Text & Utils
 import * as codeSnippets from "./codeSnippets.js";
 import markdownContent from "./content.md";
-import { calculateReadingTime } from "@/utils";
 
 // Images
 import coverImage from "./coverImage.svg";
@@ -432,6 +430,10 @@ import CodeBlock from "@/components/CodeBlock.vue";
 import VideoWithCaption from "@/components/VideoWithCaption.vue";
 import SuperscriptText from "@/components/SuperscriptText.vue";
 
+// Composables
+import { useImageModal } from "@/composables/useImageModal.js";
+import { useArticleContent } from "@/composables/useArticleContent.js";
+
 export default {
   name: "PythonStarTrails",
   components: {
@@ -445,16 +447,34 @@ export default {
     SuperscriptText,
   },
   emits: ["show-toast", "article-read"],
+  setup(_, { emit }) {
+    const title = "How to make star trails and time-lapses with Python";
+
+    const { enlargedImageSrc, isImageModalVisible, handleOpenImageModal, handleCloseImageModal } = useImageModal();
+    const { slug, readingTime } = useArticleContent({ title, emit, content: markdownContent });
+    return {
+      // Variables
+      title,
+      slug,
+      readingTime,
+      enlargedImageSrc,
+      isImageModalVisible,
+
+      // Methods
+      handleOpenImageModal,
+      handleCloseImageModal,
+    };
+  },
   data() {
     return {
+      // Code snippets
       ...codeSnippets,
 
+      // Variables
       tags: ["Python", "Astrophotography", "Image processing", "Timelapse", "Star trails"],
-      readingTime: 0,
       markdownContent,
-      enlargedImageSrc: "",
-      isImageModalVisible: false,
 
+      // Images
       coverImage,
       timelapse60Fps,
       fiveFramesArrangedChronologically,
@@ -470,39 +490,11 @@ export default {
       fadeInOutPhasesBrightness,
       fadeInOutResult,
 
+      // Constants
       ARTICLE_TYPES,
     };
   },
-  computed: {
-    slug() {
-      return this.$route.params.slug;
-    },
-  },
-  mounted() {
-    document.title = "How to make star trails and time-lapses with Python";
-    const articleContent = this.$refs.articleContent.$el.innerText;
-    this.readingTime = calculateReadingTime(articleContent);
-    const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
-    setTimeout(() => {
-      this.$emit("article-read");
-    }, readTimeThresholdInMilliseconds);
-  },
   methods: {
-    handleOpenImageModal(event) {
-      this.enlargedImageSrc = event.target.src;
-      this.isImageModalVisible = true;
-      window.addEventListener("keydown", this.handleEscape);
-    },
-    handleCloseImageModal() {
-      this.isImageModalVisible = false;
-      this.enlargedImageSrc = "";
-      window.removeEventListener("keydown", this.handleEscape);
-    },
-    handleEscape(event) {
-      if (event.key === "Escape") {
-        this.handleCloseImageModal();
-      }
-    },
     handleShowToastEvent(data) {
       this.$emit("show-toast", data);
     },

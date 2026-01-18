@@ -1,7 +1,6 @@
 <template>
   <ArticleLayout
-    ref="articleContent"
-    title="Train your own language model"
+    :title="title"
     sub-title="Learn every step needed to train a language model from scratch in Python."
     creation-date="September 26, 2025"
     :article-type="ARTICLE_TYPES.COURSE"
@@ -77,7 +76,6 @@
 
 <script>
 // Text & Utils
-import { calculateReadingTime } from "@/utils";
 import markdownContent from "./content.md";
 
 // Images
@@ -92,6 +90,10 @@ import YouTubePlayer from "@/components/YouTubePlayer.vue";
 import ArticleLayout from "@/components/ArticleLayout.vue";
 import InlineCode from "@/components/InlineCode.vue";
 
+// Composables
+import { useImageModal } from "@/composables/useImageModal.js";
+import { useArticleContent } from "@/composables/useArticleContent.js";
+
 export default {
   name: "TrainYourOwnLanguageModel",
   components: {
@@ -101,48 +103,38 @@ export default {
     InlineCode,
   },
   emits: ["show-toast", "article-read"],
+  setup(_, { emit }) {
+    const title = "Train your own language model";
+
+    const { enlargedImageSrc, isImageModalVisible, handleOpenImageModal, handleCloseImageModal } = useImageModal();
+    const { slug, readingTime } = useArticleContent({ title, emit, content: markdownContent });
+    return {
+      // Variables
+      title,
+      slug,
+      readingTime,
+      enlargedImageSrc,
+      isImageModalVisible,
+
+      // Methods
+      handleOpenImageModal,
+      handleCloseImageModal,
+    };
+  },
   data() {
     return {
+      // Variables
       tags: ["LLM", "Transformer", "Fine-tuning", "Attention", "PyTorch", "Python", "AI", "NLP", "Machine learning"],
-      coverImage,
-      enlargedImageSrc: "",
-      isImageModalVisible: false,
-      readingTime: 0,
       markdownContent,
 
+      // Images
+      coverImage,
+
+      // Constants
       ARTICLE_TYPES,
     };
   },
-  computed: {
-    slug() {
-      return this.$route.params.slug;
-    },
-  },
-  mounted() {
-    document.title = "Train your own language model";
-    const articleContent = this.$refs.articleContent.$el.innerText;
-    this.readingTime = calculateReadingTime(articleContent);
-    const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
-    setTimeout(() => {
-      this.$emit("article-read");
-    }, readTimeThresholdInMilliseconds);
-  },
   methods: {
-    handleOpenImageModal(event) {
-      this.enlargedImageSrc = event.target.src;
-      this.isImageModalVisible = true;
-      window.addEventListener("keydown", this.handleEscape);
-    },
-    handleCloseImageModal() {
-      this.isImageModalVisible = false;
-      this.enlargedImageSrc = "";
-      window.removeEventListener("keydown", this.handleEscape);
-    },
-    handleEscape(event) {
-      if (event.key === "Escape") {
-        this.handleCloseImageModal();
-      }
-    },
     handleShowToastEvent(data) {
       this.$emit("show-toast", data);
     },
