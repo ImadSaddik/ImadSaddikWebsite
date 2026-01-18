@@ -1,7 +1,6 @@
 <template>
   <ArticleLayout
-    ref="articleContent"
-    title="Elasticsearch for beginners"
+    :title="title"
     sub-title="Learn Elasticsearch from scratch with practical examples in Python."
     creation-date="September 26, 2025"
     :article-type="ARTICLE_TYPES.COURSE"
@@ -76,7 +75,6 @@
 
 <script>
 // Text & Utils
-import { calculateReadingTime } from "@/utils";
 import markdownContent from "./content.md";
 
 // Images
@@ -92,6 +90,7 @@ import ArticleLayout from "@/components/ArticleLayout.vue";
 
 // Composables
 import { useImageModal } from "@/composables/useImageModal.js";
+import { useArticleContent } from "@/composables/useArticleContent";
 
 export default {
   name: "ElasticsearchForBeginners",
@@ -101,10 +100,16 @@ export default {
     ArticleLayout,
   },
   emits: ["show-toast", "article-read"],
-  setup() {
+  setup(_, { emit }) {
+    const title = "Elasticsearch for beginners";
+
     const { enlargedImageSrc, isImageModalVisible, handleOpenImageModal, handleCloseImageModal } = useImageModal();
+    const { slug, readingTime } = useArticleContent({ title, emit, content: markdownContent });
     return {
-      // Refs
+      // Variables
+      title,
+      slug,
+      readingTime,
       enlargedImageSrc,
       isImageModalVisible,
 
@@ -118,26 +123,11 @@ export default {
       // Variables
       tags: ["Elasticsearch", "Search", "Python"],
       coverImage,
-      readingTime: 0,
       markdownContent,
 
       // Constants
       ARTICLE_TYPES,
     };
-  },
-  computed: {
-    slug() {
-      return this.$route.params.slug;
-    },
-  },
-  mounted() {
-    document.title = "Elasticsearch For Beginners";
-    const articleContent = this.$refs.articleContent.$el.innerText;
-    this.readingTime = calculateReadingTime(articleContent);
-    const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
-    setTimeout(() => {
-      this.$emit("article-read");
-    }, readTimeThresholdInMilliseconds);
   },
   methods: {
     handleShowToastEvent(data) {

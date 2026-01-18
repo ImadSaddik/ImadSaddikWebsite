@@ -1,7 +1,6 @@
 <template>
   <ArticleLayout
-    ref="articleContent"
-    title="How to shoot star trails with your smartphone"
+    :title="title"
     sub-title="This complete guide covers everything you need to know to capture beautiful star trail photos using just your smartphone."
     creation-date="October 17, 2025"
     :article-type="ARTICLE_TYPES.ASTRONOMY"
@@ -823,7 +822,6 @@
 // Text & Utils
 import * as codeSnippets from "./codeSnippets.js";
 import markdownContent from "./content.md";
-import { calculateReadingTime } from "@/utils";
 
 // Images
 import coverImage from "./coverImage.svg";
@@ -882,6 +880,7 @@ import VideoWithCaption from "@/components/VideoWithCaption.vue";
 
 // Composables
 import { useImageModal } from "@/composables/useImageModal.js";
+import { useArticleContent } from "@/composables/useArticleContent.js";
 
 export default {
   name: "StarTrailsWithSmartphone",
@@ -896,10 +895,16 @@ export default {
     VideoWithCaption,
   },
   emits: ["show-toast", "article-read"],
-  setup() {
+  setup(_, { emit }) {
+    const title = "How to shoot star trails with your smartphone";
+
     const { enlargedImageSrc, isImageModalVisible, handleOpenImageModal, handleCloseImageModal } = useImageModal();
+    const { slug, readingTime } = useArticleContent({ title, emit, content: markdownContent });
     return {
-      // Refs
+      // Variables
+      title,
+      slug,
+      readingTime,
       enlargedImageSrc,
       isImageModalVisible,
 
@@ -915,7 +920,6 @@ export default {
 
       // Variables
       tags: ["Astronomy", "Star trails", "Timelapse", "Sky Tonight", "Astrophotography"],
-      readingTime: 0,
       markdownContent,
 
       // Images
@@ -963,20 +967,6 @@ export default {
       // Constants
       ARTICLE_TYPES,
     };
-  },
-  computed: {
-    slug() {
-      return this.$route.params.slug;
-    },
-  },
-  mounted() {
-    document.title = "How to shoot star trails with your smartphone";
-    const articleContent = this.$refs.articleContent.$el.innerText;
-    this.readingTime = calculateReadingTime(articleContent);
-    const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
-    setTimeout(() => {
-      this.$emit("article-read");
-    }, readTimeThresholdInMilliseconds);
   },
   methods: {
     handleShowToastEvent(data) {

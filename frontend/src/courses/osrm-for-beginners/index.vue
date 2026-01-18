@@ -1,7 +1,6 @@
 <template>
   <ArticleLayout
-    ref="articleContent"
-    title="OSRM for beginners"
+    :title="title"
     sub-title="Learn the different ways to use OSRM (Open Source Routing Machine) with practical examples in Python."
     creation-date="September 26, 2025"
     :article-type="ARTICLE_TYPES.COURSE"
@@ -72,7 +71,6 @@
 
 <script>
 // Text & Utils
-import { calculateReadingTime } from "@/utils";
 import markdownContent from "./content.md";
 
 // Images
@@ -89,6 +87,7 @@ import BulletPoint from "@/components/BulletPoint.vue";
 
 // Composables
 import { useImageModal } from "@/composables/useImageModal.js";
+import { useArticleContent } from "@/composables/useArticleContent";
 
 export default {
   name: "OSRMForBeginners",
@@ -99,10 +98,16 @@ export default {
     BulletPoint,
   },
   emits: ["show-toast", "article-read"],
-  setup() {
+  setup(_, { emit }) {
+    const title = "OSRM for beginners";
+
     const { enlargedImageSrc, isImageModalVisible, handleOpenImageModal, handleCloseImageModal } = useImageModal();
+    const { slug, readingTime } = useArticleContent({ title, emit, content: markdownContent });
     return {
-      // Refs
+      // Variables
+      title,
+      slug,
+      readingTime,
       enlargedImageSrc,
       isImageModalVisible,
 
@@ -115,7 +120,6 @@ export default {
     return {
       // Variables
       tags: ["OSRM", "Routing", "Python", "Docker", "TSP"],
-      readingTime: 0,
       markdownContent,
       bulletPoints: [
         "How to set up OSRM with Docker.",
@@ -131,20 +135,6 @@ export default {
       // Constants
       ARTICLE_TYPES,
     };
-  },
-  computed: {
-    slug() {
-      return this.$route.params.slug;
-    },
-  },
-  mounted() {
-    document.title = "OSRM for beginners";
-    const articleContent = this.$refs.articleContent.$el.innerText;
-    this.readingTime = calculateReadingTime(articleContent);
-    const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
-    setTimeout(() => {
-      this.$emit("article-read");
-    }, readTimeThresholdInMilliseconds);
   },
   methods: {
     handleShowToastEvent(data) {

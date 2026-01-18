@@ -1,7 +1,6 @@
 <template>
   <ArticleLayout
-    ref="articleContent"
-    title="Learn the night sky with free planetarium applications"
+    :title="title"
     sub-title="A list of free planetarium applications to explore the night sky on your computer or mobile device."
     creation-date="September 20, 2025"
     :article-type="ARTICLE_TYPES.ASTRONOMY"
@@ -511,7 +510,6 @@
 <script>
 // Text & Utils
 import markdownContent from "./content.md";
-import { calculateReadingTime } from "@/utils";
 
 // Images
 import coverImage from "./coverImage.svg";
@@ -549,6 +547,7 @@ import InlineCode from "@/components/InlineCode.vue";
 
 // Composables
 import { useImageModal } from "@/composables/useImageModal.js";
+import { useArticleContent } from "@/composables/useArticleContent.js";
 
 export default {
   name: "FreePlanetariumApps",
@@ -559,10 +558,16 @@ export default {
     InlineCode,
   },
   emits: ["show-toast", "article-read"],
-  setup() {
+  setup(_, { emit }) {
+    const title = "Learn the night sky with free planetarium applications";
+
     const { enlargedImageSrc, isImageModalVisible, handleOpenImageModal, handleCloseImageModal } = useImageModal();
+    const { slug, readingTime } = useArticleContent({ title, emit, content: markdownContent });
     return {
-      // Refs
+      // Variables
+      title,
+      slug,
+      readingTime,
       enlargedImageSrc,
       isImageModalVisible,
 
@@ -575,7 +580,6 @@ export default {
     return {
       // Variables
       tags: ["Astronomy", "Planetarium", "Stellarium", "Sky Tonight", "SkySafari"],
-      readingTime: 0,
       markdownContent,
 
       // Images
@@ -606,20 +610,6 @@ export default {
       // Constants
       ARTICLE_TYPES,
     };
-  },
-  computed: {
-    slug() {
-      return this.$route.params.slug;
-    },
-  },
-  mounted() {
-    document.title = "Learn the night sky with free planetarium applications";
-    const articleContent = this.$refs.articleContent.$el.innerText;
-    this.readingTime = calculateReadingTime(articleContent);
-    const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
-    setTimeout(() => {
-      this.$emit("article-read");
-    }, readTimeThresholdInMilliseconds);
   },
   methods: {
     handleShowToastEvent(data) {

@@ -1,7 +1,6 @@
 <template>
   <ArticleLayout
-    ref="articleContent"
-    title="Evolution of the Transformer architecture from 2017 to 2025"
+    :title="title"
     sub-title="Discover how the Transformer architecture has evolved over the years. Implement the different ideas that researchers proposed to improve the original Transformer architecture."
     creation-date="September 26, 2025"
     :article-type="ARTICLE_TYPES.COURSE"
@@ -75,7 +74,6 @@
 
 <script>
 // Text & Utils
-import { calculateReadingTime } from "@/utils";
 import markdownContent from "./content.md";
 
 // Images
@@ -91,6 +89,7 @@ import ArticleLayout from "@/components/ArticleLayout.vue";
 
 // Composables
 import { useImageModal } from "@/composables/useImageModal.js";
+import { useArticleContent } from "@/composables/useArticleContent";
 
 export default {
   name: "EvolutionOfTheTransformer",
@@ -100,10 +99,16 @@ export default {
     ArticleLayout,
   },
   emits: ["show-toast", "article-read"],
-  setup() {
+  setup(_, { emit }) {
+    const title = "Evolution of the Transformer architecture from 2017 to 2025";
+
     const { enlargedImageSrc, isImageModalVisible, handleOpenImageModal, handleCloseImageModal } = useImageModal();
+    const { slug, readingTime } = useArticleContent({ title, emit, content: markdownContent });
     return {
-      // Refs
+      // Variables
+      title,
+      slug,
+      readingTime,
       enlargedImageSrc,
       isImageModalVisible,
 
@@ -127,7 +132,6 @@ export default {
         "NLP",
         "Machine learning",
       ],
-      readingTime: 0,
       markdownContent,
 
       // Images
@@ -136,20 +140,6 @@ export default {
       // Constants
       ARTICLE_TYPES,
     };
-  },
-  computed: {
-    slug() {
-      return this.$route.params.slug;
-    },
-  },
-  mounted() {
-    document.title = "Evolution of the Transformer architecture from 2017 to 2025";
-    const articleContent = this.$refs.articleContent.$el.innerText;
-    this.readingTime = calculateReadingTime(articleContent);
-    const readTimeThresholdInMilliseconds = this.readingTime * 0.25 * 60 * 1000;
-    setTimeout(() => {
-      this.$emit("article-read");
-    }, readTimeThresholdInMilliseconds);
   },
   methods: {
     handleShowToastEvent(data) {
