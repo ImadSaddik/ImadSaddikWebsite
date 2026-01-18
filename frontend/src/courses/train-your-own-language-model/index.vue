@@ -92,7 +92,7 @@ import InlineCode from "@/components/InlineCode.vue";
 
 // Composables
 import { useImageModal } from "@/composables/useImageModal.js";
-import { useArticleContent } from "@/composables/useArticleContent";
+import { useArticleContent } from "@/composables/useArticleContent.js";
 
 export default {
   name: "TrainYourOwnLanguageModel",

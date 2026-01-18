@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { mount } from "@vue/test-utils";
-import { useArticleContent } from "@/composables/useArticleContent";
+import { useArticleContent } from "@/composables/useArticleContent.js";
 import { useRoute } from "vue-router";
 import { calculateReadingTime } from "@/utils";
 import { DEFAULT_ARTICLE_TITLE } from "@/constants";
