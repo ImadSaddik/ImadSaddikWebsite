@@ -24,8 +24,8 @@ describe("useImageModal", () => {
 
   it("initializes with default values", () => {
     const wrapper = mount(TestComponent);
-    expect(wrapper.vm.enlargedImageSrc).toBeUndefined();
-    expect(wrapper.vm.isImageModalVisible).toBeUndefined();
+    expect(wrapper.vm.enlargedImageSrc).toBe("");
+    expect(wrapper.vm.isImageModalVisible).toBe(false);
   });
 
   it("opens the modal and sets the image source", () => {

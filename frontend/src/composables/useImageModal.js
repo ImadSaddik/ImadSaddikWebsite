@@ -13,8 +13,8 @@ import { ref, onUnmounted } from "vue";
  * @returns {Function} handleCloseImageModal - Closes the modal and cleans up listeners
  */
 export function useImageModal() {
-  const enlargedImageSrc = ref();
-  const isImageModalVisible = ref();
+  const enlargedImageSrc = ref("");
+  const isImageModalVisible = ref(false);
 
   const handleOpenImageModal = (event) => {
     enlargedImageSrc.value = event.target.src;
