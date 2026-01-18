@@ -45,7 +45,7 @@ jobs:
                 echo "Download failed. Retrying in $RETRY_DELAY seconds..."
                 sleep $RETRY_DELAY
               else
-                echo "Failed to download Meilisearch after $MAX_RETRIES attempts"
+                echo "Download failed after $MAX_RETRIES attempts"
                 exit 1
               fi
             fi
