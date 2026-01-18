@@ -87,6 +87,9 @@ import YouTubePlayer from "@/components/YouTubePlayer.vue";
 import ArticleLayout from "@/components/ArticleLayout.vue";
 import BulletPoint from "@/components/BulletPoint.vue";
 
+// Composables
+import { useImageModal } from "@/composables/useImageModal.js";
+
 export default {
   name: "OSRMForBeginners",
   components: {
@@ -96,12 +99,22 @@ export default {
     BulletPoint,
   },
   emits: ["show-toast", "article-read"],
+  setup() {
+    const { enlargedImageSrc, isImageModalVisible, handleOpenImageModal, handleCloseImageModal } = useImageModal();
+    return {
+      // Refs
+      enlargedImageSrc,
+      isImageModalVisible,
+
+      // Methods
+      handleOpenImageModal,
+      handleCloseImageModal,
+    };
+  },
   data() {
     return {
+      // Variables
       tags: ["OSRM", "Routing", "Python", "Docker", "TSP"],
-      coverImage,
-      enlargedImageSrc: "",
-      isImageModalVisible: false,
       readingTime: 0,
       markdownContent,
       bulletPoints: [
@@ -112,6 +125,10 @@ export default {
         "How to solve the Traveling Salesman Problem (TSP).",
       ],
 
+      // Images
+      coverImage,
+
+      // Constants
       ARTICLE_TYPES,
     };
   },
@@ -130,21 +147,6 @@ export default {
     }, readTimeThresholdInMilliseconds);
   },
   methods: {
-    handleOpenImageModal(event) {
-      this.enlargedImageSrc = event.target.src;
-      this.isImageModalVisible = true;
-      window.addEventListener("keydown", this.handleEscape);
-    },
-    handleCloseImageModal() {
-      this.isImageModalVisible = false;
-      this.enlargedImageSrc = "";
-      window.removeEventListener("keydown", this.handleEscape);
-    },
-    handleEscape(event) {
-      if (event.key === "Escape") {
-        this.handleCloseImageModal();
-      }
-    },
     handleShowToastEvent(data) {
       this.$emit("show-toast", data);
     },

@@ -219,6 +219,9 @@ import YouTubePlayer from "@/components/YouTubePlayer.vue";
 import ImageWithCaption from "@/components/ImageWithCaption.vue";
 import ArticleLayout from "@/components/ArticleLayout.vue";
 
+// Composables
+import { useImageModal } from "@/composables/useImageModal.js";
+
 export default {
   name: "ElasticsearchPreFilteringWithKnnSearch",
   components: {
@@ -231,18 +234,31 @@ export default {
     ArticleLayout,
   },
   emits: ["show-toast", "article-read"],
+  setup() {
+    const { enlargedImageSrc, isImageModalVisible, handleOpenImageModal, handleCloseImageModal } = useImageModal();
+    return {
+      // Refs
+      enlargedImageSrc,
+      isImageModalVisible,
+
+      // Methods
+      handleOpenImageModal,
+      handleCloseImageModal,
+    };
+  },
   data() {
     return {
+      // Code
       ...codeSnippets,
 
+      // Images
       allMiniLMModelHuggingFaceHub,
       blogTags: ["Elasticsearch", "kNN", "Semantic search"],
       coverImage,
-      enlargedImageSrc: "",
-      isImageModalVisible: false,
       readingTime: 0,
       markdownContent,
 
+      // Constants
       ARTICLE_TYPES,
     };
   },
@@ -261,21 +277,6 @@ export default {
     }, readTimeThresholdInMilliseconds);
   },
   methods: {
-    handleOpenImageModal(event) {
-      this.enlargedImageSrc = event.target.src;
-      this.isImageModalVisible = true;
-      window.addEventListener("keydown", this.handleEscape);
-    },
-    handleCloseImageModal() {
-      this.isImageModalVisible = false;
-      this.enlargedImageSrc = "";
-      window.removeEventListener("keydown", this.handleEscape);
-    },
-    handleEscape(event) {
-      if (event.key === "Escape") {
-        this.handleCloseImageModal();
-      }
-    },
     handleShowToastEvent(data) {
       this.$emit("show-toast", data);
     },

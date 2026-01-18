@@ -547,6 +547,9 @@ import ImageWithCaption from "@/components/ImageWithCaption.vue";
 import ImageEnlarger from "@/components/ImageEnlarger.vue";
 import InlineCode from "@/components/InlineCode.vue";
 
+// Composables
+import { useImageModal } from "@/composables/useImageModal.js";
+
 export default {
   name: "FreePlanetariumApps",
   components: {
@@ -556,14 +559,26 @@ export default {
     InlineCode,
   },
   emits: ["show-toast", "article-read"],
+  setup() {
+    const { enlargedImageSrc, isImageModalVisible, handleOpenImageModal, handleCloseImageModal } = useImageModal();
+    return {
+      // Refs
+      enlargedImageSrc,
+      isImageModalVisible,
+
+      // Methods
+      handleOpenImageModal,
+      handleCloseImageModal,
+    };
+  },
   data() {
     return {
+      // Variables
       tags: ["Astronomy", "Planetarium", "Stellarium", "Sky Tonight", "SkySafari"],
       readingTime: 0,
       markdownContent,
-      enlargedImageSrc: "",
-      isImageModalVisible: false,
 
+      // Images
       coverImage,
       stellariumMilkyWay,
       stellariumClickObjectInformation,
@@ -588,6 +603,7 @@ export default {
       changeForecastHorizonStargazingIndex,
       stargazingNewsSteps,
 
+      // Constants
       ARTICLE_TYPES,
     };
   },
@@ -606,21 +622,6 @@ export default {
     }, readTimeThresholdInMilliseconds);
   },
   methods: {
-    handleOpenImageModal(event) {
-      this.enlargedImageSrc = event.target.src;
-      this.isImageModalVisible = true;
-      window.addEventListener("keydown", this.handleEscape);
-    },
-    handleCloseImageModal() {
-      this.isImageModalVisible = false;
-      this.enlargedImageSrc = "";
-      window.removeEventListener("keydown", this.handleEscape);
-    },
-    handleEscape(event) {
-      if (event.key === "Escape") {
-        this.handleCloseImageModal();
-      }
-    },
     handleShowToastEvent(data) {
       this.$emit("show-toast", data);
     },
