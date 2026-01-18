@@ -32,8 +32,9 @@ If applicable, add screenshots to help explain your problem.
 Share the following details about your environment:
 
 - OS: [e.g. Ubuntu]
-- Browser [e.g. Chrome, Firefox]
-- Version [e.g. 22]
+- Browser: [e.g. Chrome, Firefox]
+- Browser Version: [e.g. 108]
+- Application Version (if applicable): [e.g. 1.2.3]
 
 ## Additional context
 
