@@ -66,7 +66,7 @@
         <div>
           <p>Open your terminal and run:</p>
           <CodeBlock :code="bashCodeSnippet1" language="bash" @show-toast="handleShowToastEvent" />
-          <AdmonitionBlock title="Note" type="note">
+          <AdmonitionBlock title="Info" type="info">
             <p>
               If you assigned a different name to the container, replace <InlineCode text="elasticsearch" /> with that
               name in the command.

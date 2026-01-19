@@ -151,8 +151,6 @@ export default {
   --color-toast-info-foreground: #000000;
 
   /* Admonition colors */
-  --color-admonition-note-background: #9ca3af1a;
-  --color-admonition-note-border: #9ca3af;
   --color-admonition-tip-background: #22c55e1a;
   --color-admonition-tip-border: #22c55e;
   --color-admonition-info-background: #5996f71a;

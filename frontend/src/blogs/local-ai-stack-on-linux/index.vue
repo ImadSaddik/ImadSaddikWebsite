@@ -238,7 +238,7 @@
         <InlineCode text="llama-server" /> directly from any location.
       </p>
 
-      <AdmonitionBlock title="Note" type="note">
+      <AdmonitionBlock title="Info" type="info">
         <p>If you recompile the project, make sure to copy the programs again.</p>
       </AdmonitionBlock>
     </section>
@@ -1030,7 +1030,7 @@
         @open-image-modal="handleOpenImageModal"
       />
 
-      <AdmonitionBlock title="Note" type="note">
+      <AdmonitionBlock title="Info" type="info">
         <p>
           The diagram above is a conceptual illustration I made to help explain the process. It does not reflect the
           exact internal architecture of any specific model.
@@ -2203,7 +2203,7 @@ docker compose restart"
         <InlineCode text="--convert" /> flag when running the server.
       </p>
 
-      <AdmonitionBlock title="Note" type="note">
+      <AdmonitionBlock title="Info" type="info">
         <p>This FFmpeg integration is currently supported on <b>Linux only</b>.</p>
       </AdmonitionBlock>
 
