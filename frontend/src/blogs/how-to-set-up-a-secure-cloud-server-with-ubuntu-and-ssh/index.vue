@@ -207,25 +207,25 @@
       />
 
       <p>The diagram above shows the conversation that happens between your computer and the server:</p>
-      <ol>
-        <li>
+      <OrderedList>
+        <OrderedItem>
           <strong>SSH request</strong>: Your computer contacts the server and says, "I want to connect using this
           specific key ID".
-        </li>
-        <li>
+        </OrderedItem>
+        <OrderedItem>
           <strong>Challenge</strong>: The server is cautious. It sends back a random string of characters (called a
           <a href="https://en.wikipedia.org/wiki/Cryptographic_nonce" target="_blank">nonce</a>) and says, "Prove you
           own the private key by signing this random message".
-        </li>
-        <li>
+        </OrderedItem>
+        <OrderedItem>
           <strong>Send signature</strong>: Your computer takes that random message and "signs" it using your private
           key. This creates a unique digital signature that gets sent back to the server.
-        </li>
-        <li>
+        </OrderedItem>
+        <OrderedItem>
           <strong>The result</strong>: The server uses the public key (which you uploaded to it) to verify the
           signature. If the signature matches, the server knows you have the private key and grants access.
-        </li>
-      </ol>
+        </OrderedItem>
+      </OrderedList>
 
       <p>
         To generate a key, open the terminal on your local computer. Use the
@@ -650,6 +650,8 @@ import AdmonitionBlock from "@/components/AdmonitionBlock.vue";
 import ImageWithCaption from "@/components/ImageWithCaption.vue";
 import ImageEnlarger from "@/components/ImageEnlarger.vue";
 import BulletPoint from "@/components/BulletPoint.vue";
+import OrderedList from "@/components/OrderedList.vue";
+import OrderedItem from "@/components/OrderedItem.vue";
 
 // Composables
 import { useImageModal } from "@/composables/useImageModal.js";
@@ -667,6 +669,8 @@ export default {
     AdmonitionBlock,
     ImageWithCaption,
     BulletPoint,
+    OrderedList,
+    OrderedItem,
   },
   emits: ["show-toast", "article-read"],
   setup(_, { emit }) {
