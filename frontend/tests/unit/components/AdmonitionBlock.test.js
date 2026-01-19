@@ -5,8 +5,8 @@ describe("AdmonitionBlock", () => {
   const factory = (props = {}, slots = {}) =>
     mount(AdmonitionBlock, {
       props: {
-        title: "Note",
-        type: "note",
+        title: "Info",
+        type: "info",
         ...props,
       },
       slots: {
@@ -17,19 +17,19 @@ describe("AdmonitionBlock", () => {
 
   it("renders title and slot content", () => {
     const wrapper = factory();
-    expect(wrapper.find(".admonition-title").text()).toBe("Note");
+    expect(wrapper.find(".admonition-title").text()).toBe("Info");
     expect(wrapper.find(".admonition-content").text()).toContain("Some helpful information");
   });
 
-  it.each(["note", "tip", "info", "warning", "danger"])("applies correct class for type '%s'", (type) => {
+  it.each(["info", "tip", "warning", "danger"])("applies correct class for type '%s'", (type) => {
     const wrapper = factory({ type, title: type });
     expect(wrapper.find(".admonition").classes()).toContain(`admonition-${type}`);
     expect(wrapper.find(".admonition-content").text()).toContain("Some helpful information");
   });
 
-  it("defaults to note type when none provided", () => {
+  it("defaults to info type when none provided", () => {
     const wrapper = mount(AdmonitionBlock, { props: { title: "Default" }, slots: { default: "Default content" } });
-    expect(wrapper.find(".admonition").classes()).toContain("admonition-note");
+    expect(wrapper.find(".admonition").classes()).toContain("admonition-info");
     expect(wrapper.find(".admonition-content").text()).toContain("Default content");
   });
 });
