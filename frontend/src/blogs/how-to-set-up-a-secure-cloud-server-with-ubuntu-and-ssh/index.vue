@@ -24,7 +24,7 @@
         securely via SSH keys, with password authentication completely disabled.
       </p>
 
-      <AdmonitionBlock title="Tip" type="danger">
+      <AdmonitionBlock title="Tip" type="tip">
         <p>Prefer video? Watch this article walkthrough:</p>
         <YouTubePlayer video-url="https://www.youtube.com/embed/e7Tz_YRfoCc" />
       </AdmonitionBlock>
