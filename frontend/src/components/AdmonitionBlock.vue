@@ -97,7 +97,11 @@ export default {
   line-height: 1.6;
 }
 
-.admonition-content ::v-deep(p) {
+.admonition-content ::v-deep(p:not(:last-child)) {
+  margin-bottom: var(--gap-md);
+}
+
+.admonition-content ::v-deep(p:last-child) {
   margin: 0;
 }
 
