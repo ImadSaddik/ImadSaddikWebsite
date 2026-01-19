@@ -8,37 +8,37 @@
 >
     <url>
         <loc>https://imadsaddik.com/</loc>
-        <lastmod>2026-01-19T17:16:15.299Z</lastmod>
+        <lastmod>2026-01-19T17:23:53.697Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/about-me</loc>
-        <lastmod>2026-01-19T17:16:15.299Z</lastmod>
+        <lastmod>2026-01-19T17:23:53.697Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/hire-me</loc>
-        <lastmod>2026-01-19T17:16:15.299Z</lastmod>
+        <lastmod>2026-01-19T17:23:53.697Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/resume</loc>
-        <lastmod>2026-01-19T17:16:15.299Z</lastmod>
+        <lastmod>2026-01-19T17:23:53.697Z</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/blogs/elasticsearch-change-heap-size</loc>
-        <lastmod>2026-01-19T17:04:11.251Z</lastmod>
+        <lastmod>2026-01-19T17:21:20.366Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/blogs/elasticsearch-collapse-search-results</loc>
-        <lastmod>2026-01-19T17:04:11.251Z</lastmod>
+        <lastmod>2026-01-19T17:21:20.366Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -56,7 +56,7 @@
     </url>
     <url>
         <loc>https://imadsaddik.com/blogs/how-to-set-up-a-secure-cloud-server-with-ubuntu-and-ssh</loc>
-        <lastmod>2026-01-19T17:07:25.286Z</lastmod>
+        <lastmod>2026-01-19T17:23:25.669Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -68,7 +68,7 @@
     </url>
     <url>
         <loc>https://imadsaddik.com/blogs/local-ai-stack-on-linux</loc>
-        <lastmod>2026-01-19T17:04:11.252Z</lastmod>
+        <lastmod>2026-01-19T17:21:20.367Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
