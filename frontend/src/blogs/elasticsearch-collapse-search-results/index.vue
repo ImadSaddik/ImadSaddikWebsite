@@ -210,7 +210,7 @@
             <InlineCode text="search_after" /> parameter to paginate through the results. This is useful when you want
             to retrieve all collapsed results without missing any.
           </p>
-          <AdmonitionBlock title="Note" type="note">
+          <AdmonitionBlock title="Info" type="info">
             <p>
               You can't use the <InlineCode text="scroll API" /> with collapsing. Use
               <InlineCode text="search_after" /> instead.

@@ -251,7 +251,7 @@
 
       <p>I strongly recommend adding a passphrase for your personal key.</p>
       lock down the
-      <AdmonitionBlock title="Note" type="note">
+      <AdmonitionBlock title="Info" type="info">
         <p>
           If you need a key for a CI/CD pipeline later (to deploy code automatically), generate a separate key pair
           without a passphrase. Never remove the passphrase from your personal key.
@@ -514,7 +514,7 @@
 
       <p>Both errors mean the same thing: The root account is now locked against remote login.</p>
 
-      <AdmonitionBlock title="Note" type="note">
+      <AdmonitionBlock title="Info" type="info">
         <p>
           Setting <InlineCode text="PasswordAuthentication no" /> is optional because DigitalOcean already disabled
           password authentication when you created the droplet (assuming you selected SSH key authentication).
