@@ -12,7 +12,6 @@ export default {
 
 <style scoped>
 .ordered-list {
-  counter-reset: ordered-list-counter;
   display: flex;
   flex-direction: column;
 }

@@ -48,7 +48,6 @@ export default {
   align-items: flex-start;
   gap: var(--gap-sm);
   margin-bottom: var(--gap-sm);
-  counter-increment: ordered-list-counter;
 }
 
 .step-number {
