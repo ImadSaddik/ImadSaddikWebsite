@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils";
-import { nextTick } from "vue";
+import { nextTick, ref } from "vue";
 import TableOfContents from "@/components/TableOfContents.vue";
 import { SCROLL_MARGIN_TOP_OFFSET_PX } from "@/constants";
 
@@ -29,7 +29,13 @@ describe("TableOfContents", () => {
       return element.id === "introduction" ? 120 : 240;
     });
 
-    const wrapper = mount(TableOfContents);
+    const wrapper = mount(TableOfContents, {
+      global: {
+        provide: {
+          wideArticlesEnabled: ref(false),
+        },
+      },
+    });
     await nextTick();
     await nextTick();
 
@@ -47,7 +53,13 @@ describe("TableOfContents", () => {
 
     vi.spyOn(TableOfContents.methods, "computeAbsoluteYPosition").mockImplementation(() => 400);
 
-    const wrapper = mount(TableOfContents);
+    const wrapper = mount(TableOfContents, {
+      global: {
+        provide: {
+          wideArticlesEnabled: ref(false),
+        },
+      },
+    });
     await nextTick();
 
     await wrapper.vm.handleSectionClick("details");

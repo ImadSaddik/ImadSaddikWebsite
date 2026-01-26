@@ -33,6 +33,7 @@ describe("ArticleFooter", () => {
     mount(ArticleFooter, {
       props: {
         cardData: sampleCards,
+        articleType: ARTICLE_TYPES.BLOG,
         ...props,
       },
       global: {
