@@ -53,12 +53,16 @@ describe("useArticleLoader", () => {
   });
 
   it("redirects to NotFound when the slug is invalid", async () => {
+    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
     mount(TestComponent, {
       props: { slug: "invalid-slug-123" },
     });
 
     expect(mockRouterReplace).toHaveBeenCalledWith({ name: "NotFound" });
     expect(axios.patch).not.toHaveBeenCalled();
+
+    consoleSpy.mockRestore();
   });
 
   it("emits 'page-visited' on mount", () => {
