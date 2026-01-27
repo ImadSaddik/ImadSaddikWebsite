@@ -58,7 +58,7 @@ jobs:
 
   frontend-build:
     name: Frontend
-    needs: e2e-tests
+    needs: [e2e-tests, dast-check]
     uses: ./.github/workflows/frontend-build.yml
 
   pipeline-success:
