@@ -196,7 +196,7 @@ Create a new branch for your feature or bugfix:
 git checkout -b feature/my-new-feature
 ```
 
-Make your changes and ensure they follow the project's coding standards. Run tests locally to ensure nothing is broken.
+Make your changes and ensure they follow the project's coding standards by running all linting, formatting, and testing commands. Run tests locally to ensure nothing is broken.
 
 Commit your changes with descriptive commit messages. Push your branch to your fork:
 
