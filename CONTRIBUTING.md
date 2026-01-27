@@ -29,9 +29,12 @@ Click the `Fork` button at the top right of this page. This will create a copy o
 Now, clone your fork:
 
 ```bash
-git clone https://github.com/ImadSaddik/ImadSaddikWebsite.git
+git clone https://github.com/your_username/ImadSaddikWebsite.git
 cd ImadSaddikWebsite/
 ```
+
+> [!NOTE]
+> Make sure to replace `your_username` with your actual GitHub username in the clone URL.
 
 Follow the backend and frontend setup guides below to get your local environment running.
 
