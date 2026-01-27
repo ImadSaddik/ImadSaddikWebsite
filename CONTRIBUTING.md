@@ -102,7 +102,7 @@ Run the application:
 uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-The API will be available at `http://localhost:8000`. API docs are at `http://localhost:8000/docs`.
+The API will be available at [http://localhost:8000](http://localhost:8000). API docs are at [http://localhost:8000/docs](http://localhost:8000/docs).
 
 ### Running tests
 
@@ -163,7 +163,7 @@ Start the development server:
 pnpm dev
 ```
 
-The application will be available at `http://localhost:8080`.
+The application will be available at [http://localhost:8080](http://localhost:8080).
 
 ### Running tests
 
