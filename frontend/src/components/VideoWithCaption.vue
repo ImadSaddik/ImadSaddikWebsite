@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="video-with-caption-container">
     <figure>
       <video autoplay loop muted playsinline :src="videoSrc"></video>
       <figcaption v-html="videoCaption"></figcaption>
@@ -24,6 +24,10 @@ export default {
 </script>
 
 <style scoped>
+.video-with-caption-container {
+  margin: var(--gap-md) 0;
+}
+
 figure {
   margin: 0;
 }

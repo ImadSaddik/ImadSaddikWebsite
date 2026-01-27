@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="image-with-caption-container">
     <figure>
       <img :src="imageSrc" :alt="imageAlt" @click="openImageModal" />
       <figcaption v-html="imageCaption"></figcaption>
@@ -34,6 +34,10 @@ export default {
 </script>
 
 <style scoped>
+.image-with-caption-container {
+  margin: var(--gap-md) 0;
+}
+
 figure {
   margin: 0;
 }
