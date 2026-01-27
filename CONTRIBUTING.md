@@ -21,6 +21,7 @@ The following is a set of guidelines for contributing to this project. These are
     - [Running tests (frontend)](#running-tests-frontend)
     - [Linting and formatting (frontend)](#linting-and-formatting-frontend)
   - [Pull request process](#pull-request-process)
+  - [Code of conduct](#code-of-conduct)
 
 ## Getting started
 
@@ -205,3 +206,7 @@ git push origin feature/my-new-feature
 ```
 
 Open a Pull Request against the `master` branch of the original repository.
+
+## Code of conduct
+
+This project and everyone participating in it is governed by the [code of conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior.
