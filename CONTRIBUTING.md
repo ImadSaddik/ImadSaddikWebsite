@@ -167,13 +167,13 @@ The application will be available at [http://localhost:8080](http://localhost:80
 
 ### Running tests
 
-Unit Tests with [Vitest](https://vitest.dev/):
+Unit tests with [Vitest](https://vitest.dev/):
 
 ```bash
 pnpm test
 ```
 
-End-to-End Tests with [Playwright](https://playwright.dev/):
+End-to-End tests with [Playwright](https://playwright.dev/):
 
 ```bash
 # Install browsers first if you haven't
