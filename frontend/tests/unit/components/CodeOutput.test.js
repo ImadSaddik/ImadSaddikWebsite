@@ -9,11 +9,12 @@ describe("CodeOutput", () => {
     expect(wrapper.find("code").text()).toBe(output);
   });
 
-  it("raises an error when no code output is provided", () => {
-    try {
-      mount(CodeOutput);
-    } catch (e) {
-      expect(e.message).toContain('Missing required prop: "codeOutput"');
-    }
+  it("warns when no code output is provided", () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    mount(CodeOutput);
+    expect(warn).toHaveBeenCalled();
+    const warningMessage = warn.mock.calls.flat().join(" ");
+    expect(warningMessage).toContain('Missing required prop: "codeOutput"');
+    warn.mockRestore();
   });
 });
