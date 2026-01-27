@@ -28,7 +28,7 @@ export default {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  margin-bottom: var(--gap-md);
+  margin: var(--gap-md) 0;
 }
 
 iframe {

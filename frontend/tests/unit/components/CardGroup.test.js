@@ -87,7 +87,11 @@ describe("CardGroup", () => {
   });
 
   it("uses default empty array for cardsData prop", () => {
-    const wrapper = mount(CardGroup);
+    const wrapper = mount(CardGroup, {
+      props: {
+        path: "/test-path",
+      },
+    });
     expect(wrapper.findAllComponents(BaseCard)).toHaveLength(0);
   });
 });

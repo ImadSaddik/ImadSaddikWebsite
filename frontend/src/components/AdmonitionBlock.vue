@@ -13,9 +13,9 @@ export default {
   props: {
     type: {
       type: String,
-      default: "note",
+      default: "info",
       validator(value) {
-        return ["note", "tip", "info", "warning", "danger"].includes(value);
+        return ["info", "tip", "warning", "danger"].includes(value);
       },
     },
     title: {
@@ -36,11 +36,6 @@ export default {
   padding: var(--gap-md);
   border-left: 5px solid;
   margin: var(--gap-md) 0;
-}
-
-.admonition-note {
-  background-color: var(--color-admonition-note-background);
-  border-color: var(--color-admonition-note-border);
 }
 
 .admonition-tip {
@@ -71,10 +66,6 @@ export default {
   text-transform: capitalize;
 }
 
-.admonition-note .admonition-title {
-  color: var(--color-admonition-note-border);
-}
-
 .admonition-tip .admonition-title {
   color: var(--color-admonition-tip-border);
 }
@@ -97,8 +88,12 @@ export default {
   line-height: 1.6;
 }
 
-.admonition-content ::v-deep(p) {
+.admonition-content :deep(p) {
   margin: 0;
+}
+
+.admonition-content :deep(p:not(:last-child)) {
+  margin-bottom: var(--gap-md);
 }
 
 @media screen and (max-width: 576px) {
