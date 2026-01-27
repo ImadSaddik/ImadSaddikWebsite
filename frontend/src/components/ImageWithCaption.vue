@@ -34,6 +34,10 @@ export default {
 </script>
 
 <style scoped>
+section {
+  margin: var(--gap-md) 0;
+}
+
 figure {
   margin: 0;
 }

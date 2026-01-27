@@ -19,8 +19,7 @@ export default {
   background-color: var(--color-code-night-owl-background);
   color: var(--color-text-secondary);
   padding: 30px;
-  margin: 0;
-  margin-top: var(--gap-md);
+  margin: var(--gap-md) 0;
   overflow-x: auto;
   font-size: var(--font-size-small);
   line-height: 30px;
