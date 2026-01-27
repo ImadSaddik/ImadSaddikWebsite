@@ -89,6 +89,7 @@ export default {
 <style>
 .code-container {
   position: relative;
+  margin: var(--gap-md) 0;
 }
 
 .language-label {
