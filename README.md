@@ -252,7 +252,6 @@ This repository contains several helper tools to assist with maintenance and ana
 
 - **[Dashboard analysis](./dashboard_analysis/README.md)**: A collection of tools to analyze Nginx logs using [GoAccess](https://goaccess.io/) data. Useful for tracking traffic and identifying bad actors.
 - **[Bash scripts](./bash_scripts/README.md)**: A set of utility scripts for tasks such as:
-
   - Optimizing images (`optimize_jpeg_images.sh`, `optimize_png_images.sh`)
   - Finding large media files (`find_media.sh`)
   - Managing backups (`clean_backups.sh`)
@@ -272,54 +271,14 @@ For more details, refer to the [infrastructure README](./infrastructure/README.m
 
 ## Contributing
 
-Contributions are welcome! To keep the code clean and consistent, please follow these simple steps:
+Contributions are welcome! I appreciate you taking the time to help improve the project.
 
-### Pre-commit hooks
+To ensure a smooth and collaborative process, please read the [contributing guide](./CONTRIBUTING.md) before you get started. It provides detailed instructions on:
 
-I use **pre-commit hooks** to check the code automatically before every commit. This helps catch small mistakes early.
-
-First, install `pre-commit` in your virtual environment:
-
-```bash
-pip install pre-commit
-```
-
-Then, set up the hooks:
-
-```bash
-pre-commit install
-```
-
-> [!NOTE]
-> The pre-commit hooks will also automatically regenerate the `sitemap.xml` file if you make changes to the frontend.
-
-### Code style (Linting and Formatting)
-
-Please make sure your code follows the project style. You can run these commands to fix most style issues:
-
-- **Frontend**: Run `pnpm lint` and `pnpm format` in the `frontend` folder.
-- **Backend**: Run `ruff check . --fix` in the `backend` folder.
-
-### Testing
-
-Before submitting your changes, run the tests to make sure everything still works:
-
-Inside the `frontend` folder run these tests:
-
-- **Unit tests**: `pnpm run test:run`
-- **E2E tests**: `pnpm run test:e2e` (requires the frontend, meilisearch, and backend to be running)
-
-Inside the `backend` folder run these tests:
-
-- **Unit tests**: `pytest tests/unit`
-- **Integration tests**: `pytest tests/integration` (requires Meilisearch to be running)
-- **Load tests**:
-
-  ```bash
-  locust -f tests/load/locustfile.py
-  ```
-
-  Then open [http://localhost:8089](http://localhost:8089) to start the swarm.
+- Setting up the development environment
+- Running tests for both frontend and backend
+- Following the code style and linting guidelines
+- The pull request process
 
 If you find a typo or have a suggestion, feel free to open an issue or a pull request!
 
