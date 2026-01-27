@@ -64,12 +64,6 @@
       </p>
     </section>
   </ArticleLayout>
-
-  <ImageEnlarger
-    :is-visible="isImageModalVisible"
-    :enlarged-image-src="enlargedImageSrc"
-    @close-image-modal="handleCloseImageModal"
-  />
 </template>
 
 <script>
@@ -83,18 +77,15 @@ import coverImage from "./coverImage.svg";
 import { ARTICLE_TYPES } from "@/constants";
 
 // Components
-import ImageEnlarger from "@/components/ImageEnlarger.vue";
 import YouTubePlayer from "@/components/YouTubePlayer.vue";
 import ArticleLayout from "@/components/ArticleLayout.vue";
 
 // Composables
-import { useImageModal } from "@/composables/useImageModal.js";
 import { useArticleContent } from "@/composables/useArticleContent.js";
 
 export default {
   name: "EvolutionOfTheTransformer",
   components: {
-    ImageEnlarger,
     YouTubePlayer,
     ArticleLayout,
   },
@@ -102,19 +93,12 @@ export default {
   setup(_, { emit }) {
     const title = "Evolution of the Transformer architecture from 2017 to 2025";
 
-    const { enlargedImageSrc, isImageModalVisible, handleOpenImageModal, handleCloseImageModal } = useImageModal();
     const { slug, readingTime } = useArticleContent({ title, emit, content: markdownContent });
     return {
       // Variables
       title,
       slug,
       readingTime,
-      enlargedImageSrc,
-      isImageModalVisible,
-
-      // Methods
-      handleOpenImageModal,
-      handleCloseImageModal,
     };
   },
   data() {
