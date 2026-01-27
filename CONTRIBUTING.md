@@ -11,15 +11,15 @@ The following is a set of guidelines for contributing to this project. These are
   - [Getting started](#getting-started)
   - [Project structure](#project-structure)
   - [Backend development](#backend-development)
-    - [Prerequisites](#prerequisites)
-    - [Setup](#setup)
-    - [Running tests](#running-tests)
-    - [Linting and formatting](#linting-and-formatting)
+    - [Prerequisites (backend)](#prerequisites-backend)
+    - [Setup (backend)](#setup-backend)
+    - [Running tests (backend)](#running-tests-backend)
+    - [Linting and formatting (backend)](#linting-and-formatting-backend)
   - [Frontend development](#frontend-development)
-    - [Prerequisites](#prerequisites-1)
-    - [Setup](#setup-1)
-    - [Running tests](#running-tests-1)
-    - [Linting and formatting](#linting-and-formatting-1)
+    - [Prerequisites (frontend)](#prerequisites-frontend)
+    - [Setup (frontend)](#setup-frontend)
+    - [Running tests (frontend)](#running-tests-frontend)
+    - [Linting and formatting (frontend)](#linting-and-formatting-frontend)
   - [Pull request process](#pull-request-process)
 
 ## Getting started
@@ -52,12 +52,12 @@ The repository is organized as follows:
 
 The backend is built with [FastAPI](https://fastapi.tiangolo.com/) and uses [Meilisearch](https://www.meilisearch.com/) for search functionality.
 
-### Prerequisites
+### Prerequisites (backend)
 
 - [Python](https://www.python.org/) 3.13+
 - [Meilisearch](https://docs.meilisearch.com/learn/getting_started/installation.html) installed and running.
 
-### Setup
+### Setup (backend)
 
 Navigate to the backend directory:
 
@@ -104,7 +104,7 @@ uvicorn main:app --reload --host 0.0.0.0 --port 8000
 
 The API will be available at [http://localhost:8000](http://localhost:8000). API docs are at [http://localhost:8000/docs](http://localhost:8000/docs).
 
-### Running tests
+### Running tests (backend)
 
 We use `pytest` for testing.
 
@@ -116,7 +116,7 @@ pytest -vv
 pytest --cov -vv
 ```
 
-### Linting and formatting
+### Linting and formatting (backend)
 
 We use `ruff` for linting and formatting.
 
@@ -132,12 +132,12 @@ ruff format .
 
 The frontend is built with [Vue.js](https://vuejs.org/) and [Vite](https://vitejs.dev/).
 
-### Prerequisites
+### Prerequisites (frontend)
 
 - [Node.js](https://nodejs.org/)
 - [pnpm](https://pnpm.io/) (v10+)
 
-### Setup
+### Setup (frontend)
 
 Navigate to the frontend directory:
 
@@ -165,7 +165,7 @@ pnpm dev
 
 The application will be available at [http://localhost:8080](http://localhost:8080).
 
-### Running tests
+### Running tests (frontend)
 
 Unit tests with [Vitest](https://vitest.dev/):
 
@@ -183,7 +183,7 @@ pnpm exec playwright install
 pnpm test:e2e
 ```
 
-### Linting and formatting
+### Linting and formatting (frontend)
 
 - **Lint**: `pnpm lint`
 - **Format**: `pnpm format`
