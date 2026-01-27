@@ -61,12 +61,6 @@
       </p>
     </section>
   </ArticleLayout>
-
-  <ImageEnlarger
-    :is-visible="isImageModalVisible"
-    :enlarged-image-src="enlargedImageSrc"
-    @close-image-modal="handleCloseImageModal"
-  />
 </template>
 
 <script>
@@ -80,7 +74,6 @@ import coverImage from "./coverImage.svg";
 import { ARTICLE_TYPES } from "@/constants";
 
 // Components
-import ImageEnlarger from "@/components/ImageEnlarger.vue";
 import YouTubePlayer from "@/components/YouTubePlayer.vue";
 import ArticleLayout from "@/components/ArticleLayout.vue";
 import BulletPoint from "@/components/BulletPoint.vue";
@@ -92,7 +85,6 @@ import { useArticleContent } from "@/composables/useArticleContent.js";
 export default {
   name: "OSRMForBeginners",
   components: {
-    ImageEnlarger,
     YouTubePlayer,
     ArticleLayout,
     BulletPoint,
@@ -101,19 +93,12 @@ export default {
   setup(_, { emit }) {
     const title = "OSRM for beginners";
 
-    const { enlargedImageSrc, isImageModalVisible, handleOpenImageModal, handleCloseImageModal } = useImageModal();
     const { slug, readingTime } = useArticleContent({ title, emit, content: markdownContent });
     return {
       // Variables
       title,
       slug,
       readingTime,
-      enlargedImageSrc,
-      isImageModalVisible,
-
-      // Methods
-      handleOpenImageModal,
-      handleCloseImageModal,
     };
   },
   data() {
