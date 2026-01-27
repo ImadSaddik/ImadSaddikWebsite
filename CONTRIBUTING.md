@@ -24,7 +24,7 @@ The following is a set of guidelines for contributing to this project. These are
 
 ## Getting started
 
-Click the `Fork` button at the top right of this page. This will create a copy of the repository under your GitHub account.
+Click the `Fork` button at the top right of the page. This will create a copy of the repository under your GitHub account.
 
 Now, clone your fork:
 
