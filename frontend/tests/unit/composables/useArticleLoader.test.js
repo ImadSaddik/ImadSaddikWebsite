@@ -61,6 +61,7 @@ describe("useArticleLoader", () => {
 
     expect(mockRouterReplace).toHaveBeenCalledWith({ name: "NotFound" });
     expect(axios.patch).not.toHaveBeenCalled();
+    expect(consoleSpy).toHaveBeenCalledWith("Invalid blogs slug: invalid-slug-123");
 
     consoleSpy.mockRestore();
   });
