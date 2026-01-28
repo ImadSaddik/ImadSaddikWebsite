@@ -54,3 +54,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Web server:** Nginx configured with strict caching rules and security headers (CSP).
   - **Monitoring:** Real-time resource tracking with Btop and traffic analysis with GoAccess.
   - **Performance:** Global delivery optimization via Cloudflare CDN.
+
+[v1.1.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v1.0.0...v1.1.0
+[v1.0.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/releases/tag/v1.0.0
