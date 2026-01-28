@@ -221,6 +221,9 @@ This project uses [conventional commits](https://www.conventionalcommits.org/) f
 <type>: <description> (#PR_NUMBER)
 ```
 
+> [!NOTE]
+> The `(#PR_NUMBER)` part should be used only when merging a pull request to reference the PR number.
+
 ### Types
 
 - **feat**: A new feature
