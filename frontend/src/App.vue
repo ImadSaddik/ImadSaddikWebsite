@@ -160,6 +160,12 @@ export default {
   --color-admonition-danger-background: #ef44441a;
   --color-admonition-danger-border: #ef4444;
 
+  /* Table colors */
+  --color-table-header-background: #011627;
+  --color-table-row-even-background: #011d2c;
+  --color-table-outside-border: #444654;
+  --color-table-inside-border: #363b42;
+
   /* Modal */
   --color-background-overlay: #000000cc;
 
