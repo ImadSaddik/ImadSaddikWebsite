@@ -162,7 +162,6 @@ export default {
 
   /* Table colors */
   --color-table-header-background: #011627;
-  --color-table-row-even-background: #011d2c;
   --color-table-outside-border: #444654;
   --color-table-inside-border: #363b42;
 
