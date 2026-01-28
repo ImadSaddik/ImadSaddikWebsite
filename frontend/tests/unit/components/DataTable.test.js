@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils";
-import DataTable from "@/components/Table.vue";
+import DataTable from "@/components/DataTable.vue";
 
 describe("DataTable", () => {
   const headers = ["Name", "Age", "City"];
