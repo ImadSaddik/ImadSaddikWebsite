@@ -1563,12 +1563,7 @@
         18 layers and increase the count by 1 up to 24. In each run, the model will generate 128 tokens.
       </p>
 
-      <ImageWithCaption
-        :image-src="llamaBenchResults1"
-        image-alt="The results returned by llama-bench"
-        image-caption="The results returned by llama-bench."
-        @open-image-modal="handleOpenImageModal"
-      />
+      <DataTable :headers="llamaBench1Headers" :rows="llamaBench1Rows" :text-align="'left'" />
 
       <p>
         The table shows that offloading <b>19 layers</b> provides the highest generation speed. We can also see the
@@ -1594,12 +1589,7 @@
       </p>
       <CodeBlock :code="llamaBenchStep2" language="bash" @show-toast="handleShowToastEvent" />
 
-      <ImageWithCaption
-        :image-src="llamaBenchResults2"
-        image-alt="The results returned by llama-bench"
-        image-caption="The results returned by llama-bench."
-        @open-image-modal="handleOpenImageModal"
-      />
+      <DataTable :headers="llamaBench2Headers" :rows="llamaBench2Rows" :text-align="'left'" />
 
       <p>
         The results show a clear trade-off. With 19 layers on the GPU, we don’t have enough leftover VRAM to handle a
@@ -1608,12 +1598,7 @@
       </p>
       <CodeBlock :code="llamaBenchStep3" language="bash" @show-toast="handleShowToastEvent" />
 
-      <ImageWithCaption
-        :image-src="llamaBenchResults3"
-        image-alt="The results returned by llama-bench"
-        image-caption="The results returned by llama-bench."
-        @open-image-modal="handleOpenImageModal"
-      />
+      <DataTable :headers="llamaBench3Headers" :rows="llamaBench3Rows" :text-align="'left'" />
 
       <p>
         By offloading only 16 layers, we can now handle the 16K context window. Notice how the generation speed
@@ -2361,15 +2346,12 @@ import libreChatSpeechSettings from "./24_libre_chat_speech_settings.svg";
 import llamaSwapWhisperLoading from "./25_llama_swap_whisper_loading.jpg";
 import libreChatWhisperError from "./26_libre_chat_whisper_error.jpg";
 import llamaSwapFasterWhisperLogs from "./27_llama_swap_faster_whisper_logs.svg";
-import llamaBenchResults1 from "./28_llama_bench_results1.jpg";
-import llamaBenchResults2 from "./29_llama_bench_results2.jpg";
-import llamaBenchResults3 from "./30_llama_bench_results3.jpg";
-import llamaSwapDesktopShortcut from "./31_llama_swap_desktop_shortcut.jpg";
-import libreChatDesktopShortcut from "./32_libre_chat_desktop_shortcut.jpg";
-import llamaSwapModelRemoved from "./33_llama_swap_model_removed.jpg";
-import libreChatModelRemoved from "./34_libre_chat_model_removed.jpg";
-import conclusionImage from "./35_conclusion_image.jpg";
-import llamaCppWebUI from "./36_llama_cpp_web_ui.mp4";
+import llamaSwapDesktopShortcut from "./28_llama_swap_desktop_shortcut.jpg";
+import libreChatDesktopShortcut from "./29_libre_chat_desktop_shortcut.jpg";
+import llamaSwapModelRemoved from "./30_llama_swap_model_removed.jpg";
+import libreChatModelRemoved from "./31_libre_chat_model_removed.jpg";
+import conclusionImage from "./32_conclusion_image.jpg";
+import llamaCppWebUI from "./33_llama_cpp_web_ui.mp4";
 
 // Constants
 import { ARTICLE_TYPES } from "@/constants";
@@ -2384,6 +2366,7 @@ import CodeOutput from "@/components/CodeOutput.vue";
 import CodeBlock from "@/components/CodeBlock.vue";
 import AdmonitionBlock from "@/components/AdmonitionBlock.vue";
 import VideoWithCaption from "@/components/VideoWithCaption.vue";
+import DataTable from "@/components/DataTable.vue";
 
 // Composables
 import { useImageModal } from "@/composables/useImageModal.js";
@@ -2401,6 +2384,7 @@ export default {
     CodeBlock,
     AdmonitionBlock,
     VideoWithCaption,
+    DataTable,
   },
   emits: ["show-toast", "article-read"],
   setup(_, { emit }) {
@@ -2459,15 +2443,36 @@ export default {
       llamaSwapWhisperLoading,
       libreChatWhisperError,
       llamaSwapFasterWhisperLogs,
-      llamaBenchResults1,
-      llamaBenchResults2,
-      llamaBenchResults3,
       llamaSwapDesktopShortcut,
       libreChatDesktopShortcut,
       llamaSwapModelRemoved,
       libreChatModelRemoved,
       conclusionImage,
       llamaCppWebUI,
+
+      // Table data
+      llamaBench1Headers: ["model", "size (GiB)", "params (B)", "backend", "ngl", "test", "t/s"],
+      llamaBench1Rows: [
+        ["qwen3moe 30B.A3B IQ4_XS - 4.25 bpw", "15.25", "30.53", "CUDA", "18", "tg128", "25.22 ± 0.57"],
+        ["qwen3moe 30B.A3B IQ4_XS - 4.25 bpw", "15.25", "30.53", "CUDA", "19", "tg128", "25.46 ± 0.49"],
+        ["qwen3moe 30B.A3B IQ4_XS - 4.25 bpw", "15.25", "30.53", "CUDA", "20", "tg128", "25.22 ± 0.93"],
+        ["qwen3moe 30B.A3B IQ4_XS - 4.25 bpw", "15.25", "30.53", "CUDA", "21", "tg128", "23.92 ± 1.15"],
+        ["qwen3moe 30B.A3B IQ4_XS - 4.25 bpw", "15.25", "30.53", "CUDA", "22", "tg128", "23.70 ± 1.37"],
+        ["qwen3moe 30B.A3B IQ4_XS - 4.25 bpw", "15.25", "30.53", "CUDA", "23", "tg128", "24.85 ± 0.94"],
+      ],
+      llamaBench2Headers: ["model", "size (GiB)", "params (B)", "backend", "ngl", "test", "t/s"],
+      llamaBench2Rows: [
+        ["qwen3moe 30B.A3B IQ4_XS - 4.25 bpw", "15.25", "30.53", "CUDA", "19", "tg128", "22.12 ± 2.12"],
+        ["qwen3moe 30B.A3B IQ4_XS - 4.25 bpw", "15.25", "30.53", "CUDA", "19", "tg128 @ d4096", "15.60 ± 0.26"],
+        ["qwen3moe 30B.A3B IQ4_XS - 4.25 bpw", "15.25", "30.53", "CUDA", "19", "tg128 @ d8192", "11.33 ± 0.35"],
+      ],
+      llamaBench3Headers: ["model", "size (GiB)", "params (B)", "backend", "ngl", "test", "t/s"],
+      llamaBench3Rows: [
+        ["qwen3moe 30B.A3B IQ4_XS - 4.25 bpw", "15.25", "30.53", "CUDA", "16", "tg128", "23.14 ± 1.04"],
+        ["qwen3moe 30B.A3B IQ4_XS - 4.25 bpw", "15.25", "30.53", "CUDA", "16", "tg128 @ d4096", "14.62 ± 0.17"],
+        ["qwen3moe 30B.A3B IQ4_XS - 4.25 bpw", "15.25", "30.53", "CUDA", "16", "tg128 @ d8192", "10.63 ± 0.12"],
+        ["qwen3moe 30B.A3B IQ4_XS - 4.25 bpw", "15.25", "30.53", "CUDA", "16", "tg128 @ d16384", "6.79 ± 0.10"],
+      ],
 
       // Constants
       ARTICLE_TYPES,

@@ -8,37 +8,37 @@
 >
     <url>
         <loc>https://imadsaddik.com/</loc>
-        <lastmod>2026-01-27T19:09:17.543Z</lastmod>
+        <lastmod>2026-01-28T08:50:19.426Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/about-me</loc>
-        <lastmod>2026-01-27T19:09:17.543Z</lastmod>
+        <lastmod>2026-01-28T08:50:19.426Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/hire-me</loc>
-        <lastmod>2026-01-27T19:09:17.543Z</lastmod>
+        <lastmod>2026-01-28T08:50:19.426Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/resume</loc>
-        <lastmod>2026-01-27T19:09:17.543Z</lastmod>
+        <lastmod>2026-01-28T08:50:19.426Z</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/blogs/elasticsearch-change-heap-size</loc>
-        <lastmod>2026-01-19T17:21:20.366Z</lastmod>
+        <lastmod>2026-01-27T20:45:42.884Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/blogs/elasticsearch-collapse-search-results</loc>
-        <lastmod>2026-01-19T17:21:20.366Z</lastmod>
+        <lastmod>2026-01-27T20:45:42.884Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -56,7 +56,7 @@
     </url>
     <url>
         <loc>https://imadsaddik.com/blogs/how-to-set-up-a-secure-cloud-server-with-ubuntu-and-ssh</loc>
-        <lastmod>2026-01-19T19:00:24.116Z</lastmod>
+        <lastmod>2026-01-27T20:45:42.902Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -68,37 +68,37 @@
     </url>
     <url>
         <loc>https://imadsaddik.com/blogs/local-ai-stack-on-linux</loc>
-        <lastmod>2026-01-19T17:21:20.367Z</lastmod>
+        <lastmod>2026-01-28T08:48:12.153Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/courses/benchmark-embedding-models</loc>
-        <lastmod>2026-01-27T19:08:11.579Z</lastmod>
+        <lastmod>2026-01-27T21:35:52.365Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/courses/elasticsearch-for-beginners</loc>
-        <lastmod>2026-01-27T19:08:11.579Z</lastmod>
+        <lastmod>2026-01-27T21:35:52.365Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/courses/evolution-of-the-transformer</loc>
-        <lastmod>2026-01-27T19:08:11.580Z</lastmod>
+        <lastmod>2026-01-27T21:35:52.365Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/courses/osrm-for-beginners</loc>
-        <lastmod>2026-01-27T19:08:11.580Z</lastmod>
+        <lastmod>2026-01-27T21:35:52.365Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/courses/train-your-own-language-model</loc>
-        <lastmod>2026-01-27T19:08:11.580Z</lastmod>
+        <lastmod>2026-01-27T21:35:52.365Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
