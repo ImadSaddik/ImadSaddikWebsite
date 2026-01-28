@@ -2346,15 +2346,12 @@ import libreChatSpeechSettings from "./24_libre_chat_speech_settings.svg";
 import llamaSwapWhisperLoading from "./25_llama_swap_whisper_loading.jpg";
 import libreChatWhisperError from "./26_libre_chat_whisper_error.jpg";
 import llamaSwapFasterWhisperLogs from "./27_llama_swap_faster_whisper_logs.svg";
-import llamaBenchResults1 from "./28_llama_bench_results1.jpg";
-import llamaBenchResults2 from "./29_llama_bench_results2.jpg";
-import llamaBenchResults3 from "./30_llama_bench_results3.jpg";
-import llamaSwapDesktopShortcut from "./31_llama_swap_desktop_shortcut.jpg";
-import libreChatDesktopShortcut from "./32_libre_chat_desktop_shortcut.jpg";
-import llamaSwapModelRemoved from "./33_llama_swap_model_removed.jpg";
-import libreChatModelRemoved from "./34_libre_chat_model_removed.jpg";
-import conclusionImage from "./35_conclusion_image.jpg";
-import llamaCppWebUI from "./36_llama_cpp_web_ui.mp4";
+import llamaSwapDesktopShortcut from "./28_llama_swap_desktop_shortcut.jpg";
+import libreChatDesktopShortcut from "./29_libre_chat_desktop_shortcut.jpg";
+import llamaSwapModelRemoved from "./30_llama_swap_model_removed.jpg";
+import libreChatModelRemoved from "./31_libre_chat_model_removed.jpg";
+import conclusionImage from "./32_conclusion_image.jpg";
+import llamaCppWebUI from "./33_llama_cpp_web_ui.mp4";
 
 // Constants
 import { ARTICLE_TYPES } from "@/constants";
@@ -2446,9 +2443,6 @@ export default {
       llamaSwapWhisperLoading,
       libreChatWhisperError,
       llamaSwapFasterWhisperLogs,
-      llamaBenchResults1,
-      llamaBenchResults2,
-      llamaBenchResults3,
       llamaSwapDesktopShortcut,
       libreChatDesktopShortcut,
       llamaSwapModelRemoved,
