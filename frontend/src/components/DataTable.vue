@@ -52,6 +52,7 @@ export default {
 
 .custom-table {
   width: 100%;
+  min-width: 800px;
   border-collapse: collapse;
   font-size: var(--font-size-small);
   color: var(--color-text-secondary);
