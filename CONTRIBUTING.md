@@ -21,6 +21,10 @@ The following is a set of guidelines for contributing to this project. These are
     - [Running tests (frontend)](#running-tests-frontend)
     - [Linting and formatting (frontend)](#linting-and-formatting-frontend)
   - [Pull request process](#pull-request-process)
+  - [Commit message conventions](#commit-message-conventions)
+    - [Format](#format)
+    - [Types](#types)
+    - [Examples](#examples)
   - [Code of conduct](#code-of-conduct)
 
 ## Getting started
@@ -206,6 +210,38 @@ git push origin feature/my-new-feature
 ```
 
 Open a Pull Request against the `master` branch of the original repository.
+
+## Commit message conventions
+
+This project uses [conventional commits](https://www.conventionalcommits.org/) for all commit messages, including merge commits.
+
+### Format
+
+```plaintext
+<type>: <description> (#PR_NUMBER)
+```
+
+> [!NOTE]
+> The `(#PR_NUMBER)` part should be used only when merging a pull request to reference the PR number.
+
+### Types
+
+- **feat**: A new feature
+- **fix**: A bug fix
+- **docs**: Documentation changes
+- **style**: Code style changes (formatting, missing semicolons, etc.)
+- **refactor**: Code refactoring without feature changes
+- **test**: Adding or updating tests
+- **chore**: Build, dependencies, or maintenance tasks
+
+### Examples
+
+```plaintext
+feat: add table component (#143)
+fix: correct table overflow on mobile
+docs: update installation instructions
+refactor: simplify data table logic (#144)
+```
 
 ## Code of conduct
 
