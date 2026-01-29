@@ -234,10 +234,10 @@
         Once you are logged in, you can run the missing command to fix the issue. For example, if you forgot to allow
         SSH:
       </p>
-      <CodeBlock :code="bashCodeSnippet11" language="bash" @show-toast="handleShowToastEvent" />
+      <CodeBlock :code="bashCodeSnippet2" language="bash" @show-toast="handleShowToastEvent" />
 
       <p>After fixing the issue, close the browser window and try to SSH from your terminal again.</p>
-      <CodeBlock :code="bashCodeSnippet12" language="bash" @show-toast="handleShowToastEvent" />
+      <CodeBlock :code="bashCodeSnippet11" language="bash" @show-toast="handleShowToastEvent" />
     </section>
 
     <section>

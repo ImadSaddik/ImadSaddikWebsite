@@ -52,6 +52,4 @@ export const codeOutput4 = `Status for the jail: sshd
 |- Total banned: 1
 - Banned IP list: 142.93.130.134`;
 
-export const bashCodeSnippet11 = `sudo ufw allow OpenSSH`;
-
-export const bashCodeSnippet12 = `ssh <your_username>@<your_server_ip>`;
+export const bashCodeSnippet11 = `ssh <your_username>@<your_server_ip>`;
