@@ -8,25 +8,25 @@
 >
     <url>
         <loc>https://imadsaddik.com/</loc>
-        <lastmod>2026-01-28T08:50:19.426Z</lastmod>
+        <lastmod>2026-01-29T14:41:36.901Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/about-me</loc>
-        <lastmod>2026-01-28T08:50:19.426Z</lastmod>
+        <lastmod>2026-01-29T14:41:36.901Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/hire-me</loc>
-        <lastmod>2026-01-28T08:50:19.426Z</lastmod>
+        <lastmod>2026-01-29T14:41:36.901Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/resume</loc>
-        <lastmod>2026-01-28T08:50:19.426Z</lastmod>
+        <lastmod>2026-01-29T14:41:36.901Z</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
@@ -55,6 +55,12 @@
         <priority>0.7</priority>
     </url>
     <url>
+        <loc>https://imadsaddik.com/blogs/how-to-configure-firewall-ufw-fail2ban-ubuntu</loc>
+        <lastmod>2026-01-29T14:36:52.240Z</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
         <loc>https://imadsaddik.com/blogs/how-to-set-up-a-secure-cloud-server-with-ubuntu-and-ssh</loc>
         <lastmod>2026-01-27T20:45:42.902Z</lastmod>
         <changefreq>monthly</changefreq>
@@ -68,7 +74,7 @@
     </url>
     <url>
         <loc>https://imadsaddik.com/blogs/local-ai-stack-on-linux</loc>
-        <lastmod>2026-01-28T08:48:12.153Z</lastmod>
+        <lastmod>2026-01-29T13:46:59.858Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
