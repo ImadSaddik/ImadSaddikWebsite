@@ -103,7 +103,7 @@ sudo apt install fail2ban -y
 
 By default, Fail2Ban only bans attackers for 10 minutes. This is often too short; persistent bots will just come back later. To increase this to 1 day, create a local configuration file.
 
-> [!Important]
+> [!IMPORTANT]
 > Never edit the `.conf` file directly, as system updates will overwrite it. Always use a `.local` file for your customizations.
 
 Create the file using nano.
