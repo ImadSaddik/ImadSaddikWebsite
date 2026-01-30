@@ -32,8 +32,7 @@ repos:
         entry: npx prettier --write
         language: node
         language_version: system
-        files: ^frontend/.*\.(js|vue|css|scss|html|json|xml)$
-        types_or: [javascript, vue, css, scss, html, json, xml]
+        files: ^frontend/.*\.(js|vue|css|scss|html|json|xml|svg)$
 
   - repo: local
     hooks:
