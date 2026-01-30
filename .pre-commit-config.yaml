@@ -33,7 +33,6 @@ repos:
         language: node
         language_version: system
         files: ^frontend/.*\.(js|vue|css|scss|html|json|xml|svg)$
-        types_or: [javascript, vue, css, scss, html, json, xml, svg]
 
   - repo: local
     hooks:
