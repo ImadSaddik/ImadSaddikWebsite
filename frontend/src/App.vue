@@ -185,6 +185,7 @@ export default {
   --font-size-extra-small: 0.875rem; /* 14px */
 
   /* Gaps */
+  --gap-xxs: 0.25rem; /* 4px */
   --gap-xs: 0.5rem; /* 8px */
   --gap-sm: 1rem; /* 16px */
   --gap-md: 1.5rem; /* 24px */
