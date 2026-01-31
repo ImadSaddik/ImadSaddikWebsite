@@ -12,7 +12,7 @@ export default {
     },
     alt: {
       type: String,
-      default: "icon",
+      default: "",
     },
   },
 };
