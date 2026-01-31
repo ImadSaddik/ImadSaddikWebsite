@@ -151,8 +151,8 @@
         panel, you will see options for <b>Top bend path</b>, <b>Right bend path</b>, etc.
       </p>
       <p>
-        Click the small "Edit on-canvas" icon next to the <b>Top bend path</b> option. You will see a green line appear
-        with two handles.
+        Click the small "Edit on-canvas" <InlineIcon :icon="toolNodeEditorIcon" /> icon next to the
+        <b>Top bend path</b> option. You will see a green line appear with two handles.
       </p>
 
       <ImageWithCaption
@@ -176,8 +176,8 @@
 
       <p>
         Repeat this process for the other sides: <b>Right bend path</b>, <b>Bottom bend path</b>, and
-        <b>Left bend path</b>. Each time, click the "Edit on-canvas" icon and snap the handles to the corners of your
-        guide shape.
+        <b>Left bend path</b>. Each time, click the "Edit on-canvas" <InlineIcon :icon="toolNodeEditorIcon" /> icon and
+        snap the handles to the corners of your guide shape.
       </p>
 
       <ImageWithCaption
@@ -237,6 +237,7 @@ import drawCurvedShape from "./6_draw_shape_matching_curved_surface.svg";
 import editingTopBend from "./7_editing_top_bend_path.svg";
 import aligningTopBend from "./8_aligning_top_bend_handles.svg";
 import aligningAllBend from "./9_aligning_all_bend_handles.svg";
+import toolNodeEditorIcon from "@/assets/icons/tool_node_editor.svg";
 
 // Constants
 import { ARTICLE_TYPES } from "@/constants";
@@ -246,6 +247,7 @@ import ArticleLayout from "@/components/ArticleLayout.vue";
 import ImageWithCaption from "@/components/ImageWithCaption.vue";
 import ImageEnlarger from "@/components/ImageEnlarger.vue";
 import InlineCode from "@/components/InlineCode.vue";
+import InlineIcon from "@/components/InlineIcon.vue";
 import AdmonitionBlock from "@/components/AdmonitionBlock.vue";
 import BulletPoint from "@/components/BulletPoint.vue";
 import YouTubePlayer from "@/components/YouTubePlayer.vue";
@@ -261,6 +263,7 @@ export default {
     ImageWithCaption,
     ImageEnlarger,
     InlineCode,
+    InlineIcon,
     AdmonitionBlock,
     BulletPoint,
     YouTubePlayer,
@@ -301,6 +304,7 @@ export default {
       editingTopBend,
       aligningTopBend,
       aligningAllBend,
+      toolNodeEditorIcon,
 
       // Constants
       ARTICLE_TYPES,
