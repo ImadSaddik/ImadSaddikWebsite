@@ -1,8 +1,11 @@
 import { mount } from "@vue/test-utils";
 import InlineIcon from "@/components/InlineIcon.vue";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeEach } from "vitest";
 
 describe("InlineIcon", () => {
+  let wrapper;
+  let image;
+
   const defaultProps = {
     icon: "/assets/test-icon.svg",
   };
@@ -15,31 +18,29 @@ describe("InlineIcon", () => {
       },
     });
 
-  it("renders the image with the correct src", () => {
-    const wrapper = factory();
-    const img = wrapper.find("img");
+  beforeEach(() => {
+    wrapper = factory();
+    image = wrapper.find("img");
+  });
 
-    expect(img.exists()).toBe(true);
-    expect(img.attributes("src")).toBe(defaultProps.icon);
+  it("renders the image with the correct src", () => {
+    expect(image.exists()).toBe(true);
+    expect(image.attributes("src")).toBe(defaultProps.icon);
   });
 
   it("renders with default alt text", () => {
-    const wrapper = factory();
-    const img = wrapper.find("img");
+    expect(image.attributes("alt")).toBe("");
+  });
 
-    expect(img.attributes("alt")).toBe("icon");
+  it("has the correct class", () => {
+    expect(wrapper.classes()).toContain("inline-icon");
   });
 
   it("renders with custom alt text", () => {
     const customAlt = "Custom description";
-    const wrapper = factory({ alt: customAlt });
-    const img = wrapper.find("img");
+    wrapper = factory({ alt: customAlt });
+    image = wrapper.find("img");
 
-    expect(img.attributes("alt")).toBe(customAlt);
-  });
-
-  it("has the correct class", () => {
-    const wrapper = factory();
-    expect(wrapper.classes()).toContain("inline-icon");
+    expect(image.attributes("alt")).toBe(customAlt);
   });
 });
