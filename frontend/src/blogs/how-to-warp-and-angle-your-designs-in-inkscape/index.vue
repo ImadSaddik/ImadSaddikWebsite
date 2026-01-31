@@ -189,9 +189,8 @@
 
       <AdmonitionBlock title="Important" type="warning">
         <p>
-          Both of these tools create "live" effects. If you move the object later, it might look wrong. To fix this,
-          select your finished object and go to <InlineCode text="Path > Object to Path" />. This makes the shape
-          permanent.
+          This tool creates a "live" effect. To make the shape permanent, select your finished object and go to
+          <InlineCode text="Path > Object to Path" />.
         </p>
       </AdmonitionBlock>
     </section>
