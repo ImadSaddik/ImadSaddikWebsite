@@ -575,7 +575,7 @@ p:hover {
   display: flex;
   flex-direction: column;
   gap: var(--gap-md);
-  min-width: 150px;
+  width: 200px;
 }
 
 .footer-column-title {
