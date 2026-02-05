@@ -231,8 +231,12 @@ This project uses [conventional commits](https://www.conventionalcommits.org/) f
 - **docs**: Documentation changes
 - **style**: Code style changes (formatting, missing semicolons, etc.)
 - **refactor**: Code refactoring without feature changes
+- **chore**: Other changes that don't modify src or test files
+- **content**: Blog posts, articles, or other content updates
+- **perf**: A code change that improves performance
 - **test**: Adding or updating tests
-- **chore**: Build, dependencies, or maintenance tasks
+- **build**: Changes that affect the build system or external dependencies
+- **ci**: Changes to our CI configuration files and scripts
 
 ### Examples
 
