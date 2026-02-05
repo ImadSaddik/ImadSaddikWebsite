@@ -224,16 +224,10 @@ import huggingFaceLogo from "@/assets/logos/huggingFace.svg";
 import youtubeLogo from "@/assets/logos/youtube.svg";
 import mediumLogo from "@/assets/logos/medium.svg";
 import linkedinLogo from "@/assets/logos/linkedin.svg";
-import vueLogo from "@/assets/logos/vue.svg";
 import emailLogo from "@/assets/logos/email.svg";
 import calendlyLogo from "@/assets/logos/calendly.svg";
-import pythonLogo from "@/assets/logos/python.svg";
-import svgRepoLogo from "@/assets/logos/svg_repo.svg";
-import fontAwesomeLogo from "@/assets/logos/fontAwesome.svg";
 import patreonLogo from "@/assets/logos/patreon.svg";
 import paypalLogo from "@/assets/logos/paypal.svg";
-import nginxLogo from "@/assets/logos/nginx.svg";
-import meilisearchLogo from "@/assets/logos/meilisearch.svg";
 
 // Images
 import footerLandscape from "@/assets/footer_landscape.svg";
@@ -271,16 +265,10 @@ export default {
       youtubeLogo,
       mediumLogo,
       linkedinLogo,
-      vueLogo,
       emailLogo,
       calendlyLogo,
-      pythonLogo,
-      svgRepoLogo,
-      fontAwesomeLogo,
       patreonLogo,
       paypalLogo,
-      nginxLogo,
-      meilisearchLogo,
       footerLandscape,
 
       footerNavItems: [
