@@ -16,24 +16,16 @@
 
         <div class="footer-column">
           <h4 class="footer-column-title">Connect</h4>
+
+          <div class="footer-icon-text-container">
+            <img :src="emailLogo" alt="Email logo" />
+            <a class="clickable" href="mailto:simad3647@gmail.com" target="_blank" rel="noopener noreferrer">Email</a>
+          </div>
+
           <div class="footer-icon-text-container">
             <img :src="githubLogo" alt="GitHub logo" />
             <a class="clickable" href="https://github.com/ImadSaddik" target="_blank" rel="noopener noreferrer"
               >GitHub</a
-            >
-          </div>
-
-          <div class="footer-icon-text-container">
-            <img :src="huggingFaceLogo" alt="Hugging Face logo" />
-            <a class="clickable" href="https://huggingface.co/ImadSaddik" target="_blank" rel="noopener noreferrer"
-              >Hugging Face</a
-            >
-          </div>
-
-          <div class="footer-icon-text-container">
-            <img :src="youtubeLogo" alt="YouTube logo" />
-            <a class="clickable" href="https://www.youtube.com/@3CodeCampers" target="_blank" rel="noopener noreferrer"
-              >YouTube</a
             >
           </div>
 
@@ -54,57 +46,47 @@
               >LinkedIn</a
             >
           </div>
-        </div>
-
-        <div class="footer-column">
-          <h4 class="footer-column-title">Built with</h4>
 
           <div class="footer-icon-text-container">
-            <img :src="vueLogo" alt="Vue.js logo" />
-            <a class="clickable" href="https://vuejs.org/" target="_blank" rel="noopener noreferrer">Vue.js</a>
-          </div>
-
-          <div class="footer-icon-text-container">
-            <img :src="pythonLogo" alt="Python logo" />
-            <a class="clickable" href="https://www.python.org/" target="_blank" rel="noopener noreferrer">Python</a>
-          </div>
-
-          <div class="footer-icon-text-container">
-            <img :src="nginxLogo" alt="Nginx logo" />
-            <a class="clickable" href="https://nginx.org/" target="_blank" rel="noopener noreferrer">Nginx</a>
-          </div>
-
-          <div class="footer-icon-text-container">
-            <img :src="meilisearchLogo" alt="Meilisearch logo" />
-            <a class="clickable" href="https://www.meilisearch.com/" target="_blank" rel="noopener noreferrer"
-              >Meilisearch</a
+            <img :src="youtubeLogo" alt="YouTube logo" />
+            <a class="clickable" href="https://www.youtube.com/@3CodeCampers" target="_blank" rel="noopener noreferrer"
+              >YouTube</a
             >
           </div>
-        </div>
 
-        <div class="footer-column">
-          <h4 class="footer-column-title">Contact</h4>
-          <a class="clickable" href="mailto:simad3647@gmail.com" target="_blank" rel="noopener noreferrer">Email</a>
-          <a class="clickable" href="https://imadsaddik.com/resume" target="_blank" rel="noopener noreferrer">Resume</a>
-          <a class="clickable" href="https://calendly.com/simad3647/30min" target="_blank" rel="noopener noreferrer"
-            >Book a meeting</a
-          >
-          <a
-            class="clickable"
-            href="https://github.com/ImadSaddik/ImadSaddikWebsite/issues/new"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Report an issue</a
-          >
+          <div class="footer-icon-text-container">
+            <img :src="huggingFaceLogo" alt="Hugging Face logo" />
+            <a class="clickable" href="https://huggingface.co/ImadSaddik" target="_blank" rel="noopener noreferrer"
+              >Hugging Face</a
+            >
+          </div>
+
+          <div class="footer-icon-text-container">
+            <img :src="calendlyLogo" alt="Calendly logo" />
+            <a class="clickable" href="https://calendly.com/simad3647/30min" target="_blank" rel="noopener noreferrer"
+              >Book a meeting</a
+            >
+          </div>
         </div>
 
         <div class="footer-column">
           <h4 class="footer-column-title">Support</h4>
 
           <div class="footer-icon-text-container">
-            <img :src="githubLogo" alt="GitHub sponsors logo" />
+            <img :src="heartLogo" alt="Heart logo" />
             <a class="clickable" href="https://github.com/sponsors/ImadSaddik" target="_blank" rel="noopener noreferrer"
-              >GitHub</a
+              >GitHub Sponsors</a
+            >
+          </div>
+
+          <div class="footer-icon-text-container">
+            <img :src="githubLogo" alt="GitHub logo" />
+            <a
+              class="clickable"
+              href="https://github.com/ImadSaddik/ImadSaddikWebsite/issues/new"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Contribute an issue</a
             >
           </div>
 
@@ -125,6 +107,15 @@
               >PayPal</a
             >
           </div>
+        </div>
+
+        <div class="footer-column">
+          <h4 class="footer-column-title">My websites</h4>
+
+          <a class="clickable" href="https://myuniversehub.com/" target="_blank" rel="noopener noreferrer"
+            >myuniversehub.com</a
+          >
+          <p class="disabled-text">More websites coming</p>
         </div>
 
         <div class="footer-column">
@@ -228,19 +219,15 @@
 <script>
 // Logos
 import githubLogo from "@/assets/logos/github.svg";
+import heartLogo from "@/assets/logos/heart.svg";
 import huggingFaceLogo from "@/assets/logos/huggingFace.svg";
 import youtubeLogo from "@/assets/logos/youtube.svg";
 import mediumLogo from "@/assets/logos/medium.svg";
 import linkedinLogo from "@/assets/logos/linkedin.svg";
-import vueLogo from "@/assets/logos/vue.svg";
 import emailLogo from "@/assets/logos/email.svg";
-import pythonLogo from "@/assets/logos/python.svg";
-import svgRepoLogo from "@/assets/logos/svg_repo.svg";
-import fontAwesomeLogo from "@/assets/logos/fontAwesome.svg";
+import calendlyLogo from "@/assets/logos/calendly.svg";
 import patreonLogo from "@/assets/logos/patreon.svg";
 import paypalLogo from "@/assets/logos/paypal.svg";
-import nginxLogo from "@/assets/logos/nginx.svg";
-import meilisearchLogo from "@/assets/logos/meilisearch.svg";
 
 // Images
 import footerLandscape from "@/assets/footer_landscape.svg";
@@ -273,19 +260,15 @@ export default {
   data() {
     return {
       githubLogo,
+      heartLogo,
       huggingFaceLogo,
       youtubeLogo,
       mediumLogo,
       linkedinLogo,
-      vueLogo,
       emailLogo,
-      pythonLogo,
-      svgRepoLogo,
-      fontAwesomeLogo,
+      calendlyLogo,
       patreonLogo,
       paypalLogo,
-      nginxLogo,
-      meilisearchLogo,
       footerLandscape,
 
       footerNavItems: [
@@ -388,6 +371,12 @@ p:hover {
   color: var(--color-text-secondary);
   text-decoration: none;
   cursor: default;
+}
+
+.disabled-text,
+.disabled-text:hover {
+  color: var(--color-text-disabled);
+  cursor: not-allowed;
 }
 
 .clickable:hover {
@@ -576,7 +565,7 @@ p:hover {
   display: flex;
   flex-direction: column;
   gap: var(--gap-md);
-  min-width: 150px;
+  width: 200px;
 }
 
 .footer-column-title {
