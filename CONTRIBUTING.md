@@ -226,17 +226,17 @@ This project uses [conventional commits](https://www.conventionalcommits.org/) f
 
 ### Types
 
+- **build**: Changes that affect the build system or external dependencies
+- **chore**: Other changes that don't modify src or test files
+- **ci**: Changes to our CI configuration files and scripts
+- **content**: Blog posts, articles, or other content updates
+- **docs**: Documentation changes
 - **feat**: A new feature
 - **fix**: A bug fix
-- **docs**: Documentation changes
-- **style**: Code style changes (formatting, missing semicolons, etc.)
-- **refactor**: Code refactoring without feature changes
-- **chore**: Other changes that don't modify src or test files
-- **content**: Blog posts, articles, or other content updates
 - **perf**: A code change that improves performance
+- **refactor**: Code refactoring without feature changes
+- **style**: Code style changes (formatting, missing semicolons, etc.)
 - **test**: Adding or updating tests
-- **build**: Changes that affect the build system or external dependencies
-- **ci**: Changes to our CI configuration files and scripts
 
 ### Examples
 
