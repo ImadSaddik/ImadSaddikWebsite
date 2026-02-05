@@ -16,24 +16,16 @@
 
         <div class="footer-column">
           <h4 class="footer-column-title">Connect</h4>
+
+          <div class="footer-icon-text-container">
+            <img :src="emailLogo" alt="Email logo" />
+            <a class="clickable" href="mailto:simad3647@gmail.com" target="_blank" rel="noopener noreferrer">Email</a>
+          </div>
+
           <div class="footer-icon-text-container">
             <img :src="githubLogo" alt="GitHub logo" />
             <a class="clickable" href="https://github.com/ImadSaddik" target="_blank" rel="noopener noreferrer"
               >GitHub</a
-            >
-          </div>
-
-          <div class="footer-icon-text-container">
-            <img :src="huggingFaceLogo" alt="Hugging Face logo" />
-            <a class="clickable" href="https://huggingface.co/ImadSaddik" target="_blank" rel="noopener noreferrer"
-              >Hugging Face</a
-            >
-          </div>
-
-          <div class="footer-icon-text-container">
-            <img :src="youtubeLogo" alt="YouTube logo" />
-            <a class="clickable" href="https://www.youtube.com/@3CodeCampers" target="_blank" rel="noopener noreferrer"
-              >YouTube</a
             >
           </div>
 
@@ -54,22 +46,27 @@
               >LinkedIn</a
             >
           </div>
-        </div>
 
-        <div class="footer-column">
-          <h4 class="footer-column-title">Get in touch</h4>
-          <a class="clickable" href="mailto:simad3647@gmail.com" target="_blank" rel="noopener noreferrer">Email</a>
-          <a class="clickable" href="https://imadsaddik.com/resume" target="_blank" rel="noopener noreferrer">Resume</a>
-          <a class="clickable" href="https://calendly.com/simad3647/30min" target="_blank" rel="noopener noreferrer"
-            >Book a meeting</a
-          >
-          <a
-            class="clickable"
-            href="https://github.com/ImadSaddik/ImadSaddikWebsite/issues/new"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Report an issue</a
-          >
+          <div class="footer-icon-text-container">
+            <img :src="youtubeLogo" alt="YouTube logo" />
+            <a class="clickable" href="https://www.youtube.com/@3CodeCampers" target="_blank" rel="noopener noreferrer"
+              >YouTube</a
+            >
+          </div>
+
+          <div class="footer-icon-text-container">
+            <img :src="huggingFaceLogo" alt="Hugging Face logo" />
+            <a class="clickable" href="https://huggingface.co/ImadSaddik" target="_blank" rel="noopener noreferrer"
+              >Hugging Face</a
+            >
+          </div>
+
+          <div class="footer-icon-text-container">
+            <img :src="calendlyLogo" alt="Calendly logo" />
+            <a class="clickable" href="https://calendly.com/simad3647/30min" target="_blank" rel="noopener noreferrer"
+              >Book a meeting</a
+            >
+          </div>
         </div>
 
         <div class="footer-column">
@@ -78,7 +75,18 @@
           <div class="footer-icon-text-container">
             <img :src="githubLogo" alt="GitHub sponsors logo" />
             <a class="clickable" href="https://github.com/sponsors/ImadSaddik" target="_blank" rel="noopener noreferrer"
-              >GitHub</a
+              >GitHub Sponsors</a
+            >
+          </div>
+
+          <div class="footer-icon-text-container">
+            <img :src="githubLogo" alt="GitHub sponsors logo" />
+            <a
+              class="clickable"
+              href="https://github.com/ImadSaddik/ImadSaddikWebsite/issues/new"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Contribute an issue</a
             >
           </div>
 
@@ -217,6 +225,7 @@ import mediumLogo from "@/assets/logos/medium.svg";
 import linkedinLogo from "@/assets/logos/linkedin.svg";
 import vueLogo from "@/assets/logos/vue.svg";
 import emailLogo from "@/assets/logos/email.svg";
+import calendlyLogo from "@/assets/logos/calendly.svg";
 import pythonLogo from "@/assets/logos/python.svg";
 import svgRepoLogo from "@/assets/logos/svg_repo.svg";
 import fontAwesomeLogo from "@/assets/logos/fontAwesome.svg";
@@ -262,6 +271,7 @@ export default {
       linkedinLogo,
       vueLogo,
       emailLogo,
+      calendlyLogo,
       pythonLogo,
       svgRepoLogo,
       fontAwesomeLogo,
