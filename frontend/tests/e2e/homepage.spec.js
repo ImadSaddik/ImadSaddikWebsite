@@ -39,7 +39,7 @@ test.describe("Homepage", () => {
       await expect(page.locator('.footer-column-title:has-text("Explore")')).toBeVisible();
       await expect(page.locator('.footer-column-title:has-text("Connect")')).toBeVisible();
       await expect(page.locator('.footer-column-title:has-text("My websites")')).toBeVisible();
-      await expect(page.locator('.footer-column-title:has-text("Get in touch")')).toBeVisible();
+      await expect(page.locator('.footer-column-title:has-text("Support")')).toBeVisible();
       await expect(page.locator('.footer-column-title:has-text("Preferences")')).toBeVisible();
     });
 
