@@ -73,14 +73,14 @@
           <h4 class="footer-column-title">Support</h4>
 
           <div class="footer-icon-text-container">
-            <img :src="githubLogo" alt="GitHub sponsors logo" />
+            <img :src="heartLogo" alt="Heart logo" />
             <a class="clickable" href="https://github.com/sponsors/ImadSaddik" target="_blank" rel="noopener noreferrer"
               >GitHub Sponsors</a
             >
           </div>
 
           <div class="footer-icon-text-container">
-            <img :src="githubLogo" alt="GitHub sponsors logo" />
+            <img :src="githubLogo" alt="GitHub logo" />
             <a
               class="clickable"
               href="https://github.com/ImadSaddik/ImadSaddikWebsite/issues/new"
@@ -219,6 +219,7 @@
 <script>
 // Logos
 import githubLogo from "@/assets/logos/github.svg";
+import heartLogo from "@/assets/logos/heart.svg";
 import huggingFaceLogo from "@/assets/logos/huggingFace.svg";
 import youtubeLogo from "@/assets/logos/youtube.svg";
 import mediumLogo from "@/assets/logos/medium.svg";
@@ -265,6 +266,7 @@ export default {
   data() {
     return {
       githubLogo,
+      heartLogo,
       huggingFaceLogo,
       youtubeLogo,
       mediumLogo,
