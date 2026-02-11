@@ -8,8 +8,12 @@ This directory contains the configuration files and scripts required to deploy a
 
 Contains Nginx server blocks and configuration snippets.
 
-- `imadsaddik.com`: The main site configuration. It handles SSL (via Certbot), proxies requests to Gunicorn (backend) and Vite (frontend), and serves static files.
+- `imadsaddik.com.conf`: The main site configuration. It handles SSL (via Certbot), proxies requests to Gunicorn (backend) and Vite (frontend), and serves static files.
 - `cloudflare.conf`: Configuration to correctly handle real user IPs when the site is behind Cloudflare.
+- `redirects.map.conf`: A map file for Nginx to handle URL redirects. This encapsulates all the redirect logic in one place, making it easier to manage and update without modifying the main server block.
+
+> [!NOTE]
+> The `.conf` extension is used in this repository to enable syntax highlighting via the [NGINX Configuration Language Support](https://marketplace.visualstudio.com/items?itemName=ahmadalli.vscode-nginx-conf) VS Code extension. In production, remove the `.conf` suffix (e.g., rename `imadsaddik.com.conf` to `imadsaddik.com`) so they are correctly included by Nginx.
 
 ### [scripts/](./scripts/)
 
