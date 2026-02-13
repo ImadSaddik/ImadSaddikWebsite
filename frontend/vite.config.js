@@ -1,12 +1,19 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
+import Markdown from "unplugin-vue-markdown/vite";
+import MarkdownItContainer from "markdown-it-container";
 import { fileURLToPath, URL } from "node:url";
 import { visualizer } from "rollup-plugin-visualizer";
 
 export default defineConfig({
   plugins: [
-    vue(),
-    markdownRawPlugin(),
+    vue({
+      include: [/\.vue$/, /\.md$/],
+    }),
+    Markdown({
+      headEnabled: false,
+      markdownItUses: [],
+    }),
     visualizer({
       title: "Bundle visualizer",
       filename: "./stats.json",
@@ -53,17 +60,3 @@ export default defineConfig({
     },
   },
 });
-
-function markdownRawPlugin() {
-  return {
-    name: "vite-plugin-md-raw",
-    transform(code, id) {
-      if (id.endsWith(".md")) {
-        return {
-          code: `export default ${JSON.stringify(code)}`,
-          map: null,
-        };
-      }
-    },
-  };
-}
