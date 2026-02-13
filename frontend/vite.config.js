@@ -1,9 +1,10 @@
-import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import Markdown from "unplugin-vue-markdown/vite";
-import MarkdownItContainer from "markdown-it-container";
+
+import { defineConfig } from "vite";
 import { fileURLToPath, URL } from "node:url";
 import { visualizer } from "rollup-plugin-visualizer";
+import { getMarkdownTransformers } from "./vite/markdown/index.js";
 
 export default defineConfig({
   plugins: [
@@ -12,7 +13,7 @@ export default defineConfig({
     }),
     Markdown({
       headEnabled: false,
-      markdownItUses: [],
+      markdownItUses: getMarkdownTransformers(),
     }),
     visualizer({
       title: "Bundle visualizer",
