@@ -14,9 +14,7 @@ export default defineConfig({
     Markdown({
       headEnabled: false,
       markdownItSetup(markdownItInstance) {
-        getMarkdownTransformers().forEach((plugin) => {
-          markdownItInstance.use(plugin);
-        });
+        getMarkdownTransformers().forEach((plugin) => markdownItInstance.use(plugin));
       },
     }),
     visualizer({
