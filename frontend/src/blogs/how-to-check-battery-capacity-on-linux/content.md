@@ -10,7 +10,7 @@ This quick guide will help you find the health of your laptop battery using the 
 
 ## Introduction
 
-If you've been using your laptop for quite a while, you might notice that you cannot work away from the charger for as long as you used to. When the battery drains faster than before, it is important to understand why.
+If you've been using your laptop for quite a while, you might notice that you can't work away from the charger for as long as before. When the battery drains faster than before, it is important to understand why.
 
 Batteries are chemical devices, and they [degrade over time](https://en.wikipedia.org/wiki/Capacity_loss). A battery that held a 4-hour charge when it was new might only hold a 2-hour charge after a few years.
 
@@ -22,7 +22,7 @@ In this article, you will learn how to use a simple command-line tool to find th
 
 ## Finding the battery path
 
-First, you need to find out how the system names your battery. Linux treats hardware components as file or device paths.
+First, you need to find out how the system identifies your battery. Linux treats hardware components as file or device paths.
 
 To list all power-related devices, use the `upower` command with the `-e` (enumerate) flag:
 
@@ -44,7 +44,7 @@ Look for the line ending in `battery_BAT0`. This is the path to your laptop's ph
 
 ## Getting the battery details
 
-Once you've the path, you can ask the system for specific details about that device. Use the `upower` command again, but this time with the `-i` (show info) flag followed by the path you found in the previous step:
+Once you have the path, you can ask the system for specific details about that device. Use the `upower` command again, but this time with the `-i` (show info) flag followed by the path you found in the previous step:
 
 ```bash
 upower -i /org/freedesktop/UPower/devices/battery_BAT0
@@ -90,7 +90,7 @@ The output provides a lot of data, but there are three lines that reveal your ba
 
 By comparing the "design" energy to the current "full" energy, you can see how much the battery has degraded.
 
-In the example above, my battery has lost about **~16%** of its original life, sitting at **84.33% health**.
+In the example above, my battery has lost about **16%** of its original life, sitting at **84.33% health**.
 
 This explains why a laptop doesn't last as long as it used to. It usually isn't a software issue; it is simply the physical hardware aging over time.
 
