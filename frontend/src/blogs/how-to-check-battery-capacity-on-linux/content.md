@@ -96,6 +96,16 @@ This explains why a laptop doesn't last as long as it used to. It usually isn't 
 
 ---
 
+## Tips to prolong your battery life
+
+Now that you know the numbers, you might want to keep them as high as possible. While all batteries degrade eventually, you can slow down the process with a few habits:
+
+- **Avoid extreme heat:** High temperatures are the number one enemy of lithium-ion batteries. Make sure your laptop vents are not blocked by blankets or dust.
+- **Don't stay at 100% forever:** Leaving your laptop plugged in at 100% charge for weeks will stress the battery. If possible, unplug it occasionally or use software settings to limit the charge threshold to 80%.
+- **Avoid deep discharges:** Try not to let your battery drop to 0% regularly.
+
+---
+
 ## Conclusion
 
 Using `upower` is a fast and direct way to check your hardware without installing heavy graphical applications.
