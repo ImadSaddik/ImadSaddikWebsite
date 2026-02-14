@@ -13,7 +13,11 @@ export default defineConfig({
     }),
     Markdown({
       headEnabled: false,
-      markdownItUses: getMarkdownTransformers(),
+      markdownItSetup(markdownItInstance) {
+        getMarkdownTransformers().forEach((plugin) => {
+          markdownItInstance.use(plugin);
+        });
+      },
     }),
     visualizer({
       title: "Bundle visualizer",
