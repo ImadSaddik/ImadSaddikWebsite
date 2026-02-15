@@ -5,12 +5,12 @@ const INLINE_CONTENT_TOKEN_OFFSET = 1;
 export function headerTransformer(markdownItInstance) {
   const originalHeaderOpen =
     markdownItInstance.renderer.rules.heading_open ||
-    function (tokens, idx, options, env, self) {
-      return self.renderToken(tokens, idx, options);
+    function (tokens, index, options, env, self) {
+      return self.renderToken(tokens, index, options);
     };
 
-  markdownItInstance.renderer.rules.heading_open = function (tokens, idx, options, env, self) {
-    const token = tokens[idx];
+  markdownItInstance.renderer.rules.heading_open = function (tokens, index, options, env, self) {
+    const token = tokens[index];
     const headerLevel = token.tag.slice(HEADER_TAG_LEVEL_START_INDEX);
 
     if (!env.usedHeaderIds) {
@@ -18,7 +18,7 @@ export function headerTransformer(markdownItInstance) {
     }
 
     if (SUPPORTED_HEADER_LEVELS.includes(headerLevel)) {
-      const inlineToken = tokens[idx + INLINE_CONTENT_TOKEN_OFFSET];
+      const inlineToken = tokens[index + INLINE_CONTENT_TOKEN_OFFSET];
       const title = inlineToken.children
         .filter((token) => ["text", "code_inline"].includes(token.type))
         .map((token) => token.content)
@@ -40,33 +40,33 @@ export function headerTransformer(markdownItInstance) {
       token.attrSet("class", "article-body-header");
       token.attrSet("data-table-of-contents", "");
 
-      const headerOpeningTag = originalHeaderOpen(tokens, idx, options, env, self);
+      const headerOpeningTag = originalHeaderOpen(tokens, index, options, env, self);
       const headerLink = `<a class="clickable-header-link" href="#${id}">`;
 
       return `${headerOpeningTag}${headerLink}`;
     }
 
-    return originalHeaderOpen(tokens, idx, options, env, self);
+    return originalHeaderOpen(tokens, index, options, env, self);
   };
 
   const originalHeaderClose =
     markdownItInstance.renderer.rules.heading_close ||
-    function (tokens, idx, options, env, self) {
-      return self.renderToken(tokens, idx, options);
+    function (tokens, index, options, env, self) {
+      return self.renderToken(tokens, index, options);
     };
 
-  markdownItInstance.renderer.rules.heading_close = function (tokens, idx, options, env, self) {
-    const token = tokens[idx];
+  markdownItInstance.renderer.rules.heading_close = function (tokens, index, options, env, self) {
+    const token = tokens[index];
     const headerLevel = token.tag.slice(HEADER_TAG_LEVEL_START_INDEX);
 
     if (SUPPORTED_HEADER_LEVELS.includes(headerLevel)) {
-      const headerClosingTag = originalHeaderClose(tokens, idx, options, env, self);
+      const headerClosingTag = originalHeaderClose(tokens, index, options, env, self);
       const headerLinkClose = "</a>";
 
       return `${headerLinkClose}${headerClosingTag}`;
     }
 
-    return originalHeaderClose(tokens, idx, options, env, self);
+    return originalHeaderClose(tokens, index, options, env, self);
   };
 }
 
