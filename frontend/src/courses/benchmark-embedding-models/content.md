@@ -10,9 +10,7 @@ Learn how to benchmark embedding models on your own data in this course for begi
 **Date:** January 25, 2026
 **Tags:** Embedding, LLM, VLM, Python, Benchmarking, Statistical tests, t-SNE
 
----
-
-## Course Overview
+## Course overview
 
 In this course, you will learn the limitations of extracting text from PDF files with Python libraries and how to solve that with the help of VLMs (Vision Language Models).
 
@@ -24,9 +22,7 @@ Furthermore, we will plot the vector representations to visualize if clusters ar
 
 You can find the slides, notebook, and scripts in this [GitHub repository](https://github.com/ImadSaddik/Benchmark_Embedding_Models). The dataset is available here: [HuggingFace dataset](https://huggingface.co/datasets/ImadSaddik/BenchmarkEmbeddingModelsCourse).
 
----
-
-## Watch the Course
+## Watch the course
 
 I believe knowledge should be free, so I am sharing this course for free on the freeCodeCamp YouTube channel. You can watch the full course below.
 
