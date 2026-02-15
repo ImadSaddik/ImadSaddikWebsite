@@ -1,3 +1,7 @@
+const SUPPORTED_HEADER_LEVELS = ["2", "3", "4"];
+const HEADER_TAG_LEVEL_START_INDEX = 1;
+const INLINE_CONTENT_TOKEN_OFFSET = 1;
+
 export function headerTransformer(markdownItInstance) {
   const originalHeaderOpen =
     markdownItInstance.renderer.rules.heading_open ||
@@ -7,14 +11,14 @@ export function headerTransformer(markdownItInstance) {
 
   markdownItInstance.renderer.rules.heading_open = function (tokens, idx, options, env, self) {
     const token = tokens[idx];
-    const headerLevel = token.tag.slice(1);
+    const headerLevel = token.tag.slice(HEADER_TAG_LEVEL_START_INDEX);
 
     if (!env.usedHeaderIds) {
       env.usedHeaderIds = {};
     }
 
-    if (["2", "3", "4"].includes(headerLevel)) {
-      const inlineToken = tokens[idx + 1];
+    if (SUPPORTED_HEADER_LEVELS.includes(headerLevel)) {
+      const inlineToken = tokens[idx + INLINE_CONTENT_TOKEN_OFFSET];
       const title = inlineToken.children
         .filter((token) => ["text", "code_inline"].includes(token.type))
         .map((token) => token.content)
@@ -53,9 +57,9 @@ export function headerTransformer(markdownItInstance) {
 
   markdownItInstance.renderer.rules.heading_close = function (tokens, idx, options, env, self) {
     const token = tokens[idx];
-    const headerLevel = token.tag.slice(1);
+    const headerLevel = token.tag.slice(HEADER_TAG_LEVEL_START_INDEX);
 
-    if (["2", "3", "4"].includes(headerLevel)) {
+    if (SUPPORTED_HEADER_LEVELS.includes(headerLevel)) {
       const headerClosingTag = originalHeaderClose(tokens, idx, options, env, self);
       const headerLinkClose = "</a>";
 
