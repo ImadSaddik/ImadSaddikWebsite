@@ -1,13 +1,11 @@
-# OSRM for beginners
-
-Learn the different ways to use OSRM (Open Source Routing Machine) with practical examples in Python.
-
-**Date:** September 26, 2025
-**Tags:** OSRM, Routing, Python, Docker, TSP
-
+---
+title: "OSRM for beginners"
+subtitle: "Learn the different ways to use OSRM (Open Source Routing Machine) with practical examples in Python."
+date: "September 26, 2025"
+tags: ["OSRM", "Routing", "Python", "Docker", "TSP"]
 ---
 
-## Course Overview
+## Course overview
 
 This course will teach you how to use [OSRM (Open Source Routing Machine)](https://github.com/Project-OSRM/osrm-backend) for different routing tasks. OSRM is a free and powerful tool that helps you find the shortest route between places, solve the [traveling salesman problem (TSP)](https://en.wikipedia.org/wiki/Travelling_salesman_problem), and much more.
 
@@ -23,11 +21,12 @@ Here's what you'll learn:
 
 All course materials, slides, and Jupyter notebooks are available on my [GitHub repository](https://github.com/ImadSaddik/OSRM_Course_Python). By the end of the course, you'll know how OSRM works and how to use it in your own projects.
 
----
-
-## Watch the Course
+## Watch the course
 
 I believe knowledge should be free, so I am sharing this course for free on the freeCodeCamp YouTube channel. You can watch the full course below.
+
+::: youtube [https://www.youtube.com/embed/o9Bgwq_H-rE](https://www.youtube.com/embed/o9Bgwq_H-rE)
+:::
 
 Creating courses like this takes months of research, experiments, designing illustrations, recording, and more.
 If you want to support my mission to share free knowledge, you can [sponsor me on GitHub](https://github.com/sponsors/ImadSaddik), [support me on Patreon](https://www.patreon.com/3CodeCamp), or [donate via PayPal](https://www.paypal.com/paypalme/ImadSaddik).

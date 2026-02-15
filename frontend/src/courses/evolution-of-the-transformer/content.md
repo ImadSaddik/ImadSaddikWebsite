@@ -1,13 +1,23 @@
-# Evolution of the Transformer architecture from 2017 to 2025
-
-Discover how the Transformer architecture has evolved over the years. Implement the different ideas that researchers proposed to improve the original Transformer architecture.
-
-**Date:** September 26, 2025
-**Tags:** LLM, Transformer, Attention, Positional encoding, Normalization, PyTorch, Python, AI, NLP, Machine learning
-
+---
+title: "Evolution of the Transformer architecture from 2017 to 2025"
+subtitle: "Discover how the Transformer architecture has evolved over the years. Implement the different ideas that researchers proposed to improve the original Transformer architecture."
+date: "September 26, 2025"
+tags:
+  [
+    "LLM",
+    "Transformer",
+    "Attention",
+    "Positional encoding",
+    "Normalization",
+    "PyTorch",
+    "Python",
+    "AI",
+    "NLP",
+    "Machine learning",
+  ]
 ---
 
-## Course Overview
+## Course overview
 
 This course explores how the [Transformer architecture](<https://en.wikipedia.org/wiki/Transformer_(deep_learning_architecture)>) has changed from its introduction in the famous paper [Attention is all you need](https://arxiv.org/pdf/1706.03762) in 2017 to the latest updates in 2025. We will look at the main ideas that researchers have used to improve the original Transformer, and you will learn how to build these improvements step by step.
 
@@ -17,11 +27,12 @@ You will use [Python](https://www.python.org/downloads/) and [PyTorch](https://p
 
 By the end of the course, you will build several models using the ideas we discuss. We will compare their performance to see which ones work best. This will help us understand which improvements are most effective.
 
----
-
-## Watch the Course
+## Watch the course
 
 I believe knowledge should be free, so I am sharing this course for free on the freeCodeCamp YouTube channel. You can watch the full course below.
+
+::: youtube [https://www.youtube.com/embed/8WBS0dT0h2I](https://www.youtube.com/embed/8WBS0dT0h2I)
+:::
 
 Creating courses like this takes months of research, experiments, designing illustrations, recording, and more.
 If you want to support my mission to share free knowledge, you can [sponsor me on GitHub](https://github.com/sponsors/ImadSaddik), [support me on Patreon](https://www.patreon.com/3CodeCamp), or [donate via PayPal](https://www.paypal.com/paypalme/ImadSaddik).
