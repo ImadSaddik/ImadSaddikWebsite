@@ -8,31 +8,31 @@
 >
     <url>
         <loc>https://imadsaddik.com/</loc>
-        <lastmod>2026-02-15T23:14:11.787Z</lastmod>
+        <lastmod>2026-02-15T23:41:52.738Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/about-me</loc>
-        <lastmod>2026-02-15T23:14:11.787Z</lastmod>
+        <lastmod>2026-02-15T23:41:52.738Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/hire-me</loc>
-        <lastmod>2026-02-15T23:14:11.787Z</lastmod>
+        <lastmod>2026-02-15T23:41:52.738Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/resume</loc>
-        <lastmod>2026-02-15T23:14:11.787Z</lastmod>
+        <lastmod>2026-02-15T23:41:52.738Z</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/blogs/elasticsearch-change-heap-size</loc>
-        <lastmod>2026-02-03T20:32:51.668Z</lastmod>
+        <lastmod>2026-02-15T23:30:47.860Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -86,13 +86,13 @@
     </url>
     <url>
         <loc>https://imadsaddik.com/courses/benchmark-embedding-models</loc>
-        <lastmod>2026-02-15T08:41:02.483Z</lastmod>
+        <lastmod>2026-02-15T23:30:27.038Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/courses/elasticsearch-for-beginners</loc>
-        <lastmod>2026-02-15T23:08:50.084Z</lastmod>
+        <lastmod>2026-02-15T23:30:36.546Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -104,13 +104,13 @@
     </url>
     <url>
         <loc>https://imadsaddik.com/courses/osrm-for-beginners</loc>
-        <lastmod>2026-02-15T23:09:15.133Z</lastmod>
+        <lastmod>2026-02-15T23:35:23.131Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/courses/train-your-own-language-model</loc>
-        <lastmod>2026-02-15T23:09:25.462Z</lastmod>
+        <lastmod>2026-02-15T23:35:29.728Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
