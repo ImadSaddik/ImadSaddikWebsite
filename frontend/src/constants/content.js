@@ -1,3 +1,6 @@
+export const ARTICLE_READ_THRESHOLD = 0.25;
+export const MILLISECONDS_PER_MINUTE = 60000;
+
 export const DEFAULT_ARTICLE_TITLE = "Imad Saddik - Articles";
 
 export const ARTICLE_TYPES = {
