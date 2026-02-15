@@ -19,7 +19,6 @@ export function headerTransformer(markdownItInstance) {
         .filter((token) => ["text", "code_inline"].includes(token.type))
         .map((token) => token.content)
         .join("");
-      console.log("title:", title);
 
       let id = title
         .toLowerCase()
@@ -32,14 +31,38 @@ export function headerTransformer(markdownItInstance) {
       } else {
         env.usedHeaderIds[id] = 0;
       }
-      console.log("Generated ID:", id);
 
       token.attrSet("id", id);
       token.attrSet("class", "article-body-header");
       token.attrSet("data-table-of-contents", "");
+
+      const headerOpeningTag = originalHeaderOpen(tokens, idx, options, env, self);
+      const headerLink = `<a class="clickable-header-link" href="#${id}">`;
+
+      return `${headerOpeningTag}${headerLink}`;
     }
 
     return originalHeaderOpen(tokens, idx, options, env, self);
+  };
+
+  const originalHeaderClose =
+    markdownItInstance.renderer.rules.heading_close ||
+    function (tokens, idx, options, env, self) {
+      return self.renderToken(tokens, idx, options);
+    };
+
+  markdownItInstance.renderer.rules.heading_close = function (tokens, idx, options, env, self) {
+    const token = tokens[idx];
+    const headerLevel = token.tag.slice(1);
+
+    if (["2", "3", "4"].includes(headerLevel)) {
+      const headerClosingTag = originalHeaderClose(tokens, idx, options, env, self);
+      const headerLinkClose = "</a>";
+
+      return `${headerLinkClose}${headerClosingTag}`;
+    }
+
+    return originalHeaderClose(tokens, idx, options, env, self);
   };
 }
 
