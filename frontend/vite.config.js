@@ -19,6 +19,7 @@ export default defineConfig({
       },
     }),
     Components({
+      dts: true,
       dirs: ["src/components"],
       extensions: ["vue", "md"],
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
