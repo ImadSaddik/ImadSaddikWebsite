@@ -1,5 +1,6 @@
 import vue from "@vitejs/plugin-vue";
 import Markdown from "unplugin-vue-markdown/vite";
+import Components from "unplugin-vue-components/vite";
 
 import { defineConfig } from "vite";
 import { fileURLToPath, URL } from "node:url";
@@ -16,6 +17,11 @@ export default defineConfig({
       markdownItSetup(markdownItInstance) {
         getMarkdownTransformers().forEach((plugin) => markdownItInstance.use(plugin));
       },
+    }),
+    Components({
+      dirs: ["src/components"],
+      extensions: ["vue", "md"],
+      include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
     }),
     visualizer({
       title: "Bundle visualizer",
