@@ -5,8 +5,6 @@ date: "January 25, 2026"
 tags: ["Embedding", "LLM", "VLM", "Python", "Benchmarking", "Statistical tests", "t-SNE"]
 ---
 
-# How to benchmark embedding models on your own data
-
 Learn how to benchmark embedding models on your own data in this course for beginners.
 
 **Date:** January 25, 2026
