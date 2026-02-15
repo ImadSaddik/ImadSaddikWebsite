@@ -1,19 +1,19 @@
 import MarkdownItContainer from "markdown-it-container";
 
-const youtubeRegex = /youtube\s+(.*)/;
-const linkRegex = /\[.*\]\((.*)\)/;
+const YOUTUBE_REGEX = /youtube\s+(.*)/;
+const LINK_REGEX = /\[.*\]\((.*)\)/;
 
 export const youtubeTransformer = (markdownItInstance) => {
   markdownItInstance.use(MarkdownItContainer, "youtube", {
-    validate: (params) => params.trim().match(youtubeRegex),
+    validate: (params) => params.trim().match(YOUTUBE_REGEX),
     render: (tokens, index) => {
-      const match = tokens[index].info.trim().match(youtubeRegex);
+      const match = tokens[index].info.trim().match(YOUTUBE_REGEX);
 
       if (tokens[index].nesting === 1) {
         let videoUrl = match ? match[1] : "";
 
         // Handle markdown link syntax: [text](url) -> extract url
-        const linkMatch = videoUrl.match(linkRegex);
+        const linkMatch = videoUrl.match(LINK_REGEX);
         if (linkMatch) {
           videoUrl = linkMatch[1];
         }
