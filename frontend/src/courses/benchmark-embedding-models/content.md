@@ -26,5 +26,8 @@ You can find the slides, notebook, and scripts in this [GitHub repository](https
 
 I believe knowledge should be free, so I am sharing this course for free on the freeCodeCamp YouTube channel. You can watch the full course below.
 
+::: youtube https://www.youtube.com/embed/7G9q_5q82hY
+:::
+
 Creating courses like this takes months of research, experiments, designing illustrations, recording, and more.
 If you want to support my mission to share free knowledge, you can [sponsor me on GitHub](https://github.com/sponsors/ImadSaddik), [support me on Patreon](https://www.patreon.com/3CodeCamp), or [donate via PayPal](https://www.paypal.com/paypalme/ImadSaddik).
