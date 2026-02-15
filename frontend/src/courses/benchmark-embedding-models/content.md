@@ -5,8 +5,6 @@ date: "January 25, 2026"
 tags: ["Embedding", "LLM", "VLM", "Python", "Benchmarking", "Statistical tests", "t-SNE"]
 ---
 
-Learn how to benchmark embedding models on your own data in this course for beginners.
-
 ## Course overview
 
 In this course, you will learn the limitations of extracting text from PDF files with Python libraries and how to solve that with the help of VLMs (Vision Language Models).
