@@ -21,6 +21,7 @@ import { transformerNotationHighlight } from "@shikijs/transformers";
 
 export default {
   name: "CodeBlock",
+  inject: ["showToast"],
   props: {
     code: {
       type: String,
@@ -31,7 +32,6 @@ export default {
       required: true,
     },
   },
-  emits: ["show-toast"],
   data() {
     return {
       highlightedHtml: null,
@@ -64,7 +64,7 @@ export default {
       try {
         await navigator.clipboard.writeText(text);
         this.copied = true;
-        this.$emit("show-toast", {
+        this.showToast({
           message: "Code copied to clipboard",
           type: "success",
         });
@@ -73,7 +73,7 @@ export default {
         }, this.resetIconIntervalInMilliseconds);
       } catch {
         this.errorOccured = true;
-        this.$emit("show-toast", {
+        this.showToast({
           message: "Failed to copy code",
           type: "error",
         });

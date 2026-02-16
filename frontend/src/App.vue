@@ -1,7 +1,7 @@
 <template>
   <SkipLink />
   <NavBar :visited-page="visitedPage" />
-  <RouterView @show-toast="handleShowToastEvent" @page-visited="handlePageVisitedEvent" />
+  <RouterView @page-visited="handlePageVisitedEvent" />
   <StarBackground v-if="starEffectEnabled" />
   <MeteorShowers v-if="meteoriteEffectEnabled" />
   <ScrollBackToTop />
@@ -51,6 +51,7 @@ export default {
   provide() {
     return {
       wideArticlesEnabled: computed(() => this.wideArticlesEnabled),
+      showToast: (data) => this.handleShowToastEvent(data),
     };
   },
   data() {

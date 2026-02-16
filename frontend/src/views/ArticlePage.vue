@@ -15,7 +15,6 @@
     :sub-title="frontmatter.subtitle"
     :slug="slug"
     :title="frontmatter.title"
-    @show-toast="handleShowToast"
   >
     <component :is="MarkdownComponent" />
   </ArticleLayout>
@@ -56,7 +55,7 @@ export default {
       required: true,
     },
   },
-  emits: ["show-toast", "article-read"],
+  emits: ["article-read"],
   data() {
     return {
       articleRawContent: "",
@@ -148,9 +147,6 @@ export default {
     handleLoadError(error) {
       console.error("Failed to load article:", error);
       this.$router.replace({ name: ROUTES.NOT_FOUND.name });
-    },
-    handleShowToast(data) {
-      this.$emit("show-toast", data);
     },
   },
 };

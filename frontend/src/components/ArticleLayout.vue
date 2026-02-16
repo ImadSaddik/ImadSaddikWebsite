@@ -9,7 +9,6 @@
       :reading-time="readingTime"
       :markdown-content="markdownContent"
       :article-type="articleType"
-      @show-toast="handleShowToastEvent"
     />
 
     <div class="article-body-wrapper">
@@ -60,7 +59,7 @@ export default {
     EditArticleOnGitHub,
     TableOfContents,
   },
-  inject: ["wideArticlesEnabled"],
+  inject: ["wideArticlesEnabled", "showToast"],
   props: {
     title: {
       type: String,
@@ -99,7 +98,6 @@ export default {
       required: true,
     },
   },
-  emits: ["show-toast"],
   data() {
     return {
       cardData: [],
@@ -115,9 +113,6 @@ export default {
     await this.getInitialClapCount();
   },
   methods: {
-    handleShowToastEvent(data) {
-      this.$emit("show-toast", data);
-    },
     async getInitialClapCount() {
       try {
         const response = await axios.get(`/api/articles/${this.slug}/claps-count`);
@@ -129,7 +124,7 @@ export default {
           throw new Error("Failed to fetch initial clap count");
         }
       } catch (error) {
-        this.$emit("show-toast", {
+        this.showToast({
           message: "Failed to fetch initial clap count",
           type: "error",
         });
@@ -151,12 +146,12 @@ export default {
         });
       } catch (error) {
         if (error.response && error.response.status === 429) {
-          this.$emit("show-toast", {
+          this.showToast({
             message: "Are you a bot? Take a tiny break while I cool down the recommendation engine.",
             type: "warning",
           });
         } else {
-          this.$emit("show-toast", {
+          this.showToast({
             message: "Failed to fetch article recommendations",
             type: "error",
           });
@@ -181,19 +176,19 @@ export default {
           this.userClapCount += 1;
           this.showClapAnimation = true;
         } else {
-          this.$emit("show-toast", {
+          this.showToast({
             message: `Failed to increment clap count: ${message}`,
             type: "error",
           });
         }
       } catch (error) {
         if (error.response && error.response.status === 429) {
-          this.$emit("show-toast", {
+          this.showToast({
             message: "Woah there! You are hammering the button too fast. Please wait a minute before clapping again.",
             type: "warning",
           });
         } else {
-          this.$emit("show-toast", {
+          this.showToast({
             message: "Failed to increment clap count",
             type: "error",
           });
