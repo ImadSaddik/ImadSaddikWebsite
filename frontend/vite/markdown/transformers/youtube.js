@@ -1,9 +1,8 @@
 import MarkdownItContainer from "markdown-it-container";
+import { MARKDOWN_IT_OPENING_TAG, REGEX_FIRST_CAPTURE_GROUP } from "../../../src/constants";
 
 const YOUTUBE_CONTAINER_REGEX = /youtube\s+(.*)/;
 const MARKDOWN_LINK_REGEX = /\[.*\]\((.*)\)/;
-const MARKDOWN_IT_OPENING_TAG = 1;
-const REGEX_FIRST_CAPTURE_GROUP = 1;
 
 export const youtubeTransformer = (markdownItInstance) => {
   markdownItInstance.use(MarkdownItContainer, "youtube", {

@@ -1,0 +1,2 @@
+export const MARKDOWN_IT_OPENING_TAG = 1;
+export const REGEX_FIRST_CAPTURE_GROUP = 1;
