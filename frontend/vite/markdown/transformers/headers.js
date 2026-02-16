@@ -2,6 +2,12 @@ const SUPPORTED_HEADER_LEVELS = ["2", "3", "4"];
 const HEADER_TAG_LEVEL_START_INDEX = 1;
 const INLINE_CONTENT_TOKEN_OFFSET = 1;
 
+const HEADER_LEVEL_TO_CLASS_MAPPING = {
+  2: "article-body-header",
+  3: "article-body-subheader",
+  4: "article-body-sub-subheader",
+};
+
 export function headerTransformer(markdownItInstance) {
   const originalHeaderOpen =
     markdownItInstance.renderer.rules.heading_open ||
@@ -37,7 +43,7 @@ export function headerTransformer(markdownItInstance) {
       }
 
       token.attrSet("id", id);
-      token.attrSet("class", "article-body-header");
+      token.attrSet("class", HEADER_LEVEL_TO_CLASS_MAPPING[headerLevel]);
       token.attrSet("data-table-of-contents", "");
 
       const headerOpeningTag = originalHeaderOpen(tokens, index, options, env, self);
