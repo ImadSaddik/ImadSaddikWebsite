@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import { ADMONITION_TYPES } from "@/constants";
+
 export default {
   name: "AdmonitionBlock",
   props: {
@@ -15,7 +17,7 @@ export default {
       type: String,
       default: "info",
       validator(value) {
-        return ["info", "tip", "warning", "danger"].includes(value);
+        return ADMONITION_TYPES.includes(value);
       },
     },
     title: {
