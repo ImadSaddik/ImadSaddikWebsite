@@ -11,6 +11,21 @@ export default defineConfig({
   plugins: [
     vue({
       include: [/\.vue$/, /\.md$/],
+      template: {
+        transformAssetUrls: {
+          includeAbsolute: false,
+          tags: {
+            video: ["src", "poster"],
+            source: ["src"],
+            img: ["src"],
+            image: ["xlink:href", "href"],
+            use: ["xlink:href", "href"],
+            // By adding 'ImageWithCaption' here, Vite knows to resolve the 'image-src' attribute
+            // as a file path. This addition ensures images in Markdown articles load correctly.
+            ImageWithCaption: ["image-src"],
+          },
+        },
+      },
     }),
     Markdown({
       headEnabled: false,
