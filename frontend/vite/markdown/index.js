@@ -5,6 +5,7 @@ import { inlineCodeTransformer } from "./transformers/inlineCode.js";
 import { bulletPointTransformer } from "./transformers/bulletPoints.js";
 import { codeTransformer } from "./transformers/code.js";
 import { admonitionTransformer } from "./transformers/admonitions.js";
+import { imageTransformer } from "./transformers/images.js";
 
 export function getMarkdownTransformers() {
   return [
@@ -15,5 +16,6 @@ export function getMarkdownTransformers() {
     bulletPointTransformer,
     codeTransformer,
     admonitionTransformer,
+    imageTransformer,
   ];
 }
