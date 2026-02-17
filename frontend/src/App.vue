@@ -16,6 +16,11 @@
     @wide-articles-toggle="handleWideArticlesToggle"
   />
   <ToastNotificationManager ref="toastManager" />
+  <ImageEnlarger
+    :is-visible="isImageModalVisible"
+    :enlarged-image-src="enlargedImageSrc"
+    @close-image-modal="handleCloseImageModal"
+  />
 </template>
 
 <script>
@@ -30,12 +35,16 @@ import ScrollBackToTop from "./components/ScrollBackToTop.vue";
 import FooterSection from "@/components/FooterSection.vue";
 import ToastNotificationManager from "@/components/ToastNotificationManager.vue";
 import SkipLink from "./components/SkipLink.vue";
+import ImageEnlarger from "@/components/ImageEnlarger.vue";
 
 // Constants
 import { STORAGE_KEYS, CUSTOM_CURSOR_CLASS_NAME } from "@/constants";
 
 // Utils
 import { loadUserPreferences, saveUserPreference } from "@/utils";
+
+// Composables
+import { useImageModal } from "@/composables/useImageModal.js";
 
 export default {
   name: "App",
@@ -47,11 +56,26 @@ export default {
     FooterSection,
     ToastNotificationManager,
     SkipLink,
+    ImageEnlarger,
   },
   provide() {
     return {
       wideArticlesEnabled: computed(() => this.wideArticlesEnabled),
       showToast: (data) => this.handleShowToastEvent(data),
+      openImageModal: (event) => this.handleOpenImageModal(event),
+    };
+  },
+  setup() {
+    const { enlargedImageSrc, isImageModalVisible, handleOpenImageModal, handleCloseImageModal } = useImageModal();
+
+    return {
+      // Variables
+      enlargedImageSrc,
+      isImageModalVisible,
+
+      // Methods
+      handleOpenImageModal,
+      handleCloseImageModal,
     };
   },
   data() {
