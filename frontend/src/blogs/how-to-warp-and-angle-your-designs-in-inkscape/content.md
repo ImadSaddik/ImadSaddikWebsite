@@ -71,7 +71,7 @@ Draw a shape that matches the curved surface you want to place your logo on. Thi
 
 Select the logo and make sure that it is on top of the guide shape in the layer order. In the Path Effects panel, you will see options for **Top bend path**, **Right bend path**, etc.
 
-Click the small "Edit on-canvas" <InlineIcon icon="/src/assets/icons/tool_node_editor.svg" /> icon next to the **Top bend path** option. You will see a green line appear with two handles.
+Click the small "Edit on-canvas" ::icon{/src/assets/icons/tool_node_editor.svg}:: icon next to the **Top bend path** option. You will see a green line appear with two handles.
 
 ![Editing the top bend path](./7_editing_top_bend_path.svg "Click the 'Edit on-canvas' icon to reveal the green bend line with handles.")
 
@@ -79,7 +79,7 @@ Pick one of the green handles and snap it to the corresponding corner of your gu
 
 ![Aligning the top bend handles](./8_aligning_top_bend_handles.svg "Align the top bend handles to the guide shape corners.")
 
-Repeat this process for the other sides: **Right bend path**, **Bottom bend path**, and **Left bend path**. Each time, click the "Edit on-canvas" <InlineIcon icon="/src/assets/icons/tool_node_editor.svg" /> icon and snap the handles to the corners of your guide shape.
+Repeat this process for the other sides: **Right bend path**, **Bottom bend path**, and **Left bend path**. Each time, click the "Edit on-canvas" ::icon{/src/assets/icons/tool_node_editor.svg}:: icon and snap the handles to the corners of your guide shape.
 
 ![Aligning all bend handles](./9_aligning_all_bend_handles.svg "Align all bend handles to the guide shape corners.")
 
