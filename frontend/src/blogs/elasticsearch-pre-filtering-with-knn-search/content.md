@@ -1,25 +1,22 @@
-# Pre-filtering with kNN search in Elasticsearch
-
-How to apply filters to an index to remove documents that don’t meet certain requirements before using kNN search.
-
-**Date:** August 12, 2025
-**Tags:** Elasticsearch, kNN, Semantic search
-
+---
+title: "Pre-filtering with kNN search in Elasticsearch"
+subtitle: "How to apply filters to an index to remove documents that don’t meet certain requirements before using kNN search."
+date: "August 12, 2025"
+tags: ["Elasticsearch", "kNN", "Semantic search"]
 ---
 
 ## Introduction
 
 In this article, I will show you how to use pre-filtering with kNN search. For a more detailed walkthrough, check out the video tutorial:
 
-[https://www.youtube.com/watch?v=ESC-ome_Q1o](https://www.youtube.com/watch?v=ESC-ome_Q1o)
+::: youtube [https://www.youtube.com/embed/ESC-ome_Q1o](https://www.youtube.com/embed/ESC-ome_Q1o)
+:::
 
 You can also find all related notebooks and slides in my [GitHub repository](https://github.com/ImadSaddik/ElasticSearch_Python_Course).
 
----
-
 ## Pre-filtering
 
-**Pre-filtering** means we apply filters to an index before doing anything else. For example, we can filter out documents that don't meet certain requirements before using kNN search.
+`Pre-filtering` means we apply filters to an index before doing anything else. For example, we can filter out documents that don't meet certain requirements before using kNN search.
 
 ### Preparing the index
 
@@ -56,7 +53,11 @@ with open("../data/apod.json") as f:
     documents = json.load(f)
 ```
 
-Then, let's use an embedding model from Hugging Face. An embedding model converts text into a dense vector. I will use [all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) in this tutorial; it is a small model that should work fine if you don't have a GPU.
+Then, let's use an embedding model from Hugging Face. An embedding model converts text into a dense vector.
+
+I will use [all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) in this tutorial, it is a small model that should work fine if you don't have a GPU.
+
+![The embedding model's page on Hugging Face](./allMiniLmL6V2ModelHF.png "The model's card on Hugging Face.")
 
 First, make sure to install the `sentence_transformers` library in your python environment.
 
@@ -103,7 +104,7 @@ If the indexing is successful, you should see `response["errors"]` as `False`.
 
 ### Pre-filtering & kNN search
 
-Before using pre-filtering, let's use kNN search only. The following search query will use kNN search to find 10 documents that are very similar to the query.
+Before using `pre-filtering`, let's use kNN search only. The following search query, will use kNN search to find 10 documents that are very similar to the query.
 
 ```python
 query = "What is a black hole?"
@@ -134,7 +135,7 @@ for hit in result.body["hits"]["hits"][:3]:
     print("-" * 80)
 ```
 
-```text
+```output
 Score: 0.80657506
 Title: Black Hole Accreting with Jet
 Explanation: What happens when a black hole devours a star? Many details remain unknown, but observations are providing new clues. In 2014, a powerful explosion was recorded by the ground-based robotic telescopes of the All Sky Automated Survey for SuperNovae (Project ASAS-SN), with followed-up observations by instruments including NASA's Earth-orbiting Swift satellite. Computer modeling of these emissions fit a star being ripped apart by a distant supermassive black hole. The results of such a collision are portrayed in the featured artistic illustration. The black hole itself is a depicted as a tiny black dot in the center. As matter falls toward the hole, it collides with other matter and heats up. Surrounding the black hole is an accretion disk of hot matter that used to be the star, with a jet emanating from the black hole's spin axis.
@@ -158,7 +159,7 @@ for hit in result.body["hits"]["hits"]:
 
 We can see that the years are different.
 
-```text
+```output
 Year: 2024
 Year: 2017
 Year: 2019
@@ -171,7 +172,7 @@ Year: 2022
 Year: 2020
 ```
 
-Let's run the same query, but this time we will use **pre-filtering** to filter the documents based on the year. Let's say we want to filter the documents to only include those from the year 2024.
+Let's run the same query, but this time we will use `pre-filtering` to filter the documents based on the year. Let's say we want to filter the documents to only include those from the year 2024.
 
 We do this by adding a `filter` clause to the kNN query. The `filter` clause is a regular query that filters the documents before the kNN search is performed.
 
@@ -195,7 +196,7 @@ print(f"Found {number_of_documents} documents")
 # Found 10 documents
 ```
 
-We still get 10 documents. Let's look at the year field in each document.
+We still get 10 documents, let's look at the year field in each document.
 
 ```python
 for hit in result.body["hits"]["hits"]:
@@ -204,7 +205,7 @@ for hit in result.body["hits"]["hits"]:
 
 As you can see, the documents returned are only from the year 2024.
 
-```text
+```output
 Year: 2024
 Year: 2024
 Year: 2024
@@ -227,7 +228,7 @@ for hit in result.body["hits"]["hits"][:3]:
     print("-" * 80)
 ```
 
-```text
+```output
 Score: 0.80657506
 Title: Black Hole Accreting with Jet
 Explanation: What happens when a black hole devours a star? Many details remain unknown, but observations are providing new clues. In 2014, a powerful explosion was recorded by the ground-based robotic telescopes of the All Sky Automated Survey for SuperNovae (Project ASAS-SN), with followed-up observations by instruments including NASA's Earth-orbiting Swift satellite. Computer modeling of these emissions fit a star being ripped apart by a distant supermassive black hole. The results of such a collision are portrayed in the featured artistic illustration. The black hole itself is a depicted as a tiny black dot in the center. As matter falls toward the hole, it collides with other matter and heats up. Surrounding the black hole is an accretion disk of hot matter that used to be the star, with a jet emanating from the black hole's spin axis.
@@ -241,8 +242,6 @@ Title: Swirling Magnetic Field around Our Galaxy's Central Black Hole
 Explanation: What's happening to the big black hole in the center of our galaxy? It is sucking in matter from a swirling disk -- a disk that is magnetized, it has now been confirmed. Specifically, the black hole's accretion disk has recently been seen to emit polarized light, radiation frequently associated with a magnetized source. Pictured here is a close-up of Sgr A*, our Galaxy's central black hole, taken by radio telescopes around the world participating in the Event Horizon Telescope (EHT) Collaboration. Superposed are illustrative curved lines indicating polarized light likely emitted from swirling magnetized gas that will soon fall into the 4+ million solar mass central black hole. The central part of this image is likely dark because little light-emitting gas is visible between us and the dark event horizon of the black hole. Continued EHT monitoring of this and M87's central black hole may yield new clues about the gravity of black holes and how infalling matter creates disks and jets.
 --------------------------------------------------------------------------------
 ```
-
----
 
 ## Conclusion
 

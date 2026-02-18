@@ -8,25 +8,25 @@
 >
     <url>
         <loc>https://imadsaddik.com/</loc>
-        <lastmod>2026-02-18T19:02:35.346Z</lastmod>
+        <lastmod>2026-02-18T19:05:54.048Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/about-me</loc>
-        <lastmod>2026-02-18T19:02:35.346Z</lastmod>
+        <lastmod>2026-02-18T19:05:54.048Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/hire-me</loc>
-        <lastmod>2026-02-18T19:02:35.346Z</lastmod>
+        <lastmod>2026-02-18T19:05:54.048Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/resume</loc>
-        <lastmod>2026-02-18T19:02:35.346Z</lastmod>
+        <lastmod>2026-02-18T19:05:54.048Z</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
@@ -44,7 +44,7 @@
     </url>
     <url>
         <loc>https://imadsaddik.com/blogs/elasticsearch-pre-filtering-with-knn-search</loc>
-        <lastmod>2026-02-03T20:32:51.669Z</lastmod>
+        <lastmod>2026-02-18T19:03:47.307Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
