@@ -49,6 +49,8 @@ declare module 'vue' {
     TableOfContents: typeof import('./src/components/TableOfContents.vue')['default']
     ToastMessage: typeof import('./src/components/ToastMessage.vue')['default']
     ToastNotificationManager: typeof import('./src/components/ToastNotificationManager.vue')['default']
+    UnorderedItem: typeof import('./src/components/UnorderedItem.vue')['default']
+    UnorderedList: typeof import('./src/components/UnorderedList.vue')['default']
     VideoWithCaption: typeof import('./src/components/VideoWithCaption.vue')['default']
     YouTubePlayer: typeof import('./src/components/YouTubePlayer.vue')['default']
   }
