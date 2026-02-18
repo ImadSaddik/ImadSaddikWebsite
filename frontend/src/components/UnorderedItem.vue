@@ -1,5 +1,5 @@
 <template>
-  <div class="bullet-point">
+  <div class="unordered-item">
     <img :src="starsIcon" alt="A galaxy icon" />
     <span><slot></slot></span>
   </div>
@@ -9,7 +9,7 @@
 import starsIcon from "@/assets/stars_bullet_point.svg";
 
 export default {
-  name: "BulletPoint",
+  name: "UnorderedItem",
   data() {
     return {
       starsIcon,
@@ -19,19 +19,19 @@ export default {
 </script>
 
 <style scoped>
-.bullet-point {
+.unordered-item {
   display: flex;
   align-items: flex-start;
   gap: var(--gap-sm);
   margin-bottom: var(--gap-sm);
 }
 
-.bullet-point img {
+.unordered-item img {
   width: 24px;
   height: auto;
 }
 
-.bullet-point span {
+.unordered-item span {
   font-size: var(--font-size-small);
   color: var(--color-text-secondary);
   line-height: 1.6;
