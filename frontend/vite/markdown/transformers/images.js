@@ -12,7 +12,8 @@ export function imageTransformer(markdownItInstance) {
     const title = token.attrGet("title") || "";
 
     if (src) {
-      return `<ImageWithCaption image-src="${src}" image-alt="${alt}" image-caption="${title}" />`;
+      const renderedCaption = title ? markdownItInstance.renderInline(title) : "";
+      return `<ImageWithCaption image-src="${src}" image-alt="${alt}" image-caption="${renderedCaption}" />`;
     }
 
     return defaultRender(tokens, index, options, env, self);
