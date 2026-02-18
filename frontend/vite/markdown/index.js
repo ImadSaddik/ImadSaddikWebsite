@@ -7,6 +7,7 @@ import { codeTransformer } from "./transformers/code.js";
 import { admonitionTransformer } from "./transformers/admonitions.js";
 import { imageTransformer } from "./transformers/images.js";
 import { inlineIconTransformer } from "./transformers/inlineIcons.js";
+import { fontAwesomeTransformer } from "./transformers/fontAwesome.js";
 
 export function getMarkdownTransformers() {
   return [
@@ -19,5 +20,6 @@ export function getMarkdownTransformers() {
     admonitionTransformer,
     imageTransformer,
     inlineIconTransformer,
+    fontAwesomeTransformer,
   ];
 }
