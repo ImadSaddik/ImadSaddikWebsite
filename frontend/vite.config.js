@@ -23,6 +23,7 @@ export default defineConfig({
             // By adding 'ImageWithCaption' here, Vite knows to resolve the 'image-src' attribute
             // as a file path. This addition ensures images in Markdown articles load correctly.
             ImageWithCaption: ["image-src"],
+            InlineIcon: ["icon"],
           },
         },
       },
