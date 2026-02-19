@@ -1,25 +1,24 @@
-# How to set up a secure cloud server with Ubuntu and SSH
-
-How to set up a secure environment on DigitalOcean (or others) with Ubuntu 24.04 LTS.
-
-**Date:** January 18, 2026
-**Tags:** DevOps, Security, Ubuntu, DigitalOcean, SSH
-
+---
+title: "How to set up a secure cloud server with Ubuntu and SSH"
+subtitle: "How to set up a secure environment on DigitalOcean (or others) with Ubuntu 24.04 LTS."
+date: "January 18, 2026"
+tags: ["DevOps", "Security", "Ubuntu", "DigitalOcean", "SSH"]
 ---
 
 ## Introduction
 
 Before you deploy any code, you need a secure environment. We use DigitalOcean here, but these concepts apply to AWS EC2, Linode, or even a Raspberry Pi.
 
-By the end of this article, you will have a server running Ubuntu 24.04 LTS, accessed securely via SSH keys, with password authentication completely disabled.
+By the end of this article, you will have a server running `Ubuntu 24.04 LTS`, accessed securely via SSH keys, with password authentication completely disabled.
 
-> [!TIP]
-> Prefer video? Watch this article walkthrough: [https://www.youtube.com/watch?v=e7Tz_YRfoCc](https://www.youtube.com/watch?v=e7Tz_YRfoCc)
+::: tip
+Prefer video? Watch this article walkthrough:
+::: youtube [https://www.youtube.com/embed/e7Tz_YRfoCc](https://www.youtube.com/embed/e7Tz_YRfoCc)
+:::
 
-<!-- This comment is here to satisfy the MD028 rule -->
-
-> [!IMPORTANT]
-> Throughout this guide, you will see text inside angle brackets like `<your_username>` or `<your_key_name>`. These are **placeholders**. You must replace them with your actual values and **remove the brackets** when running the commands.
+::: warning
+Throughout this guide, you will see text inside angle brackets like `<your_username>` or `<your_key_name>`. These are **placeholders**. You must replace them with your actual values and **remove the brackets** when running the commands.
+:::
 
 ## Create the project
 
@@ -27,15 +26,15 @@ In this guide, we use DigitalOcean to host your web application. If you don’t 
 
 After creating your account, create a project to hold your resources. Click on the **New project** button.
 
-_The location of the **+ New Project** button on the DigitalOcean dashboard._
+![Screenshot of DigitalOcean dashboard highlighting the New Project button](./1_1_create_new_project_inkscape.png "The location of the **+ New Project** button on the DigitalOcean dashboard.")
 
 Give your project a name and a description. Choose a **descriptive** name so you can remember the purpose of the project later. I named mine "imad-saddik". Click on **Create Project** when you are done.
 
-_Give the project a name and a description._
+![Screenshot of project creation form with name and description fields](./1_2_information_about_project_step_1.png "Give the project a name and a description.")
 
 DigitalOcean will ask if you want to move resources to this project. Click **Skip for now** since you are starting from scratch.
 
-_Skip this step because you don’t have any resources yet._
+![Screenshot of move resources dialog with Skip for now button](./1_3_information_about_project_step_2.png "Skip this step because you don’t have any resources yet.")
 
 ## Create the droplet
 
@@ -43,15 +42,15 @@ Now, create the virtual machine. In DigitalOcean, these are called "droplets". C
 
 A droplet is a Linux-based virtual machine that runs on virtualized hardware. This machine will host the code for your website.
 
-_Click **Create**, then select **droplets** to start setting up your server._
+![Screenshot of Create menu dropdown with Droplets option highlighted](./1_4_create_droplet_inkscape.jpg "Click **Create**, then select **droplets** to start setting up your server.")
 
 Choose a **Region** where your VM will be hosted. Always select a region geographically near you or your target users. I live in Morocco, so I chose the Frankfurt (Germany) datacenter.
 
-_Select the region where your droplet will be hosted._
+![Screenshot of datacenter region selector showing various global locations](./1_5_choose_region.png "Select the region where your droplet will be hosted.")
 
 Next, choose an **Operating System**. Linux is the standard for servers. Select **Ubuntu 24.04 (LTS)** because it is stable and well-supported.
 
-_Choose the operating system for your droplet._
+![Screenshot of operating system selection with Ubuntu 24.04 LTS option](./1_6_choose_an_image.png "Choose the operating system for your droplet.")
 
 Now you need to choose the size of your virtual machine. You can pick between **shared CPU** and **dedicated CPU**. Inside each option, you must decide how much **RAM**, **disk space**, and how many **CPU cores** you want.
 
@@ -59,11 +58,11 @@ Dedicated VMs are more expensive because the resources are **reserved only for y
 
 Fortunately, you can **change the droplet size later** if needed. For now, create a droplet with a shared CPU and the lowest resources. This costs **$4 per month**, and I will show you how to upgrade it later.
 
-_Select the droplet size that fits your needs._
+![Screenshot of droplet size options showing CPU, RAM, and storage configurations](./1_7_choose_size.png "Select the droplet size that fits your needs.")
 
 If you need more storage, click **Add Volume** and enter the size in GB. This feature is not free; it costs **$1 per month per 10 GB**. You can also enable automatic backups if you need them.
 
-_Additional storage and backup options._
+![Screenshot of additional storage volume and backup configuration options](./1_8_space_and_backup.png "Additional storage and backup options.")
 
 ## Configure authentication
 
@@ -71,7 +70,7 @@ This is a critical security step. You can access your server using a **password*
 
 Select **SSH Key** and click on the **Add SSH Key** button.
 
-_Select SSH key for better security._
+![Screenshot of authentication method selector with SSH Key option and Add SSH Key button](./1_9_authentication.png "Select SSH key for better security.")
 
 **Always use an SSH key.** Passwords are vulnerable to brute-force attacks, whereas SSH keys are significantly more secure. Think of it like a real lock and key:
 
@@ -80,7 +79,7 @@ _Select SSH key for better security._
 
 When you try to connect, the server checks if your "key" fits its "lock". If it does, you get in without a password.
 
-_How SSH keys verify your identity._
+![Diagram showing SSH key authentication flow between client and server](./1_10_how_ssh_keys_work.png "How SSH keys verify your identity.")
 
 The diagram above shows the conversation that happens between your computer and the server:
 
@@ -97,21 +96,22 @@ ssh-keygen -t ed25519 -f ~/.ssh/<your_key_name> -C "<key_comment>"
 
 Here is what the arguments do:
 
-- `-t ed25519`: Specifies the modern Ed25519 algorithm.
-- `-f ~/.ssh/<your_key_name>`: Saves the key with a specific name so you don’t overwrite your default keys.
-- `-C "<key_comment>"`: Adds a comment to help you identify the key.
+- `ed25519`: Specifies the modern Ed25519 algorithm.
+- `~/.ssh/<your_key_name>`: Saves the key with a specific name so you don’t overwrite your default keys.
+- `<key_comment>`: Adds a comment to help you identify the key.
 
 The system will ask you to add a **passphrase**. This is an extra password to protect your private key. If someone steals your private key file, they cannot use it without this passphrase.
 
-```text
+```output
 Generating public/private ed25519 key pair.
 Enter passphrase for "/home/<your_username>/.ssh/<your_key_name>" (empty for no passphrase):
 ```
 
 I strongly recommend adding a passphrase for your personal key.
 
-> [!NOTE]
-> If you need a key for a CI/CD pipeline later (to deploy code automatically), generate a separate key pair without a passphrase. Never remove the passphrase from your personal key.
+::: info
+If you need a key for a CI/CD pipeline later (to deploy code automatically), generate a separate key pair without a passphrase. Never remove the passphrase from your personal key.
+:::
 
 You have generated the key pair. Now, copy the public key.
 
@@ -121,33 +121,33 @@ cat ~/.ssh/<your_key_name>.pub
 
 The command displays your public key. Copy the entire text starting with `ssh-ed25519`. Paste it into the box, give it a name, and click **Add SSH Key**.
 
-_Add the public SSH key._
+![Screenshot of adding SSH public key to DigitalOcean](./1_11_adding_a_public_key.png "Add the public SSH key.")
 
 You can add more than one SSH key by clicking the **New SSH Key** button. This allows you to add a specific key for your CI without a passphrase, while keeping the one on your computer protected with a passphrase.
 
-_Add multiple SSH keys._
+![Screenshot showing multiple SSH keys added to droplet configuration](./1_12_add_additional_ssh_keys.jpg "Add multiple SSH keys.")
 
 You are almost done. Select **Add improved metrics monitoring and alerting** because it is free.
 
-_Select the free monitoring option._
+![Screenshot of advanced options showing monitoring and alerting checkbox](./1_13_advanced_options.png "Select the free monitoring option.")
 
 ## Finalize and connect
 
 Give your droplet a name you can recognize, add tags, and assign it to the project you created. You can deploy multiple droplets, but for now, keep the quantity set to **1 droplet**.
 
-_Give your droplet a name, tags, and assign it to a project._
+![Screenshot of droplet finalization form with hostname, tags, and project fields](./1_14_final_step_before_creating_droplet.png "Give your droplet a name, tags, and assign it to a project.")
 
 Click on **Create droplet**. The site redirects you to the project page. Under **Resources**, you should see a **green dot** next to your droplet. This means it is running.
 
-_Ensure that the droplet is running and assigned to the project._
+![Screenshot of project resources page showing active droplet with green status indicator](./1_15_droplet_in_project_page.png "Ensure that the droplet is running and assigned to the project.")
 
 Later, if you find that this VM cannot handle the traffic, you can click on **Upsize** to add more resources.
 
-_Increase resources by upsizing._
+![Screenshot of droplet resize options showing CPU, RAM, and disk upgrade choices](./1_16_upsize_droplet.png "Increase resources by upsizing.")
 
 You are now ready to connect to your VM. Find the **IP address** on the project page. Copy the IP address shown next to your droplet's name.
 
-_Locate the IP address of the VM._
+![Screenshot highlighting the IP address field in the droplet overview](./1_17_find_ip_address.png "Locate the IP address of the VM.")
 
 Use the SSH command to connect to the machine. Pass your private key using the `-i` flag and add your IP address after `root@`.
 
@@ -157,7 +157,7 @@ ssh -i ~/.ssh/<your_key_name> root@<your_droplet_ip>
 
 A security warning appears about the authenticity of the host. Type `yes` and hit `Enter` to continue.
 
-```text
+```output
 The authenticity of host '<your_droplet_ip> (<your_droplet_ip>)' can't be established.
 ED25519 key fingerprint is SHA256:...
 This key is not known by any other names.
@@ -168,7 +168,7 @@ Sometimes, the server is not fully ready even though the status says "Running". 
 
 If this happens, just wait a few seconds and run the SSH command again. It should work the second time.
 
-```text
+```output
 Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
 Warning: Permanently added '<your_droplet_ip>' (ED69696) to the list of known hosts.
 Connection closed by <your_droplet_ip> port 22
@@ -176,7 +176,7 @@ Connection closed by <your_droplet_ip> port 22
 
 Once connected, you will see a welcome message similar to this:
 
-```text
+```output
 *** System restart required ***
 
 The programs included with the Ubuntu system are free software;
@@ -196,10 +196,11 @@ sudo apt update
 sudo apt upgrade
 ```
 
-> [!IMPORTANT]
-> If you see a configuration screen during the update, select **keep the local version currently installed**. This option ensures you keep the working SSH configuration that DigitalOcean set up for you.
+::: warning
+If you see a configuration screen during the update, select **keep the local version currently installed**. This option ensures you keep the working SSH configuration that DigitalOcean set up for you.
+:::
 
-_Handle the configuration conflict._
+![Screenshot of dpkg configuration prompt asking to keep or replace sshd_config](./1_18_configure_open_ssh_server_warning.png "Handle the configuration conflict.")
 
 Reboot the machine to complete the upgrade and start using the new kernel and packages.
 
@@ -221,7 +222,7 @@ adduser <your_username>
 
 It will ask you to set a password and fill in some details. You can skip the details by pressing `Enter`.
 
-```text
+```output
 New password:
 Retype new password:
 passwd: password updated successfully
@@ -251,7 +252,7 @@ ssh -i ~/.ssh/<private_key_name> <your_username>@<your_droplet_ip>
 
 You will get an error. This happens because the SSH key you authorized exists only in the `root` user's `authorized_keys` file. The new user (`<your_username>`) has an empty list. You need to copy the key from `root` to `<your_username>`.
 
-```text
+```output
 <your_username>@<your_droplet_ip>: Permission denied (publickey).
 ```
 
@@ -279,7 +280,7 @@ ssh -i ~/.ssh/<private_key_name> <your_username>@<your_droplet_ip>
 
 It should work now. You will see a prompt like this:
 
-```text
+```output
 To run a command as administrator (user "root"), use "sudo <command>".
 See "man sudo_root" for details.
 
@@ -308,8 +309,9 @@ sudo nano /etc/ssh/sshd_config
 
 Find the line `PermitRootLogin yes` and change it to `no`. Also, find the line `PasswordAuthentication yes` and change it to `no`. This explicitly forces the server to use SSH keys and reject all password login attempts.
 
-> [!TIP]
-> To search in nano, press `Ctrl+W`, type the search term, and hit `Enter`.
+::: tip
+To search in nano, press `Ctrl+W`, type the search term, and hit `Enter`.
+:::
 
 ```text
 PermitRootLogin no
@@ -336,7 +338,7 @@ ssh -i ~/.ssh/<private_key_name> root@<your_droplet_ip>
 
 You should see a message indicating that authentication was rejected. Depending on your local SSH configuration, you will see one of these two errors:
 
-```text
+```output
 # Scenario A: Standard rejection
 Permission denied (publickey).
 
@@ -346,37 +348,36 @@ Received disconnect from <your_droplet_ip> port 22:2: Too many authentication fa
 
 Both errors mean the same thing: The root account is now locked against remote login.
 
-> [!NOTE]
-> Setting `PasswordAuthentication no` is optional because DigitalOcean already disabled password authentication when you created the droplet (assuming you selected SSH key authentication).
->
-> However, it is good practice to set it manually. This ensures your server remains secure if you run your setup scripts on a different provider that does not create those default cloud settings.
->
-> Unlike many Linux services where the "last configuration wins", SSH uses a "first match wins" rule. It applies the first value it finds for a setting and ignores the rest.
->
-> DigitalOcean's default `sshd_config` file includes this line at the very top:
->
-> ```text
-> Include /etc/ssh/sshd_config.d/*.conf
-> ```
->
-> This means SSH reads the files in the `.d` folder before reading the rest of your main file. You can see this hidden rule by running:
->
-> ```bash
-> sudo grep -r "PasswordAuthentication" /etc/ssh/sshd_config.d/
-> ```
->
-> You will see something like this:
->
-> ```text
-> /etc/ssh/sshd_config.d/50-cloud-init.conf:PasswordAuthentication no
-> /etc/ssh/sshd_config.d/60-cloudimg-settings.conf:PasswordAuthentication no
-> ```
->
-> Because SSH sees this "no" first, it locks that setting in.
->
-> So why did we edit the main file? We edit the main `sshd_config` file as a safety net.
->
-> If you ever use your setup script to configure a fresh server on a bare-metal provider or a different cloud, that `50-cloud-init.conf` file might not exist. By explicitly setting `PasswordAuthentication no` in your main configuration, you guarantee your server is secure regardless of the hosting provider.
+::: info
+Setting `PasswordAuthentication no` is optional because DigitalOcean already disabled password authentication when you created the droplet (assuming you selected SSH key authentication).
+
+However, it is good practice to set it manually. This ensures your server remains secure if you run your setup scripts on a different provider that does not create those default cloud settings.
+
+Unlike many Linux services where the "last configuration wins", SSH uses a "first match wins" rule. It applies the first value it finds for a setting and ignores the rest.
+
+DigitalOcean's default `sshd_config` file includes this line at the very top:
+
+`Include /etc/ssh/sshd_config.d/*.conf`
+
+This means SSH reads the files in the `.d` folder before reading the rest of your main file. You can see this hidden rule by running:
+
+```bash
+sudo grep -r "PasswordAuthentication" /etc/ssh/sshd_config.d/
+```
+
+You will see something like this:
+
+```output
+/etc/ssh/sshd_config.d/50-cloud-init.conf:PasswordAuthentication no
+/etc/ssh/sshd_config.d/60-cloudimg-settings.conf:PasswordAuthentication no
+```
+
+Because SSH sees this "no" first, it locks that setting in.
+
+So why did we edit the main file? We edit the main `sshd_config` file as a safety net.
+
+If you ever use your setup script to configure a fresh server on a bare-metal provider or a different cloud, that `50-cloud-init.conf` file might not exist. By explicitly setting `PasswordAuthentication no` in your main configuration, you guarantee your server is secure regardless of the hosting provider.
+:::
 
 ## Simplify SSH access
 
@@ -424,4 +425,4 @@ Your computer will automatically look up the IP, user, and key, and log you stra
 
 You have successfully configured a clean Ubuntu server and secured it with SSH keys. However, your server is still exposed to the open internet.
 
-Your next step should be to lock down the network. You should look into configuring [UFW](https://www.digitalocean.com/community/tutorials/ufw-essentials-common-firewall-rules-and-commands) to block unwanted traffic, setting up [Fail2Ban](https://github.com/fail2ban/fail2ban) to stop brute-force attacks, and using the Recovery Console if you ever get locked out
+Your next step should be to lock down the network. You should look into configuring [UFW](https://www.digitalocean.com/community/tutorials/ufw-essentials-common-firewall-rules-and-commands) to block unwanted traffic, setting up [Fail2Ban](https://github.com/fail2ban/fail2ban) to stop brute-force attacks, and using the Recovery Console if you ever get locked out.
