@@ -6,8 +6,10 @@ import { listTransformer } from "./transformers/lists.js";
 import { codeTransformer } from "./transformers/code.js";
 import { admonitionTransformer } from "./transformers/admonitions.js";
 import { imageTransformer } from "./transformers/images.js";
+import { videoTransformer } from "./transformers/videos.js";
 import { inlineIconTransformer } from "./transformers/inlineIcons.js";
 import { fontAwesomeTransformer } from "./transformers/fontAwesome.js";
+import { superscriptTransformer } from "./transformers/superscript.js";
 
 export function getMarkdownTransformers() {
   return [
@@ -19,7 +21,9 @@ export function getMarkdownTransformers() {
     codeTransformer,
     admonitionTransformer,
     imageTransformer,
+    videoTransformer,
     inlineIconTransformer,
     fontAwesomeTransformer,
+    superscriptTransformer,
   ];
 }

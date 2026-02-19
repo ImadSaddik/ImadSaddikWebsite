@@ -20,9 +20,11 @@ export default defineConfig({
             img: ["src"],
             image: ["xlink:href", "href"],
             use: ["xlink:href", "href"],
-            // By adding 'ImageWithCaption' here, Vite knows to resolve the 'image-src' attribute
-            // as a file path. This addition ensures images in Markdown articles load correctly.
+            // By adding 'ImageWithCaption' and 'VideoWithCaption' here, Vite knows to resolve
+            // the 'image-src' and 'video-src' attributes as file paths.
+            // This addition ensures images and videos in Markdown articles load correctly.
             ImageWithCaption: ["image-src"],
+            VideoWithCaption: ["video-src"],
             InlineIcon: ["icon"],
           },
         },
