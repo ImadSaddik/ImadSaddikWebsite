@@ -9,12 +9,10 @@ export function superscriptTransformer(markdownItInstance) {
     let content = tokens[index].content;
 
     if (content.includes("^")) {
-      console.log("Superscript content found:", content);
       // Regex to match ^text^ and replace with <SuperscriptText text="text" />
       content = content.replace(/\^([^^]+)\^/g, (_match, superscriptText) => {
         return `<SuperscriptText text="${superscriptText}" />`;
       });
-      console.log("Transformed content:", content);
       return content;
     }
 
