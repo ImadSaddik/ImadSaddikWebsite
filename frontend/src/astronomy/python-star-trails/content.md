@@ -1,10 +1,8 @@
-# How to make star trails and time-lapses with Python
-
-A guide to creating star trail images and time-lapse videos on any platform using Python.
-
-**Date:** October 24, 2025
-**Tags:** Python, Astrophotography, Image processing, Timelapse, Star trails
-
+---
+title: "How to make star trails and time-lapses with Python"
+subtitle: "A guide to creating star trail images and time-lapse videos on any platform using Python."
+date: "October 24, 2025"
+tags: ["Python", "Astrophotography", "Image processing", "Timelapse", "Star trails"]
 ---
 
 ## Introduction
@@ -13,11 +11,10 @@ I created `PyStarTrails` because I needed a simple tool to make star trail image
 
 You will learn the basics of how to **blend photos** together to create a beautiful star trail image. I will also show you how to add cool effects like **comet trails** and **fades**. Finally, we'll use the same code to turn all those images into a time-lapse video, like the one below.
 
-_Time-lapse generated from 408 images at 60 FPS._
+::: video ./timelapse_60_fps.mp4 "Time-lapse generated from 408 images at 60 FPS."
+:::
 
 The source code for this project is available on [GitHub](https://github.com/ImadSaddik/PyStarTrails).
-
----
 
 ## Creating your first star trail image
 
@@ -39,19 +36,19 @@ In the white cells, I've placed the number `1`, which represents full brightness
 
 The black cells correspond to a brightness value of `0`. For clarity, they are left empty in the diagram because they are greater in number than the white cells.
 
-_A sequence of five 8x8 grids arranged in chronological order._
+![A diagram showing five 8x8 grids, with 'stars' (white cells) moving diagonally.](./five_frames_arranged_chronologically.svg "A sequence of five 8x8 grids arranged in chronological order.")
 
 In the first image, there are three stars. From one frame to the next, each star moves one pixel to the right and one pixel down. By the final frame, only one star remains visible, as the other two have moved outside the `8x8` grid.
 
 Now, let's apply the `lighten blending mode` to the first two images. In the illustration, you'll see them represented as inputs to the `max()` function. This function compares the pixel values from both images and keeps the brighter one for each position. The resulting image is a blend of the two, showing all the stars that were visible in either frame.
 
-_Blending the first two images with the max function._
+![A diagram showing the max() function combining the first two 8x8 grids.](./basic_blending_step_1.svg "Blending the first two images with the max function.")
 
 The blended image becomes the new input for the next iteration of the `max()` function. The third image is then used as the second argument. Blend these two together, and repeat the process with the remaining images until you reach the fifth one.
 
 The final blended result is your complete star trail image, showing the continuous paths traced by the stars over time.
 
-_Iteratively applying the max function to combine the brightest pixels from each frame._
+![A diagram showing the iterative blending process using the max() function across all five grids.](./basic_blending_step_n.svg "Iteratively applying the max function to combine the brightest pixels from each frame.")
 
 ### Putting it into practice
 
@@ -123,9 +120,7 @@ It then loops through the images one by one:
 
 Finally, the script saves the resulting star trail image to the `output` directory.
 
-_The star trail image that the Python script produced._
-
----
+![A star trail image showing circular paths of stars around a central point.](./basic_blending_final_image.jpg "The star trail image that the Python script produced.")
 
 ## Stylizing your star trails
 
@@ -135,30 +130,30 @@ Comets are fascinating objects, they shine with a bright core followed by a long
 
 With this technique, each star will leave behind a fading trail instead of a continuous, fully bright line.
 
-_Comet at moonrise by [Gabriel Zaparolli](https://www.instagram.com/gabriel_zaparolli/)._
+![A real photograph of a comet with a long tail during moonrise.](./real_comet_image.jpg "Comet at moonrise by <a href='https://www.instagram.com/gabriel_zaparolli/' target='_blank'>Gabriel Zaparolli</a>.")
 
 To create this effect, we introduce a `decay factor` that gradually reduces the brightness of the stars over time. The decay factor controls how long the comet-like tail appears: values close to `1.0` produce longer trails, while values below `0.95` make the trails fade much more quickly.
 
 The total number of frames also has a strong impact on trail length. Below is a comparison of two results created using the same sequence of images, but with different decay factors:
 
-_**Left:** decay factor = 0.99. **Right:** decay factor = 0.95._
+![A side-by-side comparison of star trails with a 0.99 decay (long trails) vs 0.95 decay (short trails).](./decay_factor_comparison.jpg "<b>Left:</b> decay factor = 0.99. <b>Right:</b> decay factor = 0.95.")
 
 As you can see, the difference is significant. With a decay factor of `0.99`, the star trails remain visible for much longer than with `0.95`.
 
 This example uses a stack of `408` images. If we take a pixel with initial brightness `1` and apply the decay factor repeatedly, we can see just how quickly the light fades:
 
-- 1 \* 0.99^407 = 0.01673108868
-- 1 \* 0.95^407 = 0.00000000086
+- 1 \* 0.99^407^ = 0.01673108868
+- 1 \* 0.95^407^ = 0.00000000086
 
 With a decay factor of `0.95`, the pixel brightness becomes very small, and would be even dimmer if we collected more images. This is why choosing the right decay factor is important for control of your star trails.
 
 To apply the comet effect, we introduce the `decay factor` into the `max()` blending operation. In each iteration, we slightly dim the previously blended image before comparing it with the next frame.
 
-_Applying the decay factor during the first blending step._
+![A diagram showing the blending step with a decay factor applied to the first image.](./comet_blending_step_1.svg "Applying the decay factor during the first blending step.")
 
 On the next iteration, the updated blended image is multiplied by the `decay factor` again, then compared with the next input image. This process repeats for every frame in the sequence.
 
-_Each new frame adds a bright star position, while older ones gradually fade._
+![A diagram showing the iterative blending process with the decay factor.](./comet_blending_step_n.svg "Each new frame adds a bright star position, while older ones gradually fade.")
 
 Here is the modified code that applies the comet effect. We introduce a new variable, `decay_factor`, and apply it to the previously blended image before combining it with the next frame using `np.maximum`:
 
@@ -215,7 +210,7 @@ print(f"The stacked image has been saved to {output_path}")
 
 Here is the resulting comet-style star trail image:
 
-_Star trails with comet effect applied (decay_factor = 0.99)._
+![A star trail image where the trails look like comet tails, fading out.](./comet_style_final_image.jpg "Star trails with comet effect applied (decay_factor = 0.99).")
 
 ### Adding a fade in and fade out
 
@@ -226,14 +221,14 @@ To apply this effect, count the total number of images and determine the midpoin
 - Frames **before** the midpoint are gradually brightened, this is the fade-in phase.
 - Frames **after** the midpoint are gradually dimmed, the fade-out phase.
 
-_Image sequence showing the fade-in, midpoint, and fade-out phases._
+![A diagram showing an image sequence with fade-in, midpoint, and fade-out phases.](./fade_in_fade_out_phases.svg "Image sequence showing the fade-in, midpoint, and fade-out phases.")
 
 Here is the updated code that applies the fade-in and fade-out effect. We introduce two new variables:
 
 - `mid_point` determines the center frame in the sequence.
 - `brightness` controls how bright each frame appears based on its position.
 
-_Multiplying each frame by the brightness value for its position._
+![A diagram showing an image sequence with fade-in, midpoint, and fade-out phases. Each frame is labeled with its brightness value.](./fade_in_fade_out_phases_brightness.svg "Multiplying each frame by the brightness value for its position.")
 
 Unlike the comet effect, we do not apply the `brightness` factor to the blended image. Instead, we multiply it directly with each current image, because the brightness must depend on that frame's position in the sequence (how far it is from the midpoint).
 
@@ -261,7 +256,7 @@ def save_array_as_image(image_array: np.ndarray, output_path: str) -> None:
     final_image.save(output_path)
 
 
-image_directory = "./images/stacking_input"  // Make sure this is set correctly
+image_directory = "./images/stacking_input"  # Make sure this is set correctly
 image_files = get_all_input_images(image_directory)
 print(f"Found {len(image_files)} image files.")
 
@@ -292,9 +287,7 @@ print(f"The stacked image has been saved to {output_path}")
 
 Here is the resulting star trail image with the fade-in and fade-out effect:
 
-_Star trails with a fade-in / fade-out brightness effect._
-
----
+![A star trail image where the trails fade in at the start and fade out at the end.](./fade_in_fade_out_final_image.jpg "Star trails with a fade-in / fade-out brightness effect.")
 
 ## Creating a star trail time-lapse
 
@@ -399,8 +392,6 @@ with iio.imopen(uri=output_path, io_mode="w", plugin="pyav") as writer:
 
 print(f"Video saved successfully to {output_path}")
 ```
-
----
 
 ## Conclusion
 
