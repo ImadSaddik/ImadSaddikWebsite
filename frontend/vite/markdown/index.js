@@ -1,14 +1,14 @@
 import { youtubeTransformer } from "./transformers/youtube.js";
-import { headerTransformer } from "./transformers/headers.js";
-import { linkTransformer } from "./transformers/links.js";
+import { headerTransformer } from "./transformers/header.js";
+import { linkTransformer } from "./transformers/link.js";
 import { inlineCodeTransformer } from "./transformers/inlineCode.js";
-import { listTransformer } from "./transformers/lists.js";
+import { listTransformer } from "./transformers/list.js";
 import { codeTransformer } from "./transformers/code.js";
-import { admonitionTransformer } from "./transformers/admonitions.js";
-import { imageTransformer } from "./transformers/images.js";
-import { videoTransformer } from "./transformers/videos.js";
-import { tableTransformer } from "./transformers/tables.js";
-import { inlineIconTransformer } from "./transformers/inlineIcons.js";
+import { admonitionTransformer } from "./transformers/admonition.js";
+import { imageTransformer } from "./transformers/image.js";
+import { videoTransformer } from "./transformers/video.js";
+import { tableTransformer } from "./transformers/table.js";
+import { inlineIconTransformer } from "./transformers/inlineIcon.js";
 import { fontAwesomeTransformer } from "./transformers/fontAwesome.js";
 import { superscriptTransformer } from "./transformers/superscript.js";
 
