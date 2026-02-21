@@ -15,10 +15,14 @@ describe("ArticleHeader", () => {
     markdownContent: "# Article content here",
   };
 
-  const factory = (props = {}, options = {}) =>
-    mount(ArticleHeader, {
+  let showToast;
+
+  const factory = (props = {}, options = {}) => {
+    showToast = vi.fn();
+    return mount(ArticleHeader, {
       props: { ...defaultProps, ...props },
       global: {
+        provide: { showToast },
         stubs: {
           RouterLink: RouterLinkStub,
           InlineButton: true,
@@ -29,6 +33,7 @@ describe("ArticleHeader", () => {
         ...options.global,
       },
     });
+  };
 
   beforeEach(() => {
     vi.stubGlobal("open", vi.fn());
@@ -88,8 +93,7 @@ describe("ArticleHeader", () => {
     await wrapper.vm.$nextTick();
 
     expect(writeText).toHaveBeenCalled();
-    expect(wrapper.emitted("show-toast")).toBeTruthy();
-    expect(wrapper.emitted("show-toast")[0][0]).toEqual({
+    expect(showToast).toHaveBeenCalledWith({
       message: "Link copied to clipboard!",
       type: "success",
     });
@@ -104,7 +108,7 @@ describe("ArticleHeader", () => {
     await copyButton.trigger("click");
     await wrapper.vm.$nextTick();
 
-    expect(wrapper.emitted("show-toast")[0][0]).toEqual({
+    expect(showToast).toHaveBeenCalledWith({
       message: "Failed to copy link",
       type: "error",
     });
