@@ -55,6 +55,12 @@
         <priority>0.7</priority>
     </url>
     <url>
+        <loc>https://imadsaddik.com/blogs/how-to-check-battery-capacity-on-linux</loc>
+        <lastmod>2026-02-14T11:34:05.122Z</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
         <loc>https://imadsaddik.com/blogs/how-to-configure-firewall-ufw-fail2ban-ubuntu</loc>
         <lastmod>2026-02-18T21:52:51.865Z</lastmod>
         <changefreq>monthly</changefreq>
