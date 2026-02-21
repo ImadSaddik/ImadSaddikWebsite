@@ -11,7 +11,6 @@ export function tableTransformer(markdownItInstance) {
 
     // Add the `table_close` token
     if (i < tokens.length) {
-      console.log("add last token:", tableTokens[0]);
       tableTokens.push(tokens[i]);
     }
 
@@ -40,9 +39,9 @@ export function tableTransformer(markdownItInstance) {
 
       if (token.type === "inline") {
         if (inThead) {
-          headers.push(token.content);
+          headers.push(markdownItInstance.renderInline(token.content));
         } else if (inTbody) {
-          currentRow.push(token.content);
+          currentRow.push(markdownItInstance.renderInline(token.content));
         }
       }
     });

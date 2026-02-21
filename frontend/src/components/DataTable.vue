@@ -3,12 +3,12 @@
     <table class="custom-table" :style="tableStyle">
       <thead>
         <tr>
-          <th v-for="header in headers" :key="header">{{ header }}</th>
+          <th v-for="header in headers" :key="header" v-html="header"></th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(row, rowIndex) in rows" :key="rowIndex">
-          <td v-for="(cell, cellIndex) in row" :key="cellIndex">{{ cell }}</td>
+          <td v-for="(cell, cellIndex) in row" :key="cellIndex" v-html="cell"></td>
         </tr>
       </tbody>
     </table>
