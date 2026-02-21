@@ -52,5 +52,11 @@
     "vite": "^7.3.0",
     "vitest": "^4.0.14",
     "vue-eslint-parser": "^10.2.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "minimatch": "^10.2.1",
+      "ajv": "^6.14.0"
+    }
   }
 }
