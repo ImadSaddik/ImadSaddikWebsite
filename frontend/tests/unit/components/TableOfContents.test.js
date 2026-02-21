@@ -1,7 +1,7 @@
 import { mount } from "@vue/test-utils";
 import { nextTick, ref } from "vue";
 import TableOfContents from "@/components/TableOfContents.vue";
-import { SCROLL_MARGIN_TOP_OFFSET_PX } from "@/constants";
+import { SCROLL_OFFSET_PIXELS } from "@/constants";
 
 describe("TableOfContents", () => {
   const headingsMarkup = `
@@ -64,7 +64,7 @@ describe("TableOfContents", () => {
 
     await wrapper.vm.handleSectionClick("details");
 
-    expect(scrollToSpy).toHaveBeenCalledWith({ top: 400 - SCROLL_MARGIN_TOP_OFFSET_PX, behavior: "smooth" });
+    expect(scrollToSpy).toHaveBeenCalledWith({ top: 400 - SCROLL_OFFSET_PIXELS, behavior: "smooth" });
     expect(wrapper.vm.activeSectionId).toBe("details");
     expect(replaceStateSpy).toHaveBeenCalledWith(null, "", "#details");
   });
