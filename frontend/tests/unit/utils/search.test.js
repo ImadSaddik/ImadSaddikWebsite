@@ -4,10 +4,10 @@ import { getCardsDataFromDocumentHits } from "@/utils";
 import { ARTICLE_TYPES } from "@/constants";
 
 vi.mock("@/registries/images.js", () => ({
-  blogCoverImages: {},
-  courseCoverImages: {},
-  astronomyCoverImages: {
-    "/src/astronomy/existing-slug/coverImage.svg": "astronomy-cover.svg",
+  ARTICLE_COVER_IMAGE_REGISTRY: {
+    astronomy: {
+      "/src/astronomy/existing-slug/coverImage.svg": "astronomy-cover.svg",
+    },
   },
 }));
 
