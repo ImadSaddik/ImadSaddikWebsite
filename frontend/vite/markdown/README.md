@@ -2,7 +2,7 @@
 
 [This directory](./transformers/) contains the custom logic that converts standard Markdown into `Vue.js` components for my articles.
 
-I decided against using a static site generator because I wanted my website to feel unique and stay free from the constraints of existing tools. Instead, I built a custom pipeline that lets me write in Markdown and render it through my own Vue components.
+I built a custom pipeline to render Markdown through my own Vue components. This allows my website to feel unique and avoids the limitations of standard static site generators.
 
 ## How it works
 
