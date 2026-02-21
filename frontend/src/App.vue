@@ -1,7 +1,7 @@
 <template>
   <SkipLink />
   <NavBar :visited-page="visitedPage" />
-  <RouterView @page-visited="handlePageVisitedEvent" />
+  <RouterView @page-visited="handlePageVisitedEvent" @show-toast="handleShowToastEvent" />
   <StarBackground v-if="starEffectEnabled" />
   <MeteorShowers v-if="meteoriteEffectEnabled" />
   <ScrollBackToTop />
