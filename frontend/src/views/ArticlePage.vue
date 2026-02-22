@@ -9,7 +9,7 @@
     :article-type="articleType"
     :article-tags="frontmatter.tags"
     :creation-date="frontmatter.date"
-    :cover-image="resolvedCoverImage"
+    :cover-image="pathToCoverImage"
     :markdown-content="articleRawContent"
     :reading-time="readingTime"
     :sub-title="frontmatter.subtitle"
@@ -66,10 +66,10 @@ export default {
     };
   },
   computed: {
-    currentPath() {
+    pathToContentMD() {
       return `/src/${this.folder}/${this.slug}/content.md`;
     },
-    resolvedCoverImage() {
+    pathToCoverImage() {
       const imagePath = `/src/${this.folder}/${this.slug}/coverImage.svg`;
       return ARTICLE_COVER_IMAGE_REGISTRY[this.folder]?.[imagePath];
     },
@@ -119,11 +119,11 @@ export default {
       return contentLoaders;
     },
     getArticleLoaders(contentLoaders) {
-      const loadRenderable = contentLoaders.renderable[this.currentPath];
-      const loadSource = contentLoaders.source[this.currentPath];
+      const loadRenderable = contentLoaders.renderable[this.pathToContentMD];
+      const loadSource = contentLoaders.source[this.pathToContentMD];
 
       if (!loadRenderable || !loadSource) {
-        throw new Error(`Article not found at path: ${this.currentPath}`);
+        throw new Error(`Article not found at path: ${this.pathToContentMD}`);
       }
 
       return { loadRenderable, loadSource };
