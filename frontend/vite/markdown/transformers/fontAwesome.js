@@ -4,8 +4,8 @@ const FONT_AWESOME_REGEX = /^::fa\{(.*?)}::/;
 
 export function fontAwesomeTransformer(markdownItInstance) {
   markdownItInstance.inline.ruler.before("emphasis", "font_awesome", (state, silent) => {
-    const src = state.src.slice(state.pos);
-    const match = src.match(FONT_AWESOME_REGEX);
+    const substring = state.src.slice(state.pos);
+    const match = substring.match(FONT_AWESOME_REGEX);
 
     if (!match || match.index !== 0) {
       return false;

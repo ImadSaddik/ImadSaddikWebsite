@@ -1,21 +1,30 @@
+import { MARKDOWN_IT_SELF_CONTAINED_TAG, REGEX_FULL_MATCH, REGEX_FIRST_CAPTURE_GROUP } from "../../../src/constants";
+
+const SUPERSCRIPT_REGEX = /^\^([^^]+)\^/;
+
 export function superscriptTransformer(markdownItInstance) {
-  const defaultRender =
-    markdownItInstance.renderer.rules.text ||
-    function (tokens, index, options, env, self) {
-      return self.renderToken(tokens, index, options);
-    };
+  markdownItInstance.inline.ruler.before("emphasis", "superscript", (state, silent) => {
+    const substring = state.src.slice(state.pos);
+    const match = substring.match(SUPERSCRIPT_REGEX);
 
-  markdownItInstance.renderer.rules.text = function (tokens, index, options, env, self) {
-    let content = tokens[index].content;
-
-    if (content.includes("^")) {
-      // Regex to match ^text^ and replace with <SuperscriptText text="text" />
-      content = content.replace(/\^([^^]+)\^/g, (_match, superscriptText) => {
-        return `<SuperscriptText text="${superscriptText}" />`;
-      });
-      return content;
+    if (!match || match.index !== 0) {
+      return false;
     }
 
-    return defaultRender(tokens, index, options, env, self);
+    // Create the token only when not in 'silent' mode (validation).
+    if (!silent) {
+      const token = state.push("superscript", "SuperscriptText", MARKDOWN_IT_SELF_CONTAINED_TAG);
+      token.attrSet("text", match[REGEX_FIRST_CAPTURE_GROUP]);
+    }
+
+    // Push the cursor forward by the length of the matched string.
+    state.pos += match[REGEX_FULL_MATCH].length;
+    return true;
+  });
+
+  markdownItInstance.renderer.rules.superscript = (tokens, index) => {
+    const token = tokens[index];
+    const text = token.attrGet("text");
+    return `<SuperscriptText text="${text}" />`;
   };
 }
