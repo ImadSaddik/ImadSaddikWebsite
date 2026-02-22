@@ -16,3 +16,6 @@ pnpm-lock.yaml
 coverage
 .DS_Store
 *.log
+
+# Auto generated files
+components.d.ts
