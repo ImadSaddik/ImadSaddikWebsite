@@ -63,6 +63,7 @@ export default {
       loading: true,
       MarkdownComponent: null,
       readingTime: 0,
+      readTimer: null,
     };
   },
   computed: {
@@ -89,6 +90,9 @@ export default {
   mounted() {
     this.$emit("page-visited", PAGE_KEYS.OTHER);
   },
+  unmounted() {
+    this.clearReadTimer();
+  },
   methods: {
     async loadArticle() {
       this.resetArticleState();
@@ -113,6 +117,7 @@ export default {
       this.loading = true;
       this.MarkdownComponent = null;
       this.readingTime = 0;
+      this.clearReadTimer();
     },
     validateAndGetContentLoaders() {
       const contentLoaders = ARTICLE_MARKDOWN_REGISTRY[this.folder];
@@ -150,13 +155,19 @@ export default {
     },
     scheduleReadCountIncrement() {
       const thresholdMilliseconds = this.readingTime * ARTICLE_READ_THRESHOLD * MILLISECONDS_PER_MINUTE;
-      setTimeout(() => {
-        this.$emit("article-read");
+      this.readTimer = setTimeout(() => {
+        //
       }, thresholdMilliseconds);
     },
     handleLoadError(error) {
       console.error("Failed to load article:", error);
       this.$router.replace({ name: ROUTES.NOT_FOUND.name });
+    },
+    clearReadTimer() {
+      if (this.readTimer) {
+        clearTimeout(this.readTimer);
+        this.readTimer = null;
+      }
     },
   },
 };
