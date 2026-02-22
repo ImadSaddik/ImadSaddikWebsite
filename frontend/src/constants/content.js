@@ -11,6 +11,12 @@ export const ARTICLE_TYPES = {
   ASTRONOMY: "astronomy-post",
 };
 
+export const ARTICLE_COUNT_TYPES = {
+  VIEW: "view",
+  READ: "read",
+  CLAPS: "claps",
+};
+
 export const DIRECTORY_MAPPING = {
   [ARTICLE_TYPES.BLOG]: "blogs",
   [ARTICLE_TYPES.COURSE]: "courses",

@@ -48,8 +48,8 @@ import ArticleFooter from "@/components/ArticleFooter.vue";
 import EditArticleOnGitHub from "./EditArticleOnGitHub.vue";
 import TableOfContents from "./TableOfContents.vue";
 
-// Constants
-import { TIME_OUT_MILLISECONDS } from "@/constants";
+// Composables
+import { useArticleTracking } from "@/composables/useArticleTracking";
 
 export default {
   name: "ArticleLayout",
@@ -98,6 +98,10 @@ export default {
       required: true,
     },
   },
+  setup() {
+    const { incrementClapCount, fetchInitialClapCount } = useArticleTracking();
+    return { incrementClapCount, fetchInitialClapCount };
+  },
   data() {
     return {
       cardData: [],
@@ -110,26 +114,10 @@ export default {
   },
   async mounted() {
     await this.getArticleRecommendations();
-    await this.getInitialClapCount();
+    const count = await this.fetchInitialClapCount(this.slug);
+    if (count !== null) this.totalClapCount = count;
   },
   methods: {
-    async getInitialClapCount() {
-      try {
-        const response = await axios.get(`/api/articles/${this.slug}/claps-count`);
-        const { success, claps_count } = response.data;
-
-        if (success) {
-          this.totalClapCount = claps_count;
-        } else {
-          throw new Error("Failed to fetch initial clap count");
-        }
-      } catch (error) {
-        this.showToast({
-          message: "Failed to fetch initial clap count",
-          type: "error",
-        });
-      }
-    },
     async getArticleRecommendations() {
       try {
         const response = await axios.post("/api/articles/recommendations", {
@@ -166,32 +154,11 @@ export default {
       this.isClapping = true;
 
       try {
-        const endpoint = `/api/articles/${this.slug}/increment-claps-count`;
-        const response = await axios.patch(endpoint, { timeout: TIME_OUT_MILLISECONDS });
-
-        const { success, message, claps_count } = response.data;
-
-        if (success) {
-          this.totalClapCount = claps_count;
+        const data = await this.incrementClapCount(this.slug);
+        if (data) {
+          this.totalClapCount = data.claps_count;
           this.userClapCount += 1;
           this.showClapAnimation = true;
-        } else {
-          this.showToast({
-            message: `Failed to increment clap count: ${message}`,
-            type: "error",
-          });
-        }
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          this.showToast({
-            message: "Woah there! You are hammering the button too fast. Please wait a minute before clapping again.",
-            type: "warning",
-          });
-        } else {
-          this.showToast({
-            message: "Failed to increment clap count",
-            type: "error",
-          });
         }
       } finally {
         this.isClapping = false;
