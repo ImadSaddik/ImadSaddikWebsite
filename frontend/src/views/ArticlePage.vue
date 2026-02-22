@@ -33,6 +33,7 @@ import { calculateReadingTime } from "@/utils";
 
 // Composables
 import { ARTICLE_COVER_IMAGE_REGISTRY } from "@/registries/images.js";
+import { useArticleTracking } from "@/composables/useArticleTracking";
 
 // Constants
 import { ROUTES } from "@/constants";
@@ -56,6 +57,10 @@ export default {
     },
   },
   emits: ["page-visited"],
+  setup() {
+    const { incrementViewCount, incrementReadCount } = useArticleTracking();
+    return { incrementViewCount, incrementReadCount };
+  },
   data() {
     return {
       articleRawContent: "",
@@ -104,6 +109,7 @@ export default {
         await this.loadArticleMetadata(loadRenderable);
         await this.processArticleContent(loadSource);
 
+        this.incrementViewCount(this.slug);
         this.scheduleReadCountIncrement();
       } catch (error) {
         this.handleLoadError(error);
@@ -156,7 +162,7 @@ export default {
     scheduleReadCountIncrement() {
       const thresholdMilliseconds = this.readingTime * ARTICLE_READ_THRESHOLD * MILLISECONDS_PER_MINUTE;
       this.readTimer = setTimeout(() => {
-        //
+        this.incrementReadCount(this.slug);
       }, thresholdMilliseconds);
     },
     handleLoadError(error) {
