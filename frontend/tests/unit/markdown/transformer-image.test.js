@@ -107,4 +107,13 @@ describe("imageTransformer", () => {
       expect(output).toContain('<ImageWithCaption image-src="./b.png" image-alt="second" image-caption="Second" />');
     });
   });
+
+  describe("image with no src", () => {
+    it("should fall back to the default renderer when src is empty", () => {
+      const input = "![alt]()";
+      const output = markdownItInstance.render(input);
+      expect(output).toContain("<img");
+      expect(output).not.toContain("<ImageWithCaption");
+    });
+  });
 });
