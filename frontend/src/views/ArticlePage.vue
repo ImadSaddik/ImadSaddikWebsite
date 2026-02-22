@@ -126,12 +126,13 @@ export default {
       const articleComponent = await loadRenderable();
       this.MarkdownComponent = markRaw(articleComponent.default);
 
-      if (articleComponent.frontmatter) {
-        this.frontmatter = articleComponent.frontmatter;
-      } else {
-        const { default: _, ...rest } = articleComponent;
-        this.frontmatter = rest;
-      }
+      // Frontmatter fields are not available as a single `frontmatter` property on
+      // the article component. Instead, they are exposed as top-level named exports
+      // (e.g., title, date, tags) alongside the default export (the component).
+      // We use the rest operator to extract all named exports except `default`
+      // into the frontmatter object.
+      const { default: _, ...rest } = articleComponent;
+      this.frontmatter = rest;
     },
     async processArticleContent(loadSource) {
       const articleRawContent = await loadSource();
