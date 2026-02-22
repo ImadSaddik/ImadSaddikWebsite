@@ -37,7 +37,7 @@ import { ARTICLE_COVER_IMAGE_REGISTRY } from "@/registries/images.js";
 // Constants
 import { ROUTES } from "@/constants";
 import { ARTICLE_MARKDOWN_REGISTRY } from "@/registries/articles.js";
-import { ARTICLE_READ_THRESHOLD, MILLISECONDS_PER_MINUTE, DEFAULT_ARTICLE_TITLE } from "@/constants/content.js";
+import { ARTICLE_READ_THRESHOLD, MILLISECONDS_PER_MINUTE, DEFAULT_ARTICLE_TITLE, PAGE_KEYS } from "@/constants";
 
 export default {
   name: "ArticlePage",
@@ -55,7 +55,7 @@ export default {
       required: true,
     },
   },
-  emits: ["article-read"],
+  emits: ["page-visited"],
   data() {
     return {
       articleRawContent: "",
@@ -85,6 +85,9 @@ export default {
       },
       deep: true,
     },
+  },
+  mounted() {
+    this.$emit("page-visited", PAGE_KEYS.OTHER);
   },
   methods: {
     async loadArticle() {
