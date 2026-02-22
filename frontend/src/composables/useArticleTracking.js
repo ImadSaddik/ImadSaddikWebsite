@@ -13,7 +13,7 @@ export function useArticleTracking() {
   };
 
   async function incrementViewCount(slug) {
-    await incrementMetric({
+    return await incrementMetric({
       slug,
       countType: ARTICLE_COUNT_TYPES.VIEW,
       errorMessage: "Failed to increment view count",
@@ -21,7 +21,7 @@ export function useArticleTracking() {
   }
 
   async function incrementReadCount(slug) {
-    await incrementMetric({
+    return await incrementMetric({
       slug,
       countType: ARTICLE_COUNT_TYPES.READ,
       errorMessage: "Failed to increment read count",
@@ -33,7 +33,6 @@ export function useArticleTracking() {
       slug,
       countType: ARTICLE_COUNT_TYPES.CLAPS,
       errorMessage: "Failed to increment clap count",
-      returnData: true,
     });
   }
 
@@ -53,7 +52,7 @@ export function useArticleTracking() {
     }
   }
 
-  async function incrementMetric({ slug, countType, errorMessage, returnData = false }) {
+  async function incrementMetric({ slug, countType, errorMessage }) {
     const errorData = { message: errorMessage, type: "error" };
 
     try {
@@ -67,7 +66,7 @@ export function useArticleTracking() {
         return null;
       }
 
-      return returnData ? rest : null;
+      return rest;
     } catch (error) {
       if (error.response && error.response.status === 429) {
         showToast({
