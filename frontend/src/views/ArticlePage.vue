@@ -37,7 +37,7 @@ import { ARTICLE_COVER_IMAGE_REGISTRY } from "@/registries/images.js";
 // Constants
 import { ROUTES } from "@/constants";
 import { ARTICLE_MARKDOWN_REGISTRY } from "@/registries/articles.js";
-import { ARTICLE_READ_THRESHOLD, MILLISECONDS_PER_MINUTE } from "@/constants/content.js";
+import { ARTICLE_READ_THRESHOLD, MILLISECONDS_PER_MINUTE, DEFAULT_ARTICLE_TITLE } from "@/constants/content.js";
 
 export default {
   name: "ArticlePage",
@@ -78,6 +78,12 @@ export default {
     slug: {
       immediate: true,
       handler: "loadArticle",
+    },
+    frontmatter: {
+      handler(newFrontmatter) {
+        document.title = newFrontmatter.title ? newFrontmatter.title : DEFAULT_ARTICLE_TITLE;
+      },
+      deep: true,
     },
   },
   methods: {
