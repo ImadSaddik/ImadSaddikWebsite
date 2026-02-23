@@ -105,10 +105,10 @@ export default {
       try {
         const contentLoaders = this.validateAndGetContentLoaders();
         const { loadRenderable, loadSource } = this.getArticleLoaders(contentLoaders);
+        const [articleComponent, articleRawContent] = await Promise.all([loadRenderable(), loadSource()]);
 
-        await this.loadArticleMetadata(loadRenderable);
-        await this.processArticleContent(loadSource);
-
+        this.loadArticleMetadata(articleComponent);
+        this.processArticleContent(articleRawContent);
         this.incrementViewCount(this.slug);
         this.scheduleReadCountIncrement();
       } catch (error) {
@@ -142,8 +142,7 @@ export default {
 
       return { loadRenderable, loadSource };
     },
-    async loadArticleMetadata(loadRenderable) {
-      const articleComponent = await loadRenderable();
+    loadArticleMetadata(articleComponent) {
       this.MarkdownComponent = markRaw(articleComponent.default);
 
       // Frontmatter fields are not available as a single `frontmatter` property on
@@ -154,8 +153,7 @@ export default {
       const { default: _, ...rest } = articleComponent;
       this.frontmatter = rest;
     },
-    async processArticleContent(loadSource) {
-      const articleRawContent = await loadSource();
+    processArticleContent(articleRawContent) {
       this.articleRawContent = articleRawContent;
       this.readingTime = calculateReadingTime(articleRawContent);
     },
