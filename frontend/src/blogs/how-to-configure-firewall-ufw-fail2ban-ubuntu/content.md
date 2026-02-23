@@ -1,10 +1,8 @@
-# How to configure a firewall with UFW and Fail2Ban
-
-Secure your server by blocking incoming traffic and banning brute-force attackers.
-
-**Date:** January 29, 2026
-**Tags:** Security, UFW, Fail2Ban, Ubuntu, Firewall
-
+---
+title: "How to configure a firewall with UFW and Fail2Ban"
+subtitle: "Secure your server by blocking incoming traffic and banning brute-force attackers."
+date: "January 29, 2026"
+tags: ["Security", "UFW", "Fail2Ban", "Ubuntu", "Firewall"]
 ---
 
 ## Introduction
@@ -13,8 +11,9 @@ Right now, your server is like a house with the front door locked (SSH keys) but
 
 In this section, you will configure a firewall to block all incoming traffic by default, allowing only the connections you explicitly trust, using **UFW** (Uncomplicated Firewall). You will also install **Fail2Ban** to automatically ban bots that try to guess your SSH keys.
 
-> [!IMPORTANT]
-> Throughout this guide, you will see text inside angle brackets like `<your_username>` or `<your_server_ip>`. These are **placeholders**. You must replace them with your actual values and **remove the brackets** when running the commands.
+::: warning Important
+Throughout this guide, you will see text inside angle brackets like `<your_username>` or `<your_server_ip>`. These are **placeholders**. You must replace them with your actual values and **remove the brackets** when running the commands.
+:::
 
 ## Configure the firewall
 
@@ -28,8 +27,9 @@ sudo ufw status
 
 It should say `Status: inactive`. Before you activate it, you must explicitly allow SSH connections.
 
-> [!IMPORTANT]
-> If you enable the firewall without allowing SSH first, you will lock yourself out of the server immediately.
+::: warning Important
+If you enable the firewall without allowing SSH first, you will lock yourself out of the server immediately.
+:::
 
 ```bash
 sudo ufw allow OpenSSH
@@ -43,7 +43,7 @@ sudo ufw enable
 
 The system will warn you that this command might disrupt existing SSH connections. Type `y` and hit `Enter`.
 
-```plaintext
+```output
 Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
 Firewall is active and enabled on system startup
 ```
@@ -56,7 +56,7 @@ sudo ufw status verbose
 
 The output gives you a detailed list. Pay close attention to the Default policy and the ALLOW IN rules.
 
-```plaintext
+```output
 Status: active
 Logging: on (low)
 Default: deny (incoming), allow (outgoing), disabled (routed)
@@ -73,8 +73,9 @@ Here is how to interpret this output:
 - **Default: deny (incoming)**: This is the most important rule. It means every single port on your server is blocked unless you explicitly allow it.
 - **ALLOW IN**: These are your exceptions. Right now, you are only allowing traffic for SSH (port 22).
 
-> [!NOTE]
-> Later in the guide, when you install the web server ([Nginx](https://nginx.org/)), you will come back here to open ports [80 (HTTP)](https://en.wikipedia.org/wiki/Port_%28computer_networking%29#Common_port_numbers) and [443 (HTTPS)](https://en.wikipedia.org/wiki/Port_%28computer_networking%29#Common_port_numbers). For now, keeping them closed is safer.
+::: info Note
+Later in the guide, when you install the web server ([Nginx](https://nginx.org/)), you will come back here to open ports [80 (HTTP)](https://en.wikipedia.org/wiki/Port_%28computer_networking%29#Common_port_numbers) and [443 (HTTPS)](https://en.wikipedia.org/wiki/Port_%28computer_networking%29#Common_port_numbers). For now, keeping them closed is safer.
+:::
 
 ## Protect SSH with Fail2Ban
 
@@ -82,7 +83,7 @@ If you check your authentication logs (`/var/log/auth.log`), you will likely see
 
 Here is a real example from my own server logs:
 
-```plaintext
+```output
 2025-12-07T10:59:44 sshd[615989]: Invalid user docker from 142.93.130.134
 2025-12-07T11:01:28 sshd[616006]: Invalid user dspace from 142.93.130.134
 2025-12-07T11:05:09 sshd[616037]: Invalid user elastic from 142.93.130.134
@@ -93,7 +94,7 @@ Even though they cannot get in (because you disabled password authentication), t
 
 To stop this, install [Fail2Ban](https://github.com/fail2ban/fail2ban). This tool monitors your logs in real-time. If an IP address fails to log in too many times, Fail2Ban instantly updates the firewall to block that IP completely.
 
-_How Fail2Ban turns log entries into firewall rules._
+![How Fail2Ban turns log entries into firewall rules](./1_fail2ban_firewall_rules_illustration.svg "How Fail2Ban turns log entries into firewall rules.")
 
 Fail2Ban is available in Ubuntu's default repositories. Install it with this command:
 
@@ -103,8 +104,9 @@ sudo apt install fail2ban -y
 
 By default, Fail2Ban only bans attackers for 10 minutes. This is often too short; persistent bots will just come back later. To increase this to 1 day, create a local configuration file.
 
-> [!IMPORTANT]
-> Never edit the `.conf` file directly, as system updates will overwrite it. Always use a `.local` file for your customizations.
+::: warning Important
+Never edit the `.conf` file directly, as system updates will overwrite it. Always use a `.local` file for your customizations.
+:::
 
 Create the file using nano.
 
@@ -156,15 +158,15 @@ sudo fail2ban-client status sshd
 
 The output will look like this:
 
-```plaintext
+```output
 Status for the jail: sshd
 |- Filter
 | |- Currently failed: 4
 | |- Total failed: 27
-| `- Journal matches: _SYSTEMD_UNIT=sshd.service + _COMM=sshd `- Actions
+| - Journal matches: _SYSTEMD_UNIT=sshd.service + _COMM=sshd - Actions
 |- Currently banned: 1
 |- Total banned: 1
-`- Banned IP list: 142.93.130.134
+- Banned IP list: 142.93.130.134
 ```
 
 If you see IPs in the "Banned IP list", it means the tool is working. That specific IP from the logs is now blocked and can no longer connect to the server.
@@ -180,16 +182,17 @@ If you get locked out, DigitalOcean provides a Recovery Console. This feature gi
 3. Click on the **Access** button in the left sidebar.
 4. Click **Launch Recovery Console**.
 
-_Access the Recovery Console from the DigitalOcean dashboard._
+![Accessing the Recovery Console from the DigitalOcean dashboard](./2_click_droplet_digital_ocean.png "Access the Recovery Console from the DigitalOcean dashboard.")
 
 Once the console opens, you will need to log in.
 
-> [!WARNING]
-> The Recovery Console requires a password to log in. If you created your user without a password, or if you forgot it, you will need to reset the root password first using the "Reset Root Password" button on the same Access page.
+::: warning Warning
+The Recovery Console requires a password to log in. If you created your user without a password, or if you forgot it, you will need to reset the root password first using the "Reset Root Password" button on the same Access page.
+:::
 
 The keyboard mapping in the Recovery Console can be tricky. It is a good idea to type your password in the username field first just to see if the characters match what you are pressing, then delete it and log in properly.
 
-_The Recovery Console login screen._
+![The Recovery Console login screen](./3_launch_recovery_console.png "The Recovery Console login screen.")
 
 Once you are logged in, you can run the missing command to fix the issue. For example, if you forgot to allow SSH:
 

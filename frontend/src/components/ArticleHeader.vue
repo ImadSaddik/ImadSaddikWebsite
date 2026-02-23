@@ -46,6 +46,7 @@ export default {
     BaseTag,
     InlineButton,
   },
+  inject: ["showToast"],
   props: {
     title: {
       type: String,
@@ -80,7 +81,6 @@ export default {
       required: true,
     },
   },
-  emits: ["show-toast"],
   data() {
     return {
       twitterLogo,
@@ -101,12 +101,12 @@ export default {
     async copyLink() {
       try {
         await navigator.clipboard.writeText(window.location.href);
-        this.$emit("show-toast", {
+        this.showToast({
           message: "Link copied to clipboard!",
           type: "success",
         });
       } catch {
-        this.$emit("show-toast", {
+        this.showToast({
           message: "Failed to copy link",
           type: "error",
         });
@@ -115,12 +115,12 @@ export default {
     async handleCopyContentInMarkdown() {
       try {
         await navigator.clipboard.writeText(this.markdownContent);
-        this.$emit("show-toast", {
+        this.showToast({
           message: "Article content copied to clipboard!",
           type: "success",
         });
       } catch {
-        this.$emit("show-toast", {
+        this.showToast({
           message: "Failed to copy article content",
           type: "error",
         });

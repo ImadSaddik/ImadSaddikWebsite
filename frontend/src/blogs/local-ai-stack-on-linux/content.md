@@ -1,10 +1,8 @@
-# How to build your own local AI stack on Linux with llama.cpp, llama-swap, LibreChat and more
-
-A complete guide to running LLMs, embedding models, and multimodal models locally with full control and automation.
-
-**Date:** December 27, 2025
-**Tags:** Linux, AI, LLM, llama.cpp, LibreChat, Local AI, llama-swap
-
+---
+title: "How to build your own local AI stack on Linux with llama.cpp, llama-swap, LibreChat and more"
+subtitle: "A complete guide to running LLMs, embedding models, and multimodal models locally with full control and automation."
+date: "December 27, 2025"
+tags: ["Linux", "AI", "LLM", "llama.cpp", "LibreChat", "Local AI", "llama-swap"]
 ---
 
 ## Introduction
@@ -17,13 +15,13 @@ This article is long because I show everything in detail. You will learn a lot f
 
 In the end, I will show you how to automate everything by using [services](https://wiki.archlinux.org/title/Systemd), [cron jobs](https://en.wikipedia.org/wiki/Cron), creating desktop shortcuts, and using watchers to detect file changes to run commands automatically.
 
-_The architecture of the local AI stack that you will build._
+![The architecture of the local AI stack that you will build.](./1_architecture_diagram.svg "The architecture of the local AI stack that you will build.")
 
-> [!IMPORTANT]
->
-> Throughout this guide, I use my own username (`imad-saddik`) and specific directory paths (e.g., `/home/imad-saddik/...`) in the code snippets.
->
-> You **must** update these paths to match your own username and system file structure. Additionally, check that flags like `-DCMAKE_CUDA_ARCHITECTURES` match your specific GPU model.
+::: warning
+Throughout this guide, I use my own username (`imad-saddik`) and specific directory paths (e.g., `/home/imad-saddik/...`) in the code snippets.
+
+You **must** update these paths to match your own username and system file structure. Additionally, check that flags like `-DCMAKE_CUDA_ARCHITECTURES` match your specific GPU model.
+:::
 
 ## Hardware and operating system
 
@@ -37,7 +35,7 @@ The experiments that I conducted in this article were performed on an **Asus ROG
 
 The main reason that made me want to try `llama.cpp` is running the new [Qwen3-30B-A3B-Instruct-2507](https://huggingface.co/Qwen/Qwen3-30B-A3B-Instruct-2507) model released by the [Qwen team](https://qwen.ai/home).
 
-_Comparing Qwen3–30B-A3B-Instruct-2507 to other models on selected benchmarks. Graph shared by the Qwen team._
+![Comparing Qwen3-30B-A3B-Instruct-2507 to other models on selected benchmarks](./2_qwen_benchmark_graph.jpg "Comparing Qwen3-30B-A3B-Instruct-2507 to other models on selected benchmarks. Graph shared by the Qwen team.")
 
 Ollama is great, but it decides for you how it should run a model. That worked well for models that didn’t exceed the **12B parameters** range. However, when trying to run big models, ollama complains that I don’t have enough resources to use those models.
 
@@ -60,13 +58,13 @@ sudo apt install build-essential cmake git
 
 You need to install the **NVIDIA CUDA Toolkit** if you don’t have it. This is very important if you want to use your GPU for inference. You can [install the toolkit from NVIDIA’s website](https://developer.nvidia.com/cuda-downloads).
 
-_Selecting the target platform before downloading the CUDA toolkit._
+![Selecting the target platform before downloading the CUDA toolkit](./3_cuda_toolkit_download.png "Selecting the target platform before downloading the CUDA toolkit.")
 
 When visiting the website, you will be prompted to select your operating system, architecture, distribution, and other stuff. The options that are selected in the image are valid for my system. Please make sure to select what is valid for you.
 
 For the installation type, you can choose **deb (network)** because it automatically handles downloading and installing all the necessary dependencies.
 
-_The commands to install the CUDA toolkit will be shown after completing the first step._
+![The commands to install the CUDA toolkit](./4_cuda_toolkit_commands.png "The commands to install the CUDA toolkit will be shown after completing the first step.")
 
 After completing the first step, you will see a list of commands that you need to run in order to install the toolkit. To verify that the installation went well, run this command.
 
@@ -76,7 +74,7 @@ nvcc --version
 
 You should see something like this.
 
-```text
+```output
 nvcc: NVIDIA (R) Cuda compiler driver
 Copyright (c) 2005-2023 NVIDIA Corporation
 Built on Fri_Jan__6_16:45:21_PST_2023
@@ -89,7 +87,7 @@ Build cuda_12.0.r12.0/compiler.32267302_0
 Start by cloning the `llama.cpp` project from GitHub with the following command.
 
 ```bash
-git clone [https://github.com/ggml-org/llama.cpp.git](https://github.com/ggml-org/llama.cpp.git)
+git clone https://github.com/ggml-org/llama.cpp.git
 ```
 
 Now, go inside the `llama.cpp` folder.
@@ -110,7 +108,7 @@ The `CMAKE_CUDA_ARCHITECTURES` flag tells the compiler exactly which NVIDIA GPU 
 
 After running that command, you should see something like this.
 
-```text
+```output
 $ cmake -B build -DGGML_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES=89
 
 -- The C compiler identification is GNU 13.3.0
@@ -170,7 +168,7 @@ The command takes the configuration files from the `build` directory and starts 
 
 You should see something like this in the end.
 
-```text
+```output
 $ cmake --build build --config Release -j $(nproc)
 
 ...
@@ -192,8 +190,9 @@ sudo cp build/bin/llama-embedding /usr/local/bin/
 
 Now, you can run `llama-cli`, `llama-embedding` and `llama-server` directly from any location.
 
-> [!NOTE]
-> If you recompile the project, make sure to copy the programs again.
+::: info
+If you recompile the project, make sure to copy the programs again.
+:::
 
 ## Running an LLM
 
@@ -201,7 +200,7 @@ Companies and research teams upload their models to [Hugging Face](https://huggi
 
 Search for the [Qwen3-30B-A3B-Instruct-2507](https://huggingface.co/Qwen/Qwen3-30B-A3B-Instruct-2507) model in the hub. Click on the [Files and versions](https://huggingface.co/Qwen/Qwen3-30B-A3B-Instruct-2507/tree/main) tab, notice how many `safetensors` files are there. These files contain the weights in their original high-precision format (16 or 32-bits).
 
-_The Qwen3-30B-A3B-Instruct-2507 model uploaded to Hugging Face by the Qwen team._
+![The Qwen3-30B-A3B-Instruct-2507 model uploaded to Hugging Face](./5_hugging_face_model_page.png "The Qwen3-30B-A3B-Instruct-2507 model uploaded to Hugging Face by the Qwen team.")
 
 `llama.cpp` does not work with the `safetensors` format, it works with the [GGUF format](https://github.com/ggml-org/ggml/blob/master/docs/gguf.md). This format is optimized for quick loading and saving of models, and running models efficiently on consumer hardware.
 
@@ -209,11 +208,11 @@ The good news is that we can convert models to the GGUF format. There is a [Hugg
 
 If you don’t want to convert the model by yourself, you can search for GGUF versions of the model that you want to download. There are a lot of people that do this for the community. You have [Unsloth](https://huggingface.co/unsloth/models), [bartowski](https://huggingface.co/bartowski), [TheBloke](https://huggingface.co/TheBloke), and others. Sometimes, the teams behind the models release GGUF versions too.
 
-_A GGUF version of the Qwen3-30B-A3B-Instruct-2507 model from Unsloth._
+![A GGUF version of the Qwen3-30B-A3B-Instruct-2507 model from Unsloth](./6_hugging_face_gguf_page.jpg "A GGUF version of the Qwen3-30B-A3B-Instruct-2507 model from Unsloth.")
 
 Hugging Face displays useful information for GGUF models. On the right side, you will find how much memory is needed to run the model at different [quantization levels](https://huggingface.co/docs/hub/gguf#quantization-types).
 
-_The hardware compatibility panel._
+![The hardware compatibility panel](./7_hardware_compatibility_panel.jpg "The hardware compatibility panel.")
 
 Hugging Face is displaying the available quantization levels for the model that you selected. You will see a green checkmark next to the quantization levels that you can run without any issue on your system.
 
@@ -221,11 +220,11 @@ If you don’t see those icons that means that you did not specify the hardware 
 
 In the settings page, click on `Local Apps and Hardware`. After that, select one of the three options under the `Add new Hardware` section, select the model that you have and click on the `Add item` button.
 
-_Adding Hardware to your Hugging Face profile._
+![Adding Hardware to your Hugging Face profile](./8_adding_hardware_to_hf.svg "Adding Hardware to your Hugging Face profile.")
 
 But, Imad! I see a lot of quantization options, which one should I choose? That is a great question, before I answer it I would like you to [read this page](https://huggingface.co/docs/hub/gguf#quantization-types) from Hugging Face. There is a table that explains all those quantization types in detail.
 
-_The quantization types explained in the Hugging Face docs._
+![The quantization types explained in the Hugging Face docs](./9_quantization_types_table.jpg "The quantization types explained in the Hugging Face docs.")
 
 Avoid downloading models in `FP32` or `FP16` precision, as these unquantized formats require a lot of memory, especially for very large models.
 
@@ -261,7 +260,7 @@ llama-cli --help
 
 After running the `llama-cli` command, the program will load the model and display startup information before presenting an interactive prompt. You can then begin chatting with the model directly in your terminal.
 
-```text
+```output
 $ llama-cli \
   --model ~/.cache/llama.cpp/Qwen3-30B-A3B-Thinking-2507-IQ4_XS.gguf \
   --n-gpu-layers 20 \
@@ -289,21 +288,21 @@ Before the interactive prompt appears, `llama-cli` outputs detailed logs about t
 
 First, look for a message confirming `llama.cpp` found your CUDA device.
 
-```text
+```output
 ggml_cuda_init: found 1 CUDA devices:
   Device 0: NVIDIA GeForce RTX 4070 Laptop GPU, compute capability 8.9, VMM: yes
 ```
 
 Next, you can see exactly how many of the model’s layers were offloaded to the GPU. In this case, 20 out of 49 layers were moved.
 
-```text
+```output
 load_tensors: offloading 20 repeating layers to GPU
 load_tensors: offloaded 20/49 layers to GPU
 ```
 
 Finally, the logs provide a breakdown of memory allocation. This is useful for understanding how much **VRAM** and **RAM** the model is using.
 
-```text
+```output
 print_info: file size = 15.25 GiB (4.29 BPW)
 
 load_tensors:      CUDA0 model buffer size = 6334.71 MiB
@@ -317,7 +316,7 @@ Based on this output:
 
 When you exit the interactive session by pressing `Ctrl+C`, `llama-cli` automatically displays a detailed performance report. The output will look like this.
 
-```text
+```output
 llama_perf_sampler_print:    sampling time =      25.55 ms /   390 runs   (    0.07 ms per token, 15264.79 tokens per second)
 llama_perf_context_print:        load time =   12043.37 ms
 llama_perf_context_print: prompt eval time =     444.75 ms /    24 tokens (   18.53 ms per token,    53.96 tokens per second)
@@ -363,8 +362,8 @@ If you were to use the default `127.0.0.1` (localhost), the server would only be
 
 After running the command, the log output will confirm that the server is running and ready to accept requests.
 
-```text
-main: server is listening on [http://0.0.0.0:8080](http://0.0.0.0:8080) - starting the main loop
+```output
+main: server is listening on http://0.0.0.0:8080 - starting the main loop
 srv update_slots: all slots are idle
 ```
 
@@ -478,7 +477,7 @@ try:
     print()
 
 except requests.exceptions.RequestException as e:
-    print(f"\nAn error occurred: {e}")
+    print(f"An error occurred: {e}")
 ```
 
 ### Connect to the server with LibreChat
@@ -490,7 +489,7 @@ I love LibreChat because it is highly customizable and can connect to any AI pro
 Now, let’s configure LibreChat to work with our running `llama-server`. First, clone the LibreChat project and navigate into the new directory.
 
 ```bash
-git clone [https://github.com/danny-avila/LibreChat.git](https://github.com/danny-avila/LibreChat.git)
+git clone https://github.com/danny-avila/LibreChat.git
 cd LibreChat
 ```
 
@@ -507,7 +506,7 @@ endpoints:
   custom:
     - name: "llama.cpp"
       apiKey: "llama-cpp-is-awesome" # Put anything here. Because we are running the models locally, there is no API key that we need to provide.
-      baseURL: "[http://host.docker.internal:8080/v1](http://host.docker.internal:8080/v1)"
+      baseURL: "http://host.docker.internal:8080/v1"
       models:
         default: [
             "canis-majoris", # Put any model name here for now. We will change this later.
@@ -529,7 +528,7 @@ cp docker-compose.override.yml.example docker-compose.override.yml
 Open the new `docker-compose.override.yml` and uncomment the `services` section. This configuration mounts your `librechat.yaml` file into the container and sets the image for the `api` service to `ghcr.io/danny-avila/librechat:latest`, which pulls the latest stable LibreChat image.
 
 ```yaml
-# Please consult our docs for more info: [https://www.librechat.ai/docs/configuration/docker_override](https://www.librechat.ai/docs/configuration/docker_override)
+# Please consult our docs for more info: https://www.librechat.ai/docs/configuration/docker_override
 
 # TO USE THIS FILE, FIRST UNCOMMENT THE LINE ('services:')
 
@@ -557,15 +556,15 @@ You can now build and run the LibreChat application using Docker compose. Run th
 docker compose up -d
 ```
 
-_Starting the LibreChat application._
+![Starting the LibreChat application](./10_libre_chat_startup.jpg "Starting the LibreChat application.")
 
-Open your web browser and navigate to [http://localhost:3080](https://www.google.com/search?q=http://localhost:3080). After that, create an account, and login. To select a model that you are serving with `llama-server` follow these steps:
+Open your web browser and navigate to [http://localhost:3080](http://localhost:3080). After that, create an account, and login. To select a model that you are serving with `llama-server` follow these steps:
 
 - Click the model selector button in the top-left corner.
 - In the dropdown menu, hover over `llama.cpp`.
 - Select the model name that appears.
 
-_Selecting a model from Llama.cpp._
+![Selecting a model from Llama.cpp](./11_libre_chat_model_selection.svg "Selecting a model from Llama.cpp.")
 
 You’ll notice the model is named `canis-majoris`. This is just a display name that I chose, it has nothing to do with the model that you are serving with `llama-server`.
 
@@ -594,7 +593,7 @@ Luckily, we have [llama-swap](https://github.com/mostlygeek/llama-swap). This to
 
 Let’s set up the `llama-swap` tool. Go to the [llama-swap releases page](https://github.com/mostlygeek/llama-swap/releases) and download the archive that matches your operating system and CPU architecture. For example, I chose `llama-swap_162_linux_amd64.tar.gz` because I am on Ubuntu with a 64-bit Intel CPU.
 
-_The releases page of the llama-swap project._
+![The releases page of the llama-swap project](./12_llama_swap_releases.jpg "The releases page of the llama-swap project.")
 
 Open your terminal, navigate to your Downloads folder, and extract the `llama-swap` executable using the `tar` command.
 
@@ -653,7 +652,7 @@ endpoints:
   custom:
     - name: "llama.cpp"
       apiKey: "llama-cpp-is-awesome"
-      baseURL: "[http://host.docker.internal:8080/v1](http://host.docker.internal:8080/v1)"
+      baseURL: "http://host.docker.internal:8080/v1"
       models:
         default: [
             # These names MUST EXACTLY match the names in the llama-swap config.yaml
@@ -672,37 +671,37 @@ Apply the new configuration by restarting the LibreChat containers.
 docker compose restart
 ```
 
-Navigate back to LibreChat at [http://localhost:3080](https://www.google.com/search?q=http://localhost:3080). When you click the model selector, you should now see a dropdown list with all the models you configured.
+Navigate back to LibreChat at [http://localhost:3080](http://localhost:3080). When you click the model selector, you should now see a dropdown list with all the models you configured.
 
-_The new models appear in LibreChat._
+![The new models appear in LibreChat](./13_libre_chat_new_models.jpg "The new models appear in LibreChat.")
 
-In LibreChat, select one of your models, send a message, and wait for the reply. Open a new browser tab and navigate to the address of your `llama-swap` server: [http://localhost:8080](https://www.google.com/search?q=http://localhost:8080).
+In LibreChat, select one of your models, send a message, and wait for the reply. Open a new browser tab and navigate to the address of your `llama-swap` server: [http://localhost:8080](http://localhost:8080).
 
 This is a web application that ships with `llama-swap`. it shows you logs, available models, the state of each server, and more.
 
-_The llama-swap web interface._
+![The llama-swap web interface](./14_llama_swap_web_ui.jpg "The llama-swap web interface.")
 
-Click on the [models tab](https://www.google.com/search?q=http://localhost:8080/ui/models) and make sure that the model that you are chatting with in LibreChat is in the ready state.
+Click on the [models tab](http://localhost:8080/ui/models) and make sure that the model that you are chatting with in LibreChat is in the ready state.
 
-_The model you are chatting with in LibreChat is in the ready state._
+![The model you are chatting with in LibreChat is in the ready state](./15_llama_swap_ready_state.jpg "The model you are chatting with in LibreChat is in the ready state.")
 
 Then, select your second model and send another message. Switch back to the `llama-swap` web interface and notice how the state has changed. The previous model is in the stopped state, while the new one is in the ready state.
 
-_The previous model is in the stopped state after switching to the other model._
+![The previous model is in the stopped state after switching to the other model](./16_llama_swap_stopped_state.jpg "The previous model is in the stopped state after switching to the other model.")
 
 When you switch models in LibreChat, you will see `llama-swap` automatically stop the old server and start the new one. The logs will show a cleanup message like this.
 
-```text
+```output
 srv    operator(): operator(): cleaning up before exit...
 ```
 
 If you stop interacting with a model, its status will remain `ready` for the duration you set in the `ttl` field. After that, `llama-swap` will automatically unload it to free up VRAM, and its status will change to `stopped`.
 
-_The model’s state changed to stopped because it was not used._
+![The model’s state changed to stopped because it was not used](./17_llama_swap_unload_state.jpg "The model’s state changed to <b>stopped</b> because it was not used.")
 
 The corresponding log message will look like this.
 
-```text
+```output
 [INFO] <gemma-3-1b-it> Unloading model, TTL of 300s reached
 srv    operator(): operator(): cleaning up before exit...
 ```
@@ -761,7 +760,7 @@ So far, we’ve focused on chat models. Now, let’s explore how to use an **emb
 
 We’ll use the [Qwen3-Embedding-8B-Q5_K_M](https://huggingface.co/Qwen/Qwen3-Embedding-8B-GGUF) model, which is currently the top-performing embedding model on the [MTEB leaderboard](https://huggingface.co/spaces/mteb/leaderboard).
 
-_The MTEB leaderboard._
+![The MTEB leaderboard](./18_mteb_leaderboard.jpg "The MTEB leaderboard.")
 
 You can generate an embedding directly from the terminal using the `llama-embedding` program.
 
@@ -782,7 +781,7 @@ You’ll notice I set `--n-gpu-layers` to `999`. This is a useful trick to tell 
 
 If this command gives you an **Out Of Memory (OOM)** error, look at the startup logs for lines that tell you the total number of layers in the model.
 
-```text
+```output
 load_tensors: offloading 36 repeating layers to GPU
 load_tensors: offloading output layer to GPU
 load_tensors: offloaded 37/37 layers to GPU
@@ -845,21 +844,22 @@ except requests.exceptions.RequestException as e:
 
 ### Working with vision models
 
-So far, we have only worked with text. Now, let’s explore **multimodal models** like [gemma-3–4b-it-GGUF](https://huggingface.co/unsloth/gemma-3-4b-it-GGUF) or [Qwen2.5-VL-3B-Instruct-GGUF](https://huggingface.co/unsloth/Qwen2.5-VL-3B-Instruct-GGUF) that can process and understand both text and images as input.
+So far, we have only worked with text. Now, let’s explore **multimodal models** like [gemma-3-4b-it-GGUF](https://huggingface.co/unsloth/gemma-3-4b-it-GGUF) or [Qwen2.5-VL-3B-Instruct-GGUF](https://huggingface.co/unsloth/Qwen2.5-VL-3B-Instruct-GGUF) that can process and understand both text and images as input.
 
 Running a multimodal model in `llama.cpp` involves two separate files that work together to answer your questions:
 
 - The language model **(**`.gguf`**)**: This is the standard model file we've been using. It understands language, performs reasoning, and generates the final text response.
 - The multimodal projector **(**`mmproj.gguf`**)**: This is a specialized model. Its job is to look at an image, process it, and translate what it sees into embeddings that the language model can understand.
 
-_The mmproj and language models work together to handle multimodal input._
+![The mmproj and language models work together to handle multimodal input](./19_multimodal_architecture.svg "The mmproj and language models work together to handle multimodal input.")
 
-> [!NOTE]
-> The diagram above is a conceptual illustration I made to help explain the process. It does not reflect the exact internal architecture of any specific model.
+::: info
+The diagram above is a conceptual illustration I made to help explain the process. It does not reflect the exact internal architecture of any specific model.
+:::
 
 When downloading multimodal models from Hugging Face, you must make sure you get **both** the main `.gguf` file and the corresponding `mmproj.gguf` file.
 
-_Arrows point to the different files that you should be looking for when trying to download multimodal models._
+![Arrows point to the different files that you should be looking for when trying to download multimodal models](./20_download_multimodal_files.svg "Arrows point to the different files that you should be looking for when trying to download multimodal models.")
 
 #### Running the model in the terminal
 
@@ -879,7 +879,7 @@ llama-mtmd-cli -hf ggml-org/gemma-3-4b-it-GGUF
 
 Once the model loads, you'll enter an interactive chat mode.
 
-```text
+```output
 Running in chat mode, available commands:
 /image <path>    load an image
 /clear           clear the chat history
@@ -888,14 +888,14 @@ Running in chat mode, available commands:
 
 First, send a text message to make sure it’s working. Then, use the `/image` command to load your image, followed by a question about it. I will give the model the first thumbnail that I designed for this article.
 
-```text
+```output
 > /image /home/imad-saddik/Downloads/thumbnail.png
 > /home/imad-saddik/Downloads/thumbnail.png image loaded
 ```
 
 The image is loaded, now let’s ask the model about it.
 
-```text
+```output
 > What do you see in this image?
 encoding image slice...
 image slice encoded in 709 ms
@@ -949,7 +949,7 @@ endpoints:
   custom:
     - name: "llama.cpp"
       apiKey: "llama-cpp-is-awesome"
-      baseURL: "[http://host.docker.internal:8080/v1](http://host.docker.internal:8080/v1)"
+      baseURL: "http://host.docker.internal:8080/v1"
       models:
         default: [
             # These names MUST EXACTLY match the names in the llama-swap config.yaml
@@ -973,11 +973,11 @@ In LibreChat, load the `gemma-3-4b-it` model and send a text message to verify t
 
 You got a response back? Perfect. Now click on the attach files icon and upload an image.
 
-_Uploading an image in LibreChat._
+![Uploading an image in LibreChat](./21_uploading_image_libre_chat.svg "Uploading an image in LibreChat.")
 
 Send the image together with a text message. You should get a response confirming that the model understood the image.
 
-_Successfully used an image as input in LibreChat._
+![Successfully used an image as input in LibreChat](./22_image_input_libre_chat.jpg "Successfully used an image as input in LibreChat.")
 
 #### Using the model in Python
 
@@ -1068,7 +1068,7 @@ llama-mtmd-cli -hf ggml-org/Voxtral-Mini-3B-2507-GGUF
 
 After it loads, you can use the `/audio` command to provide an audio file and then ask the model to transcribe it. I gave it an audio clip from one of my YouTube videos.
 
-```text
+```output
 Running in chat mode, available commands:
 /audio <path>    load an audio
 /clear           clear the chat history
@@ -1104,7 +1104,7 @@ Unfortunately, while `Voxtral` is amazing in the CLI, its advanced audio capabil
 
 My attempts to use it with LibreChat or standard OpenAI audio endpoints (like `/v1/audio/transcriptions`) in Python failed with a `404 Not Found` error.
 
-```text
+```output
 An error occurred: 404 Client Error: Not Found for url: http://localhost:8080/v1/audio/transcriptions
 ```
 
@@ -1119,14 +1119,14 @@ There are different ways to run Whisper. We can use `whisper.cpp`, `faster-whisp
 Clone the `whisper.cpp` project.
 
 ```bash
-git clone [https://github.com/ggml-org/whisper.cpp.git](https://github.com/ggml-org/whisper.cpp.git)
+git clone https://github.com/ggml-org/whisper.cpp.git
 cd whisper.cpp
 ```
 
 [Download the model from Hugging Face](https://huggingface.co/ggerganov/whisper.cpp). I picked the large version since it fits comfortably on my GPU.
 
 ```bash
-wget -O ~/.cache/llama.cpp/whisper-large-v3-turbo-q8_0.gguf "[https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo-q8_0.bin](https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo-q8_0.bin)"
+wget -O ~/.cache/llama.cpp/whisper-large-v3-turbo-q8_0.gguf "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo-q8_0.bin"
 ```
 
 I will build the project with CUDA support. Check the project’s [README.md](https://github.com/ggml-org/whisper.cpp/blob/master/README.md) for other options.
@@ -1138,7 +1138,7 @@ cmake --build build -j --config Release
 
 You should see something like this in the end.
 
-```text
+```output
 [ 99%] Linking CXX executable ../../bin/whisper-cli
 [ 99%] Built target whisper-cli
 [100%] Linking CXX executable ../../bin/whisper-server
@@ -1204,7 +1204,7 @@ except FileNotFoundError:
 
 Running this script should successfully return the full transcribed text, proving our `whisper.cpp` server and `llama-swap` integration is working correctly. Here is the output:
 
-```text
+```output
 Hello everyone, welcome to this course about routing and pathfinding problems. We will focus on using the OSRM project, which stands for Open Source Routing Machine. I will show you how to install the routing engine on your computer and use it as a server to make HTTP requests. You will learn how to use the OSRM's services, such as finding the shortest path between two or more points, customizing the profile used by OSRM. It could be cars, bikes, or even pedestrians, solving the traveling salesman problem, and much more. I will also show you how to download a specific map area to limit the search space. In this course, I will use Python in the backend to interact with the OSRM engine server. However, you can use any programming language that can make HTTP requests. We will also visualize the data we get from the engine on a map to make the process more fun and easy to understand. This will help us confirm that the data from OSRM is accurate. I hope you are excited about this course. I will do my best to provide high quality content. Before I forget, the source code will be available on GitHub. Let's get started.
 ```
 
@@ -1250,7 +1250,7 @@ except FileNotFoundError:
 
 Here is the output of the script.
 
-```text
+```output
 [0:00:00 --> 0:00:04.240000] Hello, everyone. Welcome to this course about routing and
 [0:00:04.240000 --> 0:00:09.560000] pathfinding problems. We will focus on using the OSRM
 [0:00:09.560000 --> 0:00:14.170000] project, which stands for Open Source Routing Machine. I
@@ -1284,7 +1284,7 @@ speech:
       engineSTT: "external"
   stt:
     openai:
-      url: "[http://host.docker.internal:8080/v1/audio/transcriptions](http://host.docker.internal:8080/v1/audio/transcriptions)"
+      url: "http://host.docker.internal:8080/v1/audio/transcriptions"
       apiKey: "whisper-cpp-is-awesome"
       model: "whisper-large-v3-turbo" # The same name in config.yaml
 ```
@@ -1297,25 +1297,25 @@ docker compose restart
 
 Click on the **Settings** button.
 
-_Steps to find the Settings button in LibreChat._
+![Steps to find the Settings button in LibreChat](./23_libre_chat_settings_button.svg "Steps to find the Settings button in LibreChat.")
 
 Click on the **Speech** option, and make sure that the engine is set to `External` in the Speech to Text section.
 
-_The speech settings page._
+![The speech settings page](./24_libre_chat_speech_settings.svg "The speech settings page.")
 
 Go back and click on the microphone and start talking, when you are done click the button again to stop the recording. LibreChat will call the transcriptions endpoint and will send the data to whisper.
 
 Go to the `llama-swap` dashboard, you should see that whisper is starting to load.
 
-_llama-swap received the request and is starting to load whisper._
+![llama-swap received the request and is starting to load whisper](./25_llama_swap_whisper_loading.jpg "llama-swap received the request and is starting to load whisper.")
 
 After waiting for a few seconds, I got this error.
 
-_Error in LibreChat._
+![Error in LibreChat](./26_libre_chat_whisper_error.jpg "Error in LibreChat.")
 
 Looking at the `llama-swap` logs reveals the problem.
 
-```text
+```output
 error: failed to read audio data as wav (Unknown error)
 error: failed to read audio data
 ```
@@ -1326,7 +1326,7 @@ There is a section in the [README.md](https://github.com/ggml-org/whisper.cpp?ta
 
 I followed those instructions but couldn’t solve the problem. Instead, I ran into new issues. The `whisper-cli` works fine with different audio files, but the `whisper-server` isn’t functioning properly. I get errors like these.
 
-```text
+```output
 Couldn't open input file Eߣ
 error: failed to ffmpeg decode 'Eߣ'
 error: failed to read audio data
@@ -1367,7 +1367,7 @@ pip install nvidia-cublas-cu12 "nvidia-cudnn-cu12==9.*"
 
 You must tell your system where to find the NVIDIA libraries you just installed by setting the `LD_LIBRARY_PATH` environment variable. If you don’t do that, you will get this error.
 
-```text
+```output
 Unable to load any of {libcudnn_ops.so.9.1.0, libcudnn_ops.so.9.1, libcudnn_ops.so.9, libcudnn_ops.so}
 Invalid handle. Cannot load symbol cudnnCreateTensorDescriptor
 Aborted (core dumped)
@@ -1538,7 +1538,7 @@ models:
   "whisper-large-v3-turbo":
     cmd: /home/imad-saddik/Programs/faster-whisper/start.sh --port ${PORT}
     cmdStop: pkill -f "uvicorn server:app"
-    proxy: [http://127.0.0.1](http://127.0.0.1):${PORT}
+    proxy: http://127.0.0.1:${PORT}
     checkEndpoint: "/health"
     ttl: 300
 ```
@@ -1553,15 +1553,15 @@ In LibreChat, click the microphone icon to start recording, speak, and click it 
 
 Open the `llama-swap` interface.
 
-_The model state and logs in the llama-swap interface._
+![The model state and logs in the llama-swap interface](./27_llama_swap_faster_whisper_logs.svg "The model state and logs in the llama-swap interface.")
 
 You should see that the model is in a **ready state**, and if you inspect the logs, you will see entries like the following.
 
-```text
+```output
 INFO: Started server process [133188]
 INFO: Waiting for application startup.
 INFO: Application startup complete.
-INFO: Uvicorn running on [http://0.0.0.0:10004](http://0.0.0.0:10004) (Press CTRL+C to quit)
+INFO: Uvicorn running on http://0.0.0.0:10004 (Press CTRL+C to quit)
 INFO: 127.0.0.1:49778 - "GET /health HTTP/1.1" 200 OK
 INFO:faster_whisper:Processing audio with duration 00:06.414
 INFO:faster_whisper:Detected language 'ar' with probability 0.33
@@ -1598,11 +1598,18 @@ llama-bench \
 
 The argument `--n-gpu-layers 18-24+1` tells `llama-bench` to start with 18 layers and increase the count by 1 up to 24. In each run, the model will generate 128 tokens.
 
-_The results returned by llama-bench._
+| model                              | size (GiB) | params (B) | backend | ngl | test  | t/s          |
+| :--------------------------------- | :--------- | :--------- | :------ | :-- | :---- | :----------- |
+| qwen3moe 30B.A3B IQ4_XS - 4.25 bpw | 15.25      | 30.53      | CUDA    | 18  | tg128 | 25.22 ± 0.57 |
+| qwen3moe 30B.A3B IQ4_XS - 4.25 bpw | 15.25      | 30.53      | CUDA    | 19  | tg128 | 25.46 ± 0.49 |
+| qwen3moe 30B.A3B IQ4_XS - 4.25 bpw | 15.25      | 30.53      | CUDA    | 20  | tg128 | 25.22 ± 0.93 |
+| qwen3moe 30B.A3B IQ4_XS - 4.25 bpw | 15.25      | 30.53      | CUDA    | 21  | tg128 | 23.92 ± 1.15 |
+| qwen3moe 30B.A3B IQ4_XS - 4.25 bpw | 15.25      | 30.53      | CUDA    | 22  | tg128 | 23.70 ± 1.37 |
+| qwen3moe 30B.A3B IQ4_XS - 4.25 bpw | 15.25      | 30.53      | CUDA    | 23  | tg128 | 24.85 ± 0.94 |
 
 The table shows that offloading **19 layers** provides the highest generation speed. We can also see the final run for 24 layers failed due to insufficient VRAM.
 
-```text
+```output
 main: error: failed to create context with model '/home/imad-saddik/.cache/llama.cpp/Qwen3-30B-A3B-Thinking-2507-IQ4_XS.gguf'
 ```
 
@@ -1621,7 +1628,11 @@ llama-bench \
   --n-depth 0,4096,8192,16384
 ```
 
-_The results returned by llama-bench._
+| model                              | size (GiB) | params (B) | backend | ngl | test          | t/s          |
+| :--------------------------------- | :--------- | :--------- | :------ | :-- | :------------ | :----------- |
+| qwen3moe 30B.A3B IQ4_XS - 4.25 bpw | 15.25      | 30.53      | CUDA    | 19  | tg128         | 22.12 ± 2.12 |
+| qwen3moe 30B.A3B IQ4_XS - 4.25 bpw | 15.25      | 30.53      | CUDA    | 19  | tg128 @ d4096 | 15.60 ± 0.26 |
+| qwen3moe 30B.A3B IQ4_XS - 4.25 bpw | 15.25      | 30.53      | CUDA    | 19  | tg128 @ d8192 | 11.33 ± 0.35 |
 
 The results show a clear trade-off. With 19 layers on the GPU, we don’t have enough leftover VRAM to handle a 16,384 token context. To support a larger context, we must sacrifice some speed by offloading fewer layers. Let’s test that hypothesis by reducing the layers to 16.
 
@@ -1634,7 +1645,12 @@ llama-bench \
   --n-depth 0,4096,8192,16384
 ```
 
-_The results returned by llama-bench._
+| model                              | size (GiB) | params (B) | backend | ngl | test           | t/s          |
+| :--------------------------------- | :--------- | :--------- | :------ | :-- | :------------- | :----------- |
+| qwen3moe 30B.A3B IQ4_XS - 4.25 bpw | 15.25      | 30.53      | CUDA    | 16  | tg128          | 23.14 ± 1.04 |
+| qwen3moe 30B.A3B IQ4_XS - 4.25 bpw | 15.25      | 30.53      | CUDA    | 16  | tg128 @ d4096  | 14.62 ± 0.17 |
+| qwen3moe 30B.A3B IQ4_XS - 4.25 bpw | 15.25      | 30.53      | CUDA    | 16  | tg128 @ d8192  | 10.63 ± 0.12 |
+| qwen3moe 30B.A3B IQ4_XS - 4.25 bpw | 15.25      | 30.53      | CUDA    | 16  | tg128 @ d16384 | 6.79 ± 0.10  |
 
 By offloading only 16 layers, we can now handle the 16K context window. Notice how the generation speed decreases when the context window increases. This is normal because the model needs to do a lot of work.
 
@@ -1674,7 +1690,7 @@ endpoints:
   custom:
     - name: "llama.cpp"
       apiKey: "llama-cpp-is-awesome"
-      baseURL: "[http://host.docker.internal:8080/v1](http://host.docker.internal:8080/v1)"
+      baseURL: "http://host.docker.internal:8080/v1"
       models:
         default: [
             # These names MUST EXACTLY match the names in the llama-swap config.yaml
@@ -1703,8 +1719,8 @@ This is how you can use `llama-bench` to systematically find the best settings f
 
 To make launching everything easier, we’ll be accessing two web interfaces:
 
-- **llama-swap interface**: [http://localhost:8080/](https://www.google.com/search?q=http://localhost:8080/)
-- **LibreChat**: [http://localhost:3080/](https://www.google.com/search?q=http://localhost:3080/)
+- **llama-swap interface**: [http://localhost:8080/](http://localhost:8080/)
+- **LibreChat**: [http://localhost:3080/](http://localhost:3080/)
 
 Instead of remembering these links, we can create desktop shortcuts to open these links.
 
@@ -1744,7 +1760,7 @@ update-desktop-database ~/.local/share/applications
 
 Search for **Llama Swap UI**. You should see it appear in the search result. Click it and verify that it opens the browser with the correct link.
 
-_The Llama Swap UI desktop shortcut._
+![The Llama Swap UI desktop shortcut](./28_llama_swap_desktop_shortcut.jpg "The Llama Swap UI desktop shortcut.")
 
 #### LibreChat
 
@@ -1793,7 +1809,7 @@ firefox http://localhost:3080
 
 Search for **LibreChat** in your application menu and click it. It should start the Docker containers (if they aren’t already running) and open the UI in your browser.
 
-_The LibreChat desktop shortcut._
+![The LibreChat desktop shortcut](./29_libre_chat_desktop_shortcut.jpg "The LibreChat desktop shortcut.")
 
 ### Automatically restarting services on configuration changes
 
@@ -1876,7 +1892,7 @@ sudo visudo
 
 Scroll to the bottom of the file and add the following line.
 
-```text
+```output
 imad-saddik ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart llama-swap
 ```
 
@@ -1930,9 +1946,7 @@ Check the status to make sure it is running correctly.
 sudo systemctl status config-watcher.service
 ```
 
-You should see output similar to this.
-
-```text
+```output
 ● config-watcher.service - Watcher for llama-swap and librechat config files
      Loaded: loaded (/etc/systemd/system/config-watcher.service; enabled; preset: enabled)
      Active: active (running) since Wed 2025-10-01 21:19:38 +01; 2h 26min ago
@@ -1991,7 +2005,7 @@ models:
   "whisper-large-v3-turbo":
     cmd: /home/imad-saddik/Programs/faster-whisper/start.sh --port ${PORT}
     cmdStop: pkill -f "uvicorn server:app"
-    proxy: [http://127.0.0.1](http://127.0.0.1):${PORT}
+    proxy: http://127.0.0.1:${PORT}
     checkEndpoint: "/health"
     ttl: 300
 ```
@@ -2004,7 +2018,7 @@ journalctl -u config-watcher.service -f
 
 You should see that the change is detected, for example.
 
-```text
+```output
 $ journalctl -u config-watcher.service -f
 Oct 01 21:19:38 saddik systemd[1]: Started config-watcher.service - Watcher for llama-swap and librechat config files.
 Oct 01 21:20:47 saddik config_watcher.sh[23025]: Wed Oct 1 09:20:47 PM +01 2025: **Change detected** in /home/imad-saddik/Programs/llama-swap/config.yaml. Restarting all services...
@@ -2013,7 +2027,7 @@ Oct 01 21:20:47 saddik sudo[23945]: imad-saddik : PWD=/ ; USER=root ; COMMAND=/u
 
 To verify that it worked, open the `llama-swap` interface and confirm that the removed model no longer appears. In this example, `Qwen3-30B-A3B-Thinking - 16K` is gone.
 
-_Qwen3-30B-A3B-Thinking — 16K is no longer visible._
+![Qwen3-30B-A3B-Thinking — 16K is no longer visible](./30_llama_swap_model_removed.jpg "Qwen3-30B-A3B-Thinking — 16K is no longer visible.")
 
 Next, do the same with `librechat.yaml` by updating the list of models.
 
@@ -2022,7 +2036,7 @@ endpoints:
   custom:
     - name: "llama.cpp"
       apiKey: "llama-cpp-is-awesome"
-      baseURL: "[http://host.docker.internal:3647/v1](http://host.docker.internal:3647/v1)"
+      baseURL: "http://host.docker.internal:3647/v1"
       models:
         default: [
             # These names MUST EXACTLY match the names in the llama-swap config.yaml
@@ -2035,13 +2049,13 @@ endpoints:
 
 Save the file and watch the logs again. You should see something like.
 
-```text
+```output
 Oct 01 21:21:39 saddik config_watcher.sh[23025]: Wed Oct 1 09:21:39 PM +01 2025: **Change detected** in /home/imad-saddik/snap/LibreChat/librechat.yaml. Restarting LibreChat containers...
 ```
 
 Open LibreChat and check the model list, `Qwen3-30B-A3B-Thinking - 16K` is no longer available.
 
-_The Qwen3-30B-A3B-Thinking — 16K can no longer be selected in LibreChat._
+![The Qwen3-30B-A3B-Thinking — 16K can no longer be selected in LibreChat](./31_libre_chat_model_removed.jpg "The Qwen3-30B-A3B-Thinking — 16K can no longer be selected in LibreChat.")
 
 Now you can enjoy watching the script automatically restart the services whenever you make changes. This feature saves time and makes sure you never forget to restart anything. I really like it, and I hope you do too!
 
@@ -2134,7 +2148,7 @@ crontab -e
 
 Add the following line to the end of the file. This will run your update script **every day at 6:00 AM**.
 
-```text
+```output
 0 6 * * * sudo /home/your_user/update_llama_cpp.sh >> /home/your_user/llama_cpp_update.log 2>&1
 ```
 
@@ -2154,8 +2168,8 @@ sudo visudo
 
 Scroll to the bottom and add the following line to allow the script to run without requiring a password.
 
-```text
-imad-saddik ALL=(ALL) NOPASSWD: /usr/local/bin/update_llama_cpp.sh
+```output
+imad-saddik ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart llama-swap
 ```
 
 I ran into a few issues with **crontab**. Sometimes it executed my job, and other times it didn’t, even though my laptop was powered on at the scheduled time. To avoid dealing with inconsistent behavior, I switched to **anacron**.
@@ -2344,7 +2358,7 @@ pip install --upgrade faster-whisper
 
 ## Conclusion
 
-_Photo by [Vlad Bagacian](https://unsplash.com/@vladbagacian?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) on [Unsplash](https://unsplash.com/photos/woman-sitting-on-grey-cliff-d1eaoAabeXs?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)._
+![Photo by Vlad Bagacian on Unsplash](./32_conclusion_image.jpg "Photo by <a href='https://unsplash.com/@vladbagacian?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash' target='_blank'>Vlad Bagacian</a> on <a href='https://unsplash.com/photos/woman-sitting-on-grey-cliff-d1eaoAabeXs?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash' target='_blank'>Unsplash</a>.")
 
 This article documented my complete journey of replacing ollama with a more powerful, flexible, and fully-controlled local AI stack. We started with the goal of running large models that ollama couldn’t handle and ended up building a complete system centered around `llama.cpp` and `llama-swap`.
 
@@ -2366,8 +2380,9 @@ In the **Speech-to-Text with Whisper** section, I mentioned that I couldn’t ge
 
 It turns out I was missing two things: enabling FFmpeg during the build process AND using the `--convert` flag when running the server.
 
-> [!NOTE]
-> This FFmpeg integration is currently supported on **Linux only**.
+::: info
+This FFmpeg integration is currently supported on **Linux only**.
+:::
 
 If you prefer to use the native `whisper.cpp` server instead of the Python workaround, here is how to do it.
 
@@ -2379,8 +2394,9 @@ sudo apt install libavcodec-dev libavformat-dev libavutil-dev
 
 Navigate to your `whisper.cpp` directory. You need to add `-DWHISPER_FFMPEG=yes` to your cmake command.
 
-> [!IMPORTANT]
-> In the command below, I am using `-DCMAKE_CUDA_ARCHITECTURES=89` which targets my specific GPU (RTX 4070). You must change this number to match your GPU's [compute capability](https://developer.nvidia.com/cuda/gpus) (e.g., `86` for RTX 3000 series, `75` for RTX 2000 series), or use `native` to let CMake detect it automatically.
+::: warning
+In the command below, I am using `-DCMAKE_CUDA_ARCHITECTURES=89` which targets my specific GPU (RTX 4070). You must change this number to match your GPU's [compute capability](https://developer.nvidia.com/cuda/gpus) (e.g., `86` for RTX 3000 series, `75` for RTX 2000 series), or use `native` to let CMake detect it automatically.
+:::
 
 ```bash
 cd ~/Programs/whisper.cpp
@@ -2468,6 +2484,7 @@ llama-server \
   --jinja
 ```
 
-Now, navigate to [http://localhost:8033](https://www.google.com/search?q=http://localhost:8033) in your browser.
+Now, navigate to [http://localhost:8033](http://localhost:8033) in your browser.
 
-_The new llama.cpp WebUI._
+::: video ./33_llama_cpp_web_ui.mp4 "The new llama.cpp WebUI."
+:::

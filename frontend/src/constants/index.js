@@ -7,3 +7,4 @@ export * from "./astronomy";
 export * from "./api";
 export * from "./dropdown";
 export * from "./routes";
+export * from "./markdown";

@@ -1,7 +1,7 @@
 <template>
   <section class="image-with-caption-container">
     <figure>
-      <img :src="imageSrc" :alt="imageAlt" @click="openImageModal" />
+      <img :src="imageSrc" :alt="imageAlt" @click="handleImageClick" />
       <figcaption v-html="imageCaption"></figcaption>
     </figure>
   </section>
@@ -10,6 +10,7 @@
 <script>
 export default {
   name: "ImageWithCaption",
+  inject: ["openImageModal"],
   props: {
     imageSrc: {
       type: String,
@@ -24,10 +25,9 @@ export default {
       required: true,
     },
   },
-  emits: ["open-image-modal"],
   methods: {
-    openImageModal(event) {
-      this.$emit("open-image-modal", event);
+    handleImageClick(event) {
+      this.openImageModal(event);
     },
   },
 };

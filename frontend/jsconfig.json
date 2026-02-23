@@ -9,6 +9,6 @@
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
-  "include": ["src/**/*", "tests/"],
+  "include": ["src/**/*", "tests/", "components.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

@@ -15,10 +15,14 @@ describe("ArticleHeader", () => {
     markdownContent: "# Article content here",
   };
 
-  const factory = (props = {}, options = {}) =>
-    mount(ArticleHeader, {
+  let showToast;
+
+  const factory = (props = {}, options = {}) => {
+    showToast = vi.fn();
+    return mount(ArticleHeader, {
       props: { ...defaultProps, ...props },
       global: {
+        provide: { showToast },
         stubs: {
           RouterLink: RouterLinkStub,
           InlineButton: true,
@@ -29,6 +33,7 @@ describe("ArticleHeader", () => {
         ...options.global,
       },
     });
+  };
 
   beforeEach(() => {
     vi.stubGlobal("open", vi.fn());
@@ -88,8 +93,7 @@ describe("ArticleHeader", () => {
     await wrapper.vm.$nextTick();
 
     expect(writeText).toHaveBeenCalled();
-    expect(wrapper.emitted("show-toast")).toBeTruthy();
-    expect(wrapper.emitted("show-toast")[0][0]).toEqual({
+    expect(showToast).toHaveBeenCalledWith({
       message: "Link copied to clipboard!",
       type: "success",
     });
@@ -104,8 +108,37 @@ describe("ArticleHeader", () => {
     await copyButton.trigger("click");
     await wrapper.vm.$nextTick();
 
-    expect(wrapper.emitted("show-toast")[0][0]).toEqual({
+    expect(showToast).toHaveBeenCalledWith({
       message: "Failed to copy link",
+      type: "error",
+    });
+  });
+
+  it("emits show-toast with success when markdown content is copied", async () => {
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    Object.assign(navigator, { clipboard: { writeText } });
+
+    const wrapper = factory();
+    await wrapper.vm.handleCopyContentInMarkdown();
+    await wrapper.vm.$nextTick();
+
+    expect(writeText).toHaveBeenCalledWith(defaultProps.markdownContent);
+    expect(showToast).toHaveBeenCalledWith({
+      message: "Article content copied to clipboard!",
+      type: "success",
+    });
+  });
+
+  it("emits show-toast with error when copying markdown content fails", async () => {
+    const writeText = vi.fn().mockRejectedValue(new Error("Copy failed"));
+    Object.assign(navigator, { clipboard: { writeText } });
+
+    const wrapper = factory();
+    await wrapper.vm.handleCopyContentInMarkdown();
+    await wrapper.vm.$nextTick();
+
+    expect(showToast).toHaveBeenCalledWith({
+      message: "Failed to copy article content",
       type: "error",
     });
   });

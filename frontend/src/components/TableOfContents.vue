@@ -20,6 +20,9 @@
 // Third-party libraries
 import { useThrottleFn } from "@vueuse/core";
 
+// Constants
+import { THROTTLE_WAIT_TIME_MILLISECONDS, SCROLL_OFFSET_PIXELS } from "@/constants";
+
 export default {
   name: "TableOfContents",
   inject: ["wideArticlesEnabled"],
@@ -37,7 +40,7 @@ export default {
 
       this.throttledScrollHandler = useThrottleFn(
         this.handleScrollEvent,
-        100 /* wait time in ms */,
+        THROTTLE_WAIT_TIME_MILLISECONDS,
         true /* trailing */,
         true /* leading */
       );
@@ -82,9 +85,8 @@ export default {
       if (!sectionElement) return;
 
       const y = this.computeAbsoluteYPosition(sectionElement);
-      const topOffset = 20;
       window.scrollTo({
-        top: y - topOffset,
+        top: y - SCROLL_OFFSET_PIXELS,
         behavior: "smooth",
       });
 

@@ -1,13 +1,11 @@
-# Elasticsearch for beginners
-
-Learn Elasticsearch from scratch with practical examples in Python.
-
-**Date:** September 26, 2025
-**Tags:** Elasticsearch, Search, Python
-
+---
+title: "Elasticsearch for beginners"
+subtitle: "Learn Elasticsearch from scratch with practical examples in Python."
+date: "September 26, 2025"
+tags: ["Elasticsearch", "Search", "Python"]
 ---
 
-## Course Overview
+## Course overview
 
 This course is for anyone new to [Elasticsearch](https://www.elastic.co/elasticsearch). If you have some experience, you'll still find it helpful for building a strong foundation.
 
@@ -19,11 +17,12 @@ At the end of the course, we'll put everything together in a [final project](htt
 
 All course materials, slides, and Jupyter notebooks are available on my [GitHub repository](https://github.com/ImadSaddik/ElasticSearch_Python_Course). By the end, you'll understand how Elasticsearch works and how to use it in your own projects.
 
----
-
-## Watch the Course
+## Watch the course
 
 I believe knowledge should be free, so I am sharing this course for free on the freeCodeCamp YouTube channel. You can watch the full course below.
+
+::: youtube [https://www.youtube.com/embed/a4HBKEda_F8](https://www.youtube.com/embed/a4HBKEda_F8)
+:::
 
 Creating courses like this takes months of research, experiments, designing illustrations, recording, and more.
 If you want to support my mission to share free knowledge, you can [sponsor me on GitHub](https://github.com/sponsors/ImadSaddik), [support me on Patreon](https://www.patreon.com/3CodeCamp), or [donate via PayPal](https://www.paypal.com/paypalme/ImadSaddik).

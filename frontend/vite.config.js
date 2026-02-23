@@ -1,12 +1,47 @@
-import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
+import Markdown from "unplugin-vue-markdown/vite";
+import Components from "unplugin-vue-components/vite";
+
+import { defineConfig } from "vite";
 import { fileURLToPath, URL } from "node:url";
 import { visualizer } from "rollup-plugin-visualizer";
+import { getMarkdownTransformers } from "./vite/markdown/index.js";
 
 export default defineConfig({
   plugins: [
-    vue(),
-    markdownRawPlugin(),
+    vue({
+      include: [/\.vue$/, /\.md$/],
+      template: {
+        transformAssetUrls: {
+          includeAbsolute: false,
+          tags: {
+            video: ["src", "poster"],
+            source: ["src"],
+            img: ["src"],
+            image: ["xlink:href", "href"],
+            use: ["xlink:href", "href"],
+            // By adding 'ImageWithCaption' and 'VideoWithCaption' here, Vite knows to resolve
+            // the 'image-src' and 'video-src' attributes as file paths.
+            // This addition ensures images and videos in Markdown articles load correctly.
+            ImageWithCaption: ["image-src"],
+            VideoWithCaption: ["video-src"],
+            InlineIcon: ["icon"],
+          },
+        },
+      },
+    }),
+    Markdown({
+      headEnabled: false,
+      markdownItSetup(markdownItInstance) {
+        getMarkdownTransformers().forEach((plugin) => markdownItInstance.use(plugin));
+      },
+    }),
+    Components({
+      dts: true,
+      dirs: ["src/components"],
+      extensions: ["vue", "md"],
+      include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+    }),
     visualizer({
       title: "Bundle visualizer",
       filename: "./stats.json",
@@ -53,17 +88,3 @@ export default defineConfig({
     },
   },
 });
-
-function markdownRawPlugin() {
-  return {
-    name: "vite-plugin-md-raw",
-    transform(code, id) {
-      if (id.endsWith(".md")) {
-        return {
-          code: `export default ${JSON.stringify(code)}`,
-          map: null,
-        };
-      }
-    },
-  };
-}

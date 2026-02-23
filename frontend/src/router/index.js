@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { ARTICLE_TYPES, ROUTES } from "@/constants";
+import { ARTICLE_TYPES, ROUTES, DIRECTORY_MAPPING } from "@/constants";
 
 const routes = [
   {
@@ -15,8 +15,12 @@ const routes = [
   {
     path: ROUTES.BLOG_PAGE.path,
     name: ROUTES.BLOG_PAGE.name,
-    component: () => import("@/views/BlogPage.vue"),
-    props: true,
+    component: () => import("@/views/ArticlePage.vue"),
+    props: (route) => ({
+      slug: route.params.slug,
+      folder: DIRECTORY_MAPPING[ARTICLE_TYPES.BLOG],
+      articleType: ARTICLE_TYPES.BLOG,
+    }),
   },
   {
     path: ROUTES.COURSES_HUB.path,
@@ -26,8 +30,12 @@ const routes = [
   {
     path: ROUTES.COURSE_PAGE.path,
     name: ROUTES.COURSE_PAGE.name,
-    component: () => import("@/views/CoursePage.vue"),
-    props: true,
+    component: () => import("@/views/ArticlePage.vue"),
+    props: (route) => ({
+      slug: route.params.slug,
+      folder: DIRECTORY_MAPPING[ARTICLE_TYPES.COURSE],
+      articleType: ARTICLE_TYPES.COURSE,
+    }),
   },
   {
     path: ROUTES.ASTRONOMY_HUB.path,
@@ -37,8 +45,12 @@ const routes = [
   {
     path: ROUTES.ASTRONOMY_PAGE.path,
     name: ROUTES.ASTRONOMY_PAGE.name,
-    component: () => import("@/views/AstronomyPage.vue"),
-    props: true,
+    component: () => import("@/views/ArticlePage.vue"),
+    props: (route) => ({
+      slug: route.params.slug,
+      folder: DIRECTORY_MAPPING[ARTICLE_TYPES.ASTRONOMY],
+      articleType: ARTICLE_TYPES.ASTRONOMY,
+    }),
   },
   {
     path: ROUTES.ABOUT_ME.path,
