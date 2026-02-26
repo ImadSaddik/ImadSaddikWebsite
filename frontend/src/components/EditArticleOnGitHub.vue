@@ -26,7 +26,7 @@ export default {
     githubEditUrl() {
       const baseRepoUrl = "https://github.com/ImadSaddik/ImadSaddikWebsite/edit/master";
       const directory = DIRECTORY_MAPPING[this.articleType];
-      const filePath = `frontend/src/${directory}/${this.slug}/index.vue`;
+      const filePath = `frontend/src/${directory}/${this.slug}/content.md`;
       return `${baseRepoUrl}/${filePath}`;
     },
   },

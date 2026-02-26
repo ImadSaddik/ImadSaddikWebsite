@@ -17,7 +17,7 @@ describe("EditArticleOnGitHub", () => {
     const link = wrapper.find("a");
     const directory = DIRECTORY_MAPPING[ARTICLE_TYPES.BLOG];
     expect(link.attributes("href")).toBe(
-      `https://github.com/ImadSaddik/ImadSaddikWebsite/edit/master/frontend/src/${directory}/blog_name/index.vue`
+      `https://github.com/ImadSaddik/ImadSaddikWebsite/edit/master/frontend/src/${directory}/blog_name/content.md`
     );
   });
 
@@ -26,7 +26,7 @@ describe("EditArticleOnGitHub", () => {
     const link = wrapper.find("a");
     const directory = DIRECTORY_MAPPING[ARTICLE_TYPES.COURSE];
     expect(link.attributes("href")).toBe(
-      `https://github.com/ImadSaddik/ImadSaddikWebsite/edit/master/frontend/src/${directory}/course_name/index.vue`
+      `https://github.com/ImadSaddik/ImadSaddikWebsite/edit/master/frontend/src/${directory}/course_name/content.md`
     );
   });
 
@@ -35,7 +35,7 @@ describe("EditArticleOnGitHub", () => {
     const link = wrapper.find("a");
     const directory = DIRECTORY_MAPPING[ARTICLE_TYPES.ASTRONOMY];
     expect(link.attributes("href")).toBe(
-      `https://github.com/ImadSaddik/ImadSaddikWebsite/edit/master/frontend/src/${directory}/astronomy_name/index.vue`
+      `https://github.com/ImadSaddik/ImadSaddikWebsite/edit/master/frontend/src/${directory}/astronomy_name/content.md`
     );
   });
 
