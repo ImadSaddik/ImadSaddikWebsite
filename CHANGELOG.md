@@ -12,9 +12,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Architecture (v2.0):**
   - **Markdown content authoring:** Migrated entire article content from individual Vue files (`index.vue`) to unified Markdown (`content.md`) files for better authoring and separation of concerns.
   - **Custom rendering engine:** Developed a comprehensive system of custom Vue-based Markdown transformers (headers, lists, code blocks, images, videos, admonitions, tables, and YouTube embeds) to render Markdown into functional Vue components.
-- **Article tracking and metrics:**
-  - **Interactive features:** Implemented backend and frontend tracking for article views, read counts, and user claps.
-  - **Optimistic UI:** Added optimistic updates for clapping to provide an instantaneous user experience.
 - **SEO and routing:**
   - **Nginx redirect map:** Added an Nginx configuration map to handle automatic redirection of old camelCase URLs to their new kebab-case equivalents, preserving SEO rankings and external links.
 - **New components:**
@@ -30,7 +27,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **CI/CD and security:**
   - Major dependency upgrades including Vue Router v5.0, Gunicorn v24, Meilisearch v0.40, and Pandas v3.0.
   - Improved "Edit on GitHub" links to target the new `content.md` source files.
-  - Added markdownlint to the pre-commit hook and CI pipeline.
 
 ## [v1.1.0] - 2026-01-27
 
