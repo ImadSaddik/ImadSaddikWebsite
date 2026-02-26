@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.0.0] - 2026-02-26
+
+### Added
+
+- **Architecture (v2.0):**
+  - **Markdown content authoring:** Migrated entire article content from individual Vue files (`index.vue`) to unified Markdown (`content.md`) files for better authoring and separation of concerns.
+  - **Custom rendering engine:** Developed a comprehensive system of custom Vue-based Markdown transformers (headers, lists, code blocks, images, videos, admonitions, tables, and YouTube embeds) to render Markdown into functional Vue components.
+- **Article tracking and metrics:**
+  - **Interactive features:** Implemented backend and frontend tracking for article views, read counts, and user claps.
+  - **Optimistic UI:** Added optimistic updates for clapping to provide an instantaneous user experience.
+- **SEO and routing:**
+  - **Nginx redirect map:** Added an Nginx configuration map to handle automatic redirection of old camelCase URLs to their new kebab-case equivalents, preserving SEO rankings and external links.
+- **New components:**
+  - `InlineIcon.vue` for embedding SVG icons directly within text paragraphs.
+  - `DataTable.vue` component for rich data presentation.
+  - Automated component importing using `unplugin-vue-components`.
+- **Content:**
+  - New guides on battery capacity monitoring on Linux, configuring UFW/Fail2Ban, and design warping in Inkscape.
+
+### Changed
+
+- **Frontend refactoring:** Consolidated separate blog, course, and astronomy pages into a single abstract layout component, significantly reducing code duplication.
+- **CI/CD and security:**
+  - Major dependency upgrades including Vue Router v5.0, Gunicorn v24, Meilisearch v0.40, and Pandas v3.0.
+  - Improved "Edit on GitHub" links to target the new `content.md` source files.
+  - Added markdownlint to the pre-commit hook and CI pipeline.
+
 ## [v1.1.0] - 2026-01-27
 
 ### Added
@@ -14,10 +41,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - New course: "Benchmarking Embedding Models".
   - Project showcase section to README with image preview.
   - Monthly maintenance checklist to README.
-- **Components & Features:**
+- **Components and features:**
   - `OrderedList` and `OrderedItem` components.
   - `useImageModal` composable for improved image handling.
-- **Community & Documentation:**
+- **Community and documentation:**
   - `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, and `CODEOWNERS` files.
   - Issue templates (Bug Report, Feature Request) and Pull Request template.
 
@@ -44,16 +71,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Frontend:** Vue.js (Vite)
   - **Backend:** FastAPI
   - **Search engine:** Self-hosted Meilisearch instance.
-- **CI/CD & Automation:**
+- **CI/CD and automation:**
   - **Quality gates:** Automated linting (Ruff, ESLint) and formatting (Prettier).
   - **Testing:** Full suite of Unit, Integration, and End-to-End (Playwright) tests.
   - **Security scanning:** Automated security checks using OWASP ZAP.
   - **Deployment:** Zero-downtime deployment to DigitalOcean via SSH.
-- **Infrastructure & Security:**
+- **Infrastructure and security:**
   - **Server:** Ubuntu VM on DigitalOcean protected by UFW firewall and Fail2Ban.
   - **Web server:** Nginx configured with strict caching rules and security headers (CSP).
   - **Monitoring:** Real-time resource tracking with Btop and traffic analysis with GoAccess.
   - **Performance:** Global delivery optimization via Cloudflare CDN.
 
+[v2.0.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v1.1.0...v2.0.0
 [v1.1.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v1.0.0...v1.1.0
 [v1.0.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/releases/tag/v1.0.0
