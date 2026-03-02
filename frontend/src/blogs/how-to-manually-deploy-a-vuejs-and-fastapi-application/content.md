@@ -597,7 +597,7 @@ srwxr-xr-x 1 <your_username> <your_username> 0 Feb 8 13:00 /web_app/backend/guni
 If the file is missing, the service might have crashed or failed to write to the directory. Check the permissions or logs again.
 :::
 
-### Verify the service (and kill zombies)
+### Verify the service (and kill orphans)
 
 Check if your process is running correctly using `ps`.
 
@@ -605,10 +605,10 @@ Check if your process is running correctly using `ps`.
 ps aux | grep <your_project_name>
 ```
 
-You should see only **one** cluster of processes with a recent start time. However, if you see dozens of processes, or processes with old dates, you have "zombie" workers.
+You should see only **one** cluster of processes with a recent start time. However, if you see dozens of processes, or processes with old dates, you have "orphan" workers.
 
 ::: info Note
-A "zombie" process is a process that has completed execution but still has an entry in the process table. You can learn more about zombie processes here: [https://en.wikipedia.org/wiki/Zombie_process](https://en.wikipedia.org/wiki/Zombie_process).
+An "orphan" process is a computer process whose parent process has finished or terminated, though it remains running itself. You can learn more about orphan processes here: [https://en.wikipedia.org/wiki/Orphan_process](https://en.wikipedia.org/wiki/Orphan_process).
 :::
 
 Here is a real example from my server. Look closely at the start dates:
@@ -629,7 +629,7 @@ imad      833505  0.0  1.2  38128  5760 ?        S     Feb07   0:17 ... /web_app
 imad      833507  0.2  6.9 224996 32732 ?        Sl    Feb07   4:02 ... /web_app/backend/venv/bin/gunicorn main:app --name imadsaddik_com --workers 1
 ```
 
-I have dozens of processes running simultaneously. Some are from yesterday, some are from last month, and some are even from last year! These are "zombie" workers, orphaned processes running in the background, fighting over the same socket file and eating your RAM.
+I have dozens of processes running simultaneously. Some are from yesterday, some are from last month, and some are even from last year! These are "orphan" workers, orphaned processes running in the background, fighting over the same socket file and eating your RAM.
 
 You might wonder if this actually matters. The answer is yes. Run this command to see exactly how much memory each of these ghosts are stealing. It sorts processes by memory usage:
 
@@ -637,7 +637,7 @@ You might wonder if this actually matters. The answer is yes. Run this command t
 ps -eo pid,user,rss,comm | grep gunicorn | awk '{printf "%s %s %0.1fM %s\n", $1, $2, $3/1024, $4}' | sort -k3 -hr
 ```
 
-The output reveals the cost. While my main process (PID 833507) is using 32MB, the zombies are each chewing up small chunks of memory:
+The output reveals the cost. While my main process (PID 833507) is using 32MB, the orphans are each chewing up small chunks of memory:
 
 ```output
 833507    imad     32.0M    gunicorn
@@ -693,7 +693,7 @@ In the guide, we set `NUM_WORKERS=3`, so you should see **4 processes** total (1
 The formula: `Total Processes = 1 Master + N Workers`
 :::
 
-You want to keep the Master and its children and kill the zombies (orphaned Masters). Ask Supervisor for the PID of the Master process.
+You want to keep the Master and its children and kill the orphans (orphaned Masters). Ask Supervisor for the PID of the Master process.
 
 ```bash
 sudo supervisorctl pid <your_project_name>
@@ -715,19 +715,19 @@ Look at the columns: `PID` (The process itself) and `PPID` (The parent who creat
 
 ```output
 UID    PID     PPID    ... CMD
-imad   29492   1       ... gunicorn main:app (ZOMBIE - Parent is 1/Init)
-imad   60096   1       ... gunicorn main:app (ZOMBIE - Parent is 1/Init)
+imad   29492   1       ... gunicorn main:app (ORPHAN - Parent is 1/Init)
+imad   60096   1       ... gunicorn main:app (ORPHAN - Parent is 1/Init)
 ...
-imad   783416  1       ... gunicorn main:app (ZOMBIE - Parent is 1/Init)
+imad   783416  1       ... gunicorn main:app (ORPHAN - Parent is 1/Init)
 imad   833505  833485  ... gunicorn main:app (MASTER - This matches the Supervisor PID)
 imad   833507  833505  ... gunicorn main:app (WORKER - Parent is 833505)
 ```
 
 - **PID 833505**: This matches the PID from Step 1. **KEEP IT**.
 - **PID 833507**: Look at its PPID (Parent). It is `833505`. This is a legitimate worker owned by the Master. **KEEP IT**.
-- **PID 29492 (and others)**: Look at their PPID. It is `1`. In Linux, PID 1 is the [system init process](https://en.wikipedia.org/wiki/Init). This means their original parent died, and they were "orphaned" to the OS. These are the zombies. **KILL THEM**.
+- **PID 29492 (and others)**: Look at their PPID. It is `1`. In Linux, PID 1 is the [system init process](https://en.wikipedia.org/wiki/Init). This means their original parent died, and they were "orphaned" to the OS. These are the orphans. **KILL THEM**.
 
-Now that you have visually confirmed the zombies (the ones whose PPID is `1`), you can kill them safely without touching the Master (`833505`) or its Worker (`833507`).
+Now that you have visually confirmed the orphans (the ones whose PPID is `1`), you can kill them safely without touching the Master (`833505`) or its Worker (`833507`).
 
 ```bash
 # Syntax: sudo kill <pid_1> <pid_2> <pid_3> ... <pid_n>
@@ -735,10 +735,10 @@ sudo kill 29492 60096 783416
 ```
 
 ::: info Note
-Replace `29492`, `60096`, `783416`, etc. with the actual zombie PIDs from **your terminal output**. Do not copy-paste the example numbers; they are only from my server.
+Replace `29492`, `60096`, `783416`, etc. with the actual orphan PIDs from **your terminal output**. Do not copy-paste the example numbers; they are only from my server.
 :::
 
-Since you are only killing the zombies, the main process continues serving traffic without interruption.
+Since you are only killing the orphans, the main process continues serving traffic without interruption.
 
 ## Conclusion
 
