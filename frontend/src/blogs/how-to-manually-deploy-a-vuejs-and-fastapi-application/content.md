@@ -9,6 +9,11 @@ tags: ["Deployment", "Vue.js", "FastAPI", "Gunicorn", "Supervisor", "Ubuntu"]
 
 In this article, you will move your codebase to the cloud, install the necessary runtimes (Python and Node.js), and configure a process manager to keep your backend alive.
 
+Prefer video? Watch the video tutorial:
+
+::: youtube [https://www.youtube.com/embed/wmF_xVQC790](https://www.youtube.com/embed/wmF_xVQC790)
+:::
+
 ## Move the project to the VM
 
 You will be deploying a full-stack application that uses **Vue.js** for the frontend and **FastAPI** for the backend.
