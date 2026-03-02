@@ -349,7 +349,7 @@ ssh -L 8080:localhost:8080 <your_username>@<your_server_ip>
 
 Now, open your browser and visit `http://localhost:8080`. You should see your Vue.js application.
 
-![Home page of my website](./2_visiting_the_website_at_8080.png "Home page of my website")
+![Home page of my website](./2_visiting_the_website_at_8080.png "Home page of my website.")
 
 ::: info Note
 Your app will fail to make any API calls because the backend isn't running properly yet. This is normal. You are just testing if the HTML and CSS load correctly.
