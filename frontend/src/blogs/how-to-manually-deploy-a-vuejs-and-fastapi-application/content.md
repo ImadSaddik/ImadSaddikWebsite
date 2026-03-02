@@ -629,7 +629,7 @@ imad      833505  0.0  1.2  38128  5760 ?        S     Feb07   0:17 ... /web_app
 imad      833507  0.2  6.9 224996 32732 ?        Sl    Feb07   4:02 ... /web_app/backend/venv/bin/gunicorn main:app --name imadsaddik_com --workers 1
 ```
 
-I have dozens of processes running simultaneously. Some are from yesterday, some are from last month, and some are even from last year! These are "orphan" workers, orphaned processes running in the background, fighting over the same socket file and eating your RAM.
+I have dozens of processes running simultaneously. Some are from yesterday, some are from last month, and some are even from last year! These are "orphan" workers running in the background, fighting over the same socket file and eating your RAM.
 
 You might wonder if this actually matters. The answer is yes. Run this command to see exactly how much memory each of these ghosts are stealing. It sorts processes by memory usage:
 
