@@ -80,13 +80,19 @@ describe("imageTransformer", () => {
     it("should render bold text in the caption as <strong>", () => {
       const input = '![chart](./chart.png "Revenue **grew** this quarter")';
       const output = markdownItInstance.render(input);
-      expect(output).toContain("Revenue <strong>grew</strong> this quarter");
+      expect(output).toContain("Revenue &lt;strong&gt;grew&lt;/strong&gt; this quarter");
     });
 
     it("should render inline code in the caption as InlineCode", () => {
       const input = '![screenshot](./screenshot.png "Run `npm install` first")';
       const output = markdownItInstance.render(input);
-      expect(output).toContain('<InlineCode text="npm install" />');
+      expect(output).toContain("&lt;InlineCode text=&quot;npm install&quot; /&gt;");
+    });
+
+    it("should handle inline code with dashes inside caption without breaking attribute parsing", () => {
+      const input = '![diagram](./diagram.png "The `-L` flag enables port forwarding")';
+      const output = markdownItInstance.render(input);
+      expect(output).toContain("&lt;InlineCode text=&quot;-L&quot; /&gt;");
     });
   });
 

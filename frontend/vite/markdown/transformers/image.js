@@ -13,7 +13,9 @@ export function imageTransformer(markdownItInstance) {
 
     if (src) {
       const renderedCaption = title ? markdownItInstance.renderInline(title) : "";
-      return `<ImageWithCaption image-src="${src}" image-alt="${alt}" image-caption="${renderedCaption}" />`;
+      const escapedCaption = markdownItInstance.utils.escapeHtml(renderedCaption);
+
+      return `<ImageWithCaption image-src="${src}" image-alt="${alt}" image-caption="${escapedCaption}" />`;
     }
 
     return defaultRender(tokens, index, options, env, self);

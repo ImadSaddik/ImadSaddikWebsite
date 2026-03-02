@@ -15,7 +15,7 @@ NVM_INIT="export NVM_DIR=\"$HOME/.nvm\"; [ -s \"\$NVM_DIR/nvm.sh\" ] && . \"\$NV
 
 # Commands
 MEILISEARCH_CMD="sudo ./meilisearch --master-key='aStrongMasterKey'"
-BACKEND_CMD="$CONDA_INIT && conda activate meilisearch && uvicorn main:app --reload --host 0.0.0.0 --port 8000"
+BACKEND_CMD="$CONDA_INIT && conda activate imadsaddik_com && uvicorn main:app --reload --host 0.0.0.0 --port 8000"
 FRONTEND_CMD="$NVM_INIT && pnpm run dev"
 
 # Kill any old session and start a new one
