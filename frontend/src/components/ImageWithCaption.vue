@@ -2,9 +2,9 @@
   <section class="image-with-caption-container">
     <figure>
       <img :src="imageSrc" :alt="imageAlt" @click="handleImageClick" />
-      <div class="image-caption">
+      <figcaption class="image-caption">
         <slot></slot>
-      </div>
+      </figcaption>
     </figure>
   </section>
 </template>
