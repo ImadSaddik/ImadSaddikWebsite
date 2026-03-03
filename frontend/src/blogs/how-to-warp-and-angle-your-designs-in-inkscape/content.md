@@ -20,7 +20,9 @@ When you place a flat 2D design onto a picture of a 3D object, it doesn't accoun
 
 To fix this, you need to warp your design. However, Inkscape has different tools for this: the **Perspective** extension and the **Envelope Deformation** path effect.
 
-![Flat logo and text do not match the top surface](./1_flat_logo_does_not_match_the_top_surface.svg "The flat logo and text do not match the top surface.")
+::: image ./1_flat_logo_does_not_match_the_top_surface.svg "Flat logo and text do not match the top surface"
+The flat logo and text do not match the top surface.
+:::
 
 ## The solution
 
@@ -39,7 +41,9 @@ When drawing the shape, start at the bottom-left corner and move clockwise. This
 However, the drawing order does not matter for logos.
 :::
 
-![Draw a shape matching the surface](./2_draw_shape_matching_surface.svg "Draw a shape matching the surface.")
+::: image ./2_draw_shape_matching_surface.svg "Draw a shape matching the surface"
+Draw a shape matching the surface.
+:::
 
 Make sure your text is on top of the shape in the layer order. You can check this in the `Layers` panel (`Shift` + `Ctrl` + `L`). After that, select your text path first, hold `Shift`, and select the target shape second.
 
@@ -51,7 +55,9 @@ Go to `Extensions > Modify Path > Perspective`.
 
 Inkscape will snap the four corners of your text to the corners of the shape.
 
-![Using the Perspective extension](./3_using_perspective_extension.svg "The text snaps perfectly when drawn clockwise from bottom left (left), but fails with incorrect drawing direction (right).")
+::: image ./3_using_perspective_extension.svg "Using the Perspective extension"
+The text snaps perfectly when drawn clockwise from bottom left (left), but fails with incorrect drawing direction (right).
+:::
 
 As you can see, the text matches the surface angle perfectly, provided it was drawn correctly.
 
@@ -59,29 +65,41 @@ As you can see, the text matches the surface angle perfectly, provided it was dr
 
 The Perspective extension falls short on curved surfaces because it creates a linear distortion between corners. For a curved roof or a bottle, you need **Envelope Deformation**.
 
-![Perspective extension fails on curved surfaces](./4_perspective_fails_on_circle.svg "The Perspective extension distorts text poorly on curved surfaces because it only maps to the four corners.")
+::: image ./4_perspective_fails_on_circle.svg "Perspective extension fails on curved surfaces"
+The Perspective extension distorts text poorly on curved surfaces because it only maps to the four corners.
+:::
 
 Select your logo path and open the `Path Effects` panel by pressing `Ctrl` + `&`. Click the arrow icon and search for "Envelope Deformation".
 
-![Adding Envelope Deformation](./5_adding_envelope_deformation.svg "Select Envelope Deformation from the Path Effects panel.")
+::: image ./5_adding_envelope_deformation.svg "Adding Envelope Deformation"
+Select Envelope Deformation from the Path Effects panel.
+:::
 
 Draw a shape that matches the curved surface you want to place your logo on. This shape will act as a guide for warping. Center the logo over this shape.
 
-![Draw a shape matching the curved surface](./6_draw_shape_matching_curved_surface.svg "Draw a shape matching the curved surface.")
+::: image ./6_draw_shape_matching_curved_surface.svg "Draw a shape matching the curved surface"
+Draw a shape matching the curved surface.
+:::
 
 Select the logo and make sure that it is on top of the guide shape in the layer order. In the Path Effects panel, you will see options for **Top bend path**, **Right bend path**, etc.
 
 Click the small "Edit on-canvas" ::icon{/src/assets/icons/tool_node_editor.svg}:: icon next to the **Top bend path** option. You will see a green line appear with two handles.
 
-![Editing the top bend path](./7_editing_top_bend_path.svg "Click the 'Edit on-canvas' icon to reveal the green bend line with handles.")
+::: image ./7_editing_top_bend_path.svg "Editing the top bend path"
+Click the 'Edit on-canvas' icon to reveal the green bend line with handles.
+:::
 
 Pick one of the green handles and snap it to the corresponding corner of your guide shape. Do the same for the other handle.
 
-![Aligning the top bend handles](./8_aligning_top_bend_handles.svg "Align the top bend handles to the guide shape corners.")
+::: image ./8_aligning_top_bend_handles.svg "Aligning the top bend handles"
+Align the top bend handles to the guide shape corners.
+:::
 
 Repeat this process for the other sides: **Right bend path**, **Bottom bend path**, and **Left bend path**. Each time, click the "Edit on-canvas" ::icon{/src/assets/icons/tool_node_editor.svg}:: icon and snap the handles to the corners of your guide shape.
 
-![Aligning all bend handles](./9_aligning_all_bend_handles.svg "Align all bend handles to the guide shape corners.")
+::: image ./9_aligning_all_bend_handles.svg "Aligning all bend handles"
+Align all bend handles to the guide shape corners.
+:::
 
 ::: warning Important
 This tool creates a "live" effect. To make the shape permanent, select your finished object and go to `Path > Object to Path`.

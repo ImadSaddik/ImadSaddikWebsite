@@ -17,108 +17,164 @@ describe("imageTransformer", () => {
     });
   });
 
-  describe("image with caption", () => {
-    it("should transform markdown images into ImageWithCaption component", () => {
-      const input = '![alt text](./image.png "My Caption")';
+  describe("image with alt text and caption", () => {
+    it("should transform ::: image into ImageWithCaption component", () => {
+      const input = '::: image ./image.png "alt text"\nMy Caption\n:::';
       const output = markdownItInstance.render(input);
-      expect(output).toContain(
-        '<ImageWithCaption image-src="./image.png" image-alt="alt text" image-caption="My Caption" />'
-      );
+      expect(output).toContain('<ImageWithCaption image-src="./image.png" image-alt="alt text">');
     });
 
-    it("should set the correct image-src", () => {
-      const input = '![photo](./photos/sunset.jpg "Sunset")';
+    it("should set the correct image-src attribute", () => {
+      const input = '::: image ./photos/sunset.jpg "A sunset"\nSunset over the hills.\n:::';
       const output = markdownItInstance.render(input);
       expect(output).toContain('image-src="./photos/sunset.jpg"');
     });
 
-    it("should set the correct image-alt", () => {
-      const input = '![a beautiful landscape](./landscape.jpg "Landscape")';
+    it("should set the correct image-alt attribute", () => {
+      const input = '::: image ./landscape.jpg "A beautiful landscape"\nCaption.\n:::';
       const output = markdownItInstance.render(input);
-      expect(output).toContain('image-alt="a beautiful landscape"');
+      expect(output).toContain('image-alt="A beautiful landscape"');
     });
 
-    it("should set the correct image-caption", () => {
-      const input = '![chart](./chart.png "Monthly revenue for Q4")';
+    it("should produce a closing ImageWithCaption tag", () => {
+      const input = '::: image ./img.png "An image"\nCaption text.\n:::';
       const output = markdownItInstance.render(input);
-      expect(output).toContain('image-caption="Monthly revenue for Q4"');
+      expect(output).toContain("</ImageWithCaption>");
     });
 
-    it("should produce a self-closing tag", () => {
-      const input = '![img](./img.png "Caption")';
+    it("should render the caption text as slot content", () => {
+      const input = '::: image ./chart.png "Monthly revenue"\nMonthly revenue for Q4.\n:::';
       const output = markdownItInstance.render(input);
-      expect(output).toContain("/>");
-      expect(output).not.toContain("</ImageWithCaption>");
+      expect(output).toContain("Monthly revenue for Q4.");
     });
-  });
 
-  describe("image without caption", () => {
-    it("should produce an empty image-caption when no title is given", () => {
-      const input = "![screenshot](./screenshot.png)";
+    it("should produce an empty image-alt when no alt text is given", () => {
+      const input = "::: image ./screenshot.png\nCaption here.\n:::";
       const output = markdownItInstance.render(input);
       expect(output).toContain('image-src="./screenshot.png"');
-      expect(output).toContain('image-alt="screenshot"');
-      expect(output).toContain('image-caption=""');
+      expect(output).toContain('image-alt=""');
+    });
+
+    it("should render the component with no slot content when the container body is empty", () => {
+      const input = '::: image ./diagram.png "Diagram"\n:::';
+      const output = markdownItInstance.render(input);
+      expect(output).toContain('<ImageWithCaption image-src="./diagram.png" image-alt="Diagram">');
+      expect(output).toContain("</ImageWithCaption>");
     });
   });
 
   describe("file formats", () => {
     it("should handle .svg files", () => {
-      const input = '![diagram](./diagram.svg "Architecture")';
+      const input = '::: image ./diagram.svg "Architecture diagram"\nCaption.\n:::';
       const output = markdownItInstance.render(input);
       expect(output).toContain('image-src="./diagram.svg"');
     });
 
     it("should handle .jpg files", () => {
-      const input = '![photo](./photo.jpg "A photo")';
+      const input = '::: image ./photo.jpg "A photo"\nCaption.\n:::';
       const output = markdownItInstance.render(input);
       expect(output).toContain('image-src="./photo.jpg"');
     });
+
+    it("should handle .jpeg files", () => {
+      const input = '::: image ./photo.jpeg "A photo"\nCaption.\n:::';
+      const output = markdownItInstance.render(input);
+      expect(output).toContain('image-src="./photo.jpeg"');
+    });
+
+    it("should handle .png files", () => {
+      const input = '::: image ./screenshot.png "A screenshot"\nCaption.\n:::';
+      const output = markdownItInstance.render(input);
+      expect(output).toContain('image-src="./screenshot.png"');
+    });
   });
 
-  describe("markdown in caption", () => {
+  describe("markdown in caption slot", () => {
     it("should render bold text in the caption as <strong>", () => {
-      const input = '![chart](./chart.png "Revenue **grew** this quarter")';
+      const input = '::: image ./chart.png "Chart"\nRevenue **grew** this quarter.\n:::';
       const output = markdownItInstance.render(input);
-      expect(output).toContain("Revenue &lt;strong&gt;grew&lt;/strong&gt; this quarter");
+      expect(output).toContain("<strong>grew</strong>");
     });
 
     it("should render inline code in the caption as InlineCode", () => {
-      const input = '![screenshot](./screenshot.png "Run `npm install` first")';
+      const input = '::: image ./screenshot.png "Screenshot"\nRun `npm install` first.\n:::';
       const output = markdownItInstance.render(input);
-      expect(output).toContain("&lt;InlineCode text=&quot;npm install&quot; /&gt;");
+      expect(output).toContain('<InlineCode text="npm install" />');
     });
 
-    it("should handle inline code with dashes inside caption without breaking attribute parsing", () => {
-      const input = '![diagram](./diagram.png "The `-L` flag enables port forwarding")';
+    it("should render links in the caption as <a> tags", () => {
+      const input = '::: image ./photo.jpg "Photo"\nCheck out [this link](https://example.com).\n:::';
       const output = markdownItInstance.render(input);
-      expect(output).toContain("&lt;InlineCode text=&quot;-L&quot; /&gt;");
+      expect(output).toContain('<a href="https://example.com" target="_blank" rel="noopener noreferrer">this link</a>');
+    });
+
+    it("should render superscripts", () => {
+      const input = '::: image ./formula.png "Formula"\nE = mc^2^.\n:::';
+      const output = markdownItInstance.render(input);
+      expect(output).toContain('E = mc<SuperscriptText text="2" />.');
+    });
+
+    it("should render inline icons", () => {
+      const input =
+        '::: image ./icon.png "Icon"\nLook for the star icon ::icon{/src/assets/icons/star.svg}:: in the guide.\n:::';
+      const output = markdownItInstance.render(input);
+      expect(output).toContain('<InlineIcon icon="/src/assets/icons/star.svg" />');
+    });
+
+    it("should render font awesome icons", () => {
+      const input =
+        '::: image ./icon.png "Icon"\nTo indicate a warning, use the ::fa{exclamation-triangle}:: icon.\n:::';
+      const output = markdownItInstance.render(input);
+      expect(output).toContain('<i class="exclamation-triangle"></i>');
     });
   });
 
-  describe("empty alt text", () => {
-    it("should produce an empty image-alt attribute for images with no alt text", () => {
-      const input = '![](./image.png "Caption")';
+  describe("alt text edge cases", () => {
+    it("should preserve apostrophes in alt text", () => {
+      const input = `::: image ./test.png "It's a diagram"\nCaption.\n:::`;
       const output = markdownItInstance.render(input);
-      expect(output).toContain('image-alt=""');
-      expect(output).toContain('image-caption="Caption"');
+      expect(output).toContain(`image-alt="It's a diagram"`);
+    });
+
+    it("should escape ampersands in alt text", () => {
+      const input = '::: image ./test.png "Foo & Bar"\nCaption.\n:::';
+      const output = markdownItInstance.render(input);
+      expect(output).toContain('image-alt="Foo &amp; Bar"');
+    });
+
+    it("should escape angle brackets in alt text", () => {
+      const input = '::: image ./test.png "Foo < Bar >"\nCaption.\n:::';
+      const output = markdownItInstance.render(input);
+      expect(output).toContain('image-alt="Foo &lt; Bar &gt;"');
+    });
+
+    it("should escape double quotes in alt text", () => {
+      const input = '::: image ./test.png "Foo "Bar""\nCaption.\n:::';
+      const output = markdownItInstance.render(input);
+      expect(output).toContain('image-alt="Foo &quot;Bar&quot;"');
     });
   });
 
   describe("multiple images", () => {
     it("should render two images in the same document independently", () => {
-      const input = '![first](./a.png "First")\n\n![second](./b.png "Second")';
+      const input =
+        '::: image ./a.png "First image"\nFirst caption.\n:::\n\n::: image ./b.png "Second image"\nSecond caption.\n:::';
       const output = markdownItInstance.render(input);
-      expect(output).toContain('<ImageWithCaption image-src="./a.png" image-alt="first" image-caption="First" />');
-      expect(output).toContain('<ImageWithCaption image-src="./b.png" image-alt="second" image-caption="Second" />');
+      expect(output).toContain('<ImageWithCaption image-src="./a.png" image-alt="First image">');
+      expect(output).toContain('<ImageWithCaption image-src="./b.png" image-alt="Second image">');
     });
   });
 
-  describe("image with no src", () => {
-    it("should fall back to the default renderer when src is empty", () => {
-      const input = "![alt]()";
+  describe("no transformation", () => {
+    it("should not transform when no src is provided", () => {
+      const input = "::: image\n:::";
       const output = markdownItInstance.render(input);
-      expect(output).toContain("<img");
+      expect(output).not.toContain("<ImageWithCaption");
+    });
+
+    it("should not transform an unknown container type", () => {
+      const input = '::: img ./photo.png "A photo"\nCaption.\n:::';
+      const output = markdownItInstance.render(input);
       expect(output).not.toContain("<ImageWithCaption");
     });
   });

@@ -57,7 +57,9 @@ Then, let's use an embedding model from Hugging Face. An embedding model convert
 
 I will use [all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) in this tutorial, it is a small model that should work fine if you don't have a GPU.
 
-![The embedding model's page on Hugging Face](./allMiniLmL6V2ModelHF.png "The model's card on Hugging Face.")
+::: image ./allMiniLmL6V2ModelHF.png "The embedding model's page on Hugging Face"
+The model's card on Hugging Face.
+:::
 
 First, make sure to install the `sentence_transformers` library in your python environment.
 

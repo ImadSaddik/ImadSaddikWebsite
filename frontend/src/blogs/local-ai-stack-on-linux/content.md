@@ -15,7 +15,9 @@ This article is long because I show everything in detail. You will learn a lot f
 
 In the end, I will show you how to automate everything by using [services](https://wiki.archlinux.org/title/Systemd), [cron jobs](https://en.wikipedia.org/wiki/Cron), creating desktop shortcuts, and using watchers to detect file changes to run commands automatically.
 
-![The architecture of the local AI stack that you will build.](./1_architecture_diagram.svg "The architecture of the local AI stack that you will build.")
+::: image ./1_architecture_diagram.svg "The architecture of the local AI stack that you will build."
+The architecture of the local AI stack that you will build.
+:::
 
 ::: warning
 Throughout this guide, I use my own username (`imad-saddik`) and specific directory paths (e.g., `/home/imad-saddik/...`) in the code snippets.
@@ -35,7 +37,9 @@ The experiments that I conducted in this article were performed on an **Asus ROG
 
 The main reason that made me want to try `llama.cpp` is running the new [Qwen3-30B-A3B-Instruct-2507](https://huggingface.co/Qwen/Qwen3-30B-A3B-Instruct-2507) model released by the [Qwen team](https://qwen.ai/home).
 
-![Comparing Qwen3-30B-A3B-Instruct-2507 to other models on selected benchmarks](./2_qwen_benchmark_graph.jpg "Comparing Qwen3-30B-A3B-Instruct-2507 to other models on selected benchmarks. Graph shared by the Qwen team.")
+::: image ./2_qwen_benchmark_graph.jpg "Comparing Qwen3-30B-A3B-Instruct-2507 to other models on selected benchmarks"
+Comparing Qwen3-30B-A3B-Instruct-2507 to other models on selected benchmarks. Graph shared by the Qwen team.
+:::
 
 Ollama is great, but it decides for you how it should run a model. That worked well for models that didn’t exceed the **12B parameters** range. However, when trying to run big models, ollama complains that I don’t have enough resources to use those models.
 
@@ -58,13 +62,17 @@ sudo apt install build-essential cmake git
 
 You need to install the **NVIDIA CUDA Toolkit** if you don’t have it. This is very important if you want to use your GPU for inference. You can [install the toolkit from NVIDIA’s website](https://developer.nvidia.com/cuda-downloads).
 
-![Selecting the target platform before downloading the CUDA toolkit](./3_cuda_toolkit_download.png "Selecting the target platform before downloading the CUDA toolkit.")
+::: image ./3_cuda_toolkit_download.png "Selecting the target platform before downloading the CUDA toolkit"
+Selecting the target platform before downloading the CUDA toolkit.
+:::
 
 When visiting the website, you will be prompted to select your operating system, architecture, distribution, and other stuff. The options that are selected in the image are valid for my system. Please make sure to select what is valid for you.
 
 For the installation type, you can choose **deb (network)** because it automatically handles downloading and installing all the necessary dependencies.
 
-![The commands to install the CUDA toolkit](./4_cuda_toolkit_commands.png "The commands to install the CUDA toolkit will be shown after completing the first step.")
+::: image ./4_cuda_toolkit_commands.png "The commands to install the CUDA toolkit"
+The commands to install the CUDA toolkit will be shown after completing the first step.
+:::
 
 After completing the first step, you will see a list of commands that you need to run in order to install the toolkit. To verify that the installation went well, run this command.
 
@@ -200,7 +208,9 @@ Companies and research teams upload their models to [Hugging Face](https://huggi
 
 Search for the [Qwen3-30B-A3B-Instruct-2507](https://huggingface.co/Qwen/Qwen3-30B-A3B-Instruct-2507) model in the hub. Click on the [Files and versions](https://huggingface.co/Qwen/Qwen3-30B-A3B-Instruct-2507/tree/main) tab, notice how many `safetensors` files are there. These files contain the weights in their original high-precision format (16 or 32-bits).
 
-![The Qwen3-30B-A3B-Instruct-2507 model uploaded to Hugging Face](./5_hugging_face_model_page.png "The Qwen3-30B-A3B-Instruct-2507 model uploaded to Hugging Face by the Qwen team.")
+::: image ./5_hugging_face_model_page.png "The Qwen3-30B-A3B-Instruct-2507 model uploaded to Hugging Face"
+The Qwen3-30B-A3B-Instruct-2507 model uploaded to Hugging Face by the Qwen team.
+:::
 
 `llama.cpp` does not work with the `safetensors` format, it works with the [GGUF format](https://github.com/ggml-org/ggml/blob/master/docs/gguf.md). This format is optimized for quick loading and saving of models, and running models efficiently on consumer hardware.
 
@@ -208,11 +218,15 @@ The good news is that we can convert models to the GGUF format. There is a [Hugg
 
 If you don’t want to convert the model by yourself, you can search for GGUF versions of the model that you want to download. There are a lot of people that do this for the community. You have [Unsloth](https://huggingface.co/unsloth/models), [bartowski](https://huggingface.co/bartowski), [TheBloke](https://huggingface.co/TheBloke), and others. Sometimes, the teams behind the models release GGUF versions too.
 
-![A GGUF version of the Qwen3-30B-A3B-Instruct-2507 model from Unsloth](./6_hugging_face_gguf_page.jpg "A GGUF version of the Qwen3-30B-A3B-Instruct-2507 model from Unsloth.")
+::: image ./6_hugging_face_gguf_page.jpg "A GGUF version of the Qwen3-30B-A3B-Instruct-2507 model from Unsloth"
+A GGUF version of the Qwen3-30B-A3B-Instruct-2507 model from Unsloth.
+:::
 
 Hugging Face displays useful information for GGUF models. On the right side, you will find how much memory is needed to run the model at different [quantization levels](https://huggingface.co/docs/hub/gguf#quantization-types).
 
-![The hardware compatibility panel](./7_hardware_compatibility_panel.jpg "The hardware compatibility panel.")
+::: image ./7_hardware_compatibility_panel.jpg "The hardware compatibility panel"
+The hardware compatibility panel.
+:::
 
 Hugging Face is displaying the available quantization levels for the model that you selected. You will see a green checkmark next to the quantization levels that you can run without any issue on your system.
 
@@ -220,11 +234,15 @@ If you don’t see those icons that means that you did not specify the hardware 
 
 In the settings page, click on `Local Apps and Hardware`. After that, select one of the three options under the `Add new Hardware` section, select the model that you have and click on the `Add item` button.
 
-![Adding Hardware to your Hugging Face profile](./8_adding_hardware_to_hf.svg "Adding Hardware to your Hugging Face profile.")
+::: image ./8_adding_hardware_to_hf.svg "Adding Hardware to your Hugging Face profile"
+Adding Hardware to your Hugging Face profile.
+:::
 
 But, Imad! I see a lot of quantization options, which one should I choose? That is a great question, before I answer it I would like you to [read this page](https://huggingface.co/docs/hub/gguf#quantization-types) from Hugging Face. There is a table that explains all those quantization types in detail.
 
-![The quantization types explained in the Hugging Face docs](./9_quantization_types_table.jpg "The quantization types explained in the Hugging Face docs.")
+::: image ./9_quantization_types_table.jpg "The quantization types explained in the Hugging Face docs"
+The quantization types explained in the Hugging Face docs.
+:::
 
 Avoid downloading models in `FP32` or `FP16` precision, as these unquantized formats require a lot of memory, especially for very large models.
 
@@ -556,7 +574,9 @@ You can now build and run the LibreChat application using Docker compose. Run th
 docker compose up -d
 ```
 
-![Starting the LibreChat application](./10_libre_chat_startup.jpg "Starting the LibreChat application.")
+::: image ./10_libre_chat_startup.jpg "Starting the LibreChat application"
+Starting the LibreChat application.
+:::
 
 Open your web browser and navigate to [http://localhost:3080](http://localhost:3080). After that, create an account, and login. To select a model that you are serving with `llama-server` follow these steps:
 
@@ -564,7 +584,9 @@ Open your web browser and navigate to [http://localhost:3080](http://localhost:3
 - In the dropdown menu, hover over `llama.cpp`.
 - Select the model name that appears.
 
-![Selecting a model from Llama.cpp](./11_libre_chat_model_selection.svg "Selecting a model from Llama.cpp.")
+::: image ./11_libre_chat_model_selection.svg "Selecting a model from Llama.cpp"
+Selecting a model from Llama.cpp.
+:::
 
 You’ll notice the model is named `canis-majoris`. This is just a display name that I chose, it has nothing to do with the model that you are serving with `llama-server`.
 
@@ -593,7 +615,9 @@ Luckily, we have [llama-swap](https://github.com/mostlygeek/llama-swap). This to
 
 Let’s set up the `llama-swap` tool. Go to the [llama-swap releases page](https://github.com/mostlygeek/llama-swap/releases) and download the archive that matches your operating system and CPU architecture. For example, I chose `llama-swap_162_linux_amd64.tar.gz` because I am on Ubuntu with a 64-bit Intel CPU.
 
-![The releases page of the llama-swap project](./12_llama_swap_releases.jpg "The releases page of the llama-swap project.")
+::: image ./12_llama_swap_releases.jpg "The releases page of the llama-swap project"
+The releases page of the llama-swap project.
+:::
 
 Open your terminal, navigate to your Downloads folder, and extract the `llama-swap` executable using the `tar` command.
 
@@ -673,21 +697,29 @@ docker compose restart
 
 Navigate back to LibreChat at [http://localhost:3080](http://localhost:3080). When you click the model selector, you should now see a dropdown list with all the models you configured.
 
-![The new models appear in LibreChat](./13_libre_chat_new_models.jpg "The new models appear in LibreChat.")
+::: image ./13_libre_chat_new_models.jpg "The new models appear in LibreChat"
+The new models appear in LibreChat.
+:::
 
 In LibreChat, select one of your models, send a message, and wait for the reply. Open a new browser tab and navigate to the address of your `llama-swap` server: [http://localhost:8080](http://localhost:8080).
 
 This is a web application that ships with `llama-swap`. it shows you logs, available models, the state of each server, and more.
 
-![The llama-swap web interface](./14_llama_swap_web_ui.jpg "The llama-swap web interface.")
+::: image ./14_llama_swap_web_ui.jpg "The llama-swap web interface"
+The llama-swap web interface.
+:::
 
 Click on the [models tab](http://localhost:8080/ui/models) and make sure that the model that you are chatting with in LibreChat is in the ready state.
 
-![The model you are chatting with in LibreChat is in the ready state](./15_llama_swap_ready_state.jpg "The model you are chatting with in LibreChat is in the ready state.")
+::: image ./15_llama_swap_ready_state.jpg "The model you are chatting with in LibreChat is in the ready state"
+The model you are chatting with in LibreChat is in the ready state.
+:::
 
 Then, select your second model and send another message. Switch back to the `llama-swap` web interface and notice how the state has changed. The previous model is in the stopped state, while the new one is in the ready state.
 
-![The previous model is in the stopped state after switching to the other model](./16_llama_swap_stopped_state.jpg "The previous model is in the stopped state after switching to the other model.")
+::: image ./16_llama_swap_stopped_state.jpg "The previous model is in the stopped state after switching to the other model"
+The previous model is in the stopped state after switching to the other model.
+:::
 
 When you switch models in LibreChat, you will see `llama-swap` automatically stop the old server and start the new one. The logs will show a cleanup message like this.
 
@@ -697,7 +729,9 @@ srv    operator(): operator(): cleaning up before exit...
 
 If you stop interacting with a model, its status will remain `ready` for the duration you set in the `ttl` field. After that, `llama-swap` will automatically unload it to free up VRAM, and its status will change to `stopped`.
 
-![The model’s state changed to stopped because it was not used](./17_llama_swap_unload_state.jpg "The model’s state changed to <b>stopped</b> because it was not used.")
+::: image ./17_llama_swap_unload_state.jpg "The model’s state changed to stopped because it was not used"
+The model’s state changed to **stopped** because it was not used.
+:::
 
 The corresponding log message will look like this.
 
@@ -760,7 +794,9 @@ So far, we’ve focused on chat models. Now, let’s explore how to use an **emb
 
 We’ll use the [Qwen3-Embedding-8B-Q5_K_M](https://huggingface.co/Qwen/Qwen3-Embedding-8B-GGUF) model, which is currently the top-performing embedding model on the [MTEB leaderboard](https://huggingface.co/spaces/mteb/leaderboard).
 
-![The MTEB leaderboard](./18_mteb_leaderboard.jpg "The MTEB leaderboard.")
+::: image ./18_mteb_leaderboard.jpg "The MTEB leaderboard"
+The MTEB leaderboard.
+:::
 
 You can generate an embedding directly from the terminal using the `llama-embedding` program.
 
@@ -851,7 +887,9 @@ Running a multimodal model in `llama.cpp` involves two separate files that work 
 - The language model **(**`.gguf`**)**: This is the standard model file we've been using. It understands language, performs reasoning, and generates the final text response.
 - The multimodal projector **(**`mmproj.gguf`**)**: This is a specialized model. Its job is to look at an image, process it, and translate what it sees into embeddings that the language model can understand.
 
-![The mmproj and language models work together to handle multimodal input](./19_multimodal_architecture.svg "The mmproj and language models work together to handle multimodal input.")
+::: image ./19_multimodal_architecture.svg "The mmproj and language models work together to handle multimodal input"
+The mmproj and language models work together to handle multimodal input.
+:::
 
 ::: info
 The diagram above is a conceptual illustration I made to help explain the process. It does not reflect the exact internal architecture of any specific model.
@@ -859,7 +897,9 @@ The diagram above is a conceptual illustration I made to help explain the proces
 
 When downloading multimodal models from Hugging Face, you must make sure you get **both** the main `.gguf` file and the corresponding `mmproj.gguf` file.
 
-![Arrows point to the different files that you should be looking for when trying to download multimodal models](./20_download_multimodal_files.svg "Arrows point to the different files that you should be looking for when trying to download multimodal models.")
+::: image ./20_download_multimodal_files.svg "Arrows point to the different files that you should be looking for when trying to download multimodal models"
+Arrows point to the different files that you should be looking for when trying to download multimodal models.
+:::
 
 #### Running the model in the terminal
 
@@ -973,11 +1013,15 @@ In LibreChat, load the `gemma-3-4b-it` model and send a text message to verify t
 
 You got a response back? Perfect. Now click on the attach files icon and upload an image.
 
-![Uploading an image in LibreChat](./21_uploading_image_libre_chat.svg "Uploading an image in LibreChat.")
+::: image ./21_uploading_image_libre_chat.svg "Uploading an image in LibreChat"
+Uploading an image in LibreChat.
+:::
 
 Send the image together with a text message. You should get a response confirming that the model understood the image.
 
-![Successfully used an image as input in LibreChat](./22_image_input_libre_chat.jpg "Successfully used an image as input in LibreChat.")
+::: image ./22_image_input_libre_chat.jpg "Successfully used an image as input in LibreChat"
+Successfully used an image as input in LibreChat.
+:::
 
 #### Using the model in Python
 
@@ -1297,21 +1341,29 @@ docker compose restart
 
 Click on the **Settings** button.
 
-![Steps to find the Settings button in LibreChat](./23_libre_chat_settings_button.svg "Steps to find the Settings button in LibreChat.")
+::: image ./23_libre_chat_settings_button.svg "Steps to find the Settings button in LibreChat"
+Steps to find the Settings button in LibreChat.
+:::
 
 Click on the **Speech** option, and make sure that the engine is set to `External` in the Speech to Text section.
 
-![The speech settings page](./24_libre_chat_speech_settings.svg "The speech settings page.")
+::: image ./24_libre_chat_speech_settings.svg "The speech settings page"
+The speech settings page.
+:::
 
 Go back and click on the microphone and start talking, when you are done click the button again to stop the recording. LibreChat will call the transcriptions endpoint and will send the data to whisper.
 
 Go to the `llama-swap` dashboard, you should see that whisper is starting to load.
 
-![llama-swap received the request and is starting to load whisper](./25_llama_swap_whisper_loading.jpg "llama-swap received the request and is starting to load whisper.")
+::: image ./25_llama_swap_whisper_loading.jpg "llama-swap received the request and is starting to load whisper"
+llama-swap received the request and is starting to load whisper.
+:::
 
 After waiting for a few seconds, I got this error.
 
-![Error in LibreChat](./26_libre_chat_whisper_error.jpg "Error in LibreChat.")
+::: image ./26_libre_chat_whisper_error.jpg "Error in LibreChat"
+Error in LibreChat.
+:::
 
 Looking at the `llama-swap` logs reveals the problem.
 
@@ -1553,7 +1605,9 @@ In LibreChat, click the microphone icon to start recording, speak, and click it 
 
 Open the `llama-swap` interface.
 
-![The model state and logs in the llama-swap interface](./27_llama_swap_faster_whisper_logs.svg "The model state and logs in the llama-swap interface.")
+::: image ./27_llama_swap_faster_whisper_logs.svg "The model state and logs in the llama-swap interface"
+The model state and logs in the llama-swap interface.
+:::
 
 You should see that the model is in a **ready state**, and if you inspect the logs, you will see entries like the following.
 
@@ -1760,7 +1814,9 @@ update-desktop-database ~/.local/share/applications
 
 Search for **Llama Swap UI**. You should see it appear in the search result. Click it and verify that it opens the browser with the correct link.
 
-![The Llama Swap UI desktop shortcut](./28_llama_swap_desktop_shortcut.jpg "The Llama Swap UI desktop shortcut.")
+::: image ./28_llama_swap_desktop_shortcut.jpg "The Llama Swap UI desktop shortcut"
+The Llama Swap UI desktop shortcut.
+:::
 
 #### LibreChat
 
@@ -1809,7 +1865,9 @@ firefox http://localhost:3080
 
 Search for **LibreChat** in your application menu and click it. It should start the Docker containers (if they aren’t already running) and open the UI in your browser.
 
-![The LibreChat desktop shortcut](./29_libre_chat_desktop_shortcut.jpg "The LibreChat desktop shortcut.")
+::: image ./29_libre_chat_desktop_shortcut.jpg "The LibreChat desktop shortcut"
+The LibreChat desktop shortcut.
+:::
 
 ### Automatically restarting services on configuration changes
 
@@ -2027,7 +2085,9 @@ Oct 01 21:20:47 saddik sudo[23945]: imad-saddik : PWD=/ ; USER=root ; COMMAND=/u
 
 To verify that it worked, open the `llama-swap` interface and confirm that the removed model no longer appears. In this example, `Qwen3-30B-A3B-Thinking - 16K` is gone.
 
-![Qwen3-30B-A3B-Thinking — 16K is no longer visible](./30_llama_swap_model_removed.jpg "Qwen3-30B-A3B-Thinking — 16K is no longer visible.")
+::: image ./30_llama_swap_model_removed.jpg "Qwen3-30B-A3B-Thinking — 16K is no longer visible"
+Qwen3-30B-A3B-Thinking — 16K is no longer visible.
+:::
 
 Next, do the same with `librechat.yaml` by updating the list of models.
 
@@ -2055,7 +2115,9 @@ Oct 01 21:21:39 saddik config_watcher.sh[23025]: Wed Oct 1 09:21:39 PM +01 2025:
 
 Open LibreChat and check the model list, `Qwen3-30B-A3B-Thinking - 16K` is no longer available.
 
-![The Qwen3-30B-A3B-Thinking — 16K can no longer be selected in LibreChat](./31_libre_chat_model_removed.jpg "The Qwen3-30B-A3B-Thinking — 16K can no longer be selected in LibreChat.")
+::: image ./31_libre_chat_model_removed.jpg "The Qwen3-30B-A3B-Thinking — 16K can no longer be selected in LibreChat"
+The Qwen3-30B-A3B-Thinking — 16K can no longer be selected in LibreChat.
+:::
 
 Now you can enjoy watching the script automatically restart the services whenever you make changes. This feature saves time and makes sure you never forget to restart anything. I really like it, and I hope you do too!
 
@@ -2358,7 +2420,9 @@ pip install --upgrade faster-whisper
 
 ## Conclusion
 
-![Photo by Vlad Bagacian on Unsplash](./32_conclusion_image.jpg "Photo by <a href='https://unsplash.com/@vladbagacian?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash' target='_blank'>Vlad Bagacian</a> on <a href='https://unsplash.com/photos/woman-sitting-on-grey-cliff-d1eaoAabeXs?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash' target='_blank'>Unsplash</a>.")
+::: image ./32_conclusion_image.jpg "Photo by Vlad Bagacian on Unsplash"
+Photo by [Vlad Bagacian](https://unsplash.com/@vladbagacian?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) on [Unsplash](https://unsplash.com/photos/woman-sitting-on-grey-cliff-d1eaoAabeXs?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash).
+:::
 
 This article documented my complete journey of replacing ollama with a more powerful, flexible, and fully-controlled local AI stack. We started with the goal of running large models that ollama couldn’t handle and ended up building a complete system centered around `llama.cpp` and `llama-swap`.
 

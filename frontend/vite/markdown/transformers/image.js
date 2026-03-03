@@ -1,23 +1,23 @@
-export function imageTransformer(markdownItInstance) {
-  const defaultRender =
-    markdownItInstance.renderer.rules.image ||
-    function (tokens, index, options, env, self) {
-      return self.renderToken(tokens, index, options);
-    };
+import MarkdownItContainer from "markdown-it-container";
+import { MARKDOWN_IT_OPENING_TAG, REGEX_FIRST_CAPTURE_GROUP, REGEX_SECOND_CAPTURE_GROUP } from "../../../src/constants";
 
-  markdownItInstance.renderer.rules.image = function (tokens, index, options, env, self) {
-    const token = tokens[index];
-    const src = token.attrGet("src");
-    const alt = token.content;
-    const title = token.attrGet("title") || "";
+const IMAGE_CONTAINER_REGEX = /image\s+(.*?)(?:\s+"(.*?)")?\s*$/;
 
-    if (src) {
-      const renderedCaption = title ? markdownItInstance.renderInline(title) : "";
-      const escapedCaption = markdownItInstance.utils.escapeHtml(renderedCaption);
+export const imageTransformer = (markdownItInstance) => {
+  markdownItInstance.use(MarkdownItContainer, "image", {
+    validate: (params) => params.trim().match(IMAGE_CONTAINER_REGEX),
+    render: (tokens, index) => {
+      const match = tokens[index].info.trim().match(IMAGE_CONTAINER_REGEX);
 
-      return `<ImageWithCaption image-src="${src}" image-alt="${alt}" image-caption="${escapedCaption}" />`;
-    }
+      if (tokens[index].nesting === MARKDOWN_IT_OPENING_TAG) {
+        const imageSrc = match ? match[REGEX_FIRST_CAPTURE_GROUP].trim() : "";
+        const imageAlt = match && match[REGEX_SECOND_CAPTURE_GROUP] ? match[REGEX_SECOND_CAPTURE_GROUP] : "";
+        const escapedImageAlt = markdownItInstance.utils.escapeHtml(imageAlt);
 
-    return defaultRender(tokens, index, options, env, self);
-  };
-}
+        return `<ImageWithCaption image-src="${imageSrc}" image-alt="${escapedImageAlt}">`;
+      } else {
+        return "</ImageWithCaption>";
+      }
+    },
+  });
+};

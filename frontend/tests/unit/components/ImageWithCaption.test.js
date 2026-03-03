@@ -4,14 +4,16 @@ import ImageWithCaption from "@/components/ImageWithCaption.vue";
 describe("ImageWithCaption", () => {
   let openImageModal;
 
-  const factory = (props = {}) => {
+  const factory = (props = {}, slotContent = "A stunning view of M42") => {
     openImageModal = vi.fn();
     return mount(ImageWithCaption, {
       props: {
         imageSrc: "nebula.jpg",
         imageAlt: "Orion Nebula",
-        imageCaption: "A stunning view of M42",
         ...props,
+      },
+      slots: {
+        default: slotContent,
       },
       global: {
         provide: { openImageModal },
@@ -26,9 +28,9 @@ describe("ImageWithCaption", () => {
     expect(img.attributes("alt")).toBe("Orion Nebula");
   });
 
-  it("renders the caption as HTML", () => {
-    const wrapper = factory({ imageCaption: "<em>Credits:</em> NASA" });
-    expect(wrapper.find("figcaption").html()).toContain("<em>Credits:</em> NASA");
+  it("renders the caption as HTML via slot", () => {
+    const wrapper = factory({}, "<em>Credits:</em> NASA");
+    expect(wrapper.find(".image-caption").html()).toContain("<em>Credits:</em> NASA");
   });
 
   it("calls openImageModal with the event when the image is clicked", async () => {

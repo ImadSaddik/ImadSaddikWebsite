@@ -23,11 +23,15 @@ After turning on the laptop, the first screen you'll see is the [GNU GRUB](https
 
 If you have more than one OS, it allows you to choose which one to boot. We will use this menu to select a special option that lets us start Ubuntu with an older kernel, bypassing the one that is causing the panic.
 
-![The GNU GRUB menu screen showing options for Ubuntu, Advanced options, and Windows Boot Manager.](./grub_menu.svg "The GNU GRUB menu.")
+::: image ./grub_menu.svg "The GNU GRUB menu screen showing options for Ubuntu, Advanced options, and Windows Boot Manager."
+The GNU GRUB menu screen showing options for Ubuntu, Advanced options, and Windows Boot Manager.
+:::
 
 The first option in the list is `Ubuntu`. This option is automatically set to boot the newest kernel you have installed. Since the newest kernel is the broken one, selecting this will take you right back to the pink kernel panic screen. We need to choose a different option instead.
 
-![A computer screen displaying a kernel panic error.](./kernel_panic_screen.svg "The scary kernel panic screen!")
+::: image ./kernel_panic_screen.svg "A computer screen displaying a kernel panic error."
+A computer screen displaying a kernel panic error.
+:::
 
 ## Fixing the problem
 
@@ -37,7 +41,9 @@ From the main GRUB menu, use your arrow keys to select `Advanced options for Ubu
 
 You will see at least two versions. For example, my list showed a new, broken kernel (`6.14.0-24-generic`) and an older, working one (`6.11.0-29-generic`).
 
-![A list of available Linux kernels in the GRUB advanced options menu.](./kernel_versions_list.svg "The different versions of the Linux kernel.")
+::: image ./kernel_versions_list.svg "A list of available Linux kernels in the GRUB advanced options menu."
+A list of available Linux kernels in the GRUB advanced options menu.
+:::
 
 The menu doesn't label which kernel is broken. You may need to do a quick test to find a working version. Simply select one from the list and press Enter. If you see the kernel panic screen again, just reboot your computer and try a different one until your system starts successfully.
 
@@ -115,7 +121,9 @@ sudo update-grub
 
 Now, reboot your laptop to make sure that everything is set correctly. It should boot directly into your 6.11 kernel when clicking on `Ubuntu` in the GRUB menu.
 
-![A screenshot of the Ubuntu desktop verifying the system is working.](./ubuntu_desktop_success.jpg "Success! The system is working again.")
+::: image ./ubuntu_desktop_success.jpg "A screenshot of the Ubuntu desktop verifying the system is working."
+Success! The system is working again.
+:::
 
 ## Conclusion
 

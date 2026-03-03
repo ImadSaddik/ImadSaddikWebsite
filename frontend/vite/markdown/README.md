@@ -55,9 +55,13 @@ Because standard Markdown does not support image captions, use this format inste
 Syntax and example:
 
 ```markdown
-![alt text](path "caption")
+::: image [path] "[alt text]"
+Caption goes here.
+:::
 
-![alt text](./image.png "This is the caption that appears below the image.")
+::: image ./image.png "This is an alt text"
+This is the caption that appears below the image.
+:::
 ```
 
 ### Admonitions (Alerts)
