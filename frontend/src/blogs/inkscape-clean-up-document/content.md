@@ -17,7 +17,9 @@ This issue often happens when working with **embedded** [raster images](https://
 
 You won't see the deleted image on your canvas or even in the `Layers and Objects` panel, but the data remains hidden in the file's code, keeping the size unnecessarily large.
 
-![The Layers and Objects panel in Inkscape not showing the hidden images.](./layers_panel_hidden_images.png "The **Layers and Objects** panel is not showing the images.")
+::: image ./layers_panel_hidden_images.png "The Layers and Objects panel in Inkscape not showing the hidden images."
+The **Layers and Objects** panel is not showing the images.
+:::
 
 If you open the SVG file in a text editor, you will find the image data still there. It is encoded in a format called [base64](https://en.wikipedia.org/wiki/Base64) and looks something like this:
 
@@ -27,11 +29,15 @@ If you open the SVG file in a text editor, you will find the image data still th
 
 First, drag a large raster image into your Inkscape document and select `Embed` and `Default import resolution`.
 
-![The Inkscape image import dialog with Embed selected.](./image_import_dialog.jpg "The image import dialog.")
+::: image ./image_import_dialog.jpg "The Inkscape image import dialog with Embed selected."
+The Inkscape image import dialog with Embed selected.
+:::
 
 Add another rectangle and try clipping the image using the shape builder tool. Select both the rectangle and the image, then press `X` or click the tool directly. Choose the part of the image you want to keep, and click the `Accept` button to confirm.
 
-![Using the shape builder tool to clip an image in Inkscape.](./shape_builder_clipping.jpg "Use the shape builder tool to clip the image.")
+::: image ./shape_builder_clipping.jpg "Using the shape builder tool to clip an image in Inkscape."
+Using the shape builder tool to clip an image in Inkscape.
+:::
 
 Now, save the file and close Inkscape. Check the file size, you should notice it has increased because we added a new image. In my case, it went from 12 MB to 17.5 MB.
 
@@ -41,7 +47,9 @@ Next, open the document again in Inkscape, delete the image, and save the file. 
 
 Luckily, there is an easy fix to this issue. Click on `File > Clean Up Document` and save the file. This option removes any unused elements from your document.
 
-![The File menu in Inkscape highlighting the Clean Up Document option.](./clean_up_document_menu.jpg "The Clean Up Document option.")
+::: image ./clean_up_document_menu.jpg "The File menu in Inkscape highlighting the Clean Up Document option."
+The File menu in Inkscape highlighting the Clean Up Document option.
+:::
 
 Did the file size change? In my case, it shrank to only 12KB. That is a **1458x** reduction.
 

@@ -94,7 +94,9 @@ Even though they cannot get in (because you disabled password authentication), t
 
 To stop this, install [Fail2Ban](https://github.com/fail2ban/fail2ban). This tool monitors your logs in real-time. If an IP address fails to log in too many times, Fail2Ban instantly updates the firewall to block that IP completely.
 
-![How Fail2Ban turns log entries into firewall rules](./1_fail2ban_firewall_rules_illustration.svg "How Fail2Ban turns log entries into firewall rules.")
+::: image ./1_fail2ban_firewall_rules_illustration.svg "How Fail2Ban turns log entries into firewall rules"
+How Fail2Ban turns log entries into firewall rules.
+:::
 
 Fail2Ban is available in Ubuntu's default repositories. Install it with this command:
 
@@ -182,7 +184,9 @@ If you get locked out, DigitalOcean provides a Recovery Console. This feature gi
 3. Click on the **Access** button in the left sidebar.
 4. Click **Launch Recovery Console**.
 
-![Accessing the Recovery Console from the DigitalOcean dashboard](./2_click_droplet_digital_ocean.png "Access the Recovery Console from the DigitalOcean dashboard.")
+::: image ./2_click_droplet_digital_ocean.png "Accessing the Recovery Console from the DigitalOcean dashboard"
+Access the Recovery Console from the DigitalOcean dashboard.
+:::
 
 Once the console opens, you will need to log in.
 
@@ -192,7 +196,9 @@ The Recovery Console requires a password to log in. If you created your user wit
 
 The keyboard mapping in the Recovery Console can be tricky. It is a good idea to type your password in the username field first just to see if the characters match what you are pressing, then delete it and log in properly.
 
-![The Recovery Console login screen](./3_launch_recovery_console.png "The Recovery Console login screen.")
+::: image ./3_launch_recovery_console.png "The Recovery Console login screen"
+The Recovery Console login screen.
+:::
 
 Once you are logged in, you can run the missing command to fix the issue. For example, if you forgot to allow SSH:
 

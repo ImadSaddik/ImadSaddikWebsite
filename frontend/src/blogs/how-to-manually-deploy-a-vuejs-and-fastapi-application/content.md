@@ -337,7 +337,9 @@ If you try to visit `http://<your_droplet_ip>:8080` in your browser, it will fai
 
 Instead of opening port `8080` to the entire world (which is insecure), you can use your existing SSH connection to create a [private tunnel](https://iximiuz.com/en/posts/ssh-tunnels/) to the server.
 
-![SSH tunneling explained](./1_ssh_tunnel_illustration.png "Visualizing SSH local port forwarding. The `-L` flag creates a secure, encrypted pipe that forwards traffic from your local machine (port 8080) directly to the server's internal localhost (port 8080), effectively bypassing the remote firewall.")
+::: image ./1_ssh_tunnel_illustration.png "SSH tunneling explained"
+Visualizing SSH local port forwarding. The `-L` flag creates a secure, encrypted pipe that forwards traffic from your local machine (port 8080) directly to the server's internal localhost (port 8080), effectively bypassing the remote firewall.
+:::
 
 Think of it like a secure pipe inside your existing SSH connection:
 
@@ -354,7 +356,9 @@ ssh -L 8080:localhost:8080 <your_username>@<your_server_ip>
 
 Now, open your browser and visit `http://localhost:8080`. You should see your Vue.js application.
 
-![Home page of my website](./2_visiting_the_website_at_8080.png "Home page of my website.")
+::: image ./2_visiting_the_website_at_8080.png "Home page of my website."
+Home page of my website.
+:::
 
 ::: info Note
 Your app will fail to make any API calls because the backend isn't running properly yet. This is normal. You are just testing if the HTML and CSS load correctly.
@@ -369,7 +373,9 @@ Currently, you are running the backend manually using `uvicorn`. If you close th
 - `Gunicorn`: A robust server manager that handles multiple processes.
 - `Supervisor`: A system that monitors Gunicorn and restarts it automatically if it crashes or if the server reboots.
 
-![Diagram showing the hierarchy](./3_process_hierarchy.png "Diagram showing the hierarchy. Supervisor manages Gunicorn, which manages Uvicorn workers.")
+::: image ./3_process_hierarchy.png "Diagram showing the hierarchy"
+Diagram showing the hierarchy. Supervisor manages Gunicorn, which manages Uvicorn workers.
+:::
 
 Let's configure these tools to keep your backend alive and responsive.
 

@@ -36,19 +36,25 @@ In the white cells, I've placed the number `1`, which represents full brightness
 
 The black cells correspond to a brightness value of `0`. For clarity, they are left empty in the diagram because they are greater in number than the white cells.
 
-![A diagram showing five 8x8 grids, with 'stars' (white cells) moving diagonally.](./five_frames_arranged_chronologically.svg "A sequence of five 8x8 grids arranged in chronological order.")
+::: image ./five_frames_arranged_chronologically.svg "A diagram showing five 8x8 grids, with 'stars' (white cells) moving diagonally."
+A sequence of five 8x8 grids arranged in chronological order.
+:::
 
 In the first image, there are three stars. From one frame to the next, each star moves one pixel to the right and one pixel down. By the final frame, only one star remains visible, as the other two have moved outside the `8x8` grid.
 
 Now, let's apply the `lighten blending mode` to the first two images. In the illustration, you'll see them represented as inputs to the `max()` function. This function compares the pixel values from both images and keeps the brighter one for each position. The resulting image is a blend of the two, showing all the stars that were visible in either frame.
 
-![A diagram showing the max() function combining the first two 8x8 grids.](./basic_blending_step_1.svg "Blending the first two images with the max function.")
+::: image ./basic_blending_step_1.svg "A diagram showing the max() function combining the first two 8x8 grids."
+Blending the first two images with the max function.
+:::
 
 The blended image becomes the new input for the next iteration of the `max()` function. The third image is then used as the second argument. Blend these two together, and repeat the process with the remaining images until you reach the fifth one.
 
 The final blended result is your complete star trail image, showing the continuous paths traced by the stars over time.
 
-![A diagram showing the iterative blending process using the max() function across all five grids.](./basic_blending_step_n.svg "Iteratively applying the max function to combine the brightest pixels from each frame.")
+::: image ./basic_blending_step_n.svg "A diagram showing the iterative blending process using the max() function across all five grids."
+Iteratively applying the max function to combine the brightest pixels from each frame.
+:::
 
 ### Putting it into practice
 
@@ -120,7 +126,9 @@ It then loops through the images one by one:
 
 Finally, the script saves the resulting star trail image to the `output` directory.
 
-![A star trail image showing circular paths of stars around a central point.](./basic_blending_final_image.jpg "The star trail image that the Python script produced.")
+::: image ./basic_blending_final_image.jpg "A star trail image showing circular paths of stars around a central point."
+The star trail image that the Python script produced.
+:::
 
 ## Stylizing your star trails
 
@@ -130,13 +138,17 @@ Comets are fascinating objects, they shine with a bright core followed by a long
 
 With this technique, each star will leave behind a fading trail instead of a continuous, fully bright line.
 
-![A real photograph of a comet with a long tail during moonrise.](./real_comet_image.jpg "Comet at moonrise by <a href='https://www.instagram.com/gabriel_zaparolli/' target='_blank'>Gabriel Zaparolli</a>.")
+::: image ./real_comet_image.jpg "A real photograph of a comet with a long tail during moonrise."
+Comet at moonrise by [Gabriel Zaparolli](https://www.instagram.com/gabriel_zaparolli/).
+:::
 
 To create this effect, we introduce a `decay factor` that gradually reduces the brightness of the stars over time. The decay factor controls how long the comet-like tail appears: values close to `1.0` produce longer trails, while values below `0.95` make the trails fade much more quickly.
 
 The total number of frames also has a strong impact on trail length. Below is a comparison of two results created using the same sequence of images, but with different decay factors:
 
-![A side-by-side comparison of star trails with a 0.99 decay (long trails) vs 0.95 decay (short trails).](./decay_factor_comparison.jpg "<b>Left:</b> decay factor = 0.99. <b>Right:</b> decay factor = 0.95.")
+::: image ./decay_factor_comparison.jpg "A side-by-side comparison of star trails with a 0.99 decay (long trails) vs 0.95 decay (short trails)."
+**Left:** decay factor = 0.99. **Right:** decay factor = 0.95.
+:::
 
 As you can see, the difference is significant. With a decay factor of `0.99`, the star trails remain visible for much longer than with `0.95`.
 
@@ -149,11 +161,15 @@ With a decay factor of `0.95`, the pixel brightness becomes very small, and woul
 
 To apply the comet effect, we introduce the `decay factor` into the `max()` blending operation. In each iteration, we slightly dim the previously blended image before comparing it with the next frame.
 
-![A diagram showing the blending step with a decay factor applied to the first image.](./comet_blending_step_1.svg "Applying the decay factor during the first blending step.")
+::: image ./comet_blending_step_1.svg "A diagram showing the blending step with a decay factor applied to the first image."
+Applying the decay factor during the first blending step.
+:::
 
 On the next iteration, the updated blended image is multiplied by the `decay factor` again, then compared with the next input image. This process repeats for every frame in the sequence.
 
-![A diagram showing the iterative blending process with the decay factor.](./comet_blending_step_n.svg "Each new frame adds a bright star position, while older ones gradually fade.")
+::: image ./comet_blending_step_n.svg "A diagram showing the iterative blending process with the decay factor."
+Each new frame adds a bright star position, while older ones gradually fade.
+:::
 
 Here is the modified code that applies the comet effect. We introduce a new variable, `decay_factor`, and apply it to the previously blended image before combining it with the next frame using `np.maximum`:
 
@@ -210,7 +226,9 @@ print(f"The stacked image has been saved to {output_path}")
 
 Here is the resulting comet-style star trail image:
 
-![A star trail image where the trails look like comet tails, fading out.](./comet_style_final_image.jpg "Star trails with comet effect applied (decay_factor = 0.99).")
+::: image ./comet_style_final_image.jpg "A star trail image where the trails look like comet tails, fading out."
+Star trails with comet effect applied (decay_factor = 0.99).
+:::
 
 ### Adding a fade in and fade out
 
@@ -221,14 +239,18 @@ To apply this effect, count the total number of images and determine the midpoin
 - Frames **before** the midpoint are gradually brightened, this is the fade-in phase.
 - Frames **after** the midpoint are gradually dimmed, the fade-out phase.
 
-![A diagram showing an image sequence with fade-in, midpoint, and fade-out phases.](./fade_in_fade_out_phases.svg "Image sequence showing the fade-in, midpoint, and fade-out phases.")
+::: image ./fade_in_fade_out_phases.svg "A diagram showing an image sequence with fade-in, midpoint, and fade-out phases."
+Image sequence showing the fade-in, midpoint, and fade-out phases.
+:::
 
 Here is the updated code that applies the fade-in and fade-out effect. We introduce two new variables:
 
 - `mid_point` determines the center frame in the sequence.
 - `brightness` controls how bright each frame appears based on its position.
 
-![A diagram showing an image sequence with fade-in, midpoint, and fade-out phases. Each frame is labeled with its brightness value.](./fade_in_fade_out_phases_brightness.svg "Multiplying each frame by the brightness value for its position.")
+::: image ./fade_in_fade_out_phases_brightness.svg "A diagram showing an image sequence with fade-in, midpoint, and fade-out phases. Each frame is labeled with its brightness value."
+Multiplying each frame by the brightness value for its position.
+:::
 
 Unlike the comet effect, we do not apply the `brightness` factor to the blended image. Instead, we multiply it directly with each current image, because the brightness must depend on that frame's position in the sequence (how far it is from the midpoint).
 
@@ -287,7 +309,9 @@ print(f"The stacked image has been saved to {output_path}")
 
 Here is the resulting star trail image with the fade-in and fade-out effect:
 
-![A star trail image where the trails fade in at the start and fade out at the end.](./fade_in_fade_out_final_image.jpg "Star trails with a fade-in / fade-out brightness effect.")
+::: image ./fade_in_fade_out_final_image.jpg "A star trail image where the trails fade in at the start and fade out at the end."
+Star trails with a fade-in / fade-out brightness effect.
+:::
 
 ## Creating a star trail time-lapse
 
