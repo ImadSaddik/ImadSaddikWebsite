@@ -2,7 +2,9 @@
   <section class="image-with-caption-container">
     <figure>
       <img :src="imageSrc" :alt="imageAlt" @click="handleImageClick" />
-      <figcaption v-html="imageCaption"></figcaption>
+      <div class="image-caption">
+        <slot></slot>
+      </div>
     </figure>
   </section>
 </template>
@@ -17,10 +19,6 @@ export default {
       required: true,
     },
     imageAlt: {
-      type: String,
-      required: true,
-    },
-    imageCaption: {
       type: String,
       required: true,
     },
@@ -48,7 +46,7 @@ img {
   cursor: zoom-in;
 }
 
-figcaption {
+.image-caption {
   text-align: center;
   color: var(--color-text-secondary);
   font-size: var(--font-size-small);
