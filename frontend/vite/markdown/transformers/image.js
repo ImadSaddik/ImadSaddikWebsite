@@ -12,8 +12,9 @@ export const imageTransformer = (markdownItInstance) => {
       if (tokens[index].nesting === MARKDOWN_IT_OPENING_TAG) {
         const imageSrc = match ? match[REGEX_FIRST_CAPTURE_GROUP].trim() : "";
         const imageAlt = match && match[REGEX_SECOND_CAPTURE_GROUP] ? match[REGEX_SECOND_CAPTURE_GROUP] : "";
+        const escapedImageAlt = markdownItInstance.utils.escapeHtml(imageAlt);
 
-        return `<ImageWithCaption image-src="${imageSrc}" image-alt="${imageAlt}">`;
+        return `<ImageWithCaption image-src="${imageSrc}" image-alt="${escapedImageAlt}">`;
       } else {
         return "</ImageWithCaption>";
       }
