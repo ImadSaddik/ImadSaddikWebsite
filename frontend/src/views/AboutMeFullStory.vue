@@ -21,9 +21,9 @@
           <ImageWithCaption
             :image-src="meLookingAtSunset"
             image-alt="Me looking at the sunset"
-            image-caption="A photo of me looking at the sunset. Edited with <a href='https://blog.google/intl/en-mena/product-updates/explore-get-answers/nano-banana-image-editing-in-gemini-just-got-a-major-upgrade/' target='_blank'>Nano banana</a> to remove other people from the scene."
             @open-image-modal="handleOpenImageModal"
-          />
+            >A photo of me looking at the sunset.</ImageWithCaption
+          >
         </div>
       </section>
 
@@ -45,9 +45,9 @@
           <ImageWithCaption
             :image-src="moulayIsmailUpClose"
             image-alt="Lycee Moulay Ismail Up Close"
-            image-caption="A photo of Lycee Moulay Ismail, the high school I attended in Meknes, Morocco."
             @open-image-modal="handleOpenImageModal"
-          />
+            >A photo of Lycee Moulay Ismail, the high school I attended in Meknes, Morocco.</ImageWithCaption
+          >
           <p>
             I really enjoyed learning about
             <a href="https://en.wikipedia.org/wiki/Electricity_generation" target="_blank">how electricity is made</a>,
@@ -85,12 +85,9 @@
             <a href="https://en.wikipedia.org/wiki/Control_engineering" target="_blank">control engineering</a>, and
             much more.
           </p>
-          <ImageWithCaption
-            :image-src="estmUpClose"
-            image-alt="ESTM Up Close"
-            image-caption="A photo of ESTM , the school I attended for my higher education."
-            @open-image-modal="handleOpenImageModal"
-          />
+          <ImageWithCaption :image-src="estmUpClose" image-alt="ESTM Up Close" @open-image-modal="handleOpenImageModal"
+            >A photo of ESTM, the school I attended for my higher education.</ImageWithCaption
+          >
           <p>
             During my time at ESTM, I also learned the
             <a href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank">C programming language</a>.
@@ -126,9 +123,9 @@
           <ImageWithCaption
             :image-src="ensamUpClose"
             image-alt="ENSAM Up Close"
-            image-caption="A photo of ENSAM, the engineering school I attended."
             @open-image-modal="handleOpenImageModal"
-          />
+            >A photo of ENSAM, the engineering school I attended.</ImageWithCaption
+          >
           <p>
             I learned two more programming languages at ENSAM:
             <a href="https://en.wikipedia.org/wiki/Python_(programming_language)" target="_blank">Python</a> and
@@ -158,9 +155,9 @@
           <ImageWithCaption
             :image-src="bestPaperAward"
             image-alt="Best Paper Award"
-            image-caption="The first best paper award that I received at the ICRERA 2024 conference."
             @open-image-modal="handleOpenImageModal"
-          />
+            >The first best paper award that I received at the ICRERA 2024 conference.</ImageWithCaption
+          >
         </div>
         <p>
           And that marked the end of my academic journey. From high school to earning an engineering degree, it was a
@@ -241,9 +238,9 @@
           <ImageWithCaption
             :image-src="randomAyahGeneratorScreenshots"
             image-alt="Random Ayah Generator Screenshots"
-            image-caption="Screenshots of the Random Ayah Generator app I built."
             @open-image-modal="handleOpenImageModal"
-          />
+            >Screenshots of the Random Ayah Generator app I built.</ImageWithCaption
+          >
         </div>
 
         <div>
@@ -302,9 +299,9 @@
           <ImageWithCaption
             :image-src="reactBadVueGood"
             image-alt="React Bad Vue Good"
-            image-caption="React the headache vs Vue the delight."
             @open-image-modal="handleOpenImageModal"
-          />
+            >React the headache vs Vue the delight.</ImageWithCaption
+          >
           <p>
             I first got into
             <a href="https://en.wikipedia.org/wiki/Web_development" target="_blank">web development</a> during my time
@@ -363,9 +360,9 @@
         <ImageWithCaption
           :image-src="windowsBadLinuxGood"
           image-alt="Windows Bad Linux Good"
-          image-caption="Windows the demon vs Linux the angel."
           @open-image-modal="handleOpenImageModal"
-        />
+          >Windows the demon vs Linux the angel.</ImageWithCaption
+        >
 
         <div>
           <p>
@@ -425,9 +422,9 @@
           <ImageWithCaption
             :image-src="myYouTubeChannel"
             image-alt="My YouTube Channel (3CodeCamp)"
-            image-caption="A screenshot of my YouTube channel, 3CodeCamp."
             @open-image-modal="handleOpenImageModal"
-          />
+            >A screenshot of my YouTube channel, 3CodeCamp.</ImageWithCaption
+          >
           <p>
             I also found a ton of inspiration from
             <a href="https://www.freecodecamp.org/" target="_blank">freeCodeCamp</a>, a channel where I learned so many
@@ -451,9 +448,9 @@
           <ImageWithCaption
             :image-src="freeCodeCampContributions"
             image-alt="freeCodeCamp Contributions"
-            image-caption="Few courses I created for freeCodeCamp."
             @open-image-modal="handleOpenImageModal"
-          />
+            >Few courses I created for freeCodeCamp.</ImageWithCaption
+          >
           <p>Thank you, <b>Linux</b>!</p>
         </div>
       </section>
@@ -478,9 +475,9 @@
           <ImageWithCaption
             :image-src="venusDuringSunset"
             image-alt="Venus During Sunset"
-            image-caption="Venus shining during sunset at Meknes, Morocco <i>(dot added manually)</i>."
             @open-image-modal="handleOpenImageModal"
-          />
+            >Venus shining during sunset at Meknes, Morocco <i>(dot added manually)</i>.</ImageWithCaption
+          >
         </div>
 
         <div>
@@ -529,9 +526,10 @@
           <ImageWithCaption
             :image-src="telescopeAndJupiterSaturnMoon"
             image-alt="Telescope and Jupiter, Saturn, and Moon"
-            image-caption="My telescope alongside a photo I took of Jupiter, Saturn, and the Moon. The camera doesn’t capture their true beauty, they look much more stunning to the naked eye."
             @open-image-modal="handleOpenImageModal"
-          />
+            >My telescope alongside a photo I took of Jupiter, Saturn, and the Moon. The camera doesn't capture their
+            true beauty, they look much more stunning to the naked eye.</ImageWithCaption
+          >
         </div>
 
         <div>
@@ -547,9 +545,9 @@
           <ImageWithCaption
             :image-src="milkyWayWideFieldShot"
             image-alt="Milky Way Wide Field Shot"
-            image-caption="A wide field shot of the Milky Way I took in Oued Amlil, Morocco."
             @open-image-modal="handleOpenImageModal"
-          />
+            >A wide field shot of the Milky Way I took in Oued Amlil, Morocco.</ImageWithCaption
+          >
         </div>
       </section>
 
@@ -577,9 +575,10 @@
         <ImageWithCaption
           :image-src="sombreroGalaxy"
           image-alt="Sombrero Galaxy"
-          image-caption="My favorite galaxy, the <a href='https://en.wikipedia.org/wiki/Sombrero_Galaxy' target='_blank'>Sombrero galaxy</a>."
           @open-image-modal="handleOpenImageModal"
-        />
+          >My favorite galaxy, the
+          <a href="https://en.wikipedia.org/wiki/Sombrero_Galaxy" target="_blank">Sombrero galaxy</a>.</ImageWithCaption
+        >
       </section>
     </div>
 
