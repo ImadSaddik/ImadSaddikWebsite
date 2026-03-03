@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.0.1] - 2026-03-03
+
+### Changed
+
+- **Image transformer:** Migrated the `ImageWithCaption` component from the default inline Markdown image syntax (`![alt](path "caption")`) to a `markdown-it-container` block, enabling rich slot-based captions that support Vue components.
+- **Content:** Updated all `content.md` files across `blogs/`, `astronomy/`, and `courses/` to use the new `::: image` container syntax (143 images across 10 files).
+- **ImageWithCaption component:** Replaced the `image-caption` prop with a default slot, allowing captions to contain arbitrary HTML and Vue components.
+- **Views:** Migrated `HireMe.vue` and `AboutMeFullStory.vue` to use the new slot-based caption API.
+
+### Tests
+
+- Rewrote `transformer-image.test.js` to cover the new container syntax.
+- Updated `ImageWithCaption.test.js` to use slot-based caption testing.
+
 ## [v2.0.0] - 2026-02-26
 
 ### Added
@@ -78,6 +92,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Monitoring:** Real-time resource tracking with Btop and traffic analysis with GoAccess.
   - **Performance:** Global delivery optimization via Cloudflare CDN.
 
+[v2.0.1]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.0.0...v2.0.1
 [v2.0.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v1.1.0...v2.0.0
 [v1.1.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v1.0.0...v1.1.0
 [v1.0.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/releases/tag/v1.0.0
