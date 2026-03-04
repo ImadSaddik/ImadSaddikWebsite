@@ -101,7 +101,6 @@ In the backend, the `.env` file contains the following variables:
 
 In the frontend, the `.env` file contains the following variables:
 
-- `VITE_API_BASE_URL`: The URL of the backend API (default: `http://localhost:8000`).
 - `BASE_URL`: The base URL used by Playwright for E2E testing (default: `http://localhost:8080`).
 
 ### Meilisearch
