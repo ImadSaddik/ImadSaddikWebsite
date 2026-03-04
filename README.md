@@ -40,13 +40,7 @@ cd frontend
 pnpm install
 ```
 
-Next, create a `.env` file by copying the example file:
-
-```bash
-cp .env.example .env
-```
-
-Finally, start the development server:
+Next, start the development server:
 
 ```bash
 pnpm dev
