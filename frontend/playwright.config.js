@@ -11,7 +11,7 @@ export default defineConfig({
     timeout: 10 * 1000,
   },
   use: {
-    baseURL: process.env.BASE_URL || "http://localhost:8080",
+    baseURL: "http://localhost:8080",
     trace: "on-first-retry",
     screenshot: "only-on-failure",
   },
@@ -30,7 +30,7 @@ export default defineConfig({
 
   webServer: {
     command: "pnpm run dev",
-    url: process.env.BASE_URL || "http://localhost:8080",
+    url: "http://localhost:8080",
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,
   },
