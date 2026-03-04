@@ -88,20 +88,16 @@ uvicorn main:app --reload --host 0.0.0.0 --port 8000
 
 You are almost done! The next and final step is to start Meilisearch, and populate it with data. This will enable the search functionality, list blogs, courses, and more.
 
+Both the backend and frontend are ready for use.
+
 ### Configuration
 
-Both the frontend and backend use `.env` files to manage configuration.
-
-In the backend, the `.env` file contains the following variables:
+The backend uses a `.env` file to manage configuration:
 
 - `MEILISEARCH_URL`: The URL of your Meilisearch instance (default: `http://localhost:7700`).
 - `MEILISEARCH_MASTER_KEY`: The master key to secure your search engine. **Must match** the key used when starting Meilisearch.
 - `MEILISEARCH_INDEX_NAME`: The name of the index to store articles (default: `articles`).
 - `ENVIRONMENT`: Set to `development` or `production`.
-
-In the frontend, the `.env` file contains the following variables:
-
-- `BASE_URL`: The base URL used by Playwright for E2E testing (default: `http://localhost:8080`).
 
 ### Meilisearch
 
