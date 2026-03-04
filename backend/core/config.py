@@ -11,18 +11,6 @@ class Settings(BaseSettings):
 
     ENVIRONMENT: str = "development"
 
-    @property
-    def CORS_ORIGINS(self):
-        if self.ENVIRONMENT.lower() == "production":
-            return [
-                "https://imadsaddik.com",
-                "https://www.imadsaddik.com",
-            ]
-        return [
-            "http://localhost:8080",
-            "http://192.168.1.15:8080",
-        ]
-
     model_config = SettingsConfigDict(env_file="../env")
 
 
