@@ -110,21 +110,23 @@ test.describe("Navigation", () => {
       await expect(page).toHaveURL(ROUTES.HOME.path);
     });
 
-    test("should redirect invalid blog slug to 404 page", async ({ page }) => {
-      await page.goto(`${ROUTES.BLOGS_HUB.path}/this-blog-does-not-exist-at-all`);
-      await expect(page).toHaveURL(ROUTES.HOME.path);
-    });
+    const testCases = [
+      { name: "blog", path: ROUTES.BLOGS_HUB.path, slug: "this-blog-does-not-exist-at-all" },
+      { name: "course", path: ROUTES.COURSES_HUB.path, slug: "this-course-does-not-exist-at-all" },
+      { name: "astronomy", path: ROUTES.ASTRONOMY_HUB.path, slug: "non-existent-astronomy-article" },
+    ];
 
-    test("should redirect invalid course slug to 404 page", async ({ page }) => {
-      await page.goto(`${ROUTES.COURSES_HUB.path}/invalid-course-slug-12345`);
+    for (const { name, path, slug } of testCases) {
+      test(`should display 404 page for invalid ${name} slug`, async ({ page }) => {
+        const url = `${path}/${slug}`;
+        await page.goto(url);
 
-      await expect(page).toHaveURL(ROUTES.HOME.path);
-    });
-
-    test("should redirect invalid astronomy slug to 404 page", async ({ page }) => {
-      await page.goto(`${ROUTES.ASTRONOMY_HUB.path}/non-existent-astronomy-article`);
-
-      await expect(page).toHaveURL(ROUTES.HOME.path);
-    });
+        await expect(page).toHaveURL(url);
+        await expect(page).toHaveTitle("Page not found");
+        await expect(page.locator(".not-found-page-container p")).toContainText(
+          "The page you are looking for does not exist"
+        );
+      });
+    }
   });
 });
