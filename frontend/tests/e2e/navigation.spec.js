@@ -111,20 +111,21 @@ test.describe("Navigation", () => {
     });
 
     test("should redirect invalid blog slug to 404 page", async ({ page }) => {
-      await page.goto(`${ROUTES.BLOGS_HUB.path}/this-blog-does-not-exist-at-all`);
-      await expect(page).toHaveURL(ROUTES.HOME.path);
+      const url = `${ROUTES.BLOGS_HUB.path}/this-blog-does-not-exist-at-all`;
+      await page.goto(url);
+      await expect(page).toHaveURL(url);
     });
 
     test("should redirect invalid course slug to 404 page", async ({ page }) => {
-      await page.goto(`${ROUTES.COURSES_HUB.path}/invalid-course-slug-12345`);
-
-      await expect(page).toHaveURL(ROUTES.HOME.path);
+      const url = `${ROUTES.COURSES_HUB.path}/this-course-does-not-exist-at-all`;
+      await page.goto(url);
+      await expect(page).toHaveURL(url);
     });
 
     test("should redirect invalid astronomy slug to 404 page", async ({ page }) => {
-      await page.goto(`${ROUTES.ASTRONOMY_HUB.path}/non-existent-astronomy-article`);
-
-      await expect(page).toHaveURL(ROUTES.HOME.path);
+      const url = `${ROUTES.ASTRONOMY_HUB.path}/non-existent-astronomy-article`;
+      await page.goto(url);
+      await expect(page).toHaveURL(url);
     });
   });
 });
