@@ -165,7 +165,12 @@ export default {
     },
     handleLoadError(error) {
       console.error("Failed to load article:", error);
-      this.$router.replace({ name: ROUTES.NOT_FOUND.name });
+      this.$router.replace({
+        name: ROUTES.NOT_FOUND.name,
+        params: { pathMatch: this.$route.path.split("/").slice(1) },
+        query: this.$route.query,
+        hash: this.$route.hash,
+      });
     },
     clearReadTimer() {
       if (this.readTimer) {
