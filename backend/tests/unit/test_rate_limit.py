@@ -13,7 +13,9 @@ def test_rate_limit_increment_read_count(assert_rate_limit) -> None:
 
 
 def test_rate_limit_increment_claps_count(assert_rate_limit) -> None:
-    assert_rate_limit(url="/api/articles/test-rate-limit-article/increment-claps-count", method="PATCH")
+    assert_rate_limit(
+        url="/api/articles/test-rate-limit-article/increment-claps-count", method="PATCH", payload={"count": 1}
+    )
 
 
 def test_rate_limit_recommendations(assert_rate_limit) -> None:
