@@ -123,8 +123,7 @@ export default {
   },
   async mounted() {
     await this.getArticleRecommendations();
-    const count = await this.fetchInitialClapCount(this.slug);
-    if (count !== null) this.totalClapCount = count;
+    await this.loadInitialClaps();
   },
   beforeUnmount() {
     if (!this.clapDebounceTimer) {
@@ -163,6 +162,12 @@ export default {
             type: "error",
           });
         }
+      }
+    },
+    async loadInitialClaps() {
+      const count = await this.fetchInitialClapCount(this.slug);
+      if (count !== null) {
+        this.totalClapCount = count;
       }
     },
     handleClap() {
