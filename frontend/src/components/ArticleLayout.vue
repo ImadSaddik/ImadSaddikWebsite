@@ -169,11 +169,10 @@ export default {
       }
     },
     cleanupClapTimerAndSubmitRemainingClaps() {
-      if (!this.clapDebounceTimer) return;
-
       clearTimeout(this.clapDebounceTimer);
       if (this.queuedClaps > 0) {
-        this.submitClapChanges();
+        // Fire and forget the API call since the component is unmounting.
+        this.incrementClapCount(this.slug, this.queuedClaps);
       }
     },
     submitQueuedClapsOnPageHide() {
