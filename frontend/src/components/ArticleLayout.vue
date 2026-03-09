@@ -102,8 +102,8 @@ export default {
     },
   },
   setup() {
-    const { incrementClapCount, fetchInitialClapCount } = useArticleTracking();
-    return { incrementClapCount, fetchInitialClapCount };
+    const { incrementClapCount, fetchInitialClapCount, sendBeaconClapCount } = useArticleTracking();
+    return { incrementClapCount, fetchInitialClapCount, sendBeaconClapCount };
   },
   data() {
     return {
@@ -183,12 +183,7 @@ export default {
       this.queuedClaps = 0;
       this.clapDebounceTimer = null;
 
-      fetch(`/api/articles/${this.slug}/increment-claps-count`, {
-        keepalive: true,
-        method: "PATCH",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ count }),
-      });
+      this.sendBeaconClapCount(this.slug, count);
     },
     handleClap() {
       if (this.hasReachedMaxClaps) {
