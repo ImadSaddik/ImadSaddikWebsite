@@ -3,6 +3,7 @@ from fastapi import APIRouter, HTTPException, Request
 from core.limiter import limiter
 from logger import logger
 from models.article import (
+    IncrementClapsCountRequest,
     IncrementClapsCountResponse,
     IncrementReadCountResponse,
     IncrementViewCountResponse,
@@ -69,9 +70,13 @@ async def increment_article_read_count(request: Request, name: str):
 
 @router.patch("/articles/{name}/increment-claps-count", response_model=IncrementClapsCountResponse)
 @limiter.limit("30/minute")
-async def increment_article_claps_count(request: Request, name: str):
+async def increment_article_claps_count(
+    request: Request,
+    name: str,
+    body: IncrementClapsCountRequest,
+):
     try:
-        result = await meilisearch_service.increment_claps_count(name)
+        result = await meilisearch_service.increment_claps_count(name, body.count)
 
         if not result["success"]:
             raise HTTPException(

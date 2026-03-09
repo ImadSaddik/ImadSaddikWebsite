@@ -102,8 +102,8 @@ class MeilisearchService:
     async def increment_read_count(self, document_name: str) -> dict:
         return await self._increment_counter(document_name, "read_count")
 
-    async def increment_claps_count(self, document_name: str) -> dict:
-        return await self._increment_counter(document_name, "claps_count")
+    async def increment_claps_count(self, document_name: str, count: int = 1) -> dict:
+        return await self._increment_counter(document_name, "claps_count", count)
 
     async def get_article_recommendations(self, data: RecommendationArticleRequest) -> RecommendationArticleResponse:
         safe_ignore_name = self._sanitize(data.document_name_to_ignore)
@@ -201,7 +201,7 @@ class MeilisearchService:
                 "claps_count": 0,
             }
 
-    async def _increment_counter(self, document_name: str, field_name: str) -> dict:
+    async def _increment_counter(self, document_name: str, field_name: str, count: int = 1) -> dict:
         try:
             safe_name = self._sanitize(document_name)
             response = self.index.get_documents({"filter": f"name = '{safe_name}'", "limit": 100})
@@ -214,7 +214,7 @@ class MeilisearchService:
                     field_name: 0,
                 }
 
-            new_count = getattr(chunks[0], field_name) + 1
+            new_count = getattr(chunks[0], field_name) + count
             documents_to_update = [{"id": chunk.id, field_name: new_count} for chunk in chunks]
 
             self.index.update_documents(documents_to_update)

@@ -19,6 +19,10 @@ class IncrementReadCountResponse(IncrementCountResponse):
     read_count: int
 
 
+class IncrementClapsCountRequest(BaseModel):
+    count: int = 1
+
+
 class IncrementClapsCountResponse(IncrementCountResponse):
     claps_count: int
 
