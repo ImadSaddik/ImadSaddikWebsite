@@ -126,14 +126,7 @@ export default {
     await this.loadInitialClaps();
   },
   beforeUnmount() {
-    if (!this.clapDebounceTimer) {
-      return;
-    }
-
-    clearTimeout(this.clapDebounceTimer);
-    if (this.queuedClaps > 0) {
-      this.submitClapChanges();
-    }
+    this.cleanupClapTimerAndSubmitRemainingClaps();
   },
   methods: {
     async getArticleRecommendations() {
@@ -168,6 +161,14 @@ export default {
       const count = await this.fetchInitialClapCount(this.slug);
       if (count !== null) {
         this.totalClapCount = count;
+      }
+    },
+    cleanupClapTimerAndSubmitRemainingClaps() {
+      if (!this.clapDebounceTimer) return;
+
+      clearTimeout(this.clapDebounceTimer);
+      if (this.queuedClaps > 0) {
+        this.submitClapChanges();
       }
     },
     handleClap() {
