@@ -127,11 +127,13 @@ export default {
     if (count !== null) this.totalClapCount = count;
   },
   beforeUnmount() {
-    if (this.clapDebounceTimer) {
-      clearTimeout(this.clapDebounceTimer);
-      if (this.queuedClaps > 0) {
-        this.submitClapChanges();
-      }
+    if (!this.clapDebounceTimer) {
+      return;
+    }
+
+    clearTimeout(this.clapDebounceTimer);
+    if (this.queuedClaps > 0) {
+      this.submitClapChanges();
     }
   },
   methods: {
