@@ -36,7 +36,11 @@ describe("useArticleTracking", () => {
 
       await wrapper.vm.incrementViewCount("my-article");
 
-      expect(axios.patch).toHaveBeenCalledWith("/api/articles/my-article/increment-view-count", expect.any(Object));
+      expect(axios.patch).toHaveBeenCalledWith(
+        "/api/articles/my-article/increment-view-count",
+        expect.any(Object),
+        expect.any(Object)
+      );
     });
 
     it("returns data and shows no toast on success", async () => {
@@ -93,7 +97,11 @@ describe("useArticleTracking", () => {
 
       await wrapper.vm.incrementReadCount("my-article");
 
-      expect(axios.patch).toHaveBeenCalledWith("/api/articles/my-article/increment-read-count", expect.any(Object));
+      expect(axios.patch).toHaveBeenCalledWith(
+        "/api/articles/my-article/increment-read-count",
+        expect.any(Object),
+        expect.any(Object)
+      );
     });
 
     it("returns data and shows no toast on success", async () => {
@@ -132,13 +140,30 @@ describe("useArticleTracking", () => {
   });
 
   describe("incrementClapCount", () => {
-    it("calls the claps count endpoint with the correct slug", async () => {
+    it("calls the claps count endpoint with the correct slug and default count of 1", async () => {
       axios.patch.mockResolvedValue({ data: { success: true, claps_count: 42 } });
       const wrapper = mountComponent();
 
       await wrapper.vm.incrementClapCount("my-article");
 
-      expect(axios.patch).toHaveBeenCalledWith("/api/articles/my-article/increment-claps-count", expect.any(Object));
+      expect(axios.patch).toHaveBeenCalledWith(
+        "/api/articles/my-article/increment-claps-count",
+        { count: 1 },
+        expect.any(Object)
+      );
+    });
+
+    it("sends the batched count when a count greater than 1 is provided", async () => {
+      axios.patch.mockResolvedValue({ data: { success: true, claps_count: 47 } });
+      const wrapper = mountComponent();
+
+      await wrapper.vm.incrementClapCount("my-article", 5);
+
+      expect(axios.patch).toHaveBeenCalledWith(
+        "/api/articles/my-article/increment-claps-count",
+        { count: 5 },
+        expect.any(Object)
+      );
     });
 
     it("returns data from the response on success", async () => {
