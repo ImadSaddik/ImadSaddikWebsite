@@ -28,11 +28,12 @@ export function useArticleTracking() {
     });
   }
 
-  async function incrementClapCount(slug) {
+  async function incrementClapCount(slug, count = 1) {
     return await incrementMetric({
       slug,
       countType: ARTICLE_COUNT_TYPES.CLAPS,
       errorMessage: "Failed to increment clap count",
+      count,
     });
   }
 
@@ -52,12 +53,13 @@ export function useArticleTracking() {
     }
   }
 
-  async function incrementMetric({ slug, countType, errorMessage }) {
+  async function incrementMetric({ slug, countType, errorMessage, count }) {
     const errorData = { message: errorMessage, type: "error" };
 
     try {
       const endpoint = `/api/articles/${slug}/increment-${countType}-count`;
-      const response = await axios.patch(endpoint, { timeout: TIME_OUT_MILLISECONDS });
+      const body = count !== undefined ? { count } : {};
+      const response = await axios.patch(endpoint, body, { timeout: TIME_OUT_MILLISECONDS });
       const { success, message, ...rest } = response.data;
 
       if (!success) {
