@@ -44,7 +44,7 @@
     "jsdom": "^27.4.0",
     "markdown-it-container": "^4.0.0",
     "prettier": "^3.7.4",
-    "rollup-plugin-visualizer": "^6.0.5",
+    "rollup-plugin-visualizer": "^7.0.0",
     "sitemap": "^9.0.0",
     "unplugin-vue-components": "^31.0.0",
     "unplugin-vue-markdown": "^29.2.0",
