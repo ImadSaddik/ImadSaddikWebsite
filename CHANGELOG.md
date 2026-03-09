@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.1.0] - 2026-03-09
+
+### Added
+
+- **Optimistic UI (Claps):** Enhanced the "clap" interaction to update the UI immediately upon click, significantly improving perceived responsiveness.
+- **Request batching & debouncing:** Replaced multiple per-click API calls with a single batched request sent after a 1-second debounce, optimizing backend performance.
+- **Reliability:** Integrated `fetch` with `keepalive` and `pagehide` listeners to ensure pending claps are successfully transmitted even if the user navigates away or closes the tab.
+- **Backend API:** Updated the clap increment endpoint to support bulk updates via a `count` parameter.
+
+### Tests
+
+- Added unit tests for the frontend debounce and batching logic.
+- Added backend integration tests for bulk clap count increments.
+
 ## [v2.0.1] - 2026-03-03
 
 ### Changed
@@ -92,6 +106,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Monitoring:** Real-time resource tracking with Btop and traffic analysis with GoAccess.
   - **Performance:** Global delivery optimization via Cloudflare CDN.
 
+[v2.1.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.0.1...v2.1.0
 [v2.0.1]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.0.0...v2.0.1
 [v2.0.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v1.1.0...v2.0.0
 [v1.1.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v1.0.0...v1.1.0
