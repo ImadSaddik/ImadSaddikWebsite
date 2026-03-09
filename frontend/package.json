@@ -45,7 +45,7 @@
     "markdown-it-container": "^4.0.0",
     "prettier": "^3.7.4",
     "rollup-plugin-visualizer": "^6.0.5",
-    "sitemap": "^9.0.0",
+    "sitemap": "^9.0.1",
     "unplugin-vue-components": "^31.0.0",
     "unplugin-vue-markdown": "^29.2.0",
     "vite": "^7.3.1",
