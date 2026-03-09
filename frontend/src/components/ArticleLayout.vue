@@ -21,7 +21,7 @@
     </div>
 
     <div class="clap-container">
-      <button class="clap-button" :disabled="userClapCount >= maxPossibleClaps || isClapping" @click="handleClap">
+      <button class="clap-button" :disabled="hasReachedMaxClaps" @click="handleClap">
         <i class="fa-solid fa-hands-clapping"></i>
         <span>{{ totalClapCount }}</span>
 
@@ -112,6 +112,11 @@ export default {
       showClapAnimation: false,
     };
   },
+  computed: {
+    hasReachedMaxClaps() {
+      return this.userClapCount >= this.maxPossibleClaps;
+    },
+  },
   async mounted() {
     await this.getArticleRecommendations();
     const count = await this.fetchInitialClapCount(this.slug);
@@ -147,7 +152,7 @@ export default {
       }
     },
     async handleClap() {
-      if (this.isClapping || this.userClapCount >= this.maxPossibleClaps) {
+      if (this.hasReachedMaxClaps) {
         return;
       }
 
