@@ -1,6 +1,6 @@
 from typing import List
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from enums.article import ArticleType
 from models.document import Hit
@@ -17,6 +17,10 @@ class IncrementViewCountResponse(IncrementCountResponse):
 
 class IncrementReadCountResponse(IncrementCountResponse):
     read_count: int
+
+
+class IncrementClapsCountRequest(BaseModel):
+    count: int = Field(default=1, gt=0, le=30)
 
 
 class IncrementClapsCountResponse(IncrementCountResponse):

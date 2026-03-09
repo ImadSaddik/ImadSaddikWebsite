@@ -21,12 +21,12 @@
     </div>
 
     <div class="clap-container">
-      <button class="clap-button" :disabled="userClapCount >= maxPossibleClaps || isClapping" @click="handleClap">
+      <button class="clap-button" :disabled="hasReachedMaxClaps" @click="handleClap">
         <i class="fa-solid fa-hands-clapping"></i>
         <span>{{ totalClapCount }}</span>
 
-        <div v-if="showClapAnimation" :key="userClapCount" class="clap-animation-circle" @animationend="onAnimationEnd">
-          +{{ userClapCount }}
+        <div v-if="showClapAnimation" :key="clapsGiven" class="clap-animation-circle" @animationend="onAnimationEnd">
+          +{{ clapsGiven }}
         </div>
       </button>
     </div>
@@ -50,6 +50,9 @@ import TableOfContents from "./TableOfContents.vue";
 
 // Composables
 import { useArticleTracking } from "@/composables/useArticleTracking";
+
+// Constants
+import { CLAP_DEBOUNCE_MILLISECONDS } from "@/constants";
 
 export default {
   name: "ArticleLayout",
@@ -99,23 +102,36 @@ export default {
     },
   },
   setup() {
-    const { incrementClapCount, fetchInitialClapCount } = useArticleTracking();
-    return { incrementClapCount, fetchInitialClapCount };
+    const { incrementClapCount, fetchInitialClapCount, sendBeaconClapCount } = useArticleTracking();
+    return { incrementClapCount, fetchInitialClapCount, sendBeaconClapCount };
   },
   data() {
     return {
       cardData: [],
+      clapsGiven: 0,
+      queuedClaps: 0,
       totalClapCount: 0,
       maxPossibleClaps: 30,
-      userClapCount: 0,
-      isClapping: false,
+      clapDebounceTimer: null,
       showClapAnimation: false,
+      pagehideHandler: null,
     };
+  },
+  computed: {
+    hasReachedMaxClaps() {
+      return this.clapsGiven >= this.maxPossibleClaps;
+    },
   },
   async mounted() {
     await this.getArticleRecommendations();
-    const count = await this.fetchInitialClapCount(this.slug);
-    if (count !== null) this.totalClapCount = count;
+    await this.loadInitialClaps();
+
+    this.pagehideHandler = () => this.submitQueuedClapsOnPageHide();
+    window.addEventListener("pagehide", this.pagehideHandler);
+  },
+  beforeUnmount() {
+    window.removeEventListener("pagehide", this.pagehideHandler);
+    this.cleanupClapTimerAndSubmitRemainingClaps();
   },
   methods: {
     async getArticleRecommendations() {
@@ -146,22 +162,55 @@ export default {
         }
       }
     },
-    async handleClap() {
-      if (this.isClapping || this.userClapCount >= this.maxPossibleClaps) {
+    async loadInitialClaps() {
+      const count = await this.fetchInitialClapCount(this.slug);
+      if (count !== null) {
+        this.totalClapCount = count;
+      }
+    },
+    cleanupClapTimerAndSubmitRemainingClaps() {
+      clearTimeout(this.clapDebounceTimer);
+      if (this.queuedClaps > 0) {
+        // Fire and forget the API call since the component is unmounting.
+        this.incrementClapCount(this.slug, this.queuedClaps);
+      }
+    },
+    submitQueuedClapsOnPageHide() {
+      if (this.queuedClaps <= 0) return;
+
+      clearTimeout(this.clapDebounceTimer);
+      const count = this.queuedClaps;
+      this.queuedClaps = 0;
+      this.clapDebounceTimer = null;
+
+      this.sendBeaconClapCount(this.slug, count);
+    },
+    handleClap() {
+      if (this.hasReachedMaxClaps) {
         return;
       }
 
-      this.isClapping = true;
+      this.clapsGiven += 1;
+      this.queuedClaps += 1;
+      this.totalClapCount += 1;
+      this.showClapAnimation = true;
 
-      try {
-        const data = await this.incrementClapCount(this.slug);
-        if (data) {
-          this.totalClapCount = data.claps_count;
-          this.userClapCount += 1;
-          this.showClapAnimation = true;
-        }
-      } finally {
-        this.isClapping = false;
+      clearTimeout(this.clapDebounceTimer);
+      this.clapDebounceTimer = setTimeout(() => this.submitClapChanges(), CLAP_DEBOUNCE_MILLISECONDS);
+    },
+    async submitClapChanges() {
+      const count = this.queuedClaps;
+      this.queuedClaps = 0;
+      this.clapDebounceTimer = null;
+
+      const data = await this.incrementClapCount(this.slug, count);
+      if (data) {
+        // Sync the total clap count with the server's response.
+        this.totalClapCount = data.claps_count;
+      } else {
+        // If the API call fails, undo the claps the user made.
+        this.clapsGiven -= count;
+        this.totalClapCount -= count;
       }
     },
     onAnimationEnd() {

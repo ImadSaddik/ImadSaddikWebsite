@@ -28,11 +28,28 @@ export function useArticleTracking() {
     });
   }
 
-  async function incrementClapCount(slug) {
+  async function incrementClapCount(slug, count = 1) {
     return await incrementMetric({
       slug,
       countType: ARTICLE_COUNT_TYPES.CLAPS,
       errorMessage: "Failed to increment clap count",
+      count,
+    });
+  }
+
+  /**
+   * Sends a fire-and-forget clap count update using the Fetch API with `keepalive: true`,
+   * ensuring the request is delivered even if the page is being unloaded.
+   * Use this instead of `incrementClapCount` when the component is unmounting or the page is hiding.
+   * @param {string} slug - The article slug.
+   * @param {number} count - The number of claps to submit.
+   */
+  function sendBeaconClapCount(slug, count) {
+    fetch(`/api/articles/${slug}/increment-claps-count`, {
+      keepalive: true,
+      method: "PATCH",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ count }),
     });
   }
 
@@ -52,12 +69,13 @@ export function useArticleTracking() {
     }
   }
 
-  async function incrementMetric({ slug, countType, errorMessage }) {
+  async function incrementMetric({ slug, countType, errorMessage, count }) {
     const errorData = { message: errorMessage, type: "error" };
 
     try {
       const endpoint = `/api/articles/${slug}/increment-${countType}-count`;
-      const response = await axios.patch(endpoint, { timeout: TIME_OUT_MILLISECONDS });
+      const body = count !== undefined ? { count } : {};
+      const response = await axios.patch(endpoint, body, { timeout: TIME_OUT_MILLISECONDS });
       const { success, message, ...rest } = response.data;
 
       if (!success) {
@@ -80,5 +98,5 @@ export function useArticleTracking() {
     }
   }
 
-  return { incrementViewCount, incrementReadCount, incrementClapCount, fetchInitialClapCount };
+  return { incrementViewCount, incrementReadCount, incrementClapCount, fetchInitialClapCount, sendBeaconClapCount };
 }

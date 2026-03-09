@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { ROUTES } from "@/constants";
+import { ROUTES, CLAP_DEBOUNCE_MILLISECONDS } from "@/constants";
 
 test.describe("Article metric tracking", () => {
   test.describe("view count", () => {
@@ -40,6 +40,7 @@ test.describe("Article metric tracking", () => {
         await clapButton.click();
         await page.waitForTimeout(100);
       }
+      await page.waitForTimeout(CLAP_DEBOUNCE_MILLISECONDS);
 
       await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");

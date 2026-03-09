@@ -50,10 +50,48 @@ def test_increment_article_claps_count(mock_service, client):
         return_value={"success": True, "message": "Incremented claps count to 20", "claps_count": 20}
     )
 
-    response = client.patch("/api/articles/test-article/increment-claps-count")
+    response = client.patch("/api/articles/test-article/increment-claps-count", json={"count": 1})
     assert response.status_code == 200
     assert response.json() == {"success": True, "message": "Incremented claps count to 20", "claps_count": 20}
-    mock_service.increment_claps_count.assert_called_once_with("test-article")
+    mock_service.increment_claps_count.assert_called_once_with("test-article", 1)
+
+
+@patch("api.article.meilisearch_service")
+def test_increment_article_claps_count_batched(mock_service, client):
+    mock_service.increment_claps_count = AsyncMock(
+        return_value={"success": True, "message": "Incremented claps count to 25", "claps_count": 25}
+    )
+
+    response = client.patch("/api/articles/test-article/increment-claps-count", json={"count": 5})
+    assert response.status_code == 200
+    assert response.json() == {"success": True, "message": "Incremented claps count to 25", "claps_count": 25}
+    mock_service.increment_claps_count.assert_called_once_with("test-article", 5)
+
+
+@patch("api.article.meilisearch_service")
+def test_increment_article_claps_count_max_boundary(mock_service, client):
+    mock_service.increment_claps_count = AsyncMock(
+        return_value={"success": True, "message": "Incremented claps count to 30", "claps_count": 30}
+    )
+
+    response = client.patch("/api/articles/test-article/increment-claps-count", json={"count": 30})
+    assert response.status_code == 200
+    mock_service.increment_claps_count.assert_called_once_with("test-article", 30)
+
+
+def test_increment_article_claps_count_exceeds_max(client):
+    response = client.patch("/api/articles/test-article/increment-claps-count", json={"count": 31})
+    assert response.status_code == 422
+
+
+def test_increment_article_claps_count_zero(client):
+    response = client.patch("/api/articles/test-article/increment-claps-count", json={"count": 0})
+    assert response.status_code == 422
+
+
+def test_increment_article_claps_count_negative(client):
+    response = client.patch("/api/articles/test-article/increment-claps-count", json={"count": -1})
+    assert response.status_code == 422
 
 
 @patch("api.article.meilisearch_service")
