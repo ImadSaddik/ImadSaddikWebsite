@@ -114,6 +114,7 @@ export default {
       maxPossibleClaps: 30,
       clapDebounceTimer: null,
       showClapAnimation: false,
+      pagehideHandler: null,
     };
   },
   computed: {
@@ -124,8 +125,12 @@ export default {
   async mounted() {
     await this.getArticleRecommendations();
     await this.loadInitialClaps();
+
+    this.pagehideHandler = () => this.submitQueuedClapsOnPageHide();
+    window.addEventListener("pagehide", this.pagehideHandler);
   },
   beforeUnmount() {
+    window.removeEventListener("pagehide", this.pagehideHandler);
     this.cleanupClapTimerAndSubmitRemainingClaps();
   },
   methods: {
@@ -170,6 +175,21 @@ export default {
       if (this.queuedClaps > 0) {
         this.submitClapChanges();
       }
+    },
+    submitQueuedClapsOnPageHide() {
+      if (this.queuedClaps <= 0) return;
+
+      clearTimeout(this.clapDebounceTimer);
+      const count = this.queuedClaps;
+      this.queuedClaps = 0;
+      this.clapDebounceTimer = null;
+
+      fetch(`/api/articles/${this.slug}/increment-claps-count`, {
+        keepalive: true,
+        method: "PATCH",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ count }),
+      });
     },
     handleClap() {
       if (this.hasReachedMaxClaps) {
