@@ -4,6 +4,7 @@ from locust import FastHttpUser, between, task
 
 from enums.article import ArticleType
 from enums.search import SortableField, SortOrder
+from enums.visitor import VisitorPageType
 
 
 class WebsiteUser(FastHttpUser):
@@ -56,4 +57,10 @@ class WebsiteUser(FastHttpUser):
             "size": 10,
             "sort_by": {"field": sort_field, "order": sort_order},
         }
+        self.client.post(endpoint, json=payload, name=endpoint)
+
+    @task(15)
+    def track_visitor(self):
+        endpoint = "/api/visitors/track"
+        payload = {"visited_page": random.choice([p.value for p in VisitorPageType])}
         self.client.post(endpoint, json=payload, name=endpoint)
