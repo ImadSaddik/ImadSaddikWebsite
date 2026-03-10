@@ -21,10 +21,6 @@ class WebsiteUser(FastHttpUser):
         endpoint = f"/api/articles/{article_name}/claps-count"
         self.client.get(endpoint, name="/articles/[name]/claps-count")
 
-    @task(4)
-    def view_homepage(self):
-        self.client.get("/", name="/")
-
     @task(7)
     def get_latest_articles(self):
         endpoint = "/api/articles/latest"
