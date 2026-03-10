@@ -1,6 +1,6 @@
 from typing import List
 
-import meilisearch
+from meilisearch_python_sdk import AsyncClient
 
 from core.config import settings
 from enums.search import SortableField, SortOrder
@@ -17,7 +17,7 @@ from models.search import FacetDistribution, SearchHit, SearchRequest, SearchRes
 
 class MeilisearchService:
     def __init__(self) -> None:
-        self.client = meilisearch.Client(url=settings.MEILISEARCH_URL, api_key=settings.MEILISEARCH_MASTER_KEY)
+        self.client = AsyncClient(url=settings.MEILISEARCH_URL, api_key=settings.MEILISEARCH_MASTER_KEY)
         self.index = self.client.index(uid=settings.MEILISEARCH_INDEX_NAME)
 
     def get_filter_conditions(self, data: SearchRequest) -> str:
@@ -56,15 +56,14 @@ class MeilisearchService:
         filter_conditions = self.get_filter_conditions(request)
         sorting_criteria = self.get_sorting_criteria(request)
 
-        search_parameters = {
-            "filter": filter_conditions,
-            "showRankingScore": True,
-            "sort": sorting_criteria,
-            "facets": ["tags", "year"],
-            "limit": request.size,
-        }
-
-        results = self.index.search(query=request.query, opt_params=search_parameters)
+        results = await self.index.search(
+            query=request.query,
+            filter=filter_conditions or None,
+            show_ranking_score=True,
+            sort=sorting_criteria,
+            facets=["tags", "year"],
+            limit=request.size,
+        )
 
         hits = [
             SearchHit(
@@ -81,19 +80,20 @@ class MeilisearchService:
                 claps_count=hit.get("claps_count", 0),
                 ranking_score=hit.get("_rankingScore"),
             )
-            for hit in results["hits"]
+            for hit in results.hits
         ]
 
+        facet_distribution_data = results.facet_distribution or {}
         facet_distribution = FacetDistribution(
-            tags=results.get("facetDistribution", {}).get("tags", {}),
-            year=results.get("facetDistribution", {}).get("year", {}),
+            tags=facet_distribution_data.get("tags", {}),
+            year=facet_distribution_data.get("year", {}),
         )
 
         return SearchResponse(
             hits=hits,
-            total_hits=results.get("estimatedTotalHits", 0),
+            total_hits=results.estimated_total_hits or 0,
             facet_distribution=facet_distribution,
-            processing_time_ms=results.get("processingTimeMs", 0),
+            processing_time_ms=results.processing_time_ms,
         )
 
     async def increment_view_count(self, document_name: str) -> dict:
@@ -115,26 +115,24 @@ class MeilisearchService:
 
         filter_str = " AND ".join(filter_parts)
 
-        response = self.index.get_documents(
-            {
-                "filter": filter_str,
-                "limit": 3,
-            }
+        response = await self.index.get_documents(
+            filter=filter_str,
+            limit=3,
         )
 
         hits = [
             RecommendationArticleHit(
-                id=hit.id,
-                name=hit.name,
-                title=hit.title,
-                content=hit.content,
-                type=hit.type,
-                year=hit.year,
-                tags=hit.tags,
-                creation_date=hit.creation_date,
-                view_count=hit.view_count,
-                read_count=hit.read_count,
-                claps_count=hit.claps_count,
+                id=hit.get("id", ""),
+                name=hit.get("name", ""),
+                title=hit.get("title", ""),
+                content=hit.get("content", ""),
+                type=hit.get("type", ""),
+                year=hit.get("year", ""),
+                tags=hit.get("tags", []),
+                creation_date=hit.get("creation_date", ""),
+                view_count=hit.get("view_count", 0),
+                read_count=hit.get("read_count", 0),
+                claps_count=hit.get("claps_count", 0),
             )
             for hit in response.results
         ]
@@ -146,26 +144,24 @@ class MeilisearchService:
     async def get_latest_articles(self, document_type: str) -> LatestArticleResponse:
         sort_order = SortOrder.DESC.value
         safe_document_type = self._sanitize(document_type)
-        response = self.index.get_documents(
-            {
-                "filter": f"type = '{safe_document_type}'",
-                "sort": [f"creation_date:{sort_order}"],
-                "limit": 3,
-            }
+        response = await self.index.get_documents(
+            filter=f"type = '{safe_document_type}'",
+            sort=f"creation_date:{sort_order}",
+            limit=3,
         )
         hits = [
             LatestArticleHit(
-                id=hit.id,
-                name=hit.name,
-                title=hit.title,
-                content=hit.content,
-                type=hit.type,
-                year=hit.year,
-                tags=hit.tags,
-                creation_date=hit.creation_date,
-                view_count=hit.view_count,
-                read_count=hit.read_count,
-                claps_count=hit.claps_count,
+                id=hit.get("id", ""),
+                name=hit.get("name", ""),
+                title=hit.get("title", ""),
+                content=hit.get("content", ""),
+                type=hit.get("type", ""),
+                year=hit.get("year", ""),
+                tags=hit.get("tags", []),
+                creation_date=hit.get("creation_date", ""),
+                view_count=hit.get("view_count", 0),
+                read_count=hit.get("read_count", 0),
+                claps_count=hit.get("claps_count", 0),
             )
             for hit in response.results
         ]
@@ -177,7 +173,7 @@ class MeilisearchService:
     async def get_claps_count(self, document_name: str) -> dict:
         try:
             safe_name = self._sanitize(document_name)
-            response = self.index.get_documents({"filter": f"name = '{safe_name}'", "limit": 1})
+            response = await self.index.get_documents(filter=f"name = '{safe_name}'", limit=1)
             chunks = response.results
 
             if not chunks:
@@ -190,7 +186,7 @@ class MeilisearchService:
             return {
                 "success": True,
                 "message": "Claps count retrieved successfully",
-                "claps_count": chunks[0].claps_count,
+                "claps_count": chunks[0].get("claps_count", 0),
             }
 
         except Exception:
@@ -204,7 +200,7 @@ class MeilisearchService:
     async def _increment_counter(self, document_name: str, field_name: str, count: int = 1) -> dict:
         try:
             safe_name = self._sanitize(document_name)
-            response = self.index.get_documents({"filter": f"name = '{safe_name}'", "limit": 100})
+            response = await self.index.get_documents(filter=f"name = '{safe_name}'", limit=100)
             chunks = response.results
 
             if not chunks:
@@ -214,10 +210,10 @@ class MeilisearchService:
                     field_name: 0,
                 }
 
-            new_count = getattr(chunks[0], field_name) + count
-            documents_to_update = [{"id": chunk.id, field_name: new_count} for chunk in chunks]
+            new_count = chunks[0].get(field_name, 0) + count
+            documents_to_update = [{"id": chunk.get("id", ""), field_name: new_count} for chunk in chunks]
 
-            self.index.update_documents(documents_to_update)
+            await self.index.update_documents(documents_to_update)
 
             display_field = field_name.replace("_count", "").replace("_", " ")
             return {
