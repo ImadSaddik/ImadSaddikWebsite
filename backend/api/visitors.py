@@ -12,7 +12,9 @@ router = APIRouter()
 @router.post("/track")
 @limiter.limit("30/minute")
 async def track_visitor_endpoint(
-    request: Request, background_tasks: BackgroundTasks, body: TrackVisitorRequest
+    request: Request,
+    background_tasks: BackgroundTasks,
+    body: TrackVisitorRequest,
 ) -> dict:
     client_ip = None
     if client := request.client:
@@ -32,7 +34,7 @@ async def _track_task(
 
         ip_api_response = await get_country_and_check_bot_from_ip(client_ip)
         if ip_api_response.country:
-            add_visitor(
+            await add_visitor(
                 ip_address=client_ip,
                 country=ip_api_response.country,
                 visited_page=visited_page.value,
