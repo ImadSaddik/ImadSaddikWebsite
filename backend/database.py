@@ -45,4 +45,7 @@ async def add_visitor(
 @asynccontextmanager
 async def get_database_connection() -> AsyncGenerator[Connection, None]:
     async with aiosqlite.connect(DB_FILE) as connection:
+        await connection.execute("PRAGMA journal_mode=WAL")
+        await connection.execute("PRAGMA busy_timeout=5000")
+        await connection.execute("PRAGMA synchronous=NORMAL")
         yield connection
