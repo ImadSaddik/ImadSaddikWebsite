@@ -2,8 +2,8 @@ import json
 import sys
 from pathlib import Path
 
-import meilisearch
-from meilisearch.index import Index
+from meilisearch_python_sdk import Client
+from meilisearch_python_sdk.index import Index
 
 # Add parent directory to path to import from core
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -11,7 +11,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from core.config import settings
 
 
-def seed_settings(meilisearch_client: meilisearch.Client, index: Index) -> None:
+def seed_settings(meilisearch_client: Client, index: Index) -> None:
     settings_path = Path(__file__).parent.parent / "seed" / "index_settings.json"
 
     if not settings_path.exists():
@@ -27,7 +27,7 @@ def seed_settings(meilisearch_client: meilisearch.Client, index: Index) -> None:
     print("Index settings updated successfully!")
 
 
-def seed_documents(meilisearch_client: meilisearch.Client, index: Index) -> None:
+def seed_documents(meilisearch_client: Client, index: Index) -> None:
     documents_path = Path(__file__).parent.parent / "seed" / "documents.json"
 
     if not documents_path.exists():
@@ -57,7 +57,7 @@ def main() -> None:
 
     try:
         print("\nConnecting to Meilisearch")
-        meilisearch_client = meilisearch.Client(url=settings.MEILISEARCH_URL, api_key=settings.MEILISEARCH_MASTER_KEY)
+        meilisearch_client = Client(url=settings.MEILISEARCH_URL, api_key=settings.MEILISEARCH_MASTER_KEY)
 
         try:
             meilisearch_client.create_index(settings.MEILISEARCH_INDEX_NAME, {"primaryKey": "id"})
