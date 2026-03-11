@@ -4,6 +4,7 @@ from pathlib import Path
 
 from meilisearch_python_sdk import Client
 from meilisearch_python_sdk.index import Index
+from meilisearch_python_sdk.models.settings import MeilisearchSettings
 
 # Add parent directory to path to import from core
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -22,7 +23,7 @@ def seed_settings(meilisearch_client: Client, index: Index) -> None:
         index_settings = json.load(f)
 
     print("Updating index settings")
-    task = index.update_settings(index_settings)
+    task = index.update_settings(MeilisearchSettings.model_validate(index_settings))
     meilisearch_client.wait_for_task(task.task_uid)
     print("Index settings updated successfully!")
 
