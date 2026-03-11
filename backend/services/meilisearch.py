@@ -1,5 +1,3 @@
-from typing import List
-
 from meilisearch_python_sdk import AsyncClient
 
 from core.config import settings
@@ -35,7 +33,7 @@ class MeilisearchService:
 
         return " AND ".join(conditions) if conditions else ""
 
-    def get_sorting_criteria(self, data: SearchRequest) -> List[str]:
+    def get_sorting_criteria(self, data: SearchRequest) -> list[str]:
         sort_by = SortableField.DATE
         sort_order = SortOrder.DESC.value
 
