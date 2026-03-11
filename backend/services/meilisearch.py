@@ -18,38 +18,6 @@ class MeilisearchService:
         self.client = AsyncClient(url=settings.MEILISEARCH_URL, api_key=settings.MEILISEARCH_MASTER_KEY)
         self.index = self.client.index(uid=settings.MEILISEARCH_INDEX_NAME)
 
-    def get_filter_conditions(self, data: SearchRequest) -> str:
-        conditions = []
-        if data.article_type:
-            conditions.append(f"type = '{data.article_type.value}'")
-
-        if data.filters.years:
-            years_list = [f"'{self._sanitize(year)}'" for year in data.filters.years]
-            conditions.append(f"year IN [{', '.join(years_list)}]")
-
-        if data.filters.tags:
-            tags_list = [f"'{self._sanitize(tag)}'" for tag in data.filters.tags]
-            conditions.append(f"tags IN [{', '.join(tags_list)}]")
-
-        return " AND ".join(conditions) if conditions else ""
-
-    def get_sorting_criteria(self, data: SearchRequest) -> list[str]:
-        sort_by = SortableField.DATE
-        sort_order = SortOrder.DESC.value
-
-        if data.sort_by:
-            sort_by = data.sort_by.field
-            sort_order = data.sort_by.order.value
-
-        field_mapping = {
-            SortableField.DATE: f"creation_date:{sort_order}",
-            SortableField.POPULARITY: f"view_count:{sort_order}",
-            SortableField.ENGAGEMENT: f"read_count:{sort_order}",
-            SortableField.CLAPS: f"claps_count:{sort_order}",
-        }
-        default_sorting = f"creation_date:{sort_order}"
-        return [field_mapping.get(sort_by, default_sorting)]
-
     async def search(self, request: SearchRequest) -> SearchResponse:
         filter_conditions = self.get_filter_conditions(request)
         sorting_criteria = self.get_sorting_criteria(request)
@@ -82,6 +50,38 @@ class MeilisearchService:
             processing_time_ms=results.processing_time_ms,
         )
 
+    def get_filter_conditions(self, data: SearchRequest) -> str:
+        conditions = []
+        if data.article_type:
+            conditions.append(f"type = '{data.article_type.value}'")
+
+        if data.filters.years:
+            years_list = [f"'{self._sanitize(year)}'" for year in data.filters.years]
+            conditions.append(f"year IN [{', '.join(years_list)}]")
+
+        if data.filters.tags:
+            tags_list = [f"'{self._sanitize(tag)}'" for tag in data.filters.tags]
+            conditions.append(f"tags IN [{', '.join(tags_list)}]")
+
+        return " AND ".join(conditions) if conditions else ""
+
+    def get_sorting_criteria(self, data: SearchRequest) -> list[str]:
+        sort_by = SortableField.DATE
+        sort_order = SortOrder.DESC.value
+
+        if data.sort_by:
+            sort_by = data.sort_by.field
+            sort_order = data.sort_by.order.value
+
+        field_mapping = {
+            SortableField.DATE: f"creation_date:{sort_order}",
+            SortableField.POPULARITY: f"view_count:{sort_order}",
+            SortableField.ENGAGEMENT: f"read_count:{sort_order}",
+            SortableField.CLAPS: f"claps_count:{sort_order}",
+        }
+        default_sorting = f"creation_date:{sort_order}"
+        return [field_mapping.get(sort_by, default_sorting)]
+
     async def increment_view_count(self, document_name: str) -> dict:
         return await self._increment_counter(document_name, "view_count")
 
@@ -90,6 +90,35 @@ class MeilisearchService:
 
     async def increment_claps_count(self, document_name: str, count: int = 1) -> dict:
         return await self._increment_counter(document_name, "claps_count", count)
+
+    async def _increment_counter(self, document_name: str, field_name: str, count: int = 1) -> dict:
+        try:
+            safe_name = self._sanitize(document_name)
+            response = await self.index.get_documents(filter=f"name = '{safe_name}'", limit=100)
+            chunks = response.results
+
+            if not chunks:
+                return {
+                    "success": False,
+                    "message": "Document not found",
+                    field_name: 0,
+                }
+
+            new_count = chunks[0].get(field_name, 0) + count
+            documents_to_update = [{"id": chunk["id"], field_name: new_count} for chunk in chunks]
+
+            await self.index.update_documents(documents_to_update)
+
+            display_field = field_name.replace("_count", "").replace("_", " ")
+            return {
+                "success": True,
+                "message": f"Incremented {display_field} count to {new_count}",
+                field_name: new_count,
+            }
+
+        except Exception:
+            logger.exception(f"Error incrementing {field_name} for document '{document_name}'")
+            return {"success": False, "message": "Internal server error", field_name: 0}
 
     async def get_article_recommendations(self, data: RecommendationArticleRequest) -> RecommendationArticleResponse:
         safe_ignore_name = self._sanitize(data.document_name_to_ignore)
@@ -156,35 +185,6 @@ class MeilisearchService:
                 "message": "Internal server error",
                 "claps_count": 0,
             }
-
-    async def _increment_counter(self, document_name: str, field_name: str, count: int = 1) -> dict:
-        try:
-            safe_name = self._sanitize(document_name)
-            response = await self.index.get_documents(filter=f"name = '{safe_name}'", limit=100)
-            chunks = response.results
-
-            if not chunks:
-                return {
-                    "success": False,
-                    "message": "Document not found",
-                    field_name: 0,
-                }
-
-            new_count = chunks[0].get(field_name, 0) + count
-            documents_to_update = [{"id": chunk["id"], field_name: new_count} for chunk in chunks]
-
-            await self.index.update_documents(documents_to_update)
-
-            display_field = field_name.replace("_count", "").replace("_", " ")
-            return {
-                "success": True,
-                "message": f"Incremented {display_field} count to {new_count}",
-                field_name: new_count,
-            }
-
-        except Exception:
-            logger.exception(f"Error incrementing {field_name} for document '{document_name}'")
-            return {"success": False, "message": "Internal server error", field_name: 0}
 
     def _sanitize(self, text: str) -> str:
         """
