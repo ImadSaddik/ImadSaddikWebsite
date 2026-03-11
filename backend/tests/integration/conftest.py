@@ -18,7 +18,7 @@ def setup_meilisearch_test_index() -> None:
     setup_test_index(client)
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture
 def meilisearch_service() -> IntegrationMeilisearchService:
     return IntegrationMeilisearchService()
 
