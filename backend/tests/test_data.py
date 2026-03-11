@@ -1,5 +1,5 @@
-from meilisearch import Client
-from meilisearch.errors import MeilisearchApiError
+from meilisearch_python_sdk import Client
+from meilisearch_python_sdk.errors import MeilisearchApiError
 
 from core.config import settings
 from enums.article import ArticleType
