@@ -14,6 +14,7 @@ class WebsiteUser(FastHttpUser):
     article_types = [ArticleType.BLOG_POST, ArticleType.COURSE_POST, ArticleType.ASTRONOMY_POST]
     sort_fields = [SortableField.DATE, SortableField.POPULARITY, SortableField.ENGAGEMENT, SortableField.CLAPS]
     sort_orders = [SortOrder.ASC, SortOrder.DESC]
+    page_types = [page.value for page in VisitorPageType]
 
     @task(1)
     def get_article_claps_count(self):
@@ -58,5 +59,5 @@ class WebsiteUser(FastHttpUser):
     @task(15)
     def track_visitor(self):
         endpoint = "/api/visitors/track"
-        payload = {"visited_page": random.choice([p.value for p in VisitorPageType])}
+        payload = {"visited_page": random.choice(self.page_types)}
         self.client.post(endpoint, json=payload, name=endpoint)
