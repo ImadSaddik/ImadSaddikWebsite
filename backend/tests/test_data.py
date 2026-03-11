@@ -1,5 +1,5 @@
 from meilisearch_python_sdk import Client
-from meilisearch_python_sdk.errors import MeilisearchApiError
+from meilisearch_python_sdk.models.settings import MeilisearchSettings
 
 from core.config import settings
 from enums.article import ArticleType
@@ -135,11 +135,10 @@ def get_test_client() -> Client:
 
 
 def delete_test_index_if_exists(client: Client) -> None:
-    try:
-        task = client.delete_index(TEST_INDEX_NAME)
-        client.wait_for_task(task.task_uid)
+    deleted = client.delete_index_if_exists(TEST_INDEX_NAME)
+    if deleted:
         logger.info(f"Deleted existing test index '{TEST_INDEX_NAME}'.")
-    except MeilisearchApiError:
+    else:
         logger.info(f"Test index '{TEST_INDEX_NAME}' does not exist. Skipping delete.")
 
 
@@ -147,11 +146,9 @@ def setup_test_index(client: Client) -> None:
     delete_test_index_if_exists(client)
     logger.info(f"Creating test index '{TEST_INDEX_NAME}' with production-like settings...")
 
-    task = client.create_index(TEST_INDEX_NAME, {"primaryKey": "id"})
-    client.wait_for_task(task.task_uid)
+    index = client.create_index(TEST_INDEX_NAME, primary_key="id")
 
-    index = client.index(TEST_INDEX_NAME)
-    task = index.update_settings(TEST_INDEX_SETTINGS)
+    task = index.update_settings(MeilisearchSettings.model_validate(TEST_INDEX_SETTINGS))
     client.wait_for_task(task.task_uid)
 
     task = index.add_documents(TEST_DOCUMENTS)
