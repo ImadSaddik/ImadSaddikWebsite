@@ -211,7 +211,7 @@ class MeilisearchService:
                 }
 
             new_count = chunks[0].get(field_name, 0) + count
-            documents_to_update = [{"id": chunk.get("id", ""), field_name: new_count} for chunk in chunks]
+            documents_to_update = [{"id": chunk["id"], field_name: new_count} for chunk in chunks]
 
             await self.index.update_documents(documents_to_update)
 
