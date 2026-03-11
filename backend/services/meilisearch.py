@@ -65,23 +65,11 @@ class MeilisearchService:
             limit=request.size,
         )
 
-        hits = [
-            SearchHit(
-                id=hit["id"],
-                name=hit["name"],
-                title=hit["title"],
-                content=hit["content"],
-                type=hit["type"],
-                year=hit["year"],
-                tags=hit.get("tags", []),
-                creation_date=hit["creation_date"],
-                view_count=hit.get("view_count", 0),
-                read_count=hit.get("read_count", 0),
-                claps_count=hit.get("claps_count", 0),
-                ranking_score=hit.get("_rankingScore"),
-            )
-            for hit in results.hits
-        ]
+        hits = []
+        for hit in results.hits:
+            search_hit = SearchHit(**hit)
+            search_hit.ranking_score = hit.get("_rankingScore")
+            hits.append(search_hit)
 
         facet_distribution_data = results.facet_distribution or {}
         facet_distribution = FacetDistribution(
@@ -120,22 +108,7 @@ class MeilisearchService:
             limit=3,
         )
 
-        hits = [
-            RecommendationArticleHit(
-                id=hit["id"],
-                name=hit["name"],
-                title=hit["title"],
-                content=hit["content"],
-                type=hit["type"],
-                year=hit["year"],
-                tags=hit.get("tags", []),
-                creation_date=hit["creation_date"],
-                view_count=hit.get("view_count", 0),
-                read_count=hit.get("read_count", 0),
-                claps_count=hit.get("claps_count", 0),
-            )
-            for hit in response.results
-        ]
+        hits = [RecommendationArticleHit(**hit) for hit in response.results]
         return RecommendationArticleResponse(
             hits=hits,
             total_hits=len(hits),
@@ -149,22 +122,7 @@ class MeilisearchService:
             sort=[f"creation_date:{sort_order}"],
             limit=3,
         )
-        hits = [
-            LatestArticleHit(
-                id=hit["id"],
-                name=hit["name"],
-                title=hit["title"],
-                content=hit["content"],
-                type=hit["type"],
-                year=hit["year"],
-                tags=hit.get("tags", []),
-                creation_date=hit["creation_date"],
-                view_count=hit.get("view_count", 0),
-                read_count=hit.get("read_count", 0),
-                claps_count=hit.get("claps_count", 0),
-            )
-            for hit in response.results
-        ]
+        hits = [LatestArticleHit(**hit) for hit in response.results]
         return LatestArticleResponse(
             hits=hits,
             total_hits=len(hits),
