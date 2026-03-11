@@ -146,7 +146,7 @@ class MeilisearchService:
         safe_document_type = self._sanitize(document_type)
         response = await self.index.get_documents(
             filter=f"type = '{safe_document_type}'",
-            sort=f"creation_date:{sort_order}",
+            sort=[f"creation_date:{sort_order}"],
             limit=3,
         )
         hits = [
