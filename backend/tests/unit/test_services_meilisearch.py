@@ -280,6 +280,6 @@ async def test_get_claps_count(mock_client_class):
         ("\n'\t", "\n\\'\t"),
     ],
 )
-def test_sanitize_logic(input_text, expected_output):
+def test_sanitize_logic(input_text: str, expected_output: str):
     service = MeilisearchService()
     assert service._sanitize(input_text) == expected_output
