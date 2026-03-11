@@ -18,7 +18,7 @@ def fetch_all_documents(index: Index) -> list:
     print(f"Fetching all documents from the '{index.uid}' index...")
 
     while True:
-        response = index.get_documents({"limit": limit, "offset": offset})
+        response = index.get_documents(limit=limit, offset=offset)
         batch = response.results
         all_documents.extend(batch)
 

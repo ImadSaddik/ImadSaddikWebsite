@@ -27,7 +27,7 @@ def migrate() -> None:
         return
 
     try:
-        documents = index.get_documents({"limit": 10000}).results
+        documents = index.get_documents(limit=10000).results
         print(f"Found {len(documents)} documents.")
     except Exception as e:
         print(f"Error fetching documents: {e}")

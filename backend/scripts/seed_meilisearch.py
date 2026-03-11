@@ -60,7 +60,7 @@ def main() -> None:
         meilisearch_client = Client(url=settings.MEILISEARCH_URL, api_key=settings.MEILISEARCH_MASTER_KEY)
 
         try:
-            meilisearch_client.create_index(settings.MEILISEARCH_INDEX_NAME, {"primaryKey": "id"})
+            meilisearch_client.create_index(settings.MEILISEARCH_INDEX_NAME, primary_key="id")
             print(f"Created index '{settings.MEILISEARCH_INDEX_NAME}'")
         except Exception:
             print(f"Index '{settings.MEILISEARCH_INDEX_NAME}' already exists or could not be created.")
