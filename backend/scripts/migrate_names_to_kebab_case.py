@@ -2,7 +2,7 @@ import re
 import sys
 from pathlib import Path
 
-import meilisearch
+from meilisearch_python_sdk import Client
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
@@ -18,7 +18,7 @@ def camel_to_kebab(name: str) -> str:
 def migrate() -> None:
     print(f"Connecting to Meilisearch at {settings.MEILISEARCH_URL}")
     try:
-        client = meilisearch.Client(settings.MEILISEARCH_URL, settings.MEILISEARCH_MASTER_KEY)
+        client = Client(settings.MEILISEARCH_URL, settings.MEILISEARCH_MASTER_KEY)
         index = client.index(settings.MEILISEARCH_INDEX_NAME)
 
         client.health()
@@ -27,7 +27,7 @@ def migrate() -> None:
         return
 
     try:
-        documents = index.get_documents({"limit": 10000}).results
+        documents = index.get_documents(limit=10000).results
         print(f"Found {len(documents)} documents.")
     except Exception as e:
         print(f"Error fetching documents: {e}")

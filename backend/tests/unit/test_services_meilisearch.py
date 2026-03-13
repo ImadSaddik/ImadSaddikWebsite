@@ -1,4 +1,4 @@
-from unittest.mock import MagicMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
@@ -35,7 +35,7 @@ def test_get_sorting_criteria():
     assert service.get_sorting_criteria(request) == [f"view_count:{SortOrder.ASC.value}"]
 
 
-@patch("services.meilisearch.meilisearch.Client")
+@patch("services.meilisearch.AsyncClient")
 @pytest.mark.asyncio
 async def test_search(mock_client_class):
     mock_client = MagicMock()
@@ -45,12 +45,12 @@ async def test_search(mock_client_class):
 
     service = MeilisearchService()
 
-    mock_index.search.return_value = {
-        "hits": [],
-        "estimatedTotalHits": 0,
-        "facetDistribution": {},
-        "processingTimeMs": 1,
-    }
+    mock_results = MagicMock()
+    mock_results.hits = []
+    mock_results.estimated_total_hits = 0
+    mock_results.facet_distribution = {}
+    mock_results.processing_time_ms = 1
+    mock_index.search = AsyncMock(return_value=mock_results)
 
     article_type = ArticleType.BLOG_POST
     request = SearchRequest(article_type=article_type, query="test")
@@ -60,10 +60,10 @@ async def test_search(mock_client_class):
     mock_index.search.assert_called_once()
     call_args = mock_index.search.call_args
     assert call_args.kwargs["query"] == "test"
-    assert f"type = '{article_type.value}'" in call_args.kwargs["opt_params"]["filter"]
+    assert f"type = '{article_type.value}'" in call_args.kwargs["filter"]
 
 
-@patch("services.meilisearch.meilisearch.Client")
+@patch("services.meilisearch.AsyncClient")
 @pytest.mark.asyncio
 async def test_increment_view_count(mock_client_class):
     mock_client = MagicMock()
@@ -73,11 +73,11 @@ async def test_increment_view_count(mock_client_class):
 
     service = MeilisearchService()
 
-    mock_doc = MagicMock()
-    mock_doc.id = "123"
-    mock_doc.view_count = 10
-    mock_index.get_documents.return_value.results = [mock_doc]
-    mock_index.update_documents.return_value = {"taskUid": 1}
+    mock_doc = {"id": "123", "view_count": 10}
+    mock_response = MagicMock()
+    mock_response.results = [mock_doc]
+    mock_index.get_documents = AsyncMock(return_value=mock_response)
+    mock_index.update_documents = AsyncMock(return_value={"taskUid": 1})
 
     result = await service.increment_view_count("test-doc")
 
@@ -86,7 +86,7 @@ async def test_increment_view_count(mock_client_class):
     mock_index.update_documents.assert_called_once_with([{"id": "123", "view_count": 11}])
 
 
-@patch("services.meilisearch.meilisearch.Client")
+@patch("services.meilisearch.AsyncClient")
 @pytest.mark.asyncio
 async def test_increment_view_count_not_found(mock_client_class):
     mock_client = MagicMock()
@@ -95,7 +95,9 @@ async def test_increment_view_count_not_found(mock_client_class):
     mock_client_class.return_value = mock_client
 
     service = MeilisearchService()
-    mock_index.get_documents.return_value.results = []
+    mock_response = MagicMock()
+    mock_response.results = []
+    mock_index.get_documents = AsyncMock(return_value=mock_response)
 
     result = await service.increment_view_count("test-doc")
 
@@ -103,7 +105,7 @@ async def test_increment_view_count_not_found(mock_client_class):
     assert result["message"] == "Document not found"
 
 
-@patch("services.meilisearch.meilisearch.Client")
+@patch("services.meilisearch.AsyncClient")
 @pytest.mark.asyncio
 async def test_increment_read_count(mock_client_class):
     mock_client = MagicMock()
@@ -113,10 +115,11 @@ async def test_increment_read_count(mock_client_class):
 
     service = MeilisearchService()
 
-    mock_doc = MagicMock()
-    mock_doc.id = "123"
-    mock_doc.read_count = 5
-    mock_index.get_documents.return_value.results = [mock_doc]
+    mock_doc = {"id": "123", "read_count": 5}
+    mock_response = MagicMock()
+    mock_response.results = [mock_doc]
+    mock_index.get_documents = AsyncMock(return_value=mock_response)
+    mock_index.update_documents = AsyncMock(return_value={"taskUid": 1})
 
     result = await service.increment_read_count("test-doc")
 
@@ -125,7 +128,7 @@ async def test_increment_read_count(mock_client_class):
     mock_index.update_documents.assert_called_once_with([{"id": "123", "read_count": 6}])
 
 
-@patch("services.meilisearch.meilisearch.Client")
+@patch("services.meilisearch.AsyncClient")
 @pytest.mark.asyncio
 async def test_increment_claps_count(mock_client_class):
     mock_client = MagicMock()
@@ -135,10 +138,11 @@ async def test_increment_claps_count(mock_client_class):
 
     service = MeilisearchService()
 
-    mock_doc = MagicMock()
-    mock_doc.id = "123"
-    mock_doc.claps_count = 20
-    mock_index.get_documents.return_value.results = [mock_doc]
+    mock_doc = {"id": "123", "claps_count": 20}
+    mock_response = MagicMock()
+    mock_response.results = [mock_doc]
+    mock_index.get_documents = AsyncMock(return_value=mock_response)
+    mock_index.update_documents = AsyncMock(return_value={"taskUid": 1})
 
     result = await service.increment_claps_count("test-doc")
 
@@ -147,7 +151,7 @@ async def test_increment_claps_count(mock_client_class):
     mock_index.update_documents.assert_called_once_with([{"id": "123", "claps_count": 21}])
 
 
-@patch("services.meilisearch.meilisearch.Client")
+@patch("services.meilisearch.AsyncClient")
 @pytest.mark.asyncio
 async def test_get_article_recommendations(mock_client_class):
     mock_client = MagicMock()
@@ -158,20 +162,22 @@ async def test_get_article_recommendations(mock_client_class):
     article_type = ArticleType.BLOG_POST
     service = MeilisearchService()
 
-    mock_hit = MagicMock()
-    mock_hit.id = "1"
-    mock_hit.name = "rec-1"
-    mock_hit.title = "Rec 1"
-    mock_hit.content = "Content"
-    mock_hit.type = article_type.value
-    mock_hit.year = "2023"
-    mock_hit.tags = ["tag1"]
-    mock_hit.creation_date = 1234567890
-    mock_hit.view_count = 10
-    mock_hit.read_count = 5
-    mock_hit.claps_count = 2
-
-    mock_index.get_documents.return_value.results = [mock_hit]
+    mock_hit = {
+        "id": "1",
+        "name": "rec-1",
+        "title": "Rec 1",
+        "content": "Content",
+        "type": article_type.value,
+        "year": "2023",
+        "tags": ["tag1"],
+        "creation_date": 1234567890,
+        "view_count": 10,
+        "read_count": 5,
+        "claps_count": 2,
+    }
+    mock_response = MagicMock()
+    mock_response.results = [mock_hit]
+    mock_index.get_documents = AsyncMock(return_value=mock_response)
 
     request = RecommendationArticleRequest(
         document_name_to_ignore="current", article_type=article_type, document_tags=["tag1", "tag2"]
@@ -191,7 +197,7 @@ async def test_get_article_recommendations(mock_client_class):
     assert response.hits[0].claps_count == 2
 
 
-@patch("services.meilisearch.meilisearch.Client")
+@patch("services.meilisearch.AsyncClient")
 @pytest.mark.asyncio
 async def test_get_latest_articles(mock_client_class):
     mock_client = MagicMock()
@@ -202,20 +208,22 @@ async def test_get_latest_articles(mock_client_class):
     article_type = ArticleType.BLOG_POST
     service = MeilisearchService()
 
-    mock_hit = MagicMock()
-    mock_hit.id = "2"
-    mock_hit.name = "latest-1"
-    mock_hit.title = "Latest 1"
-    mock_hit.content = "Content"
-    mock_hit.type = article_type.value
-    mock_hit.year = "2023"
-    mock_hit.tags = ["tag2"]
-    mock_hit.creation_date = 1234567890
-    mock_hit.view_count = 100
-    mock_hit.read_count = 50
-    mock_hit.claps_count = 20
-
-    mock_index.get_documents.return_value.results = [mock_hit]
+    mock_hit = {
+        "id": "2",
+        "name": "latest-1",
+        "title": "Latest 1",
+        "content": "Content",
+        "type": article_type.value,
+        "year": "2023",
+        "tags": ["tag2"],
+        "creation_date": 1234567890,
+        "view_count": 100,
+        "read_count": 50,
+        "claps_count": 20,
+    }
+    mock_response = MagicMock()
+    mock_response.results = [mock_hit]
+    mock_index.get_documents = AsyncMock(return_value=mock_response)
 
     response = await service.get_latest_articles(document_type=article_type.value)
 
@@ -232,7 +240,7 @@ async def test_get_latest_articles(mock_client_class):
     assert response.hits[0].claps_count == 20
 
 
-@patch("services.meilisearch.meilisearch.Client")
+@patch("services.meilisearch.AsyncClient")
 @pytest.mark.asyncio
 async def test_get_claps_count(mock_client_class):
     mock_client = MagicMock()
@@ -242,9 +250,10 @@ async def test_get_claps_count(mock_client_class):
 
     service = MeilisearchService()
 
-    mock_doc = MagicMock()
-    mock_doc.claps_count = 15
-    mock_index.get_documents.return_value.results = [mock_doc]
+    mock_doc = {"claps_count": 15}
+    mock_response = MagicMock()
+    mock_response.results = [mock_doc]
+    mock_index.get_documents = AsyncMock(return_value=mock_response)
 
     result = await service.get_claps_count("test-doc")
 
@@ -271,6 +280,6 @@ async def test_get_claps_count(mock_client_class):
         ("\n'\t", "\n\\'\t"),
     ],
 )
-def test_sanitize_logic(input_text, expected_output):
+def test_sanitize_logic(input_text: str, expected_output: str):
     service = MeilisearchService()
     assert service._sanitize(input_text) == expected_output

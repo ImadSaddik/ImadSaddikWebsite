@@ -55,9 +55,11 @@ class TestDocumentOperations:
 
     @pytest.mark.asyncio
     async def test_increment_view_count(
-        self, meilisearch_service: IntegrationMeilisearchService, test_document_name: str
+        self,
+        meilisearch_service: IntegrationMeilisearchService,
+        test_document_name: str,
     ) -> None:
-        response = meilisearch_service.index.get_documents({"filter": f"name = '{test_document_name}'", "limit": 100})
+        response = await meilisearch_service.index.get_documents(filter=f"name = '{test_document_name}'", limit=100)
         chunks = response.results
         assert chunks, "Test document must exist before incrementing view count."
 
@@ -67,7 +69,7 @@ class TestDocumentOperations:
         assert "view_count" in result
         assert isinstance(result["view_count"], int)
         assert result["view_count"] > 0
-        assert result["view_count"] == chunks[0].view_count + 1
+        assert result["view_count"] == chunks[0]["view_count"] + 1
 
     @pytest.mark.asyncio
     async def test_increment_view_count_not_found(self, meilisearch_service: IntegrationMeilisearchService) -> None:
@@ -78,9 +80,11 @@ class TestDocumentOperations:
 
     @pytest.mark.asyncio
     async def test_increment_read_count(
-        self, meilisearch_service: IntegrationMeilisearchService, test_document_name: str
+        self,
+        meilisearch_service: IntegrationMeilisearchService,
+        test_document_name: str,
     ) -> None:
-        response = meilisearch_service.index.get_documents({"filter": f"name = '{test_document_name}'", "limit": 100})
+        response = await meilisearch_service.index.get_documents(filter=f"name = '{test_document_name}'", limit=100)
         chunks = response.results
         assert chunks, "Test document must exist before incrementing read count."
 
@@ -90,7 +94,7 @@ class TestDocumentOperations:
         assert "read_count" in result
         assert isinstance(result["read_count"], int)
         assert result["read_count"] > 0
-        assert result["read_count"] == chunks[0].read_count + 1
+        assert result["read_count"] == chunks[0]["read_count"] + 1
 
     @pytest.mark.asyncio
     async def test_increment_read_count_not_found(self, meilisearch_service: IntegrationMeilisearchService) -> None:
@@ -101,9 +105,11 @@ class TestDocumentOperations:
 
     @pytest.mark.asyncio
     async def test_increment_claps_count(
-        self, meilisearch_service: IntegrationMeilisearchService, test_document_name: str
+        self,
+        meilisearch_service: IntegrationMeilisearchService,
+        test_document_name: str,
     ) -> None:
-        response = meilisearch_service.index.get_documents({"filter": f"name = '{test_document_name}'", "limit": 100})
+        response = await meilisearch_service.index.get_documents(filter=f"name = '{test_document_name}'", limit=100)
         chunks = response.results
         assert chunks, "Test document must exist before incrementing claps count."
 
@@ -113,7 +119,7 @@ class TestDocumentOperations:
         assert "claps_count" in result
         assert isinstance(result["claps_count"], int)
         assert result["claps_count"] > 0
-        assert result["claps_count"] == chunks[0].claps_count + 1
+        assert result["claps_count"] == chunks[0]["claps_count"] + 1
 
     @pytest.mark.asyncio
     async def test_increment_claps_count_not_found(self, meilisearch_service: IntegrationMeilisearchService) -> None:

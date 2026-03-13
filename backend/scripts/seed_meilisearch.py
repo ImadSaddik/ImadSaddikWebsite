@@ -2,8 +2,9 @@ import json
 import sys
 from pathlib import Path
 
-import meilisearch
-from meilisearch.index import Index
+from meilisearch_python_sdk import Client
+from meilisearch_python_sdk.index import Index
+from meilisearch_python_sdk.models.settings import MeilisearchSettings
 
 # Add parent directory to path to import from core
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -11,7 +12,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from core.config import settings
 
 
-def seed_settings(meilisearch_client: meilisearch.Client, index: Index) -> None:
+def seed_settings(meilisearch_client: Client, index: Index) -> None:
     settings_path = Path(__file__).parent.parent / "seed" / "index_settings.json"
 
     if not settings_path.exists():
@@ -22,12 +23,12 @@ def seed_settings(meilisearch_client: meilisearch.Client, index: Index) -> None:
         index_settings = json.load(f)
 
     print("Updating index settings")
-    task = index.update_settings(index_settings)
+    task = index.update_settings(MeilisearchSettings.model_validate(index_settings))
     meilisearch_client.wait_for_task(task.task_uid)
     print("Index settings updated successfully!")
 
 
-def seed_documents(meilisearch_client: meilisearch.Client, index: Index) -> None:
+def seed_documents(meilisearch_client: Client, index: Index) -> None:
     documents_path = Path(__file__).parent.parent / "seed" / "documents.json"
 
     if not documents_path.exists():
@@ -57,10 +58,10 @@ def main() -> None:
 
     try:
         print("\nConnecting to Meilisearch")
-        meilisearch_client = meilisearch.Client(url=settings.MEILISEARCH_URL, api_key=settings.MEILISEARCH_MASTER_KEY)
+        meilisearch_client = Client(url=settings.MEILISEARCH_URL, api_key=settings.MEILISEARCH_MASTER_KEY)
 
         try:
-            meilisearch_client.create_index(settings.MEILISEARCH_INDEX_NAME, {"primaryKey": "id"})
+            meilisearch_client.create_index(settings.MEILISEARCH_INDEX_NAME, primary_key="id")
             print(f"Created index '{settings.MEILISEARCH_INDEX_NAME}'")
         except Exception:
             print(f"Index '{settings.MEILISEARCH_INDEX_NAME}' already exists or could not be created.")

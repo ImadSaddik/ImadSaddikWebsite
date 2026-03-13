@@ -2,7 +2,6 @@ fastapi==0.128.0
 python-dotenv==1.2.1
 pydantic==2.12.5
 pydantic-settings==2.12.0
-meilisearch==0.40.0
 uvicorn==0.40.0
 httpx==0.28.1
 pytest==9.0.2
@@ -13,3 +12,4 @@ gunicorn==25.1.0
 locust==2.43.3
 slowapi==0.1.9
 aiosqlite==0.22.1
+meilisearch-python-sdk==7.0.4

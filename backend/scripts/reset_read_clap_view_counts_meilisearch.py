@@ -1,8 +1,8 @@
 import sys
 from pathlib import Path
 
-import meilisearch
-from meilisearch.index import Index
+from meilisearch_python_sdk import Client
+from meilisearch_python_sdk.index import Index
 
 # Add parent directory to path to import from core
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -18,7 +18,7 @@ def fetch_all_documents(index: Index) -> list:
     print(f"Fetching all documents from the '{index.uid}' index...")
 
     while True:
-        response = index.get_documents({"limit": limit, "offset": offset})
+        response = index.get_documents(limit=limit, offset=offset)
         batch = response.results
         all_documents.extend(batch)
 
@@ -31,7 +31,7 @@ def fetch_all_documents(index: Index) -> list:
     return all_documents
 
 
-def reset_counts(meilisearch_client: meilisearch.Client, index: Index) -> None:
+def reset_counts(meilisearch_client: Client, index: Index) -> None:
     all_documents = fetch_all_documents(index)
 
     if not all_documents:
@@ -81,7 +81,7 @@ def main():
 
     try:
         print("\nConnecting to Meilisearch...")
-        meilisearch_client = meilisearch.Client(url=settings.MEILISEARCH_URL, api_key=settings.MEILISEARCH_MASTER_KEY)
+        meilisearch_client = Client(url=settings.MEILISEARCH_URL, api_key=settings.MEILISEARCH_MASTER_KEY)
         index = meilisearch_client.index(settings.MEILISEARCH_INDEX_NAME)
         print("✓ Successfully connected to Meilisearch!")
 
