@@ -145,12 +145,9 @@ class MeilisearchService:
         sort_order = SortOrder.DESC.value
         safe_document_type = self._sanitize(document_type)
 
-        # TODO: Come back in the future and check if `meilisearch_python_sdk` has changed
-        # TODO: the type of `sort` to be `list[str]` instead of `str`. Currently, it is `str`
-        # TODO: and we need to pass a list because the meilisearch API expects it that way.
         response = await self.index.get_documents(
             filter=f"type = '{safe_document_type}'",
-            sort=[f"creation_date:{sort_order}"],  # type: ignore[arg-type]
+            sort=f"creation_date:{sort_order}",
             limit=3,
         )
         hits = [LatestArticleHit(**hit) for hit in response.results]

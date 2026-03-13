@@ -12,4 +12,4 @@ gunicorn==25.1.0
 locust==2.43.3
 slowapi==0.1.9
 aiosqlite==0.22.1
-meilisearch-python-sdk==7.0.3
+meilisearch-python-sdk==7.0.4
