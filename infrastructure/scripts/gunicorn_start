@@ -6,7 +6,8 @@ SOCKFILE=/web_app/backend/venv/run/gunicorn.sock
 USER=imad
 GROUP=imad
 NUM_WORKERS=1
-TIMEOUT=120
+TIMEOUT=30
+GRACEFUL_TIMEOUT=5
 
 # Gunicorn needs to use Uvicorn's worker class for FastAPI
 WORKER_CLASS=uvicorn.workers.UvicornWorker
@@ -30,6 +31,7 @@ exec venv/bin/gunicorn main:app \
   --workers $NUM_WORKERS \
   --worker-class $WORKER_CLASS \
   --timeout $TIMEOUT \
+  --graceful-timeout $GRACEFUL_TIMEOUT \
   --user=$USER --group=$GROUP \
   --bind=unix:$SOCKFILE \
   --forwarded-allow-ips="$FORWARDED_ALLOW_IPS" \
