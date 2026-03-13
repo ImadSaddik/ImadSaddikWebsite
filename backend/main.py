@@ -17,7 +17,7 @@ from middleware import log_request_middleware
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     # Before yield, we put code that will be executed before the application starts.
-    initialize_database()
+    await initialize_database()
     yield
     # After yield, we put code that will be executed after the application has finished.
 

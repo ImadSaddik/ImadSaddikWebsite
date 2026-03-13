@@ -4,6 +4,7 @@ from locust import FastHttpUser, between, task
 
 from enums.article import ArticleType
 from enums.search import SortableField, SortOrder
+from enums.visitor import VisitorPageType
 
 
 class WebsiteUser(FastHttpUser):
@@ -13,16 +14,13 @@ class WebsiteUser(FastHttpUser):
     article_types = [ArticleType.BLOG_POST, ArticleType.COURSE_POST, ArticleType.ASTRONOMY_POST]
     sort_fields = [SortableField.DATE, SortableField.POPULARITY, SortableField.ENGAGEMENT, SortableField.CLAPS]
     sort_orders = [SortOrder.ASC, SortOrder.DESC]
+    page_types = [page.value for page in VisitorPageType]
 
     @task(1)
     def get_article_claps_count(self):
         article_name = "elasticsearch-change-heap-size"
         endpoint = f"/api/articles/{article_name}/claps-count"
         self.client.get(endpoint, name="/articles/[name]/claps-count")
-
-    @task(4)
-    def view_homepage(self):
-        self.client.get("/", name="/")
 
     @task(7)
     def get_latest_articles(self):
@@ -56,4 +54,10 @@ class WebsiteUser(FastHttpUser):
             "size": 10,
             "sort_by": {"field": sort_field, "order": sort_order},
         }
+        self.client.post(endpoint, json=payload, name=endpoint)
+
+    @task(15)
+    def track_visitor(self):
+        endpoint = "/api/visitors/track"
+        payload = {"visited_page": random.choice(self.page_types)}
         self.client.post(endpoint, json=payload, name=endpoint)
