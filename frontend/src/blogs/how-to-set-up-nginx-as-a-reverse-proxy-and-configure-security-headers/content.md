@@ -16,7 +16,7 @@ Nginx is an efficient web server. In this architecture, it will act as a [revers
 - If the user wants a web page, Nginx grabs the static HTML, CSS, and JS files from your frontend's `dist` folder and sends them back immediately.
 - If the user action triggers an API call (like searching for an article), Nginx catches the request starting with `/api` and forwards it to your backend application.
 
-::: image ./1_nginx_reverse_proxy.png "Diagram illustrating Nginx as a reverse proxy, routing frontend requests to the Vue.js dist folder and backend API requests via a Unix socket to Gunicorn and Uvicorn, supervised by a process manager."
+::: image ./1_nginx_reverse_proxy.svg "Diagram illustrating Nginx as a reverse proxy, routing frontend requests to the Vue.js dist folder and backend API requests via a Unix socket to Gunicorn and Uvicorn, supervised by a process manager."
 Nginx acts as a reverse proxy, routing frontend requests to the Vue.js dist folder and backend API requests via a Unix socket to Gunicorn.
 :::
 

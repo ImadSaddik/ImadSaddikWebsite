@@ -8,25 +8,25 @@
 >
     <url>
         <loc>https://imadsaddik.com/</loc>
-        <lastmod>2026-03-16T09:14:25.514Z</lastmod>
+        <lastmod>2026-03-16T09:16:57.619Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/about-me</loc>
-        <lastmod>2026-03-16T09:14:25.514Z</lastmod>
+        <lastmod>2026-03-16T09:16:57.619Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/hire-me</loc>
-        <lastmod>2026-03-16T09:14:25.514Z</lastmod>
+        <lastmod>2026-03-16T09:16:57.619Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/resume</loc>
-        <lastmod>2026-03-16T09:14:25.514Z</lastmod>
+        <lastmod>2026-03-16T09:16:57.619Z</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
@@ -80,7 +80,7 @@
     </url>
     <url>
         <loc>https://imadsaddik.com/blogs/how-to-set-up-nginx-as-a-reverse-proxy-and-configure-security-headers</loc>
-        <lastmod>2026-03-16T09:13:35.297Z</lastmod>
+        <lastmod>2026-03-16T09:16:42.351Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
