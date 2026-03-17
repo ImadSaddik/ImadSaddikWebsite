@@ -833,3 +833,9 @@ server {
 ```
 
 Save the file and exit nano (`Ctrl+O`, `Enter`, `Ctrl+X`).
+
+## What is next?
+
+Your application is now live! Nginx is serving your Vue frontend and reliably routing API calls to your FastAPI backend.
+
+As a next step, you should consider securing your site with an SSL certificate using [Let's Encrypt](https://letsencrypt.org/) to enable HTTPS. This will activate your HSTS security header and ensure all traffic between your users and your server is fully encrypted.
