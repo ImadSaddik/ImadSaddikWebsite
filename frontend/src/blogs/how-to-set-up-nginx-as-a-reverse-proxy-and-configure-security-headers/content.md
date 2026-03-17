@@ -20,6 +20,11 @@ Nginx is an efficient web server. In this architecture, it will act as a [revers
 Nginx acts as a reverse proxy, routing frontend requests to the Vue.js dist folder and backend API requests via a Unix socket to Gunicorn.
 :::
 
+Prefer video? Watch the video tutorial:
+
+::: youtube [https://www.youtube.com/embed/LOexzbz4hL4?start=814](https://www.youtube.com/embed/LOexzbz4hL4?start=814)
+:::
+
 In this article, you will install Nginx, connect your frontend and backend, and apply security headers to protect your users from common web vulnerabilities.
 
 ::: info
