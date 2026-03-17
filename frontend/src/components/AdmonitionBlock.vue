@@ -1,6 +1,6 @@
 <template>
   <div class="admonition" :class="typeClass">
-    <p class="admonition-title">{{ title }}</p>
+    <p class="admonition-title">{{ formattedTitle }}</p>
     <div class="admonition-content">
       <slot></slot>
     </div>
@@ -28,6 +28,10 @@ export default {
   computed: {
     typeClass() {
       return `admonition-${this.type}`;
+    },
+    formattedTitle() {
+      if (!this.title) return "";
+      return this.title.charAt(0).toUpperCase() + this.title.slice(1);
     },
   },
 };
