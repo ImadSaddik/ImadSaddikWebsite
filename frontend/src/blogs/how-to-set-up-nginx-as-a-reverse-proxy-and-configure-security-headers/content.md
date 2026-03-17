@@ -597,7 +597,7 @@ This guide uses Google Chrome because you can update the CSP in real-time withou
 On the left, you can see the Network tab. On the right, you can see the website.
 :::
 
-The network tab is empty, refresh the page to see all the resources your website is trying to load.
+The network tab is empty. Refresh the page to see all the resources your website is trying to load.
 
 ::: image ./8_network_tab_with_resources.jpg "An image showing the Chrome developer tools with the Network tab populated with resources."
 The network tab is now populated with all the resources your website is trying to load.
