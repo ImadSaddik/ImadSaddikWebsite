@@ -481,3 +481,89 @@ sudo systemctl reload nginx
 ```
 
 Refresh your browser and test the API again. The 502 errors should be gone. Congratulations! Your Nginx reverse proxy is successfully serving the frontend and communicating with the FastAPI backend.
+
+## Add security headers
+
+Security does not stop at the firewall. Browsers have built-in security features, but they only activate if your server tells them to. You do this by adding [HTTP security headers](https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html) to your Nginx configuration.
+
+### Test your baseline security score
+
+Before we add any code, let's see how your server currently performs. There are free tools that scan your website and grade your security headers.
+
+Go to [SecurityHeaders.com](https://securityheaders.com/) or the [Mozilla HTTP Observatory](https://developer.mozilla.org/en-US/observatory) and enter your server's IP address or domain name.
+
+::: info Note
+If you haven't set up a domain name yet and are just using your server's bare IP address, make sure to use **SecurityHeaders.com**. The Mozilla HTTP Observatory requires a proper domain name to run its scans.
+:::
+
+Because you have a fresh Nginx installation with no headers configured, you will receive a failing grade like a D or an F.
+
+::: image ./5_1_security_headers_before.png "A screenshot of a security header report showing a failing grade due to missing headers."
+Scan results from [HTTP Observatory](https://developer.mozilla.org/en-US/observatory) showing a low score due to missing security headers.
+:::
+
+::: image ./5_2_security_headers_before.png "A screenshot of a security header report showing a failing grade due to missing headers."
+Scan results from [SecurityHeaders.com](https://securityheaders.com/) showing a low score due to missing security headers.
+:::
+
+Keep that tab open. Let's fix that score. Add the following blocks inside your `server` block.
+
+### HTTPS and transport
+
+First, we want to ensure that browsers strictly use secure connections when talking to your server.
+
+```nginx
+# HSTS (2 Years)
+add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
+```
+
+**Strict-Transport-Security (HSTS)** forces the browser to always use HTTPS when talking to your site for the next two years (`max-age=63072000`).
+
+::: info Note
+Keep in mind that browsers only respect this header over secure connections. If you are currently testing on regular HTTP, it won't do anything, but it will automatically lock down your site once you enable [SSL](https://www.cloudflare.com/learning/ssl/what-is-ssl/).
+:::
+
+### Content and cross-origin protections
+
+Next, you need to protect your website from malicious scripts and framing attacks.
+
+```nginx
+# CORP (Allow sharing)
+add_header Cross-Origin-Resource-Policy "cross-origin" always;
+
+# Anti-Clickjacking
+add_header X-Frame-Options "SAMEORIGIN" always;
+
+# Stop MIME sniffing
+add_header X-Content-Type-Options "nosniff" always;
+```
+
+Here is what these three headers do:
+
+**Cross-Origin-Resource-Policy (CORP)** controls whether other websites can load resources like images from your server. Setting it to `cross-origin` allows your public assets to be shared securely across the web.
+
+::: tip
+If you don't want your images or other resources to be used on other sites, you can set this to `same-origin` instead to prevent hotlinking.
+:::
+
+**X-Frame-Options** prevents [clickjacking](https://en.wikipedia.org/wiki/Clickjacking). It stops attackers from putting your website inside an invisible `<iframe>` on their malicious site to trick users into clicking buttons they did not intend to click. By setting it to `SAMEORIGIN`, only your own domain can frame your content.
+
+**X-Content-Type-Options** forces the browser to strictly trust the file type declared by the server. This prevents a common attack where a hacker uploads a malicious file (like a script) but disguises it as an image. With this header, the browser will refuse to execute it as code.
+
+### Privacy and hardware features
+
+Finally, you need to protect your users' privacy and lock down access to their physical hardware.
+
+```nginx
+# Privacy
+add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+# Disable unused features
+add_header Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()" always;
+```
+
+These two headers give you strict control over data and devices:
+
+**Referrer-Policy** acts as a privacy shield. When a user clicks a link on your site that goes to an external website, their browser sends a "Referer" header to the new site. The `strict-origin-when-cross-origin` setting protects user privacy by only sending your root domain name, not the full URL path, to external sites.
+
+**Permissions-Policy** acts as a hardware lock. By setting camera, microphone, geolocation, and payment to `()`, you explicitly disable these features. If a hacker somehow manages to run malicious code on your site, they still cannot access your users' webcams or microphones.
