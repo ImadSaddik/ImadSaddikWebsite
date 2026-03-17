@@ -35,6 +35,7 @@ Before you begin, please note that this guide uses placeholder values and exampl
 
 - **Placeholders**: Throughout this guide, you will see text inside angle brackets like `<your_project_name>`, `<your_username>`, or `<your_server_ip>`. You must replace these with your actual values and **remove the brackets** when running the commands.
 - **File paths**: This guide uses the directory `/web_app/` as an example for where your project code lives (e.g., `/web_app/frontend/dist` and `/web_app/backend/gunicorn.sock`). Be sure to replace these with the actual file paths on your server.
+- **IPs vs. Domains**: Whenever you see `<your_server_ip>`, you can use your server's public IP address. However, if you have already pointed a registered domain name to your server, you can use your domain name instead.
 
 :::
 
