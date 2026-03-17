@@ -13,6 +13,9 @@ export async function getHighlighter() {
         import("shiki/langs/asm.mjs"),
         import("shiki/langs/yaml.mjs"),
         import("shiki/langs/ini.mjs"),
+        import("shiki/langs/javascript.mjs"),
+        import("shiki/langs/nginx.mjs"),
+        import("shiki/langs/json.mjs"),
       ],
       engine: createJavaScriptRegexEngine(),
     });

@@ -32,4 +32,14 @@ describe("AdmonitionBlock", () => {
     expect(wrapper.find(".admonition").classes()).toContain("admonition-info");
     expect(wrapper.find(".admonition-content").text()).toContain("Default content");
   });
+
+  it("returns an empty string if title is an empty string", () => {
+    const wrapper = factory({ title: "" });
+    expect(wrapper.find(".admonition-title").text()).toBe("");
+  });
+
+  it("formats the string correctly", () => {
+    const wrapper = factory({ title: "tip" });
+    expect(wrapper.find(".admonition-title").text()).toBe("Tip");
+  });
 });
