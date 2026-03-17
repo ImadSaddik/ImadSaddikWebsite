@@ -172,7 +172,7 @@ server {
 Setting up dedicated `access_log` and `error_log` files is very important. If something breaks, these files will tell you exactly what went wrong.
 
 ::: info Note
-After creating a domain name we will come back to this file and replace `<your_server_ip>` with your domain (e.g., `www.mywebsite.com`).
+If you already have a domain name, you can replace `<your_server_ip>` with your domain (e.g., `www.mywebsite.com`) right now. Otherwise, you can use your IP address and update this file later.
 :::
 
 ### Serve the frontend
