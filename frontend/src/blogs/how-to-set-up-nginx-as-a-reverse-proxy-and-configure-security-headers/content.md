@@ -567,3 +567,227 @@ These two headers give you strict control over data and devices:
 **Referrer-Policy** acts as a privacy shield. When a user clicks a link on your site that goes to an external website, their browser sends a "Referer" header to the new site. The `strict-origin-when-cross-origin` setting protects user privacy by only sending your root domain name, not the full URL path, to external sites.
 
 **Permissions-Policy** acts as a hardware lock. By setting camera, microphone, geolocation, and payment to `()`, you explicitly disable these features. If a hacker somehow manages to run malicious code on your site, they still cannot access your users' webcams or microphones.
+
+### Craft a content security policy (CSP)
+
+The **Content-Security-Policy (CSP)** is your absolute strongest defense against [Cross-Site Scripting (XSS)](https://en.wikipedia.org/wiki/Cross-site_scripting).
+
+It acts as a strict whitelist. By default, a browser will download and execute any script a web page asks for. A CSP tells the browser exactly which domains are allowed to load scripts, styles, images, or frames. If a resource is not on the list, the browser blocks it.
+
+You do not just write a CSP from scratch. It is an iterative process. Here is how you do it:
+
+1. You block everything by setting `default-src 'none';`.
+2. You open your website in your browser. It will look terrible because all CSS, JS, and images will be blocked.
+3. You open the developer tools console in your browser. You will see a sea of red errors telling you exactly what was blocked and where it came from.
+4. You add exceptions one by one based on the errors until your website functions normally.
+
+Let's apply this process to your website. Open [Google Chrome](https://www.google.com/chrome/) and open the developer tools console (`Ctrl+Shift+I` or `Cmd+Option+I` on Mac). Go to the "Network" tab.
+
+::: info
+This guide uses Google Chrome because you can update the CSP in real-time without having to change your Nginx configuration and refresh the page repeatedly.
+:::
+
+::: image ./7_network_tab_chrome.jpg "An image showing the Chrome developer tools with the Network tab open."
+On the left, you can see the Network tab. On the right, you can see the website.
+:::
+
+The network tab is empty, refresh the page to see all the resources your website is trying to load.
+
+::: image ./8_network_tab_with_resources.jpg "An image showing the Chrome developer tools with the Network tab populated with resources."
+The network tab is now populated with all the resources your website is trying to load.
+:::
+
+Now, right click on the first resource in the list and select "Show all overrides".
+
+::: image ./9_show_all_overrides.png "An image showing how to find the "Show all overrides" option in the Chrome developer tools."
+Select "Show all overrides" in the menu.
+:::
+
+This will open the "Overrides" tab, which allows you to edit the response headers in real-time. Click on "Select folder for overrides", create a new folder on your desktop, and select it.
+
+::: image ./10_select_folder_for_overrides.png "An image showing how to select a folder for overrides in the Chrome developer tools."
+Create a new folder on your desktop and select it for overrides.
+:::
+
+Now, go back to the Network tab. Right click on the first resource again and click on "Override headers". After you do that, Google Chrome will create a file called `.headers` in the folder you selected.
+
+::: image ./11_override_headers.png "An image showing how to select "Override headers" in the Chrome developer tools."
+Select "Override headers" in the menu and verify that a .headers file is created in your overrides folder.
+:::
+
+Before opening the `.headers` file, click on "Add header" and type `Content-Security-Policy` as the header name and `default-src 'none';` as the value. This is your starting point: a policy that blocks everything.
+
+::: image ./12_add_csp_header.png "An image showing how to add a Content-Security-Policy header in the Chrome developer tools."
+Add a Content-Security-Policy header with the value `default-src 'none';`.
+:::
+
+Now, click on the `.headers` file and change `Apply to` from whatever resource it is on to `*`. This tells Chrome to apply this CSP to every single resource on the page.
+
+::: image ./13_apply_to_all_resources.png "An image showing how to change the "Apply to" setting for the overridden header in the Chrome developer tools."
+Change the "Apply to" setting to `*` to apply the CSP to all resources on the page.
+:::
+
+Refresh the page. It will look completely broken because all resources are blocked.
+
+::: image ./14_website_broken_due_to_csp.png "An image showing the website completely broken due to the strict CSP."
+The website looks completely broken because all resources are blocked by the strict CSP.
+:::
+
+Open the console tab. You will see a sea of red errors. Each error tells you exactly what resource was blocked and where it came from.
+
+::: image ./15_csp_errors_in_console.png "An image showing the console tab filled with CSP violation errors."
+The console is filled with CSP violation errors, each showing what was blocked and where it came from.
+:::
+
+Let's start relaxing the policy by allowing everything from your own domain. This is done by adding `self` to the CSP.
+
+```json
+[
+  {
+    "applyTo": "*",
+    "headers": [
+      {
+        "name": "Content-Security-Policy",
+        "value": "default-src 'self';"
+      }
+    ]
+  }
+]
+```
+
+Now, refresh the page. You will see that some resources are now loading, but many are still blocked.
+
+::: image ./16_website_partially_loading.png "An image showing the website partially loading after allowing 'self' in the CSP."
+The website is partially loading after allowing 'self' in the CSP, but many resources are still blocked.
+:::
+
+You can also use `self` with font sources, image sources, and so on. Let's do that because that is an easy way to resolve many errors at once.
+
+```json
+[
+  {
+    "applyTo": "*",
+    "headers": [
+      {
+        "name": "Content-Security-Policy",
+        "value": "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; frame-src 'self';"
+      }
+    ]
+  }
+]
+```
+
+::: info
+To learn more about the different types of sources (like `font-src`, `img-src`, `script-src`, etc.) and what they do, check out the [MDN documentation on CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP).
+:::
+
+If you still see errors, this means you are using resources from third-party domains, like a CDN or an analytics provider. You need to add those domains to your CSP one by one until all errors are resolved and your website functions normally.
+
+From the previous image, we can see that the browser was trying to load stylesheets from these domains:
+
+- `cdnjs.cloudflare.com`
+- `fonts.googleapis.com`
+
+To allow your external fonts and icons to load, you need to add their domains to your `style-src` directive.
+
+```json
+[
+  {
+    "applyTo": "*",
+    "headers": [
+      {
+        "name": "Content-Security-Policy",
+        "value": "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'self' https://cdnjs.cloudflare.com https://fonts.googleapis.com; connect-src 'self'; frame-src 'self';"
+      }
+    ]
+  }
+]
+```
+
+::: info
+When you allow stylesheets from `fonts.googleapis.com` and `cdnjs.cloudflare.com`, those stylesheets will try to download the actual font files from `fonts.gstatic.com` and `cdnjs.cloudflare.com`.
+
+You will see a new error for `font-src` after you apply this fix. You can get ahead of this by adding `https://fonts.gstatic.com` and `https://cdnjs.cloudflare.com` to your font-src directive right now.
+
+```json
+[
+  {
+    "applyTo": "*",
+    "headers": [
+      {
+        "name": "Content-Security-Policy",
+        "value": "default-src 'self'; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self'; script-src 'self'; style-src 'self' https://cdnjs.cloudflare.com https://fonts.googleapis.com; connect-src 'self'; frame-src 'self';"
+      }
+    ]
+  }
+]
+```
+
+:::
+
+Reload the page again. The errors for stylesheets and fonts should be gone, and your icons and fonts should be loading correctly. We have one final error to fix: inline styles and `SVG` images.
+
+::: image ./17_remaining_csp_errors.png "An image showing the remaining CSP errors for inline styles and SVG images."
+The remaining CSP errors are for inline styles and SVG images.
+:::
+
+To load `SVG` images, you need to add `data:` to your `img-src` directive. This allows images that are encoded directly in the HTML as base64 strings.
+
+For inline styles, you need to add `'unsafe-inline'` to your `style-src` directive. This is not ideal but if your inline styles are not coming from user input, it is an acceptable risk.
+
+::: warning
+You should avoid using `'unsafe-inline'` if your website has any form fields that allow users to submit data. If you allow inline styles and a hacker manages to inject malicious code into your database, that code could be executed in the browsers of every user that visits the infected page.
+
+Read more about this in the [Inline JavaScript](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP#inline_javascript) section on MDN.
+:::
+
+Here is your final CSP:
+
+```json
+[
+  {
+    "applyTo": "*",
+    "headers": [
+      {
+        "name": "Content-Security-Policy",
+        "value": "default-src 'self'; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; connect-src 'self'; frame-src 'self';"
+      }
+    ]
+  }
+]
+```
+
+Now back on your server terminal, you need to add this header to your Nginx configuration. Open your Nginx config file again.
+
+```bash
+sudo nano /etc/nginx/sites-available/<your_project_name>
+```
+
+Add the `add_header Content-Security-Policy` line with the value of your final CSP inside the `server` block.
+
+```nginx
+add_header Content-Security-Policy "default-src 'self'; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; connect-src 'self'; frame-src 'self'; upgrade-insecure-requests;" always;
+```
+
+I have added `upgrade-insecure-requests` to the end of the CSP. This tells browsers to automatically upgrade any HTTP requests to HTTPS.
+
+Save the file and exit nano (`Ctrl+O`, `Enter`, `Ctrl+X`).
+
+Test the Nginx configuration and reload the server.
+
+```bash
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+Now, if you refresh your website at `http://<your_server_ip>`, you should see zero errors in the console related to the CSP.
+
+::: image ./18_csp_errors_resolved.png "An image showing a clean console with no CSP errors."
+The console is now clean with no CSP errors.
+:::
+
+Visit [SecurityHeaders.com](https://securityheaders.com/) and enter your IP address again. Your grade should now be an A, the highest possible score.
+
+::: image ./19_security_headers_after.png "A screenshot of a security header report showing an A grade after adding security headers."
+Your server now receives an A grade after adding security headers.
+:::
