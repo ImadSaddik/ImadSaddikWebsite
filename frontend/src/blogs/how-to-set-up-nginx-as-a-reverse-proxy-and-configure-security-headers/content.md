@@ -339,3 +339,145 @@ server {
 ```
 
 Save the file and exit nano (`Ctrl+O`, `Enter`, `Ctrl+X`).
+
+## Enable the site and update the firewall
+
+Nginx uses a two-folder system. Configuration files are created in `sites-available`. To turn them on, you must create a [symbolic link](https://en.wikipedia.org/wiki/Symbolic_link) (a shortcut) to them in the `sites-enabled` folder.
+
+First, delete the default placeholder page that comes with Nginx.
+
+```bash
+sudo rm /etc/nginx/sites-enabled/default
+```
+
+Now, enable your new configuration.
+
+```bash
+sudo ln -s /etc/nginx/sites-available/<your_project_name> /etc/nginx/sites-enabled/<your_project_name>
+```
+
+Always test your configuration before restarting the server. A single typo in an Nginx file will crash the entire web server.
+
+```bash
+sudo nginx -t
+```
+
+You should see an output confirming the syntax is ok and the test is successful.
+
+```output
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+```
+
+If you see an error, Nginx will tell you exactly which line has the problem. Go back and fix it.
+
+If the test is successful, reload Nginx to apply the changes.
+
+```bash
+sudo systemctl reload nginx
+```
+
+::: info Why reload instead of restart?
+Using `sudo systemctl reload nginx` is much safer for a live server than `restart`. A `restart` completely kills the Nginx service and starts it again, instantly dropping any active connections from your users.
+
+A `reload`, however, tells Nginx to gracefully apply the new configuration to new connections while letting existing connections finish naturally, resulting in zero downtime.
+:::
+
+### Allow web traffic through the firewall
+
+If your server is protected by a firewall like [UFW](https://www.digitalocean.com/community/tutorials/ufw-essentials-common-firewall-rules-and-commands) (which it should be), it is likely configured to block all incoming web traffic by default. You must now open the gates for HTTP and HTTPS traffic.
+
+Nginx registers application profiles with UFW when it is installed. You can allow all standard web traffic by using the "Nginx Full" profile, which opens both port 80 (HTTP) and port 443 (HTTPS).
+
+```bash
+sudo ufw allow 'Nginx Full'
+```
+
+Verify that the rules were added correctly.
+
+```bash
+sudo ufw status
+```
+
+You should see both OpenSSH and Nginx Full in the active list.
+
+```output
+Status: active
+
+To                         Action      From
+--                         ------      ----
+Nginx Full                 ALLOW       Anywhere
+OpenSSH                    ALLOW       Anywhere
+22/tcp                     ALLOW       Anywhere
+Nginx Full (v6)            ALLOW       Anywhere (v6)
+OpenSSH (v6)               ALLOW       Anywhere (v6)
+22/tcp (v6)                ALLOW       Anywhere (v6)
+```
+
+### Test the deployment
+
+Before adding complex security rules, you should verify that your basic configuration actually works.
+
+Open a web browser on your local computer and enter your Server's IP address: `http://<your_server_ip>`. Your Vue.js frontend should load immediately. Now test a feature that makes an API call, like a search bar or a page that fetches data from the backend.
+
+You will likely see the frontend render correctly but every API call return a [502 Bad Gateway](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/502) error if you haven't configured the backend socket permissions correctly.
+
+If you run into this error, don't panic, it is one of the most common hurdles when setting up a reverse proxy. Let's look at why it happens and how to fix it.
+
+#### Why you see a 502 Bad Gateway
+
+Check the Nginx error log you configured earlier:
+
+```bash
+sudo cat /var/log/nginx/<your_project_name>-error.log
+```
+
+You will find a line like this:
+
+```output
+connect() to unix:/web_app/backend/gunicorn.sock failed (13: Permission denied)
+```
+
+Here is what is happening: If your backend process (like Gunicorn) was started under your personal user account, the `gunicorn.sock` file it creates is owned by your user. Nginx, however, runs as a completely separate system user called `www-data`. When Nginx tries to forward a request to the socket, Ubuntu's security model blocks it because `www-data` has no access to a file owned by someone else.
+
+The frontend works because those are just static files in `/web_app/frontend/dist`, which Nginx can read directly. The API fails because it requires Nginx to write to your socket file.
+
+#### Fix the socket permissions
+
+The solution requires two steps: adding Nginx to your user group, and ensuring that group is allowed to open your folders.
+
+First, add `www-data` (the Nginx user) to your personal user group. This gives Nginx group-level access without opening up your entire system.
+
+```bash
+sudo usermod -aG <your_username> www-data
+```
+
+Verify the change took effect by checking the members of your group:
+
+```bash
+getent group <your_username>
+```
+
+The output should show your group details with `www-data` listed at the very end:
+
+```output
+<your_username>:x:1000:www-data
+```
+
+Second, you must ensure that your group has "execute" permissions on your project folders. In Linux, execute permission (`x`) on a directory allows a user to pass through it.
+
+If your parent folders do not have this permission for the group, Nginx will be blocked at the top level and will never reach the socket file inside, resulting in a 502 error.
+
+Grant group execute permissions to your application folders to ensure Nginx can traverse them:
+
+```bash
+chmod g+x /web_app /web_app/backend
+```
+
+Now reload Nginx so it picks up the new group membership and permissions:
+
+```bash
+sudo systemctl reload nginx
+```
+
+Refresh your browser and test the API again. The 502 errors should be gone. Congratulations! Your Nginx reverse proxy is successfully serving the frontend and communicating with the FastAPI backend.
