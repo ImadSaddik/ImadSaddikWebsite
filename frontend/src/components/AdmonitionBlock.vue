@@ -65,7 +65,6 @@ export default {
   margin: 0;
   margin-bottom: var(--gap-xs);
   font-size: var(--font-size-small);
-  text-transform: capitalize;
 }
 
 .admonition-tip .admonition-title {
