@@ -419,11 +419,11 @@ OpenSSH (v6)               ALLOW       Anywhere (v6)
 
 Before adding complex security rules, you should verify that your basic configuration actually works.
 
-Open a web browser on your local computer and enter your Server's IP address: `http://<your_server_ip>`. Your Vue.js frontend should load immediately. Now test a feature that makes an API call, like a search bar or a page that fetches data from the backend.
+Open a web browser on your local computer and enter your server's IP address: `http://<your_server_ip>`. Your Vue.js frontend should load immediately. Now test a feature that makes an API call, like a search bar or a page that fetches data from the backend.
 
 You will likely see the frontend render correctly but every API call return a [502 Bad Gateway](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/502) error if you haven't configured the backend socket permissions correctly.
 
-If you run into this error, don't panic, it is one of the most common hurdles when setting up a reverse proxy. Let's look at why it happens and how to fix it.
+If you run into this error, don't panic; it is one of the most common hurdles when setting up a reverse proxy. Let's look at why it happens and how to fix it.
 
 #### Why you see a 502 Bad Gateway
 
