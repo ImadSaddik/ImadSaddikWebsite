@@ -792,3 +792,44 @@ Visit [SecurityHeaders.com](https://securityheaders.com/) and enter your IP addr
 ::: image ./19_security_headers_after.png "A screenshot of a security header report showing an A grade after adding security headers."
 Your server now receives an A grade after adding security headers.
 :::
+
+### The complete configuration
+
+Your full Nginx configuration file should now look like this:
+
+```nginx
+upstream <your_project_name>_app_server {
+    server unix:/web_app/backend/gunicorn.sock fail_timeout=0;
+}
+
+server {
+    listen 80;
+    server_name <your_server_ip>;
+
+    access_log /var/log/nginx/<your_project_name>-access.log;
+    error_log /var/log/nginx/<your_project_name>-error.log;
+
+    # Security headers
+    add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
+    add_header Cross-Origin-Resource-Policy "cross-origin" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()" always;
+    add_header Content-Security-Policy "default-src 'self'; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; connect-src 'self'; frame-src 'self'; upgrade-insecure-requests;" always;
+
+    location / {
+        root /web_app/frontend/dist;
+        try_files $uri $uri/ /index.html;
+    }
+
+    location /api {
+        proxy_pass http://<your_project_name>_app_server;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+    }
+}
+```
+
+Save the file and exit nano (`Ctrl+O`, `Enter`, `Ctrl+X`).
