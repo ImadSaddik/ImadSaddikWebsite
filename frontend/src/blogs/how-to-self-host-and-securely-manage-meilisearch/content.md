@@ -445,7 +445,7 @@ Using an SSH tunnel to securely connect to the Meilisearch server running on the
 Run this command on your **local computer** (not inside the server). Keep the terminal window open.
 
 ```bash
-ssh -L 7700:127.0.0.1:7700 <your_username>@<your_server_ip>
+ssh -L 7700:127.0.0.1:7700 <YOUR_USERNAME>@<YOUR_SERVER_IP_ADDRESS>
 ```
 
 This command tells SSH: "Listen to port 7700 on my laptop, and forward any traffic through the secure connection to port 7700 on the server."
