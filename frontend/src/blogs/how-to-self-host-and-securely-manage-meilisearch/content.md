@@ -463,3 +463,7 @@ After connecting, you can browse your production indexes, test searches, add man
 When you are finished managing your data, simply close the terminal window where the SSH command is running or press `Ctrl+C`.
 
 This immediately breaks the tunnel and cuts off access. Since the entire session happened inside an encrypted SSH pipe, your data remained 100% secure and was never exposed to the public internet.
+
+## Conclusion
+
+Your server now has a fully functioning and blazing-fast search engine running in production. By securely isolating the service using a system user, managing it entirely behind the scenes via a local SSH tunnel, and automating daily snapshot backups, you have ensured that your data stays safe while remaining entirely invisible to the outside world.
