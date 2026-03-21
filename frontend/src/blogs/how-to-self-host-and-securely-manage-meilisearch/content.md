@@ -380,3 +380,48 @@ Nov 01 07:34:15 <YOUR_HOSTNAME> meilisearch[44061]: [2026-11-01T07:34:15Z INFO  
 ```
 
 Press `Ctrl+C` to stop watching the logs when you are done.
+
+## Schedule automatic backups
+
+Your data is currently living on the edge. If your server crashes or your database gets corrupted, you could lose everything.
+
+To prevent this, you should tell Meilisearch to automatically create [snapshots](https://www.meilisearch.com/docs/learn/data_backup/snapshots) in the background. Snapshots are exact copies of your database that act as a safety net.
+
+Open your service file one more time:
+
+```bash
+sudo nano /etc/systemd/system/meilisearch.service
+```
+
+Add two new flags to your `ExecStart` command: `--schedule-snapshot` and `--snapshot-dir`. Your final `ExecStart` block should look like this:
+
+```ini
+ExecStart=/usr/local/bin/meilisearch \
+  --db-path "/var/lib/meilisearch/data" \
+  --dump-dir "/var/lib/meilisearch/dumps" \
+  --schedule-snapshot 86400 \
+  --snapshot-dir "/var/lib/meilisearch/snapshots"
+```
+
+Here is what these new lines do:
+
+- `--schedule-snapshot 86400`: This tells Meilisearch to take a snapshot every 86,400 seconds (which is exactly 24 hours). If your data changes very frequently, you can lower this to `3600` to take a backup every hour.
+- `--snapshot-dir ...`: This tells Meilisearch exactly where to save the backup files so they stay safely contained in the system user's directory.
+
+Save the file and exit (`Ctrl+O`, `Enter`, `Ctrl+X`).
+
+Create the new snapshots directory and give ownership to the `meilisearch` user so the service has permission to write the files there:
+
+```bash
+sudo mkdir -p /var/lib/meilisearch/snapshots
+sudo chown -R meilisearch:meilisearch /var/lib/meilisearch/snapshots
+```
+
+Finally, reload systemd and restart the service to apply your new backup policy:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl restart meilisearch
+```
+
+Now, Meilisearch will quietly save a safe copy of your database every single day. Only the most recent snapshot is kept, so it will not fill up your hard drive over time.
