@@ -511,6 +511,43 @@ Click the pink "Create Index" button. Your new, empty index will instantly appea
 Your new index will appear as a card in the dashboard. It is currently empty and waiting for documents to be added.
 :::
 
+### Add documents
+
+Your index is ready, but a search engine isn't very useful without data. Let's add your first documents so you have something to search for!
+
+Click on your newly created index card from the dashboard home page. This opens the index details view. Look at the menu on the left sidebar and click "::fa{fa-solid fa-upload}:: Upload documents".
+
+::: image ./9_click_upload_docs.png "A screenshot highlighting the "Upload documents" button in the left sidebar."
+Click the "::fa{fa-solid fa-upload}:: Upload documents" button at the bottom of the left sidebar.
+:::
+
+The upload page gives you two convenient options: you can either paste text directly into the "Input by editor" side on the left, or drag and drop a large `.json` file on the right.
+
+For this tutorial, let's paste some sample data directly into the editor. Replace the empty `[]` brackets with the following JSON array:
+
+```json
+[
+  {
+    "id": 1,
+    "title": "Hello World",
+    "content": "This is my very first document in my production search engine!",
+    "tags": ["tutorial", "getting-started"]
+  },
+  {
+    "id": 2,
+    "title": "Securing Meilisearch",
+    "content": "Always keep your master key safe and use SSH tunneling for access.",
+    "tags": ["security", "devops"]
+  }
+]
+```
+
+Click the green "Submit" button below the editor. Meilisearch processes documents asynchronously, but for small batches like this, it takes only milliseconds.
+
+::: image ./10_upload_documents_interface.png "A screenshot showing the split upload view."
+Paste the JSON directly into the editor on the left or drop a file on the right. Click Submit when you are ready.
+:::
+
 When you are finished managing your data, simply close the terminal window where the SSH command is running or press `Ctrl+C`.
 
 This immediately breaks the tunnel and cuts off access. Since the entire session happened inside an encrypted SSH pipe, your data remained 100% secure and was never exposed to the public internet.
