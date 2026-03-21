@@ -154,7 +154,7 @@ sudo chown -R meilisearch:meilisearch /var/lib/meilisearch
 ## Transfer and import the dump
 
 ::: info Note
-If you are starting from scratch and didn't create a dump file in the previous step, you can skip this section and go straight to **Run Meilisearch as a service**.
+If you are starting from scratch and didn't create a dump file in the previous step, you can skip this section and go straight to [Run Meilisearch as a service](#run-meilisearch-as-a-service).
 :::
 
 You need to get the dump file from your computer over to the server.
