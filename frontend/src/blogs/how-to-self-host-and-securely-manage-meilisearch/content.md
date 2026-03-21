@@ -548,6 +548,18 @@ Click the green "Submit" button below the editor. Meilisearch processes document
 Paste the JSON directly into the editor on the left or drop a file on the right. Click Submit when you are ready.
 :::
 
+### Search and manage documents
+
+As soon as your documents are added, you can test out the lightning-fast search capabilities right from the UI.
+
+Click on **::fa{fa-solid fa-file-lines}:: Documents** in the left sidebar. At the top of this page, type a query into the search bar and press `Enter` or click the pink "Search" button. Try intentionally misspelling a word like "Secoring" to see Meilisearch's built-in typo tolerance in action!
+
+If you ever need to manually update or delete a specific record, you don't need to write a script or use an API. Hover over any document in the search results list, and you will see **Update** and **Delete** buttons appear for that record.
+
+::: image ./11_search_and_manage_documents.png "A screenshot showing the search bar in action and the update/delete buttons next to a document."
+Test your search queries and easily modify existing documents directly from the interface.
+:::
+
 When you are finished managing your data, simply close the terminal window where the SSH command is running or press `Ctrl+C`.
 
 This immediately breaks the tunnel and cuts off access. Since the entire session happened inside an encrypted SSH pipe, your data remained 100% secure and was never exposed to the public internet.
