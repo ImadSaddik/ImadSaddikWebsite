@@ -92,3 +92,34 @@ task = meilisearch_client.create_dump()
 meilisearch_client.wait_for_task(task.task_uid)
 print("Dump created successfully!")
 ```
+
+## Install Meilisearch on the server
+
+Now, it is time to set up the engine on your production VM. SSH into your server:
+
+```bash
+ssh <YOUR_USERNAME>@<YOUR_SERVER_IP_ADDRESS>
+```
+
+Download the latest stable Meilisearch binary using their official installation script.
+
+```bash
+curl -L https://install.meilisearch.com | sh
+```
+
+This script downloads a single, compiled file named `meilisearch` into your current directory. It is completely self-contained, meaning you don't need to install Rust or any other dependencies.
+
+Make the binary executable and move it to the global `/usr/local/bin/` directory. This ensures the command can be run from anywhere on the system, which is required when we turn it into a background service later.
+
+```bash
+chmod +x ./meilisearch
+sudo mv ./meilisearch /usr/local/bin/
+```
+
+Verify the installation was successful by checking the version:
+
+```output
+meilisearch --version
+```
+
+If it prints the version number, you are ready to proceed.
