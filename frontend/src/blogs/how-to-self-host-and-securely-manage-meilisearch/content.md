@@ -545,7 +545,7 @@ For this tutorial, let's paste some sample data directly into the editor. Replac
 Click the green "Submit" button below the editor. Meilisearch processes documents asynchronously, but for small batches like this, it takes only milliseconds.
 
 ::: image ./10_upload_documents_interface.png "A screenshot showing the split upload view."
-Paste the JSON directly into the editor on the left or drop a file on the right. Click Submit when you are ready.
+Paste the JSON directly into the editor on the left or drop a file on the right. Click "Submit" when you are ready.
 :::
 
 ### Search and manage documents
@@ -571,7 +571,7 @@ Click on **::fa{fa-solid fa-gear}:: Settings** in the left sidebar. You will see
 To make changes, click the pink "Edit" button at the top right of the editor. Because every application's data is unique, I highly recommend reading the [official Meilisearch documentation on index settings](https://www.meilisearch.com/docs/learn/configuration/configuring_index_settings) to discover all the ways you can tweak the engine.
 
 ::: image ./12_index_settings.png "A screenshot of the meilisearch-ui settings tab showing the JSON configuration editor."
-Click the Edit button to safely modify your index's JSON configuration.
+Click the "Edit" button to safely modify your index's JSON configuration.
 :::
 
 When you are finished managing your data, simply close the terminal window where the SSH command is running or press `Ctrl+C`.
