@@ -186,6 +186,10 @@ You don't want to run Meilisearch manually in a terminal. You want it to run in 
 
 To do this, you will use [systemd](https://systemd.io/), which is the built-in service manager that comes with Ubuntu. It is the industry standard for managing low-level background services and infrastructure.
 
+::: image ./1_systemd_vs_supervisor.png "Diagram showing the server stack: systemd manages OS-level infrastructure like Meilisearch, while Supervisor manages Application-level code like Gunicorn."
+The server stack: systemd manages low-level infrastructure, while Supervisor manages high-level application code.
+:::
+
 ### Create the environment file
 
 You must secure your search engine with a strong Master Key. Instead of hardcoding this sensitive information directly into the service file, you will create a secure environment file. This keeps your secrets hidden from anyone viewing the server's process list via commands like `ps`.
@@ -434,6 +438,10 @@ This is fantastic for security, but terrible for usability if you need to manual
 
 Instead, you will use **SSH Tunneling**. This creates a secure, temporary bridge between your local laptop and the locked-down server port.
 
+::: image ./2_ssh_tunnel_meilisearch.png "An illustration showing how to manage Meilisearch securely with an SSH tunnel."
+Using an SSH tunnel to securely connect to the Meilisearch server running on the production VM.
+:::
+
 Run this command on your **local computer** (not inside the server). Keep the terminal window open.
 
 ```bash
@@ -446,11 +454,19 @@ Now, you can use a great open-source tool called [meilisearch-ui](https://github
 
 Go to [https://meilisearch-ui.vercel.app/](https://meilisearch-ui.vercel.app/) in your browser. On that page, click the "Add Instance" button to connect to your production Meilisearch.
 
+::: image ./3_add_instance_meilisearch_ui.png "A screenshot of the meilisearch-ui interface showing a mouse icon on the "plus" button."
+Add a new instance in the meilisearch-ui app.
+:::
+
 A modal will pop up asking for connection details. Fill it out like this:
 
 - **Name**: Give it a descriptive name (e.g., `Production DB`).
 - **Host**: Enter `http://127.0.0.1:7700`. (This hits your local tunnel, which forwards to the server).
 - **API Key**: Enter your production master key.
+
+::: image ./4_add_instance_details_ui.jpg "A screenshot of the meilisearch-ui interface showing the connection setup modal, with Host set to `http://127.0.0.1:7700` and the API Key field filled in."
+Add a new instance in the meilisearch-ui app by providing your local tunnel host and production key.
+:::
 
 ::: info Note
 Are you wondering how a secure `https://` website can connect to an insecure `http://` host without your browser blocking it?
@@ -459,6 +475,10 @@ Modern web browsers have a built-in security exception for `127.0.0.1` and `loca
 :::
 
 After connecting, you can browse your production indexes, test searches, add manual documents, and modify settings securely.
+
+::: image ./5_meilisearch_ui_dashboard.jpg "A screenshot of the meilisearch-ui interface showing the home page."
+The meilisearch-ui dashboard connected to the production instance through the SSH tunnel.
+:::
 
 When you are finished managing your data, simply close the terminal window where the SSH command is running or press `Ctrl+C`.
 
