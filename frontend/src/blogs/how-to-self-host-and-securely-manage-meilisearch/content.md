@@ -17,6 +17,11 @@ Hosting your own search engine on the same server as your backend has massive ad
 - **Cost-effective:** You do not have to pay for an expensive managed search [SaaS](https://en.wikipedia.org/wiki/Software_as_a_service).
 - **Maximum security:** By running Meilisearch behind a standard server firewall (like [UFW](https://help.ubuntu.com/community/UFW)), it remains completely invisible to the public internet.
 
+Prefer video? Watch the video tutorial:
+
+::: youtube [https://www.youtube.com/embed/9vydd5uXie0](https://www.youtube.com/embed/9vydd5uXie0)
+:::
+
 In this article, you will export local search data, install the Meilisearch binary on your server, isolate it using a highly secure "system user", import your data dumps, and set up secure visual management using [SSH tunneling](https://www.ssh.com/academy/ssh/tunneling).
 
 ::: warning Important
