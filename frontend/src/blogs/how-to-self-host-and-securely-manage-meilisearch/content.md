@@ -480,6 +480,37 @@ After connecting, you can browse your production indexes, test searches, add man
 The meilisearch-ui dashboard connected to the production instance through the SSH tunnel.
 :::
 
+### Create an index
+
+Before you can search for anything, you need a place to store your data. In Meilisearch, data is organized into **indexes**. You can think of an index just like a table in a traditional SQL database; it holds a specific collection of related documents.
+
+If you started from scratch, your dashboard will be empty. Let's create your first index.
+
+On your dashboard home page, locate the Indexes section. Click the pink "Create" button on the right side of the screen.
+
+::: image ./6_button_to_create_index.png "A screenshot of the meilisearch-ui interface highlighting the "Create" index button."
+Use the "Create" button to create a new index.
+:::
+
+A modal will appear asking for two details:
+
+- **UID (Unique Identifier)**: This is the name of your index. Type a descriptive name (like `articles`, `products`, or `movies`).
+- **Primary Key**: This is the unique field that identifies each document inside your index (usually something like `id` or `uuid`). You can actually leave this blank for now; if you do, Meilisearch will automatically figure it out when you upload your first document!
+
+::: image ./7_create_index_modal.png "A screenshot of the meilisearch-ui interface showing the "Create Index" modal with fields for UID and Primary Key."
+Fill out the UID and Primary Key fields to create your index. You can leave the Primary Key blank if you want Meilisearch to auto-detect it later.
+:::
+
+::: tip
+You can hover over the UID and Primary Key fields to see helpful explanations if you're not sure what they mean.
+:::
+
+Click the pink "Create Index" button. Your new, empty index will instantly appear as a card in your dashboard!
+
+::: image ./8_new_index_created.png "A screenshot of the meilisearch-ui interface showing a newly created empty index card."
+Your new index will appear as a card in the dashboard. It is currently empty and waiting for documents to be added.
+:::
+
 When you are finished managing your data, simply close the terminal window where the SSH command is running or press `Ctrl+C`.
 
 This immediately breaks the tunnel and cuts off access. Since the entire session happened inside an encrypted SSH pipe, your data remained 100% secure and was never exposed to the public internet.
