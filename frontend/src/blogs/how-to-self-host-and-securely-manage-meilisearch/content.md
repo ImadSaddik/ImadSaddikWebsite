@@ -354,3 +354,29 @@ Save the file, then reload systemd and restart the service to apply the clean co
 sudo systemctl daemon-reload
 sudo systemctl restart meilisearch
 ```
+
+## Connect the backend
+
+Now that Meilisearch is running with a production Master Key, your backend application needs to know what that key is so it can safely communicate with the search engine.
+
+Navigate to your application's configuration or `.env` file on the server. Update or add the `MEILISEARCH_MASTER_KEY` variable to match the exact key you defined in `/etc/meilisearch/env`.
+
+```ini
+MEILISEARCH_MASTER_KEY=<YOUR_STRONG_MASTER_KEY>
+```
+
+Save your changes and restart your backend service (using systemd, Docker, PM2, or whatever process manager you rely on) to force it to load the new environment variables.
+
+To prove everything is connected, you can perform a search on your live website (via your browser) while simultaneously watching the Meilisearch logs in real-time on your server:
+
+```bash
+sudo journalctl -u meilisearch.service -f
+```
+
+The `-f` flag "follows" the log output. As you type a query on your website, you should see logs stream by indicating successful HTTP search requests!
+
+```output
+Nov 01 07:34:15 <YOUR_HOSTNAME> meilisearch[44061]: [2026-11-01T07:34:15Z INFO  actix_web::middleware::logger] 127.0.0.1 "POST /indexes/<YOUR_INDEX_NAME>/search HTTP/1.1" 200 451 "-" "python-requests/2.31.0" 0.002345
+```
+
+Press `Ctrl+C` to stop watching the logs when you are done.
