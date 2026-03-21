@@ -560,6 +560,20 @@ If you ever need to manually update or delete a specific record, you don't need 
 Test your search queries and easily modify existing documents directly from the interface.
 :::
 
+### Update index settings
+
+Out of the box, Meilisearch searches through every single field in your document. It does this because the default `searchableAttributes` setting is configured to `["*"]`.
+
+While this is great for getting started, you might want to fine-tune how the engine behaves and ranks results.
+
+Click on **::fa{fa-solid fa-gear}:: Settings** in the left sidebar. You will see a large code editor displaying your index's complete configuration in JSON format.
+
+To make changes, click the pink "Edit" button at the top right of the editor. Because every application's data is unique, I highly recommend reading the [official Meilisearch documentation on index settings](https://www.meilisearch.com/docs/learn/configuration/configuring_index_settings) to discover all the ways you can tweak the engine.
+
+::: image ./12_index_settings.png "A screenshot of the meilisearch-ui settings tab showing the JSON configuration editor."
+Click the Edit button to safely modify your index's JSON configuration.
+:::
+
 When you are finished managing your data, simply close the terminal window where the SSH command is running or press `Ctrl+C`.
 
 This immediately breaks the tunnel and cuts off access. Since the entire session happened inside an encrypted SSH pipe, your data remained 100% secure and was never exposed to the public internet.
