@@ -425,3 +425,41 @@ sudo systemctl restart meilisearch
 ```
 
 Now, Meilisearch will quietly save a safe copy of your database every single day. Only the most recent snapshot is kept, so it will not fill up your hard drive over time.
+
+## Manage Meilisearch securely with a GUI
+
+Assuming you have configured a strict server firewall, port `7700` is blocked. No one on the internet can access your Meilisearch instance directly.
+
+This is fantastic for security, but terrible for usability if you need to manually inspect a document or tweak ranking rules. Opening the port to the public just to use an admin dashboard is a bad idea.
+
+Instead, you will use **SSH Tunneling**. This creates a secure, temporary bridge between your local laptop and the locked-down server port.
+
+Run this command on your **local computer** (not inside the server). Keep the terminal window open.
+
+```bash
+ssh -L 7700:127.0.0.1:7700 <your_username>@<your_server_ip>
+```
+
+This command tells SSH: "Listen to port 7700 on my laptop, and forward any traffic through the secure connection to port 7700 on the server."
+
+Now, you can use a great open-source tool called [meilisearch-ui](https://github.com/eyeix/meilisearch-ui) to manage your indexes visually, without installing anything on your server.
+
+Go to [https://meilisearch-ui.vercel.app/](https://meilisearch-ui.vercel.app/) in your browser. On that page, click the "Add Instance" button to connect to your production Meilisearch.
+
+A modal will pop up asking for connection details. Fill it out like this:
+
+- **Name**: Give it a descriptive name (e.g., `Production DB`).
+- **Host**: Enter `http://127.0.0.1:7700`. (This hits your local tunnel, which forwards to the server).
+- **API Key**: Enter your production master key.
+
+::: info Note
+Are you wondering how a secure `https://` website can connect to an insecure `http://` host without your browser blocking it?
+
+Modern web browsers have a built-in security exception for `127.0.0.1` and `localhost`. This allows local development and tunneling to work perfectly without SSL errors.
+:::
+
+After connecting, you can browse your production indexes, test searches, add manual documents, and modify settings securely.
+
+When you are finished managing your data, simply close the terminal window where the SSH command is running or press `Ctrl+C`.
+
+This immediately breaks the tunnel and cuts off access. Since the entire session happened inside an encrypted SSH pipe, your data remained 100% secure and was never exposed to the public internet.
