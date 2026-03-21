@@ -150,3 +150,32 @@ Next, create a specific folder inside that home directory for the actual databas
 sudo mkdir -p /var/lib/meilisearch/data
 sudo chown -R meilisearch:meilisearch /var/lib/meilisearch
 ```
+
+## Transfer and import the dump
+
+::: info Note
+If you are starting from scratch and didn't create a dump file in the previous step, you can skip this section and go straight to **Run Meilisearch as a service**.
+:::
+
+You need to get the dump file from your computer over to the server.
+
+First, log out of your active SSH session by typing `exit` or pressing `Ctrl+D`. Once you are back in your local terminal, use the `scp` command to upload the file.
+
+You are going to send it to the `/tmp/` directory for now. We do this because `/tmp/` is openly writable by any user, whereas our final destination (`/var/lib/meilisearch`) is strictly locked down.
+
+```bash
+scp /path/to/your/local/dumps/<YOUR_DUMP_FILE.dump> <YOUR_USERNAME>@<YOUR_SERVER_IP_ADDRESS>:/tmp/
+```
+
+**SSH back in** to the machine.
+
+```bash
+ssh <YOUR_USERNAME>@<YOUR_SERVER_IP_ADDRESS>
+```
+
+Move the dump file from the temporary folder to the Meilisearch directory, and immediately transfer the file ownership to the `meilisearch` user. If you skip the `chown` command, the Meilisearch service will crash because it won't have permission to read the file uploaded by your user account.
+
+```bash
+sudo mv /tmp/<YOUR_DUMP_FILE.dump> /var/lib/meilisearch/
+sudo chown meilisearch:meilisearch /var/lib/meilisearch/<YOUR_DUMP_FILE.dump>
+```
