@@ -22,13 +22,23 @@ export default {
     this.drawMeteors();
     this.scheduleNextMeteor();
     window.addEventListener("resize", this.handleResize);
+    document.addEventListener("visibilitychange", this.handleVisibilityChange);
   },
   beforeUnmount() {
     window.removeEventListener("resize", this.handleResize);
+    document.removeEventListener("visibilitychange", this.handleVisibilityChange);
     cancelAnimationFrame(this.animationFrameId);
     clearTimeout(this.meteorTimeoutId);
   },
   methods: {
+    handleVisibilityChange() {
+      if (document.hidden) {
+        clearTimeout(this.meteorTimeoutId);
+        this.meteors = [];
+      } else {
+        this.scheduleNextMeteor();
+      }
+    },
     spawnMeteor() {
       const spawnZoneWidth = this.width * 0.2;
       const spawnZoneOffset = (this.width - spawnZoneWidth) / 2;
