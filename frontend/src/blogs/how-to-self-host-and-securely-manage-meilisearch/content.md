@@ -69,7 +69,7 @@ curl -X GET 'http://localhost:7700/tasks/<YOUR_TASK_UID>' \
 
 Once the status in the response says `succeeded`, your dump file (which looks something like `20260318-100000.dump`) will appear in your local `dumps/` directory.
 
-If you prefer using Python instead of the terminal, you can use the official SDK to do all of this automatically.
+If you prefer using Python instead of the terminal, you can [use the official SDK](https://github.com/meilisearch/meilisearch-python) to do all of this automatically.
 
 First, install the SDK:
 
@@ -95,7 +95,7 @@ print("Dump created successfully!")
 
 ## Install Meilisearch on the server
 
-Now, it is time to set up the engine on your production VM. SSH into your server:
+Now, it is time to set up the engine on your production VM (Virtual Machine). SSH into your server:
 
 ```bash
 ssh <YOUR_USERNAME>@<YOUR_SERVER_IP_ADDRESS>
@@ -128,7 +128,7 @@ If it prints the version number, you are ready to proceed.
 
 Running applications as `root` is a massive security risk. Instead of running Meilisearch as `root` or under your personal user account, you should create a dedicated [system user](https://wiki.archlinux.org/title/Users_and_groups#Example_adding_a_system_user) specifically for this service.
 
-System users are "dummy" accounts. They exist purely to own files and run specific background processes. They have no password and cannot accept login attempts, making them immune to SSH brute-force attacks.
+System users are "dummy" accounts. They exist purely to own files and run specific background processes. They have no password and cannot accept login attempts, making them immune to [SSH brute-force attacks](https://www.cloudflare.com/learning/bots/brute-force-attack/).
 
 Run this command to create the user:
 
