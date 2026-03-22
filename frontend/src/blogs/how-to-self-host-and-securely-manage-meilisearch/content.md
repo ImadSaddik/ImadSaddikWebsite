@@ -434,7 +434,7 @@ This is fantastic for security, but terrible for usability if you need to manual
 
 Instead, you will use **SSH Tunneling**. This creates a secure, temporary bridge between your local laptop and the locked-down server port.
 
-::: image ./2_ssh_tunnel_meilisearch.png "An illustration showing how to manage Meilisearch securely with an SSH tunnel."
+::: image ./1_ssh_tunnel_meilisearch.png "An illustration showing how to manage Meilisearch securely with an SSH tunnel."
 Using an SSH tunnel to securely connect to the Meilisearch server running on the production VM.
 :::
 
@@ -450,7 +450,7 @@ Now, you can use a great open-source tool called [meilisearch-ui](https://github
 
 Go to [https://meilisearch-ui.vercel.app/](https://meilisearch-ui.vercel.app/) in your browser. On that page, click the "Add Instance" button to connect to your production Meilisearch.
 
-::: image ./3_add_instance_meilisearch_ui.png "A screenshot of the meilisearch-ui interface showing a mouse icon on the "plus" button."
+::: image ./2_add_instance_meilisearch_ui.png "A screenshot of the meilisearch-ui interface showing a mouse icon on the "plus" button."
 Add a new instance in the meilisearch-ui app.
 :::
 
@@ -460,7 +460,7 @@ A modal will pop up asking for connection details. Fill it out like this:
 - **Host**: Enter `http://127.0.0.1:7700`. (This hits your local tunnel, which forwards to the server).
 - **API Key**: Enter your production master key.
 
-::: image ./4_add_instance_details_ui.jpg "A screenshot of the meilisearch-ui interface showing the connection setup modal, with Host set to `http://127.0.0.1:7700` and the API Key field filled in."
+::: image ./3_add_instance_details_ui.jpg "A screenshot of the meilisearch-ui interface showing the connection setup modal, with Host set to `http://127.0.0.1:7700` and the API Key field filled in."
 Add a new instance in the meilisearch-ui app by providing your local tunnel host and production key.
 :::
 
@@ -472,7 +472,7 @@ Modern web browsers have a built-in security exception for `127.0.0.1` and `loca
 
 After connecting, you can browse your production indexes, test searches, add manual documents, and modify settings securely.
 
-::: image ./5_meilisearch_ui_dashboard.jpg "A screenshot of the meilisearch-ui interface showing the home page."
+::: image ./4_meilisearch_ui_dashboard.jpg "A screenshot of the meilisearch-ui interface showing the home page."
 The meilisearch-ui dashboard connected to the production instance through the SSH tunnel.
 :::
 
@@ -484,7 +484,7 @@ If you started from scratch, your dashboard will be empty. Let's create your fir
 
 On your dashboard home page, locate the Indexes section. Click the pink "Create" button on the right side of the screen.
 
-::: image ./6_button_to_create_index.png "A screenshot of the meilisearch-ui interface highlighting the "Create" index button."
+::: image ./5_button_to_create_index.png "A screenshot of the meilisearch-ui interface highlighting the "Create" index button."
 Use the "Create" button to create a new index.
 :::
 
@@ -493,7 +493,7 @@ A modal will appear asking for two details:
 - **UID (Unique Identifier)**: This is the name of your index. Type a descriptive name (like `articles`, `products`, or `movies`).
 - **Primary Key**: This is the unique field that identifies each document inside your index (usually something like `id` or `uuid`). You can actually leave this blank for now; if you do, Meilisearch will automatically figure it out when you upload your first document!
 
-::: image ./7_create_index_modal.png "A screenshot of the meilisearch-ui interface showing the "Create Index" modal with fields for UID and Primary Key."
+::: image ./6_create_index_modal.png "A screenshot of the meilisearch-ui interface showing the "Create Index" modal with fields for UID and Primary Key."
 Fill out the UID and Primary Key fields to create your index. You can leave the Primary Key blank if you want Meilisearch to auto-detect it later.
 :::
 
@@ -503,7 +503,7 @@ You can hover over the UID and Primary Key fields to see helpful explanations if
 
 Click the pink "Create Index" button. Your new, empty index will instantly appear as a card in your dashboard!
 
-::: image ./8_new_index_created.png "A screenshot of the meilisearch-ui interface showing a newly created empty index card."
+::: image ./7_new_index_created.png "A screenshot of the meilisearch-ui interface showing a newly created empty index card."
 Your new index will appear as a card in the dashboard. It is currently empty and waiting for documents to be added.
 :::
 
@@ -513,7 +513,7 @@ Your index is ready, but a search engine isn't very useful without data. Let's a
 
 Click on your newly created index card from the dashboard home page. This opens the index details view. Look at the menu on the left sidebar and click "::fa{fa-solid fa-upload}:: Upload documents".
 
-::: image ./9_click_upload_docs.png "A screenshot highlighting the "Upload documents" button in the left sidebar."
+::: image ./8_click_upload_docs.png "A screenshot highlighting the "Upload documents" button in the left sidebar."
 Click the "::fa{fa-solid fa-upload}:: Upload documents" button at the bottom of the left sidebar.
 :::
 
@@ -540,7 +540,7 @@ For this tutorial, let's paste some sample data directly into the editor. Replac
 
 Click the green "Submit" button below the editor. Meilisearch processes documents asynchronously, but for small batches like this, it takes only milliseconds.
 
-::: image ./10_upload_documents_interface.png "A screenshot showing the split upload view."
+::: image ./9_upload_documents_interface.png "A screenshot showing the split upload view."
 Paste the JSON directly into the editor on the left or drop a file on the right. Click "Submit" when you are ready.
 :::
 
@@ -552,7 +552,7 @@ Click on **::fa{fa-solid fa-file-lines}:: Documents** in the left sidebar. At th
 
 If you ever need to manually update or delete a specific record, you don't need to write a script or use an API. Hover over any document in the search results list, and you will see **Update** and **Delete** buttons appear for that record.
 
-::: image ./11_search_and_manage_documents.png "A screenshot showing the search bar in action and the update/delete buttons next to a document."
+::: image ./10_search_and_manage_documents.png "A screenshot showing the search bar in action and the update/delete buttons next to a document."
 Test your search queries and easily modify existing documents directly from the interface.
 :::
 
@@ -566,7 +566,7 @@ Click on **::fa{fa-solid fa-gear}:: Settings** in the left sidebar. You will see
 
 To make changes, click the pink "Edit" button at the top right of the editor. Because every application's data is unique, I highly recommend reading the [official Meilisearch documentation on index settings](https://www.meilisearch.com/docs/learn/configuration/configuring_index_settings) to discover all the ways you can tweak the engine.
 
-::: image ./12_index_settings.png "A screenshot of the meilisearch-ui settings tab showing the JSON configuration editor."
+::: image ./11_index_settings.png "A screenshot of the meilisearch-ui settings tab showing the JSON configuration editor."
 Click the "Edit" button to safely modify your index's JSON configuration.
 :::
 
