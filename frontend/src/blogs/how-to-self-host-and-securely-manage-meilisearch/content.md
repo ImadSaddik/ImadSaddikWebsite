@@ -118,7 +118,7 @@ sudo mv ./meilisearch /usr/local/bin/
 
 Verify the installation was successful by checking the version:
 
-```output
+```bash
 meilisearch --version
 ```
 
