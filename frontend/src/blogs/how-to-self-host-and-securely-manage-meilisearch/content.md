@@ -192,7 +192,7 @@ The server stack: systemd manages low-level infrastructure, while Supervisor man
 
 ### Create the environment file
 
-You must secure your search engine with a strong Master Key. Instead of hardcoding this sensitive information directly into the service file, you will create a secure environment file. This keeps your secrets hidden from anyone viewing the server's process list via commands like `ps`.
+You must secure your search engine with a strong master key. Instead of hardcoding this sensitive information directly into the service file, you will create a secure environment file. This keeps your secrets hidden from anyone viewing the server's process list via commands like `ps`.
 
 First, create a directory for the configuration and create the environment file:
 
@@ -361,7 +361,7 @@ sudo systemctl restart meilisearch
 
 ## Connect the backend
 
-Now that Meilisearch is running with a production Master Key, your backend application needs to know what that key is so it can safely communicate with the search engine.
+Now that Meilisearch is running with a production master key, your backend application needs to know what that key is so it can safely communicate with the search engine.
 
 Navigate to your application's configuration or `.env` file on the server. Update or add the `MEILISEARCH_MASTER_KEY` variable to match the exact key you defined in `/etc/meilisearch/env`.
 
