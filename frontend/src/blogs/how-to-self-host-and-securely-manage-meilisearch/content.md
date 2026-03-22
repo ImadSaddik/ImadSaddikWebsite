@@ -186,10 +186,6 @@ You don't want to run Meilisearch manually in a terminal. You want it to run in 
 
 To do this, you will use [systemd](https://systemd.io/), which is the built-in service manager that comes with Ubuntu. It is the industry standard for managing low-level background services and infrastructure.
 
-::: image ./1_systemd_vs_supervisor.png "Diagram showing the server stack: systemd manages OS-level infrastructure like Meilisearch, while Supervisor manages Application-level code like Gunicorn."
-The server stack: systemd manages low-level infrastructure, while Supervisor manages high-level application code.
-:::
-
 ### Create the environment file
 
 You must secure your search engine with a strong master key. Instead of hardcoding this sensitive information directly into the service file, you will create a secure environment file. This keeps your secrets hidden from anyone viewing the server's process list via commands like `ps`.
@@ -348,8 +344,8 @@ sudo nano /etc/systemd/system/meilisearch.service
 Remove these two lines from the `ExecStart` command:
 
 ```ini
-  --import-dump "/var/lib/meilisearch/<YOUR_DUMP_FILE.dump>" \
-  --ignore-dump-if-db-exists
+--import-dump "/var/lib/meilisearch/<YOUR_DUMP_FILE.dump>" \
+--ignore-dump-if-db-exists
 ```
 
 Save the file, then reload systemd and restart the service to apply the clean configuration:
