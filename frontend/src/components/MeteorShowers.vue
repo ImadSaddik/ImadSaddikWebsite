@@ -22,14 +22,26 @@ export default {
     this.drawMeteors();
     this.scheduleNextMeteor();
     window.addEventListener("resize", this.handleResize);
+    document.addEventListener("visibilitychange", this.handleVisibilityChange);
   },
   beforeUnmount() {
     window.removeEventListener("resize", this.handleResize);
+    document.removeEventListener("visibilitychange", this.handleVisibilityChange);
     cancelAnimationFrame(this.animationFrameId);
     clearTimeout(this.meteorTimeoutId);
   },
   methods: {
+    handleVisibilityChange() {
+      if (document.hidden) {
+        clearTimeout(this.meteorTimeoutId);
+        this.meteors = [];
+      } else {
+        this.scheduleNextMeteor();
+      }
+    },
     spawnMeteor() {
+      if (document.hidden) return;
+
       const spawnZoneWidth = this.width * 0.2;
       const spawnZoneOffset = (this.width - spawnZoneWidth) / 2;
 
@@ -121,8 +133,11 @@ export default {
       const minPauseMs = 30000;
       const maxPauseMs = 60000;
 
+      clearTimeout(this.meteorTimeoutId);
       this.meteorTimeoutId = setTimeout(
         () => {
+          if (document.hidden) return;
+
           if (Math.random() < burstChance) {
             const burstCount = Math.floor(Math.random() * (maxBurstCount - minBurstCount + 1)) + minBurstCount;
             for (let i = 0; i < burstCount; i++) {
