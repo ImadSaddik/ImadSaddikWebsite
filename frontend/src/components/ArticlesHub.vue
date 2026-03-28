@@ -110,7 +110,7 @@ import BaseCard from "@/components/BaseCard.vue";
 import SearchBar from "@/components/SearchBar.vue";
 
 // Constants
-import { TIME_OUT_MILLISECONDS, SORT_ORDER, SORTABLE_FIELDS } from "@/constants";
+import { TIME_OUT_MILLISECONDS, SORT_ORDER, SORTABLE_FIELDS, DEFAULT_BATCH_SIZE } from "@/constants";
 
 export default {
   name: "ArticlesHub",
@@ -160,7 +160,7 @@ export default {
       cardData: [],
       isSearchResponseEmpty: false,
 
-      batchSize: 10,
+      batchSize: DEFAULT_BATCH_SIZE,
       totalDocumentsInIndex: 0,
 
       SORT_ORDER,
@@ -225,7 +225,7 @@ export default {
       await this.performSearchRequest(data);
     },
     async loadMoreArticles() {
-      this.batchSize += 1;
+      this.batchSize += DEFAULT_BATCH_SIZE;
       await this.performSearchRequest();
     },
     async performSearchRequest() {

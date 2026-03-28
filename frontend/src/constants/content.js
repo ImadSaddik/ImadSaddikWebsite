@@ -1,6 +1,8 @@
 export const ARTICLE_READ_THRESHOLD = 0.25;
 export const MILLISECONDS_PER_MINUTE = 60000;
 
+export const DEFAULT_BATCH_SIZE = 10;
+
 export const ADMONITION_TYPES = ["tip", "info", "warning", "danger"];
 
 export const DEFAULT_ARTICLE_TITLE = "Imad Saddik - Articles";
