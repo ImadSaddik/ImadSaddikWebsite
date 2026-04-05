@@ -323,3 +323,11 @@ sudo chmod +x /etc/letsencrypt/renewal-hooks/post/reload-nginx.sh
 ```
 
 Now, your server is entirely self-sustaining. It will fetch a new certificate before the 90 days are up, and it will instantly reload the web server to apply the new encryption keys. You can just kick back and enjoy your sleep.
+
+## Conclusion
+
+Your website is now successfully live on your custom domain and fully secure with an auto-renewing SSL certificate. By letting Nginx handle the SSL termination, your application remains simple while your users benefit from encrypted, secure connections.
+
+However, there is one problem you cannot fix with server configuration alone: physical distance. Right now, if your server is located in Germany, a user in Australia will experience a slight delay because the data has to travel across the globe.
+
+As a next step to improve your site's performance, consider exploring [Content Delivery Networks (CDNs)](https://www.cloudflare.com/learning/cdn/what-is-a-cdn/) like [Cloudflare](https://www.cloudflare.com/). A CDN will cache your static files on edge servers all around the world, ensuring your site loads quickly for users everywhere.
