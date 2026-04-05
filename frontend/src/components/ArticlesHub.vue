@@ -224,9 +224,14 @@ export default {
     },
     async loadMoreArticles() {
       this.offset += this.limit;
-      await this.performSearchRequest();
+      await this.performSearchRequest(true);
     },
-    async performSearchRequest() {
+    async performSearchRequest(isLoadMore = false) {
+      const isLoadMoreChecked = isLoadMore === true;
+      if (!isLoadMoreChecked) {
+        this.offset = 0;
+      }
+
       const data = {
         query: this.searchQuery,
         article_type: this.articleType,
@@ -252,10 +257,17 @@ export default {
         });
         searchResponse = response.data;
         const hits = searchResponse?.hits || [];
-        this.cardData = getCardsDataFromDocumentHits({
+        const newCardData = getCardsDataFromDocumentHits({
           hits,
           articleType: this.articleType,
         });
+
+        if (isLoadMoreChecked) {
+          this.cardData.push(...newCardData);
+        } else {
+          this.cardData = newCardData;
+        }
+
         this.totalDocumentsInIndex = searchResponse?.total_hits || 0;
         const facetDistribution = searchResponse?.facet_distribution || {};
 
