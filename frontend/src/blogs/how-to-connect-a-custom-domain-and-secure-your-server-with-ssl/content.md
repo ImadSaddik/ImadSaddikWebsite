@@ -154,7 +154,7 @@ Before you run Certbot, you need to ensure Nginx is configured to recognize your
 Open the Nginx configuration file for your website. On standard Ubuntu setups, this is located in the `sites-available` directory. Use `nano` or your preferred text editor to open it:
 
 ```bash
-sudo nano /etc/nginx/sites-available/<your_project_name>
+sudo nano /etc/nginx/sites-available/<your_domain>
 ```
 
 Find the `server_name` directive. If it currently contains your server's IP address, change it to match your new root domain and `www` subdomain:
@@ -188,7 +188,68 @@ Certbot will then communicate with the Let's Encrypt servers to complete a chall
 
 ```output
 Deploying certificate
-Successfully deployed certificate for <your_domain>.com to /etc/nginx/sites-enabled/<your_project_name>
-Successfully deployed certificate for www.<your_domain>.com to /etc/nginx/sites-enabled/<your_project_name>
+Successfully deployed certificate for <your_domain>.com to /etc/nginx/sites-enabled/<your_domain>
+Successfully deployed certificate for www.<your_domain>.com to /etc/nginx/sites-enabled/<your_domain>
 Congratulations! You have successfully enabled HTTPS on https://<your_domain>.com and https://www.<your_domain>.com
 ```
+
+## Understand the Nginx changes
+
+Certbot does more than just download your certificate. It automatically edits your Nginx configuration file to enforce the new secure connection.
+
+I highly recommend taking a moment to understand exactly what Certbot changed. Open your configuration file to see the new layout:
+
+```bash
+sudo nano /etc/nginx/sites-available/<your_domain>
+```
+
+You will notice two big changes:
+
+### The HTTPS upgrade
+
+Your original `server` block, which used to `listen 80;`, has been upgraded. Certbot changed it to `listen 443 ssl;` and injected several lines pointing to the newly downloaded cryptographic keys.
+
+```nginx
+server {
+    server_name <your_domain>.com www.<your_domain>.com;
+
+    # ... (Your existing application routing configuration remains untouched) ...
+
+    # Certbot added these lines to handle SSL encryption
+    listen 443 ssl;
+    ssl_certificate /etc/letsencrypt/live/<your_domain>.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/<your_domain>.com/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+}
+```
+
+### The HTTP redirect
+
+Because the block above now only listens on secure port 443, what happens if a user types `http://`?
+
+Certbot anticipated this and created a new, separate `server` block at the bottom of the file specifically to catch insecure port 80 traffic and permanently redirect it ([HTTP status 301](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/301)) to the secure version.
+
+```nginx
+server {
+    if ($host = www.<your_domain>.com) {
+        return 301 https://$host$request_uri;
+    }
+
+    if ($host = <your_domain>.com) {
+        return 301 https://$host$request_uri;
+    }
+
+    listen 80;
+    server_name <your_domain>.com www.<your_domain>.com;
+    return 404;
+}
+```
+
+Exit the file (`Ctrl+X`).
+
+::: tip
+By setting up SSL at the Nginx level, you are using a pattern called [SSL Termination](https://www.f5.com/glossary/ssl-termination).
+
+This means Nginx handles all the complex encryption and decryption at the front door. Your application doesn't need to know anything about these certificates or handle HTTPS directly. Your architecture gracefully absorbs this major security upgrade with zero code changes required in your app.
+:::
