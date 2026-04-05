@@ -253,3 +253,73 @@ By setting up SSL at the Nginx level, you are using a pattern called [SSL Termin
 
 This means Nginx handles all the complex encryption and decryption at the front door. Your application doesn't need to know anything about these certificates or handle HTTPS directly. Your architecture gracefully absorbs this major security upgrade with zero code changes required in your app.
 :::
+
+## Automate certificate renewal
+
+Let's Encrypt certificates are highly secure, but they [expire every 90 days](https://letsencrypt.org/docs/faq/#what-is-the-lifetime-for-let-s-encrypt-certificates-for-how-long-are-they-valid). This short lifespan minimizes damage if a key is ever compromised.
+
+Certbot automatically installs a background timer to check for renewals, but it is best practice to test this system and set up explicit automation so you never wake up to an expired certificate warning.
+
+First, test that the renewal system works without modifying your live certificates:
+
+```bash
+sudo certbot renew --dry-run
+```
+
+If it works, you will see:
+
+```output
+Congratulations, all simulated renewals succeeded:
+/etc/letsencrypt/live/<your_domain>.com/fullchain.pem (success)
+```
+
+### Explicit cron job
+
+To guarantee you have control over the renewal schedule, you will use [cron](https://en.wikipedia.org/wiki/Cron), the Linux job scheduler.
+
+Run this command to edit the `cron` file for the `root` user:
+
+```bash
+sudo crontab -e
+```
+
+If this is your first time, it will ask you to select an editor. Press `1` for [nano](https://www.nano-editor.org/). Add the following line to the very bottom of the file:
+
+```text
+0 0 * * 0 certbot renew --quiet
+```
+
+Here is how to read this cron expression: "At exactly midnight (`0 0`), every Sunday (`* * 0`), run the `certbot renew` command."
+
+::: tip
+You can use an online tool like [crontab.guru](https://crontab.guru/) to visualize and verify your cron schedule.
+:::
+
+The `--quiet` flag ensures it does not spam your system logs unless a critical error occurs. Certbot is smart; even though it checks every Sunday, it will only request a new certificate if your current one is expiring within the next 30 days.
+
+### Create a post-renewal hook
+
+There is one minor flaw in this automation. When Certbot downloads a fresh certificate, Nginx does not automatically notice. Nginx loads certificates into memory when it starts, so it will continue using the old, soon-to-be-expired certificate until the service is reloaded.
+
+You can fix this by creating a "post-renewal hook". This is a script that Certbot will automatically trigger immediately after a successful renewal.
+
+Create the script file:
+
+```bash
+sudo nano /etc/letsencrypt/renewal-hooks/post/reload-nginx.sh
+```
+
+Paste this bash command inside:
+
+```bash
+#!/bin/bash
+systemctl reload nginx
+```
+
+Save and exit `nano` (`Ctrl+O`, `Enter`, `Ctrl+X`). Make the script executable so Certbot has permission to run it:
+
+```bash
+sudo chmod +x /etc/letsencrypt/renewal-hooks/post/reload-nginx.sh
+```
+
+Now, your server is entirely self-sustaining. It will fetch a new certificate before the 90 days are up, and it will instantly reload the web server to apply the new encryption keys. You can just kick back and enjoy your sleep.
