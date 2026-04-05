@@ -1,6 +1,6 @@
 import axios from "axios";
 import ArticlesHub from "@/components/ArticlesHub.vue";
-import { mount, RouterLinkStub } from "@vue/test-utils";
+import { mount } from "@vue/test-utils";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { DEFAULT_BATCH_SIZE, ARTICLE_TYPES } from "@/constants";
 import * as utils from "@/utils";
