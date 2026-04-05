@@ -227,8 +227,7 @@ export default {
       await this.performSearchRequest(true);
     },
     async performSearchRequest(isLoadMore = false) {
-      const isLoadMoreChecked = isLoadMore === true;
-      if (!isLoadMoreChecked) {
+      if (!isLoadMore) {
         this.offset = 0;
       }
 
@@ -259,7 +258,7 @@ export default {
           articleType: this.articleType,
         });
 
-        if (isLoadMoreChecked) {
+        if (isLoadMore) {
           this.cardData.push(...newCardData);
         } else {
           this.cardData = newCardData;
@@ -271,7 +270,7 @@ export default {
         this.updateTagsFromFacetDistribution(facetDistribution.tags || {});
         this.updateYearsFromFacetDistribution(facetDistribution.year || {});
       } catch (error) {
-        if (!isLoadMoreChecked) {
+        if (!isLoadMore) {
           this.cardData = [];
         }
 
