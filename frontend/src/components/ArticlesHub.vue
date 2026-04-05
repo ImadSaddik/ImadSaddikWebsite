@@ -285,7 +285,7 @@ export default {
         }
       }
 
-      this.isSearchResponseEmpty = !searchResponse || searchResponse.hits.length === 0;
+      this.isSearchResponseEmpty = this.cardData.length === 0;
     },
     updateTagsFromFacetDistribution(tagsFacet) {
       const sortedTags = Object.entries(tagsFacet)
