@@ -219,10 +219,7 @@ export default {
       this.selectedYears = [];
     },
     async getCardsData() {
-      const data = {
-        articleType: this.articleType,
-      };
-      await this.performSearchRequest(data);
+      await this.performSearchRequest();
     },
     async loadMoreArticles() {
       this.batchSize += DEFAULT_BATCH_SIZE;
