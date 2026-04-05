@@ -271,6 +271,10 @@ export default {
         this.updateTagsFromFacetDistribution(facetDistribution.tags || {});
         this.updateYearsFromFacetDistribution(facetDistribution.year || {});
       } catch (error) {
+        if (!isLoadMoreChecked) {
+          this.cardData = [];
+        }
+
         if (error.response && error.response.status === 429) {
           this.$emit("show-toast", {
             message:
