@@ -160,7 +160,8 @@ export default {
       cardData: [],
       isSearchResponseEmpty: false,
 
-      batchSize: DEFAULT_BATCH_SIZE,
+      limit: DEFAULT_BATCH_SIZE,
+      offset: 0,
       totalDocumentsInIndex: 0,
 
       SORT_ORDER,
@@ -222,7 +223,7 @@ export default {
       await this.performSearchRequest();
     },
     async loadMoreArticles() {
-      this.batchSize += DEFAULT_BATCH_SIZE;
+      this.offset += this.limit;
       await this.performSearchRequest();
     },
     async performSearchRequest() {
@@ -237,7 +238,8 @@ export default {
           years: this.selectedYears,
           tags: this.selectedTags,
         },
-        size: this.batchSize,
+        size: this.limit,
+        offset: this.offset,
       };
 
       let searchResponse = null;
