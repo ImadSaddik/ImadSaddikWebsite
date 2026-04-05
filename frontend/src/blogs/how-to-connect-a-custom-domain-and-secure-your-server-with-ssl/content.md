@@ -57,3 +57,72 @@ Once the page loads, verify that your new domain is active in your account.
 ::: image ./5_domain_management_dashboard.png "An illustration showing the domain management dashboard on Porkbun"
 The Domain Management dashboard showing the newly registered domain ready for configuration.
 :::
+
+## Configure DNS
+
+Now that you own a domain, you must tell the rest of the internet where to find your server when someone types that name into their browser. This is achieved using the [Domain Name System (DNS)](https://en.wikipedia.org/wiki/Domain_Name_System).
+
+Think of DNS as the phonebook of the internet. It translates human-readable names (like `imadsaddik.com`) into machine-readable IP addresses (like `142.93.130.134`).
+
+::: image ./6_dns_resolution_illustration.svg "A diagram showing how DNS works"
+A visual representation of how a browser queries a DNS server to resolve a domain name into an IP address before connecting.
+:::
+
+Go to your domain provider’s dashboard and locate the **DNS records** section for your domain. If you are using **Porkbun**, locate your domain in the list. You need to hover over the domain row to reveal the options. Click on the **DNS** link to open the configuration panel.
+
+::: image ./7_click_on_dns_porkbun.jpg "Locating the DNS link on the Porkbun dashboard"
+The quick-access DNS menu appears when you hover over the domain name in your dashboard.
+:::
+
+Scroll down to the “Current Records” section. You will see some default records created by the registrar, such as `ALIAS`, `CNAME`, or `_acme-challenge` records. **Delete these default records** to ensure they do not conflict with your real server.
+
+::: image ./8_remove_unwanted_records.jpg "Deleting default records on Porkbun"
+Click the trash can icon next to the default registrar records so you can start with a clean slate.
+:::
+
+You need to create two specific records to point your traffic to your server:
+
+### The A record
+
+An [A record](https://www.cloudflare.com/learning/dns/dns-records/dns-a-record/) (Address Record) maps a domain name directly to an [IPv4 address](https://en.wikipedia.org/wiki/IPv4).
+
+Fill in the form with the following values:
+
+- **Type:** `A`
+- **Host/Name:** Leave this blank.
+- **Answer/Value:** Paste the IP address of your server.
+- **TTL (Time To Live):** `600` (or leave as default).
+
+Click **Add** to save the record.
+
+::: image ./9_add_a_record_to_dns.jpg "Adding an A record on Porkbun"
+Follow these steps to create an A record that points your domain to your server's IP address.
+:::
+
+### The CNAME record
+
+A [CNAME record](https://www.cloudflare.com/learning/dns/dns-records/dns-cname-record/) (Canonical Name Record) maps one domain name to another domain name. You use this to ensure that users who type `www` in front of your domain still reach your website.
+
+Fill in the form with the following values:
+
+- **Type:** `CNAME`
+- **Host/Name:** `www`
+- **Answer/Value:** `<your_domain>.com`
+
+Click **Add** to save the record.
+
+::: image ./10_add_cname_record_to_dns.jpg "Adding a CNAME record on Porkbun"
+Follow these steps to create a CNAME record that points the `www` subdomain to your main domain, ensuring both versions of your site are accessible.
+:::
+
+By the end, your DNS configuration should look like this:
+
+::: image ./11_final_dns_records_look.png "The final DNS configuration on Porkbun"
+The completed DNS table showing the two newly added records.
+:::
+
+::: info
+DNS changes can take anywhere from a few minutes to 48 hours to propagate globally. Usually, it takes less than 15 minutes. You can use a tool like [whatsmydns.net](https://www.whatsmydns.net/) to verify if the world can see your new A record.
+:::
+
+Once the DNS has propagated, you should be able to type `http://<your_domain>.com` in your browser and see your web application load.
