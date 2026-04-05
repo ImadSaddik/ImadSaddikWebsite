@@ -249,10 +249,7 @@ export default {
 
       let searchResponse = null;
       try {
-        const response = await axios.post("/api/search", JSON.stringify(data), {
-          headers: {
-            "Content-Type": "application/json",
-          },
+        const response = await axios.post("/api/search", data, {
           timeout: TIME_OUT_MILLISECONDS,
         });
         searchResponse = response.data;
