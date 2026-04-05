@@ -2,6 +2,8 @@ import { test, expect } from "@playwright/test";
 import { ROUTES, CLAP_DEBOUNCE_MILLISECONDS } from "@/constants";
 
 test.describe("Article metric tracking", () => {
+  test.describe.configure({ mode: "serial" });
+
   test.describe("view count", () => {
     test("should update view count after visiting an article", async ({ page }) => {
       await page.goto(ROUTES.BLOGS_HUB.path);
