@@ -126,3 +126,69 @@ DNS changes can take anywhere from a few minutes to 48 hours to propagate global
 :::
 
 Once the DNS has propagated, you should be able to type `http://<your_domain>.com` in your browser and see your web application load.
+
+## Secure the server with SSL (Certbot)
+
+Your site is accessible via your domain, but it is currently running over unencrypted HTTP. You will use [Certbot](https://certbot.eff.org/) to obtain an SSL certificate from [Let's Encrypt](https://letsencrypt.org/).
+
+Certbot is fantastic because it completely automates the complex parts: it proves you own the domain, downloads the certificate, and safely edits your Nginx configuration to enable HTTPS.
+
+### Install Certbot
+
+Connect to your server via SSH:
+
+```bash
+ssh <your_username>@<your_server_ip>
+```
+
+Install the Certbot client and its dedicated Nginx plugin using `apt`:
+
+```bash
+sudo apt install certbot python3-certbot-nginx -y
+```
+
+### Prepare Nginx
+
+Before you run Certbot, you need to ensure Nginx is configured to recognize your new domain. Certbot reads your Nginx configuration files and looks for the `server_name` directive to know which site to secure.
+
+Open the Nginx configuration file for your website. On standard Ubuntu setups, this is located in the `sites-available` directory. Use `nano` or your preferred text editor to open it:
+
+```bash
+sudo nano /etc/nginx/sites-available/<your_project_name>
+```
+
+Find the `server_name` directive. If it currently contains your server's IP address, change it to match your new root domain and `www` subdomain:
+
+```nginx
+server_name <your_domain>.com www.<your_domain>.com;
+```
+
+Save and exit the file (`Ctrl+O`, `Enter`, `Ctrl+X`). Then, test the configuration to make sure there are no typos, and reload Nginx so it registers your new domain setup:
+
+```bash
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+### Obtain the certificate
+
+Run the following command, making sure to replace the placeholders with your actual domain names. This command requests certificates for both your root domain and the `www` subdomain.
+
+```bash
+sudo certbot --nginx -d <your_domain>.com -d www.<your_domain>.com
+```
+
+Certbot will guide you through a quick interactive setup:
+
+1. It will ask for an email address. This is used strictly for urgent security notices and renewal warnings if automation fails.
+2. It will ask you to agree to the Terms of Service.
+3. It will ask if you want to share your email with the Electronic Frontier Foundation (EFF) for news and research. Skip this if you want, it is not required.
+
+Certbot will then communicate with the Let's Encrypt servers to complete a challenge verifying you control the domain. Once verified, you will see a success message:
+
+```output
+Deploying certificate
+Successfully deployed certificate for <your_domain>.com to /etc/nginx/sites-enabled/<your_project_name>
+Successfully deployed certificate for www.<your_domain>.com to /etc/nginx/sites-enabled/<your_project_name>
+Congratulations! You have successfully enabled HTTPS on https://<your_domain>.com and https://www.<your_domain>.com
+```
