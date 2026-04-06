@@ -122,4 +122,53 @@ describe("ArticlesHub", () => {
     await wrapper.vm.performSearchRequest();
     expect(wrapper.vm.isSearchResponseEmpty).toBe(false);
   });
+
+  it("clears cardData on error when isLoadMore is false", async () => {
+    axios.post.mockRejectedValueOnce({ response: { status: 500 } });
+
+    const wrapper = factory();
+    await wrapper.vm.$nextTick();
+
+    wrapper.vm.cardData = [formatHit("Existing Article")];
+    await wrapper.vm.performSearchRequest();
+
+    expect(wrapper.vm.cardData).toEqual([]);
+  });
+
+  it("preserves cardData on error when isLoadMore is true", async () => {
+    const wrapper = factory();
+    await wrapper.vm.$nextTick();
+
+    const existingCard = formatHit("Existing Article");
+    wrapper.vm.cardData = [existingCard];
+
+    axios.post.mockRejectedValueOnce({ response: { status: 500 } });
+    await wrapper.vm.performSearchRequest(true);
+
+    expect(wrapper.vm.cardData).toEqual([existingCard]);
+  });
+
+  it("emits show-toast with warning type on 429 error", async () => {
+    axios.post.mockRejectedValueOnce({ response: { status: 429 } });
+
+    const wrapper = factory();
+    await wrapper.vm.$nextTick();
+
+    await wrapper.vm.performSearchRequest();
+
+    expect(wrapper.emitted("show-toast")).toBeTruthy();
+    expect(wrapper.emitted("show-toast")[0][0].type).toBe("warning");
+  });
+
+  it("emits show-toast with error type on non-429 error", async () => {
+    axios.post.mockRejectedValueOnce({ response: { status: 500 } });
+
+    const wrapper = factory();
+    await wrapper.vm.$nextTick();
+
+    await wrapper.vm.performSearchRequest();
+
+    expect(wrapper.emitted("show-toast")).toBeTruthy();
+    expect(wrapper.emitted("show-toast")[0][0].type).toBe("error");
+  });
 });
