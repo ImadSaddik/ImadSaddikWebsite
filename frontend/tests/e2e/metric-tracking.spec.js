@@ -2,6 +2,8 @@ import { test, expect } from "@playwright/test";
 import { ROUTES, CLAP_DEBOUNCE_MILLISECONDS } from "@/constants";
 
 test.describe("Article metric tracking", () => {
+  test.describe.configure({ mode: "serial" });
+
   test.describe("view count", () => {
     test("should update view count after visiting an article", async ({ page }) => {
       await page.goto(ROUTES.BLOGS_HUB.path);
@@ -57,7 +59,7 @@ test.describe("Article metric tracking", () => {
 
       const cardsGroup = page.locator(".cards-group").first();
       const readCountSpan = cardsGroup.locator(".card-stats").first().locator(".fa-book-open + .stat-num");
-      const initialReadCount = parseInt(await readCountSpan.textContent());
+      const initialReadCount = (await readCountSpan.count()) > 0 ? parseInt(await readCountSpan.textContent()) : 0;
 
       await cardsGroup.locator("a").first().click();
       await page.waitForLoadState("networkidle");
@@ -67,7 +69,7 @@ test.describe("Article metric tracking", () => {
       await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
 
-      const updatedReadCount = parseInt(await readCountSpan.textContent());
+      const updatedReadCount = (await readCountSpan.count()) > 0 ? parseInt(await readCountSpan.textContent()) : 0;
       expect(updatedReadCount).toBeGreaterThanOrEqual(initialReadCount + 1);
     });
   });

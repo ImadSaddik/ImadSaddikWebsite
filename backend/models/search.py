@@ -30,6 +30,7 @@ class SearchRequest(BaseModel):
     sort_by: Optional[SearchSortBy] = SearchSortBy()
     filters: SearchFilters = SearchFilters()
     size: int = 10
+    offset: int = 0
 
 
 class SearchHit(Hit):

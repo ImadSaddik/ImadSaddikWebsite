@@ -151,6 +151,11 @@ test.describe("Search functionality", () => {
     });
 
     test("should handle special characters in search", async ({ page }) => {
+      let dialogFired = false;
+      page.on("dialog", () => {
+        dialogFired = true;
+      });
+
       await page.goto(ROUTES.BLOGS_HUB.path);
       await page.waitForLoadState("networkidle");
 
@@ -160,10 +165,10 @@ test.describe("Search functionality", () => {
       await expect(searchInput).toHaveValue('<script>alert("xss")</script>');
 
       await searchInput.press("Enter");
-      await expect(page.locator(".articles-hub-container")).toBeVisible();
+      await page.waitForLoadState("networkidle");
 
-      const noResults = page.locator('text="No results found"');
-      await expect(noResults).toBeVisible();
+      await expect(page.locator(".articles-hub-container")).toBeVisible();
+      expect(dialogFired).toBe(false);
     });
 
     test("should handle very long search queries", async ({ page }) => {

@@ -1,2 +1,3 @@
 export const TIME_OUT_MILLISECONDS = 10_000;
 export const CLAP_DEBOUNCE_MILLISECONDS = 1_000;
+export const DEFAULT_BATCH_SIZE = 10;

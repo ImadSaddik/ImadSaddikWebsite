@@ -110,7 +110,7 @@ import BaseCard from "@/components/BaseCard.vue";
 import SearchBar from "@/components/SearchBar.vue";
 
 // Constants
-import { TIME_OUT_MILLISECONDS, SORT_ORDER, SORTABLE_FIELDS } from "@/constants";
+import { TIME_OUT_MILLISECONDS, SORT_ORDER, SORTABLE_FIELDS, DEFAULT_BATCH_SIZE } from "@/constants";
 
 export default {
   name: "ArticlesHub",
@@ -160,7 +160,8 @@ export default {
       cardData: [],
       isSearchResponseEmpty: false,
 
-      batchSize: 10,
+      limit: DEFAULT_BATCH_SIZE,
+      offset: 0,
       totalDocumentsInIndex: 0,
 
       SORT_ORDER,
@@ -219,16 +220,17 @@ export default {
       this.selectedYears = [];
     },
     async getCardsData() {
-      const data = {
-        articleType: this.articleType,
-      };
-      await this.performSearchRequest(data);
-    },
-    async loadMoreArticles() {
-      this.batchSize += 1;
       await this.performSearchRequest();
     },
-    async performSearchRequest() {
+    async loadMoreArticles() {
+      this.offset += this.limit;
+      await this.performSearchRequest(true);
+    },
+    async performSearchRequest(isLoadMore = false) {
+      if (!isLoadMore) {
+        this.offset = 0;
+      }
+
       const data = {
         query: this.searchQuery,
         article_type: this.articleType,
@@ -240,29 +242,38 @@ export default {
           years: this.selectedYears,
           tags: this.selectedTags,
         },
-        size: this.batchSize,
+        size: this.limit,
+        offset: this.offset,
       };
 
       let searchResponse = null;
       try {
-        const response = await axios.post("/api/search", JSON.stringify(data), {
-          headers: {
-            "Content-Type": "application/json",
-          },
+        const response = await axios.post("/api/search", data, {
           timeout: TIME_OUT_MILLISECONDS,
         });
         searchResponse = response.data;
         const hits = searchResponse?.hits || [];
-        this.cardData = getCardsDataFromDocumentHits({
+        const newCardData = getCardsDataFromDocumentHits({
           hits,
           articleType: this.articleType,
         });
+
+        if (isLoadMore) {
+          this.cardData.push(...newCardData);
+        } else {
+          this.cardData = newCardData;
+        }
+
         this.totalDocumentsInIndex = searchResponse?.total_hits || 0;
         const facetDistribution = searchResponse?.facet_distribution || {};
 
         this.updateTagsFromFacetDistribution(facetDistribution.tags || {});
         this.updateYearsFromFacetDistribution(facetDistribution.year || {});
       } catch (error) {
+        if (!isLoadMore) {
+          this.cardData = [];
+        }
+
         if (error.response && error.response.status === 429) {
           this.$emit("show-toast", {
             message:
@@ -277,7 +288,7 @@ export default {
         }
       }
 
-      this.isSearchResponseEmpty = !searchResponse || searchResponse.hits.length === 0;
+      this.isSearchResponseEmpty = this.cardData.length === 0;
     },
     updateTagsFromFacetDistribution(tagsFacet) {
       const sortedTags = Object.entries(tagsFacet)

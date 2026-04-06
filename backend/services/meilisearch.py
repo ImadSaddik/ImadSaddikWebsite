@@ -29,6 +29,7 @@ class MeilisearchService:
             sort=sorting_criteria,
             facets=["tags", "year"],
             limit=request.size,
+            offset=request.offset,
         )
 
         hits = []
