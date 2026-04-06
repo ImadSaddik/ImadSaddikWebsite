@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.2.0] - 2026-04-05
+
+### Added
+
+- **Pagination support:** Introduced `offset` and `limit` to the article search API for better performance and scalability.
+- **Batch loading:** The "Load more" functionality now fetches articles in batches instead of one by one.
+- **Improved E2E tests:** Refactored metric tracking tests to handle asynchronous index updates and parallel execution more reliably.
+
+### Fixed
+
+- Fixed a bug where "Load more" would redundantly fetch previously loaded articles.
+- Resolved flakiness in E2E tests caused by race conditions in metric increments.
+
 ## [v2.1.0] - 2026-03-09
 
 ### Added
