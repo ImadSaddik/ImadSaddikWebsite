@@ -16,6 +16,10 @@ Prefer video? Watch the video tutorial:
 ::: youtube [https://www.youtube.com/embed/SYt46WotV1w](https://www.youtube.com/embed/SYt46WotV1w)
 :::
 
+::: warning Important
+Throughout this guide, you will see placeholders inside angle brackets like `<your_domain>`, `<your_username>`, etc. You must replace these with your actual values.
+:::
+
 ## Register a domain
 
 To give your website a recognizable name, you need to register a domain. There are many domain registrars available, such as [Namecheap](https://www.namecheap.com/), or [GoDaddy](https://www.godaddy.com/fr). For this guide, I will use [Porkbun](https://porkbun.com/) as the example because of its transparent pricing, but the concepts apply everywhere.
