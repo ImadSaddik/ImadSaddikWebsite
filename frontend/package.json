@@ -23,7 +23,7 @@
   "dependencies": {
     "@shikijs/transformers": "^3.22.0",
     "@vueuse/core": "^14.2.1",
-    "axios": "^1.13.5",
+    "axios": "^1.15.0",
     "shiki": "^4.0.2",
     "vue": "^3.5.29",
     "vue-router": "^5.0.3"
@@ -48,7 +48,7 @@
     "sitemap": "^9.0.1",
     "unplugin-vue-components": "^31.0.0",
     "unplugin-vue-markdown": "^29.2.0",
-    "vite": "^7.3.1",
+    "vite": "^7.3.2",
     "vitest": "^4.0.14",
     "vue-eslint-parser": "^10.2.0"
   },
@@ -57,6 +57,7 @@
       "ajv": "^6.14.0",
       "brace-expansion": "^5.0.5",
       "flatted": "^3.4.2",
+      "follow-redirects": "^1.16.0",
       "minimatch": "^10.2.3",
       "picomatch": "^4.0.4",
       "yaml": "^2.8.3"
