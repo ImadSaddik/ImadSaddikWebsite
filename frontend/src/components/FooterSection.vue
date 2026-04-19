@@ -115,7 +115,9 @@
           <a class="clickable" href="https://myuniversehub.com/" target="_blank" rel="noopener noreferrer"
             >myuniversehub.com</a
           >
-          <p class="disabled-text">More websites coming</p>
+          <a class="clickable" href="https://setuprkhis.com/" target="_blank" rel="noopener noreferrer"
+            >setuprkhis.com</a
+          >
         </div>
 
         <div class="footer-column">
