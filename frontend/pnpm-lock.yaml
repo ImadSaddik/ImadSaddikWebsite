@@ -90,8 +90,8 @@ importers:
         specifier: ^31.0.0
         version: 31.0.0(vue@3.5.29)
       unplugin-vue-markdown:
-        specifier: ^29.2.0
-        version: 29.2.0(vite@7.3.2(@types/node@24.12.0)(terser@5.43.1)(yaml@2.8.3))
+        specifier: ^30.0.0
+        version: 30.0.0(vite@7.3.2(@types/node@24.12.0)(terser@5.43.1)(yaml@2.8.3))
       vite:
         specifier: ^7.3.2
         version: 7.3.2(@types/node@24.12.0)(terser@5.43.1)(yaml@2.8.3)
@@ -1521,8 +1521,8 @@ packages:
     resolution: {integrity: sha512-hXdUTZYIVOt1Ex//jAQi+wTZZpUpwBj/0QsOzqegb3rGMMeJiSEu5xLHnYfBrRV4RH2+OCSOO95Is/7x1WJ4bw==}
     engines: {node: '>=10'}
 
-  markdown-it-async@2.2.0:
-    resolution: {integrity: sha512-sITME+kf799vMeO/ww/CjH6q+c05f6TLpn6VOmmWCGNqPJzSh+uFgZoMB9s0plNtW6afy63qglNAC3MhrhP/gg==}
+  markdown-exit@1.0.0-beta.9:
+    resolution: {integrity: sha512-5tzrMKMF367amyBly131vm6eGuWRL2DjBqWaFmPzPbLyuxP0XOmyyyroOAIXuBAMF/3kZbbfqOxvW/SotqKqbQ==}
 
   markdown-it-container@4.0.0:
     resolution: {integrity: sha512-HaNccxUH0l7BNGYbFbjmGpf5aLHAMTinqRZQAEQbMr2cdD3z91Q6kIo1oUn1CQndkT03jat6ckrdRYuwwqLlQw==}
@@ -1986,8 +1986,8 @@ packages:
       '@nuxt/kit':
         optional: true
 
-  unplugin-vue-markdown@29.2.0:
-    resolution: {integrity: sha512-/x2hFgQ6cWN1Kls+yK5mAI9YDmeTofftynVGgOy1llBlDX1ifaXsQBls/bpORaiwn7cxA7HkOo0wn/xKcrXBHA==}
+  unplugin-vue-markdown@30.0.0:
+    resolution: {integrity: sha512-FVdKAb7jmZslfdkOCfm6jxHaUafltBpOXdoLvKY+0I0EeMmhxXTSzeDldwXFJeV0IH8LyIXIiU29E6gv02WJFQ==}
     engines: {node: '>=20'}
     peerDependencies:
       vite: ^2.0.0 || ^3.0.0-0 || ^4.0.0-0 || ^5.0.0-0 || ^6.0.0 || ^7.0.0
@@ -3577,10 +3577,15 @@ snapshots:
     dependencies:
       semver: 7.7.2
 
-  markdown-it-async@2.2.0:
+  markdown-exit@1.0.0-beta.9:
     dependencies:
-      '@types/markdown-it': 14.1.2
-      markdown-it: 14.1.1
+      '@types/linkify-it': 5.0.0
+      '@types/mdurl': 2.0.0
+      entities: 7.0.1
+      linkify-it: 5.0.0
+      mdurl: 2.0.0
+      punycode.js: 2.3.1
+      uc.micro: 2.1.0
 
   markdown-it-container@4.0.0: {}
 
@@ -4054,14 +4059,12 @@ snapshots:
       unplugin-utils: 0.3.1
       vue: 3.5.29
 
-  unplugin-vue-markdown@29.2.0(vite@7.3.2(@types/node@24.12.0)(terser@5.43.1)(yaml@2.8.3)):
+  unplugin-vue-markdown@30.0.0(vite@7.3.2(@types/node@24.12.0)(terser@5.43.1)(yaml@2.8.3)):
     dependencies:
       '@mdit-vue/plugin-component': 3.0.2
       '@mdit-vue/plugin-frontmatter': 3.0.2
       '@mdit-vue/types': 3.0.2
-      '@types/markdown-it': 14.1.2
-      markdown-it: 14.1.1
-      markdown-it-async: 2.2.0
+      markdown-exit: 1.0.0-beta.9
       unplugin: 2.3.11
       unplugin-utils: 0.3.1
       vite: 7.3.2(@types/node@24.12.0)(terser@5.43.1)(yaml@2.8.3)
@@ -4069,7 +4072,7 @@ snapshots:
   unplugin@2.3.11:
     dependencies:
       '@jridgewell/remapping': 2.3.5
-      acorn: 8.15.0
+      acorn: 8.16.0
       picomatch: 4.0.4
       webpack-virtual-modules: 0.6.2
 
