@@ -27,6 +27,11 @@ Notice how the edge servers intercept the traffic. By serving files locally, the
 
 In this article, you will integrate [Cloudflare](https://www.cloudflare.com/) to globally distribute your frontend. You will also configure Nginx to implement aggressive caching strategies for your [Single Page Application (SPA)](https://developer.mozilla.org/en-US/docs/Glossary/SPA).
 
+Prefer video? Watch the video tutorial:
+
+::: youtube [https://www.youtube.com/embed/Z_rh9YbwETM](https://www.youtube.com/embed/Z_rh9YbwETM)
+:::
+
 ## Set up Cloudflare
 
 Cloudflare is one of the most popular CDNs in the world. It acts as both a CDN and a highly secure DNS provider. Best of all, it offers a generous free tier that is perfect for personal websites and side projects.
