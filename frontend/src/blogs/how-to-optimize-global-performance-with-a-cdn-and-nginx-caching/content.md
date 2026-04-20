@@ -161,3 +161,78 @@ The improvement is massive:
 - **Beijing:** Dropped from 3.9s to **1.5s**.
 
 Your website now loads almost instantly for users all over the world.
+
+## Restore visitor IPs at the server level
+
+Now that traffic is routing through Cloudflare, a hidden issue arises. Both your Nginx logs and your application backend will see Cloudflare's IP address instead of the actual visitor's IP. This breaks your analytics and ruins any geolocation tracking.
+
+Instead of writing complex backend code to extract the real IP from request headers, you can configure Nginx to unwrap the connection globally at the server level.
+
+::: image ./15_cloudflare_real_ip.png "Diagram showing how Cloudflare masks the real IP"
+By default, your backend only sees Cloudflare's IP. Configuring Nginx to read the CF-Connecting-IP header restores the true visitor IP.
+:::
+
+Create a new configuration file in Nginx's `conf.d` directory. Nginx automatically loads any file placed in this folder.
+
+```bash
+sudo nano /etc/nginx/conf.d/cloudflare.conf
+```
+
+Paste the following configuration. This tells Nginx to trust requests originating from Cloudflare's known IP ranges and to extract the real visitor's IP from the [CF-Connecting-IP](https://developers.cloudflare.com/fundamentals/reference/http-headers/#cf-connecting-ip) header.
+
+```nginx
+# Cloudflare IPv4 Ranges
+set_real_ip_from 173.245.48.0/20;
+set_real_ip_from 103.21.244.0/22;
+set_real_ip_from 103.22.200.0/22;
+set_real_ip_from 103.31.4.0/22;
+set_real_ip_from 141.101.64.0/18;
+set_real_ip_from 108.162.192.0/18;
+set_real_ip_from 190.93.240.0/20;
+set_real_ip_from 188.114.96.0/20;
+set_real_ip_from 197.234.240.0/22;
+set_real_ip_from 198.41.128.0/17;
+set_real_ip_from 162.158.0.0/15;
+set_real_ip_from 104.16.0.0/13;
+set_real_ip_from 104.24.0.0/14;
+set_real_ip_from 172.64.0.0/13;
+set_real_ip_from 131.0.72.0/22;
+
+# Cloudflare IPv6 Ranges
+set_real_ip_from 2400:cb00::/32;
+set_real_ip_from 2606:4700::/32;
+set_real_ip_from 2803:f800::/32;
+set_real_ip_from 2405:b500::/32;
+set_real_ip_from 2405:8100::/32;
+set_real_ip_from 2a06:98c0::/29;
+set_real_ip_from 2c0f:f248::/32;
+
+# Use the 'CF-Connecting-IP' header to get the real IP
+real_ip_header CF-Connecting-IP;
+```
+
+::: info
+Cloudflare occasionally updates their IP ranges. You can always find the most up-to-date lists at [https://www.cloudflare.com/ips/](https://www.cloudflare.com/ips/).
+:::
+
+### Verify the fix
+
+To see the change in action, test and reload Nginx first:
+
+```bash
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+Now, open your terminal and watch your access logs in real-time. Replace the placeholder with your domain name:
+
+```bash
+sudo tail -f /var/log/nginx/<your_domain>.com-access.log
+```
+
+While this command is running, open your website in your browser. Look at the first column of the logs that appear:
+
+- **Before the fix:** You would see a Cloudflare IP address (like `172.70.240.61`) for every single request.
+- **After the fix:** You should now see your own [ISP](https://en.wikipedia.org/wiki/Internet_service_provider)'s IP address.
+
+Your Nginx logs and your application backend will now see the actual IP addresses of your users.
