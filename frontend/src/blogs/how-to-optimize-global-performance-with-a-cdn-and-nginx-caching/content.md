@@ -66,3 +66,27 @@ Finally, look for the **NS (Nameserver)** records pointing to your domain regist
 ::: image ./6_review_dns_records_cloudflare.png "An illustration showing the DNS records review page on Cloudflare"
 Review the DNS records. Make sure your A and CNAME records are proxied (orange cloud), and delete any NS records pointing to your old registrar.
 :::
+
+### Hand over DNS authority
+
+To make Cloudflare your CDN, you must hand over control of your DNS routing. Cloudflare will provide you with two new nameservers (for example, `paige.ns.cloudflare.com` and `yevgen.ns.cloudflare.com`).
+
+To do this, head over to your domain registrar's dashboard and locate your domain. Hover over it and click the **NS** label (or equivalent setting) to open your nameserver settings. A popup will appear showing the default nameservers. Go ahead and delete all of them.
+
+Next, paste the two new Cloudflare nameservers you just received, making sure you put each one on a separate line. Finally, hit **Submit** to apply your changes.
+
+::: image ./7_change_nameservers_porkbun.png "An illustration showing how to change the nameservers on your registrar"
+Delete the old nameservers and replace them with the new ones provided by Cloudflare.
+:::
+
+Return to the Cloudflare dashboard and click **Continue**.
+
+::: image ./8_continue_after_nameservers_cloudflare.png "An illustration showing the continue button after changing nameservers on Cloudflare"
+After updating the nameservers, click "Continue" to let Cloudflare verify the changes.
+:::
+
+You will arrive at the overview page. Click the **Check nameservers now** button. DNS changes take time to propagate across the internet. This process usually finishes in a few minutes, but it can occasionally take up to an hour.
+
+::: image ./9_check_nameservers_cloudflare.png "An illustration showing the nameservers check page on Cloudflare"
+Click "Check nameservers now" to verify that Cloudflare has taken control of your DNS. This may take a few minutes to complete.
+:::
