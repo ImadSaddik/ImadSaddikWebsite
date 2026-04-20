@@ -8,25 +8,25 @@
 >
     <url>
         <loc>https://imadsaddik.com/</loc>
-        <lastmod>2026-04-20T18:33:57.960Z</lastmod>
+        <lastmod>2026-04-20T18:35:52.428Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/about-me</loc>
-        <lastmod>2026-04-20T18:33:57.960Z</lastmod>
+        <lastmod>2026-04-20T18:35:52.428Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/hire-me</loc>
-        <lastmod>2026-04-20T18:33:57.960Z</lastmod>
+        <lastmod>2026-04-20T18:35:52.428Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/resume</loc>
-        <lastmod>2026-04-20T18:33:57.960Z</lastmod>
+        <lastmod>2026-04-20T18:35:52.428Z</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
@@ -80,7 +80,7 @@
     </url>
     <url>
         <loc>https://imadsaddik.com/blogs/how-to-optimize-global-performance-with-a-cdn-and-nginx-caching</loc>
-        <lastmod>2026-04-20T18:33:45.618Z</lastmod>
+        <lastmod>2026-04-20T18:35:41.618Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>

@@ -298,3 +298,18 @@ add_header Cache-Control "public, max-age=31536000, immutable";
 - **immutable:** An instruction that tells the browser the file will never change. This stops the browser from even asking the server if the file is up to date, resulting in instant load times.
 
 With this configuration, your users will always fetch the freshest `index.html` file upon navigating to your site, ensuring they get your latest features immediately, while the heavy lifting (downloading your compiled scripts, stylesheets, and images) is cached efficiently at the edge.
+
+## Pros and cons
+
+Before wrapping up, let's summarize what you gained and what you risked by adding this CDN layer.
+
+### The benefits
+
+- **Speed:** Your frontend loads instantly for users everywhere.
+- **Security:** Cloudflare hides your real server IP and provides basic [DDoS](https://en.wikipedia.org/wiki/Denial-of-service_attack) protection.
+- **Bandwidth:** It saves you money by serving images and scripts from their cache instead of your server.
+
+### The downsides
+
+- **Complexity:** You have introduced a middleman. If your site goes down, you now have to check if the issue is with your server or Cloudflare.
+- **Dynamic latency:** While your frontend is fast, your backend API requests still need to travel the full distance to your server. Cloudflare cannot speed up the database query itself, only the network path to reach it.
