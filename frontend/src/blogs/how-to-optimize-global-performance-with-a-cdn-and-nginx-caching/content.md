@@ -32,6 +32,10 @@ Prefer video? Watch the video tutorial:
 ::: youtube [https://www.youtube.com/embed/Z_rh9YbwETM](https://www.youtube.com/embed/Z_rh9YbwETM)
 :::
 
+::: info
+Platforms like Cloudflare, Porkbun, and others frequently update their dashboards. While the specific buttons or layouts in these screenshots might drift over time, the underlying technical concepts, such as DNS propagation, nameserver updates, and SSL configuration, remain identical.
+:::
+
 ## Set up Cloudflare
 
 Cloudflare is one of the most popular CDNs in the world. It acts as both a CDN and a highly secure DNS provider. Best of all, it offers a generous free tier that is perfect for personal websites and side projects.
