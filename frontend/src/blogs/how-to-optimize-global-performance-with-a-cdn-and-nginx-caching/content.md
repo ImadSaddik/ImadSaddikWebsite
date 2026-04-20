@@ -90,3 +90,27 @@ You will arrive at the overview page. Click the **Check nameservers now** button
 ::: image ./9_check_nameservers_cloudflare.png "An illustration showing the nameservers check page on Cloudflare"
 Click "Check nameservers now" to verify that Cloudflare has taken control of your DNS. This may take a few minutes to complete.
 :::
+
+## Configure SSL/TLS encryption mode
+
+While you wait for the nameservers to propagate, you must configure Cloudflare's encryption mode.
+
+::: warning Important
+**Do not skip this step!** If you forget to do this, your website will get stuck in an infinite loop and crash with a [Too Many Redirects](https://developers.cloudflare.com/ssl/troubleshooting/too-many-redirects/) error.
+:::
+
+In the Cloudflare dashboard, locate **SSL/TLS** in the left sidebar and click on **Overview**.
+
+::: image ./10_access_ssl_tls_cloudflare.png "An illustration showing how to access the SSL/TLS settings on Cloudflare"
+Click on "SSL/TLS" in the left sidebar, then select "Overview" to access the encryption settings.
+:::
+
+On this page, you will see a few different encryption modes. Select the **Full (strict)** option.
+
+::: image ./11_select_full_strict_cloudflare.png "An illustration showing the SSL/TLS encryption mode options on Cloudflare"
+Choose the "Full (strict)" encryption mode to ensure end-to-end encryption between users, Cloudflare, and your origin server.
+:::
+
+**Why Full (strict)?** This assumes you already have a valid SSL certificate (like [Let's Encrypt](https://letsencrypt.org/)) installed on your origin server.
+
+This strict setting tells Cloudflare to encrypt the connection from the user's browser to Cloudflare, and then strictly verify your origin server's certificate before passing the traffic along. It guarantees true end-to-end encryption.
