@@ -114,3 +114,32 @@ Choose the "Full (strict)" encryption mode to ensure end-to-end encryption betwe
 **Why Full (strict)?** This assumes you already have a valid SSL certificate (like [Let's Encrypt](https://letsencrypt.org/)) installed on your origin server.
 
 This strict setting tells Cloudflare to encrypt the connection from the user's browser to Cloudflare, and then strictly verify your origin server's certificate before passing the traffic along. It guarantees true end-to-end encryption.
+
+### Verify the DNS switch
+
+Before moving on, you should confirm that the internet sees your new nameservers. You can verify this directly from your local terminal using the [dig command](<https://en.wikipedia.org/wiki/Dig_(command)>).
+
+```bash
+dig +short NS <your_domain>.com
+```
+
+If the propagation is complete, you will see your new Cloudflare nameservers in the output:
+
+```output
+paige.ns.cloudflare.com.
+yevgen.ns.cloudflare.com.
+```
+
+If you still see the old nameservers, wait a few more minutes and try again. Once you see the Cloudflare addresses, your traffic is officially flowing through their network.
+
+Refresh the Cloudflare dashboard. You should see a green **Active** badge next to your domain, along with a "Great news!" message.
+
+::: image ./12_active_status_cloudflare.png "An illustration showing the active status of the domain on Cloudflare"
+Once the nameservers have propagated, you should see an "Active" status in the Cloudflare dashboard, confirming that your domain is now using Cloudflare's DNS and CDN services.
+:::
+
+If you want an extra check, you can also use the [whatsmydns.net](https://www.whatsmydns.net/) website to verify that the new nameservers are active globally. After visiting the website, enter your domain, select **NS** from the dropdown, and hit search. You should see your new Cloudflare nameservers appearing on the map.
+
+::: image ./13_check_nameservers_whatsmydns.png "An illustration showing the global nameservers check on whatsmydns.net"
+Use whatsmydns.net to verify that your new Cloudflare nameservers are active globally. You should see them appearing in multiple locations around the world.
+:::
