@@ -263,13 +263,15 @@ Open your site's Nginx configuration:
 sudo nano /etc/nginx/sites-available/<your_domain>.com
 ```
 
-Find your existing `location /` block. You are going to replace it and expand it. Add the following blocks inside your secure (port 443) `server` block:
+Find your existing secure (port 443) `server` block. You are going to define the `root` directory once at the server level so it is inherited by all locations, and then add specific caching rules:
 
 ```nginx
+# Define the root directory at the server level (Inherited by all locations)
+root /web_app/frontend/dist;
+
 # 1. Never cache the entry point
 # The browser must always check the server for the latest version of the app.
 location = /index.html {
-    root /web_app/frontend/dist;
     add_header Cache-Control "no-cache, no-store, must-revalidate";
 }
 
@@ -277,14 +279,12 @@ location = /index.html {
 # Modern build tools add a unique hash to filenames in the /assets directory.
 # If the code changes, the filename changes. Therefore, we can cache these heavily.
 location /assets/ {
-    root /web_app/frontend/dist;
     add_header Cache-Control "public, max-age=31536000, immutable";
 }
 
 # 3. Handle SPA routing (Fallback)
 # If the request is not for a specific asset or index.html, fall back to index.html
 location / {
-    root /web_app/frontend/dist;
     try_files $uri $uri/ /index.html;
 }
 ```
