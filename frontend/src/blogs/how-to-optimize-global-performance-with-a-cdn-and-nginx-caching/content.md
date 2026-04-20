@@ -236,3 +236,65 @@ While this command is running, open your website in your browser. Look at the fi
 - **After the fix:** You should now see your own [ISP](https://en.wikipedia.org/wiki/Internet_service_provider)'s IP address.
 
 Your Nginx logs and your application backend will now see the actual IP addresses of your users.
+
+## Optimize Nginx caching for SPAs
+
+Your CDN is active, but you need to tell it how to cache your files. By default, browsers and CDNs try to cache static assets to improve performance. However, for a Single Page Application (SPA) built with Vue, React, or another frontend framework, default caching behavior can cause massive headaches when you deploy updates.
+
+If a browser caches your `index.html` file, a user visiting your site tomorrow might load the old version of the app. That old `index.html` will try to load old JavaScript files that you may have already deleted from the server during a deployment, resulting in a blank white screen.
+
+To fix this, you must explicitly separate your caching logic into two rules:
+
+- **Never cache the entry point (`index.html`).**
+- **Cache the assets (`/assets/`) forever.**
+
+Open your site's Nginx configuration:
+
+```bash
+sudo nano /etc/nginx/sites-available/<your_domain>.com
+```
+
+Find your existing `location /` block. You are going to replace it and expand it. Add the following blocks inside your secure (port 443) `server` block:
+
+```nginx
+# 1. Never cache the entry point
+# The browser must always check the server for the latest version of the app.
+location = /index.html {
+    root /web_app/frontend/dist;
+    add_header Cache-Control "no-cache, no-store, must-revalidate";
+}
+
+# 2. Cache assets forever
+# Modern build tools add a unique hash to filenames in the /assets directory.
+# If the code changes, the filename changes. Therefore, we can cache these heavily.
+location /assets/ {
+    root /web_app/frontend/dist;
+    add_header Cache-Control "public, max-age=31536000, immutable";
+}
+
+# 3. Handle SPA routing (Fallback)
+# If the request is not for a specific asset or index.html, fall back to index.html
+location / {
+    root /web_app/frontend/dist;
+    try_files $uri $uri/ /index.html;
+}
+```
+
+Here is what those specific caching headers mean:
+
+```nginx
+add_header Cache-Control "no-cache, no-store, must-revalidate";
+```
+
+- **no-cache, no-store:** Tells the browser and Cloudflare to never save a permanent copy of this file.
+- **must-revalidate:** Forces the browser to connect to your server every single time to verify it has the absolute latest version before showing the page to the user.
+
+```nginx
+add_header Cache-Control "public, max-age=31536000, immutable";
+```
+
+- **public:** Allows anyone, including Cloudflare's edge servers, to cache the files.
+- **max-age=31536000:** Tells the browser to keep the file in its cache for exactly one year (31,536,000 seconds).
+- **immutable:** An instruction that tells the browser the file will never change. This stops the browser from even asking the server if the file is up to date, resulting in instant load times.
+
+With this configuration, your users will always fetch the freshest `index.html` file upon navigating to your site, ensuring they get your latest features immediately, while the heavy lifting (downloading your compiled scripts, stylesheets, and images) is cached efficiently at the edge.
