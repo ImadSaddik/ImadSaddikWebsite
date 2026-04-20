@@ -313,3 +313,11 @@ Before wrapping up, let's summarize what you gained and what you risked by addin
 
 - **Complexity:** You have introduced a middleman. If your site goes down, you now have to check if the issue is with your server or Cloudflare.
 - **Dynamic latency:** While your frontend is fast, your backend API requests still need to travel the full distance to your server. Cloudflare cannot speed up the database query itself, only the network path to reach it.
+
+## Conclusion
+
+Your website is now globally distributed, fast, and protected by Cloudflare's network. You have successfully finished the performance setup!
+
+By implementing a CDN, you ensure that your frontend loads instantly for users everywhere while saving bandwidth.
+
+Combined with the proper Nginx caching strategies for your SPA, you've created a robust delivery layer that prevents common caching bugs while serving assets at lightning speed ::fa{fa-solid fa-bolt}::.
