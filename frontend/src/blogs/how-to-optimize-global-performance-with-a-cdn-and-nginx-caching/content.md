@@ -53,3 +53,16 @@ In the plan selection page, choose the **Free** plan. It includes everything you
 ::: image ./5_select_free_plan_cloudflare.png "An illustration showing the plan selection page on Cloudflare"
 Select the Free plan, which is sufficient for personal websites and side projects.
 :::
+
+### Review and proxy your DNS records
+
+The next screen is very important. Cloudflare will list the DNS records it found. You need to verify their proxy status.
+
+- **Web traffic (A and CNAME records):** Ensure the proxy status is toggled on. You should see an **orange cloud**. This tells Cloudflare to intercept the traffic, cache your files, and hide your server's real IP address from the public.
+- **Email traffic (MX and TXT records):** If you have records for email, they must be set to "DNS only". Cloudflare proxies HTTP and HTTPS web traffic, not email traffic. If you proxy your mail records, your email will stop working.
+
+Finally, look for the **NS (Nameserver)** records pointing to your domain registrar (e.g., `porkbun.com`). You must delete these from the list because you are about to replace them.
+
+::: image ./6_review_dns_records_cloudflare.png "An illustration showing the DNS records review page on Cloudflare"
+Review the DNS records. Make sure your A and CNAME records are proxied (orange cloud), and delete any NS records pointing to your old registrar.
+:::
