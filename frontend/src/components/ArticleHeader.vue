@@ -24,8 +24,8 @@
     </div>
 
     <p class="article-header-copy-info">
-      Copy this article as markdown to use it with your favorite LLM. It's free.
       <InlineButton font-awesome-icon="fa-solid fa-copy" label="Copy" @button-clicked="handleCopyContentInMarkdown" />
+      this article as markdown to use it with your favorite LLM. It's free.
     </p>
   </section>
 </template>
