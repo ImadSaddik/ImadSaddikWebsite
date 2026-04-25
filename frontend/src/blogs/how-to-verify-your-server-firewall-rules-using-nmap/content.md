@@ -25,7 +25,7 @@ If you use a [Content Delivery Network (CDN)](https://www.cloudflare.com/learnin
 nmap -Pn -F <your_server_ip>
 ```
 
-The `-F` flag runs a "Fast" scan, checking only the 100 most common network ports instead of all 65,535.
+The `-Pn` flag tells Nmap to skip host discovery and treat the server as being online, while the `-F` flag runs a "Fast" scan, checking only the 100 most common network ports instead of all 65,535.
 
 If your server is properly secured, the output should look exactly like this:
 
@@ -59,7 +59,7 @@ However, a well-configured firewall is set to "drop" (deny) unauthorized traffic
 This result confirms that even if you have internal services running (like a backend API on port `8000` or a database on port `5432`), no one can access them directly from the internet. They are perfectly insulated behind your firewall rules.
 
 ::: tip
-Want to verify a specific internal service? You can use the `-p` flag to target an exact port. For example, running `nmap -p 8000 <your_server_ip>` will explicitly confirm whether your backend is successfully hidden from the outside world.
+Want to verify a specific internal service? You can use the `-p` flag to target an exact port. For example, running `nmap -Pn -p 8000 <your_server_ip>` will explicitly confirm whether your backend is successfully hidden from the outside world. As with the general scan, adding `-Pn` ensures the check isn't skipped if the host discovery (ping) fails.
 :::
 
 ## Conclusion
