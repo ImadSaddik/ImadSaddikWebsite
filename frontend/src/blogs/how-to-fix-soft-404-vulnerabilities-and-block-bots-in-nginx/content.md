@@ -56,7 +56,7 @@ location ~* \.(php|pl|py|jsp|asp|sh|cgi|bak|old|sql|conf|ini|zip|tar|gz)$|/(wp-a
 }
 ```
 
-You might notice the `access_log off;` and `log_not_found off;` lines inside those blocks. These are there to keep your server logs clean. Since bots scan these common URLs thousands of times a day, recording every single blocked attempt would just waste your disk space.
+Notice the `access_log off;` and `log_not_found off;` lines inside those blocks. These are there to keep your server logs clean. Since bots scan these common URLs thousands of times a day, recording every single blocked attempt would just waste your disk space.
 
 ::: warning
 The regex `\.(?!well-known).*` is important. If you block all dot-files, you will block the `/.well-known/acme-challenge/` directory. If you do that, Certbot will not be able to verify your domain, and your SSL certificates will fail to renew, breaking your site after 90 days.
