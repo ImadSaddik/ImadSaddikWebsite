@@ -1,12 +1,15 @@
 <template>
-  <section class="inline-button">
-    <button @click="handleClick"><i :class="fontAwesomeIcon"></i> {{ label }}</button>
-  </section>
+  <span class="inline-button">
+    <button v-bind="$attrs" @click="handleClick">
+      <i :class="fontAwesomeIcon" aria-hidden="true"></i> {{ label }}
+    </button>
+  </span>
 </template>
 
 <script>
 export default {
   name: "InlineButton",
+  inheritAttrs: false,
   props: {
     fontAwesomeIcon: {
       type: String,
