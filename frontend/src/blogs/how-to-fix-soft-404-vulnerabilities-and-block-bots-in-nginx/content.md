@@ -79,11 +79,7 @@ Now that Nginx knows what to look for, it uses two directives to block the traff
 Notice the `access_log off;` and `log_not_found off;` lines inside those blocks. These are there to keep your server logs clean. Since bots scan these common URLs thousands of times a day, recording every single blocked attempt would just waste your disk space.
 
 ::: warning
-The regex `\.(?!well-known).*` is important. If you block all dot-files, you will block the `/.well-known/acme-challenge/` directory. If you do that, Certbot will not be able to verify your domain, and your SSL certificates will fail to renew, breaking your site after 90 days.
-:::
-
-::: info
-Learn more about the [/.well-known](https://en.wikipedia.org/wiki/Well-known_URI) directory and its role in SSL certificate verification.
+The regex `\.(?!well-known).*` is important. If you block all dot-files, you will block the `/.well-known/acme-challenge/` directory. If you do that, Certbot will not be able to verify your domain, and your SSL certificates will fail to renew, breaking your site after 90 days. [Learn more about the /.well-known directory](https://en.wikipedia.org/wiki/Well-known_URI).
 :::
 
 Save the file and test your Nginx configuration:
