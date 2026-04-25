@@ -71,6 +71,11 @@ Notice that the first block uses `/\.` while the second just uses `\.`.
 - `\.` (just a dot) targets **file extensions**. In the second block, we want to block specific file types (like `.php` or `.zip`) regardless of what comes before the dot, so the slash isn't needed.
   :::
 
+Now that Nginx knows what to look for, it uses two directives to block the traffic:
+
+- **`deny all;`** immediately drops the connection and returns a `403 Forbidden` status.
+- **`return 404;`** explicitly forces the server to say "Page Not Found".
+
 Notice the `access_log off;` and `log_not_found off;` lines inside those blocks. These are there to keep your server logs clean. Since bots scan these common URLs thousands of times a day, recording every single blocked attempt would just waste your disk space.
 
 ::: warning
