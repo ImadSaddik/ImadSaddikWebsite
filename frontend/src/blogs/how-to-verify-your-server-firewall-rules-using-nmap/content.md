@@ -22,7 +22,7 @@ If you use a [Content Delivery Network (CDN)](https://www.cloudflare.com/learnin
 :::
 
 ```bash
-nmap -F <your_server_ip>
+nmap -Pn -F <your_server_ip>
 ```
 
 The `-F` flag runs a "Fast" scan, checking only the 100 most common network ports instead of all 65,535.
