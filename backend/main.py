@@ -22,7 +22,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     # After yield, we put code that will be executed after the application has finished.
 
 
-app = FastAPI(title="API for ImadSaddik.com", version="2.2.0", lifespan=lifespan)
+app = FastAPI(title="API for ImadSaddik.com", version="2.3.0", lifespan=lifespan)
 
 app.add_exception_handler(RequestValidationError, request_validation_exception_handler)
 app.add_exception_handler(HTTPException, http_exception_handler)

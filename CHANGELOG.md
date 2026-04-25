@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.3.0] - 2026-04-25
+
+### Added
+
+- **Content:** Added three new technical articles: "How to fix soft 404s", "Scanning a server with nmap", and "Optimizing global performance with a CDN and Nginx caching".
+- **Feature:** Added `setuprkhis.com` to the "My Websites" showcase column.
+
+### Changed
+
+- **UI/UX:** Improved "Copy" button positioning within sentences and enhanced accessibility with `aria-label`.
+- **Dependencies:** Updated several core dependencies including `axios`, `vite`, `pytest`, and `python-dotenv`.
+
+### Fixed
+
+- **Security:** Resolved vulnerabilities in `postcss` (^8.5.10) and `follow-redirects` (^1.16.0) via dependency overrides.
+
 ## [v2.2.0] - 2026-04-05
 
 ### Added
@@ -119,6 +135,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Monitoring:** Real-time resource tracking with Btop and traffic analysis with GoAccess.
   - **Performance:** Global delivery optimization via Cloudflare CDN.
 
+[v2.3.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.2.0...v2.3.0
+[v2.2.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.1.0...v2.2.0
 [v2.1.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.0.1...v2.1.0
 [v2.0.1]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.0.0...v2.0.1
 [v2.0.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v1.1.0...v2.0.0
