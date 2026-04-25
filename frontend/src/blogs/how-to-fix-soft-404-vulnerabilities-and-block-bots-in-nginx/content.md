@@ -95,6 +95,19 @@ Now, if you try to visit `https://<your_domain>.com/.env`, Nginx will instantly 
 The raw Nginx 404 response.
 :::
 
+::: info Why a 404 and not a 403?
+You might be wondering: If we explicitly wrote `deny all;` (which triggers a 403 Forbidden), why did the server return a 404 Not Found?
+
+Unlike many scripts that read top-to-bottom, Nginx processes every HTTP request through **11 distinct phases** in a strict, pre-defined order.
+
+- The `return` directive belongs to the **Rewrite phase** (Phase 4).
+- The `deny` directive belongs to the **Access phase** (Phase 7).
+
+Because the Rewrite phase happens earlier, Nginx hits the `return 404;`, drops the connection, and finishes the request before it ever reaches the security check in the Access phase.
+
+**So why include both?** It is a "belt and suspenders" approach. If someone accidentally deletes or comments out the `return 404;` line in the future, the `deny all;` acts as a fallback to ensure the sensitive files remain protected.
+:::
+
 But if a user visits a broken link like `https://<your_domain>.com/broken-article`, Nginx will gracefully pass it to your frontend router, providing a good user experience.
 
 ::: image ./3_vue_router_404.png "An illustration showing the frontend router 404 page when visiting a non-existent route"
