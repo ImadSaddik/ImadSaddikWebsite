@@ -24,8 +24,14 @@
     </div>
 
     <p class="article-header-copy-info">
-      <InlineButton font-awesome-icon="fa-solid fa-copy" label="Copy" @button-clicked="handleCopyContentInMarkdown" />
-      this article as markdown to use it with your favorite LLM. It's free.
+      <InlineButton
+        font-awesome-icon="fa-solid fa-copy"
+        label="Copy"
+        aria-label="Copy this article as markdown"
+        @button-clicked="handleCopyContentInMarkdown"
+      />
+      <span class="lowercase-text" aria-hidden="true">This article as markdown</span> to use it with your favorite LLM.
+      It's free.
     </p>
   </section>
 </template>
@@ -148,6 +154,16 @@ export default {
   margin-top: 0;
   margin-bottom: var(--gap-md);
   line-height: 1.6;
+}
+
+.article-header-copy-info {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-xs);
+}
+
+.lowercase-text {
+  text-transform: lowercase;
 }
 
 .article-header-tags {
