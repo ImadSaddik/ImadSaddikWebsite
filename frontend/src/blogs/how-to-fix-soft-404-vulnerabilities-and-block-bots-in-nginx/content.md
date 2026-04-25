@@ -56,6 +56,21 @@ location ~* \.(php|pl|py|jsp|asp|sh|cgi|bak|old|sql|conf|ini|zip|tar|gz)$|/(wp-a
 }
 ```
 
+If you are not familiar with [regular expressions](https://en.wikipedia.org/wiki/Regular_expression), here is how Nginx reads those location blocks:
+
+- `~` tells Nginx to perform a case-sensitive regex match.
+- `/\.` looks for a forward slash followed by a dot (meaning any hidden file or directory, like `/.env`).
+- `(?!well-known)` is a [negative lookahead](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Regular_expressions/Lookahead_assertion). It tells Nginx to block the hidden file _unless_ the folder is exactly `/.well-known/`.
+- `~*` tells Nginx to perform a case-insensitive regex match.
+- `|` acts as an "OR" operator. It allows you to block multiple file extensions or specific directories (like `/wp-admin`) in a single rule.
+
+::: info
+Notice that the first block uses `/\.` while the second just uses `\.`.
+
+- `/\.` (a slash followed by a dot) targets **hidden files or directories** (like `/.env`). It ensures the dot is the very first character after a directory path. If we didn't include the slash, Nginx would block every single file containing a dot anywhere in its name (like `index.html`), which is not what we want.
+- `\.` (just a dot) targets **file extensions**. In the second block, we want to block specific file types (like `.php` or `.zip`) regardless of what comes before the dot, so the slash isn't needed.
+  :::
+
 Notice the `access_log off;` and `log_not_found off;` lines inside those blocks. These are there to keep your server logs clean. Since bots scan these common URLs thousands of times a day, recording every single blocked attempt would just waste your disk space.
 
 ::: warning
