@@ -49,7 +49,7 @@ location ~ /\.(?!well-known).* {
 }
 
 # Immediately drop requests for PHP, backups, or CMS admin panels
-location ~* \.(php|pl|py|jsp|asp|sh|cgi|bak|old|sql|conf|ini|zip|tar|gz)$|/(wp-admin|wp-includes|node_modules) {
+location ~* \.(php|pl|py|jsp|asp|sh|cgi|bak|old|sql|conf|ini|zip|tar|gz)$|^/(wp-admin|wp-includes|node_modules) {
     access_log off;
     log_not_found off;
     return 404;
@@ -62,7 +62,8 @@ If you are not familiar with [regular expressions](https://en.wikipedia.org/wiki
 - `/\.` looks for a forward slash followed by a dot (meaning any hidden file or directory, like `/.env`).
 - `(?!well-known)` is a [negative lookahead](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Regular_expressions/Lookahead_assertion). It tells Nginx to block the hidden file _unless_ the folder is exactly `/.well-known/`.
 - `~*` tells Nginx to perform a case-insensitive regex match.
-- `|` acts as an "OR" operator. It allows you to block multiple file extensions or specific directories (like `/wp-admin`) in a single rule.
+- `|` acts as an "OR" operator. It allows you to block multiple file extensions or specific directories in a single rule.
+- `^/` is an **anchor**. It tells Nginx to only match if the URI **starts** with those specific characters. Without this anchor, Nginx would block a legitimate link like `/blogs/how-to-secure-wp-admin` because it contains the blocked string!
 
 ::: info
 Notice that the first block uses `/\.` while the second just uses `\.`.
