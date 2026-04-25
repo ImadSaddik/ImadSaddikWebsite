@@ -73,6 +73,12 @@
         <priority>0.7</priority>
     </url>
     <url>
+        <loc>https://imadsaddik.com/blogs/how-to-fix-soft-404-vulnerabilities-and-block-bots-in-nginx</loc>
+        <lastmod>2026-04-25T06:09:56.370Z</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
         <loc>https://imadsaddik.com/blogs/how-to-manually-deploy-a-vuejs-and-fastapi-application</loc>
         <lastmod>2026-03-20T06:52:13.458Z</lastmod>
         <changefreq>monthly</changefreq>
@@ -80,6 +86,7 @@
     </url>
     <url>
         <loc>https://imadsaddik.com/blogs/how-to-optimize-global-performance-with-a-cdn-and-nginx-caching</loc>
+        <lastmod>2026-04-22T20:08:18.469Z</lastmod>
         <lastmod>2026-04-22T20:08:18.469Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>

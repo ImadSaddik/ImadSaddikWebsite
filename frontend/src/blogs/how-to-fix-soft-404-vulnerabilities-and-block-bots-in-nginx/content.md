@@ -1,0 +1,90 @@
+---
+title: "How to fix soft 404 vulnerabilities and block bots in Nginx"
+subtitle: "Protect your server by returning hard 404 errors for sensitive files and preventing SPA fallback traps."
+date: "April 20, 2026"
+tags: ["Security", "Nginx", "Web Server", "Soft 404", "SPA"]
+---
+
+## Introduction
+
+Securing your server with a firewall, SSH keys, and HTTP headers is a great start. But how your web server handles bad requests is equally important. In this article, you will learn how to block malicious bots from reading sensitive files and prevent Single Page Application (SPA) fallback traps.
+
+## The SPA fallback trap
+
+When hosting a Single Page Application (like React, Vue, or Angular), it is standard practice to configure Nginx with a fallback routing block. This ensures that if a user refreshes a dynamic frontend route, the server doesn't throw an error, but instead loads the main app.
+
+It usually looks something like this:
+
+```nginx
+location / {
+    root /web_app/frontend/dist;
+    try_files $uri $uri/ /index.html;
+}
+```
+
+Because of how this `location /` block works, any request to a non-existent file on your server gets redirected to your `index.html`.
+
+If a hacker or a malicious bot scans your server looking for sensitive files like `/.env`, `/.git/config`, or `/wp-login.php`, Nginx does not block them. Instead, it serves them your SPA's `index.html` file and returns a successful [HTTP 200 OK status](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/200).
+
+To a human, it looks like a "Page Not Found" screen rendered by your frontend router. To a bot or Google's search crawler, your server just said, "Yes, this `.env` file exists and here is the content!". This is known as a [Soft 404](https://developers.google.com/search/blog/2008/08/farewell-to-soft-404s), and it wastes your server's resources while severely confusing search engines.
+
+::: image ./1_soft_404_trap.png "Diagram showing how Nginx routes a bad request to index.html resulting in a 200 OK, versus the secure setup which explicitly returns a 404 error."
+The Soft 404 trap: Nginx fails to serve `.env` but takes the bot to `index.html`, resolving with a 200 HTTP status code. Bots will think they got access to the file and will keep hammering your web server.
+:::
+
+## Fix soft 404 vulnerabilities and block bots
+
+You need to set a strict boundary. Nginx should block known malicious requests instantly, returning a hard [404 Not Found](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/404) or [403 Forbidden](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/403), preventing them from ever reaching your frontend application.
+
+Add these security blocks to your Nginx configuration, placing them **right above** your `location /` SPA fallback block:
+
+```nginx
+# Block files that bots try to access (like .env or .git)
+# EXCEPTION: Allow .well-known for Certbot SSL renewals!
+location ~ /\.(?!well-known).* {
+    deny all;
+    access_log off;
+    log_not_found off;
+    return 404;
+}
+
+# Immediately drop requests for PHP, backups, or CMS admin panels
+location ~* \.(php|pl|py|jsp|asp|sh|cgi|bak|old|sql|conf|ini|zip|tar|gz)$|/(wp-admin|wp-includes|node_modules) {
+    access_log off;
+    log_not_found off;
+    return 404;
+}
+```
+
+You might notice the `access_log off;` and `log_not_found off;` lines inside those blocks. These are there to keep your server logs clean. Since bots scan these common URLs thousands of times a day, recording every single blocked attempt would just waste your disk space.
+
+::: warning
+The regex `\.(?!well-known).*` is important. If you block all dot-files, you will block the `/.well-known/acme-challenge/` directory. If you do that, Certbot will not be able to verify your domain, and your SSL certificates will fail to renew, breaking your site after 90 days.
+:::
+
+::: info
+Learn more about the [/.well-known](https://en.wikipedia.org/wiki/Well-known_URI) directory and its role in SSL certificate verification.
+:::
+
+Save the file and test your Nginx configuration:
+
+```bash
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+Now, if you try to visit `https://<your_domain>.com/.env`, Nginx will instantly step in and return a raw server 404 error page.
+
+::: image ./2_blocked_file_404.png "An illustration showing the raw 404 error page when trying to access a blocked file"
+The raw Nginx 404 response.
+:::
+
+But if a user visits a broken link like `https://<your_domain>.com/broken-article`, Nginx will gracefully pass it to your frontend router, providing a good user experience.
+
+::: image ./3_vue_router_404.png "An illustration showing the frontend router 404 page when visiting a non-existent route"
+The fallback frontend 404 page. Because the file is not explicitly blocked by the new Nginx rules, the frontend application loads and handles the missing route gracefully.
+:::
+
+## Conclusion
+
+By updating your Nginx rules, your web server now actively protects sensitive paths and preserves its own resources. Bots are stopped at the edge, server logs stay clean, and legitimate users still get the seamless SPA experience they expect when hitting broken links.
