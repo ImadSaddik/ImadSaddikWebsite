@@ -1,7 +1,7 @@
 ---
 title: "How to fix soft 404 vulnerabilities and block bots in Nginx"
 subtitle: "Protect your server by returning hard 404 errors for sensitive files and preventing SPA fallback traps."
-date: "April 20, 2026"
+date: "April 25, 2026"
 tags: ["Security", "Nginx", "Web server", "Soft 404", "SPA"]
 ---
 
