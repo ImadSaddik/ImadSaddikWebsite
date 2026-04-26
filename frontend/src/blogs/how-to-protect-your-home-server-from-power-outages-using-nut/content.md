@@ -75,3 +75,21 @@ This tells me that even if every device is running at 100% capacity, I have a **
 ::: info
 By feeding these exact voltage limits into the NUT driver later, the software will translate the raw voltage into a human-readable 0% to 100% battery capacity scale on your dashboards.
 :::
+
+## The physical network topology
+
+To automate a shutdown sequence across multiple machines, both your power and network cables must be strategically wired. Software cannot send an emergency signal if the physical network is dead.
+
+The following devices are plugged directly into the battery backup sockets of the nJoy UPS:
+
+- **Mini PC:** the primary server and UPS manager.
+- **Gaming laptop:** the secondary client machine.
+- **Network switch**
+
+My main internet router is located too far away to be plugged into the UPS. Because of this, it will immediately lose power during a blackout, taking the internet down with it. However, because the local network switch is on the battery backup, the internal network stays alive.
+
+This maintains a stable local link. When the battery reaches a critical level, the mini PC can successfully broadcast an emergency shutdown command through the switch to the gaming laptop. Only after the secondary devices are safe does the mini PC trigger its own power-down sequence.
+
+::: image ./04_ups_topology.png "Wiring diagram showing the power, data, and communication links"
+This topology highlights the strategic wiring needed for a reliable NUT setup. The **black lines** represent raw wall power, while **blue lines** indicate devices protected by the UPS battery backup. Local data flows through **green Ethernet cables**, and the **orange USB link** allows the mini PC (primary) to monitor the hardware state directly.
+:::
