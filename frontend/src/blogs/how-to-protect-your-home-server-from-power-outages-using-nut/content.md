@@ -93,3 +93,27 @@ This maintains a stable local link. When the battery reaches a critical level, t
 ::: image ./04_ups_topology.png "Wiring diagram showing the power, data, and communication links"
 This topology highlights the strategic wiring needed for a reliable NUT setup. The **black lines** represent raw wall power, while **blue lines** indicate devices protected by the UPS battery backup. Local data flows through **green Ethernet cables**, and the **orange USB link** allows the mini PC (primary) to monitor the hardware state directly.
 :::
+
+## The NUT architecture explained
+
+Configuring Network UPS Tools (NUT) can feel overwhelming because the settings are split across several different files. To make sense of them, it helps to visualize the system as a three-layer software stack sitting on top of your physical hardware.
+
+::: image ./05_nut_architecture.png "The three layers of the NUT software architecture"
+By splitting the driver, server, and monitor into separate layers, NUT can manage multiple UPS units and coordinate shutdowns across an entire network of machines.
+:::
+
+### The driver layer
+
+The driver is the bottom layer and the only part of the software that physically talks to your hardware. It speaks the specialized language of the UPS (such as the Megatec Qx protocol) over the USB cable and translates raw electrical signals into readable data points. You configure this in `ups.conf`.
+
+### The data server layer
+
+The data server (`upsd`) sits in the middle as the central information hub. When it starts up, it reads `ups.conf` to identify which UPS units it needs to manage. Once running, it maintains a **local cache** of the current state so that clients can receive live metrics instantly.
+
+This layer also handles security and network connectivity, which you configure in `upsd.conf` (for server settings) and `upsd.users` (for user credentials). It also handles two-way communication, allowing clients to send administrative commands back to the UPS.
+
+### The monitor layer
+
+The monitor (`upsmon`) is the top layer and acts as the "brain" of the system. It constantly listens to the data server for status updates. It can run as a **primary** monitor (on the server connected to the UPS) or a **secondary** monitor (on other devices like your laptop).
+
+When it detects a critical state (both "on battery" and "low battery"), it coordinates a synchronized shutdown, ensuring secondary devices power off safely before the primary server pulls the plug. You configure this in `upsmon.conf`.
