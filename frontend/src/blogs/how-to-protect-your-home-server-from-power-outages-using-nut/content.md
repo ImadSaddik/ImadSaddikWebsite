@@ -280,3 +280,73 @@ ups.status: OL
 ::: tip
 You can also run `upsc njoy` without any filters to see every single data point your UPS reports, including load percentage, input frequency, and firmware versions.
 :::
+
+## Automating the shutdown sequence
+
+The final step in this software setup is configuring the monitor (`upsmon`). This background watcher is the "executioner" of the NUT stack: it reads the live metrics from the data server and triggers a safe shutdown when the battery reaches its critical limit.
+
+### Configuring the primary monitor
+
+On your primary server, open the monitor configuration file:
+
+```bash
+sudo nano /etc/nut/upsmon.conf
+```
+
+First, tell the monitor to watch the local UPS using the credentials you created earlier. Add this line to the bottom of the file:
+
+```text
+MONITOR njoy@localhost 1 admin your_strong_password_here primary
+```
+
+Let's break down this command:
+
+- `njoy@localhost`: The name of the UPS and the location of the data server.
+- `1`: This tells the software how many power supplies your machine has plugged into the UPS. Since a standard mini PC or laptop only has one power supply, this is always 1.
+- `primary`: The operational role. This tells the server it is in charge of the UPS and must wait for secondary devices to disconnect before shutting itself down.
+
+Next, ensure the `SHUTDOWNCMD` is defined to tell the system how to power off. Find the line and make sure it looks like this:
+
+```text
+SHUTDOWNCMD "/sbin/shutdown -h +0"
+```
+
+Save and exit. Finally, enable the services to run on boot and apply your changes by restarting the NUT stack:
+
+```bash
+sudo systemctl enable nut-server nut-monitor
+sudo systemctl restart nut-server nut-monitor
+```
+
+### Configuring the secondary monitor
+
+Now, perform the same setup on your secondary machine. Since your gaming laptop only needs to listen to the network, install just the client package:
+
+```bash
+sudo nala install nut-client -y
+```
+
+Set the operational role to `netclient` in `/etc/nut/nut.conf`:
+
+```text
+MODE=netclient
+```
+
+Then, open `/etc/nut/upsmon.conf` and add the monitor line using the primary server's static IP address and the `secondary` role:
+
+```text
+MONITOR njoy@192.168.1.14 1 admin your_strong_password_here secondary
+```
+
+Make sure the `SHUTDOWNCMD` line is also uncommented and set correctly, just like on the primary server. Save the file, then enable and restart the monitor service on the laptop:
+
+```bash
+sudo systemctl enable nut-monitor
+sudo systemctl restart nut-monitor
+```
+
+::: info
+The monitor is smart. It does not panic and shut down your machines the second the power flickers. Instead, it patiently waits until the UPS broadcasts both the `OB` (On Battery) and `LB` (Low Battery) flags at the same time.
+
+Once the battery voltage physically drops to the 21.0V critical limit we configured earlier, the secondary monitor shuts down the laptop and notifies the primary server that it has safely disconnected. Only then does the primary server trigger its own final shutdown sequence.
+:::
