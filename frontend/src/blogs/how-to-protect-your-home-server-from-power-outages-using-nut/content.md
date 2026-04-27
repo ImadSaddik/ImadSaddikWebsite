@@ -159,3 +159,124 @@ sudo udevadm control --reload-rules && sudo udevadm trigger
 ::: tip
 After running these commands, physically unplug the UPS USB cable, wait a few seconds, and plug it back in to ensure the kernel registers the new permissions correctly.
 :::
+
+## Configuring the primary server
+
+With the physical wiring and security permissions in place, you can now configure the software stack. Begin by installing the Network UPS Tools package on your primary server: the machine physically connected to the UPS via USB. In my case, this is the mini PC:
+
+```bash
+sudo nala install nut -y
+```
+
+### Setting the server mode
+
+Because the primary server will broadcast UPS data to other devices on your network, it must be configured as a network server. Open the global configuration file to define the operational role of the NUT stack:
+
+```bash
+sudo nano /etc/nut/nut.conf
+```
+
+Find the `MODE` line and change it to `netserver`:
+
+```text
+MODE=netserver
+```
+
+Setting the mode to `netserver` instructs NUT to start all three software layers: the driver, the data server, and the monitor. Unlike `standalone` mode, which is restricted to the local machine, `netserver` allows the system to share its UPS data with other devices across your network.
+
+### Defining the UPS driver
+
+Next, you need to tell NUT exactly which driver to use and how to calculate the battery percentage using the limits we found earlier. Open the UPS definition file:
+
+```bash
+sudo nano /etc/nut/ups.conf
+```
+
+Paste the following block at the bottom. The `nutdrv_qx` driver handles the communication protocol used by the nJoy unit. Notice how we use the `high` and `low` voltage limits to force the driver to calculate the battery charge:
+
+```text
+[njoy]
+    driver = nutdrv_qx
+    port = auto
+    desc = "nJoy Horus Plus 2000"
+    vendorid = "0665"
+    productid = "5161"
+    default.battery.voltage.high = 27.4
+    default.battery.voltage.low = 21.0
+```
+
+By providing these limits, you are enabling a feature called [battery charge guesstimation](https://networkupstools.org/docs/man/blazer_ser.html#_battery_charge_guesstimation). Since the UPS hardware does not calculate its own percentage, `NUT` uses a linear formula to guess the charge based on the live voltage:
+
+$$
+battery.charge = \frac{current.voltage - voltage.low}{voltage.high - voltage.low} \times 100
+$$
+
+This simple math transforms a raw number like "24.2V" into a meaningful "50%" on your dashboard. While the man page warns that this is a "guess" (since voltage can fluctuate under heavy load), it is incredibly accurate for determining when a battery is reaching its critical empty state.
+
+### Opening the network gates
+
+By default, the data server only listens to the local machine. To allow secondary devices or dashboard widgets to read the data, you must open the NUT port (3493) to your local network. Open the server configuration:
+
+```bash
+sudo nano /etc/nut/upsd.conf
+```
+
+Add this line to the bottom of the file:
+
+```text
+LISTEN 0.0.0.0 3493
+```
+
+The `0.0.0.0` address tells the server to listen on **all available network interfaces**. This ensures that the data is accessible not just to the local machine, but also to other devices or dashboard widgets on your local network. Since this opens the service to the network, you will secure it with a password in the next step.
+
+### Setting up authentication
+
+To prevent unauthorized devices from triggering shutdown commands, you must create a secure user. Open the user file:
+
+```bash
+sudo nano /etc/nut/upsd.users
+```
+
+Paste this block at the bottom. The `primary` tag gives this user the authority to manage the master shutdown sequence:
+
+```text
+[admin]
+    password = your_strong_password_here
+    upsmon primary
+```
+
+::: tip
+You can generate a strong, random password directly in your terminal by running:
+
+```bash
+openssl rand -hex 16
+```
+
+Use the output as your password in `upsd.users` and keep it safe, as you will need it again when configuring your monitoring clients.
+:::
+
+### Verifying the data server
+
+Restart the NUT services to apply your changes:
+
+```bash
+sudo systemctl restart nut-server
+```
+
+To verify that the server is successfully talking to your hardware and calculating the percentage, use the `upsc` client to filter for the most important metrics:
+
+```bash
+upsc njoy | grep -E "status|voltage|charge"
+```
+
+If everything is correct, you should see an output similar to this:
+
+```output
+battery.charge: 97
+battery.voltage: 27.18
+ups.status: OL
+```
+
+::: tip
+You can also run `upsc njoy` without any filters to see every single data point your UPS reports, including load percentage, input frequency, and firmware versions.
+:::
