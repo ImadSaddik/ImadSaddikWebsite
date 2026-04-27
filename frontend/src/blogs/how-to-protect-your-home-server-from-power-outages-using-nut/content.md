@@ -114,6 +114,48 @@ This layer also handles security and network connectivity, which you configure i
 
 ### The monitor layer
 
-The monitor (`upsmon`) is the top layer and acts as the "brain" of the system. It constantly listens to the data server for status updates. It can run as a **primary** monitor (on the server connected to the UPS) or a **secondary** monitor (on other devices like your laptop).
+The monitor (`upsmon`) is the top layer and acts as the "brain" of the system. It constantly listens to the data server for status updates. It can run as a **primary** monitor (on the server connected to the UPS) or a **secondary** monitor (on other devices like your laptop). When it detects a critical state (both "on battery" and "low battery"), it coordinates a synchronized shutdown, ensuring secondary devices power off safely before the primary server pulls the plug. You configure this in `upsmon.conf`.
 
-When it detects a critical state (both "on battery" and "low battery"), it coordinates a synchronized shutdown, ensuring secondary devices power off safely before the primary server pulls the plug. You configure this in `upsmon.conf`.
+## Bypassing Ubuntu security
+
+By default, Ubuntu restricts direct access to physical USB ports for security reasons. Because the NUT service drops its root privileges and runs as a restricted `nut` system user, it will be blocked from reading the UPS data cable. To fix this, you must create a specific `udev` rule that grants the `nut` group permission to access the hardware.
+
+### Finding the hardware ID
+
+First, plug the UPS into your server via USB and use the `lsusb` command to identify the device signature:
+
+```bash
+lsusb
+```
+
+Look for the UPS in the output list. For the nJoy Horus Plus 2000, it usually appears as a Cypress Semiconductor chip:
+
+```output
+Bus 001 Device 002: ID 0665:5161 Cypress Semiconductor USB to Serial
+```
+
+In this example, the **vendor ID** is `0665` and the **product ID** is `5161`. Note these numbers down, as you will need them for the next step.
+
+### Creating a custom udev rule
+
+Now, create a new rule file that tells the Linux kernel to grant the `nut` group access to this specific device:
+
+```bash
+sudo nano /etc/udev/rules.d/99-nut-ups.rules
+```
+
+Paste the following line into the file. Make sure to replace the `idVendor` and `idProduct` values if your UPS uses different IDs:
+
+```text
+SUBSYSTEM=="usb", ATTRS{idVendor}=="0665", ATTRS{idProduct}=="5161", MODE="0664", GROUP="nut"
+```
+
+Save the file and exit. To apply the new permissions without rebooting your server, reload the `udev` rules and trigger them manually:
+
+```bash
+sudo udevadm control --reload-rules && sudo udevadm trigger
+```
+
+::: tip
+After running these commands, physically unplug the UPS USB cable, wait a few seconds, and plug it back in to ensure the kernel registers the new permissions correctly.
+:::
