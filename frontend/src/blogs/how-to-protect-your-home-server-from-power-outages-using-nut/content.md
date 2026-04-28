@@ -364,3 +364,52 @@ Without any manual configuration, a new UPS section will appear in your Netdata 
 ::: image ./06_netdata_ups.png "Historical UPS metrics automatically discovered by Netdata"
 Find the UPS section in the Netdata sidebar to view the live metrics.
 :::
+
+### PeaNUT
+
+While the data server broadcasts metrics over a raw TCP socket, many dashboard tools (like [Homepage](https://github.com/gethomepage/homepage)) require a modern JSON API to display information.
+
+You can bridge this gap using [PeaNUT](https://github.com/Brandawg93/PeaNUT), a lightweight container that translates NUT metrics into a clean API.
+
+Create a directory for your PeaNUT configuration and set up a `docker-compose.yml` file with the following content:
+
+```yaml
+services:
+  peanut:
+    image: brandawg93/peanut:latest
+    container_name: PeaNUT
+    restart: unless-stopped
+    volumes:
+      - ./config:/config
+    ports:
+      - "8082:8080"
+    environment:
+      - WEB_PORT=8080
+      - AUTH_DISABLED=true
+```
+
+Authentication is disabled here so that Homepage can read the data without needing to manage separate credentials. Since this container is only accessible on your local network, it does not pose a security risk.
+
+Start the container in the background:
+
+```bash
+docker compose up -d
+```
+
+Once the container is running, access the web interface at `http://your-server-ip:8082`. Go to the settings page and add a new NUT server connection by providing the following details:
+
+- **Name:** nJoy Horus Plus 2000
+- **Server address:** your-server-ip
+- **Port:** 3493
+- **Username:** admin
+- **Password:** your_strong_password_here
+
+::: image ./07_peanut_setup.png "Connecting PeaNUT to the NUT data server"
+Enter the connection details using the admin credentials you created in the authentication step.
+:::
+
+Once connected, PeaNUT will automatically begin polling your UPS and displaying the data in its clean, modern interface.
+
+::: image ./08_peanut_dashboard.png "The PeaNUT web dashboard displaying live metrics"
+PeaNUT displays the status of your UPS, battery charge, and load. Click on the "Details" button to see every single metric your UPS reports.
+:::
