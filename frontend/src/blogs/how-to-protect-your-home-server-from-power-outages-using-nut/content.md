@@ -350,3 +350,17 @@ The monitor is smart. It does not panic and shut down your machines the second t
 
 Once the battery voltage physically drops to the 21.0V critical limit we configured earlier, the secondary monitor shuts down the laptop and notifies the primary server that it has safely disconnected. Only then does the primary server trigger its own final shutdown sequence.
 :::
+
+## Visualizing the data
+
+With your UPS data now broadcasting over the network, you can integrate it into your existing monitoring tools for real-time visibility and historical tracking.
+
+### Netdata
+
+If you use [Netdata](https://www.netdata.cloud/) for your home lab, it likely already knows about your UPS. Because Netdata's auto-discovery engine constantly scans the default NUT port (3493), it will automatically detect the `nut-server` the moment it starts.
+
+Without any manual configuration, a new UPS section will appear in your Netdata sidebar, giving you detailed charts for input voltage, battery load, and more.
+
+::: image ./06_netdata_ups.png "Historical UPS metrics automatically discovered by Netdata"
+Find the UPS section in the Netdata sidebar to view the live metrics.
+:::
