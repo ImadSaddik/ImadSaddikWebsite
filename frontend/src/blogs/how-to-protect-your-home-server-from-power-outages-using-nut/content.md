@@ -143,11 +143,21 @@ In this example, the **vendor ID** is `0665` and the **product ID** is `5161`. N
 
 ### Creating a custom udev rule
 
+Begin by installing the Network UPS Tools package on your primary server: the machine physically connected to the UPS via USB. In my case, this is the mini PC:
+
+```bash
+sudo apt install nut -y
+```
+
 Now, create a new rule file that tells the Linux kernel to grant the `nut` group access to this specific device:
 
 ```bash
 sudo nano /etc/udev/rules.d/99-nut-ups.rules
 ```
+
+::: info
+The `nut` group is automatically created when you install the NUT package.
+:::
 
 Paste the following line into the file. Make sure to replace the `idVendor` and `idProduct` values if your UPS uses different IDs:
 
@@ -167,11 +177,7 @@ After running these commands, physically unplug the UPS USB cable, wait a few se
 
 ## Configuring the primary server
 
-With the physical wiring and security permissions in place, you can now configure the software stack. Begin by installing the Network UPS Tools package on your primary server: the machine physically connected to the UPS via USB. In my case, this is the mini PC:
-
-```bash
-sudo apt install nut -y
-```
+With the physical wiring and security permissions in place, you can now configure the software stack.
 
 ### Setting the server mode
 
