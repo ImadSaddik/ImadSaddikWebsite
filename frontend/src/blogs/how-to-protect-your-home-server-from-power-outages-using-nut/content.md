@@ -169,7 +169,7 @@ After running these commands, physically unplug the UPS USB cable, wait a few se
 With the physical wiring and security permissions in place, you can now configure the software stack. Begin by installing the Network UPS Tools package on your primary server: the machine physically connected to the UPS via USB. In my case, this is the mini PC:
 
 ```bash
-sudo nala install nut -y
+sudo apt install nut -y
 ```
 
 ### Setting the server mode
@@ -327,7 +327,7 @@ sudo systemctl restart nut-server nut-monitor
 Now, perform the same setup on your secondary machine. Since your gaming laptop only needs to listen to the network, install just the client package:
 
 ```bash
-sudo nala install nut-client -y
+sudo apt install nut-client -y
 ```
 
 Set the operational role to `netclient` in `/etc/nut/nut.conf`:
