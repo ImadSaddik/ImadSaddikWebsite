@@ -414,7 +414,7 @@ Once connected, PeaNUT will automatically begin polling your UPS and displaying 
 PeaNUT displays the status of your UPS, battery charge, and load. Click on the "Details" button to see every single metric your UPS reports.
 :::
 
-### Homepage: the live dashboard
+### Homepage
 
 Now that PeaNUT is serving an API, you can add a live UPS widget to your Homepage dashboard. Add the following service definition to your `services.yaml`:
 
