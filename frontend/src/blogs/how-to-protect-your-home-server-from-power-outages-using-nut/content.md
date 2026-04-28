@@ -413,3 +413,41 @@ Once connected, PeaNUT will automatically begin polling your UPS and displaying 
 ::: image ./08_peanut_dashboard.png "The PeaNUT web dashboard displaying live metrics"
 PeaNUT displays the status of your UPS, battery charge, and load. Click on the "Details" button to see every single metric your UPS reports.
 :::
+
+### Homepage: the live dashboard
+
+Now that PeaNUT is serving an API, you can add a live UPS widget to your Homepage dashboard. Add the following service definition to your `services.yaml`:
+
+```yaml
+- Infrastructure:
+    - nJoy UPS:
+        icon: ups.png
+        description: Horus Plus 2000
+        href: http://your-server-ip:8082
+        widget:
+          type: customapi
+          url: http://your-server-ip:8082/api/v1/devices/njoy
+          mappings:
+            - field: battery.charge
+              label: Battery
+              format: percent
+            - field: ups.load
+              label: Load
+              format: percent
+            - field: ups.status
+              label: Status
+              format: text
+              remap:
+                - value: OL
+                  to: Online
+                - value: OB
+                  to: On Battery
+                - value: LB
+                  to: Low Battery
+```
+
+Save the file. Homepage updates automatically without needing a restart. If you now go to your Homepage dashboard, you will see your new UPS widget displaying the live battery capacity, current load, and connection status.
+
+::: image ./09_homepage_widget.png "A custom UPS widget in Homepage showing battery percentage, load, and status"
+This widget uses the PeaNUT API to display real-time UPS metrics directly on your Homepage dashboard.
+:::
