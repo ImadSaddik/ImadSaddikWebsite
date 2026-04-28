@@ -213,7 +213,7 @@ Paste the following block at the bottom. The `nutdrv_qx` driver handles the comm
 By providing these limits, you are enabling a feature called [battery charge guesstimation](https://networkupstools.org/docs/man/blazer_ser.html#_battery_charge_guesstimation). Since the UPS hardware does not calculate its own percentage, `NUT` uses a linear formula to guess the charge based on the live voltage:
 
 $$
-battery.charge = \frac{current.voltage - voltage.low}{voltage.high - voltage.low} \times 100
+\text{battery.charge} = \frac{\text{current.voltage} - \text{voltage.low}}{\text{voltage.high} - \text{voltage.low}} \times 100
 $$
 
 This simple math transforms a raw number like "24.2V" into a meaningful "50%" on your dashboard. While the man page warns that this is a "guess" (since voltage can fluctuate under heavy load), it is incredibly accurate for determining when a battery is reaching its critical empty state.
