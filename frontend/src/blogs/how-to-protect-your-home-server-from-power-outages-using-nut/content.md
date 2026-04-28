@@ -118,7 +118,9 @@ This layer also handles security and network connectivity, which you configure i
 
 ### The monitor layer
 
-The monitor (`upsmon`) is the top layer and acts as the "brain" of the system. It constantly listens to the data server for status updates. It can run as a **primary** monitor (on the server connected to the UPS) or a **secondary** monitor (on other devices like your laptop). When it detects a critical state (both "on battery" and "low battery"), it coordinates a synchronized shutdown, ensuring secondary devices power off safely before the primary server pulls the plug. You configure this in `upsmon.conf`.
+The monitor (`upsmon`) is the top layer and acts as the "brain" of the system. It constantly listens to the data server for status updates. It can run as a **primary** monitor (on the server connected to the UPS) or a **secondary** monitor (on other devices like your laptop).
+
+When it detects a critical state (both "on battery" and "low battery"), it coordinates a synchronized shutdown, ensuring secondary devices power off safely before the primary server pulls the plug. You configure this in `upsmon.conf`.
 
 ## Bypassing Ubuntu security
 
