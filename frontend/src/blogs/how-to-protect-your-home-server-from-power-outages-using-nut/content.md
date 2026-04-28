@@ -340,7 +340,7 @@ MODE=netclient
 Then, open `/etc/nut/upsmon.conf` and add the monitor line using the primary server's static IP address and the `secondary` role:
 
 ```text
-MONITOR njoy@192.168.1.14 1 admin your_strong_password_here secondary
+MONITOR njoy@your-server-ip 1 admin your_strong_password_here secondary
 ```
 
 Make sure the `SHUTDOWNCMD` line is also uncommented and set correctly, just like on the primary server. Save the file, then enable and restart the monitor service on the laptop:
