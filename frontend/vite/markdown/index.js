@@ -11,6 +11,7 @@ import { tableTransformer } from "./transformers/table.js";
 import { inlineIconTransformer } from "./transformers/inlineIcon.js";
 import { fontAwesomeTransformer } from "./transformers/fontAwesome.js";
 import { superscriptTransformer } from "./transformers/superscript.js";
+import { mathTransformer } from "./transformers/math.js";
 
 export function getMarkdownTransformers() {
   return [
@@ -27,5 +28,6 @@ export function getMarkdownTransformers() {
     inlineIconTransformer,
     fontAwesomeTransformer,
     superscriptTransformer,
+    mathTransformer,
   ];
 }
