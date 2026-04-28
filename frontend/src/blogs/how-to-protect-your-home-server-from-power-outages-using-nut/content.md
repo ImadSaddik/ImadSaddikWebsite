@@ -21,7 +21,7 @@ While this guide features the **nJoy Horus Plus 2000**, the logic and configurat
 
 Before configuring the software, you need to understand the hardware that powers it. For this setup, the infrastructure is backed by an [nJoy Horus Plus 2000](https://www.njoy.global/product/horus-plus-2000/PWUP-LI200H1-AZ01B).
 
-This is a [Line Interactive UPS](https://www.fs.com/blog/comparison-of-ups-topologies-line-interactive-vs-online-vs-offline-3538.html). This means it actively regulates the incoming AC voltage to correct minor power fluctuations without switching to the battery, which extends the lifespan of the unit. It has a capacity of 2000 VA or 1200 W, which provides plenty of headroom for a mini PC, a network switch, and a laptop.
+This is a [line interactive UPS](https://www.fs.com/blog/comparison-of-ups-topologies-line-interactive-vs-online-vs-offline-3538.html). This means it actively regulates the incoming AC voltage to correct minor power fluctuations without switching to the battery, which extends the lifespan of the unit. It has a capacity of 2000 VA or 1200 W, which provides plenty of headroom for a mini PC, a network switch, and a laptop.
 
 If you open the case, you will find two GP09122L batteries inside.
 
@@ -41,10 +41,10 @@ To fix this, you need to find the upper and lower voltage limits of your batteri
 
 #### Finding the maximum voltage
 
-Look for the **Float use** or **Standby use** charge voltage. For the GP09122 batteries, the datasheet lists a float charge of 13.5V to 13.8V. Since the UPS has two batteries in series, we multiply this by two, giving us a range of 27.0V to 27.6V. A value of `27.4V` is a safe upper limit.
+Look for the **float use** or **standby use** charge voltage. For the GP09122 batteries, the datasheet lists a float charge of 13.5V to 13.8V. Since the UPS has two batteries in series, we multiply this by two, giving us a range of 27.0V to 27.6V. A value of `27.4V` is a safe upper limit.
 
 ::: image ./01_float_voltage.png "GP09122 battery datasheet showing float charge voltage"
-Find the 'Float use' voltage in the datasheet to determine the maximum voltage limit for your NUT configuration.
+Find the 'float use' voltage in the datasheet to determine the maximum voltage limit for your NUT configuration.
 :::
 
 #### Finding the minimum voltage
