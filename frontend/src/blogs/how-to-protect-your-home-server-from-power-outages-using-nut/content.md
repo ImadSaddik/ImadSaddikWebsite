@@ -13,6 +13,10 @@ To protect against this, you need an [Uninterruptible Power Supply (UPS)](https:
 
 To fix this, you must build a communication bridge between your UPS and your server. In this article, you will learn how to use [Network UPS Tools (NUT)](https://networkupstools.org/) to continuously monitor your battery metrics and automatically trigger a graceful shutdown across multiple devices before the backup power runs out.
 
+::: tip
+While this guide features the **nJoy Horus Plus 2000**, the logic and configuration steps are nearly identical for most line-interactive UPS units. If you are using a different brand, you will only need to adjust the driver name and the battery voltage limits for your specific hardware.
+:::
+
 ## Understanding the hardware
 
 Before configuring the software, you need to understand the hardware that powers it. For this setup, the infrastructure is backed by an [nJoy Horus Plus 2000](https://www.njoy.global/product/horus-plus-2000/PWUP-LI200H1-AZ01B).
