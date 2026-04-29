@@ -21,12 +21,18 @@ importers:
       '@shikijs/transformers':
         specifier: ^3.22.0
         version: 3.22.0
+      '@vscode/markdown-it-katex':
+        specifier: ^1.1.2
+        version: 1.1.2
       '@vueuse/core':
         specifier: ^14.2.1
         version: 14.2.1(vue@3.5.29)
       axios:
         specifier: ^1.15.0
         version: 1.15.0
+      katex:
+        specifier: ^0.16.45
+        version: 0.16.45
       shiki:
         specifier: ^4.0.2
         version: 4.0.2
@@ -745,6 +751,9 @@ packages:
   '@vitest/utils@4.0.14':
     resolution: {integrity: sha512-hLqXZKAWNg8pI+SQXyXxWCTOpA3MvsqcbVeNgSi8x/CSN2wi26dSzn1wrOhmCmFjEvN9p8/kLFRHa6PI8jHazw==}
 
+  '@vscode/markdown-it-katex@1.1.2':
+    resolution: {integrity: sha512-+4IIv5PgrmhKvW/3LpkpkGg257OViEhXkOOgCyj5KMsjsOfnRXkni8XAuuF9Ui5p3B8WnUovlDXAQNb8RJ/RaQ==}
+
   '@vue-macros/common@3.1.2':
     resolution: {integrity: sha512-h9t4ArDdniO9ekYHAD95t9AZcAbb19lEGK+26iAjUODOIJKmObDNBSe4+6ELQAA3vtYiFPPBtHh7+cQCKi3Dng==}
     engines: {node: '>=20.19.0'}
@@ -963,6 +972,10 @@ packages:
 
   commander@2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
+
+  commander@8.3.0:
+    resolution: {integrity: sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==}
+    engines: {node: '>= 12'}
 
   confbox@0.1.8:
     resolution: {integrity: sha512-RMtmw0iFkeR4YV+fUOSucriAQNb9g8zFR52MWCtl+cCZOFRNL6zeB395vPzFhEjjn4fMxXudmELnl/KF/WrK6w==}
@@ -1488,6 +1501,10 @@ packages:
   json5@2.2.3:
     resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}
     engines: {node: '>=6'}
+    hasBin: true
+
+  katex@0.16.45:
+    resolution: {integrity: sha512-pQpZbdBu7wCTmQUh7ufPmLr0pFoObnGUoL/yhtwJDgmmQpbkg/0HSVti25Fu4rmd1oCR6NGWe9vqTWuWv3GcNA==}
     hasBin: true
 
   keyv@4.5.4:
@@ -2767,6 +2784,10 @@ snapshots:
       '@vitest/pretty-format': 4.0.14
       tinyrainbow: 3.0.3
 
+  '@vscode/markdown-it-katex@1.1.2':
+    dependencies:
+      katex: 0.16.45
+
   '@vue-macros/common@3.1.2(vue@3.5.29)':
     dependencies:
       '@vue/compiler-sfc': 3.5.29
@@ -3007,6 +3028,8 @@ snapshots:
 
   commander@2.20.3:
     optional: true
+
+  commander@8.3.0: {}
 
   confbox@0.1.8: {}
 
@@ -3542,6 +3565,10 @@ snapshots:
   json-stable-stringify-without-jsonify@1.0.1: {}
 
   json5@2.2.3: {}
+
+  katex@0.16.45:
+    dependencies:
+      commander: 8.3.0
 
   keyv@4.5.4:
     dependencies:
