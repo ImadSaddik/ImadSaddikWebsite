@@ -13,7 +13,7 @@ It is much more efficient to catch these errors locally on your laptop before a 
 
 In this article, you will learn how to enforce code quality at the source using the [pre-commit](https://pre-commit.com/) framework. This tool automatically runs a series of checks on your codebase, preventing messy formatting, broken files, or sensitive secrets from making it into your permanent Git history.
 
-## The pre-commit framework
+## How pre-commit works
 
 Git has a built-in feature called [hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks). These are hidden scripts that run automatically when you perform actions like committing or pushing code. However, writing and managing custom shell scripts for every security and quality check in your stack is difficult to maintain.
 
@@ -21,7 +21,7 @@ This is where the pre-commit framework comes in. Instead of writing complex bash
 
 If your code has syntax errors, contains unresolved merge conflicts, or attempts to upload a 50MB file by mistake, the hook blocks the commit entirely. This forces you to fix the issues locally.
 
-## Configure the hooks
+## Configuring the hooks
 
 Create a file named `.pre-commit-config.yaml` in the root directory of your project. For this tutorial, you will build a configuration that targets standard repository maintenance, a Python backend, and a Vue.js frontend.
 
@@ -123,7 +123,7 @@ This section uses a few specific strategies:
 - **Additional dependencies**: Because ESLint needs to understand Vue's custom `.vue` file structure, you must explicitly provide plugins like `eslint-plugin-vue` so the hook runs correctly in its isolated environment.
 - **The local repository**: Running Prettier as a `local` hook uses your existing Node.js setup, which is faster than downloading a separate copy. It executes `npx prettier --write` on your frontend files.
 
-## Install and test the hooks
+## Activation and testing
 
 Your configuration file is complete. Now you need to install the pre-commit framework so it can link those hooks to your Git repository.
 
