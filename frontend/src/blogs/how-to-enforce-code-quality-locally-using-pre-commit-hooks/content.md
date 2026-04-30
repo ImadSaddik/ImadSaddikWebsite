@@ -54,3 +54,32 @@ Here is what these baseline hooks do:
 ::: tip
 The pre-commit team maintains several other useful hooks. You can find the full list of available options in the [official repository](https://github.com/pre-commit/pre-commit-hooks#hooks-available).
 :::
+
+### Python
+
+Now, let's configure the backend hooks. We will use a tool called [Ruff](https://docs.astral.sh/ruff/). It is a modern and very fast Python linter and formatter that replaces older tools like Flake8, Black, and isort.
+
+Add this block to your configuration file:
+
+```yaml
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: "v0.15.12"
+  hooks:
+    - id: ruff
+      name: ruff (lint)
+      args: [--fix]
+      files: ^backend/
+    - id: ruff-format
+      name: ruff (format)
+      files: ^backend/
+```
+
+Here is what this does:
+
+- The `ruff` hook acts as a linter. By passing the `--fix` argument, you tell Ruff to actively fix the errors it knows how to solve, like removing unused imports.
+- The `ruff-format` hook enforces a strict visual style, making sure your spacing and line lengths are perfectly consistent.
+- The `files: ^backend/` line restricts these tools so they only run on files inside your backend folder.
+
+::: tip
+The `rev` value in the configuration specifies the exact version of the tool you are installing. It is always a good practice to check the respective GitHub repositories and use the latest stable releases instead of strictly copying the version numbers shown here.
+:::
