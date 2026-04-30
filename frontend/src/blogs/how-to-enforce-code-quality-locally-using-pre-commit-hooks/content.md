@@ -83,3 +83,42 @@ Here is what this does:
 ::: tip
 The `rev` value in the configuration specifies the exact version of the tool you are installing. It is always a good practice to check the respective GitHub repositories and use the latest stable releases instead of strictly copying the version numbers shown here.
 :::
+
+### JavaScript
+
+Next, you need to handle the frontend. You will use **ESLint** to catch logic bugs in your JavaScript and Vue files, and **Prettier** to handle the visual formatting.
+
+Append this configuration to the same YAML file:
+
+```yaml
+- repo: https://github.com/pre-commit/mirrors-eslint
+  rev: "v9.39.1"
+  hooks:
+    - id: eslint
+      name: eslint (frontend)
+      files: ^frontend/.*\.(js|vue)$
+      types: [file]
+      args: [--fix, --config, frontend/eslint.config.js]
+      additional_dependencies:
+        - eslint@9.39.1
+        - eslint-plugin-vue@10.6.2
+        - eslint-config-prettier@10.1.8
+        - globals@16.5.0
+        - vue-eslint-parser@10.2.0
+
+- repo: local
+  hooks:
+    - id: prettier-frontend
+      name: prettier (frontend)
+      entry: npx prettier --write
+      language: node
+      language_version: system
+      files: ^frontend/.*\.(js|vue|css|scss|html|json)$
+      types_or: [javascript, vue, css, scss, html, json]
+```
+
+This section uses a few specific strategies:
+
+- **Targeted arguments**: The ESLint hook uses the `--config` argument to point directly to your frontend's specific ESLint configuration file.
+- **Additional dependencies**: Because ESLint needs to understand Vue's custom `.vue` file structure, you must explicitly provide plugins like `eslint-plugin-vue` so the hook runs correctly in its isolated environment.
+- **The local repository**: Running Prettier as a `local` hook uses your existing Node.js setup, which is faster than downloading a separate copy. It executes `npx prettier --write` on your frontend files.
