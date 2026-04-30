@@ -34,7 +34,7 @@ Add this block to your configuration file:
 ```yaml
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: "v4.6.0"
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
