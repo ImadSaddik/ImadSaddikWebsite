@@ -183,3 +183,17 @@ prettier (frontend)................................Passed
 ```
 
 If a check fails, the framework blocks the commit. It will often fix the formatting automatically for you, but you still need to stage the new changes (`git add .`) and run the commit command again.
+
+## The emergency bypass
+
+Pre-commit hooks are strict, which keeps your codebase clean. But there might be a rare emergency where you absolutely must commit your code immediately, even if a linter is failing.
+
+You can bypass the hooks entirely by adding the `--no-verify` flag to your commit command.
+
+```bash
+git commit -m "WIP: saving a broken state" --no-verify
+```
+
+::: warning
+Use this flag sparingly. Bypassing your local checks means those errors will be caught later by your cloud CI/CD pipeline, forcing you to fix them anyway.
+:::
