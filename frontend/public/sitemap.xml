@@ -8,25 +8,25 @@
 >
     <url>
         <loc>https://imadsaddik.com/</loc>
-        <lastmod>2026-04-30T19:06:28.646Z</lastmod>
+        <lastmod>2026-04-30T19:10:06.902Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/about-me</loc>
-        <lastmod>2026-04-30T19:06:28.646Z</lastmod>
+        <lastmod>2026-04-30T19:10:06.902Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/hire-me</loc>
-        <lastmod>2026-04-30T19:06:28.646Z</lastmod>
+        <lastmod>2026-04-30T19:10:06.902Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/resume</loc>
-        <lastmod>2026-04-30T19:06:28.646Z</lastmod>
+        <lastmod>2026-04-30T19:10:06.902Z</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
@@ -74,7 +74,7 @@
     </url>
     <url>
         <loc>https://imadsaddik.com/blogs/how-to-enforce-code-quality-locally-using-pre-commit-hooks</loc>
-        <lastmod>2026-04-30T19:05:19.849Z</lastmod>
+        <lastmod>2026-04-30T19:10:05.783Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>

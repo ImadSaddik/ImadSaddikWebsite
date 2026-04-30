@@ -11,7 +11,7 @@ When you push code to a repository, CI/CD pipelines run automated checks to find
 
 It is much more efficient to catch these errors locally on your laptop before a commit is even created.
 
-In this article, you will learn how to enforce code quality at the source using the [pre-commit](https://pre-commit.com/) framework. This tool automatically runs a series of checks on your codebase, ensuring that messy formatting, broken files, or sensitive secrets never make it into your permanent Git history.
+In this article, you will learn how to enforce code quality at the source using the [pre-commit](https://pre-commit.com/) framework. This tool automatically runs a series of checks on your codebase, preventing messy formatting, broken files, or sensitive secrets from making it into your permanent Git history.
 
 ## The pre-commit framework
 
@@ -23,7 +23,7 @@ If your code has syntax errors, contains unresolved merge conflicts, or attempts
 
 ## Configure the hooks
 
-Create a file named `.pre-commit-config.yaml` in the root directory of your project. For this tutorial, you will build a configuration that covers standard repository maintenance, a Python backend, and a Vue.js frontend.
+Create a file named `.pre-commit-config.yaml` in the root directory of your project. For this tutorial, you will build a configuration that targets standard repository maintenance, a Python backend, and a Vue.js frontend.
 
 ### Standard repository checks
 
@@ -135,7 +135,7 @@ If you are using Python's venv, here is how to create a new virtual environment:
 python3 -m venv venv
 ```
 
-Next, activate it.
+Next, activate the environment.
 
 ```bash
 source venv/bin/activate
