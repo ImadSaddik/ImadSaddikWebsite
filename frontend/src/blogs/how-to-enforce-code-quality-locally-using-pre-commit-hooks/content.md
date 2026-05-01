@@ -11,7 +11,7 @@ When you push code to a repository, CI/CD pipelines run automated checks to find
 
 It is much more efficient to catch these errors locally on your laptop before a commit is even created.
 
-In this article, you will learn how to enforce code quality at the source using the [pre-commit](https://pre-commit.com/) framework. This tool automatically runs a series of checks on your codebase, preventing messy formatting, broken files, or sensitive secrets from making it into your permanent Git history.
+In this article, you will learn how to enforce code quality at the source using the [pre-commit](https://pre-commit.com/) framework. By automatically running a series of checks, this tool prevents messy formatting, broken files, or sensitive secrets from entering your Git history.
 
 ::: tip Prerequisites
 To follow this tutorial, you will need:
@@ -251,7 +251,7 @@ When you make a commit, the framework runs its own hooks first and then automati
 
 ### Testing your configuration
 
-From now on, whenever you type `git commit`, this script will intercept the process and run your configured hooks first.
+From now on, whenever you type `git commit`, **pre-commit** will intercept the process and run your hooks first.
 
 To verify that everything is working properly, you should manually trigger the hooks across your entire project right now.
 
@@ -262,10 +262,10 @@ pre-commit run --all-files
 The first time you run this, it will take a minute or two because the framework has to download Ruff, ESLint, and the Node.js dependencies. Once it finishes, it will output a checklist in your terminal.
 
 ```output
-ruff (lint)........................................Passed
-ruff (format)......................................Passed
-eslint (frontend)..................................Passed
-prettier (frontend)................................Passed
+ruff (lint)..............................................................Passed
+ruff (format)............................................................Passed
+eslint (frontend)........................................................Passed
+prettier (frontend)......................................................Passed
 ```
 
 If a check fails, the framework blocks the commit. It will often fix the formatting automatically for you, but you still need to stage the new changes (`git add .`) and run the commit command again.
