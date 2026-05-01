@@ -1,7 +1,7 @@
 ---
 title: "How to enforce code quality locally using pre-commit hooks"
 subtitle: "Catch syntax errors and formatting issues before they ever reach your Git history."
-date: "April 30, 2026"
+date: "May 1, 2026"
 tags: ["Git", "Automation", "Python", "JavaScript", "CI/CD"]
 ---
 
