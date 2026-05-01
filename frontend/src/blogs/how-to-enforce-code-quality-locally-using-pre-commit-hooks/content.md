@@ -123,6 +123,59 @@ This section uses a few specific strategies:
 - **Additional dependencies**: Because ESLint needs to understand Vue's custom `.vue` file structure, you must explicitly provide plugins like `eslint-plugin-vue` so the hook runs correctly in its isolated environment.
 - **The local repository**: Running Prettier as a `local` hook uses your existing Node.js setup, which is faster than downloading a separate copy. It executes `npx prettier --write` on your frontend files.
 
+### Full configuration
+
+Here is how your complete `.pre-commit-config.yaml` should look:
+
+```yaml
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: "v4.6.0"
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-added-large-files
+        args: ["--maxkb=5000"]
+      - id: check-merge-conflict
+      - id: detect-private-key
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: "v0.15.12"
+    hooks:
+      - id: ruff
+        name: ruff (lint)
+        args: [--fix]
+        files: ^backend/
+      - id: ruff-format
+        name: ruff (format)
+        files: ^backend/
+
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: "v9.39.1"
+    hooks:
+      - id: eslint
+        name: eslint (frontend)
+        files: ^frontend/.*\.(js|vue)$
+        types: [file]
+        args: [--fix, --config, frontend/eslint.config.js]
+        additional_dependencies:
+          - eslint@9.39.1
+          - eslint-plugin-vue@10.6.2
+          - eslint-config-prettier@10.1.8
+          - globals@16.5.0
+          - vue-eslint-parser@10.2.0
+
+  - repo: local
+    hooks:
+      - id: prettier-frontend
+        name: prettier (frontend)
+        entry: npx prettier --write
+        language: node
+        language_version: system
+        files: ^frontend/.*\.(js|vue|css|scss|html|json)$
+        types_or: [javascript, vue, css, scss, html, json]
+```
+
 ## Activation and testing
 
 Your configuration file is complete. Now you need to install the pre-commit framework so it can link those hooks to your Git repository.
