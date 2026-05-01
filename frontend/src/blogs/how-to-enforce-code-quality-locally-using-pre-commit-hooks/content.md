@@ -29,6 +29,10 @@ Git has a built-in feature called [hooks](https://git-scm.com/book/en/v2/Customi
 
 This is where the pre-commit framework comes in. Instead of writing complex bash scripts, you create a simple YAML configuration file. The framework reads this file, downloads the necessary tools in isolated environments, and runs them against your code right before a commit is created.
 
+::: image ./01_pre_commit_workflow.png "A diagram of the pre-commit workflow showing how a git commit triggers automated checks that either pass to the Git history or fail and block the commit for an auto-fix."
+A diagram of the pre-commit workflow showing how a git commit triggers automated checks that either pass to the Git history or fail and block the commit for an auto-fix.
+:::
+
 If your code has syntax errors, contains unresolved merge conflicts, or attempts to upload a 50MB file by mistake, the hook blocks the commit entirely. This forces you to fix the issues locally.
 
 ## Configuring the hooks
