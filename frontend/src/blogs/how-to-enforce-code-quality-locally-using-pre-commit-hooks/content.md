@@ -266,6 +266,18 @@ prettier (frontend)................................Passed
 
 If a check fails, the framework blocks the commit. It will often fix the formatting automatically for you, but you still need to stage the new changes (`git add .`) and run the commit command again.
 
+## Keeping hooks updated
+
+The tools in your configuration, like Ruff and ESLint, release new versions constantly. Manually checking their GitHub pages to update the `rev` versions in your YAML file is tedious.
+
+The framework has a built-in command to handle this for you. Run this in your terminal:
+
+```bash
+pre-commit autoupdate
+```
+
+This command scans your configuration file, checks the remote repositories for the latest stable tags, and automatically updates the `rev` strings to the newest versions.
+
 ## The emergency bypass
 
 Pre-commit hooks are strict, which keeps your codebase clean. But there might be a rare emergency where you absolutely must commit your code immediately, even if a linter is failing.
