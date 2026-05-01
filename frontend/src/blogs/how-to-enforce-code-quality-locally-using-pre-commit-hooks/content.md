@@ -180,43 +180,40 @@ repos:
 
 Your configuration file is complete. Now you need to install the pre-commit framework so it can link those hooks to your Git repository.
 
-Open your terminal in your project's root directory. Before installing the framework, isolate your environment to avoid conflicts with your system packages. You can do this using the built-in `venv` module or `Conda`.
+Because pre-commit runs as a Git hook, it is a bad idea to install it inside your project's virtual environment. If you ever delete or recreate that environment, Git will lose track of the tool and block your commits.
 
-If you are using Python's venv, here is how to create a new virtual environment:
+Instead, you should install it using a tool called [pipx](https://github.com/pypa/pipx). This installs Python applications in their own isolated environments but makes the command available globally across your entire system.
 
-```bash
-python3 -m venv venv
-```
-
-Next, activate the environment.
+First, install `pipx` using your system package manager. On Ubuntu, you can do this:
 
 ```bash
-source venv/bin/activate
+sudo apt install pipx
+pipx ensurepath
 ```
 
-If you prefer Conda, create a new environment and specify the Python version you want to use:
+::: info
+If `pipx ensurepath` shows a warning saying "All pipx binary directories have been appended to PATH", it means the path was already configured. As long as it ends with "pipx is ready to go!", you can safely ignore the warning.
+:::
+
+Next, install the pre-commit package.
 
 ```bash
-conda create --name my-project python=3.13 -y
+pipx install pre-commit
 ```
 
-Then, activate the Conda environment.
-
-```bash
-conda activate my-project
-```
-
-Install the pre-commit package using `pip`.
-
-```bash
-pip install pre-commit
-```
-
-Next, tell the framework to read your YAML file and install the hidden hook scripts into your `.git` directory.
+Now, tell the framework to read your YAML file and install the hidden hook scripts into your `.git` directory. Open your terminal in your project's root directory and run:
 
 ```bash
 pre-commit install
 ```
+
+Your repository is now safely decoupled from your project's local Python environment. You can verify this by checking the generated hook file:
+
+```bash
+cat .git/hooks/pre-commit
+```
+
+Find the `INSTALL_PYTHON` variable. It should point to your `pipx` installation (for instance, `~/.local/share/pipx/venvs/pre-commit/bin/python`) so that your hooks work regardless of which project-specific virtual environment is active.
 
 From now on, whenever you type `git commit`, this script will intercept the process and run your configured hooks first.
 
