@@ -71,7 +71,7 @@ The pre-commit team maintains several other useful hooks. You can find the full 
 
 ### Python
 
-Now, let's configure the backend hooks. We will use a tool called [Ruff](https://docs.astral.sh/ruff/). It is a modern and very fast Python linter and formatter that replaces older tools like Flake8, Black, and isort.
+Now, let's configure the backend hooks using [Ruff](https://docs.astral.sh/ruff/), a modern and extremely fast Python linter and formatter that replaces older tools like Flake8, Black, and isort.
 
 Add this block to your configuration file:
 
