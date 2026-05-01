@@ -13,6 +13,16 @@ It is much more efficient to catch these errors locally on your laptop before a 
 
 In this article, you will learn how to enforce code quality at the source using the [pre-commit](https://pre-commit.com/) framework. This tool automatically runs a series of checks on your codebase, preventing messy formatting, broken files, or sensitive secrets from making it into your permanent Git history.
 
+::: tip Prerequisites
+To follow this tutorial, you will need:
+
+- A basic understanding of **Git**.
+- **Python** and **Node.js** installed locally.
+- A package manager (e.g., **npm/pnpm** for JavaScript and **pip/uv/conda** for Python).
+
+You will configure hooks for a typical web project, though these concepts apply to any stack.
+:::
+
 ## How pre-commit works
 
 Git has a built-in feature called [hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks). These are hidden scripts that run automatically when you perform actions like committing or pushing code. However, writing and managing custom shell scripts for every security and quality check in your stack is difficult to maintain.
