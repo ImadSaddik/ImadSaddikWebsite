@@ -4,7 +4,7 @@ repos:
     hooks:
       - id: ruff
         name: ruff (lint)
-        args: [--fix]
+        args: [ --fix ]
         files: ^backend/
       - id: ruff-format
         name: ruff (format)
@@ -16,8 +16,8 @@ repos:
       - id: eslint
         name: eslint (frontend)
         files: ^frontend/.*\.(js|vue)$
-        types: [file]
-        args: [--fix, --config, frontend/eslint.config.js]
+        types: [ file ]
+        args: [ --fix, --config, frontend/eslint.config.js ]
         additional_dependencies:
           - eslint@9.39.1
           - eslint-plugin-vue@10.6.2
@@ -30,9 +30,9 @@ repos:
       - id: prettier-frontend
         name: prettier (frontend)
         entry: npx prettier --write
-        language: node
-        language_version: system
+        language: unsupported
         files: ^frontend/.*\.(js|vue|css|scss|html|json|xml|svg)$
+        types_or: [ javascript, vue, css, scss, html, json ]
 
   - repo: local
     hooks:

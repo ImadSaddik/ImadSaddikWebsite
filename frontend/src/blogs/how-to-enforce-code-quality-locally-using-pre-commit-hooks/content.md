@@ -125,8 +125,7 @@ Append this configuration to the same YAML file:
     - id: prettier-frontend
       name: prettier (frontend)
       entry: npx prettier --write
-      language: node
-      language_version: system
+      language: unsupported
       files: ^frontend/.*\.(js|vue|css|scss|html|json)$
       types_or: [javascript, vue, css, scss, html, json]
 ```
@@ -184,8 +183,7 @@ repos:
       - id: prettier-frontend
         name: prettier (frontend)
         entry: npx prettier --write
-        language: node
-        language_version: system
+        language: unsupported
         files: ^frontend/.*\.(js|vue|css|scss|html|json)$
         types_or: [javascript, vue, css, scss, html, json]
 ```
