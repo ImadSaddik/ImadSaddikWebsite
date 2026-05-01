@@ -88,11 +88,11 @@ Add this block to your configuration file:
       files: ^backend/
 ```
 
-Here is what this does:
+Breakdown of these settings:
 
-- The `ruff` hook acts as a linter. By passing the `--fix` argument, you tell Ruff to actively fix the errors it knows how to solve, like removing unused imports.
+- The `ruff` hook acts as a linter. The `--fix` argument allows Ruff to automatically resolve issues it knows how to solve, such as removing unused imports.
 - The `ruff-format` hook enforces a strict visual style, making sure your spacing and line lengths are perfectly consistent.
-- The `files: ^backend/` line restricts these tools so they only run on files inside your backend folder.
+- The `files: ^backend/` line restricts these tools to your backend directory.
 
 ::: tip
 The `rev` value in the configuration specifies the exact version of the tool you are installing. It is always a good practice to check the respective GitHub repositories and use the latest stable releases instead of strictly copying the version numbers shown here.
@@ -135,7 +135,7 @@ This section uses a few specific strategies:
 
 - **Targeted arguments**: The ESLint hook uses the `--config` argument to point directly to your frontend's specific ESLint configuration file.
 - **Additional dependencies**: Because ESLint needs to understand Vue's custom `.vue` file structure, you must explicitly provide plugins like `eslint-plugin-vue` so the hook runs correctly in its isolated environment.
-- **The local repository**: Running Prettier as a `local` hook uses your existing Node.js setup, which is faster than downloading a separate copy. It executes `npx prettier --write` on your frontend files.
+- **Local execution**: Running Prettier as a `local` hook uses your existing Node.js setup, which is faster than downloading a separate copy. It executes `npx prettier --write` on your frontend files.
 
 ### Full configuration
 
