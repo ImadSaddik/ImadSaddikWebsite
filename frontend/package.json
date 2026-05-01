@@ -27,7 +27,7 @@
     "axios": "^1.15.0",
     "katex": "^0.16.45",
     "shiki": "^4.0.2",
-    "vue": "^3.5.29",
+    "vue": "^3.5.33",
     "vue-router": "^5.0.3"
   },
   "devDependencies": {
