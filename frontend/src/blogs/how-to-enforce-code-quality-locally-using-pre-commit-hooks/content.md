@@ -33,7 +33,7 @@ This is where the pre-commit framework comes in. Instead of writing complex bash
 A diagram of the pre-commit workflow showing how a git commit triggers automated checks that either pass to the Git history or fail and block the commit.
 :::
 
-If your code has syntax errors, contains unresolved merge conflicts, or attempts to upload a 50MB file by mistake, the hook blocks the commit entirely. This forces you to fix the issues locally.
+If your code has syntax errors, unresolved merge conflicts, or a 50MB file added by mistake, the hook blocks the commit entirely. This forces you to fix issues locally before pushing, keeping your Git history clean and professional.
 
 ## Configuring the hooks
 
