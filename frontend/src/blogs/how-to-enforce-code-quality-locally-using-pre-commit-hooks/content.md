@@ -37,7 +37,7 @@ If your code has syntax errors, unresolved merge conflicts, or a 50MB file added
 
 ## Configuring the hooks
 
-Create a file named `.pre-commit-config.yaml` in the root directory of your project. For this tutorial, you will build a configuration that targets standard repository maintenance, a Python backend, and a Vue.js frontend.
+Create a file named `.pre-commit-config.yaml` in the root directory of your project. For this tutorial, you will build a configuration tailored for standard repository maintenance, a Python backend, and a Vue.js frontend.
 
 ### Standard repository checks
 
