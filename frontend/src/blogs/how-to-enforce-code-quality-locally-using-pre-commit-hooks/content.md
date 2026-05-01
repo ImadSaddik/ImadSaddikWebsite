@@ -180,6 +180,8 @@ repos:
 
 Your configuration file is complete. Now you need to install the pre-commit framework so it can link those hooks to your Git repository.
 
+### Installing the framework
+
 Because pre-commit runs as a Git hook, it is a bad idea to install it inside your project's virtual environment. If you ever delete or recreate that environment, Git will lose track of the tool and block your commits.
 
 Instead, you should install it using a tool called [pipx](https://github.com/pypa/pipx). This installs Python applications in their own isolated environments but makes the command available globally across your entire system.
@@ -201,6 +203,8 @@ Next, install the pre-commit package.
 pipx install pre-commit
 ```
 
+### Initializing the hooks
+
 Now, tell the framework to read your YAML file and install the hidden hook scripts into your `.git` directory. Open your terminal in your project's root directory and run:
 
 ```bash
@@ -213,7 +217,25 @@ Your repository is now safely decoupled from your project's local Python environ
 cat .git/hooks/pre-commit
 ```
 
-Find the `INSTALL_PYTHON` variable. It should point to your `pipx` installation (for instance, `~/.local/share/pipx/venvs/pre-commit/bin/python`) so that your hooks work regardless of which project-specific virtual environment is active.
+Look for the `INSTALL_PYTHON` variable. It should point to your `pipx` installation (e.g., `~/.local/share/pipx/...`), ensuring your hooks work regardless of which project-specific virtual environment is active.
+
+### Migrating from a virtual environment
+
+If you previously installed `pre-commit` inside a virtual environment, you don't need to manually uninstall your old hooks. Install `pre-commit` via `pipx` as shown above, and then run:
+
+```bash
+pre-commit install
+```
+
+This will refresh your Git hooks to point to the new, stable global installation, safely decoupling your repository from any project-specific environment.
+
+::: tip
+If you already have a custom bash script written inside `.git/hooks/pre-commit`, do not worry about losing it. The pre-commit framework detects custom scripts and safely renames them to `pre-commit.legacy`.
+
+When you make a commit, the framework runs its own hooks first and then automatically executes your legacy script.
+:::
+
+### Testing your configuration
 
 From now on, whenever you type `git commit`, this script will intercept the process and run your configured hooks first.
 
