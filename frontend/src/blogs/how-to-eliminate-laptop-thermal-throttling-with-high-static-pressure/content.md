@@ -76,3 +76,17 @@ To cool the internal components, a cooler needs two things:
 Static pressure is the driving force required to channel cold air through the dense copper fins inside your laptop. If you create a vacuum seal around the bottom of the laptop and use a high-RPM blower fan, you force the cold air to travel exactly where it needs to go, drastically increasing $h$.
 
 This is the exact engineering approach taken by the IETS GT500.
+
+## Introducing the IETS GT500
+
+To test if static pressure actually solves the thermal throttling problem, I bought the IETS GT500. Unlike standard cooling pads, this device is built around the two physical requirements we just looked at: a completely open intake and an industrial-grade motor.
+
+::: image ./3_iets_gt500_top_down.png "Top-down diagram of the IETS GT500 cooler with an arrow pointing to the wide, open blue air chamber surrounding the central intake."
+The massive, completely open air chamber of the GT500, designed to eliminate intake restrictions and allow maximum airflow distribution.
+:::
+
+There are three key components that make this high-pressure design work:
+
+- **The massive air chamber**: Unlike traditional cooling pads that restrict airflow through small vents, this wide-open chamber eliminates intake resistance, allowing a large volume of air to accumulate beneath the laptop.
+- **The memory foam seal**: This dense foam ring acts as a gasket. When the laptop rests on top of it, the intake chamber is completely sealed off from the room, ensuring that 100% of the pressurized air is directed straight into the laptop's intake vents.
+- **The 5000 RPM centrifugal blower**: Instead of using standard axial PC fans, the GT500 uses a large centrifugal blower wheel. At 5000 RPM, it generates an immense amount of static pressure inside the sealed chamber, easily forcing cold air through the dense fins of the laptop's heatsinks.
