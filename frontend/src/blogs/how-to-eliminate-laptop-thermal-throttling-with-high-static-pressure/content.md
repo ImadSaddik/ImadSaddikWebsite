@@ -46,3 +46,22 @@ The restrictive intake design of the Flydigi BS2, showing the small side opening
 :::
 
 Another issue with placing the intakes on the sides is the high likelihood of misalignment with your laptop's internal fans. If the cooler's vents don't line up with the laptop's intake zones, the air simply hits the bottom plastic shell. When this happens, the cooler effectively acts just like a flat desk surface, leaving the internal fans **starved for fresh air**.
+
+## The physics of heat dissipation
+
+To understand what a laptop cooler actually needs to do, you have to look at the math behind convective heat transfer. The mechanism that cools a laptop is governed by **Newton's law of cooling**:
+
+$$Q = h \cdot A \cdot (T_{CPU} - T_{ambient})$$
+
+This equation looks complex, but it breaks down into simple physical variables:
+
+- **$Q$** is the rate of heat transfer. This is what we want to maximize. A higher $Q$ means heat is leaving the laptop faster.
+- **$A$** is the surface area of the internal heatsink fins. Since you cannot physically fit more copper inside a pre-built laptop, this variable is fixed.
+- **$(T_{CPU} - T_{ambient})$** is the temperature gap between the hot CPU and the ambient room air.
+- **$h$** is the convective heat transfer coefficient. This measures how effectively the moving air strips heat away from those cooling fins.
+
+This equation reveals why summer temperatures are so brutal for gaming laptops. When the ambient room temperature ($T_{ambient}$) climbs to 40°C, that critical temperature gap shrinks significantly.
+
+Since the heatsink surface area ($A$) is a fixed constant, the overall rate of heat transfer ($Q$) drops, forcing the laptop to trigger severe thermal throttling just to stay alive.
+
+If we cannot change the physical size of heatsinks, and the scorching summer heat is destroying the temperature gap, we are left with only one variable to manipulate to save the system: we must massively increase $h$.
