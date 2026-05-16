@@ -23,4 +23,6 @@ Here are the three configurations I tested:
 2. **Lifted:** Propping up the rear feet of the laptop using a few books to increase airflow clearance.
 3. **Flydigi BS2:** An entry-level laptop cooler.
 
-While these initial tests were conducted during a mild Moroccan spring, the ultimate goal is preparing for the summer ahead. When ambient temperatures regularly cross 40°C, every degree of headroom matters. This baseline will let me measure exactly how much breathing room I gain before the extreme heat hits, and I plan to repeat this exact experiment with the GT500 once summer arrives.
+While these initial tests were conducted during the cooler spring months in Morocco, the ultimate goal is preparing for the summer ahead. When ambient temperatures regularly cross 40°C, every drop in temperature counts.
+
+This baseline allows me to measure the precise thermal improvement before the extreme heat hits, and I plan to repeat this exact experiment with the GT500 once summer arrives.
