@@ -15,7 +15,7 @@ As summer approaches and ambient room temperatures push past 40°C, a laptop's i
 
 ## The baseline test
 
-Before dropping cash on a premium cooling solution, I wanted to see if I could solve the problem with what I already had on hand. I ran a controlled 10-minute Cinebench test across three different setups to establish a solid baseline.
+Before dropping cash on a premium cooling solution, I wanted to see if I could solve the problem with what I already had on hand. I ran a controlled 10-minute Cinebench test across three different setups to create a solid baseline.
 
 Here is what I tested:
 
