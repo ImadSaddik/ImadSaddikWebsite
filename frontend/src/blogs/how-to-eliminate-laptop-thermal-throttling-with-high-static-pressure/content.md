@@ -64,4 +64,15 @@ This equation reveals why summer temperatures are so brutal for gaming laptops. 
 
 Since the heatsink surface area ($A$) is a fixed constant, the overall rate of heat transfer ($Q$) drops, forcing the laptop to trigger severe thermal throttling just to stay alive.
 
-If we cannot change the physical size of heatsinks, and the scorching summer heat is destroying the temperature gap, we are left with only one variable to manipulate to save the system: we must massively increase $h$.
+If we cannot change the physical size of heatsinks, and the scorching summer heat is destroying the temperature gap, we are left with only one variable to manipulate to save the system: we must massively increase $h$. To do that, we have to force a much higher volume of air across those internal cooling fins at a significantly higher velocity.
+
+This is where standard cooling pads fail. A fan with a low RPM blowing through restricted side openings cannot generate enough pressure to force air into the laptop chassis. The air just bounces off the bottom plastic shell.
+
+To cool the internal components, a cooler needs two things:
+
+- A fully open intake design that does not restrict the air supply.
+- An industrial-grade motor capable of generating high **static pressure**.
+
+Static pressure is the driving force required to channel cold air through the dense copper fins inside your laptop. If you create a vacuum seal around the bottom of the laptop and use a high-RPM blower fan, you force the cold air to travel exactly where it needs to go, drastically increasing $h$.
+
+This is the exact engineering approach taken by the IETS GT500.
