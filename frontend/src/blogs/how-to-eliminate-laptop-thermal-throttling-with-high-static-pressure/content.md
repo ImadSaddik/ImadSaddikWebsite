@@ -21,6 +21,6 @@ Here are the three configurations I tested:
 
 1. **Flat on desk:** The laptop sitting normally on a flat wooden surface.
 2. **Lifted:** Propping up the rear feet of the laptop using a few books to increase airflow clearance.
-3. **Flydigi BS2:** An entry-level laptop cooler featuring a memory foam seal designed to create a sealed pressure chamber under the intake vents.
+3. **Flydigi BS2:** An entry-level laptop cooler.
 
 While these initial tests were conducted during a mild Moroccan spring, the ultimate goal is preparing for the summer ahead. When ambient temperatures regularly cross 40°C, every degree of headroom matters. This baseline will let me measure exactly how much breathing room I gain before the extreme heat hits, and I plan to repeat this exact experiment with the GT500 once summer arrives.
