@@ -17,7 +17,7 @@ As summer approaches and ambient room temperatures push past 40°C, a laptop's i
 
 Before dropping cash on a premium cooling solution, I wanted to see if I could solve the problem with what I already had on hand. I ran a controlled 10-minute Cinebench test across three different setups to create a solid baseline.
 
-Here is what I tested:
+Here are the three configurations I tested:
 
 1. **Flat on desk:** The laptop sitting normally on a flat wooden surface.
 2. **Lifted:** Propping up the rear feet of the laptop using a few books to increase airflow clearance.
