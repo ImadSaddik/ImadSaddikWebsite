@@ -29,17 +29,17 @@ Here are the three configurations I tested:
 - **Lifted:** Propping up the rear feet of the laptop using a few books to increase airflow clearance.
 - **Flydigi BS2:** Another pressure-sealed laptop cooler.
 
-While these initial tests were conducted during the cooler spring months in Morocco, the ultimate goal is preparing for the summer ahead. When ambient temperatures regularly cross 40°C, every drop in temperature counts.
-
-This initial data allows me to measure the precise thermal improvement before the extreme heat hits, and I plan to repeat this exact experiment with the GT500 once summer arrives.
-
-To track the performance, I used [HWiNFO](https://www.hwinfo.com/) to collect sensor data throughout the 10-minute Cinebench run, focusing primarily on the CPU package temperature.
+To track the performance across these setups, I used [HWiNFO](https://www.hwinfo.com/) to collect sensor data throughout the 10-minute Cinebench run, focusing primarily on the CPU package temperature.
 
 After exporting and cleaning the CSV data, I generated the graph below to compare how all three configurations performed.
 
 ::: image ./1_cpu_package_temperature_smoothed.png "Line graph showing CPU package temperature over a 10-minute test duration for flat surface, lifted, and Flydigi BS2 configurations."
 All three configurations quickly spike and flatten out near the 94°C thermal throttling limit.
 :::
+
+Notice how all three setups quickly hit the 94°C thermal wall. What makes this data even more concerning is that these tests were conducted during the cooler spring months in Morocco.
+
+If standard open-air pads and entry-level sealed coolers are already failing to prevent thermal throttling now, they will be completely useless when summer arrives and ambient temperatures regularly cross 40°C. This initial data proves why I need to find a heavy-duty solution before the extreme heat hits.
 
 ### Why standard cooling pads fail
 
