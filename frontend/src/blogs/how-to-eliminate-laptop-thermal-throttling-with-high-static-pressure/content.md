@@ -25,7 +25,7 @@ Here are the three configurations I tested:
 
 While these initial tests were conducted during the cooler spring months in Morocco, the ultimate goal is preparing for the summer ahead. When ambient temperatures regularly cross 40°C, every drop in temperature counts.
 
-This baseline allows me to measure the precise thermal improvement before the extreme heat hits, and I plan to repeat this exact experiment with the GT500 once summer arrives.
+This initial data allows me to measure the precise thermal improvement before the extreme heat hits, and I plan to repeat this exact experiment with the GT500 once summer arrives.
 
 To track the performance, I used [HWiNFO](https://www.hwinfo.com/) to collect sensor data throughout the 10-minute Cinebench run, focusing primarily on the CPU package temperature.
 
@@ -160,7 +160,7 @@ With the thermal wall removed, the GPU no longer had to limit its frequencies, r
 
 With the GT500 turned off, the GPU was constantly hitting its 93°C limit. This caused the clock speeds to fluctuate between 2100 MHz and 2400 MHz as the system adjusted performance to manage the heat.
 
-Once the blower kicked in and dropped the temperatures, the GPU gained significant thermal headroom. The clock speeds stabilized, boosting to their maximum frequency of 2460 MHz and remaining there for the rest of the session.
+Once the blower kicked in and dropped the temperatures, the GPU gained significant thermal headroom. The clock speeds stabilized, boosted to their maximum frequency of 2460 MHz, and remained there for the rest of the session.
 
 ## Conclusion
 
