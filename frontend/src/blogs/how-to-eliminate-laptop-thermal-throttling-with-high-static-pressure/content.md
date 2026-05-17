@@ -41,19 +41,19 @@ Notice how all three setups quickly hit the 94°C thermal wall. What makes this 
 
 If standard open-air pads and entry-level sealed coolers are already failing to prevent thermal throttling now, they will be completely useless when summer arrives and ambient temperatures regularly cross 40°C. This initial data proves why I need to find a heavy-duty solution before the extreme heat hits.
 
-### Why standard cooling pads fail
+### Why entry-level sealed coolers fail
 
 It is surprising to see that the Flydigi BS2, which is marketed as a **high-performance cooler capable of massive temperature drops**, performed almost identically to just propping the laptop up with a few books.
 
-The primary reason the Flydigi BS2 struggles under heavy load comes down to raw power. The standard model tops out at just 3000 RPM, which cannot generate enough static pressure to force sufficient airflow into a hot laptop.
+While the standard model tops out at a weak 3000 RPM, a lack of raw power is only half the problem. Even if you put a 5000 RPM motor inside this cooler, it would still struggle because of the cooling chamber's design. Instead of a fully open intake, it relies on two tiny openings on the sides. This severely restricts the volume of air it can pull in.
 
-Adding to this issue is the design of the cooling chamber itself. Instead of a fully open intake, it relies on two tiny openings on the sides, severely restricting the volume of air it can push through the laptop's internal heatsinks. Together, this combination of low RPM and choked airflow explains the cooler's underwhelming performance.
+This combination of a weak motor and a choked air supply completely prevents the cooler from building the high static pressure needed to push air into the laptop's internal heatsinks.
 
 ::: image ./2_flydigi_bs2_intake_openings.png "Close-up photograph of the Flydigi BS2 cooling pad intake chamber, highlighting the restricted side openings."
 The restrictive intake design of the Flydigi BS2, showing the small side openings that limit total airflow.
 :::
 
-Another issue with placing the intakes on the sides is the high likelihood of misalignment with your laptop's internal fans. If the cooler's vents don't line up with the laptop's intake zones, the air simply hits the bottom plastic shell. When this happens, the cooler effectively acts just like a flat desk surface, leaving the internal fans **starved for fresh air**.
+Another major issue with placing these intakes on the sides is the high likelihood of misalignment with your laptop's internal fans. If the cooler's side vents do not perfectly line up with the laptop's bottom intake zones, the air simply hits the bottom plastic shell. When this happens, the cooler effectively acts just like a flat desk surface, leaving the internal fans **starved for fresh air**.
 
 ## The physics of heat dissipation
 
