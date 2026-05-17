@@ -90,3 +90,44 @@ There are three key components that make this high-pressure design work:
 - **The massive air chamber**: Unlike traditional cooling pads that restrict airflow through small vents, this wide-open chamber eliminates intake resistance, allowing a large volume of air to accumulate beneath the laptop.
 - **The memory foam seal**: This dense foam ring acts as a gasket. When the laptop rests on top of it, the intake chamber is completely sealed off from the room, ensuring that 100% of the pressurized air is directed straight into the laptop's intake vents.
 - **The 5000 RPM centrifugal blower**: Instead of using standard axial PC fans, the GT500 uses a large centrifugal blower wheel. At 5000 RPM, it generates an immense amount of static pressure inside the sealed chamber, easily forcing cold air through the dense fins of the laptop's heatsinks.
+
+To see how the laptop cooler handles a realistic, heavy workload, I ran a 45-minute session of **Kingdom Come: Deliverance**. This game pushes both the CPU and the RTX 4070 heavily, creating the continuous 135-watt thermal load mentioned earlier.
+
+I split the experiment into two phases:
+
+- **Phase 1 (0 to 12 minutes):** I played the game with the GT500 completely turned off. This allowed the laptop to heat up naturally and saturate the internal copper pipes.
+- **Phase 2 (12 to 45 minutes):** At exactly the 12-minute mark, I cranked the GT500 turbine to its maximum 5000 RPM setting for the remainder of the session.
+
+After collecting the logs, I parsed the HWiNFO data into two graphs to show the temperature trends for both the CPU package and the GPU.
+
+Let's start with the CPU package temperature:
+
+::: image ./4_cpu_package_temperature_gt500.png "Line graph showing CPU package temperature over a 45-minute gaming session, with a clear drop after the GT500 is turned on at the 12-minute mark."
+
+The CPU package temperature during the gaming session, showing a significant drop after the GT500 is activated at 12 minutes.
+:::
+
+Looking at the CPU package temperature, the impact of the GT500 is immediately apparent. During the first 12 minutes with the cooler turned off, the CPU quickly heat-soaked, fluctuating between 80°C and a peak of roughly 93°C under the heavy gaming load.
+
+The moment the turbine was cranked to 5000 RPM at the 12-minute mark, the thermal trend reversed sharply. Within just three minutes, the CPU package temperature plummeted by nearly 30°C, finally settling into a very low and steady 55°C to 60°C range for the rest of the 45-minute session.
+
+Moving over to the graphics card, the GPU temperature followed a very similar path. Here is how the RTX 4070 handled the exact same two-phase test:
+
+::: image ./5_gpu_temperature_gt500.png "Line graph showing GPU temperature over a 45-minute gaming session, demonstrating a steady peak around 93°C followed by a sharp drop to roughly 68°C after the GT500 is turned on."
+
+The GPU temperature during the gaming session, highlighting the thermal drop from the 93°C peak down to a stable baseline once the cooler is active.
+:::
+
+The GPU temperature followed a very similar path. During Phase 1, the RTX 4070 warmed up incredibly fast, spiking to 80°C in less than three minutes before flattening out at a very high 93°C peak. Just like the CPU, the graphics card was completely heat-soaked and running at its absolute limit.
+
+The moment the GT500 was cranked to 5000 RPM at the 12-minute mark, the graphics card got the breathing room it desperately needed. The temperature instantly dropped by about 23°C, eventually settling into a very steady 65°C to 70°C range for the rest of the test. While the drop wasn't quite as massive as the CPU's 30°C plunge, keeping a high-end GPU under 70°C while running Kingdom Come: Deliverance is a fantastic result.
+
+Comparing these results back to our initial baseline tests reveals a massive difference. Propping the laptop up on books or using a standard low-RPM cooling pad barely moved the needle, leaving the system trapped at its 94°C thermal throttling limit. Meanwhile, the IETS GT500 delivered completely different results.
+
+By creating a pressurized, vacuum-sealed environment, the blower managed to force a massive volume of air through the chassis. This maximized the convective heat transfer coefficient ($h$) in a way low-pressure pads simply cannot.
+
+Ultimately, reducing the CPU temperature by 30°C and keeping the GPU well below 70°C proves that high static pressure isn't an expensive gimmick. It is the only viable brute-force solution to keep a high-end gaming laptop running optimally when facing harsh thermal conditions.
+
+However, this level of thermal performance comes with a significant compromise: noise. Running the centrifugal blower at its maximum 5000 RPM setting generates an immense amount of noise. For most users, gaming next to the GT500 at full speed is unbearable without a good pair of noise-canceling headphones.
+
+Fortunately, you can use the physical speed adjustment dial to find a better balance. In practice, you rarely need to run the fan at 100% to stop thermal throttling. Dropping the speed down to a more tolerable 40% to 50% still provides enough static pressure to keep temperatures safe while keeping the noise levels manageable.
