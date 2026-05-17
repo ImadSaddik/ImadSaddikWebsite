@@ -63,10 +63,10 @@ $$Q = h \cdot A \cdot (T_{CPU} - T_{ambient})$$
 
 This equation looks complex, but it breaks down into simple physical variables:
 
-- **$Q$** is the rate of heat transfer. This is what we want to maximize. A higher $Q$ means heat is leaving the laptop faster.
-- **$A$** is the surface area of the internal heatsink fins. Since you cannot physically fit more copper inside a pre-built laptop, this variable is fixed.
-- **$(T_{CPU} - T_{ambient})$** is the temperature gap between the hot CPU and the ambient room air.
-- **$h$** is the convective heat transfer coefficient. This measures how effectively the moving air strips heat away from those cooling fins.
+- $Q$ is the rate of heat transfer. This is what we want to maximize. A higher $Q$ means heat is leaving the laptop faster.
+- $A$ is the surface area of the internal heatsink fins. Since you cannot physically fit more copper inside a pre-built laptop, this variable is fixed.
+- $(T_{CPU} - T_{ambient})$ is the temperature gap between the hot CPU and the ambient room air.
+- $h$ is the convective heat transfer coefficient. This measures how effectively the moving air strips heat away from those cooling fins.
 
 This equation reveals why summer temperatures are so brutal for gaming laptops. When the ambient room temperature ($T_{ambient}$) climbs to 40°C, that critical temperature gap shrinks significantly.
 
