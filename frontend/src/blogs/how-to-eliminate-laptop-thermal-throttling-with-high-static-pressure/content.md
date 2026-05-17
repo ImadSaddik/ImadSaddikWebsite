@@ -19,9 +19,9 @@ Before dropping cash on a premium cooling solution, I wanted to see if I could s
 
 Here are the three configurations I tested:
 
-1. **Flat surface:** The laptop sitting normally on a flat wooden surface.
-2. **Lifted:** Propping up the rear feet of the laptop using a few books to increase airflow clearance.
-3. **Flydigi BS2:** An entry-level laptop cooler.
+- **Flat surface:** The laptop sitting normally on a flat wooden surface.
+- **Lifted:** Propping up the rear feet of the laptop using a few books to increase airflow clearance.
+- **Flydigi BS2:** An entry-level laptop cooler.
 
 While these initial tests were conducted during the cooler spring months in Morocco, the ultimate goal is preparing for the summer ahead. When ambient temperatures regularly cross 40°C, every drop in temperature counts.
 
