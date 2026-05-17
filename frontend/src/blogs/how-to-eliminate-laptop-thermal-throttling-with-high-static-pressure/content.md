@@ -161,3 +161,11 @@ With the thermal wall removed, the GPU no longer had to limit its frequencies, r
 With the GT500 turned off, the GPU was constantly hitting its 93°C limit. This caused the clock speeds to fluctuate between 2100 MHz and 2400 MHz as the system adjusted performance to manage the heat.
 
 Once the blower kicked in and dropped the temperatures, the GPU gained significant thermal headroom. The clock speeds stabilized, boosting to their maximum frequency of 2460 MHz and remaining there for the rest of the session.
+
+## Conclusion
+
+Standard open-air cooling pads and entry-level sealed coolers rely on low-RPM fans that simply cannot generate the static pressure required to push air through dense internal heatsinks. Even if a cooler has a foam ring, a weak motor will just cool the plastic shell of the laptop and do very little to lower internal component temperatures.
+
+By utilizing a memory foam seal and a 5000 RPM centrifugal blower, the IETS GT500 provides a highly effective hardware solution to the thermal throttling problem. It forces ambient air directly through the laptop's internal heatsinks, significantly increasing the convective heat transfer coefficient.
+
+The data is clear. High static pressure prevents thermal throttling under heavy workloads. While the noise at maximum RPM is substantial, the trade-off is a 30°C drop in temperatures, stable power draw, and sustained maximum clock speeds. If you want to protect your hardware and maintain peak performance during the hottest months of the year, a sealed, high-pressure blower is a highly effective solution.
