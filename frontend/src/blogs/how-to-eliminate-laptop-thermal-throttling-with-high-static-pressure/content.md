@@ -21,6 +21,8 @@ You can find the raw HWiNFO logs, visualization scripts, and Jupyter notebooks u
 
 Before dropping cash on a premium cooling solution, I wanted to see if I could solve the problem with what I already had on hand. I ran a controlled 10-minute Cinebench test across three different setups to create a solid baseline.
 
+### Testing configurations
+
 Here are the three configurations I tested:
 
 - **Flat surface:** The laptop sitting normally on a flat wooden surface.
@@ -38,6 +40,8 @@ After exporting and cleaning the CSV data, I generated the graph below to compar
 ::: image ./1_cpu_package_temperature_smoothed.png "Line graph showing CPU package temperature over a 10-minute test duration for flat surface, lifted, and Flydigi BS2 configurations."
 All three configurations quickly spike and flatten out near the 94°C thermal throttling limit.
 :::
+
+### Why standard cooling pads fail
 
 It is surprising to see that the Flydigi BS2, which is marketed as a **high-performance cooler capable of massive temperature drops**, performed almost identically to just propping the laptop up with a few books.
 
@@ -89,11 +93,15 @@ To test if static pressure actually solves the thermal throttling problem, I bou
 The massive, completely open air chamber of the GT500, designed to eliminate intake restrictions and allow maximum airflow distribution.
 :::
 
+### The high-pressure design
+
 There are three key components that make this high-pressure design work:
 
 - **The massive air chamber**: Unlike traditional cooling pads that restrict airflow through small vents, this wide-open chamber eliminates intake resistance, allowing a large volume of air to accumulate beneath the laptop.
 - **The memory foam seal**: This dense foam ring acts as a gasket. When the laptop rests on top of it, the intake chamber is completely sealed off from the room, ensuring that 100% of the pressurized air is directed straight into the laptop's intake vents.
 - **The 5000 RPM centrifugal blower**: Instead of using standard axial PC fans, the GT500 uses a large centrifugal blower wheel. At 5000 RPM, it generates an immense amount of static pressure inside the sealed chamber, easily forcing cold air through the dense fins of the laptop's heatsinks.
+
+### The Kingdom Come benchmark
 
 To see how the laptop cooler handles a realistic, heavy workload, I ran a 45-minute session of **Kingdom Come: Deliverance**. This game pushes both the CPU and the RTX 4070 heavily, creating the continuous 135-watt thermal load mentioned earlier.
 
