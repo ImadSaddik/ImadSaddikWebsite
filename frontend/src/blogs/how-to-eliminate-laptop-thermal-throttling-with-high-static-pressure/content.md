@@ -57,16 +57,16 @@ Another major issue with placing these intakes on the sides is the high likeliho
 
 ## The physics of heat dissipation
 
-To understand what a laptop cooler actually needs to do, you have to look at the math behind convective heat transfer. The mechanism that cools a laptop is governed by **Newton's law of cooling**:
+To understand how a laptop cooler functions, you have to look at the math behind convective heat transfer. The mechanism that cools a laptop is governed by [Newton's law of cooling](https://en.wikipedia.org/wiki/Newton%27s_law_of_cooling):
 
 $$Q = h \cdot A \cdot (T_{CPU} - T_{ambient})$$
 
-This equation looks complex, but it breaks down into simple physical variables:
+This equation breaks down into four physical variables:
 
-- $Q$ is the rate of heat transfer. This is what we want to maximize. A higher $Q$ means heat is leaving the laptop faster.
+- $Q$ is the rate of heat transfer. We want to maximize this value, as a higher $Q$ means heat leaves the laptop faster.
 - $A$ is the surface area of the internal heatsink fins. Since you cannot physically fit more copper inside a pre-built laptop, this variable is fixed.
-- $(T_{CPU} - T_{ambient})$ is the temperature gap between the hot CPU and the ambient room air.
-- $h$ is the convective heat transfer coefficient. This measures how effectively the moving air strips heat away from those cooling fins.
+- $(T_{CPU} - T_{ambient})$ is the temperature difference between the hot CPU and the surrounding room air.
+- $h$ is the convective heat transfer coefficient. This measures how effectively the moving air strips heat away from the cooling fins.
 
 This equation reveals why summer temperatures are so brutal for gaming laptops. When the ambient room temperature ($T_{ambient}$) climbs to 40°C, that critical temperature gap shrinks significantly.
 
@@ -74,7 +74,7 @@ Since the heatsink surface area ($A$) is a fixed constant, the overall rate of h
 
 If we cannot change the physical size of heatsinks, and the scorching summer heat is destroying the temperature gap, we are left with only one variable to manipulate to save the system: we must massively increase $h$. To do that, we have to force a much higher volume of air across those internal cooling fins at a significantly higher velocity.
 
-This is where standard cooling pads fail. A fan with a low RPM blowing through restricted side openings cannot generate enough pressure to force air into the laptop chassis. The air just bounces off the bottom plastic shell.
+This is where standard open-air pads and entry-level sealed coolers fail. A fan with a low RPM blowing through restricted side openings cannot generate enough pressure to force air into the laptop chassis. The air just bounces off the bottom plastic shell.
 
 To cool the internal components, a cooler needs two things:
 
