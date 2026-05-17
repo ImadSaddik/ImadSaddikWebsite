@@ -131,3 +131,33 @@ Ultimately, reducing the CPU temperature by 30°C and keeping the GPU well below
 However, this level of thermal performance comes with a significant compromise: noise. Running the centrifugal blower at its maximum 5000 RPM setting generates an immense amount of noise. For most users, gaming next to the GT500 at full speed is unbearable without a good pair of noise-canceling headphones.
 
 Fortunately, you can use the physical speed adjustment dial to find a better balance. In practice, you rarely need to run the fan at 100% to stop thermal throttling. Dropping the speed down to a more tolerable 40% to 50% still provides enough static pressure to keep temperatures safe while keeping the noise levels manageable.
+
+## Verifying power draw and clock speeds
+
+When looking at a large 30°C temperature drop, a skeptic might argue that the laptop simply power-throttled. If the CPU and GPU suddenly drop their wattage to protect the silicon, the temperatures will naturally decrease, but gaming performance will suffer.
+
+To prove that the IETS GT500 is actually responsible for the cooling, we must verify that the power draw remained high and the clock speeds remained stable.
+
+::: image ./6_cpu_power_draw.png "Line graph showing CPU package power draw naturally bouncing between 25W and 45W throughout the 45-minute test."
+The CPU package power draw naturally fluctuated between 25W and 45W, showing no change when the cooler turned on at the 12-minute mark.
+:::
+
+The data shows that the CPU did not throttle its consumption. It continued to draw the exact same wattage before and after the blower was activated. The graphics card tells an even more stable story:
+
+::: image ./7_gpu_power_draw.png "Line graph showing GPU power draw locked solidly between 110W and 120W across both phases of the test."
+The RTX 4070 maintained a heavy, stable draw between 110W and 120W for the entire 45-minute session.
+:::
+
+If you notice the CPU power line fluctuating like a heartbeat while the GPU remains a flat plateau, this is completely normal behavior for a healthy gaming system. The GPU acts as a constant pipeline, rendering graphics at 100% capacity without a break. The CPU, however, acts as the manager. It handles bursty tasks like game logic and physics, rapidly spiking and dropping its wattage in milliseconds. This dynamic shifting allows the CPU to efficiently share the laptop's total power budget, ensuring the graphics card always gets the heavy 115W it needs to keep frame rates high.
+
+This power data disproves the throttling theory. The hardware was generating the exact same amount of thermal energy across both phases of the test. The temperature dropped only because the massive increase in convective heat transfer stripped the heat away.
+
+Because the power remained constant, we can look at the clock speeds to see if the cooler provided any actual performance benefits.
+
+::: image ./8_gpu_clock_speeds.png "Line graph showing GPU clock speeds fluctuating initially, then locking onto a flat 2460 MHz line after the cooler is activated."
+With the thermal wall removed, the GPU no longer had to limit its frequencies, resulting in a stable maximum clock speed.
+:::
+
+With the GT500 turned off, the GPU was constantly hitting its 93°C limit. This caused the clock speeds to fluctuate between 2100 MHz and 2400 MHz as the system adjusted performance to manage the heat.
+
+Once the blower kicked in and dropped the temperatures, the GPU gained significant thermal headroom. The clock speeds stabilized, boosting to their maximum frequency of 2460 MHz and remaining there for the rest of the session.
