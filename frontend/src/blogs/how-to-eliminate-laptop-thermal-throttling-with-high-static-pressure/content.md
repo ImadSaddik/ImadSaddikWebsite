@@ -13,6 +13,10 @@ In my testing, the system averaged a continuous 135-watt thermal load during hea
 
 As summer approaches here in Morocco, ambient room temperatures can push past 40°C. When this happens, a laptop's internal fans simply cannot spin fast enough to keep up. This article analyzes hard data to see if a high-static-pressure cooler like the `IETS GT500` actually solves this problem, or if it is just an expensive gimmick.
 
+::: info
+You can find the raw HWiNFO logs, visualization scripts, and Jupyter notebooks used for this article in the [IETSCoolerExperiment GitHub repository](https://github.com/ImadSaddik/IETSCoolerExperiment).
+:::
+
 ## The baseline test
 
 Before dropping cash on a premium cooling solution, I wanted to see if I could solve the problem with what I already had on hand. I ran a controlled 10-minute Cinebench test across three different setups to create a solid baseline.
