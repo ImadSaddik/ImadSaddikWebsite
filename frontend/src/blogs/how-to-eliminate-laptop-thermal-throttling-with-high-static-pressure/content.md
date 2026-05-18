@@ -144,7 +144,7 @@ Fortunately, you can use the physical speed adjustment dial to find a better bal
 
 ## Verifying power draw and clock speeds
 
-When looking at a large 30°C temperature drop, a skeptic might argue that the laptop simply power-throttled. If the CPU and GPU suddenly drop their wattage to protect the silicon, the temperatures will naturally decrease, but gaming performance will suffer.
+When looking at a massive 20+°C temperature drop, a skeptic might argue that the laptop simply power-throttled. If the CPU and GPU suddenly drop their wattage to protect the silicon, the temperatures will naturally decrease, but gaming performance will suffer.
 
 To prove that the IETS GT500 is actually responsible for the cooling, we must verify that the power draw remained high and the clock speeds remained stable.
 
@@ -158,7 +158,13 @@ The data shows that the CPU did not throttle its consumption. It continued to dr
 The RTX 4070 maintained a heavy, stable draw between 110W and 120W for the entire 41-minute session.
 :::
 
-If you notice the CPU power line fluctuating like a heartbeat while the GPU remains a flat plateau, this is completely normal behavior for a healthy gaming system. The GPU acts as a constant pipeline, rendering graphics at 100% capacity without a break. The CPU, however, acts as the manager. It handles bursty tasks like game logic and physics, rapidly spiking and dropping its wattage in milliseconds. This dynamic shifting allows the CPU to efficiently share the laptop's total power budget, ensuring the graphics card always gets the heavy 115W it needs to keep frame rates high.
+If you notice the CPU power line fluctuating like a heartbeat while the GPU remains a flat plateau, this is completely normal behavior for a healthy gaming system. The GPU acts as a constant pipeline, rendering graphics at 100% capacity without a break.
+
+The CPU, however, acts as the manager. It handles bursty tasks like game logic and physics, rapidly spiking and dropping its wattage in milliseconds. This dynamic shifting allows the CPU to efficiently share the laptop's total power budget, making sure the graphics card always gets the heavy 115W it needs to keep frame rates high.
+
+::: info
+If you look closely at the GPU power graph, you will spot a few sharp, narrow dips down to 40W or 20W in the second half of the test. These are not thermal throttles. They are normal moments where the game engine naturally drops the rendering load, such as opening the map, navigating inventory menus, or hitting a loading screen.
+:::
 
 This power data disproves the throttling theory. The hardware was generating the exact same amount of thermal energy across both phases of the test. The temperature dropped only because the massive increase in convective heat transfer stripped the heat away.
 
@@ -168,7 +174,7 @@ Because the power remained constant, we can look at the clock speeds to see if t
 With the thermal wall removed, the GPU no longer had to limit its frequencies, resulting in a stable maximum clock speed.
 :::
 
-With the GT500 turned off, the GPU was constantly hitting its 93°C limit. This caused the clock speeds to fluctuate between 2100 MHz and 2400 MHz as the system adjusted performance to manage the heat.
+With the GT500 turned off, the GPU was constantly hitting its 87°C thermal limit. This caused the clock speeds to fluctuate between 2100 MHz and 2400 MHz as the system adjusted performance to manage the heat.
 
 Once the blower kicked in and dropped the temperatures, the GPU gained significant thermal headroom. The clock speeds stabilized, boosted to their maximum frequency of 2460 MHz, and remained there for the rest of the session.
 
