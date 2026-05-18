@@ -1,7 +1,7 @@
 ---
 title: "How to eliminate laptop thermal throttling with high static pressure"
 subtitle: "Analyzing the thermal data of the IETS GT500 cooler during a heavy gaming workload."
-date: "May 17, 2026"
+date: "May 18, 2026"
 tags: ["Hardware", "Cooling", "Data analysis", "Python", "Gaming"]
 ---
 
