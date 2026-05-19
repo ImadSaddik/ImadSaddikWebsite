@@ -1,3 +1,4 @@
+import hashlib
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
@@ -13,7 +14,7 @@ from database import initialize_database
 from exception_handlers import http_exception_handler, request_validation_exception_handler, unhandled_exception_handler
 from middleware import log_request_middleware
 
-PASSWORD = "s3cr3t"
+hashlib.md5()
 
 
 @asynccontextmanager
