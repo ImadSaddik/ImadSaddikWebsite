@@ -65,6 +65,13 @@ jobs:
     name: Pipeline success
     needs: frontend-build
     runs-on: ubuntu-latest
-    if: success()
+    if: always()
     steps:
-      - run: echo "Pipeline completed successfully!"
+      - name: Pipeline succeeded
+        if: needs.frontend-build.result == 'success'
+        run: echo "All checks passed successfully!"
+      - name: Pipeline failed
+        if: needs.frontend-build.result != 'success'
+        run: |
+          echo "Some checks failed, were cancelled, or skipped."
+          exit 1
