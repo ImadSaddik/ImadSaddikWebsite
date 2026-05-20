@@ -140,10 +140,10 @@ The frontend is built with [Vue.js](https://vuejs.org/) and [Vite](https://vitej
 ### Prerequisites (frontend)
 
 - [Node.js](https://nodejs.org/)
-- [pnpm](https://pnpm.io/) (v11)
+- [pnpm](https://pnpm.io/) (v11+)
 
 > [!NOTE]
-> Please install `pnpm` v11 because it introduces supply-chain protection by default.
+> Please install `pnpm` v11+ because it introduces supply-chain protection by default.
 
 ### Setup (frontend)
 
