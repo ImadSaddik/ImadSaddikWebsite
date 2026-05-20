@@ -99,9 +99,9 @@ jobs:
         run: python -m tests.test_data
 
       - name: Set up pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
-          version: "10"
+          version: "11"
 
       - name: Set up Node.js
         uses: actions/setup-node@v6
