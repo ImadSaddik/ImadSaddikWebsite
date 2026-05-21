@@ -85,7 +85,7 @@ source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 Install dependencies:
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements-dev.txt
 ```
 
 Copy the example environment file and update `.env` with your Meilisearch configuration if different from defaults.
