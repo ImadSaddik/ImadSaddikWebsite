@@ -65,7 +65,7 @@ source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 Next, install the required dependencies. Don't forget to activate your virtual environment if you haven't done so already:
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements-dev.txt
 ```
 
 Now, create a `.env` file by copying the example file. You don't need to modify anything once you copy it:
