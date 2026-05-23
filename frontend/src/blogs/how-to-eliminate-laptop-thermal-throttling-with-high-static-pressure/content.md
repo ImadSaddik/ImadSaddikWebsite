@@ -108,7 +108,7 @@ With the hardware theory out of the way, it was time to see how the cooler handl
 I split this session into two distinct phases:
 
 - **Phase 1 (0 to 12 minutes):** I played the game with the GT500 completely turned off. This allowed the laptop to heat up naturally and saturate the internal copper pipes.
-- **Phase 2 (12 to 41 minutes):** At exactly the 12-minute mark, I cranked the GT500 turbine to its maximum 5000 RPM setting for the remainder of the session.
+- **Phase 2 (12 to 41 minutes):** At exactly the 12-minute mark, I set the GT500 turbine to its maximum 5000 RPM setting for the remainder of the session.
 
 After collecting the logs, I parsed the HWiNFO data into two graphs to show the temperature trends for both the CPU package and the GPU.
 
@@ -120,7 +120,7 @@ The CPU package temperature during the gaming session, showing a significant dro
 
 Looking at the CPU package temperature, the impact of the GT500 is immediately apparent. During the first 12 minutes with the cooler turned off, the CPU quickly heat-soaked, hitting a critical peak of 96°C and averaging 82.7°C under the heavy gaming load.
 
-The moment the turbine was cranked to 5000 RPM at the 12-minute mark, the thermal trend reversed sharply. The CPU package temperature plummeted, ultimately settling into a very stable average of 61°C for the rest of the 41-minute session. This represents a massive 21.7°C drop in average operating temperature.
+The moment the turbine was set to 5000 RPM at the 12-minute mark, the thermal trend reversed sharply. The CPU package temperature plummeted, ultimately settling into a very stable average of 61°C for the rest of the 41-minute session. This represents a massive 21.7°C drop in average operating temperature.
 
 Moving over to the graphics card, the GPU temperature followed a very similar path. Here is how the RTX 4070 handled the exact same two-phase test:
 
@@ -130,7 +130,7 @@ The GPU temperature during the gaming session, highlighting the thermal drop fro
 
 During phase 1, the RTX 4070 warmed up incredibly fast, averaging 75.3°C and hitting a peak of 87.6°C. Just like the CPU, the graphics card was completely heat-soaked.
 
-The moment the GT500 was cranked to 5000 RPM at the 12-minute mark, the graphics card got the breathing room it desperately needed. The temperature instantly dropped, eventually settling into a steady average of 62°C for the rest of the test. That is a solid 13.3°C reduction in average temperature. Keeping a high-end GPU at 62°C while running Kingdom Come: Deliverance is a fantastic result.
+The moment the GT500 was set to 5000 RPM at the 12-minute mark, the graphics card got the breathing room it desperately needed. The temperature instantly dropped, eventually settling into a steady average of 62°C for the rest of the test. That is a solid 13.3°C reduction in average temperature. Keeping a high-end GPU at 62°C while running Kingdom Come: Deliverance is a fantastic result.
 
 Comparing these results back to the initial baseline tests reveals a massive difference. Propping the laptop up on books or using a weak cooler made almost no difference, leaving the system trapped near its thermal throttling limit. Meanwhile, the IETS GT500 delivered completely different results.
 
