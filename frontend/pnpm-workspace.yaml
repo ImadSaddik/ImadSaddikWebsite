@@ -9,5 +9,6 @@ overrides:
   postcss: "^8.5.10"
   ws: "^8.20.1"
   yaml: "^2.8.3"
+  js-cookie: "3.0.7"
 allowBuilds:
   esbuild: true
