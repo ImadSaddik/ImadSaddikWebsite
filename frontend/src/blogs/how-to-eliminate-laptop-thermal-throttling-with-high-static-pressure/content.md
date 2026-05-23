@@ -128,7 +128,7 @@ Moving over to the graphics card, the GPU temperature followed a very similar pa
 The GPU temperature during the gaming session, highlighting the thermal drop from the 87.6°C peak down to a stable baseline once the cooler is active.
 :::
 
-During Phase 1, the RTX 4070 warmed up incredibly fast, averaging 75.3°C and hitting a peak of 87.6°C. Just like the CPU, the graphics card was completely heat-soaked.
+During phase 1, the RTX 4070 warmed up incredibly fast, averaging 75.3°C and hitting a peak of 87.6°C. Just like the CPU, the graphics card was completely heat-soaked.
 
 The moment the GT500 was cranked to 5000 RPM at the 12-minute mark, the graphics card got the breathing room it desperately needed. The temperature instantly dropped, eventually settling into a steady average of 62°C for the rest of the test. That is a solid 13.3°C reduction in average temperature. Keeping a high-end GPU at 62°C while running Kingdom Come: Deliverance is a fantastic result.
 
@@ -202,6 +202,18 @@ In the extreme heat test, that warm-up window completely vanished. Driven by a 2
 To visualize the sheer speed of this thermal spike, the graph above overlays the heatwave data onto the spring benchmark, offsetting the timelines so that both tests align perfectly at the 12.5-minute mark: right when the GT500 was activated.
 
 Once the GT500 spun up to 5000 RPM, the thermal curve dropped sharply. The CPU temperature settled into a stable average of 69.5°C for the remainder of the session. While this is 8.5°C higher than the spring baseline, it is a massive improvement over the 97°C throttling ceiling, proving that high static pressure effectively manages the thermal load even under extreme conditions.
+
+Moving over to the graphics card, the GPU temperature followed a very similar path under the extreme ambient conditions. Here is how the RTX 4070 handled the heatwave test:
+
+::: image ./10_gpu_temperature_spring_summer.png "Line graph comparing GPU temperature during the spring and heatwave tests, showing a fast spike to 87.2°C followed by a sharp drop once the cooler is turned on."
+The RTX 4070 experienced a rapid thermal spike during the heatwave, but the GT500 quickly stabilized temperatures once active.
+:::
+
+During phase 1 of the heatwave test, the graphics card warmed up incredibly fast without external assistance. It reached a critical peak of 87.2°C in those first 4.5 minutes, showing how quickly the internal cooling system became heat-soaked compared to the more gradual temperature climb seen in the spring.
+
+Just like the CPU chart, the timelines in the graph above are offset to align the activation points perfectly at the 12.5-minute mark.
+
+The moment the GT500 was set to its maximum 5000 RPM, the graphics card got the immediate relief it needed. The GPU temperature dropped sharply, eventually settling into a steady average of 70.6°C for the rest of the test. While this is roughly 8.1°C higher than the spring baseline average of 62.5°C, keeping a high-end GPU at around 70°C during a severe heatwave confirms that the high static pressure design successfully prevents thermal saturation across all major components.
 
 ## Conclusion
 
