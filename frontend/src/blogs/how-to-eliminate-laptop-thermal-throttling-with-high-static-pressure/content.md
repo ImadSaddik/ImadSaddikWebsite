@@ -120,7 +120,7 @@ The CPU package temperature during the gaming session, showing a significant dro
 
 Looking at the CPU package temperature, the impact of the GT500 is immediately apparent. During the first 12 minutes with the cooler turned off, the CPU quickly heat-soaked, hitting a critical peak of 96°C and averaging 82.7°C under the heavy gaming load.
 
-The moment the turbine was cranked to 5000 RPM at the 12-minute mark, the thermal trend reversed sharply. The CPU package temperature plummeted, ultimately settling into a very stable average of 60.1°C for the rest of the 41-minute session. This represents a massive 22.6°C drop in average operating temperature.
+The moment the turbine was cranked to 5000 RPM at the 12-minute mark, the thermal trend reversed sharply. The CPU package temperature plummeted, ultimately settling into a very stable average of 61°C for the rest of the 41-minute session. This represents a massive 21.7°C drop in average operating temperature.
 
 Moving over to the graphics card, the GPU temperature followed a very similar path. Here is how the RTX 4070 handled the exact same two-phase test:
 
@@ -128,15 +128,15 @@ Moving over to the graphics card, the GPU temperature followed a very similar pa
 The GPU temperature during the gaming session, highlighting the thermal drop from the 87.6°C peak down to a stable baseline once the cooler is active.
 :::
 
-During Phase 1, the RTX 4070 warmed up incredibly fast, averaging 79.8°C and hitting a peak of 87.6°C. Just like the CPU, the graphics card was completely heat-soaked.
+During Phase 1, the RTX 4070 warmed up incredibly fast, averaging 75.3°C and hitting a peak of 87.6°C. Just like the CPU, the graphics card was completely heat-soaked.
 
-The moment the GT500 was cranked to 5000 RPM at the 12-minute mark, the graphics card got the breathing room it desperately needed. The temperature instantly dropped, eventually settling into a steady average of 62°C for the rest of the test. That is a solid 17.8°C reduction in average temperature. Keeping a high-end GPU at 62°C while running Kingdom Come: Deliverance is a fantastic result.
+The moment the GT500 was cranked to 5000 RPM at the 12-minute mark, the graphics card got the breathing room it desperately needed. The temperature instantly dropped, eventually settling into a steady average of 62°C for the rest of the test. That is a solid 13.3°C reduction in average temperature. Keeping a high-end GPU at 62°C while running Kingdom Come: Deliverance is a fantastic result.
 
 Comparing these results back to the initial baseline tests reveals a massive difference. Propping the laptop up on books or using a weak cooler made almost no difference, leaving the system trapped near its thermal throttling limit. Meanwhile, the IETS GT500 delivered completely different results.
 
 By creating a pressurized, vacuum-sealed environment, the blower forced a massive volume of air through the chassis. This maximized the convective heat transfer coefficient ($h$) in a way low-pressure setups simply cannot.
 
-Ultimately, dropping the average CPU temperature by 22.6°C and keeping the GPU at a cool 62°C average proves that high static pressure isn't an expensive gimmick. It is a highly effective brute-force solution to keep high-end gaming hardware running optimally when facing harsh thermal conditions.
+Ultimately, dropping the average CPU temperature by 21.7°C and keeping the GPU at a cool 62°C average proves that high static pressure isn't an expensive gimmick. It is a highly effective brute-force solution to keep high-end gaming hardware running optimally when facing harsh thermal conditions.
 
 However, this level of thermal performance comes with a significant compromise: noise. Running the centrifugal blower at its maximum 5000 RPM setting generates an immense amount of noise. For most users, gaming next to the GT500 at full speed is unbearable without a good pair of noise-canceling headphones.
 
@@ -188,6 +188,20 @@ This served as an ideal real-world stress test. I booted up Kingdom Come: Delive
 - **Phase 2 (4.5 to 44 minutes):** Cooler on at 5000 RPM.
 
 Why only 4.5 minutes for the first phase? The extreme heat completely overwhelmed the laptop’s internal cooling. The CPU package temperature spiked almost instantly, hitting a critical maximum of 97°C. The fans were fully saturated, and the silicon aggressively throttled to prevent permanent damage.
+
+To visualize the impact of this heat, I overlaid the summer data onto the spring benchmarks. This allows for a direct side-by-side comparison of how the same hardware performed under different ambient conditions. Let’s start with the CPU package temperature:
+
+::: image ./9_cpu_package_temperature_spring_summer.png "Line graph comparing CPU package temperature during the spring and summer tests, highlighting the rapid summer spike."
+The cooler performed effectively in both tests. However, the extreme ambient heat in the summer session caused a rapid temperature spike to 97°C in just 4.5 minutes, compared to a slower climb in the spring. Once active, the GT500 successfully stabilized temperatures in both scenarios.
+:::
+
+In the spring test, the CPU temperature climbed gradually, taking nearly 12 minutes to hit the laptop's built-in thermal ceiling before the GT500 brought it down to a stable average of 61°C in phase 2. The system had a comfortable "warm-up" window before the fans were completely overwhelmed.
+
+In the extreme heat test, that warm-up window completely vanished. Driven by a 22°C increase in ambient room temperature during the sudden spike in heat, the CPU package temperature jumped almost instantly, hitting a critical 97°C after only 4.5 minutes of gaming. The internal fans were immediately overwhelmed by the rapid heat-soak, forcing the silicon into aggressive thermal throttling to prevent permanent damage.
+
+To visualize the sheer speed of this thermal spike, the graph above overlays the heatwave data onto the spring benchmark, offsetting the timelines so that both tests align perfectly at the 12.5-minute mark: right when the GT500 was activated.
+
+Once the GT500 spun up to 5000 RPM, the thermal curve dropped sharply. The CPU temperature settled into a stable average of 69.5°C for the remainder of the session. While this is 8.5°C higher than the spring baseline, it is a massive improvement over the 97°C throttling ceiling, proving that high static pressure effectively manages the thermal load even under extreme conditions.
 
 ## Conclusion
 
