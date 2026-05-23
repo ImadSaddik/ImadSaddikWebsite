@@ -37,7 +37,7 @@ After exporting and cleaning the CSV data, I generated the graph below to compar
 All three configurations quickly spike and flatten out near the 94°C thermal throttling limit.
 :::
 
-Notice how all three setups quickly hit the 94°C thermal wall. What makes this data even more concerning is that these tests were conducted during the cooler spring months in Morocco.
+Notice how all three setups quickly hit the 94°C thermal ceiling. What makes this data even more concerning is that these tests were conducted during the cooler spring months in Morocco.
 
 If standard open-air pads and entry-level sealed coolers are already failing to prevent thermal throttling now, they will be completely useless when summer arrives and ambient temperatures regularly cross 40°C. This initial data proves why I need to find a heavy-duty solution before the extreme heat hits.
 
@@ -108,7 +108,7 @@ With the hardware theory out of the way, it was time to see how the cooler handl
 I split this session into two distinct phases:
 
 - **Phase 1 (0 to 12 minutes):** I played the game with the GT500 completely turned off. This allowed the laptop to heat up naturally and saturate the internal copper pipes.
-- **Phase 2 (12 to 41 minutes):** At exactly the 12-minute mark, I cranked the GT500 turbine to its maximum 5000 RPM setting for the remainder of the session.
+- **Phase 2 (12 to 41 minutes):** At exactly the 12-minute mark, I set the GT500 turbine to its maximum 5000 RPM setting for the remainder of the session.
 
 After collecting the logs, I parsed the HWiNFO data into two graphs to show the temperature trends for both the CPU package and the GPU.
 
@@ -118,25 +118,25 @@ Let's start with the CPU package temperature:
 The CPU package temperature during the gaming session, showing a significant drop after the GT500 is activated at 12 minutes.
 :::
 
-Looking at the CPU package temperature, the impact of the GT500 is immediately apparent. During the first 12 minutes with the cooler turned off, the CPU quickly heat-soaked, hitting a critical peak of 96°C and averaging 82.7°C under the heavy gaming load.
+Looking at the CPU package temperature, the impact of the GT500 is immediately apparent. During the first 12 minutes with the cooler turned off, the CPU quickly heat-soaked, hitting a critical peak of 96°C and averaging 81.7°C under the heavy gaming load.
 
-The moment the turbine was cranked to 5000 RPM at the 12-minute mark, the thermal trend reversed sharply. The CPU package temperature plummeted, ultimately settling into a very stable average of 60.1°C for the rest of the 41-minute session. This represents a massive 22.6°C drop in average operating temperature.
+The moment the turbine was set to 5000 RPM at the 12-minute mark, the thermal trend reversed sharply. The CPU package temperature plummeted, ultimately settling into a very stable average of 60.6°C for the rest of the 41-minute session. This represents a massive 21.1°C drop in average operating temperature.
 
-Moving over to the graphics card, the GPU temperature followed a very similar path. Here is how the RTX 4070 handled the exact same two-phase test:
+Moving over to the graphics card, the GPU temperature followed a very similar path. Here is how the RTX 4070 handled the same two-phase test:
 
 ::: image ./5_gpu_temperature_gt500.png "Line graph showing GPU temperature over a 41-minute gaming session, demonstrating a steady peak around 87°C followed by a sharp drop to roughly 62°C after the GT500 is turned on."
 The GPU temperature during the gaming session, highlighting the thermal drop from the 87.6°C peak down to a stable baseline once the cooler is active.
 :::
 
-During Phase 1, the RTX 4070 warmed up incredibly fast, averaging 79.8°C and hitting a peak of 87.6°C. Just like the CPU, the graphics card was completely heat-soaked.
+During Phase 1, the RTX 4070 warmed up incredibly fast, averaging 75.3°C and hitting a peak of 87.6°C. Just like the CPU, the graphics card was completely heat-soaked.
 
-The moment the GT500 was cranked to 5000 RPM at the 12-minute mark, the graphics card got the breathing room it desperately needed. The temperature instantly dropped, eventually settling into a steady average of 62°C for the rest of the test. That is a solid 17.8°C reduction in average temperature. Keeping a high-end GPU at 62°C while running Kingdom Come: Deliverance is a fantastic result.
+The moment the GT500 was set to 5000 RPM at the 12-minute mark, the graphics card got the breathing room it desperately needed. The temperature instantly dropped, eventually settling into a steady average of 62.5°C for the rest of the test. That is a solid 12.8°C reduction in average temperature. Keeping a high-end GPU at 62.5°C while running Kingdom Come: Deliverance is a fantastic result.
 
 Comparing these results back to the initial baseline tests reveals a massive difference. Propping the laptop up on books or using a weak cooler made almost no difference, leaving the system trapped near its thermal throttling limit. Meanwhile, the IETS GT500 delivered completely different results.
 
 By creating a pressurized, vacuum-sealed environment, the blower forced a massive volume of air through the chassis. This maximized the convective heat transfer coefficient ($h$) in a way low-pressure setups simply cannot.
 
-Ultimately, dropping the average CPU temperature by 22.6°C and keeping the GPU at a cool 62°C average proves that high static pressure isn't an expensive gimmick. It is a highly effective brute-force solution to keep high-end gaming hardware running optimally when facing harsh thermal conditions.
+Ultimately, dropping the average CPU temperature by 21.1°C and keeping the GPU at a cool 62.5°C average proves that high static pressure isn't an expensive gimmick. It is a highly effective brute-force solution to keep high-end gaming hardware running optimally when facing harsh thermal conditions.
 
 However, this level of thermal performance comes with a significant compromise: noise. Running the centrifugal blower at its maximum 5000 RPM setting generates an immense amount of noise. For most users, gaming next to the GT500 at full speed is unbearable without a good pair of noise-canceling headphones.
 
@@ -171,17 +171,55 @@ This power data disproves the throttling theory. The hardware was generating the
 Because the power remained constant, we can look at the clock speeds to see if the cooler provided any actual performance benefits.
 
 ::: image ./8_gpu_clock_speeds.png "Line graph showing GPU clock speeds fluctuating initially, then locking onto a flat 2460 MHz line after the cooler is activated."
-With the thermal wall removed, the GPU no longer had to limit its frequencies, resulting in a stable maximum clock speed.
+With the thermal ceiling removed, the GPU no longer had to limit its frequencies, resulting in a stable maximum clock speed.
 :::
 
 With the GT500 turned off, the GPU was constantly hitting its 87°C thermal limit. This caused the clock speeds to fluctuate between 2100 MHz and 2400 MHz as the system adjusted performance to manage the heat.
 
 Once the blower kicked in and dropped the temperatures, the GPU gained significant thermal headroom. The clock speeds stabilized, boosted to their maximum frequency of 2460 MHz, and remained there for the rest of the session.
 
+## The extreme heat test
+
+While the spring data proved that high static pressure works, the goal was always to survive the extreme Moroccan heat. I did not have to wait long. In late May, a sudden heatwave pushed ambient temperatures past 37°C, serving as an ideal real-world stress test.
+
+I booted up Kingdom Come: Deliverance to run the same two-phase benchmark, but the baseline "warm-up" window completely vanished. My roof-level, brick-walled workspace offered no structural insulation against the weather. With the room air trapped and rapidly warming up, the laptop's internal cooling was immediately overwhelmed.
+
+During Phase 1 (with the cooler off), the CPU package temperature jumped almost instantly, hitting a critical 97°C after only 4.5 minutes of gaming. The internal fans were fully saturated, and the silicon was forced into aggressive thermal throttling to prevent permanent damage.
+
+Because of this rapid heat-soak, Phase 1 had to be cut short at the 4.5-minute mark, at which point I set the GT500 turbine to its maximum 5000 RPM setting for the remainder of the session (Phase 2).
+
+To see exactly how much faster the hardware saturated compared to the cooler spring months, let’s look at the overlaid CPU package temperatures:
+
+::: image ./9_cpu_package_temperature_spring_summer.png "Line graph comparing CPU package temperature during the spring and heatwave tests, highlighting the rapid spike caused by the extreme ambient heat."
+The cooler performed effectively in both tests. However, the sudden May heatwave left no room for error; the CPU temperature spiked to 97°C in just 4.5 minutes without external cooling. Once active, the GT500 successfully stabilized temperatures in both scenarios.
+:::
+
+In the spring baseline test, the CPU temperature had climbed gradually, taking nearly 12 minutes to hit the laptop's built-in thermal ceiling before the GT500 brought it down to a stable Phase 2 average of 60.6°C.
+
+To visualize the sheer speed of the heatwave spike against that baseline, the graph above overlays the heatwave session data directly onto the spring chart, offsetting the timelines so that both tests align perfectly at the 12.5-minute mark: right when the GT500 was activated.
+
+Once the GT500 spun up to 5000 RPM, the thermal curve dropped sharply. The heatwave CPU temperature settled into a stable average of 69.6°C for the remainder of the session. While this is 9°C higher than the spring baseline, it is a massive improvement over the 97°C throttling ceiling, proving that high static pressure effectively manages the thermal load even under extreme conditions.
+
+Moving over to the graphics card, the GPU temperature followed a very similar path under the extreme ambient conditions. Here is how the RTX 4070 handled the heatwave test:
+
+::: image ./10_gpu_temperature_spring_summer.png "Line graph comparing GPU temperature during the spring and heatwave tests, showing a fast spike to 87.2°C followed by a sharp drop once the cooler is turned on."
+The RTX 4070 experienced a rapid thermal spike during the heatwave, but the GT500 quickly stabilized temperatures once active.
+:::
+
+During Phase 1 of the heatwave test, the graphics card warmed up incredibly fast without external assistance. It reached a critical peak of 87.2°C in those first 4.5 minutes, showing how quickly the internal cooling system became heat-soaked compared to the more gradual temperature climb seen in the spring.
+
+Just like the CPU chart, the timelines in the graph above are offset to align the activation points perfectly at the 12.5-minute mark.
+
+The moment the GT500 was set to its maximum 5000 RPM, the graphics card got the immediate relief it needed. The GPU temperature dropped sharply, eventually settling into a steady average of 70.6°C for the rest of the test. While this is roughly 8.1°C higher than the spring baseline average of 62.5°C, keeping a high-end GPU at around 70°C during a severe heatwave confirms that the high static pressure design successfully prevents thermal saturation across all major components.
+
+Just as we saw in the spring benchmarks, verifying the power logs during the heatwave confirmed that the massive temperature drops were entirely driven by the GT500's static pressure, not hardware throttling. Throughout the entire heatwave session, the RTX 4070 maintained its stable 110W to 120W power draw, and the CPU package power continued to fluctuate naturally without any artificial drops. With the thermal ceiling removed even in 37°C ambient heat, the GPU clock speeds remained completely stable at their maximum frequency of 2460 MHz instead of throttling down.
+
+For the skeptics who want to verify these metrics themselves, the complete, unedited HWiNFO CSV logs and the Python data-parsing scripts for this heatwave session are fully available in the GitHub repository linked at the start of this article.
+
 ## Conclusion
 
-Standard open-air cooling pads and entry-level sealed coolers rely on low-RPM fans that simply cannot generate the static pressure required to push air through dense internal heatsinks. Even if a cooler has a foam ring, a weak motor will just cool the plastic shell of the laptop and do very little to lower internal component temperatures.
+When facing intense ambient temperatures, standard open-air cooling pads and entry-level sealed options completely fail because they cannot build the static pressure required to force air through dense internal heatsinks. They leave your hardware starved for fresh air and trapped at the thermal throttling limit.
 
-By utilizing a memory foam seal and a 5000 RPM centrifugal blower, the IETS GT500 provides a highly effective hardware solution to the thermal throttling problem. It forces ambient air directly through the laptop's internal heatsinks, significantly increasing the convective heat transfer coefficient.
+The IETS GT500 approaches this problem with raw physics. By combining a completely unrestricted intake, a dense memory foam gasket, and a powerful 5000 RPM centrifugal blower, it creates a pressurized environment that forces heat away from the silicon.
 
-The data is clear. High static pressure prevents thermal throttling under heavy workloads. While the noise at maximum RPM is pretty loud, the trade-off is a massive 20+°C drop in average temperatures, stable power draw, and sustained maximum clock speeds. If you want to protect your hardware and maintain peak performance during the hottest months of the year, a sealed, high-pressure blower is a highly effective solution.
+Surviving a Moroccan heatwave while keeping a high-end CPU at 69.6°C and an RTX 4070 at 70.6°C under maximum gaming load proves that high static pressure is a definitive game-changer for laptop thermals. If you can tolerate the high noise levels at maximum RPM, or mitigate them with a good pair of noise-canceling headphones, this cooler is an incredibly effective brute-force solution to protect your hardware and sustain peak performance in the harshest environments.
