@@ -215,6 +215,10 @@ Just like the CPU chart, the timelines in the graph above are offset to align th
 
 The moment the GT500 was set to its maximum 5000 RPM, the graphics card got the immediate relief it needed. The GPU temperature dropped sharply, eventually settling into a steady average of 70.6°C for the rest of the test. While this is roughly 8.1°C higher than the spring baseline average of 62.5°C, keeping a high-end GPU at around 70°C during a severe heatwave confirms that the high static pressure design successfully prevents thermal saturation across all major components.
 
+Just as we saw in the spring benchmarks, verifying the power logs during the heatwave confirmed that the massive temperature drops were entirely driven by the GT500's static pressure, not hardware throttling. Throughout the entire heatwave session, the RTX 4070 maintained its stable 110W to 120W power draw, and the CPU package power continued to fluctuate naturally without any artificial drops. With the thermal ceiling removed even in 37°C ambient heat, the GPU clock speeds remained completely stable at their maximum frequency of 2460 MHz instead of throttling down.
+
+For the skeptics who want to verify these metrics themselves, the complete, unedited HWiNFO CSV logs and the Python data-parsing scripts for this heatwave session are fully available in the GitHub repository linked at the start of this article.
+
 ## Conclusion
 
 When facing intense ambient temperatures, standard open-air cooling pads and entry-level sealed options completely fail because they cannot build the static pressure required to force air through dense internal heatsinks. They leave your hardware starved for fresh air and trapped at the thermal throttling limit.
