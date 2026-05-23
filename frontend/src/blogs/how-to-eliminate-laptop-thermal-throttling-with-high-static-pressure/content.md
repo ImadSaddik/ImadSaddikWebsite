@@ -180,9 +180,14 @@ Once the blower kicked in and dropped the temperatures, the GPU gained significa
 
 ## The extreme heat test
 
-While the spring data proved the mechanics of high static pressure, the goal was always to survive the extreme Moroccan heat. I did not have to wait long. In late May, a sudden heatwave pushed ambient room temperatures past 37°C.
+While the spring data proved that high static pressure works, the goal was always to survive the extreme Moroccan heat. I did not have to wait long. In late May, a sudden heatwave pushed ambient room temperatures past 37°C.
 
-This served as an ideal real-world stress test. I booted up Kingdom Come: Deliverance and ran the exact same two-phase benchmark. However, the results were far more aggressive due to the high ambient temperature. With the cooler off, the laptop hit its thermal limit in just 4.5 minutes, rather than the 12 minutes seen in the previous baseline.
+This served as an ideal real-world stress test. I booted up Kingdom Come: Deliverance and ran the same two-phase benchmark:
+
+- **Phase 1 (0 to 4.5 minutes):** Cooler off.
+- **Phase 2 (4.5 to 44 minutes):** Cooler on at 5000 RPM.
+
+Why only 4.5 minutes for the first phase? The extreme heat completely overwhelmed the laptop’s internal cooling. The CPU package temperature spiked almost instantly, hitting a critical maximum of 97°C. The fans were fully saturated, and the silicon aggressively throttled to prevent permanent damage.
 
 ## Conclusion
 
