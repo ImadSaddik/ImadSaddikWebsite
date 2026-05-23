@@ -178,6 +178,12 @@ With the GT500 turned off, the GPU was constantly hitting its 87°C thermal limi
 
 Once the blower kicked in and dropped the temperatures, the GPU gained significant thermal headroom. The clock speeds stabilized, boosted to their maximum frequency of 2460 MHz, and remained there for the rest of the session.
 
+## The extreme heat test
+
+While the spring data proved the mechanics of high static pressure, the goal was always to survive the extreme Moroccan heat. I did not have to wait long. In late May, a sudden heatwave pushed ambient room temperatures past 37°C.
+
+This served as an ideal real-world stress test. I booted up Kingdom Come: Deliverance and ran the exact same two-phase benchmark. However, the results were far more aggressive due to the high ambient temperature. With the cooler off, the laptop hit its thermal limit in just 4.5 minutes, rather than the 12 minutes seen in the previous baseline.
+
 ## Conclusion
 
 Standard open-air cooling pads and entry-level sealed coolers rely on low-RPM fans that simply cannot generate the static pressure required to push air through dense internal heatsinks. Even if a cooler has a foam ring, a weak motor will just cool the plastic shell of the laptop and do very little to lower internal component temperatures.
