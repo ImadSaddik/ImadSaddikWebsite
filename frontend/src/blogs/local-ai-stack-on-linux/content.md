@@ -1177,7 +1177,7 @@ I will build the project with CUDA support. Check the project’s [README.md](ht
 
 ```bash
 cmake -B build -DGGML_CUDA=1
-cmake --build build -j --config Release
+cmake --build build -j $(nproc) --config Release
 ```
 
 You should see something like this in the end.
@@ -2388,7 +2388,7 @@ Pull the latest changes and recompile the project.
 git pull --rebase
 rm -rf build/
 cmake -B build -DGGML_CUDA=1
-cmake --build build -j --config Release
+cmake --build build -j $(nproc) --config Release
 ```
 
 Copy the updated programs to your system path.
@@ -2468,7 +2468,7 @@ rm -rf build/
 
 # Build with CUDA and FFmpeg support
 cmake -B build -DGGML_CUDA=1 -DWHISPER_FFMPEG=yes -DCMAKE_CUDA_ARCHITECTURES=89
-cmake --build build -j --config Release
+cmake --build build -j $(nproc) --config Release
 ```
 
 Now you don’t need the Python script or the virtual environment anymore. You can run the native server directly.
