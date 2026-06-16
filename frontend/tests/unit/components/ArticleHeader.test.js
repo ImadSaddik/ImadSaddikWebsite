@@ -73,14 +73,22 @@ describe("ArticleHeader", () => {
     const wrapper = factory();
     const twitterButton = wrapper.findAll(".article-header-share-button")[0];
     await twitterButton.trigger("click");
-    expect(window.open).toHaveBeenCalledWith(expect.stringContaining("twitter.com/intent/tweet"), "_blank");
+    expect(window.open).toHaveBeenCalledWith(
+      expect.stringContaining("twitter.com/intent/tweet"),
+      "_blank",
+      "noopener,noreferrer"
+    );
   });
 
   it("opens LinkedIn share dialog when share button is clicked", async () => {
     const wrapper = factory();
     const linkedInButton = wrapper.findAll(".article-header-share-button")[1];
     await linkedInButton.trigger("click");
-    expect(window.open).toHaveBeenCalledWith(expect.stringContaining("linkedin.com/sharing"), "_blank");
+    expect(window.open).toHaveBeenCalledWith(
+      expect.stringContaining("linkedin.com/sharing"),
+      "_blank",
+      "noopener,noreferrer"
+    );
   });
 
   it("emits show-toast with success when link is copied", async () => {

@@ -60,7 +60,7 @@ const routes = [
   {
     path: ROUTES.HIRE_ME.path,
     name: ROUTES.HIRE_ME.name,
-    component: () => import("@/views/HireMe.vue"),
+    component: () => import("@/views/HireMe/index.vue"),
   },
   {
     path: ROUTES.NOT_FOUND.path,
