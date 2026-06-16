@@ -3,6 +3,15 @@
     <div class="hire-me-content" :class="{ wide: wideArticlesEnabled }">
       <HireMeContent />
 
+      <ImageWithCaption
+        :image-src="heartShapedAntennaGalaxies"
+        image-alt="Heart shaped antenna galaxies"
+        @open-image-modal="handleOpenImageModal"
+      >
+        A photo of the heart shaped Antennae Galaxies.
+        <a href="https://esahubble.org/images/heic0812c/" target="_blank">Credit: Robert Gendler</a>
+      </ImageWithCaption>
+
       <section class="get-in-touch-section">
         <h2 id="get-in-touch" data-table-of-contents>
           <a class="clickable-header-link" href="#get-in-touch">Get in touch</a>
@@ -16,15 +25,6 @@
           <button class="secondary-button resume-button" @click="openResumeLink">Download resume</button>
         </div>
       </section>
-
-      <ImageWithCaption
-        :image-src="heartShapedAntennaGalaxies"
-        image-alt="Heart shaped antenna galaxies"
-        @open-image-modal="handleOpenImageModal"
-      >
-        A photo of the heart shaped Antennae Galaxies.
-        <a href="https://esahubble.org/images/heic0812c/" target="_blank">Credit: Robert Gendler</a>
-      </ImageWithCaption>
     </div>
 
     <TableOfContents />
@@ -158,7 +158,7 @@ export default {
 .get-in-touch-section {
   text-align: left;
   border: 1px solid var(--color-tag-border);
-  margin-top: var(--gap-2xl);
+  margin-top: var(--gap-xl);
   padding: var(--gap-2xl) var(--gap-xl);
   background: rgba(255, 255, 255, 0.02);
 }
