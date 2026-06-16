@@ -9,7 +9,9 @@
         @open-image-modal="handleOpenImageModal"
       >
         A photo of the heart shaped Antennae Galaxies.
-        <a href="https://esahubble.org/images/heic0812c/" target="_blank">Credit: Robert Gendler</a>
+        <a href="https://esahubble.org/images/heic0812c/" target="_blank" rel="noopener noreferrer"
+          >Credit: Robert Gendler</a
+        >
       </ImageWithCaption>
 
       <section class="get-in-touch-section">
