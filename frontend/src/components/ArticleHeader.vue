@@ -98,11 +98,11 @@ export default {
     shareOnTwitter() {
       const url = encodeURIComponent(window.location.href);
       const text = encodeURIComponent("Pre-filtering with kNN search in Elasticsearch");
-      window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, "_blank");
+      window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, "_blank", "noopener,noreferrer");
     },
     shareOnLinkedIn() {
       const url = encodeURIComponent(window.location.href);
-      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, "_blank");
+      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, "_blank", "noopener,noreferrer");
     },
     async copyLink() {
       try {

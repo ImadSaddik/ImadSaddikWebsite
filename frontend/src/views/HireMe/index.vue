@@ -93,7 +93,7 @@ export default {
   },
   methods: {
     openCalendlyLink() {
-      const calendlyWindow = window.open("https://calendly.com/simad3647/30min", "_blank");
+      const calendlyWindow = window.open("https://calendly.com/simad3647/30min", "_blank", "noopener,noreferrer");
       if (!calendlyWindow) {
         this.emitToastEvent({
           type: "error",
@@ -102,7 +102,7 @@ export default {
       }
     },
     openResumeLink() {
-      window.open("https://imadsaddik.com/resume", "_blank");
+      window.open("https://imadsaddik.com/resume", "_blank", "noopener,noreferrer");
     },
     emitToastEvent(data) {
       this.$emit("show-toast", data);
