@@ -34,7 +34,7 @@
     "@faker-js/faker": "^10.1.0",
     "@playwright/test": "^1.58.2",
     "@prettier/plugin-xml": "^3.4.2",
-    "@vitejs/plugin-vue": "^6.0.3",
+    "@vitejs/plugin-vue": "^6.0.7",
     "@vitest/coverage-v8": "^4.0.14",
     "@vitest/ui": "^4.0.14",
     "@vue/test-utils": "^2.4.6",
