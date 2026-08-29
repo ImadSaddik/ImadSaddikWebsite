@@ -33,15 +33,22 @@ Syntax and example:
 
 ### Videos with captions
 
-For local video files (like `.mp4`), use the `::: video` container to embed the file alongside a caption.
+For local video files (like `.mp4`), use the `::: video` container to embed the file alongside a caption. Videos include default playback controls by default. To make a short clip auto-play on a loop (like a GIF), append the optional `loop` keyword.
 
 Syntax and example:
 
 ```markdown
-::: video [path] "[caption]"
+::: video [path] "[caption]" [loop]
 :::
 
+<!-- Standard click-to-play video with controls -->
+
 ::: video ./timelapse.mp4 "A beautiful time-lapse of the night sky."
+:::
+
+<!-- Looping video with controls -->
+
+::: video ./demo.mp4 "A short UI demo" loop
 :::
 ```
 
