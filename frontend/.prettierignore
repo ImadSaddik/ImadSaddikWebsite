@@ -14,6 +14,11 @@ pnpm-lock.yaml
 # Ignore other common generated or large files if necessary
 # e.g., coverage reports
 coverage
+playwright-report
+test-results
+stats.json
+stats.html
+.pytest_cache
 .DS_Store
 *.log
 
