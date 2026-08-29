@@ -51,3 +51,32 @@ Touch devices emulate mouse events for backward compatibility with older website
 
 Because the browser cannot tell where the pointer went after your finger leaves the screen, it leaves the element in both focus and hover states.
 :::
+
+## Fixing the problem
+
+Historically, developers tried to prevent this issue using screen width breakpoints (like `@media (min-width: 768px)`). That approach is unreliable because modern devices blur the line between desktop and mobile. A touchscreen laptop can have a large screen with touch input, while a tablet can be connected to a physical mouse.
+
+Instead of guessing based on screen dimensions, CSS provides [interaction media queries](https://www.w3.org/TR/mediaqueries-5/#hover) to test the actual capabilities of the primary input device.
+
+You can wrap your hover styles inside `@media (hover: hover)`:
+
+```css
+.control-button {
+  background-color: transparent;
+  color: #64748b;
+  transition: all 0.2s ease;
+}
+
+/* Apply hover styles only if the primary input can hover */
+@media (hover: hover) {
+  .control-button:hover {
+    background-color: #f1f5f9;
+    color: #0f172a;
+  }
+}
+```
+
+Think of `@media (hover: hover)` like an `if` statement in programming:
+
+- **If the primary device can hover** (like a desktop with a mouse), the condition evaluates to true. The browser loads the `:hover` style and displays the effect when the cursor is over the element.
+- **If the primary device cannot hover** (like a mobile phone or tablet), the condition evaluates to false. The browser completely ignores the `:hover` rule, preventing the style from getting stuck after a tap.
