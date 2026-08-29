@@ -1,7 +1,15 @@
 <template>
   <section class="video-with-caption-container">
     <figure>
-      <video autoplay loop muted playsinline :src="videoSrc"></video>
+      <video
+        controls
+        playsinline
+        :autoplay="loop"
+        :loop="loop"
+        :muted="loop"
+        :preload="loop ? 'auto' : 'metadata'"
+        :src="videoSrc"
+      ></video>
       <figcaption v-html="videoCaption"></figcaption>
     </figure>
   </section>
@@ -18,6 +26,10 @@ export default {
     videoCaption: {
       type: String,
       required: true,
+    },
+    loop: {
+      type: Boolean,
+      default: false,
     },
   },
 };
