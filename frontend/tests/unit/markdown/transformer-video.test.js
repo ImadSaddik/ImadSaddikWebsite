@@ -49,6 +49,29 @@ describe("videoTransformer", () => {
       const output = markdownItInstance.render(input);
       expect(output).toContain('video-src="./test.mp4"');
       expect(output).toContain('video-caption=""');
+      expect(output).not.toContain(':loop="true"');
+    });
+  });
+
+  describe("video with loop modifier", () => {
+    it('should set :loop="true" when loop modifier is present after caption', () => {
+      const input = '::: video ./test.mp4 "A looping video" loop\n:::';
+      const output = markdownItInstance.render(input);
+      expect(output).toContain(
+        '<VideoWithCaption video-src="./test.mp4" video-caption="A looping video" :loop="true">'
+      );
+    });
+
+    it('should set :loop="true" when loop modifier is present without caption', () => {
+      const input = "::: video ./test.mp4 loop\n:::";
+      const output = markdownItInstance.render(input);
+      expect(output).toContain('<VideoWithCaption video-src="./test.mp4" video-caption="" :loop="true">');
+    });
+
+    it("should not include :loop attribute when loop modifier is absent", () => {
+      const input = '::: video ./test.mp4 "Normal video"\n:::';
+      const output = markdownItInstance.render(input);
+      expect(output).not.toContain(':loop="true"');
     });
   });
 

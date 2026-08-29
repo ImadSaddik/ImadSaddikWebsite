@@ -1,7 +1,12 @@
 import MarkdownItContainer from "markdown-it-container";
-import { MARKDOWN_IT_OPENING_TAG, REGEX_FIRST_CAPTURE_GROUP, REGEX_SECOND_CAPTURE_GROUP } from "../../../src/constants";
+import {
+  MARKDOWN_IT_OPENING_TAG,
+  REGEX_FIRST_CAPTURE_GROUP,
+  REGEX_SECOND_CAPTURE_GROUP,
+  REGEX_THIRD_CAPTURE_GROUP,
+} from "../../../src/constants";
 
-const VIDEO_CONTAINER_REGEX = /video\s+(.*?)(?:\s+"(.*?)")?\s*$/;
+const VIDEO_CONTAINER_REGEX = /video\s+([^\s"]+)(?:\s+"(.*?)")?(?:\s+(loop))?\s*$/;
 
 export function videoTransformer(markdownItInstance) {
   markdownItInstance.use(MarkdownItContainer, "video", {
@@ -12,8 +17,11 @@ export function videoTransformer(markdownItInstance) {
       if (tokens[index].nesting === MARKDOWN_IT_OPENING_TAG) {
         const videoSrc = match ? match[REGEX_FIRST_CAPTURE_GROUP].trim() : "";
         const videoCaption = match && match[REGEX_SECOND_CAPTURE_GROUP] ? match[REGEX_SECOND_CAPTURE_GROUP] : "";
+        const isLoop = Boolean(match && match[REGEX_THIRD_CAPTURE_GROUP]);
 
-        return `<VideoWithCaption video-src="${videoSrc}" video-caption="${videoCaption}">`;
+        const loopAttr = isLoop ? ' :loop="true"' : "";
+
+        return `<VideoWithCaption video-src="${videoSrc}" video-caption="${videoCaption}"${loopAttr}>`;
       } else {
         return "</VideoWithCaption>";
       }
