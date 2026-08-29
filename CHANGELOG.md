@@ -5,6 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.4.0] - 2026-08-29
+
+### Added
+
+- **Markdown math support:** Integrated KaTeX and created a custom Markdown transformer for rendering inline and block math equations.
+- **Video player controls & loop modifier:** Added default browser playback controls (`controls`), `playsinline`, and `preload="metadata"` to `VideoWithCaption.vue`, along with an optional `loop` container modifier for looping clips.
+- **Hire Me page markdown migration:** Migrated the Hire Me page to a dynamic markdown-powered layout using `content.md`.
+- **Content:** Added four new technical articles:
+  - "How to fix sticky hover states on mobile using CSS hover media queries"
+  - "Benchmarking laptop coolers and extreme heat performance"
+  - "How to enforce code quality with pre-commit"
+  - "How to protect a home server from power outages with NUT and a UPS"
+
+### Changed
+
+- **Package manager migration:** Migrated the frontend workspace to `pnpm v11` with supply-chain protections and package override configurations.
+- **Infrastructure & performance:** Optimized Nginx configuration for better caching, security header enforcement, and maintainability.
+- **Backend architecture:** Split backend Python dependencies into separate production (`requirements.txt`) and development (`requirements-dev.txt`) files.
+- **Dependencies:** Upgraded core frontend and backend dependencies including Vue (`^3.5.33`), Vitest (`^4.1.0`), Axios (`^1.16.1`), and esbuild (`^0.28.1`).
+
+### Fixed
+
+- **Security audits:** Resolved backend and frontend audit vulnerabilities across multiple dependencies.
+- **CI/CD:** Updated GitHub Actions pipeline to ensure `pipeline-success` accurately fails when prerequisite jobs fail.
+
 ## [v2.3.0] - 2026-04-25
 
 ### Added
@@ -135,6 +160,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Monitoring:** Real-time resource tracking with Btop and traffic analysis with GoAccess.
   - **Performance:** Global delivery optimization via Cloudflare CDN.
 
+[v2.4.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.3.0...v2.4.0
 [v2.3.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.2.0...v2.3.0
 [v2.2.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.1.0...v2.2.0
 [v2.1.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.0.1...v2.1.0
