@@ -80,3 +80,12 @@ Think of `@media (hover: hover)` like an `if` statement in programming:
 
 - **If the primary device can hover** (like a desktop with a mouse), the condition evaluates to true. The browser loads the `:hover` style and displays the effect when the cursor is over the element.
 - **If the primary device cannot hover** (like a mobile phone or tablet), the condition evaluates to false. The browser completely ignores the `:hover` rule, preventing the style from getting stuck after a tap.
+
+## Testing the fix on mobile
+
+With the `@media (hover: hover)` rule in place, let's see how the button behaves on a touchscreen device now:
+
+::: video ./mobile_fixed_hover_demo.mp4 "The hover effect is completely bypassed on mobile touchscreens."
+:::
+
+The button responds to taps cleanly. The language selector opens and closes without retaining the background color change, and you no longer need to tap outside the button to clear the state.
