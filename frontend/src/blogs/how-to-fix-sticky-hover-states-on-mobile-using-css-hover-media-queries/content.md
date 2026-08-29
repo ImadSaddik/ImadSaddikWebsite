@@ -89,3 +89,9 @@ With the `@media (hover: hover)` rule in place, let's see how the button behaves
 :::
 
 The button responds to taps cleanly. The language selector opens and closes without retaining the background color change, and you no longer need to tap outside the button to clear the state.
+
+## Conclusion
+
+Using `@media (hover: hover)` is a simple and reliable way to keep your hover effects where they belong. Instead of writing JavaScript workarounds or guessing based on screen widths, CSS allows you to adapt directly to the user's input hardware.
+
+I hope this tip helps you keep your interactive elements clean on both desktop and mobile screens.
