@@ -38,7 +38,7 @@ When a visitor loads your webpage, their browser reads your stylesheet line by l
 How an `@import` rule delays page rendering by fetching fonts from an external provider.
 :::
 
-On a fast fiber connection, these requests might take only 100 to 200 milliseconds. But on a mobile device or a poor cellular connection, that latency can easily jump to several hundred milliseconds or even seconds. During that time, your text either remains invisible ([Flash of Invisible Text](https://fonts.google.com/knowledge/glossary/foit)) or shifts abruptly once the font arrives ([Flash of Unstyled Text](https://fonts.google.com/knowledge/glossary/fout)), dragging down your [First Contentful Paint](https://web.dev/articles/fcp) (FCP) and [Largest Contentful Paint](https://web.dev/articles/lcp) (LCP) scores.
+On a fast fiber connection, these requests might take only 100 to 200 milliseconds. But on a mobile device or a poor cellular connection, that latency can easily jump to several hundred milliseconds or even seconds. During that time, your text either remains invisible ([Flash of Invisible Text](https://fonts.google.com/knowledge/glossary/foit)) or shifts abruptly once the font arrives ([Flash of Unstyled Text](https://fonts.google.com/knowledge/glossary/fout)), dragging down your First Contentful Paint (FCP) and Largest Contentful Paint (LCP) scores.
 
 ### Privacy and data transfer
 
