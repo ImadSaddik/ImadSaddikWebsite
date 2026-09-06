@@ -109,3 +109,14 @@ pnpm add -D @fontsource-variable/inter @fontsource-variable/cairo
 
 > [!NOTE]
 > If you don't have `pnpm` installed, you can use `npm` or `yarn` instead.
+
+### Import the font stylesheets
+
+Next, replace your previous Google Fonts `@import` rules in your main stylesheet with the installed packages:
+
+```css
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/cairo";
+```
+
+When you build your project, bundlers like Vite handle the rest. They copy the font files into your build folder, add unique cache hashes to the filenames, and create the `@font-face` rules for you.
