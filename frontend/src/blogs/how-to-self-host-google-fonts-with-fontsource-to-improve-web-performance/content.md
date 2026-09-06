@@ -32,7 +32,7 @@ Relying on Google Fonts seems harmless at first. It is just one line of CSS, and
 When a visitor loads your webpage, their browser reads your stylesheet line by line. The moment it encounters the `@import url(...)` rule pointing to Google Fonts, it cannot start rendering the page. Instead, it must make a series of requests across two separate third-party domains:
 
 1. **The stylesheet:** The browser pauses rendering and connects to `fonts.googleapis.com` to download the CSS file containing the font rules.
-2. **The font file:** The browser reads that CSS file and sees that the actual font files live on a completely different domain `fonts.gstatic.com`. It must then open a second connection to download the `.woff2` file.
+2. **The font file:** The browser reads that CSS file and sees that the actual font files live on a completely different domain: `fonts.gstatic.com`. It must then open a second connection to download the `.woff2` file.
 
 ::: image ./hosted_font_waterfall.svg "A user visits the site, the browser parses the CSS, finds the @import, fetches the stylesheet from fonts.googleapis.com, and opens a second connection to fonts.gstatic.com to download the font files."
 How an `@import` rule forces the browser to make multiple external requests before rendering the page.
