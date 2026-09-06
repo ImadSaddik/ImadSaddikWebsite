@@ -47,3 +47,40 @@ Performance is not the only trade-off. Every time a browser requests a font from
 In regions with strict privacy laws like the European Union under [GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation), loading assets from external servers without consent has already led to warnings and fines for website owners.
 
 By hosting the fonts on your own server, you cut out all third-party tracking, protect your visitors' privacy, and keep your site compliant with privacy laws.
+
+## Self-hosting fonts the hard way
+
+If you want better performance and full privacy, consider self-hosting your fonts. This means storing the font files directly in your project and serving them from your own server.
+
+In the past, self-hosting fonts was a tedious process. You had to:
+
+1. Find and download raw `.woff2` or `.ttf` files from the web.
+2. Download separate files for every font weight you needed (light, regular, medium, bold).
+3. Place those files into your project's assets folder.
+4. Manually write `@font-face` rules in your stylesheet for every single weight:
+
+```css
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/inter-regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/inter-bold.woff2") format("woff2");
+}
+```
+
+This manual process had several problems:
+
+- **Updates are tedious:** When the font creator fixes bugs or updates glyph shapes (characters), you have to repeat the entire download and replacement process by hand.
+- **Missing weights:** If your design calls for `font-weight: 600` and you forgot to download it, the browser tries to fake a bold version, making your text look blurry.
+- **Language support:** For example, if you decide to localize your website into Arabic, you have to find a compatible font, make sure all necessary weights exist, download the files, and write another set of `@font-face` blocks.
+
+Fortunately, modern tooling makes this entire process much easier.
