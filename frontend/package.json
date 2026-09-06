@@ -31,7 +31,7 @@
     "vue-router": "^5.0.3"
   },
   "devDependencies": {
-    "@faker-js/faker": "^10.1.0",
+    "@faker-js/faker": "^10.6.0",
     "@playwright/test": "^1.58.2",
     "@prettier/plugin-xml": "^3.4.2",
     "@vitejs/plugin-vue": "^6.0.3",
@@ -48,7 +48,7 @@
     "prettier": "^3.7.4",
     "rollup-plugin-visualizer": "^7.0.1",
     "sitemap": "^9.0.1",
-    "unplugin-vue-components": "^31.0.0",
+    "unplugin-vue-components": "^31.1.0",
     "unplugin-vue-markdown": "^32.0.0",
     "vite": "^7.3.5",
     "vitest": "^4.1.0",
