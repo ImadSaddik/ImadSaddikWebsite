@@ -107,8 +107,9 @@ Install both variable packages as development dependencies:
 pnpm add -D @fontsource-variable/inter @fontsource-variable/cairo
 ```
 
-> [!NOTE]
-> If you don't have `pnpm` installed, you can use `npm` or `yarn` instead.
+::: info
+If you don't have `pnpm` installed, you can use `npm` or `yarn` instead.
+:::
 
 ### Import the font stylesheets
 
