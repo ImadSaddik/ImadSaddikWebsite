@@ -91,6 +91,10 @@ To avoid managing font files and writing `@font-face` definitions by hand, you c
 
 Instead of hunting for font files and configuring CSS rules manually, you install the font as a dependency using your package manager. Fontsource handles file organization, version pinning, and `@font-face` rules for you.
 
+::: image ./self_hosted_font_pipeline.svg "A user visits the site, the browser requests the HTML, CSS, and font files directly from your own domain over a single connection, eliminating third-party lookups."
+Self-hosting serves fonts from the same origin, removing external network round trips.
+:::
+
 ### Variable fonts
 
 When using Fontsource, install **variable font** packages whenever they are available. Standard fonts require separate files for each style (such as 400 for regular and 700 for bold). A variable font stores an entire range of weights (such as 100 to 900) in a single compact file.
