@@ -84,3 +84,9 @@ This manual process had several problems:
 - **Language support:** For example, if you decide to localize your website into Arabic, you have to find a compatible font, make sure all necessary weights exist, download the files, and write another set of `@font-face` blocks.
 
 Fortunately, modern tooling makes this entire process much easier.
+
+## Modern self-hosting with Fontsource
+
+To avoid managing font files and writing `@font-face` definitions by hand, you can use [Fontsource](https://fontsource.org/). It is an open-source project that packages typefaces, including the entire Google Fonts catalog, into standard npm dependencies.
+
+Instead of hunting for font files and configuring CSS rules manually, you install the font as a dependency using your package manager. Fontsource handles file organization, version pinning, and `@font-face` rules for you.
