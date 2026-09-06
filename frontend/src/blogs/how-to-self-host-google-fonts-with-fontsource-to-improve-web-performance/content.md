@@ -91,8 +91,8 @@ To avoid managing font files and writing `@font-face` definitions by hand, you c
 
 Instead of manually downloading font files and configuring CSS rules, you install the font as a dependency using your package manager. Fontsource handles file organization, version pinning, and `@font-face` rules for you.
 
-::: image ./self_hosted_font_pipeline.svg "A user visits the site, the browser requests the HTML, CSS, and font files directly from your own domain over a single connection, eliminating third-party lookups."
-Self-hosting serves fonts from the same origin, removing external network round trips.
+::: image ./self_hosted_font_pipeline.svg "A user visits the site with an initially blank page; the browser fetches the .woff2 font files directly from its own domain, rendering the content without any third-party requests."
+Self-hosting serves fonts directly from your own domain, eliminating external network requests.
 :::
 
 ### Variable fonts
