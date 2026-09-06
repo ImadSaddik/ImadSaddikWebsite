@@ -10,7 +10,7 @@ tags: ["Web performance", "CSS", "Frontend", "Fonts", "Lighthouse"]
 When adding custom typography to a website, the quickest path is an external CDN like [Google Fonts](https://fonts.google.com/). For years, I did this by copying an `@import` statement directly into my main stylesheet:
 
 ```css
-@import url("[https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&display=swap](https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&display=swap)");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 ```
 
 It is convenient to set up, but external CSS imports carry hidden performance costs. While running a [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview) audit on my website, I ran into this diagnostic warning:
