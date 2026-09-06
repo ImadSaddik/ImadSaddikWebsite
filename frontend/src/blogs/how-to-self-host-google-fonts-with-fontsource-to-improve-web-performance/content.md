@@ -90,3 +90,22 @@ Fortunately, modern tooling makes this entire process much easier.
 To avoid managing font files and writing `@font-face` definitions by hand, you can use [Fontsource](https://fontsource.org/). It is an open-source project that packages typefaces, including the entire Google Fonts catalog, into standard npm dependencies.
 
 Instead of hunting for font files and configuring CSS rules manually, you install the font as a dependency using your package manager. Fontsource handles file organization, version pinning, and `@font-face` rules for you.
+
+### Variable fonts
+
+When using Fontsource, install **variable font** packages whenever they are available. Standard fonts require separate files for each style (such as 400 for regular and 700 for bold). A variable font stores an entire range of weights (such as 100 to 900) in a single compact file.
+
+This reduces the number of network requests and gives you total design flexibility across any weight without adding extra files to your project.
+
+### Install the fonts
+
+If your website supports both English and Arabic, you will need fonts that handle both scripts well. The Inter font works great for English, but it does not support Arabic text. A simple solution is to pair Inter with Cairo, which is designed specifically for Arabic.
+
+Install both variable packages as development dependencies:
+
+```bash
+pnpm add -D @fontsource-variable/inter @fontsource-variable/cairo
+```
+
+> [!NOTE]
+> If you don't have `pnpm` installed, you can use `npm` or `yarn` instead.
