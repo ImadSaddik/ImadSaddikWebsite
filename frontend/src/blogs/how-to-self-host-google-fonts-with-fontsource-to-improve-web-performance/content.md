@@ -89,7 +89,7 @@ Fortunately, modern tooling makes this entire process much easier.
 
 To avoid managing font files and writing `@font-face` definitions by hand, you can use [Fontsource](https://fontsource.org/). It is an open-source project that packages typefaces, including the entire Google Fonts catalog, into standard npm dependencies.
 
-Instead of hunting for font files and configuring CSS rules manually, you install the font as a dependency using your package manager. Fontsource handles file organization, version pinning, and `@font-face` rules for you.
+Instead of manually downloading font files and configuring CSS rules, you install the font as a dependency using your package manager. Fontsource handles file organization, version pinning, and `@font-face` rules for you.
 
 ::: image ./self_hosted_font_pipeline.svg "A user visits the site, the browser requests the HTML, CSS, and font files directly from your own domain over a single connection, eliminating third-party lookups."
 Self-hosting serves fonts from the same origin, removing external network round trips.
