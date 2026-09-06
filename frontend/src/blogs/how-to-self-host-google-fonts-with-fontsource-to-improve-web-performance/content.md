@@ -39,3 +39,11 @@ How an `@import` rule forces the browser to make multiple external requests befo
 :::
 
 On a fast fiber connection, these requests might take only 100 to 200 milliseconds. But on a mobile device or a poor cellular connection, that latency can easily jump to several hundred milliseconds or even seconds. During that time, your text either remains invisible ([Flash of Invisible Text](https://fonts.google.com/knowledge/glossary/foit)) or shifts abruptly once the font arrives ([Flash of Unstyled Text](https://fonts.google.com/knowledge/glossary/fout)), dragging down your [First Contentful Paint](https://web.dev/articles/fcp) (FCP) and [Largest Contentful Paint](https://web.dev/articles/lcp) (LCP) scores.
+
+### Privacy and data transfer
+
+Performance is not the only trade-off. Every time a browser requests a font from an external CDN, it sends the visitor's IP address and browser details to that third party.
+
+In regions with strict privacy laws like the European Union under [GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation), loading assets from external servers without consent has already led to warnings and fines for website owners.
+
+By hosting the fonts on your own server, you cut out all third-party tracking, protect your visitors' privacy, and keep your site compliant with privacy laws.
