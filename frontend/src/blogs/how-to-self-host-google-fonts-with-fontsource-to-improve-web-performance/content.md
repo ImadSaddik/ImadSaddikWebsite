@@ -27,7 +27,7 @@ In this article, you will learn why hosted font CDNs slow down your site and how
 
 Relying on Google Fonts seems harmless at first. It is just one line of CSS, and Google has servers all around the world. However, that single `@import` triggers a chain of network requests that can noticeably delay your page rendering.
 
-### The two-domain network waterfall
+### The two-domain network delay
 
 When a visitor loads your webpage, their browser reads your stylesheet line by line. The moment it encounters the `@import url(...)` rule pointing to Google Fonts, it cannot start rendering the page. Instead, it must make a series of requests across two separate third-party domains:
 
@@ -162,7 +162,7 @@ If your page contains only English text, the browser downloads the Latin files f
 
 ## Conclusion
 
-Switching from a hosted font CDN to self-hosted fonts eliminates external network waterfalls, speeds up initial page rendering, and keeps your visitors' data private.
+Switching from a hosted font CDN to self-hosted fonts eliminates extra network round trips, speeds up initial page rendering, and keeps your visitors' data private.
 
 With Fontsource, you get all the performance and privacy benefits of self-hosting without the manual maintenance of downloading font files or managing `@font-face` rules. By combining variable fonts with package management, you can treat your typography like any other standard dependency in your project.
 
