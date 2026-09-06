@@ -34,8 +34,8 @@ When a visitor loads your webpage, their browser reads your stylesheet line by l
 1. **The stylesheet:** The browser pauses rendering and connects to `fonts.googleapis.com` to download the CSS file containing the font rules.
 2. **The font file:** The browser reads that CSS file and sees that the actual font files live on a completely different domain: `fonts.gstatic.com`. It must then open a second connection to download the `.woff2` file.
 
-::: image ./hosted_font_waterfall.svg "A user visits the site, the browser parses the CSS, finds the @import, fetches the stylesheet from fonts.googleapis.com, and opens a second connection to fonts.gstatic.com to download the font files."
-How an `@import` rule forces the browser to make multiple external requests before rendering the page.
+::: image ./hosted_font_requests.svg "A user visits the site with an initially blank page; the browser analyzes the CSS, encounters an @import rule for fonts.googleapis.com, fetches the .woff2 font files from Google Fonts, and only then renders the final page content."
+How an `@import` rule delays page rendering by fetching fonts from an external provider.
 :::
 
 On a fast fiber connection, these requests might take only 100 to 200 milliseconds. But on a mobile device or a poor cellular connection, that latency can easily jump to several hundred milliseconds or even seconds. During that time, your text either remains invisible ([Flash of Invisible Text](https://fonts.google.com/knowledge/glossary/foit)) or shifts abruptly once the font arrives ([Flash of Unstyled Text](https://fonts.google.com/knowledge/glossary/fout)), dragging down your [First Contentful Paint](https://web.dev/articles/fcp) (FCP) and [Largest Contentful Paint](https://web.dev/articles/lcp) (LCP) scores.
