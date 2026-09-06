@@ -103,7 +103,7 @@ This reduces the number of network requests and gives you total design flexibili
 
 ### Install the fonts
 
-If your website supports both English and Arabic, you will need fonts that handle both scripts well. The Inter font works great for English, but it does not support Arabic text. A simple solution is to pair Inter with Cairo, which is designed specifically for Arabic.
+To demonstrate how easy it is to manage multiple fonts, let's look at an example where we use **Inter** for English and **Cairo** for Arabic. If your site only needs one font, you can install that single package.
 
 Install both variable packages as development dependencies:
 
@@ -150,7 +150,7 @@ body {
 }
 ```
 
-With this setup, English text uses Inter by default, while any element with an Arabic language attribute (`lang="ar"`) switches to Cairo.
+In this example setup, English text uses Inter by default, while any element with an Arabic language attribute (`lang="ar"`) switches to Cairo.
 
 ::: info Do visitors download every font file?
 You might wonder if visitors have to download every font file right away.
