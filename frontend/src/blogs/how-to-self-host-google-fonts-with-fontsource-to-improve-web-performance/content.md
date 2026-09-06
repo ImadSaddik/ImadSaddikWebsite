@@ -79,7 +79,7 @@ In the past, self-hosting fonts was a tedious process. You had to:
 
 This manual process had several problems:
 
-- **Updates are tedious:** When the font creator fixes bugs or updates glyph shapes (characters), you have to repeat the entire download and replacement process by hand.
+- **Updates are tedious:** When the font creator fixes bugs or updates character designs, you have to repeat the entire download and replacement process by hand.
 - **Missing weights:** If your design calls for `font-weight: 600` and you forgot to download it, the browser tries to fake a bold version, making your text look blurry.
 - **Language support:** For example, if you decide to localize your website into Arabic, you have to find a compatible font, make sure all necessary weights exist, download the files, and write another set of `@font-face` blocks.
 
