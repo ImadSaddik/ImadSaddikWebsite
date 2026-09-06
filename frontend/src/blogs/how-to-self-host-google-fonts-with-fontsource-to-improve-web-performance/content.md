@@ -91,16 +91,6 @@ To avoid managing font files and writing `@font-face` definitions by hand, you c
 
 Instead of hunting for font files and configuring CSS rules manually, you install the font as a dependency using your package manager. Fontsource handles file organization, version pinning, and `@font-face` rules for you.
 
-When you run your build command (such as `pnpm build`), Vite bundles the CSS and copies the hashed font files directly into your production directory:
-
-```output
-dist/assets/inter-latin-wght-normal-Dx4kXJAl.woff2          48.25 kB
-dist/assets/cairo-arabic-wght-normal-CJWMIGCx.woff2         30.89 kB
-dist/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2       18.74 kB
-dist/assets/inter-greek-wght-normal-CkhJZR-_.woff2          18.99 kB
-dist/assets/inter-vietnamese-wght-normal-CBcvBZtf.woff2     10.25 kB
-```
-
 ### Variable fonts
 
 When using Fontsource, install **variable font** packages whenever they are available. Standard fonts require separate files for each style (such as 400 for regular and 700 for bold). A variable font stores an entire range of weights (such as 100 to 900) in a single compact file.
@@ -131,6 +121,16 @@ Next, replace your previous Google Fonts `@import` rules in your main stylesheet
 ```
 
 When you build your project, bundlers like Vite handle the rest. They copy the font files into your build folder, add unique cache hashes to the filenames, and create the `@font-face` rules for you.
+
+When you run your build command (such as `pnpm build`), Vite bundles the CSS and copies the hashed font files directly into your production directory:
+
+```output
+dist/assets/inter-latin-wght-normal-Dx4kXJAl.woff2          48.25 kB
+dist/assets/cairo-arabic-wght-normal-CJWMIGCx.woff2         30.89 kB
+dist/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2       18.74 kB
+dist/assets/inter-greek-wght-normal-CkhJZR-_.woff2          18.99 kB
+dist/assets/inter-vietnamese-wght-normal-CBcvBZtf.woff2     10.25 kB
+```
 
 ### Apply the fonts in CSS
 
