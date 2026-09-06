@@ -155,7 +155,7 @@ In this example setup, English text uses Inter by default, while any element wit
 ::: info Do visitors download every font file?
 You might wonder if visitors have to download every font file right away.
 
-They do not. Fontsource splits fonts into character subsets (like Latin and Arabic) using CSS `unicode-range`. Modern browsers only download a font file when characters from that subset actually appear on the page.
+They do not. Fontsource splits fonts into character subsets (like Latin and Arabic) using CSS [unicode-range](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@font-face/unicode-range). Modern browsers only download a font file when characters from that subset appear on the page.
 
 If your page contains only English text, the browser downloads the Latin files for Inter. It ignores Cairo until Arabic text appears on the screen.
 :::
