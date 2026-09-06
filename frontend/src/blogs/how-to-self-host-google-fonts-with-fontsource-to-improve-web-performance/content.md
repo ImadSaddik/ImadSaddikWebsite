@@ -120,3 +120,27 @@ Next, replace your previous Google Fonts `@import` rules in your main stylesheet
 ```
 
 When you build your project, bundlers like Vite handle the rest. They copy the font files into your build folder, add unique cache hashes to the filenames, and create the `@font-face` rules for you.
+
+### Apply the fonts in CSS
+
+Now use the font families in your CSS rules:
+
+```css
+body {
+  font-family: "Inter Variable", "Inter", sans-serif;
+}
+
+:lang(ar) {
+  font-family: "Cairo Variable", "Cairo", sans-serif;
+}
+```
+
+With this setup, English text uses Inter by default, while any element with an Arabic language attribute (`lang="ar"`) switches to Cairo.
+
+::: info Do visitors download every font file?
+You might wonder if visitors have to download every font file right away.
+
+They do not. Fontsource splits fonts into character subsets (like Latin and Arabic) using CSS `unicode-range`. Modern browsers only download a font file when characters from that subset actually appear on the page.
+
+If your page contains only English text, the browser downloads the Latin files for Inter. It ignores Cairo until Arabic text appears on the screen.
+:::
