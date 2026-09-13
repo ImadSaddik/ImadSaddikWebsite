@@ -21,7 +21,7 @@
     "sitemap": "node generate-sitemap.js"
   },
   "dependencies": {
-    "@shikijs/transformers": "^3.22.0",
+    "@shikijs/transformers": "^4.4.3",
     "@vscode/markdown-it-katex": "^1.1.2",
     "@vueuse/core": "^14.2.1",
     "axios": "^1.20.0",
