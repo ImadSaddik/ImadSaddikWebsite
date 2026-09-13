@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.5.0] - 2026-09-13
+
+### Added
+
+- **Static Open Graph metadata & image generation:** Added build-time generation of static Open Graph / Twitter card HTML shells and automatic conversion of article cover SVGs to high-resolution PNG preview images using `@resvg/resvg-js` and `gray-matter`.
+- **Content:** Added a new technical article:
+  - "How to self-host Google Fonts with Fontsource to improve web performance"
+
+### Changed
+
+- **Nginx routing:** Updated Nginx fallback configuration to check `$uri/index.html` before `$uri` to eliminate redundant 301 redirects on article routes and serve prerendered OG metadata directly.
+- **Repository configuration:** Added `.gitattributes` to enforce consistent LF line endings and exclude Jupyter notebooks from language breakdown statistics.
+
+### Fixed
+
+- **Security audits:** Resolved frontend audit vulnerabilities across dependencies.
+
 ## [v2.4.0] - 2026-08-29
 
 ### Added
@@ -160,6 +177,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Monitoring:** Real-time resource tracking with Btop and traffic analysis with GoAccess.
   - **Performance:** Global delivery optimization via Cloudflare CDN.
 
+[v2.5.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.4.0...v2.5.0
 [v2.4.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.3.0...v2.4.0
 [v2.3.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.2.0...v2.3.0
 [v2.2.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.1.0...v2.2.0
