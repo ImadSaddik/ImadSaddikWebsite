@@ -163,7 +163,6 @@ export default {
   /* Code colors */
   --color-code-background: #15181d;
   --color-code-highlighted-background: #00ddff22;
-  --color-code-line-inset-background: #82aaff;
   --color-code-border: #444654;
 
   /* Toast colors */
