@@ -16,8 +16,7 @@
 </template>
 
 <script>
-import { getHighlighter } from "@/services/shiki.js";
-import { transformerNotationHighlight } from "@shikijs/transformers";
+import { highlightCode } from "@/services/shiki.js";
 
 export default {
   name: "CodeBlock",
@@ -48,15 +47,19 @@ export default {
       return "fa-regular fa-clipboard fa-2xl";
     },
   },
-  async created() {
-    const highlighter = await getHighlighter();
-    this.highlightedHtml = highlighter.codeToHtml(this.code, {
-      lang: this.language,
-      theme: "night-owl",
-      transformers: [transformerNotationHighlight({ matchAlgorithm: "v3" })],
-    });
+  watch: {
+    code: {
+      immediate: true,
+      handler: "renderHighlightedCode",
+    },
+    language: {
+      handler: "renderHighlightedCode",
+    },
   },
   methods: {
+    async renderHighlightedCode() {
+      this.highlightedHtml = await highlightCode(this.code, this.language);
+    },
     async copyCode() {
       if (this.errorOccured || this.copied) return;
 
@@ -145,6 +148,7 @@ export default {
 }
 
 pre.shiki {
+  background-color: var(--color-code-background);
   margin: 0;
   padding: 0;
   overflow-x: auto;

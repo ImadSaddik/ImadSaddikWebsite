@@ -16,7 +16,7 @@ export default {
 
 <style scoped>
 .code-output-container {
-  background-color: var(--color-code-night-owl-background);
+  background-color: var(--color-code-background);
   color: var(--color-text-secondary);
   padding: 30px;
   margin: var(--gap-md) 0;
