@@ -15,15 +15,21 @@ const BUNDLED_LANGUAGES = [
   import("shiki/langs/vue.mjs"),
 ];
 
-let highlighter;
+let highlighterPromise;
 
+/**
+ * Returns a cached singleton Shiki highlighter instance.
+ */
 export async function getHighlighter() {
-  if (!highlighter) {
-    highlighter = await createHighlighterCore({
+  if (!highlighterPromise) {
+    highlighterPromise = createHighlighterCore({
       themes: [defaultTheme],
       langs: BUNDLED_LANGUAGES,
       engine: createJavaScriptRegexEngine(),
+    }).catch((error) => {
+      highlighterPromise = null;
+      throw error;
     });
   }
-  return highlighter;
+  return highlighterPromise;
 }
