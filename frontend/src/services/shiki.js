@@ -1,5 +1,6 @@
 import { createHighlighterCore } from "shiki/core";
 import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
+import defaultTheme from "shiki/themes/github-dark-default.mjs";
 
 const BUNDLED_LANGUAGES = [
   import("shiki/langs/python.mjs"),
@@ -19,7 +20,7 @@ let highlighter;
 export async function getHighlighter() {
   if (!highlighter) {
     highlighter = await createHighlighterCore({
-      themes: [import("shiki/themes/night-owl.mjs")],
+      themes: [defaultTheme],
       langs: BUNDLED_LANGUAGES,
       engine: createJavaScriptRegexEngine(),
     });
