@@ -161,7 +161,7 @@ export default {
   --color-tag-border-hover: #22d3ee4d;
 
   /* Code colors */
-  --color-code-night-owl-background: #011627;
+  --color-code-background: #15181d;
   --color-code-highlighted-background: #00ddff22;
   --color-code-line-inset-background: #82aaff;
   --color-code-border: #444654;
