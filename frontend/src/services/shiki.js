@@ -20,7 +20,7 @@ const BUNDLED_LANGUAGES = [
 
 const BACKGROUND_COLOR_REGEX = /background-color:\s*[^;]+;?/i;
 
-const removeInlineBackgroundTransformer = {
+export const removeInlineBackgroundTransformer = {
   name: "remove-inline-background",
   pre(node) {
     if (!node.properties?.style) return;

@@ -1,5 +1,19 @@
-import { describe, it, expect } from "vitest";
-import { getHighlighter, highlightCode, DEFAULT_THEME_NAME } from "@/services/shiki.js";
+import { describe, it, expect, vi } from "vitest";
+import {
+  getHighlighter,
+  highlightCode,
+  DEFAULT_THEME_NAME,
+  removeInlineBackgroundTransformer,
+} from "@/services/shiki.js";
+import { createHighlighterCore } from "shiki/core";
+
+vi.mock("shiki/core", async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual,
+    createHighlighterCore: vi.fn(actual.createHighlighterCore),
+  };
+});
 
 describe("shiki service", () => {
   it("exports DEFAULT_THEME_NAME as github-dark-default", () => {
@@ -17,6 +31,14 @@ describe("shiki service", () => {
       expect(instance1).toBeDefined();
       expect(instance1).toBe(instance2);
       expect(instance2).toBe(instance3);
+    });
+
+    it("resets highlighterPromise and propagates the error when initialization fails", async () => {
+      vi.resetModules();
+      vi.mocked(createHighlighterCore).mockRejectedValueOnce(new Error("Initialization error"));
+      const { getHighlighter: getFreshHighlighter } = await import("@/services/shiki.js");
+
+      await expect(getFreshHighlighter()).rejects.toThrow("Initialization error");
     });
   });
 
@@ -58,6 +80,28 @@ describe("shiki service", () => {
 
     it("throws an error when an unsupported or unbundled language is specified", async () => {
       await expect(highlightCode("some code", "unsupported-lang")).rejects.toThrow();
+    });
+  });
+
+  describe("removeInlineBackgroundTransformer", () => {
+    it("does nothing when node has no style property", () => {
+      const node = { properties: {} };
+      removeInlineBackgroundTransformer.pre(node);
+      expect(node.properties.style).toBeUndefined();
+    });
+
+    it("removes inline background-color while preserving other styles", () => {
+      const node = {
+        properties: { style: "background-color: #0d1117; color: #e6edf3;" },
+      };
+      removeInlineBackgroundTransformer.pre(node);
+      expect(node.properties.style).toBe("color: #e6edf3;");
+    });
+
+    it("deletes the style property completely if no other styles remain", () => {
+      const node = { properties: { style: "background-color: #0d1117;" } };
+      removeInlineBackgroundTransformer.pre(node);
+      expect(node.properties.style).toBeUndefined();
     });
   });
 });
