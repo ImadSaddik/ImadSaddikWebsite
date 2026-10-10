@@ -64,3 +64,21 @@ try {
 Both methods get the job done, but modifying your source code for manual testing creates friction. You must remember to remove the test code before committing, and hot reloading might trigger unintended side effects.
 
 Browser developer tools let you simulate this failure at the network boundary without modifying a single file.
+
+## Blocking requests in developer tools
+
+Firefox includes a native request-blocking tool inside its Network monitor. You can use it to block individual endpoints, third-party scripts, or entire route trees.
+
+### Open the network monitor
+
+Open your browser's developer tools by pressing `F12` (or right-click anywhere on the page and select **Inspect**). Then, switch to the **Network** tab.
+
+::: image ./network_tab_open.png "The Network tab inside Firefox Developer Tools."
+The Network tab inside the browser developer tools.
+:::
+
+Refresh your web page or trigger an action in your app. The network table will populate with all incoming and outgoing assets, scripts, and API calls.
+
+::: image ./all_network_requests.png "A list of network requests recorded in the Network tab."
+All network requests recorded after refreshing the page.
+:::
