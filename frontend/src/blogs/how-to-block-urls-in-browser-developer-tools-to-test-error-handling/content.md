@@ -98,3 +98,23 @@ Selecting Block URL from the context menu opens the Request Blocking sidebar.
 :::
 
 Once clicked, Firefox opens a dedicated **Request Blocking** sidebar on the left side of the panel. You will see your endpoint listed (for example, `http://localhost:8080/api/search`) with an active checkbox indicating that the rule is live.
+
+### Verify the error handling
+
+Now that the URL is blocked by the browser, trigger the search action again or reload the page.
+
+Instead of reaching your backend server, the request is stopped right in the client. Because the promise rejected, the frontend `catch` block executed as designed, and displayed the error toast notification.
+
+::: image ./error_toast_confirmation.png "The UI showing an error toast notification after the blocked request fails."
+The frontend application safely catches the error and displays the notification toast.
+:::
+
+As you can see, you verified your error handling without modifying any backend logic or frontend code.
+
+:::: info What status code does the browser report?
+When a browser blocks a request via developer tools, it does not receive an HTTP 500 or 404 from the server. Instead, the browser terminates the request locally before it hits the network and reports a client-side network failure.
+
+::: image ./no_status_code.png "The Network tab shows a blocked request with no status code."
+The blocked request does not receive a status code because the browser terminates it before it reaches the server.
+:::
+::::
