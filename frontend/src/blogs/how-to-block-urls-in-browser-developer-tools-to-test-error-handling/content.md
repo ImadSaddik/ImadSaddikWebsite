@@ -82,3 +82,19 @@ Refresh your web page or trigger an action in your app. The network table will p
 ::: image ./all_network_requests.png "A list of network requests recorded in the Network tab."
 All network requests recorded after refreshing the page.
 :::
+
+### Block the target endpoint
+
+Use the search filter at the top left corner of the Network panel to isolate the request you want to test. For this example, typing `search` and selecting the **Fetch/XHR** tab filters out static assets, leaving only the `POST` request to `/api/search`.
+
+::: image ./filtered_search_request.png "Filtering network requests to locate the search endpoint."
+Filtering network requests to locate the target search endpoint.
+:::
+
+Right-click the request row and select **Block URL**.
+
+::: image ./block_url_option.png "Context menu showing the Block URL action and the Request Blocking panel."
+Selecting Block URL from the context menu opens the Request Blocking sidebar.
+:::
+
+Once clicked, Firefox opens a dedicated **Request Blocking** sidebar on the left side of the panel. You will see your endpoint listed (for example, `http://localhost:8080/api/search`) with an active checkbox indicating that the rule is live.
