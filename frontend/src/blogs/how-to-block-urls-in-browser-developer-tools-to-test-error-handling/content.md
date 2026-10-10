@@ -14,3 +14,53 @@ Testing those error states has always felt clunky. Most of us temporarily raise 
 Modern browser developer tools make this simpler by allowing you to block requests directly. By intercepting and blocking specific requests in your browser, you can test how your application handles network failures on demand.
 
 In this guide, you will learn how to block network requests using Firefox Developer Tools. The same workflow also applies to Chromium-based browsers like Chrome and Edge.
+
+## How developers usually test failed requests
+
+To understand why URL blocking is convenient, consider a typical search feature. On the backend, an endpoint receives a query, asks the search service for records, and returns the result:
+
+```python
+@router.post("/search", response_model=SearchResponse)
+async def search_articles(request: Request, body: SearchRequest):
+    try:
+        results = await meilisearch_service.search(body)
+        return results
+    except Exception:
+        logger.exception(f"Error searching articles with query '{body.query}'")
+        raise HTTPException(status_code=500, detail="Internal server error")
+```
+
+On the frontend, an HTTP client like Axios triggers the request inside a `try...catch` block:
+
+```javascript
+try {
+  const response = await axios.post("/api/search", data);
+} catch (error) {
+  showErrorNotification("Failed to load search results.");
+}
+```
+
+If you want to verify that your error toast notification appears when the request fails, you traditionally have two options.
+
+First, you can force an exception in your backend route:
+
+```python
+@router.post("/search", response_model=SearchResponse)
+async def search_articles(request: Request, body: SearchRequest):
+    raise RuntimeError("Simulated error")
+```
+
+Second, if you do not want to touch backend code, you can throw an error right before making the frontend request:
+
+```javascript
+try {
+  throw new Error("Simulated error");
+  const response = await axios.post("/api/search", data);
+} catch (error) {
+  showErrorNotification("Failed to load search results.");
+}
+```
+
+Both methods get the job done, but modifying your source code for manual testing creates friction. You must remember to remove the test code before committing, and hot reloading might trigger unintended side effects.
+
+Browser developer tools let you simulate this failure at the network boundary without modifying a single file.
