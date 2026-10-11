@@ -1,7 +1,7 @@
 ---
 title: "How to block URLs in browser developer tools to test error handling"
 subtitle: "Simulate failed network requests and verify frontend error states without editing a single line of code."
-date: "October 10, 2026"
+date: "October 11, 2026"
 tags: ["Debugging", "DevTools", "Frontend", "Firefox", "Web development", "JavaScript"]
 ---
 
