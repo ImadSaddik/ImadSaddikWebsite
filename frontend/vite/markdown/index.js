@@ -12,6 +12,7 @@ import { inlineIconTransformer } from "./transformers/inlineIcon.js";
 import { fontAwesomeTransformer } from "./transformers/fontAwesome.js";
 import { superscriptTransformer } from "./transformers/superscript.js";
 import { mathTransformer } from "./transformers/math.js";
+import { keyboardTransformer } from "./transformers/keyboard.js";
 
 export function getMarkdownTransformers() {
   return [
@@ -19,6 +20,7 @@ export function getMarkdownTransformers() {
     headerTransformer,
     linkTransformer,
     inlineCodeTransformer,
+    keyboardTransformer,
     listTransformer,
     codeTransformer,
     admonitionTransformer,
