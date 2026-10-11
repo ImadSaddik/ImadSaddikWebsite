@@ -40,7 +40,6 @@ export default {
 
 <style scoped>
 kbd.keyboard-shortcut {
-  all: unset;
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
