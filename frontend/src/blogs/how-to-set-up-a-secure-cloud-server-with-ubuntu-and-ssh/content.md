@@ -189,7 +189,7 @@ Use the SSH command to connect to the machine. Pass your private key using the `
 ssh -i ~/.ssh/<your_key_name> root@<your_droplet_ip>
 ```
 
-A security warning appears about the authenticity of the host. Type `yes` and hit `Enter` to continue.
+A security warning appears about the authenticity of the host. Type `yes` and hit [[Enter]] to continue.
 
 ```output
 The authenticity of host '<your_droplet_ip> (<your_droplet_ip>)' can't be established.
@@ -244,7 +244,7 @@ Reboot the machine to complete the upgrade and start using the new kernel and pa
 reboot
 ```
 
-The connection will close, but you can connect via SSH to the server again after it reboots. If you want to exit the VM, type exit and hit `Enter` or hit `Ctrl+D`.
+The connection will close, but you can connect via SSH to the server again after it reboots. If you want to exit the VM, type exit and hit [[Enter]] or hit [[Ctrl+D]].
 
 ## Create a non-root user and configure SSH access
 
@@ -256,7 +256,7 @@ Create a new user to act as a security barrier.
 adduser <your_username>
 ```
 
-It will ask you to set a password and fill in some details. You can skip the details by pressing `Enter`.
+It will ask you to set a password and fill in some details. You can skip the details by pressing [[Enter]].
 
 ```output
 New password:
@@ -280,7 +280,7 @@ Give the new user administrative privileges ([sudo](https://www.sudo.ws/news/)).
 usermod -aG sudo <your_username>
 ```
 
-Now, log out of the server (`exit` or `Ctrl+D`) and attempt to log in as your new user.
+Now, log out of the server (`exit` or [[Ctrl+D]]) and attempt to log in as your new user.
 
 ```bash
 ssh -i ~/.ssh/<private_key_name> <your_username>@<your_droplet_ip>
@@ -346,7 +346,7 @@ sudo nano /etc/ssh/sshd_config
 Find the line `PermitRootLogin yes` and change it to `no`. Also, find the line `PasswordAuthentication yes` and change it to `no`. This explicitly forces the server to use SSH keys and reject all password login attempts.
 
 ::: tip
-To search in nano, press `Ctrl+W`, type the search term, and hit `Enter`.
+To search in nano, press [[Ctrl+W]], type the search term, and hit [[Enter]].
 :::
 
 ```text
@@ -354,7 +354,7 @@ PermitRootLogin no
 PasswordAuthentication no
 ```
 
-Save the file by pressing `Ctrl+O` (to write out/save), then exit nano with `Ctrl+X`. After that, restart the SSH service to apply the changes.
+Save the file by pressing [[Ctrl+O]] (to write out/save), then exit nano with [[Ctrl+X]]. After that, restart the SSH service to apply the changes.
 
 ```bash
 sudo systemctl restart ssh

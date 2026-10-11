@@ -71,7 +71,7 @@ Firefox includes a native request-blocking tool inside its Network monitor. You 
 
 ### Open the network monitor
 
-Open your browser's developer tools by pressing `F12` (or right-click anywhere on the page and select **Inspect**). Then, switch to the **Network** tab.
+Open your browser's developer tools by pressing [[F12]] (or right-click anywhere on the page and select **Inspect**). Then, switch to the **Network** tab.
 
 ::: image ./network_tab_open.png "The Network tab inside Firefox Developer Tools."
 The Network tab inside the browser developer tools.

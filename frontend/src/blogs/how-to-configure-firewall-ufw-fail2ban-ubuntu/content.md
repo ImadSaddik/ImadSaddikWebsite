@@ -41,7 +41,7 @@ Now that SSH is allowed, you can safely enable the firewall.
 sudo ufw enable
 ```
 
-The system will warn you that this command might disrupt existing SSH connections. Type `y` and hit `Enter`.
+The system will warn you that this command might disrupt existing SSH connections. Type `y` and hit [[Enter]].
 
 ```output
 Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
@@ -133,7 +133,7 @@ Here is what these settings do:
 - `maxretry`: Allows a user to fail 5 times before being banned.
 - `findtime`: The window of time (10 minutes) in which those 5 failures must occur to trigger a ban.
 
-Save and exit (`Ctrl+O`, `Enter`, `Ctrl+X`). Restart the Fail2Ban service for the new configuration to take effect:
+Save and exit ([[Ctrl+O]], [[Enter]], [[Ctrl+X]]). Restart the Fail2Ban service for the new configuration to take effect:
 
 ```bash
 sudo systemctl restart fail2ban

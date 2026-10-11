@@ -37,7 +37,7 @@ A computer screen displaying a kernel panic error.
 
 ### Boot into a working Linux kernel
 
-From the main GRUB menu, use your arrow keys to select `Advanced options for Ubuntu` and press Enter. This will take you to a new screen listing all the Linux kernels installed on your system.
+From the main GRUB menu, use your arrow keys to select `Advanced options for Ubuntu` and press [[Enter]]. This will take you to a new screen listing all the Linux kernels installed on your system.
 
 You will see at least two versions. For example, my list showed a new, broken kernel (`6.14.0-24-generic`) and an older, working one (`6.11.0-29-generic`).
 
@@ -45,7 +45,7 @@ You will see at least two versions. For example, my list showed a new, broken ke
 A list of available Linux kernels in the GRUB advanced options menu.
 :::
 
-The menu doesn't label which kernel is broken. You may need to do a quick test to find a working version. Simply select one from the list and press Enter. If you see the kernel panic screen again, just reboot your computer and try a different one until your system starts successfully.
+The menu doesn't label which kernel is broken. You may need to do a quick test to find a working version. Simply select one from the list and press [[Enter]]. If you see the kernel panic screen again, just reboot your computer and try a different one until your system starts successfully.
 
 ### Remove the broken kernel
 

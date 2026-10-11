@@ -35,7 +35,7 @@ Clicking on an object in Stellarium reveals detailed information about it.
 
 The `What's up today` feature shows you a list of interesting celestial events happening on the current day, such as planets, galaxies, and comets. It's a great way to discover new objects to observe in the night sky.
 
-To access this feature, click on the `Astronomical calculations window` icon on the left toolbar or press `F10`, then go to the `What's up today (WUT)` tab.
+To access this feature, click on the `Astronomical calculations window` icon on the left toolbar or press [[F10]], then go to the `What's up today (WUT)` tab.
 
 Within the `WUT` tab, you can filter events by category (for example, planets or comets) and by the time of day (such as any time during the night or just in the evening). You can also filter the results by magnitude, which is useful if you want to see only the brightest objects.
 
@@ -83,7 +83,7 @@ The **Image sensor frame** feature in Stellarium helps you visualize your camera
 
 Stellarium supports a variety of [sky cultures](https://en.wikipedia.org/wiki/Cultural_astronomy), allowing you to view the night sky as interpreted by different cultures around the world. You can choose from a wide range of cultural sky representations.
 
-To explore these options, click on the `Sky and viewing options window` icon on the left toolbar or press `F4`, then go to the `Sky culture` tab.
+To explore these options, click on the `Sky and viewing options window` icon on the left toolbar or press [[F4]], then go to the `Sky culture` tab.
 
 ::: image ./sky_culture_stellarium.jpeg "Sky culture options in Stellarium"
 On the left is the modern sky culture, and on the right is the Arabic sky culture.
@@ -95,7 +95,7 @@ In the past, [people enjoyed the night sky](https://harmoniouscosmos.com/ancient
 
 Stellarium allows you to simulate different sky conditions, such as light pollution, and atmospheric effects. This is especially useful for planning observations based on your local environment.
 
-To adjust these settings, click on the `Sky and viewing options window` on the left toolbar or press `F4`, then go to the `Sky` tab.
+To adjust these settings, click on the `Sky and viewing options window` on the left toolbar or press [[F4]], then go to the `Sky` tab.
 
 ::: image ./sky_and_viewing_window.jpeg "Sky and viewing options window in Stellarium"
 The **Sky and viewing options window** in Stellarium allows you to customize various sky settings.
@@ -119,7 +119,7 @@ You can also adjust other settings, such as making stars twinkle, changing the [
 
 Because Stellarium is open source, it offers a wide range of plugins that add extra features to the application. You can find plugins that add [quasars](https://en.wikipedia.org/wiki/Quasar), [pulsars](https://en.wikipedia.org/wiki/Pulsar), simulate periodic [meteor showers](https://en.wikipedia.org/wiki/Meteor_shower), and much more.
 
-To explore plugins, click on the `Configuration window` icon on the left toolbar or press `F2`, then go to the `Plugins` tab. Select a plugin and check the `Load at startup` box to enable it. Some plugins have additional settings you can configure by clicking the `Configure` button.
+To explore plugins, click on the `Configuration window` icon on the left toolbar or press [[F2]], then go to the `Plugins` tab. Select a plugin and check the `Load at startup` box to enable it. Some plugins have additional settings you can configure by clicking the `Configure` button.
 
 ::: image ./plugins_tab_stellarium.jpeg "Plugins tab in Stellarium"
 The **Plugins** tab in Stellarium allows you to manage and configure various plugins.

@@ -159,7 +159,7 @@ If you are starting from scratch and didn't create a dump file in the previous s
 
 You need to get the dump file from your computer over to the server.
 
-First, log out of your active SSH session by typing `exit` or pressing `Ctrl+D`. Once you are back in your local terminal, use the `scp` command to upload the file.
+First, log out of your active SSH session by typing `exit` or pressing [[Ctrl+D]]. Once you are back in your local terminal, use the `scp` command to upload the file.
 
 You are going to send it to the `/tmp/` directory for now. We do this because `/tmp/` is openly writable by any user, whereas our final destination (`/var/lib/meilisearch`) is strictly locked down.
 
@@ -272,7 +272,7 @@ Let's explain this configuration file:
 - `--ignore-dump-if-db-exists`: This is a safety feature. It tells Meilisearch to skip the dump import entirely if a database already exists in the `data` folder.
 - `Restart=on-failure`: If the process crashes or gets killed due to low memory, `systemd` will automatically spin it back up.
 
-Save the file and exit (`Ctrl+O`, `Enter`, `Ctrl+X`).
+Save the file and exit ([[Ctrl+O]], [[Enter]], [[Ctrl+X]]).
 
 ### Enable and start the service
 
@@ -379,7 +379,7 @@ The `-f` flag "follows" the log output. As you type a query on your website, you
 Nov 01 07:34:15 <YOUR_HOSTNAME> meilisearch[44061]: [2026-11-01T07:34:15Z INFO  actix_web::middleware::logger] 127.0.0.1 "POST /indexes/<YOUR_INDEX_NAME>/search HTTP/1.1" 200 451 "-" "python-requests/2.31.0" 0.002345
 ```
 
-Press `Ctrl+C` to stop watching the logs when you are done.
+Press [[Ctrl+C]] to stop watching the logs when you are done.
 
 ## Schedule automatic backups
 
@@ -408,7 +408,7 @@ Here is what these new lines do:
 - `--schedule-snapshot 86400`: This tells Meilisearch to take a snapshot every 86,400 seconds (which is exactly 24 hours). If your data changes very frequently, you can lower this to `3600` to take a backup every hour.
 - `--snapshot-dir ...`: This tells Meilisearch exactly where to save the backup files so they stay safely contained in the system user's directory.
 
-Save the file and exit (`Ctrl+O`, `Enter`, `Ctrl+X`).
+Save the file and exit ([[Ctrl+O]], [[Enter]], [[Ctrl+X]]).
 
 Create the new snapshots directory and give ownership to the `meilisearch` user so the service has permission to write the files there:
 
@@ -548,7 +548,7 @@ Paste the JSON directly into the editor on the left or drop a file on the right.
 
 As soon as your documents are added, you can test out the lightning-fast search capabilities right from the UI.
 
-Click on **::fa{fa-solid fa-file-lines}:: Documents** in the left sidebar. At the top of this page, type a query into the search bar and press `Enter` or click the pink "Search" button. Try intentionally misspelling a word like "Secoring" to see Meilisearch's built-in typo tolerance in action!
+Click on **::fa{fa-solid fa-file-lines}:: Documents** in the left sidebar. At the top of this page, type a query into the search bar and press [[Enter]] or click the pink "Search" button. Try intentionally misspelling a word like "Secoring" to see Meilisearch's built-in typo tolerance in action!
 
 If you ever need to manually update or delete a specific record, you don't need to write a script or use an API. Hover over any document in the search results list, and you will see **Update** and **Delete** buttons appear for that record.
 
@@ -570,7 +570,7 @@ To make changes, click the pink "Edit" button at the top right of the editor. Be
 Click the "Edit" button to safely modify your index's JSON configuration.
 :::
 
-When you are finished managing your data, simply close the terminal window where the SSH command is running or press `Ctrl+C`.
+When you are finished managing your data, simply close the terminal window where the SSH command is running or press [[Ctrl+C]].
 
 This immediately breaks the tunnel and cuts off access. Since the entire session happened inside an encrypted SSH pipe, your data remained 100% secure and was never exposed to the public internet.
 

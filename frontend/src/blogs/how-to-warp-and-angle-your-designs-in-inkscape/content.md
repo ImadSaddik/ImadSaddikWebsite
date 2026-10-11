@@ -28,7 +28,7 @@ The flat logo and text do not match the top surface.
 
 Before starting, there is one critical rule: These tools only work on **Paths**. They won't work on editable text or standard imported images.
 
-- **For text:** Select it and press `Shift` + `Ctrl` + `C` to convert it to a path or go to `Path > Object to Path`.
+- **For text:** Select it and press [[Shift+Ctrl+C]] to convert it to a path or go to `Path > Object to Path`.
 - **For images:** You must trace them first using `Path > Trace Bitmap`.
 
 ### The Perspective extension
@@ -45,7 +45,7 @@ However, the drawing order does not matter for logos.
 Draw a shape matching the surface.
 :::
 
-Make sure your text is on top of the shape in the layer order. You can check this in the `Layers` panel (`Shift` + `Ctrl` + `L`). After that, select your text path first, hold `Shift`, and select the target shape second.
+Make sure your text is on top of the shape in the layer order. You can check this in the `Layers` panel ([[Shift+Ctrl+L]]). After that, select your text path first, hold [[Shift]], and select the target shape second.
 
 ::: warning Warning
 Make sure that both objects are paths. If they are not, the extension will not work correctly.
@@ -69,7 +69,7 @@ The Perspective extension falls short on curved surfaces because it creates a li
 The Perspective extension distorts text poorly on curved surfaces because it only maps to the four corners.
 :::
 
-Select your logo path and open the `Path Effects` panel by pressing `Ctrl` + `&`. Click the arrow icon and search for "Envelope Deformation".
+Select your logo path and open the `Path Effects` panel by pressing [[Ctrl+&]]. Click the arrow icon and search for "Envelope Deformation".
 
 ::: image ./5_adding_envelope_deformation.svg "Adding Envelope Deformation"
 Select Envelope Deformation from the Path Effects panel.
