@@ -40,4 +40,18 @@ describe("KeyboardKey", () => {
     expect(keys[0].text()).toBe("Ctrl");
     expect(keys[1].text()).toBe("C");
   });
+
+  it("handles empty text gracefully", () => {
+    const wrapper = mount(KeyboardKey, { props: { text: "" } });
+    const kbd = wrapper.find("kbd.keyboard-key");
+    expect(kbd.exists()).toBe(true);
+    expect(kbd.text()).toBe("");
+  });
+
+  it("falls back to raw text when no valid parts are extracted", () => {
+    const wrapper = mount(KeyboardKey, { props: { text: "++" } });
+    const kbd = wrapper.find("kbd.keyboard-key");
+    expect(kbd.exists()).toBe(true);
+    expect(kbd.text()).toBe("++");
+  });
 });
