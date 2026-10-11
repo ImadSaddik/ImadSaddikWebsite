@@ -167,7 +167,7 @@ Find the `server_name` directive. If it currently contains your server's IP addr
 server_name <your_domain>.com www.<your_domain>.com;
 ```
 
-Save and exit the file (`Ctrl+O`, `Enter`, `Ctrl+X`). Then, test the configuration to make sure there are no typos, and reload Nginx so it registers your new domain setup:
+Save and exit the file ([[Ctrl+O]], [[Enter]], [[Ctrl+X]]). Then, test the configuration to make sure there are no typos, and reload Nginx so it registers your new domain setup:
 
 ```bash
 sudo nginx -t
@@ -250,7 +250,7 @@ server {
 }
 ```
 
-Exit the file (`Ctrl+X`).
+Exit the file ([[Ctrl+X]]).
 
 ::: tip
 By setting up SSL at the Nginx level, you are using a pattern called [SSL Termination](https://www.f5.com/glossary/ssl-termination).
@@ -320,7 +320,7 @@ Paste this bash command inside:
 systemctl reload nginx
 ```
 
-Save and exit `nano` (`Ctrl+O`, `Enter`, `Ctrl+X`). Make the script executable so Certbot has permission to run it:
+Save and exit `nano` ([[Ctrl+O]], [[Enter]], [[Ctrl+X]]). Make the script executable so Certbot has permission to run it:
 
 ```bash
 sudo chmod +x /etc/letsencrypt/renewal-hooks/post/reload-nginx.sh

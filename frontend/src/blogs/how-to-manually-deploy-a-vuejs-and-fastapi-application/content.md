@@ -173,7 +173,7 @@ curl http://127.0.0.1:8000/api/health
 
 If you see a JSON response (like `{"status": "ok"}`), your backend is working.
 
-Stop the server now by pressing `Ctrl+C` in the first terminal.
+Stop the server now by pressing [[Ctrl+C]] in the first terminal.
 
 ## Frontend setup and swap memory
 
@@ -364,7 +364,7 @@ Home page of my website.
 Your app will fail to make any API calls because the backend isn't running properly yet. This is normal. You are just testing if the HTML and CSS load correctly.
 :::
 
-When you are done, press `Ctrl+C` in both terminals to stop the SSH tunnel and the Python server.
+When you are done, press [[Ctrl+C]] in both terminals to stop the SSH tunnel and the Python server.
 
 ## Gunicorn and Supervisor
 
@@ -666,7 +666,7 @@ That is **110MB of RAM** wasted on a server that might only have 512MB or 1GB to
 
 This usually happens for two reasons:
 
-1. **Manual testing:** You ran the startup script manually to test it, but closed the terminal without killing the process (`Ctrl+C`), leaving it running in the background.
+1. **Manual testing:** You ran the startup script manually to test it, but closed the terminal without killing the process ([[Ctrl+C]]), leaving it running in the background.
 2. **Configuration shifts:** You changed the script (e.g., from 3 workers to 1) but didn't kill the old "3-worker" process before starting the new "1-worker" one.
 
 The quick and easy fix is to kill everything and let Supervisor do its job.

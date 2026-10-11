@@ -304,7 +304,7 @@ The location of the preferences button.
 
 By default, `Lighten` mode is selected, this is what we want. You can also select
 `Gap filling` to smooth out any breaks in the star trails. Keep
-`Lighten` active, then press `Ctrl+P` or click
+`Lighten` active, then press [[Ctrl+P]] or click
 `Start processing` in the top-left corner to begin stacking.
 
 ::: image ./star_trail_processing_windows_macos_step_4.svg "StarStax preferences showing Lighten mode selected and stacking options."
@@ -312,7 +312,7 @@ The stacked image will appear in the preview once processing is finished.
 :::
 
 To save your final image, click `Save as` next to the
-`Start processing` button or press `Ctrl+S`.
+`Start processing` button or press [[Ctrl+S]].
 
 Inside your `StarTrails` folder, create another folder called
 `StackedImage` and save the result there.

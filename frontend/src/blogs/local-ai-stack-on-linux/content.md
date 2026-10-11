@@ -332,7 +332,7 @@ Based on this output:
 - The 20 offloaded layers are occupying **~6.3 GB of GPU VRAM**.
 - The rest of the model is running on the CPU and consuming **~9.3 GB of system RAM**.
 
-When you exit the interactive session by pressing `Ctrl+C`, `llama-cli` automatically displays a detailed performance report. The output will look like this.
+When you exit the interactive session by pressing [[Ctrl+C]], `llama-cli` automatically displays a detailed performance report. The output will look like this.
 
 ```output
 llama_perf_sampler_print:    sampling time =      25.55 ms /   390 runs   (    0.07 ms per token, 15264.79 tokens per second)

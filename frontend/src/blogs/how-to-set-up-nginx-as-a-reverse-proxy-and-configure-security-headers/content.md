@@ -344,7 +344,7 @@ server {
 }
 ```
 
-Save the file and exit nano (`Ctrl+O`, `Enter`, `Ctrl+X`).
+Save the file and exit nano ([[Ctrl+O]], [[Enter]], [[Ctrl+X]]).
 
 ## Enable the site and update the firewall
 
@@ -587,7 +587,7 @@ You do not just write a CSP from scratch. It is an iterative process. Here is ho
 3. You open the developer tools console in your browser. You will see a sea of red errors telling you exactly what was blocked and where it came from.
 4. You add exceptions one by one based on the errors until your website functions normally.
 
-Let's apply this process to your website. Open [Google Chrome](https://www.google.com/chrome/) and open the developer tools console (`Ctrl+Shift+I` or `Cmd+Option+I` on Mac). Go to the "Network" tab.
+Let's apply this process to your website. Open [Google Chrome](https://www.google.com/chrome/) and open the developer tools console ([[Ctrl+Shift+I]] or [[Cmd+Option+I]] on Mac). Go to the "Network" tab.
 
 ::: info
 This guide uses Google Chrome because you can update the CSP in real-time without having to change your Nginx configuration and refresh the page repeatedly.
@@ -777,7 +777,7 @@ add_header Content-Security-Policy "default-src 'self'; font-src 'self' https://
 
 I have added `upgrade-insecure-requests` to the end of the CSP. This tells browsers to automatically upgrade any HTTP requests to HTTPS.
 
-Save the file and exit nano (`Ctrl+O`, `Enter`, `Ctrl+X`).
+Save the file and exit nano ([[Ctrl+O]], [[Enter]], [[Ctrl+X]]).
 
 Test the Nginx configuration and reload the server.
 
@@ -837,7 +837,7 @@ server {
 }
 ```
 
-Save the file and exit nano (`Ctrl+O`, `Enter`, `Ctrl+X`).
+Save the file and exit nano ([[Ctrl+O]], [[Enter]], [[Ctrl+X]]).
 
 ## What is next?
 
