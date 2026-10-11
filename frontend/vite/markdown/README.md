@@ -138,6 +138,22 @@ Example:
 To indicate a warning, use the ::fa{exclamation-triangle}:: icon.
 ```
 
+### Keyboard keys
+
+To display keyboard keys or key combinations formatted as realistic keycaps using the native `<kbd>` HTML element, enclose the key or shortcut in double brackets (`[[key]]`).
+
+Syntax and example:
+
+```markdown
+[[key]]
+
+Press [[F12]] to open developer tools.
+
+Use [[Ctrl+Shift+P]] (or [[Cmd+Shift+P]] on macOS) to access the command palette.
+
+Press [[Ctrl+C]] to exit.
+```
+
 ### Links
 
 The links transformer automatically adds `target="_blank"` and `rel="noopener noreferrer"` to all external links so they open securely in a new tab.
