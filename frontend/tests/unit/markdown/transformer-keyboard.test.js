@@ -51,6 +51,12 @@ describe("keyboardTransformer", () => {
       const output = markdownItInstance.render(input);
       expect(output).toContain('<KeyboardKey text="Ctrl+Shift+P" />');
     });
+
+    it("should handle keyboard keys inside link text", () => {
+      const input = "Click [here for [[Ctrl+C]]](https://example.com)";
+      const output = markdownItInstance.render(input);
+      expect(output).toContain('<KeyboardKey text="Ctrl+C" />');
+    });
   });
 
   describe("HTML escaping", () => {
