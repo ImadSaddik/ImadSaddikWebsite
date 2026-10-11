@@ -119,6 +119,20 @@ The blocked request does not receive a status code because the browser terminate
 :::
 ::::
 
+## Using wildcards for route patterns
+
+The blocking panel is not limited to exact URLs. It also supports wildcard characters (`*`), which allows you to target an entire group of endpoints with a single pattern.
+
+For example, if you want to test how your frontend behaves when every user-related endpoint fails at once, you can add this rule:
+
+```text
+http://localhost:8080/api/users/*
+```
+
+This pattern matches and blocks every sub-route under `/api/users/`. For example, it would also match paths like `/api/users/profile`, `/api/users/settings`, or `/api/users/avatar` depending on your app’s actual routes.
+
+You can also keep multiple rules active at the same time. This is useful for simulating partial outages, such as blocking an external analytics script while leaving your primary API endpoints running normally.
+
 ## Disabling and removing blocked URLs
 
 Once you finish testing, you do not want your endpoint to remain blocked. Firefox gives you two ways to restore your network traffic depending on whether you plan to test that endpoint again soon.
