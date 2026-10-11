@@ -118,3 +118,19 @@ When a browser blocks a request via developer tools, it does not receive an HTTP
 The blocked request does not receive a status code because the browser terminates it before it reaches the server.
 :::
 ::::
+
+## Disabling and removing blocked URLs
+
+Once you finish testing, you do not want your endpoint to remain blocked. Firefox gives you two ways to restore your network traffic depending on whether you plan to test that endpoint again soon.
+
+If you only want to pause the block temporarily, uncheck the box next to the URL in the **Request Blocking** sidebar. This restores normal network traffic immediately while keeping your configured URL saved in the list for later.
+
+::: image ./disable_blocked_url_checkbox.png "Unchecking the checkbox next to a blocked URL in the Request Blocking sidebar."
+Uncheck the box next to the blocked URL to restore traffic without deleting the configured rule.
+:::
+
+If you are completely finished with your test and want to clean up your list, hover over the entry in the sidebar and click the ::fa{fa-solid fa-close}:: button. You can also right-click the row directly inside the main Network table and select **Unblock URL**.
+
+::: image ./delete_blocked_url.png "Hovering over a blocked URL in the sidebar to click the delete button."
+Two ways to remove a blocked URL from the Request Blocking sidebar are demonstrated in this screenshot.
+:::
