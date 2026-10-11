@@ -148,3 +148,9 @@ If you are completely finished with your test and want to clean up your list, ho
 ::: image ./delete_blocked_url.png "Hovering over a blocked URL in the sidebar to click the delete button."
 Two ways to remove a blocked URL from the Request Blocking sidebar are demonstrated in this screenshot.
 :::
+
+## Conclusion
+
+Testing edge cases and network errors is an essential part of building resilient web applications. Instead of inserting temporary exceptions or mock errors into your codebase, use your browser's built-in developer tools.
+
+By blocking URLs directly in the Network tab, you get instant feedback on your frontend error states while keeping your local Git working tree completely untouched.
