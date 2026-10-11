@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.6.0] - 2026-10-11
+
+### Added
+
+- **Syntax highlighting theme:** Switched Shiki highlighter theme to GitHub Dark and added Vue.js syntax highlighting support.
+- **Content:** Added two new technical articles:
+  - "How to replace Font Awesome with compile-time inline SVGs in Vite"
+  - "How to block URLs in browser developer tools to test error handling"
+- **Test coverage:** Added unit tests for `CodeBlock` component and Shiki service methods.
+
+### Changed
+
+- **Highlighter performance:** Refactored Shiki highlighter to initialize as a singleton and added a custom background-color purge transformer.
+- **Dependencies:** Updated core frontend dependencies including Vue (`^3.5.43`), Vue Router (`^5.4.0`), Shiki (`^4.5.0`), KaTeX (`^0.19.0`), and Vite (`^7.3.7`).
+
+### Fixed
+
+- **Security audits:** Resolved frontend dependency audit vulnerabilities.
+
 ## [v2.5.0] - 2026-09-13
 
 ### Added
@@ -177,6 +196,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Monitoring:** Real-time resource tracking with Btop and traffic analysis with GoAccess.
   - **Performance:** Global delivery optimization via Cloudflare CDN.
 
+[v2.6.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.5.0...v2.6.0
 [v2.5.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.4.0...v2.5.0
 [v2.4.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.3.0...v2.4.0
 [v2.3.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.2.0...v2.3.0
