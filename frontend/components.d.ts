@@ -33,6 +33,7 @@ declare module 'vue' {
     InlineButton: typeof import('./src/components/InlineButton.vue')['default']
     InlineCode: typeof import('./src/components/InlineCode.vue')['default']
     InlineIcon: typeof import('./src/components/InlineIcon.vue')['default']
+    KeyboardKey: typeof import('./src/components/KeyboardKey.vue')['default']
     MeteorShowers: typeof import('./src/components/MeteorShowers.vue')['default']
     NavBar: typeof import('./src/components/NavBar.vue')['default']
     OrderedItem: typeof import('./src/components/OrderedItem.vue')['default']
