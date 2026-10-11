@@ -43,6 +43,7 @@ kbd.keyboard-shortcut {
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
+  vertical-align: middle;
 }
 
 .keyboard-key {
@@ -63,6 +64,7 @@ kbd.keyboard-shortcut {
   box-shadow: inset 0 -2px 0 0 rgba(0, 0, 0, 1);
   white-space: nowrap;
   user-select: none;
+  vertical-align: middle;
 }
 
 .keyboard-separator {
