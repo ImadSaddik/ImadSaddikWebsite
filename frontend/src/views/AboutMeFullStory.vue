@@ -657,7 +657,7 @@ export default {
         clr     $0050
         clr     $0051
         clr     $0052
-    loopn   cpx     #$010a
+loopn   cpx     #$010a
         beq     fin
         ldaa    ,x
         bmi     negatif
@@ -665,13 +665,13 @@ export default {
         inc     $0052
         inx
         bra     loopn
-    null    inc     $0051
+null    inc     $0051
         inx
         bra     loopn
-    negatif inc     $0050
+negatif inc     $0050
         inx
         bra     loopn
-    fin     swi
+fin     swi
         org     $0100
         fcb     -16,-2,-3,-4,0,0,21,31,14,15
         end`,
