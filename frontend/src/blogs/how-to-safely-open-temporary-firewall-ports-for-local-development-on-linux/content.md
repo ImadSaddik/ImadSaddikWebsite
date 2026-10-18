@@ -85,3 +85,37 @@ Your router does not expect this connection from the outside and does not know w
 Even though your home router protects you from the outside internet, leaving ports open permanently on your laptop creates real risks once you leave your desk. If you connect your laptop to a public Wi-Fi network at a coffee shop or an airport, anyone on that same network can scan your machine and communicate with services running on those open ports.
 
 There is also the issue of forgotten rules. Any process you start later that happens to use that same port automatically inherits that firewall permission and becomes visible to everyone on your network. Over time, your firewall fills up with old rules, making it difficult to remember which ports you actively need and which ones were temporary tests from weeks ago.
+
+## Labeling rules with UFW comments
+
+The quickest manual improvement you can make today is taking advantage of UFW's built-in comment system.
+
+By default, running `sudo ufw allow 5173/tcp` provides zero context. Instead, tag the rule when you create it:
+
+```bash
+sudo ufw allow 5173/tcp comment 'vite-frontend-dev'
+sudo ufw allow 2000/tcp comment 'node-api-temp'
+```
+
+When you view your firewall configuration with the `status` command, the comments appear alongside the rules:
+
+```bash
+sudo ufw status
+```
+
+```output
+Status: active
+
+To                         Action      From
+--                         ------      ----
+5173/tcp                   ALLOW IN    Anywhere                   # vite-frontend-dev
+2000/tcp                   ALLOW IN    Anywhere                   # node-api-temp
+5173/tcp (v6)              ALLOW IN    Anywhere (v6)              # vite-frontend-dev
+2000/tcp (v6)              ALLOW IN    Anywhere (v6)              # node-api-temp
+```
+
+Labeling your rules makes it easy to see why a port is open and whether it is temporary. Once you are done, you can delete it with a single command:
+
+```bash
+sudo ufw delete allow 2000/tcp
+```
