@@ -443,3 +443,9 @@ sudo systemctl stop ufw-dev-cleanup.service
 ```
 
 Now, whenever you shut down, systemd removes every rule tagged with `ephemeral dev`. You start your next session with a clean firewall.
+
+## Conclusion
+
+Opening ports is a normal part of testing local services on other devices, but leaving them open weakens your computer's security.
+
+Using a process wrapper handles immediate cleanup when you finish work, and a systemd shutdown service catches anything left behind. This setup lets you test freely on your local network while keeping your firewall clean and safe.
