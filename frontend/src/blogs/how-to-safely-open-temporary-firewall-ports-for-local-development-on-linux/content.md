@@ -399,3 +399,47 @@ fi
 ```
 
 Passing the `--force` flag allows `ufw delete` to run non-interactively without prompting for manual confirmation. We append `|| true` to each deletion as a final defensive safeguard so a single missing index won't interrupt the rest of the cleanup sequence.
+
+#### Create the systemd service unit
+
+Next, register a systemd unit that executes this script during the shutdown sequence before the network stack is taken down.
+
+Create `/etc/systemd/system/ufw-dev-cleanup.service`:
+
+```ini
+[Unit]
+Description=Clean up temporary UFW development rules
+After=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/true
+ExecStop=/usr/local/bin/ufw-cleanup-dev.sh
+TimeoutStopSec=10
+
+[Install]
+WantedBy=multi-user.target
+```
+
+In systemd, the standard idiom for running a task during shutdown is configuring a one-shot service with `RemainAfterExit=yes` and placing the logic inside `ExecStop=`.
+
+When your machine boots, systemd runs `ExecStart=/bin/true`. This command does nothing and exits immediately with success. However, `RemainAfterExit=yes` tells systemd to keep treating the service as active and running in the background.
+
+When you power off or restart, systemd stops active services in reverse order. Because this unit specifies `After=network.target`, systemd runs `ExecStop=/usr/local/bin/ufw-cleanup-dev.sh` while the filesystems and network tools are still writable. This removes the temporary firewall rules before the system shuts down.
+
+Enable the service so that it runs automatically on every boot:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable ufw-dev-cleanup.service
+sudo systemctl start ufw-dev-cleanup.service
+```
+
+You can also test the cleanup manually at any time without restarting:
+
+```bash
+sudo systemctl stop ufw-dev-cleanup.service
+```
+
+Now, whenever you shut down, systemd removes every rule tagged with `ephemeral dev`. You start your next session with a clean firewall.
