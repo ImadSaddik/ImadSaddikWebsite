@@ -309,3 +309,11 @@ In web projects, you can add `dev-expose` directly to your `package.json` script
 ```
 
 Running `pnpm dev:lan` will open port 5173, launch the local server, and clean up the rule as soon as you stop the process.
+
+::: warning When process traps cannot run
+Shell traps only work if the process receives a signal it can catch.
+
+If a process is terminated forcefully using `SIGKILL`, the operating system stops the shell immediately. The kernel does not give Bash a chance to execute the cleanup function.
+
+Similarly, if your machine loses power or crashes unexpectedly, the firewall rule remains written on disk. Process traps handle clean exits, but they cannot defend against abrupt termination.
+:::
