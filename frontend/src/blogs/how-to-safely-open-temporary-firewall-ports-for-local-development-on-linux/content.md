@@ -133,3 +133,138 @@ The cleanest way to handle dev ports is to tie the firewall rule directly to the
 In Bash, you can achieve this using the `trap` command, which intercepts exit signals like `SIGINT` and `SIGTERM`.
 
 Hardcoding a specific port and command only works for a single setup. Real-world development involves many different tools: Vite with `pnpm`, FastAPI with `uvicorn`, compiled Go binaries, or static servers on custom ports. Instead of writing custom scripts for each tool, you can build a reusable, generic CLI wrapper that accepts any port and runs any command.
+
+#### The universal wrapper script
+
+Create an executable script named `dev-expose`. It reads the target port, opens it in UFW, runs your development command, and guarantees cleanup when the process finishes or gets interrupted:
+
+```bash
+#!/usr/bin/env bash
+set -e
+
+PORT="$1"
+shift || true
+
+if [ -z "$PORT" ] || [ $# -eq 0 ]; then
+  echo "Usage: dev-expose <port> <command>"
+  echo "Example: dev-expose 8000 uvicorn main:app --host 0.0.0.0"
+  exit 1
+fi
+
+CHILD_PID=""
+
+cleanup() {
+  trap - EXIT INT TERM HUP
+
+  echo -e "\nClosing port $PORT in UFW"
+  sudo ufw delete allow "$PORT/tcp" >/dev/null 2>&1 || true
+
+  if [ -n "$CHILD_PID" ] && kill -0 "$CHILD_PID" 2>/dev/null; then
+    kill -TERM "$CHILD_PID" 2>/dev/null || true
+  fi
+}
+
+if command -v ufw >/dev/null 2>&1; then
+  echo "Opening port $PORT in UFW"
+  sudo ufw allow "$PORT/tcp" comment 'ephemeral dev' >/dev/null
+
+  trap cleanup EXIT INT TERM HUP
+fi
+
+"$@" &
+CHILD_PID=$!
+
+wait "$CHILD_PID" || {
+  status=$?
+  if [ "$status" -eq 130 ] || [ "$status" -eq 143 ]; then
+    exit 0
+  fi
+  exit "$status"
+}
+```
+
+Make the script executable:
+
+```bash
+chmod +x dev-expose
+```
+
+#### How the wrapper works under the hood
+
+While the script is relatively concise, every line addresses a specific quirk in Unix process management and signal handling. Let's walk through each block so you know exactly what is happening beneath the surface.
+
+First, the script separates the port number from the command you want to run:
+
+```bash
+PORT="$1"
+shift || true
+```
+
+The first argument passed to the script is saved into `$PORT`. Then, we call `shift`. In Bash, `shift` slides all positional parameters one slot to the left, which drops `$1` entirely. This means `$2` becomes `$1`, `$3` becomes `$2`, and the special array `"$@"` now holds only your development server command and its flags.
+
+We append `|| true` as a defensive guard so that if someone runs the script without enough arguments, `set -e` will not terminate the shell before our validation block can print the helpful usage message.
+
+Next comes the cleanup function:
+
+```bash
+cleanup() {
+  trap - EXIT INT TERM HUP
+
+  echo -e "\nClosing port $PORT in UFW"
+  sudo ufw delete allow "$PORT/tcp" >/dev/null 2>&1 || true
+
+  if [ -n "$CHILD_PID" ] && kill -0 "$CHILD_PID" 2>/dev/null; then
+    kill -TERM "$CHILD_PID" 2>/dev/null || true
+  fi
+}
+```
+
+Notice that first line: `trap - EXIT INT TERM HUP`. Here, the hyphen (`-`) clears the existing trap handlers and restores each signal’s default behavior.
+
+Why do we need this? Without it, your cleanup logic would run twice whenever you press [[Ctrl+C]]. First, Bash catches the interrupt signal (`INT`) and runs `cleanup()`. But once `cleanup()` finishes, the script terminates.
+
+In Bash, exiting automatically fires the `EXIT` trap. This runs `cleanup()` a second time and prints duplicate log messages. Disarming traps immediately upon entry guarantees that your cleanup code runs exactly once.
+
+We also check if our background process is still alive using `kill -0` and forward a termination signal so no orphaned server keeps running in the background.
+
+Then, we arm the traps before starting anything:
+
+```bash
+if command -v ufw >/dev/null 2>&1; then
+  echo "Opening port $PORT in UFW"
+  sudo ufw allow "$PORT/tcp" comment 'ephemeral dev' >/dev/null
+
+  trap cleanup EXIT INT TERM HUP
+fi
+```
+
+If UFW is installed and available, we punch the hole for our port and tag it with our `ephemeral dev` label. We then bind our `cleanup` function to `EXIT` (normal exit), `INT` (pressing [[Ctrl+C]]), `TERM` (process termination), and `HUP` (hangup, which happens if you abruptly close your terminal tab or drop an SSH session).
+
+Next, we run the command in the background and capture its process ID.
+
+```bash
+"$@" &
+CHILD_PID=$!
+```
+
+Avoid using `exec "$@"` in this case. The `exec` call replaces the Bash process entirely, which drops all active traps. As a result, the shell **can't** execute cleanup to remove the firewall rule when the server exits.
+
+Instead, launch the command in the background with `&` and store its process ID in `$CHILD_PID`. This keeps the parent Bash shell alive to wait for the command and trigger the cleanup trap on exit.
+
+Finally, the script waits for the background process and normalizes its exit status:
+
+```bash
+wait "$CHILD_PID" || {
+  status=$?
+  if [ "$status" -eq 130 ] || [ "$status" -eq 143 ]; then
+    exit 0
+  fi
+  exit "$status"
+}
+```
+
+The `wait` command blocks until the background server process exits or receives a signal. If the server exits with a non-zero status, the `||` block evaluates and captures the code in `$status`.
+
+On Linux, a process killed by a signal returns an exit status of 128 plus the signal number. Pressing [[Ctrl+C]] sends `SIGINT` (signal 2), which produces code 130. Terminating the process sends `SIGTERM` (signal 15), which produces code 143.
+
+Returning 130 or 143 causes package managers like `pnpm` to treat the command as a failure and print `ELIFECYCLE` error logs. Mapping both codes to `0` marks standard manual termination as a clean exit while still passing through actual application failure codes such as `1`.
