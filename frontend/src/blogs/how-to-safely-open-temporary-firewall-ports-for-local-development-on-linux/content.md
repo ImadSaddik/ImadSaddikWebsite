@@ -132,6 +132,4 @@ The cleanest way to handle dev ports is to tie the firewall rule directly to the
 
 In Bash, you can achieve this using the `trap` command, which intercepts exit signals like `SIGINT` and `SIGTERM`.
 
-Hardcoding a specific port and command only works for a single project. Real-world development involves many different tools. You might run Vite with `pnpm`, a FastAPI app with `uvicorn`, compiled Go binaries, or standalone servers on different ports.
-
-Instead of hardcoding parameters, you can build a reusable CLI wrapper that accepts any port and runs any command.
+Hardcoding a specific port and command only works for a single setup. Real-world development involves many different tools: Vite with `pnpm`, FastAPI with `uvicorn`, compiled Go binaries, or static servers on custom ports. Instead of writing custom scripts for each tool, you can build a reusable, generic CLI wrapper that accepts any port and runs any command.
