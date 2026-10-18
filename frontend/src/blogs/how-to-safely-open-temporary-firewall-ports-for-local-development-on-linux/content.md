@@ -51,3 +51,37 @@ sudo ufw status
 
 If the status reports `Status: inactive`, your system is not filtering inbound connections. This guide specifically applies if your firewall is active and you want to keep it secure while developing.
 :::
+
+## Does opening a port expose it to the internet?
+
+Before looking at cleanup strategies, it helps to understand what a local UFW rule actually permits.
+
+When you allow a port like `5173`, you are only telling your laptop to accept incoming traffic on that port. However, in a standard home setup, your router stands between your laptop and the outside internet.
+
+::: image ./network_topology_nat.webp "Network diagram showing incoming traffic hitting a home router NAT boundary before reaching a laptop."
+Your router blocks incoming internet traffic by default, but other devices on your home Wi-Fi can still reach your laptop.
+:::
+
+Your router uses [Network Address Translation (NAT)](https://en.wikipedia.org/wiki/Network_address_translation) to manage traffic. By default, it drops any unsolicited incoming connections from the internet unless you manually set up port forwarding.
+
+::: info Verifying external isolation
+You can verify this boundary yourself using a secondary device connected to mobile data (completely disconnected from your home Wi-Fi).
+
+First, find your router's public IPv4 address by running this command on your laptop:
+
+```bash
+curl -4 ifconfig.me
+```
+
+Then, from your secondary device (for example, inside an app like [Termux](https://termux.dev/en/)), run a quick port check against that IP:
+
+```bash
+nc -zv -w 3 YOUR_PUBLIC_IP 5173
+```
+
+Your router does not expect this connection from the outside and does not know which device should receive it. It drops the request, so the command waits and times out after three seconds.
+:::
+
+Even though your home router protects you from the outside internet, leaving ports open permanently on your laptop creates real risks once you leave your desk. If you connect your laptop to a public Wi-Fi network at a coffee shop or an airport, anyone on that same network can scan your machine and communicate with services running on those open ports.
+
+There is also the issue of forgotten rules. Any process you start later that happens to use that same port automatically inherits that firewall permission and becomes visible to everyone on your network. Over time, your firewall fills up with old rules, making it difficult to remember which ports you actively need and which ones were temporary tests from weeks ago.
