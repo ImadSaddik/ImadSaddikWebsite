@@ -268,3 +268,21 @@ The `wait` command blocks until the background server process exits or receives 
 On Linux, a process killed by a signal returns an exit status of 128 plus the signal number. Pressing [[Ctrl+C]] sends `SIGINT` (signal 2), which produces code 130. Terminating the process sends `SIGTERM` (signal 15), which produces code 143.
 
 Returning 130 or 143 causes package managers like `pnpm` to treat the command as a failure and print `ELIFECYCLE` error logs. Mapping both codes to `0` marks standard manual termination as a clean exit while still passing through actual application failure codes such as `1`.
+
+#### Using the wrapper across different tools
+
+Because the wrapper passes all remaining arguments directly to the shell, it works with any stack or tool:
+
+```bash
+# Python and FastAPI
+dev-expose 8000 uvicorn main:app --host 0.0.0.0
+
+# Vite with pnpm
+dev-expose 5173 pnpm dev --host
+
+# Go web server
+dev-expose 8080 go run main.go
+
+# Simple static testing
+dev-expose 2000 python3 -m http.server 2000 --bind 0.0.0.0
+```
