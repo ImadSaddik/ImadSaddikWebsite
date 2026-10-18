@@ -286,3 +286,26 @@ dev-expose 8080 go run main.go
 # Simple static testing
 dev-expose 2000 python3 -m http.server 2000 --bind 0.0.0.0
 ```
+
+#### Making the wrapper globally accessible
+
+To use `dev-expose` across your entire system without needing a relative path, move the script into a directory in your `$PATH`, such as `~/.local/bin/` or `/usr/local/bin/`:
+
+```bash
+mv dev-expose ~/.local/bin/
+```
+
+Once it is in your executable path, you can run `dev-expose` from any terminal directory, regardless of what programming language or project you are working on.
+
+In web projects, you can add `dev-expose` directly to your `package.json` scripts.
+
+```json
+{
+  "scripts": {
+    "dev": "vite",
+    "dev:lan": "dev-expose 5173 vite --host"
+  }
+}
+```
+
+Running `pnpm dev:lan` will open port 5173, launch the local server, and clean up the rule as soon as you stop the process.
