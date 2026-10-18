@@ -8,25 +8,25 @@
 >
     <url>
         <loc>https://imadsaddik.com/</loc>
-        <lastmod>2026-10-18T11:46:58.195Z</lastmod>
+        <lastmod>2026-10-18T11:51:52.214Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/about-me</loc>
-        <lastmod>2026-10-18T11:46:58.195Z</lastmod>
+        <lastmod>2026-10-18T11:51:52.214Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/hire-me</loc>
-        <lastmod>2026-10-18T11:46:58.195Z</lastmod>
+        <lastmod>2026-10-18T11:51:52.214Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/resume</loc>
-        <lastmod>2026-10-18T11:46:58.195Z</lastmod>
+        <lastmod>2026-10-18T11:51:52.214Z</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
@@ -130,7 +130,7 @@
         <loc>
             https://imadsaddik.com/blogs/how-to-safely-open-temporary-firewall-ports-for-local-development-on-linux
         </loc>
-        <lastmod>2026-10-18T11:46:58.094Z</lastmod>
+        <lastmod>2026-10-18T11:51:52.120Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
