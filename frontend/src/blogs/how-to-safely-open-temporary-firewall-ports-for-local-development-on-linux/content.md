@@ -317,3 +317,85 @@ If a process is terminated forcefully using `SIGKILL`, the operating system stop
 
 Similarly, if your machine loses power or crashes unexpectedly, the firewall rule remains written on disk. Process traps handle clean exits, but they cannot defend against abrupt termination.
 :::
+
+### Clearing temporary rules on system shutdown
+
+Process traps work well when you close your dev server gracefully. But what if your terminal window is closed abruptly, the process crashes, or you manually opened a few ports while debugging and forgot to remove them?
+
+You can set up a small systemd unit to delete temporary dev rules whenever your computer shuts down or restarts.
+
+#### The shutdown cleanup script
+
+Create a script at `/usr/local/bin/ufw-cleanup-dev.sh`:
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+rules=$(
+  ufw status numbered 2>/dev/null |
+    grep 'ephemeral dev' |
+    awk -F"[][]" '{print $2}' |
+    tr -d ' ' |
+    sort -rn
+) || true
+
+if [ -n "$rules" ]; then
+  for num in $rules; do
+    ufw --force delete "$num" >/dev/null 2>&1 || true
+  done
+fi
+```
+
+Make the script executable:
+
+```bash
+sudo chmod +x /usr/local/bin/ufw-cleanup-dev.sh
+```
+
+::: info Why `/usr/local/bin` instead of `~/.local/bin`?
+Unlike `dev-expose`, which runs interactively in your user shell, this script is invoked by a system-wide systemd service running as `root`. Systemd does not expand tilde paths (`~`), and system services should never depend on personal home directories that might be unmounted before shutdown completes. The Linux Filesystem Hierarchy Standard (FHS) reserves `/usr/local/bin` for locally installed, system-wide user executables.
+:::
+
+#### How the cleanup script works under the hood
+
+The script starts by querying UFW for active firewall rules with their index numbers:
+
+```bash
+rules=$(
+  ufw status numbered 2>/dev/null |
+    grep 'ephemeral dev' |
+    awk -F"[][]" '{print $2}' |
+    tr -d ' ' |
+    sort -rn
+) || true
+```
+
+The output of `ufw status numbered` prefixes each rule with a bracketed index:
+
+```output
+Status: active
+     To                         Action      From
+     --                         ------      ----
+[ 1] 3647/tcp                   ALLOW IN    192.168.1.14               # llama-swap
+[ 2] 5173/tcp                   ALLOW IN    Anywhere                   # ephemeral dev
+[ 3] 5173/tcp (v6)              ALLOW IN    Anywhere (v6)              # ephemeral dev
+```
+
+We pipe this table into `grep` to isolate only rules tagged with our `ephemeral dev` comment, and then use `awk` to split on the square brackets and extract the rule number inside. Because single-digit numbers include a leading space, `tr -d ' '` strips any remaining whitespace.
+
+The most important step in this pipeline is `sort -rn`, which sorts the matched rule numbers in reverse numerical order. UFW dynamically re-indexes rules whenever one is removed. If you deleted rule 1 first, rule 2 would immediately shift up and become rule 1, throwing off all subsequent index targets and potentially deleting the wrong rules. Deleting from highest index to lowest ensures that preceding rule indices never shift.
+
+Notice the `|| true` guard at the end of the assignment. Under `set -euo pipefail`, if `grep` finds no matching rules, it exits with status 1 and terminates the script immediately. Appending `|| true` ensures that clean shutdowns with no leftover rules finish quietly without raising errors in systemd.
+
+Once the target indices are captured, the script loops through each number:
+
+```bash
+if [ -n "$rules" ]; then
+  for num in $rules; do
+    ufw --force delete "$num" >/dev/null 2>&1 || true
+  done
+fi
+```
+
+Passing the `--force` flag allows `ufw delete` to run non-interactively without prompting for manual confirmation. We append `|| true` to each deletion as a final defensive safeguard so a single missing index won't interrupt the rest of the cleanup sequence.
