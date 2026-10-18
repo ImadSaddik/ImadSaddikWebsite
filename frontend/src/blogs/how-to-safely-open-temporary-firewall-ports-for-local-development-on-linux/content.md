@@ -120,6 +120,8 @@ Labeling your rules makes it easy to see why a port is open and whether it is te
 sudo ufw delete allow 2000/tcp
 ```
 
+## Automating firewall cleanup
+
 While adding comments keeps your rules organized, manual deletion still depends on you remembering to clean up. If you close your laptop or switch tasks, that port stays open indefinitely. To keep your firewall truly clean, let your tools handle the cleanup automatically.
 
 Depending on your daily workflow, you can either tie the port to the exact process that uses it, or set up a safety net that clears temporary rules whenever your computer turns off.
