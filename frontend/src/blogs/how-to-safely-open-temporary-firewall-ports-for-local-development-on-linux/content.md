@@ -125,3 +125,13 @@ sudo ufw delete allow 2000/tcp
 While adding comments keeps your rules organized, manual deletion still depends on you remembering to clean up. If you close your laptop or switch tasks, that port stays open indefinitely. To keep your firewall truly clean, let your tools handle the cleanup automatically.
 
 Depending on your daily workflow, you can either tie the port to the exact process that uses it, or set up a safety net that clears temporary rules whenever your computer turns off.
+
+### Closing ports automatically with process traps
+
+The cleanest way to handle dev ports is to tie the firewall rule directly to the lifecycle of your development server. When the server starts, the port opens. When you stop the server by pressing [[Ctrl+C]], the port closes immediately.
+
+In Bash, you can achieve this using the `trap` command, which intercepts exit signals like `SIGINT` and `SIGTERM`.
+
+Hardcoding a specific port and command only works for a single project. Real-world development involves many different tools. You might run Vite with `pnpm`, a FastAPI app with `uvicorn`, compiled Go binaries, or standalone servers on different ports.
+
+Instead of hardcoding parameters, you can build a reusable CLI wrapper that accepts any port and runs any command.
