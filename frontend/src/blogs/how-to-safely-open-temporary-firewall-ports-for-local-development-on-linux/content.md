@@ -1,8 +1,8 @@
 ---
 title: "How to safely open temporary firewall ports for local development on Linux"
 subtitle: "Keep your local development workflow smooth without letting your UFW firewall collect forgotten open ports."
-date: "October 18, 2026"
-tags: ["Linux", "UFW", "Firewall", "Web development", "Security", "Bash"]
+date: "October 19, 2026"
+tags: ["Linux", "UFW", "Bash", "Systemd", "Security"]
 ---
 
 ## Introduction
