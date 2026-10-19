@@ -9,7 +9,7 @@ tags: ["Linux", "UFW", "Bash", "Systemd", "Security"]
 
 When developing full-stack web applications, you regularly need to test your work across multiple devices on your local network. Maybe you are checking how a responsive layout behaves on an actual mobile device, or maybe you need to share a quick live preview with someone else on the same Wi-Fi.
 
-If you have an active software firewall like UFW running on your Linux laptop, other devices on your Wi-Fi can't connect to your local services by default. To let them in, you bind your server to all network interfaces using `0.0.0.0` (like passing `--host` to Vite or `--bind 0.0.0.0` to Python), and then you punch a hole through your firewall:
+If you have an active software firewall like UFW running on your Linux laptop, other devices on your Wi-Fi can't connect to your local services by default. To let them in, you bind your server to all network interfaces using `0.0.0.0`, and then you punch a hole through your firewall:
 
 ```bash
 sudo ufw allow 5173/tcp
@@ -36,7 +36,7 @@ To                         Action      From
 6999/tcp                   ALLOW       Anywhere
 ```
 
-Your firewall has quietly become cluttered with obsolete rules. While these ports are typically shielded from the public internet by your home [router's NAT boundary](https://en.wikipedia.org/wiki/Network_address_translation), they remain wide open to anyone sharing your local network. If you take your laptop to a coffee shop, an office, or an airport, any process binding to that port is immediately exposed to unknown peers on that subnet.
+Your firewall has quietly become cluttered with obsolete rules. While these ports are shielded from the public internet by your home [router's NAT boundary](https://en.wikipedia.org/wiki/Network_address_translation), they remain wide open to anyone sharing your local network. If you take your laptop to a coffee shop, an office, or an airport, any process binding to that port is immediately exposed to unknown devices on that network.
 
 In this guide, you will learn how to properly manage development ports in UFW. You will start by labeling temporary rules so they remain easy to identify. Then, you will automate their cleanup when your dev process exits or when your computer shuts down.
 
@@ -49,12 +49,12 @@ You can verify whether your firewall is running with this command:
 sudo ufw status
 ```
 
-If the status reports `Status: inactive`, your system is not filtering inbound connections. This guide specifically applies if your firewall is active and you want to keep it secure while developing.
+If the status reports `Status: inactive`, your system is not filtering incoming connections. This guide specifically applies if your firewall is active and you want to keep it secure while developing.
 :::
 
 ## Does opening a port expose it to the internet?
 
-Before looking at cleanup strategies, it helps to understand what a local UFW rule actually permits.
+Before looking at cleanup strategies, it helps to understand what a local UFW rule permits.
 
 When you allow a port like `5173`, you are only telling your laptop to accept incoming traffic on that port. However, in a standard home setup, your router stands between your laptop and the outside internet.
 
@@ -62,10 +62,10 @@ When you allow a port like `5173`, you are only telling your laptop to accept in
 Your router blocks incoming internet traffic by default, but other devices on your home Wi-Fi can still reach your laptop.
 :::
 
-Your router uses [Network Address Translation (NAT)](https://en.wikipedia.org/wiki/Network_address_translation) to manage traffic. By default, it drops any unsolicited incoming connections from the internet unless you manually set up port forwarding.
+Your router uses [Network Address Translation (NAT)](https://en.wikipedia.org/wiki/Network_address_translation) to manage traffic. By default, it drops any uninvited incoming connections from the internet unless you manually set up port forwarding.
 
 ::: info Verifying external isolation
-You can verify this boundary yourself using a secondary device connected to mobile data (completely disconnected from your home Wi-Fi).
+You can verify this boundary yourself using a secondary device connected to mobile data.
 
 First, find your router's public IPv4 address by running this command on your laptop:
 
@@ -191,7 +191,7 @@ chmod +x dev-expose
 
 #### How the wrapper works under the hood
 
-While the script is relatively concise, every line addresses a specific quirk in Unix process management and signal handling. Let's walk through each block so you know exactly what is happening beneath the surface.
+While the script is relatively concise, every line addresses a specific quirk in Unix process management and signal handling. Let's walk through each block so you know what is happening beneath the surface.
 
 First, the script separates the port number from the command you want to run:
 
@@ -267,7 +267,7 @@ The `wait` command blocks until the background server process exits or receives 
 
 On Linux, a process killed by a signal returns an exit status of 128 plus the signal number. Pressing [[Ctrl+C]] sends `SIGINT` (signal 2), which produces code 130. Terminating the process sends `SIGTERM` (signal 15), which produces code 143.
 
-Returning 130 or 143 causes package managers like `pnpm` to treat the command as a failure and print `ELIFECYCLE` error logs. Mapping both codes to `0` marks standard manual termination as a clean exit while still passing through actual application failure codes such as `1`.
+Returning 130 or 143 causes package managers like `pnpm` to treat the command as a failure and print `ELIFECYCLE` error logs. Mapping both codes to `0` marks standard manual termination as a clean exit while still passing through application failure codes such as `1`.
 
 #### Using the wrapper across different tools
 
@@ -384,7 +384,7 @@ Status: active
 
 We pipe this table into `grep` to isolate only rules tagged with our `ephemeral dev` comment, and then use `awk` to split on the square brackets and extract the rule number inside. Because single-digit numbers include a leading space, `tr -d ' '` strips any remaining whitespace.
 
-The most important step in this pipeline is `sort -rn`, which sorts the matched rule numbers in reverse numerical order. UFW dynamically re-indexes rules whenever one is removed. If you deleted rule 1 first, rule 2 would immediately shift up and become rule 1, throwing off all subsequent index targets and potentially deleting the wrong rules. Deleting from highest index to lowest ensures that preceding rule indices never shift.
+The most important step in this pipeline is `sort -rn`, which sorts the matched rule numbers in reverse numerical order. UFW dynamically re-indexes rules whenever one is removed. If you deleted rule 1 first, rule 2 would immediately shift up and become rule 1. That shift breaks the target numbers for the rest of the list, so you risk deleting the wrong rules. When you delete from the highest index to the lowest, the earlier numbers stay in place.
 
 Notice the `|| true` guard at the end of the assignment. Under `set -euo pipefail`, if `grep` finds no matching rules, it exits with status 1 and terminates the script immediately. Appending `|| true` ensures that clean shutdowns with no leftover rules finish quietly without raising errors in systemd.
 
