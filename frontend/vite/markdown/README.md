@@ -73,17 +73,21 @@ This is the caption that appears below the image.
 
 ### Admonitions (Alerts)
 
-Use custom containers to highlight important information like tips, warnings, or info blocks.
+Use custom containers to highlight important information like tips, warnings, or info blocks. You can also specify an optional custom title, which supports inline Markdown (such as inline code).
 
 Syntax and example:
 
 ```markdown
-::: [type]
+::: [type] [optional title]
 Content goes here.
 :::
 
 ::: tip
 This is a helpful tip!
+:::
+
+::: info Why `/usr/local/bin` instead of `~/.local/bin`?
+Admonition titles support inline code and other formatting.
 :::
 ```
 
