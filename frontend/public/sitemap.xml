@@ -8,25 +8,25 @@
 >
     <url>
         <loc>https://imadsaddik.com/</loc>
-        <lastmod>2026-10-11T22:25:52.557Z</lastmod>
+        <lastmod>2026-10-19T22:49:00.236Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/about-me</loc>
-        <lastmod>2026-10-11T22:25:52.557Z</lastmod>
+        <lastmod>2026-10-19T22:49:00.236Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/hire-me</loc>
-        <lastmod>2026-10-11T22:25:52.557Z</lastmod>
+        <lastmod>2026-10-19T22:49:00.236Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://imadsaddik.com/resume</loc>
-        <lastmod>2026-10-11T22:25:52.557Z</lastmod>
+        <lastmod>2026-10-19T22:49:00.236Z</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
@@ -127,6 +127,14 @@
         <priority>0.7</priority>
     </url>
     <url>
+        <loc>
+            https://imadsaddik.com/blogs/how-to-safely-open-temporary-firewall-ports-for-local-development-on-linux
+        </loc>
+        <lastmod>2026-10-19T22:46:26.341Z</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
         <loc>https://imadsaddik.com/blogs/how-to-self-host-and-securely-manage-meilisearch</loc>
         <lastmod>2026-10-11T16:25:05.972Z</lastmod>
         <changefreq>monthly</changefreq>
@@ -194,7 +202,7 @@
     </url>
     <url>
         <loc>https://imadsaddik.com/courses/full-stack-web-deployment</loc>
-        <lastmod>2026-10-11T22:25:35.750Z</lastmod>
+        <lastmod>2026-10-11T22:34:37.431Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
