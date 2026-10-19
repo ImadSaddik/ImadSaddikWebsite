@@ -42,4 +42,20 @@ describe("AdmonitionBlock", () => {
     const wrapper = factory({ title: "tip" });
     expect(wrapper.find(".admonition-title").text()).toBe("Tip");
   });
+
+  it("renders title from title slot when provided", () => {
+    const wrapper = factory({}, { title: "Slot Title" });
+    expect(wrapper.find(".admonition-title").text()).toBe("Slot Title");
+  });
+
+  it("renders title slot with nested HTML", () => {
+    const wrapper = factory({}, { title: "Why <code>/usr/local/bin</code>?" });
+    expect(wrapper.find(".admonition-title code").exists()).toBe(true);
+    expect(wrapper.find(".admonition-title code").text()).toBe("/usr/local/bin");
+  });
+
+  it("prefers title slot over title prop when both are provided", () => {
+    const wrapper = factory({ title: "Prop Title" }, { title: "Slot Title" });
+    expect(wrapper.find(".admonition-title").text()).toBe("Slot Title");
+  });
 });

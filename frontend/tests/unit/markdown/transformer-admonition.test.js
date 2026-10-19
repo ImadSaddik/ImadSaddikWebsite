@@ -26,7 +26,8 @@ describe("admonitionTransformer", () => {
     ])("should transform ::: %s into AdmonitionBlock with type='%s'", (type, content) => {
       const input = `::: ${type}\n${content}\n:::`;
       const output = markdownItInstance.render(input);
-      expect(output).toContain(`<AdmonitionBlock type="${type}" title="${type}"`);
+      const expectedTitle = type.charAt(0).toUpperCase() + type.slice(1);
+      expect(output).toContain(`<AdmonitionBlock type="${type}"><template #title>${expectedTitle}</template>`);
       expect(output).toContain("</AdmonitionBlock>");
     });
   });
@@ -40,7 +41,7 @@ describe("admonitionTransformer", () => {
     ])("should use a custom title when provided for type '%s'", (type, title) => {
       const input = `::: ${type} ${title}\nWatch out!\n:::`;
       const output = markdownItInstance.render(input);
-      expect(output).toContain(`<AdmonitionBlock type="${type}" title="${title}"`);
+      expect(output).toContain(`<AdmonitionBlock type="${type}"><template #title>${title}</template>`);
       expect(output).toContain("</AdmonitionBlock>");
     });
   });
@@ -63,7 +64,8 @@ describe("admonitionTransformer", () => {
       (type) => {
         const input = `::: ${type}\n:::`;
         const output = markdownItInstance.render(input);
-        expect(output).toContain(`<AdmonitionBlock type="${type}" title="${type}"`);
+        const expectedTitle = type.charAt(0).toUpperCase() + type.slice(1);
+        expect(output).toContain(`<AdmonitionBlock type="${type}"><template #title>${expectedTitle}</template>`);
         expect(output).toContain("</AdmonitionBlock>");
       }
     );
@@ -75,7 +77,8 @@ describe("admonitionTransformer", () => {
       (type) => {
         const input = `::: ${type}   \nSome content\n:::`;
         const output = markdownItInstance.render(input);
-        expect(output).toContain(`<AdmonitionBlock type="${type}" title="${type}"`);
+        const expectedTitle = type.charAt(0).toUpperCase() + type.slice(1);
+        expect(output).toContain(`<AdmonitionBlock type="${type}"><template #title>${expectedTitle}</template>`);
         expect(output).toContain("</AdmonitionBlock>");
       }
     );
@@ -85,9 +88,29 @@ describe("admonitionTransformer", () => {
     it("should render two consecutive admonition blocks independently", () => {
       const input = `::: tip First\nContent A\n:::\n\n::: warning Second\nContent B\n:::`;
       const output = markdownItInstance.render(input);
-      expect(output).toContain(`<AdmonitionBlock type="tip" title="First"`);
-      expect(output).toContain(`<AdmonitionBlock type="warning" title="Second"`);
+      expect(output).toContain(`<AdmonitionBlock type="tip"><template #title>First</template>`);
+      expect(output).toContain(`<AdmonitionBlock type="warning"><template #title>Second</template>`);
       expect(output.split("</AdmonitionBlock>").length - 1).toBe(2);
+    });
+  });
+
+  describe("inline markdown in custom titles", () => {
+    it("should render inline code inside the admonition title", () => {
+      const input = `::: info Why \`/usr/local/bin\` instead of \`~/.local/bin\`?\nContent\n:::`;
+      const output = markdownItInstance.render(input);
+      expect(output).toContain(
+        '<AdmonitionBlock type="info"><template #title>Why <InlineCode text="/usr/local/bin" /> instead of <InlineCode text="~/.local/bin" />?</template>'
+      );
+      expect(output).toContain("</AdmonitionBlock>");
+    });
+
+    it("should render bold and emphasis inside the admonition title", () => {
+      const input = `::: tip **Important** *notice*\nContent\n:::`;
+      const output = markdownItInstance.render(input);
+      expect(output).toContain(
+        '<AdmonitionBlock type="tip"><template #title><strong>Important</strong> <em>notice</em></template>'
+      );
+      expect(output).toContain("</AdmonitionBlock>");
     });
   });
 

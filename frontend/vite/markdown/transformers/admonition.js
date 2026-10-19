@@ -14,8 +14,14 @@ export function admonitionTransformer(markdownItInstance) {
         const match = tokens[index].info.trim().match(pattern);
 
         if (tokens[index].nesting === MARKDOWN_IT_OPENING_TAG) {
-          const title = match && match[REGEX_FIRST_CAPTURE_GROUP] ? match[REGEX_FIRST_CAPTURE_GROUP] : type;
-          return `<AdmonitionBlock type="${type}" title="${title}">`;
+          const rawTitle =
+            match && match[REGEX_FIRST_CAPTURE_GROUP] && match[REGEX_FIRST_CAPTURE_GROUP].trim()
+              ? match[REGEX_FIRST_CAPTURE_GROUP].trim()
+              : type;
+          const formattedTitle = rawTitle.charAt(0).toUpperCase() + rawTitle.slice(1);
+          const renderedTitle = markdownItInstance.renderInline(formattedTitle);
+
+          return `<AdmonitionBlock type="${type}"><template #title>${renderedTitle}</template>`;
         } else {
           return "</AdmonitionBlock>";
         }

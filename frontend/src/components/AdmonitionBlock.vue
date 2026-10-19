@@ -1,6 +1,8 @@
 <template>
   <div class="admonition" :class="typeClass">
-    <p class="admonition-title">{{ formattedTitle }}</p>
+    <p class="admonition-title">
+      <slot name="title">{{ formattedTitle }}</slot>
+    </p>
     <div class="admonition-content">
       <slot></slot>
     </div>
@@ -22,7 +24,7 @@ export default {
     },
     title: {
       type: String,
-      required: true,
+      default: "",
     },
   },
   computed: {
