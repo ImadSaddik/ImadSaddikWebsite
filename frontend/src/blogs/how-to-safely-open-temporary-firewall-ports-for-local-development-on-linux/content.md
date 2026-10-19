@@ -1,6 +1,6 @@
 ---
 title: "How to safely open temporary firewall ports for local development on Linux"
-subtitle: "Keep your local development workflow smooth without turning your UFW firewall into an abandoned graveyard of open ports."
+subtitle: "Keep your local development workflow smooth without letting your UFW firewall collect forgotten open ports."
 date: "October 18, 2026"
 tags: ["Linux", "UFW", "Firewall", "Web development", "Security", "Bash"]
 ---
@@ -36,7 +36,7 @@ To                         Action      From
 6999/tcp                   ALLOW       Anywhere
 ```
 
-Your firewall has quietly become a graveyard of forgotten rules. While these ports are typically shielded from the public internet by your home [router's NAT boundary](https://en.wikipedia.org/wiki/Network_address_translation), they remain wide open to anyone sharing your local network. If you take your laptop to a coffee shop, an office, or an airport, any process binding to that port is immediately exposed to unknown peers on that subnet.
+Your firewall has quietly become cluttered with obsolete rules. While these ports are typically shielded from the public internet by your home [router's NAT boundary](https://en.wikipedia.org/wiki/Network_address_translation), they remain wide open to anyone sharing your local network. If you take your laptop to a coffee shop, an office, or an airport, any process binding to that port is immediately exposed to unknown peers on that subnet.
 
 In this guide, you will learn how to properly manage development ports in UFW. You will start by labeling temporary rules so they remain easy to identify. Then, you will automate their cleanup when your dev process exits or when your computer shuts down.
 
