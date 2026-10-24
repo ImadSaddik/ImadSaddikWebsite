@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node generate-sitemap.js && vite build && node generate-og-metadata.js",
+    "build": "node generate-sitemap.js && node generate-llms-txt.js && vite build && node generate-og-metadata.js && node generate-llms-txt.js",
+    "llms": "node generate-llms-txt.js",
     "og:generate": "node generate-og-metadata.js",
     "preview": "vite preview",
     "lint": "eslint . --fix",
