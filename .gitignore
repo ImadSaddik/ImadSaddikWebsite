@@ -2,6 +2,11 @@
 node_modules
 /dist
 
+# Generated markdown exports for AI agents
+/frontend/public/blogs/
+/frontend/public/courses/
+/frontend/public/astronomy/
+
 
 # local env files
 .env.local

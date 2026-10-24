@@ -12,6 +12,9 @@
           <RouterLink v-for="item in footerNavItems" :key="item.key" :to="item.path">
             <p class="clickable">{{ item.name }}</p>
           </RouterLink>
+          <a class="clickable" href="/llms.txt" target="_blank" rel="noopener noreferrer">
+            <p class="clickable">llms.txt</p>
+          </a>
         </div>
 
         <div class="footer-column">
