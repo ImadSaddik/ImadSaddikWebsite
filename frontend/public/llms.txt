@@ -1,0 +1,54 @@
+# Imad Saddik
+
+> Personal website and technical blog by Imad Saddik covering Linux system administration, self-hosted AI stacks, search engines, web performance, and astronomy.
+
+Welcome! This document provides an LLM-friendly index of tutorials, technical articles, and courses hosted on [imadsaddik.com](https://imadsaddik.com). Raw Markdown versions of all articles are provided via the links below, or bundled together in [/llms-full.txt](https://imadsaddik.com/llms-full.txt).
+
+## Blog posts
+
+- [How to safely open temporary firewall ports for local development on Linux](https://imadsaddik.com/blogs/how-to-safely-open-temporary-firewall-ports-for-local-development-on-linux.md): Keep your local development workflow smooth without letting your UFW firewall collect forgotten open ports.
+- [How to block URLs in browser developer tools to test error handling](https://imadsaddik.com/blogs/how-to-block-urls-in-browser-developer-tools-to-test-error-handling.md): Simulate failed network requests and verify frontend error states without editing a single line of code.
+- [How to replace Font Awesome with compile-time inline SVGs in Vite](https://imadsaddik.com/blogs/how-to-replace-font-awesome-with-compile-time-inline-svgs-in-vite.md): Eliminate heavy icon fonts, prevent layout shifts, and bundle only the icons you need using unplugin-icons and Iconify.
+- [How to self-host Google Fonts with Fontsource to improve web performance](https://imadsaddik.com/blogs/how-to-self-host-google-fonts-with-fontsource-to-improve-web-performance.md): Eliminate render-blocking font requests and protect user privacy by packaging fonts as standard npm dependencies.
+- [How to fix sticky hover states on mobile using CSS hover media queries](https://imadsaddik.com/blogs/how-to-fix-sticky-hover-states-on-mobile-using-css-hover-media-queries.md): Prevent awkward hover styles from getting stuck on touchscreen devices with @media (hover: hover).
+- [How to eliminate laptop thermal throttling with high static pressure](https://imadsaddik.com/blogs/how-to-eliminate-laptop-thermal-throttling-with-high-static-pressure.md): Analyzing the thermal data of the IETS GT500 cooler during a heavy gaming workload.
+- [How to enforce code quality locally using pre-commit hooks](https://imadsaddik.com/blogs/how-to-enforce-code-quality-locally-using-pre-commit-hooks.md): Catch syntax errors and formatting issues before they ever reach your Git history.
+- [How to protect your home server from power outages using NUT](https://imadsaddik.com/blogs/how-to-protect-your-home-server-from-power-outages-using-nut.md): A complete guide to configuring Network UPS Tools (NUT), automating graceful shutdowns, and understanding battery hardware.
+- [How to fix soft 404 vulnerabilities and block bots in Nginx](https://imadsaddik.com/blogs/how-to-fix-soft-404-vulnerabilities-and-block-bots-in-nginx.md): Protect your server by returning hard 404 errors for sensitive files and preventing SPA fallback traps.
+- [How to verify your server firewall rules using nmap](https://imadsaddik.com/blogs/how-to-verify-your-server-firewall-rules-using-nmap.md): Scan your server from the outside to ensure only the right ports are exposed to the public internet.
+- [How to optimize global performance with a CDN and Nginx caching](https://imadsaddik.com/blogs/how-to-optimize-global-performance-with-a-cdn-and-nginx-caching.md): Learn how to use Cloudflare to globally distribute your frontend and configure Nginx to implement aggressive caching for Single Page Applications.
+- [How to connect a custom domain and secure your server with SSL](https://imadsaddik.com/blogs/how-to-connect-a-custom-domain-and-secure-your-server-with-ssl.md): Learn how to register a domain, configure DNS records, and secure your site with a free Let's Encrypt SSL certificate.
+- [How to self-host and securely manage Meilisearch](https://imadsaddik.com/blogs/how-to-self-host-and-securely-manage-meilisearch.md): Deploy a lightning-fast open-source search engine on your server and manage it securely.
+- [How to set up Nginx as a reverse proxy and configure security headers](https://imadsaddik.com/blogs/how-to-set-up-nginx-as-a-reverse-proxy-and-configure-security-headers.md): Learn how to connect your frontend and backend, and apply security headers to protect your application.
+- [How to manually deploy a Vue.js and FastAPI application](https://imadsaddik.com/blogs/how-to-manually-deploy-a-vuejs-and-fastapi-application.md): Move your codebase to the cloud, install runtimes, and configure Gunicorn and Supervisor.
+- [How to check battery capacity on Linux](https://imadsaddik.com/blogs/how-to-check-battery-capacity-on-linux.md): This quick guide will help you find the health of your laptop battery using the terminal.
+- [How to place text and logos in perspective in Inkscape](https://imadsaddik.com/blogs/how-to-warp-and-angle-your-designs-in-inkscape.md): A simple guide to warping designs to fit angled or curved surfaces for realistic mockups.
+- [How to configure a firewall with UFW and Fail2Ban](https://imadsaddik.com/blogs/how-to-configure-firewall-ufw-fail2ban-ubuntu.md): Secure your server by blocking incoming traffic and banning brute-force attackers.
+- [How to set up a secure cloud server with Ubuntu and SSH](https://imadsaddik.com/blogs/how-to-set-up-a-secure-cloud-server-with-ubuntu-and-ssh.md): How to set up a secure environment on DigitalOcean (or others) with Ubuntu 24.04 LTS.
+- [How to build your own local AI stack on Linux with llama.cpp, llama-swap, LibreChat and more](https://imadsaddik.com/blogs/local-ai-stack-on-linux.md): A complete guide to running LLMs, embedding models, and multimodal models locally with full control and automation.
+- [How to remove hidden data from Inkscape files to reduce the file size](https://imadsaddik.com/blogs/inkscape-clean-up-document.md): A simple guide to removing invisible data from embedded images to keep your Inkscape projects lightweight.
+- [How to fix the kernel panic problem after installing a new version of the kernel](https://imadsaddik.com/blogs/fix-kernel-panic-linux.md): A step-by-step guide to recovering your Linux system from a broken kernel update using GRUB.
+- [Change the heap size for Elasticsearch](https://imadsaddik.com/blogs/elasticsearch-change-heap-size.md): How to change the heap size for Elasticsearch to improve performance and reduce memory usage.
+- [Collapse search results in Elasticsearch](https://imadsaddik.com/blogs/elasticsearch-collapse-search-results.md): How to show only the best documents for each group with collapsing.
+- [Pre-filtering with kNN search in Elasticsearch](https://imadsaddik.com/blogs/elasticsearch-pre-filtering-with-knn-search.md): How to apply filters to an index to remove documents that don’t meet certain requirements before using kNN search.
+
+## Courses and tutorials
+
+- [Full-stack web deployment from scratch](https://imadsaddik.com/courses/full-stack-web-deployment.md): Learn how to deploy, secure, automate, and maintain a full-stack web application on Linux from scratch.
+- [How to benchmark embedding models on your own data](https://imadsaddik.com/courses/benchmark-embedding-models.md): Learn how to benchmark embedding models on your own data in this course for beginners.
+- [Elasticsearch for beginners](https://imadsaddik.com/courses/elasticsearch-for-beginners.md): Learn Elasticsearch from scratch with practical examples in Python.
+- [Evolution of the Transformer architecture from 2017 to 2025](https://imadsaddik.com/courses/evolution-of-the-transformer.md): Discover how the Transformer architecture has evolved over the years. Implement the different ideas that researchers proposed to improve the original Transformer architecture.
+- [OSRM for beginners](https://imadsaddik.com/courses/osrm-for-beginners.md): Learn the different ways to use OSRM (Open Source Routing Machine) with practical examples in Python.
+- [Train your own language model](https://imadsaddik.com/courses/train-your-own-language-model.md): Learn every step needed to train a language model from scratch in Python.
+
+## Astronomy guides
+
+- [How to make star trails and time-lapses with Python](https://imadsaddik.com/astronomy/python-star-trails.md): A guide to creating star trail images and time-lapse videos on any platform using Python.
+- [How to shoot star trails with your smartphone](https://imadsaddik.com/astronomy/star-trails-with-smartphone.md): This complete guide covers everything you need to know to capture beautiful star trail photos using just your smartphone.
+- [Learn the night sky with free planetarium applications](https://imadsaddik.com/astronomy/free-planetarium-apps.md): A list of free planetarium applications to explore the night sky on your computer or mobile device.
+
+## Additional resources
+
+- [About Imad Saddik](https://imadsaddik.com/about-me): Background, experience, open-source projects, and skills.
+- [Hire me](https://imadsaddik.com/hire-me): Contact and freelance consulting information.
+- [Full documentation bundle](https://imadsaddik.com/llms-full.txt): Complete aggregated text of all tutorials and guides.
