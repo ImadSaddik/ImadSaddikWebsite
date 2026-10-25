@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.7.0] - 2026-10-25
+
+### Added
+
+- **LLM-friendly content standard (llms.txt):** Implemented the `llms.txt` and `llms-full.txt` standards with build-time automation via `generate-llms-txt.js`, exporting raw Markdown endpoints (`.md`) for all articles.
+- **AI agent discoverability:** Updated `robots.txt` to allow AI agents, added an `llms.txt` link in the website footer, and included an alternate link tag in `index.html`.
+- **Keyboard shortcut component:** Introduced the `KeyboardKey` component and custom `[[key]]` Markdown syntax for rendering styled keyboard shortcuts.
+- **Admonition title formatting:** Added support for inline code and Markdown formatting inside admonition block titles.
+- **Content:** Added two new educational resources:
+  - Course: "Full-stack web deployment from scratch"
+  - Article: "How to safely open temporary firewall ports for local development on Linux"
+
+### Changed
+
+- **Nginx configuration:** Added a dedicated `.md` location block with `text/markdown; charset=utf-8` and caching headers.
+
+### Fixed
+
+- **Nginx hub routing:** Removed directory check from `try_files` to eliminate 403 Forbidden errors on hub routes (`/blogs`, `/courses`, `/astronomy`).
+- **Process management:** Added `autostart` and `autorestart` directives to Supervisor configuration for improved backend uptime.
+- **About Me page:** Fixed assembly code snippet indentation.
+- **Security audits:** Resolved frontend dependency audit vulnerabilities.
+
 ## [v2.6.0] - 2026-10-11
 
 ### Added
@@ -196,6 +219,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Monitoring:** Real-time resource tracking with Btop and traffic analysis with GoAccess.
   - **Performance:** Global delivery optimization via Cloudflare CDN.
 
+[v2.7.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.6.0...v2.7.0
 [v2.6.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.5.0...v2.6.0
 [v2.5.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.4.0...v2.5.0
 [v2.4.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.3.0...v2.4.0
