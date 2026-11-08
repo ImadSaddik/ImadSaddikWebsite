@@ -28,3 +28,15 @@ Even with a script handling the transcription, that routine created several fric
 - I had to open the file, copy the text, and paste it back into my original window.
 
 To make voice dictation feel as natural as typing on a physical keyboard, the tool must inject keystrokes directly into whatever window holds focus the moment you stop speaking.
+
+## Streaming versus push-to-talk
+
+When I started exploring voice dictation, I assumed it had to stream words in real time onto the screen as I spoke. Watching words appear live seemed like the natural way for voice input to work. After testing push-to-talk, I found that waiting until you finish speaking provides a much better experience for desktop text entry.
+
+Streaming speech engines predict text incrementally without knowing how your sentence will end. Because the model lacks future context, it often has to revise earlier words on the fly by firing synthetic backspaces at your cursor, which can cause jitter or trigger autocomplete popups in code editors.
+
+More importantly, real-time streaming struggles with punctuation and homophones. The model cannot hear the end of a clause before deciding where a comma belongs or which word you meant.
+
+Push-to-talk avoids these compromises by feeding the entire audio segment to the model at once. Because the engine hears the full sentence before predicting tokens, it understands the context, resolves homophones accurately, and places punctuation naturally.
+
+For typical sentences and short thoughts, modern engines process speech at roughly fifteen times real-time speed. A four-second sentence transcribes in a fraction of a second. Clean text appears at your cursor almost the moment you release the key, without any of the instability of streaming.
