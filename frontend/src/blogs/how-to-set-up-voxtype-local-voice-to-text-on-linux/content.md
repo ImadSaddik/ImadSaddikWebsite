@@ -53,16 +53,14 @@ This is why I wanted to explore newer alternatives like NVIDIA Parakeet. Specifi
 
 For my workflow, Parakeet checked every box. I wanted a model that looks at the entire recording, handles capitalization and punctuation naturally, and runs at fifteen to twenty times real-time speed on the CPU. Parakeet delivered exactly that.
 
-## Why run on the CPU when you have a GPU?
+## Why I run on the CPU instead of the GPU
 
-My laptop is equipped with an Intel 13th Gen CPU and an NVIDIA GeForce RTX 4070 Laptop GPU. Offloading transcription to the GPU via CUDA seemed like the natural choice at first.
+My laptop is equipped with a 13th Gen Intel Core i7 processor and an NVIDIA GeForce RTX 4070 Laptop GPU. When I first looked at local transcription, offloading inference to the GPU seemed like the obvious choice.
 
-However, running Parakeet on the CPU using AVX2 instructions turned out to be the practical setup for a laptop.
+However, video memory is a scarce resource on laptops. My GPU has 8 GB of VRAM, which I rely on for running local language models and heavy graphical workloads. To keep dictation responsive without reloading weights on every shortcut press, Voxtype holds the model in memory, which currently consumes around 3.5 GB.
 
-- Discrete laptop GPUs consume extra power when waking from an idle state. Running transcription on the CPU keeps the dedicated GPU powered down, which preserves battery life and keeps cooling fans quiet.
-- On an RTX 4070, transcribing a short phrase takes about 50 milliseconds. On the CPU via AVX2, it takes about 150 milliseconds. Both feel instantaneous in everyday typing.
-- All 8 GB of VRAM stays completely free for running local LLMs or graphical workloads without memory contention.
+Putting that on an 8 GB GPU would swallow nearly half of my video memory while sitting idle. In contrast, my laptop has 32 GB of system RAM. Holding 3.5 GB in system memory consumes only about 11 percent of my available RAM, leaving plenty of room for everything else.
 
-::: tip
-If your processor supports AVX2, running a lightweight model like Parakeet-TDT on the CPU provides fast transcription without waking up your dedicated GPU.
-:::
+Power consumption and thermals are another major factor. Dedicated laptop GPUs draw significant power every time they wake from an idle state. Running transcription on the CPU lets the RTX 4070 idle at around 3 watts, which prevents battery drain and keeps cooling fans completely silent throughout the day.
+
+Finally, the GPU compute advantage is negligible for everyday text entry. A GPU clearly processes large audio files faster, but for short sentences and quick thoughts, modern CPUs running AVX2 instructions finish the job in the blink of an eye. In practice, waking an idle GPU from its power-saving state can take longer than the transcription itself.
