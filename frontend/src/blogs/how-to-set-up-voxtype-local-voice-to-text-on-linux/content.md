@@ -64,3 +64,25 @@ Putting that on an 8 GB GPU would swallow nearly half of my video memory while s
 Power consumption and thermals are another major factor. Dedicated laptop GPUs draw significant power every time they wake from an idle state. Running transcription on the CPU lets the RTX 4070 idle at around 3 watts, which prevents battery drain and keeps cooling fans completely silent throughout the day.
 
 Finally, the GPU compute advantage is negligible for everyday text entry. A GPU clearly processes large audio files faster, but for short sentences and quick thoughts, modern CPUs running AVX2 instructions finish the job in the blink of an eye. In practice, waking an idle GPU from its power-saving state can take longer than the transcription itself.
+
+## The GNOME Wayland typing challenge
+
+Getting text injection to work reliably on Linux depends on your desktop environment.
+
+On wlroots-based Wayland compositors (like Hyprland or Sway), tools like `wtype` interact directly with the virtual keyboard protocol (`zwp_virtual_keyboard_v1`). However, GNOME on Wayland intentionally restricts this protocol for security reasons.
+
+If you run `wtype` inside a standard GNOME Wayland session, it fails immediately.
+
+```output
+Compositor does not support the virtual keyboard protocol
+
+```
+
+Voxtype handles this by falling back through a tiered driver chain.
+
+1. `wtype` (Wayland virtual keyboard)
+2. `dotool` (Direct XKB virtual typing)
+3. `ydotool` (Kernel-level `/dev/uinput` daemon)
+4. `wl-clipboard` (Safe clipboard fallback)
+
+On GNOME Wayland, `ydotool` is the bridge that makes direct cursor typing possible. Because `ydotool` communicates with the Linux kernel's `/dev/uinput` device, it can inject keystrokes into any window regardless of compositor restrictions.
