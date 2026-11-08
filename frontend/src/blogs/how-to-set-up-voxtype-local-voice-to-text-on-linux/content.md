@@ -65,24 +65,14 @@ Power consumption and thermals are another major factor. Dedicated laptop GPUs d
 
 Finally, the GPU compute advantage is negligible for everyday text entry. A GPU clearly processes large audio files faster, but for short sentences and quick thoughts, modern CPUs running AVX2 instructions finish the job in the blink of an eye. In practice, waking an idle GPU from its power-saving state can take longer than the transcription itself.
 
-## The GNOME Wayland typing challenge
+## The Wayland typing challenge
 
-Getting text injection to work reliably on Linux depends on your desktop environment.
+When I started testing local dictation, I realized that transcribing speech was only half the problem. The other half was getting that text to appear directly at my active cursor.
 
-On wlroots-based Wayland compositors (like Hyprland or Sway), tools like `wtype` interact directly with the virtual keyboard protocol (`zwp_virtual_keyboard_v1`). However, GNOME on Wayland intentionally restricts this protocol for security reasons.
+On modern Linux systems running Wayland, this is surprisingly tricky. Wayland isolates applications from one another for security. By default, a background daemon cannot inject keystrokes into your active code editor or browser window.
 
-If you run `wtype` inside a standard GNOME Wayland session, it fails immediately.
+While some minimal window managers allow background typing through custom Wayland protocols, desktop environments like GNOME block this behavior for privacy. If an input tool tries to type directly through the Wayland display server, it fails immediately.
 
-```output
-Compositor does not support the virtual keyboard protocol
+To solve this, Voxtype relies on `ydotool`. Instead of asking the Wayland compositor for permission, `ydotool` communicates directly with the Linux kernel through `/dev/uinput`. The kernel exposes a virtual input device, so your desktop receives the transcribed text as if you typed it on a physical keyboard.
 
-```
-
-Voxtype handles this by falling back through a tiered driver chain.
-
-1. `wtype` (Wayland virtual keyboard)
-2. `dotool` (Direct XKB virtual typing)
-3. `ydotool` (Kernel-level `/dev/uinput` daemon)
-4. `wl-clipboard` (Safe clipboard fallback)
-
-On GNOME Wayland, `ydotool` is the bridge that makes direct cursor typing possible. Because `ydotool` communicates with the Linux kernel's `/dev/uinput` device, it can inject keystrokes into any window regardless of compositor restrictions.
+This design makes direct-to-cursor dictation work across any application. It also explains why setting up Voxtype on Wayland requires configuring user permissions for `/dev/uinput`.
