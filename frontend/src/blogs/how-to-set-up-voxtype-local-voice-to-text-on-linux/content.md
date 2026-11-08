@@ -76,3 +76,77 @@ While some minimal window managers allow background typing through custom Waylan
 To solve this, Voxtype relies on `ydotool`. Instead of asking the Wayland compositor for permission, `ydotool` communicates directly with the Linux kernel through `/dev/uinput`. The kernel exposes a virtual input device, so your desktop receives the transcribed text as if you typed it on a physical keyboard.
 
 This design makes direct-to-cursor dictation work across any application. It also explains why setting up Voxtype on Wayland requires configuring user permissions for `/dev/uinput`.
+
+## Setting up Voxtype on Ubuntu
+
+Getting Voxtype and Parakeet running on my Ubuntu setup required three main steps. I had to configure virtual input permissions, install the package, and switch to the ONNX runtime.
+
+### Install dependencies and configure input permissions
+
+First, install `ydotool` for virtual typing along with the required clipboard and audio packages:
+
+```bash
+sudo apt update
+sudo apt install -y ydotool libvulkan1 wl-clipboard pipewire-alsa libnotify-bin wget
+```
+
+Next, add your user account to the `input` group so `ydotool` can access the `/dev/uinput` kernel device:
+
+```bash
+sudo usermod -aG input $USER
+```
+
+Enable and start the user-level `ydotool` service:
+
+```bash
+systemctl --user enable --now ydotool
+```
+
+::: warning
+Linux group permission changes only take effect after starting a fresh session. You must log out of your desktop and log back in (or reboot) for your user account to gain access to `/dev/uinput`.
+:::
+
+### Install Voxtype
+
+Download the latest `.deb` release package [from GitHub](https://github.com/peteonrails/voxtype/releases) and install it with `apt`:
+
+```bash
+wget https://github.com/peteonrails/voxtype/releases/download/v1.1.1/voxtype_1.1.1-1_amd64.deb
+sudo apt install -y ./voxtype_1.1.1-1_amd64.deb
+rm voxtype_1.1.1-1_amd64.deb
+```
+
+### Switch to the ONNX runtime and download Parakeet
+
+Whisper models run on Voxtype's default binary, but Parakeet runs on the ONNX runtime. Switch the system binary to the ONNX variant:
+
+```bash
+sudo voxtype setup onnx --enable
+```
+
+Always run model downloads and configuration commands as your regular user without `sudo`. This practice keeps model files and settings inside your home directory.
+
+Download the Parakeet model and activate it in your configuration:
+
+```bash
+voxtype setup --download --model parakeet-tdt-0.6b-v3 --activate
+```
+
+This command downloads the model files to `~/.local/share/voxtype/models/parakeet-tdt-0.6b-v3`. The `--activate` flag updates `~/.config/voxtype/config.toml` automatically by setting `engine = "parakeet"` and `model = "parakeet-tdt-0.6b-v3"` so you do not have to edit the file manually.
+
+### Enable the background daemon
+
+Voxtype runs as a user-level systemd service. Keeping the daemon active ensures the model stays loaded in memory, which lets keyboard shortcuts trigger recording and transcription instantly.
+
+Reload the systemd user manager and start the service:
+
+```bash
+systemctl --user daemon-reload
+systemctl --user enable --now voxtype
+```
+
+Verify that the daemon is active and running:
+
+```bash
+systemctl --user status voxtype
+```
