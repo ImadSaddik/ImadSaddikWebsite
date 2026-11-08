@@ -52,3 +52,17 @@ Because Whisper is so familiar, many people stick with it without realizing that
 This is why I wanted to explore newer alternatives like NVIDIA Parakeet. Specifically, Voxtype supports `parakeet-tdt-0.6b-v3` through its ONNX runtime. It uses a FastConformer-TDT architecture trained on over 670,000 hours of speech. Instead of predicting text one word at a time in a slow loop, it evaluates chunks of speech in parallel.
 
 For my workflow, Parakeet checked every box. I wanted a model that looks at the entire recording, handles capitalization and punctuation naturally, and runs at fifteen to twenty times real-time speed on the CPU. Parakeet delivered exactly that.
+
+## Why run on the CPU when you have a GPU?
+
+My laptop is equipped with an Intel 13th Gen CPU and an NVIDIA GeForce RTX 4070 Laptop GPU. Offloading transcription to the GPU via CUDA seemed like the natural choice at first.
+
+However, running Parakeet on the CPU using AVX2 instructions turned out to be the practical setup for a laptop.
+
+- Discrete laptop GPUs consume extra power when waking from an idle state. Running transcription on the CPU keeps the dedicated GPU powered down, which preserves battery life and keeps cooling fans quiet.
+- On an RTX 4070, transcribing a short phrase takes about 50 milliseconds. On the CPU via AVX2, it takes about 150 milliseconds. Both feel instantaneous in everyday typing.
+- All 8 GB of VRAM stays completely free for running local LLMs or graphical workloads without memory contention.
+
+::: tip
+If your processor supports AVX2, running a lightweight model like Parakeet-TDT on the CPU provides fast transcription without waking up your dedicated GPU.
+:::
