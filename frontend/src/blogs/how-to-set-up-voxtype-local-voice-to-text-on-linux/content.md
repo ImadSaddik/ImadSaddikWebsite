@@ -40,3 +40,15 @@ More importantly, real-time streaming struggles with punctuation and homophones.
 Push-to-talk avoids these compromises by feeding the entire audio segment to the model at once. Because the engine hears the full sentence before predicting tokens, it understands the context, resolves homophones accurately, and places punctuation naturally.
 
 For typical sentences and short thoughts, modern engines process speech at roughly fifteen times real-time speed. A four-second sentence transcribes in a fraction of a second. Clean text appears at your cursor almost the moment you release the key, without any of the instability of streaming.
+
+## Choosing the right transcription model
+
+Voxtype supports several transcription backends, including cloud APIs like Cohere and local models like Whisper and NVIDIA Parakeet. Because privacy, zero network latency, and offline reliability were primary requirements for my setup, I ruled out cloud services immediately and focused entirely on local models.
+
+When people think of local transcription, OpenAI Whisper is almost always the default choice. Whisper has been around for years and has had plenty of time to be optimized across different platforms and tools. I used Whisper for my earlier manual scripts, and it is still a solid, capable model that deserves its popularity.
+
+Because Whisper is so familiar, many people stick with it without realizing that newer speech architectures have emerged. Whisper was built as a heavy multilingual model designed to translate dozens of languages. Running that full pipeline on a CPU can feel sluggish during desktop dictation, and it can occasionally get stuck repeating words if there is background noise.
+
+This is why I wanted to explore newer alternatives like NVIDIA Parakeet. Specifically, Voxtype supports `parakeet-tdt-0.6b-v3` through its ONNX runtime. It uses a FastConformer-TDT architecture trained on over 670,000 hours of speech. Instead of predicting text one word at a time in a slow loop, it evaluates chunks of speech in parallel.
+
+For my workflow, Parakeet checked every box. I wanted a model that looks at the entire recording, handles capitalization and punctuation naturally, and runs at fifteen to twenty times real-time speed on the CPU. Parakeet delivered exactly that.
