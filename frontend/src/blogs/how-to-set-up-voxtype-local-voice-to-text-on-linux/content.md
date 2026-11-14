@@ -233,3 +233,11 @@ systemctl --user restart voxtype
 Voxtype keeps the active model resident in system memory by default (`on_demand_loading = false`).
 
 On a machine with 16 GB or 32 GB of RAM, dedicating ~2 GB of memory to keep Parakeet warm means every dictation responds with zero startup latency. If you are working on a memory-constrained machine, you can set `on_demand_loading = true` so Voxtype only loads the model while recording and frees it immediately afterward.
+
+## Conclusion
+
+Replacing my old Audacity and Whisper script workflow with Voxtype turned voice input from a multi-step chore into something I use every day. Instead of managing temporary audio and text files on disk, you press [[Ctrl+Alt+Space]], speak your thoughts, and get the transcribed text directly at your cursor.
+
+Running NVIDIA Parakeet on the CPU through the ONNX runtime keeps transcription fast while leaving your GPU idle and your VRAM free for other workloads. Combined with `ydotool` for Wayland typing, a global GNOME shortcut, and a couple of configuration adjustments for notifications and recording duration, you get a reliable, offline dictation setup that stays completely on your machine.
+
+I hope this guide helps you set up local voice-to-text on your Linux desktop.
