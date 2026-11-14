@@ -187,3 +187,49 @@ Setting the name, command, and key combination in the Add Custom Shortcut dialog
 :::
 
 With this shortcut set up, you can dictate text anywhere on your desktop. Pressing [[Ctrl+Alt+Space]] once starts recording, and a microphone icon appears in the top bar to show that your microphone is being used. Pressing the shortcut again stops recording, the icon disappears, and Voxtype types the transcribed text directly at your cursor.
+
+## Useful tweaks after two weeks of use
+
+After using Voxtype as my primary dictation tool for two weeks, I made two adjustments in `~/.config/voxtype/config.toml` to fit my daily workflow.
+
+### Silencing notification banners
+
+By default, Voxtype can show desktop notifications when recording starts, when recording stops, and when transcription finishes.
+
+While these notifications are helpful when troubleshooting your initial setup, they get in the way when you dictate frequently throughout the day. Your text already appears at your cursor, so having extra banners slide in is unnecessary.
+
+To disable alerts for recording start, recording stop, and completed transcriptions, find the `[output.notification]` section in `~/.config/voxtype/config.toml` and set all three options to `false`:
+
+```toml
+[output.notification]
+on_recording_start = false
+on_recording_stop = false
+on_transcription = false
+```
+
+### Tuning duration limits for longer thoughts
+
+The second issue I encountered happened when recording longer sessions. When you speak past the built-in limit, Voxtype stops recording before you finish and processes whatever audio it captured up to that point. I want to be able to record for as long as I need without getting cut off.
+
+This happens because Voxtype includes a safety guard called `max_duration_secs`, which defaults to **60 seconds**. It keeps a recording from running indefinitely and wasting memory or disk space if you forget to toggle it off.
+
+If you want to record for longer than the default 60-second limit, open `~/.config/voxtype/config.toml` and increase `max_duration_secs` under the `[audio]` section:
+
+```toml
+[audio]
+sample_rate = 16000
+# Increase maximum duration to 5 minutes (300 seconds)
+max_duration_secs = 300
+```
+
+After modifying your configuration, restart the user daemon to apply the changes:
+
+```bash
+systemctl --user restart voxtype
+```
+
+### Memory retention
+
+Voxtype keeps the active model resident in system memory by default (`on_demand_loading = false`).
+
+On a machine with 16 GB or 32 GB of RAM, dedicating ~2 GB of memory to keep Parakeet warm means every dictation responds with zero startup latency. If you are working on a memory-constrained machine, you can set `on_demand_loading = true` so Voxtype only loads the model while recording and frees it immediately afterward.
