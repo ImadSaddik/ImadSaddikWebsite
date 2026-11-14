@@ -17,6 +17,10 @@ While looking for a better way, I heard Martin talk about [Voxtype](https://gith
 
 In this guide, you will learn how to set up Voxtype on Ubuntu and Wayland, why NVIDIA Parakeet outperforms Whisper for desktop dictation, and the configuration adjustments that make it reliable for everyday writing.
 
+::: info Scope of this guide
+I wrote and tested this guide on Ubuntu 26.04 with GNOME on Wayland. The prebuilt `.deb` package requires Ubuntu 24.04 or newer (`glibc 2.39+`), and Voxtype also supports other Linux distributions, desktop environments, and macOS. If you are on an older Ubuntu release or a different system, check the [Voxtype repository](https://github.com/peteonrails/voxtype) for installation and shortcut instructions tailored to your setup.
+:::
+
 ## The friction of my manual transcription setup
 
 Before setting up Voxtype, my transcription workflow was entirely file-based. Whenever I wanted to transcribe my thoughts, I opened Audacity, recorded my voice, and exported the audio to an MP3 file. Then, I switched to the terminal to run my local transcription script against that file, waited for it to write the text output to disk, opened the resulting file, and copied the text to my clipboard.
