@@ -21,6 +21,11 @@ In this guide, you will learn how to set up Voxtype on Ubuntu and Wayland, why N
 I wrote and tested this guide on Ubuntu 26.04 with GNOME on Wayland. The prebuilt `.deb` package requires Ubuntu 24.04 or newer (`glibc 2.39+`), and Voxtype also supports other Linux distributions, desktop environments, and macOS. If you are on an older Ubuntu release or a different system, check the [Voxtype repository](https://github.com/peteonrails/voxtype) for installation and shortcut instructions tailored to your setup.
 :::
 
+Here is the finished setup in action. I press [[Ctrl+Alt+Space]] to start recording, speak, and press the shortcut again to insert the transcribed text at my cursor.
+
+::: video ./voxtype_demo.webm "Pressing Ctrl + Alt + Space starts recording and inserts the transcribed text when toggled off."
+:::
+
 ## The friction of my manual transcription setup
 
 Before setting up Voxtype, my transcription workflow was entirely file-based. Whenever I wanted to transcribe my thoughts, I opened Audacity, recorded my voice, and exported the audio to an MP3 file. Then, I switched to the terminal to run my local transcription script against that file, waited for it to write the text output to disk, opened the resulting file, and copied the text to my clipboard.
