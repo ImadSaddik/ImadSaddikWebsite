@@ -14,6 +14,7 @@ const BUNDLED_LANGUAGES = [
   import("shiki/langs/javascript.mjs"),
   import("shiki/langs/nginx.mjs"),
   import("shiki/langs/json.mjs"),
+  import("shiki/langs/toml.mjs"),
   import("shiki/langs/css.mjs"),
   import("shiki/langs/vue.mjs"),
 ];
