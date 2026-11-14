@@ -150,3 +150,40 @@ Verify that the daemon is active and running:
 ```bash
 systemctl --user status voxtype
 ```
+
+## Setting up the global shortcut in GNOME
+
+Because GNOME manages keyboard shortcuts globally, I disabled Voxtype's internal `evdev` key listener and let GNOME trigger recording through the command line.
+
+In `~/.config/voxtype/config.toml`, make sure the internal listener is disabled:
+
+```toml
+[hotkey]
+enabled = false
+```
+
+Next, open GNOME Settings and navigate to the **Keyboard** section. Click **View and Customize Shortcuts** to open the shortcut management modal.
+
+::: image ./1_open_keyboard_shortcuts.webp "Opening keyboard shortcuts in GNOME Settings."
+Clicking View and Customize Shortcuts inside the GNOME Keyboard settings panel.
+:::
+
+Scroll to the bottom of the shortcuts modal and select **Custom Shortcuts**.
+
+::: image ./2_select_custom_shortcuts.webp "Selecting Custom Shortcuts in the GNOME shortcuts modal."
+Navigating to Custom Shortcuts at the bottom of the list.
+:::
+
+Click **Add Shortcut** to create a new keybinding and fill in the shortcut properties:
+
+- **Name**: Voxtype Dictation
+- **Command**: `voxtype record toggle`
+- **Shortcut**: [[Ctrl+Alt+Space]] (or your preferred key combination)
+
+Click **Set Shortcut**, press your desired key combination, and click **Add** to save.
+
+::: image ./3_configure_custom_shortcut_modal.webp "Filling in the custom shortcut details for Voxtype."
+Setting the name, command, and key combination in the Add Custom Shortcut dialog.
+:::
+
+With this shortcut set up, you can dictate text anywhere on your desktop. Pressing [[Ctrl+Alt+Space]] once starts recording, and a microphone icon appears in the top bar to show that your microphone is being used. Pressing the shortcut again stops recording, the icon disappears, and Voxtype types the transcribed text directly at your cursor.
