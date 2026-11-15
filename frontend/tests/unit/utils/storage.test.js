@@ -10,6 +10,7 @@ vi.mock("@/constants", async (importOriginal) => {
       METEORITE_EFFECT: "mock-meteorite-key",
       CUSTOM_CURSOR: "mock-cursor-key",
       WIDE_ARTICLES: "mock-wide-key",
+      WRAP_CODE: "mock-wrap-key",
     },
   };
 });
@@ -26,17 +27,20 @@ describe("loadUserPreferences", () => {
       meteoriteEffect: null,
       customCursor: null,
       wideArticles: null,
+      wrapCode: null,
     });
   });
 
   it("parses and returns values from local storage", () => {
     localStorage.setItem("mock-star-key", "true");
     localStorage.setItem("mock-wide-key", "false");
+    localStorage.setItem("mock-wrap-key", "true");
 
     const preferences = loadUserPreferences();
 
     expect(preferences.starEffect).toBe(true);
     expect(preferences.wideArticles).toBe(false);
+    expect(preferences.wrapCode).toBe(true);
     expect(preferences.customCursor).toBeNull();
     expect(preferences.meteoriteEffect).toBeNull();
   });

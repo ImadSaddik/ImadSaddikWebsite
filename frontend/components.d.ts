@@ -22,7 +22,9 @@ declare module 'vue' {
     CardGroup: typeof import('./src/components/CardGroup.vue')['default']
     CheckboxGroup: typeof import('./src/components/CheckboxGroup.vue')['default']
     CodeBlock: typeof import('./src/components/CodeBlock.vue')['default']
+    CodeContainer: typeof import('./src/components/CodeContainer.vue')['default']
     CodeOutput: typeof import('./src/components/CodeOutput.vue')['default']
+    CopyCodeButton: typeof import('./src/components/CopyCodeButton.vue')['default']
     DataTable: typeof import('./src/components/DataTable.vue')['default']
     DropDownMenu: typeof import('./src/components/DropDownMenu.vue')['default']
     EditArticleOnGitHub: typeof import('./src/components/EditArticleOnGitHub.vue')['default']
@@ -52,6 +54,7 @@ declare module 'vue' {
     UnorderedItem: typeof import('./src/components/UnorderedItem.vue')['default']
     UnorderedList: typeof import('./src/components/UnorderedList.vue')['default']
     VideoWithCaption: typeof import('./src/components/VideoWithCaption.vue')['default']
+    WrapToggleButton: typeof import('./src/components/WrapToggleButton.vue')['default']
     YouTubePlayer: typeof import('./src/components/YouTubePlayer.vue')['default']
   }
 }

@@ -121,6 +121,32 @@ test.describe("User Preferences", () => {
       }
     });
 
+    test("should have toggle for wrap code", async ({ page }) => {
+      await page.goto(ROUTES.HOME.path);
+      await page.locator(".footer-container").scrollIntoViewIfNeeded();
+
+      const wrapCodeToggle = page.locator('label:has-text("Wrap code"), #wrap-code');
+      await expect(wrapCodeToggle.first()).toBeVisible();
+    });
+
+    test("should persist wrap code preference", async ({ page }) => {
+      await page.goto(ROUTES.HOME.path);
+      await page.locator(".footer-container").scrollIntoViewIfNeeded();
+
+      const wrapCodeCheckbox = page.locator("#wrap-code");
+      const wrapCodeLabel = page.locator('label[for="wrap-code"]');
+      const wasChecked = await wrapCodeCheckbox.isChecked();
+      await wrapCodeLabel.click();
+
+      await page.reload();
+      await page.locator(".footer-container").scrollIntoViewIfNeeded();
+
+      const newState = await wrapCodeCheckbox.isChecked();
+      expect(newState).toBe(!wasChecked);
+
+      await wrapCodeLabel.click();
+    });
+
     test("should update body class when custom cursor is toggled", async ({ page }) => {
       await page.goto(ROUTES.HOME.path);
       await page.locator(".footer-container").scrollIntoViewIfNeeded();
@@ -149,9 +175,11 @@ test.describe("User Preferences", () => {
 
       const wideArticlesLabel = page.locator('label[for="wide-articles"]');
       const customCursorLabel = page.locator('label[for="custom-cursor"]');
+      const wrapCodeLabel = page.locator('label[for="wrap-code"]');
 
       await expect(wideArticlesLabel).not.toBeVisible();
       await expect(customCursorLabel).not.toBeVisible();
+      await expect(wrapCodeLabel).toBeVisible();
     });
   });
 

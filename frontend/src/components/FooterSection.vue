@@ -202,6 +202,25 @@
               />
               <span class="effects-slider"></span>
             </label>
+
+            <label for="wrap-code" class="effects-toggle">
+              <span
+                class="effects-toggle-label clickable"
+                tabindex="0"
+                role="button"
+                :aria-pressed="wrapCodeEnabled"
+                @keydown.enter.prevent="handleWrapCodeToggle(!wrapCodeEnabled)"
+                @keydown.space.prevent="handleWrapCodeToggle(!wrapCodeEnabled)"
+                >Wrap code</span
+              >
+              <input
+                id="wrap-code"
+                type="checkbox"
+                :checked="wrapCodeEnabled"
+                @change="handleWrapCodeToggle($event.target.checked)"
+              />
+              <span class="effects-slider"></span>
+            </label>
           </div>
         </div>
       </div>
@@ -260,8 +279,18 @@ export default {
       type: Boolean,
       default: false,
     },
+    wrapCodeEnabled: {
+      type: Boolean,
+      default: false,
+    },
   },
-  emits: ["star-effect-toggle", "meteorite-effect-toggle", "custom-cursor-toggle", "wide-articles-toggle"],
+  emits: [
+    "star-effect-toggle",
+    "meteorite-effect-toggle",
+    "custom-cursor-toggle",
+    "wide-articles-toggle",
+    "wrap-code-toggle",
+  ],
   data() {
     return {
       githubLogo,
@@ -314,6 +343,9 @@ export default {
     },
     handleWideArticlesToggle(value) {
       this.$emit("wide-articles-toggle", value);
+    },
+    handleWrapCodeToggle(value) {
+      this.$emit("wrap-code-toggle", value);
     },
     getLunarData() {
       const date = new Date();

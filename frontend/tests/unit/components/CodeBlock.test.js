@@ -1,11 +1,13 @@
+import { ref } from "vue";
 import { mount } from "@vue/test-utils";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import CodeBlock from "@/components/CodeBlock.vue";
+import * as shikiService from "@/services/shiki.js";
 
 describe("CodeBlock", () => {
   let showToast;
 
-  const factory = (props = {}) => {
+  const factory = (props = {}, provideOverrides = {}) => {
     showToast = vi.fn();
     return mount(CodeBlock, {
       props: {
@@ -14,7 +16,7 @@ describe("CodeBlock", () => {
         ...props,
       },
       global: {
-        provide: { showToast },
+        provide: { showToast, ...provideOverrides },
       },
     });
   };
@@ -30,7 +32,7 @@ describe("CodeBlock", () => {
 
   it("renders the language label", () => {
     const wrapper = factory({ language: "python" });
-    const label = wrapper.find(".language-label");
+    const label = wrapper.find(".code-label");
     expect(label.exists()).toBe(true);
     expect(label.text()).toBe("python");
   });
@@ -52,12 +54,49 @@ describe("CodeBlock", () => {
     const container = wrapper.find(".code-container");
 
     await container.trigger("mouseenter");
-    expect(wrapper.find(".language-label").classes()).toContain("hidden");
+    expect(wrapper.find(".code-label").classes()).toContain("hidden");
     expect(wrapper.find(".code-copy-button").classes()).toContain("visible");
+    expect(wrapper.find(".code-wrap-button").classes()).toContain("visible");
 
     await container.trigger("mouseleave");
-    expect(wrapper.find(".language-label").classes()).not.toContain("hidden");
+    expect(wrapper.find(".code-label").classes()).not.toContain("hidden");
     expect(wrapper.find(".code-copy-button").classes()).not.toContain("visible");
+    expect(wrapper.find(".code-wrap-button").classes()).not.toContain("visible");
+  });
+
+  it("hides controls on mouseleave even after clicking a button", async () => {
+    const wrapper = factory();
+    const container = wrapper.find(".code-container");
+    const wrapButton = wrapper.find(".code-wrap-button");
+
+    await container.trigger("mouseenter");
+    await container.trigger("pointerdown");
+    await wrapButton.trigger("focusin");
+    await wrapButton.trigger("click");
+    expect(wrapButton.classes()).toContain("visible");
+
+    await container.trigger("mouseleave");
+    expect(wrapper.find(".code-label").classes()).not.toContain("hidden");
+    expect(wrapper.find(".code-copy-button").classes()).not.toContain("visible");
+    expect(wrapButton.classes()).not.toContain("visible");
+  });
+
+  it("toggles local wrapping state and overrides global wrap preference", async () => {
+    const wrapCodeEnabled = ref(false);
+    const wrapper = factory({}, { wrapCodeEnabled });
+
+    expect(wrapper.find(".code-container").classes()).not.toContain("wrapped");
+
+    await wrapper.find(".code-wrap-button").trigger("click");
+    expect(wrapper.find(".code-container").classes()).toContain("wrapped");
+    expect(wrapper.find(".code-wrap-button").classes()).toContain("active");
+
+    wrapCodeEnabled.value = true;
+    await wrapper.vm.$nextTick();
+    expect(wrapper.find(".code-container").classes()).toContain("wrapped");
+
+    await wrapper.find(".code-wrap-button").trigger("click");
+    expect(wrapper.find(".code-container").classes()).not.toContain("wrapped");
   });
 
   it("copies code to clipboard and displays success toast", async () => {
@@ -115,8 +154,58 @@ describe("CodeBlock", () => {
 
     await wrapper.setProps({ code: "val = 42", language: "python" });
     await vi.waitFor(() => {
-      expect(wrapper.find(".language-label").text()).toBe("python");
+      expect(wrapper.find(".code-label").text()).toBe("python");
       expect(wrapper.find("pre.shiki").text()).toContain("val = 42");
     });
+  });
+
+  it("preserves multiple highlighted lines when wrapping is enabled", async () => {
+    const code = [
+      "#!/usr/bin/env bash",
+      "set -e # [!code highlight]",
+      'PORT="$1"',
+      'echo "Usage: dev-expose <port> <command>" # [!code highlight]',
+      'echo "Example: dev-expose 8000 uvicorn main:app --host 0.0.0.0" # [!code highlight]',
+      "exit 1",
+    ].join("\n");
+
+    const wrapper = factory({ code, language: "bash" }, { wrapCodeEnabled: ref(true) });
+    await vi.waitFor(() => {
+      expect(wrapper.findAll(".shiki .line.highlighted")).toHaveLength(3);
+    });
+
+    expect(wrapper.find(".code-container").classes()).toContain("wrapped");
+    expect(wrapper.findAll(".shiki .line")).toHaveLength(6);
+  });
+
+  it("ignores stale highlightCode results when props change rapidly", async () => {
+    let resolveFirst;
+    let resolveSecond;
+    const firstPromise = new Promise((resolve) => {
+      resolveFirst = resolve;
+    });
+    const secondPromise = new Promise((resolve) => {
+      resolveSecond = resolve;
+    });
+
+    const spy = vi
+      .spyOn(shikiService, "highlightCode")
+      .mockReturnValueOnce(firstPromise)
+      .mockReturnValueOnce(secondPromise);
+
+    const wrapper = factory({ code: "first()", language: "javascript" });
+    await wrapper.setProps({ code: "second()" });
+
+    resolveSecond('<pre class="shiki"><code><span class="line">second()</span></code></pre>');
+    await vi.waitFor(() => {
+      expect(wrapper.find("pre.shiki").text()).toContain("second()");
+    });
+
+    resolveFirst('<pre class="shiki"><code><span class="line">first()</span></code></pre>');
+    await wrapper.vm.$nextTick();
+
+    expect(wrapper.find("pre.shiki").text()).toContain("second()");
+    expect(wrapper.find("pre.shiki").text()).not.toContain("first()");
+    expect(spy).toHaveBeenCalledTimes(2);
   });
 });

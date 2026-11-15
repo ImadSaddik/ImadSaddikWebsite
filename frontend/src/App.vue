@@ -10,10 +10,12 @@
     :meteorite-effect-enabled="meteoriteEffectEnabled"
     :custom-cursor-enabled="customCursorEnabled"
     :wide-articles-enabled="wideArticlesEnabled"
+    :wrap-code-enabled="wrapCodeEnabled"
     @star-effect-toggle="handleStarEffectToggle"
     @meteorite-effect-toggle="handleMeteoriteEffectToggle"
     @custom-cursor-toggle="handleCustomCursorToggle"
     @wide-articles-toggle="handleWideArticlesToggle"
+    @wrap-code-toggle="handleWrapCodeToggle"
   />
   <ToastNotificationManager ref="toastManager" />
   <ImageEnlarger
@@ -61,6 +63,7 @@ export default {
   provide() {
     return {
       wideArticlesEnabled: computed(() => this.wideArticlesEnabled),
+      wrapCodeEnabled: computed(() => this.wrapCodeEnabled),
       showToast: (data) => this.handleShowToastEvent(data),
       openImageModal: (event) => this.handleOpenImageModal(event),
     };
@@ -85,6 +88,7 @@ export default {
       meteoriteEffectEnabled: true,
       customCursorEnabled: true,
       wideArticlesEnabled: false,
+      wrapCodeEnabled: false,
     };
   },
   created() {
@@ -94,6 +98,7 @@ export default {
     if (userPreferences.meteoriteEffect !== null) this.meteoriteEffectEnabled = userPreferences.meteoriteEffect;
     if (userPreferences.customCursor !== null) this.customCursorEnabled = userPreferences.customCursor;
     if (userPreferences.wideArticles !== null) this.wideArticlesEnabled = userPreferences.wideArticles;
+    if (userPreferences.wrapCode !== null) this.wrapCodeEnabled = userPreferences.wrapCode;
   },
   mounted() {
     this.updateCursorClass(this.customCursorEnabled);
@@ -115,6 +120,10 @@ export default {
     handleWideArticlesToggle(enabled) {
       this.wideArticlesEnabled = enabled;
       saveUserPreference(STORAGE_KEYS.WIDE_ARTICLES, enabled);
+    },
+    handleWrapCodeToggle(enabled) {
+      this.wrapCodeEnabled = enabled;
+      saveUserPreference(STORAGE_KEYS.WRAP_CODE, enabled);
     },
     handleShowToastEvent(data) {
       this.$refs.toastManager.showToast(data);
