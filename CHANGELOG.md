@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.8.0] - 2026-11-15
+
+### Added
+
+- **Code wrapping and copy controls:** Added global footer "Wrap code" preference persisted in `localStorage` (`wrapCodeEnabled`), per-block line-wrapping toggles, and clipboard copy support with toast notifications for `CodeOutput` blocks.
+- **Shiki language support:** Added `toml` syntax highlighting support in the Shiki highlighter.
+- **Content:** Added a new technical article: "How to set up Voxtype for local voice-to-text on Linux".
+- **Test coverage:** Added unit tests for `CodeContainer`, `CodeOutput`, `WrapToggleButton`, `CopyCodeButton`, `useCodeWrap`, `useClipboardCopy`, Shiki `toml` highlighting, async highlighting race protection, and `CF-Connecting-IP` rate limiting, along with Playwright E2E tests for code wrapping.
+
+### Changed
+
+- **Code container architecture:** Extracted shared code header layout, wrapping state, and clipboard logic from `CodeBlock` into reusable `CodeContainer`, `WrapToggleButton`, and `CopyCodeButton` components and `useCodeWrap` and `useClipboardCopy` composables.
+
+### Fixed
+
+- **Rate limiting IP detection:** Updated `get_remote_address` to prioritize Cloudflare's `CF-Connecting-IP` header and ignore client-injected `X-Forwarded-For` headers to prevent rate limit bypasses.
+- **Security audits:** Resolved frontend dependency audit vulnerabilities.
+- **End-to-end test reliability:** Updated Playwright search and metric tracking specs to work reliably against both seeded CI test indices and populated local development indices.
+
 ## [v2.7.0] - 2026-10-25
 
 ### Added
@@ -219,6 +238,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Monitoring:** Real-time resource tracking with Btop and traffic analysis with GoAccess.
   - **Performance:** Global delivery optimization via Cloudflare CDN.
 
+[v2.8.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.7.0...v2.8.0
 [v2.7.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.6.0...v2.7.0
 [v2.6.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.5.0...v2.6.0
 [v2.5.0]: https://github.com/ImadSaddik/ImadSaddikWebsite/compare/v2.4.0...v2.5.0
