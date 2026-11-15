@@ -1,152 +1,42 @@
 <template>
-  <div class="code-container" @mouseenter="hovering = true" @mouseleave="hovering = false">
-    <span class="language-label" :class="{ hidden: hovering }">{{ language }}</span>
-    <button
-      class="code-copy-button"
-      :class="{ visible: hovering }"
-      :disabled="copied"
-      :aria-label="copied ? 'Copied!' : 'Copy code'"
-      :title="copied ? 'Copied!' : 'Copy code'"
-      @click="copyCode"
-    >
-      <i :class="iconClass"></i>
-    </button>
+  <CodeContainer :label="language" :copy-text="code">
     <div v-html="highlightedHtml"></div>
-  </div>
+  </CodeContainer>
 </template>
 
-<script>
+<script setup>
+import { ref, watch } from "vue";
+import CodeContainer from "@/components/CodeContainer.vue";
 import { highlightCode } from "@/services/shiki.js";
 
-export default {
-  name: "CodeBlock",
-  inject: ["showToast"],
-  props: {
-    code: {
-      type: String,
-      required: true,
-    },
-    language: {
-      type: String,
-      required: true,
-    },
+const props = defineProps({
+  code: {
+    type: String,
+    required: true,
   },
-  data() {
-    return {
-      highlightedHtml: null,
-      copied: false,
-      errorOccured: false,
-      hovering: false,
-      resetIconIntervalInMilliseconds: 1500,
-    };
+  language: {
+    type: String,
+    required: true,
   },
-  computed: {
-    iconClass() {
-      if (this.errorOccured) return "fa-solid fa-xmark fa-2xl";
-      if (this.copied) return "fa-solid fa-check fa-2xl";
-      return "fa-regular fa-clipboard fa-2xl";
-    },
-  },
-  watch: {
-    code: {
-      immediate: true,
-      handler: "renderHighlightedCode",
-    },
-    language: {
-      handler: "renderHighlightedCode",
-    },
-  },
-  methods: {
-    async renderHighlightedCode() {
-      this.highlightedHtml = await highlightCode(this.code, this.language);
-    },
-    async copyCode() {
-      if (this.errorOccured || this.copied) return;
+});
 
-      const text = this.code ?? "";
-      try {
-        await navigator.clipboard.writeText(text);
-        this.copied = true;
-        this.showToast({
-          message: "Code copied to clipboard",
-          type: "success",
-        });
-        setTimeout(() => {
-          this.copied = false;
-        }, this.resetIconIntervalInMilliseconds);
-      } catch {
-        this.errorOccured = true;
-        this.showToast({
-          message: "Failed to copy code",
-          type: "error",
-        });
-        setTimeout(() => {
-          this.errorOccured = false;
-        }, this.resetIconIntervalInMilliseconds);
-      }
-    },
+const highlightedHtml = ref(null);
+let latestRequestId = 0;
+
+watch(
+  () => [props.code, props.language],
+  async ([code, language]) => {
+    const requestId = ++latestRequestId;
+    const html = await highlightCode(code, language);
+    if (requestId === latestRequestId) {
+      highlightedHtml.value = html;
+    }
   },
-};
+  { immediate: true }
+);
 </script>
 
 <style>
-.code-container {
-  position: relative;
-  margin: var(--gap-md) 0;
-}
-
-.language-label {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  z-index: 2;
-  font-size: var(--font-size-small);
-  color: var(--color-text-secondary);
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  opacity: 1;
-  transition: opacity 0.15s ease;
-  pointer-events: none;
-}
-
-.language-label.hidden {
-  opacity: 0;
-}
-
-.code-copy-button {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  z-index: 2;
-  width: 3.5rem;
-  height: 3.5rem;
-  padding: 0;
-  border: 1px solid var(--color-code-border);
-  background: var(--color-background);
-  color: var(--color-text-secondary);
-  cursor: pointer;
-  opacity: 0;
-  transition: all 0.15s ease;
-  pointer-events: none; /* prevent interaction when hidden */
-}
-
-.code-copy-button.visible {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.code-copy-button:hover {
-  opacity: 0.8;
-}
-
-.code-copy-button:disabled {
-  cursor: default;
-}
-
-.code-copy-button.visible:disabled {
-  opacity: 0.5;
-}
-
 pre.shiki {
   background-color: var(--color-code-background);
   margin: 0;
@@ -161,7 +51,7 @@ pre.shiki code {
   grid-auto-rows: min-content;
   row-gap: 0px;
   font-size: var(--font-size-small);
-  padding: 30px 0px;
+  padding: 44px 0px 30px;
   min-width: max-content;
 }
 
@@ -199,22 +89,26 @@ pre.shiki code {
   font-weight: 600;
 }
 
+.code-container.wrapped pre.shiki {
+  overflow-x: hidden;
+}
+
+.code-container.wrapped pre.shiki code {
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.code-container.wrapped .shiki .line {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 @media screen and (max-width: 576px) {
-  .language-label {
-    top: 0.25rem;
-    right: 0.25rem;
-    font-size: var(--font-size-extra-small);
-  }
-
-  .code-copy-button {
-    top: 0.25rem;
-    right: 0.25rem;
-    width: 3rem;
-    height: 3rem;
-  }
-
   pre.shiki code {
     font-size: var(--font-size-extra-small);
+    padding: 40px 0px 20px;
   }
 
   .shiki .line {
