@@ -1,6 +1,8 @@
 import { test, expect } from "@playwright/test";
 import { ROUTES } from "@/constants";
 
+const NON_EXISTENT_QUERY = "zxqv9988nonexistentquery";
+
 test.describe("Search functionality", () => {
   test.describe("Happy path", () => {
     test("should display search bar on blogs hub", async ({ page }) => {
@@ -82,8 +84,12 @@ test.describe("Search functionality", () => {
       await page.waitForLoadState("networkidle");
 
       const searchInput = page.locator(".search-input");
-      await searchInput.fill("Half-life 3");
-      await searchInput.press("Enter");
+      await searchInput.fill(NON_EXISTENT_QUERY);
+
+      await Promise.all([
+        page.waitForResponse((res) => res.url().includes("/api/search") && res.request().method() === "POST"),
+        searchInput.press("Enter"),
+      ]);
 
       const noResults = page.locator('text="No results found"');
       await expect(noResults).toBeVisible();
@@ -94,10 +100,13 @@ test.describe("Search functionality", () => {
       await page.waitForLoadState("networkidle");
 
       const searchInput = page.locator(".search-input");
-      await searchInput.fill("Half-life 3");
+      await searchInput.fill(NON_EXISTENT_QUERY);
 
       const searchButton = page.locator(".search-send");
-      await searchButton.click();
+      await Promise.all([
+        page.waitForResponse((res) => res.url().includes("/api/search") && res.request().method() === "POST"),
+        searchButton.click(),
+      ]);
 
       const noResults = page.locator('text="No results found"');
       await expect(noResults).toBeVisible();
