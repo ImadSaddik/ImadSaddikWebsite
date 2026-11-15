@@ -55,6 +55,17 @@ describe("shiki service", () => {
       expect(html).toContain("</pre>");
     });
 
+    it("renders toml code with syntax highlighting", async () => {
+      const code = "[hotkey]\nenabled = false";
+      const html = await highlightCode(code, "toml");
+
+      expect(html).toContain('<pre class="shiki github-dark-default"');
+      expect(html).toContain('class="line"');
+      expect(html).toContain("hotkey");
+      expect(html).toContain("enabled");
+      expect(html).toContain("</pre>");
+    });
+
     it("removes inline background-color from the pre element", async () => {
       const code = "x = 42";
       const html = await highlightCode(code, "python");
