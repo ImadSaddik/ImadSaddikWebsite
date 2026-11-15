@@ -3,4 +3,5 @@ export const STORAGE_KEYS = {
   METEORITE_EFFECT: "meteoriteEffectEnabled",
   CUSTOM_CURSOR: "customCursorEnabled",
   WIDE_ARTICLES: "wideArticlesEnabled",
+  WRAP_CODE: "wrapCodeEnabled",
 };

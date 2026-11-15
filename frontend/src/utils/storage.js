@@ -11,6 +11,7 @@ export function loadUserPreferences() {
     meteoriteEffect: get(STORAGE_KEYS.METEORITE_EFFECT),
     customCursor: get(STORAGE_KEYS.CUSTOM_CURSOR),
     wideArticles: get(STORAGE_KEYS.WIDE_ARTICLES),
+    wrapCode: get(STORAGE_KEYS.WRAP_CODE),
   };
 }
 
