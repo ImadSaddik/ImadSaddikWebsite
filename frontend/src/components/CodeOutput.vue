@@ -38,7 +38,7 @@ defineProps({
   font-family: var(--font-family-mono);
 }
 
-:global(.code-container.wrapped) .code-output-container {
+:global(.code-container.wrapped .code-output-container) {
   overflow-x: hidden;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
