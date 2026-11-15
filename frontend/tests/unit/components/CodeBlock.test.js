@@ -2,6 +2,7 @@ import { ref } from "vue";
 import { mount } from "@vue/test-utils";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import CodeBlock from "@/components/CodeBlock.vue";
+import * as shikiService from "@/services/shiki.js";
 
 describe("CodeBlock", () => {
   let showToast;
@@ -175,5 +176,36 @@ describe("CodeBlock", () => {
 
     expect(wrapper.find(".code-container").classes()).toContain("wrapped");
     expect(wrapper.findAll(".shiki .line")).toHaveLength(6);
+  });
+
+  it("ignores stale highlightCode results when props change rapidly", async () => {
+    let resolveFirst;
+    let resolveSecond;
+    const firstPromise = new Promise((resolve) => {
+      resolveFirst = resolve;
+    });
+    const secondPromise = new Promise((resolve) => {
+      resolveSecond = resolve;
+    });
+
+    const spy = vi
+      .spyOn(shikiService, "highlightCode")
+      .mockReturnValueOnce(firstPromise)
+      .mockReturnValueOnce(secondPromise);
+
+    const wrapper = factory({ code: "first()", language: "javascript" });
+    await wrapper.setProps({ code: "second()" });
+
+    resolveSecond('<pre class="shiki"><code><span class="line">second()</span></code></pre>');
+    await vi.waitFor(() => {
+      expect(wrapper.find("pre.shiki").text()).toContain("second()");
+    });
+
+    resolveFirst('<pre class="shiki"><code><span class="line">first()</span></code></pre>');
+    await wrapper.vm.$nextTick();
+
+    expect(wrapper.find("pre.shiki").text()).toContain("second()");
+    expect(wrapper.find("pre.shiki").text()).not.toContain("first()");
+    expect(spy).toHaveBeenCalledTimes(2);
   });
 });
