@@ -84,6 +84,10 @@ While some minimal window managers allow background typing through custom Waylan
 
 To solve this, Voxtype relies on `ydotool`. Instead of asking the Wayland compositor for permission, `ydotool` communicates directly with the Linux kernel through `/dev/uinput`. The kernel exposes a virtual input device, so your desktop receives the transcribed text as if you typed it on a physical keyboard.
 
+::: image ./wayland_ydotool_flow.webp "Diagram showing direct Wayland keystroke injection blocked while ydotool sends input through /dev/uinput."
+Wayland blocks background daemons from injecting keystrokes directly, while `ydotool` routes input through `/dev/uinput` as a virtual keyboard.
+:::
+
 This design makes direct-to-cursor dictation work across any application. It also explains why setting up Voxtype on Wayland requires configuring user permissions for `/dev/uinput`.
 
 ## Setting up Voxtype on Ubuntu
