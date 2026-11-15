@@ -48,7 +48,7 @@ More importantly, real-time streaming struggles with punctuation and homophones.
 
 Push-to-talk avoids these compromises by feeding the entire audio segment to the model at once. Because the engine hears the full sentence before predicting tokens, it understands the context, resolves homophones accurately, and places punctuation naturally.
 
-For typical sentences and short thoughts, modern engines process speech at roughly fifteen times real-time speed. A four-second sentence transcribes in a fraction of a second. Clean text appears at your cursor almost the moment you release the key, without any of the instability of streaming.
+For everyday sentences and short thoughts, modern engines process speech at roughly fifteen times real-time speed. A four-second sentence transcribes in a fraction of a second. Clean text appears at your cursor almost the moment you release the key, without any of the instability of streaming.
 
 ## Choosing the right transcription model
 
@@ -58,7 +58,7 @@ When people think of local transcription, OpenAI Whisper is almost always the de
 
 Because Whisper is so familiar, many people stick with it without realizing that newer speech architectures have emerged. Whisper was built as a heavy multilingual model designed to translate dozens of languages. Running that full pipeline on a CPU can feel sluggish during desktop dictation, and it can occasionally get stuck repeating words if there is background noise.
 
-This is why I wanted to explore newer alternatives like NVIDIA Parakeet. Specifically, Voxtype supports `parakeet-tdt-0.6b-v3` through its ONNX runtime. It uses a FastConformer-TDT architecture trained on over 670,000 hours of speech. Instead of predicting text one word at a time in a slow loop, it evaluates chunks of speech in parallel.
+This is why I wanted to explore newer alternatives like NVIDIA Parakeet. Specifically, Voxtype supports [parakeet-tdt-0.6b-v3](https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3) through its ONNX runtime. It uses a FastConformer-TDT architecture trained on over 670,000 hours of speech.
 
 For my workflow, Parakeet checked every box. I wanted a model that looks at the entire recording, handles capitalization and punctuation naturally, and runs at fifteen to twenty times real-time speed on the CPU. Parakeet delivered exactly that.
 
@@ -66,17 +66,17 @@ For my workflow, Parakeet checked every box. I wanted a model that looks at the 
 
 My laptop is equipped with a 13th Gen Intel Core i7 processor and an NVIDIA GeForce RTX 4070 Laptop GPU. When I first looked at local transcription, offloading inference to the GPU seemed like the obvious choice.
 
-However, video memory is a scarce resource on laptops. My GPU has 8 GB of VRAM, which I rely on for running local language models and heavy graphical workloads. To keep dictation responsive without reloading weights on every shortcut press, Voxtype holds the model in memory, which currently consumes around 3.5 GB.
+However, video memory is a scarce resource on laptops. My GPU has 8 GB of VRAM, which I rely on for gaming, running local language models, and training AI models. To keep dictation responsive without reloading weights on every shortcut press, Voxtype holds the model in memory, which consumes around 2.5 to 3 GB for `parakeet-tdt-0.6b-v3` (larger models use more).
 
-Putting that on an 8 GB GPU would swallow nearly half of my video memory while sitting idle. In contrast, my laptop has 32 GB of system RAM. Holding 3.5 GB in system memory consumes only about 11 percent of my available RAM, leaving plenty of room for everything else.
+Putting that on an 8 GB GPU would take up more than a third of my video memory while sitting idle. In contrast, my laptop has 32 GB of system RAM. Holding 2.5 to 3 GB in system memory consumes less than 10 percent of my available RAM, leaving plenty of room for everything else.
 
 Power consumption and thermals are another major factor. Dedicated laptop GPUs draw significant power every time they wake from an idle state. Running transcription on the CPU lets the RTX 4070 idle at around 3 watts, which prevents battery drain and keeps cooling fans completely silent throughout the day.
 
-Finally, the GPU compute advantage is negligible for everyday text entry. A GPU clearly processes large audio files faster, but for short sentences and quick thoughts, modern CPUs running AVX2 instructions finish the job in the blink of an eye. In practice, waking an idle GPU from its power-saving state can take longer than the transcription itself.
+Finally, the GPU compute advantage is negligible for everyday text entry. A GPU clearly processes large audio files faster, but for short sentences and quick thoughts, modern CPUs running [AVX2](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions) instructions finish the job in the blink of an eye. In practice, waking an idle GPU from its power-saving state can take longer than the transcription itself.
 
 ## The Wayland typing challenge
 
-When I started testing local dictation, I realized that transcribing speech was only half the problem. The other half was getting that text to appear directly at my active cursor.
+When I started testing local dictation, I realized that transcribing speech was only half the problem. The other half was getting that text to appear directly at my cursor.
 
 On modern Linux systems running Wayland, this is surprisingly tricky. Wayland isolates applications from one another for security. By default, a background daemon cannot inject keystrokes into your active code editor or browser window.
 
@@ -88,11 +88,11 @@ To solve this, Voxtype relies on `ydotool`. Instead of asking the Wayland compos
 Wayland blocks background daemons from injecting keystrokes directly, while `ydotool` routes input through `/dev/uinput` as a virtual keyboard.
 :::
 
-This design makes direct-to-cursor dictation work across any application. It also explains why setting up Voxtype on Wayland requires configuring user permissions for `/dev/uinput`.
+This design makes direct-to-cursor dictation work across any application. Because `/dev/uinput` is locked down to prevent arbitrary programs from faking keystrokes, you need to add your user to the `input` group so `ydotool` can access it.
 
 ## Setting up Voxtype on Ubuntu
 
-Getting Voxtype and Parakeet running on my Ubuntu setup required three main steps. I had to configure virtual input permissions, install the package, and switch to the ONNX runtime.
+Getting Voxtype and Parakeet running on my Ubuntu setup took four steps. I had to configure virtual input permissions, install the package, switch to the ONNX runtime with Parakeet, and enable the background daemon.
 
 ### Install dependencies and configure input permissions
 
@@ -166,7 +166,7 @@ systemctl --user status voxtype
 
 ## Setting up the global shortcut in GNOME
 
-Because GNOME manages keyboard shortcuts globally, I disabled Voxtype's internal `evdev` key listener and let GNOME trigger recording through the command line.
+Because GNOME manages keyboard shortcuts globally, I disabled Voxtype's built-in hotkey listener and let GNOME trigger recording through the command line.
 
 In `~/.config/voxtype/config.toml`, make sure the internal listener is disabled:
 
@@ -245,7 +245,7 @@ systemctl --user restart voxtype
 
 Voxtype keeps the active model resident in system memory by default (`on_demand_loading = false`).
 
-On a machine with 16 GB or 32 GB of RAM, dedicating ~2 GB of memory to keep Parakeet warm means every dictation responds with zero startup latency. If you are working on a memory-constrained machine, you can set `on_demand_loading = true` so Voxtype only loads the model while recording and frees it immediately afterward.
+On a machine with 16 GB or 32 GB of RAM, dedicating 2.5 to 3 GB of memory to keep Parakeet warm means every dictation responds with zero startup latency. If you are working on a memory-constrained machine, you can set `on_demand_loading = true` so Voxtype loads the model only for dictation and frees that memory right after transcription.
 
 ## Conclusion
 
