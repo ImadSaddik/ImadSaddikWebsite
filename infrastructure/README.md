@@ -23,6 +23,7 @@ Automation scripts for deployment and server maintenance.
 - `monthly_cleanup.sh`: Maintenance script to clean system caches, vacuum logs, and remove unnecessary build artifacts.
 - `reload-nginx.sh`: A simple helper to test and reload the Nginx configuration.
 - `clean_backups.sh`: Production-specific version of the backup cleaning script.
+- `sync_cloudflare_ufw.sh`: Restricts ports 80 and 443 in UFW to official Cloudflare IPv4 and IPv6 ranges (run in dry-run mode first, then pass `--apply --prune-anywhere` as root).
 
 ### [supervisor/](./supervisor/)
 
