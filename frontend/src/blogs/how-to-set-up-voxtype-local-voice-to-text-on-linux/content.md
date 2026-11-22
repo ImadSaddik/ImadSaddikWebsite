@@ -203,7 +203,7 @@ With this shortcut set up, you can dictate text anywhere on your desktop. Pressi
 
 ## Useful tweaks after two weeks of use
 
-After using Voxtype as my primary dictation tool for two weeks, I made two adjustments in `~/.config/voxtype/config.toml` to fit my daily workflow.
+After using Voxtype as my primary dictation tool for two weeks, I made a few adjustments in `~/.config/voxtype/config.toml` to fit my daily workflow.
 
 ### Silencing notification banners
 
@@ -247,10 +247,97 @@ Voxtype keeps the active model resident in system memory by default (`on_demand_
 
 On a machine with 16 GB or 32 GB of RAM, dedicating 2.5 to 3 GB of memory to keep Parakeet warm means every dictation responds with zero startup latency. If you are working on a memory-constrained machine, you can set `on_demand_loading = true` so Voxtype loads the model only for dictation and frees that memory right after transcription.
 
+## Updating Voxtype
+
+Because Voxtype is installed from a standalone `.deb` package on Ubuntu rather than an APT repository, `apt upgrade` will not update it automatically.
+
+### Updating manually
+
+First, check whether a newer release is available:
+
+```bash
+voxtype check-update
+```
+
+If an update is available, download the latest `.deb` package from GitHub, install it, and remove the downloaded file:
+
+```bash
+DEB_URL=$(wget -qO- https://api.github.com/repos/peteonrails/voxtype/releases/latest | grep -m1 -oE 'https://[^"]+_amd64\.deb')
+wget -O voxtype_latest_amd64.deb "$DEB_URL"
+sudo apt install -y ./voxtype_latest_amd64.deb
+rm voxtype_latest_amd64.deb
+```
+
+If you switched to the ONNX binary for Parakeet, re-enable it in case the package upgrade reset the `/usr/bin/voxtype` symlink, then restart the user daemon:
+
+```bash
+sudo voxtype setup onnx --enable
+systemctl --user restart voxtype
+```
+
+Finally, confirm that the updated version is installed and active:
+
+```bash
+voxtype --version
+```
+
+### Automating updates with a script
+
+To run the full check-and-upgrade flow with a single command, save a small script inside `~/.local/bin`. On Ubuntu, `~/.profile` automatically adds `~/.local/bin` to your `PATH` at login when that directory exists.
+
+Create the directory if needed and open `~/.local/bin/update-voxtype`:
+
+```bash
+mkdir -p ~/.local/bin
+nano ~/.local/bin/update-voxtype
+```
+
+Add the following script:
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+RELEASE_JSON=$(wget -qO- https://api.github.com/repos/peteonrails/voxtype/releases/latest)
+LATEST_VERSION=$(printf '%s\n' "$RELEASE_JSON" | awk -F'"' '/"tag_name":/ && !found { sub(/^v/, "", $4); print $4; found=1 }')
+CURRENT_VERSION=$(voxtype --version | awk '{print $2}')
+
+if [ "$CURRENT_VERSION" = "$LATEST_VERSION" ]; then
+  echo "Voxtype is already up to date ($CURRENT_VERSION)."
+  exit 0
+fi
+
+DEB_URL=$(printf '%s\n' "$RELEASE_JSON" | awk -F'"' '/"browser_download_url":/ && $4 ~ /_amd64\.deb$/ && !found { print $4; found=1 }')
+TMP_DIR=$(mktemp -d)
+trap 'rm -rf "$TMP_DIR"' EXIT
+
+echo "Updating Voxtype from $CURRENT_VERSION to $LATEST_VERSION..."
+wget -O "$TMP_DIR/voxtype.deb" "$DEB_URL"
+sudo apt install -y "$TMP_DIR/voxtype.deb"
+sudo voxtype setup onnx --enable
+systemctl --user restart voxtype
+
+echo "Updated to $(voxtype --version)."
+```
+
+This script compares your installed version with the latest GitHub release first. If you are already up to date, it skips downloading the `.deb`. When an update is available, it downloads the package into a temporary directory that is cleaned up automatically on exit.
+
+Make the script executable:
+
+```bash
+chmod +x ~/.local/bin/update-voxtype
+```
+
+If you created `~/.local/bin` for the first time, log out and log back in (or run `export PATH="$HOME/.local/bin:$PATH"` in your current shell). After that, you can update Voxtype from any directory by running:
+
+```bash
+update-voxtype
+```
+
 ## Conclusion
 
 Replacing my old Audacity and Whisper script workflow with Voxtype turned voice input from a multi-step chore into something I use every day. Instead of managing temporary audio and text files on disk, you press [[Ctrl+Alt+Space]], speak your thoughts, and get the transcribed text directly at your cursor.
 
-Running NVIDIA Parakeet on the CPU through the ONNX runtime keeps transcription fast while leaving your GPU idle and your VRAM free for other workloads. Combined with `ydotool` for Wayland typing, a global GNOME shortcut, and a couple of configuration adjustments for notifications and recording duration, you get a reliable, offline dictation setup that stays completely on your machine.
+Running NVIDIA Parakeet on the CPU through the ONNX runtime keeps transcription fast while leaving your GPU idle and your VRAM free for other workloads. Combined with `ydotool` for Wayland typing, a global GNOME shortcut, and a few configuration adjustments for notifications, recording duration, and memory retention, you get a reliable, offline dictation setup that stays completely on your machine.
 
 I hope this guide helps you set up local voice-to-text on your Linux desktop.
